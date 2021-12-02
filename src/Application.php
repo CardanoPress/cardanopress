@@ -8,7 +8,6 @@
 namespace PBWebDev\NamiPress;
 
 use Dotenv\Dotenv;
-use Env\Env;
 use PBWebDev\NamiPress\Actions\CoreAction;
 use PBWebDev\NamiPress\Actions\WalletAction;
 use ThemePlate\Enqueue;
@@ -35,10 +34,12 @@ class Application
         $this->setupDotEnv($load_path);
 
         $this->templates = new Templates($load_path . 'templates');
+
         new Manifest($load_path . 'assets');
         new CoreAction();
         new WalletAction();
-        $this->admin = new Admin($this);
+
+        $this->admin = new Admin();
 
         Enqueue::init();
     }
@@ -61,13 +62,7 @@ class Application
 
     public function variable(string $name)
     {
-        $value = $_ENV[$name] ?? null;
-
-        if (null === $value) {
-            return null;
-        }
-
-        return Env::convert($value);
+        return $this->admin->getVariable($name);
     }
 
     public function option(string $key)

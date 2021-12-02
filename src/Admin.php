@@ -7,6 +7,7 @@
 
 namespace PBWebDev\NamiPress;
 
+use Env\Env;
 use Exception;
 use ThemePlate\Core\Data;
 use ThemePlate\Page;
@@ -18,9 +19,8 @@ class Admin
 
     public const OPTION_KEY = 'namipress';
 
-    public function __construct(Application $application)
+    public function __construct()
     {
-        $this->application = $application;
         $this->data = new Data();
 
         $this->setup();
@@ -58,19 +58,19 @@ class Admin
                     'project_id' => [
                         'type' => 'group',
                         'default' => [
-                            'mainnet' => $this->application->variable('BLOCKFROST_MAINNET_PROJECT_ID'),
-                            'testnet' => $this->application->variable('BLOCKFROST_TESTNET_PROJECT_ID'),
+                            'mainnet' => $this->getVariable('BLOCKFROST_MAINNET_PROJECT_ID'),
+                            'testnet' => $this->getVariable('BLOCKFROST_TESTNET_PROJECT_ID'),
                         ],
                         'fields' => [
                             'mainnet' => [
                                 'title' => __('Mainnet', 'namipress'),
                                 'type' => 'text',
-                                'default' => $this->application->variable('BLOCKFROST_MAINNET_PROJECT_ID'),
+                                'default' => $this->getVariable('BLOCKFROST_MAINNET_PROJECT_ID'),
                             ],
                             'testnet' => [
                                 'title' => __('Testnet', 'namipress'),
                                 'type' => 'text',
-                                'default' => $this->application->variable('BLOCKFROST_TESTNET_PROJECT_ID'),
+                                'default' => $this->getVariable('BLOCKFROST_TESTNET_PROJECT_ID'),
                             ],
                         ],
                     ],
@@ -96,7 +96,7 @@ class Admin
                         'default' => [
                             [
                                 'label' => __('Asset Collection', 'namipress'),
-                                'value' => $this->application->variable('ASSETS_POLICY_ID'),
+                                'value' => $this->getVariable('ASSETS_POLICY_ID'),
                             ],
                         ],
                         'repeatable' => true,
@@ -144,6 +144,17 @@ class Admin
         } catch (Exception $exception) {
             error_log($exception->getMessage());
         }
+    }
+
+    public function getVariable(string $name)
+    {
+        $value = $_ENV[$name] ?? null;
+
+        if (null === $value) {
+            return null;
+        }
+
+        return Env::convert($value);
     }
 
     public function getOption(string $key)
