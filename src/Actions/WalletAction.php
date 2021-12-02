@@ -7,7 +7,6 @@
 
 namespace PBWebDev\NamiPress\Actions;
 
-use PBWebDev\NamiPress\Application;
 use PBWebDev\NamiPress\Blockfrost;
 use PBWebDev\NamiPress\Profile;
 

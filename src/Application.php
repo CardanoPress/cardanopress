@@ -61,9 +61,9 @@ class Application
 
     public function variable(string $name)
     {
-        $value = $_ENV[$name] ?? false;
+        $value = $_ENV[$name] ?? null;
 
-        if ($value === false) {
+        if (null === $value) {
             return null;
         }
 
@@ -75,9 +75,9 @@ class Application
         return $this->admin->getOption($key);
     }
 
-    public function template(string $name, array $variables = [])
+    public function template(string $name, array $variables = []): void
     {
-        $name = $name . '.php';
+        $name .= '.php';
         $file = locate_template($this->templates->getPath() . $name);
 
         if (! $file) {
@@ -85,7 +85,7 @@ class Application
         }
 
         if (file_exists($file)) {
-            extract($variables);
+            extract($variables, EXTR_OVERWRITE);
             include $file;
         }
     }

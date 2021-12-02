@@ -75,9 +75,9 @@ class CoreAction
         $userProfile->saveAssets($assets);
     }
 
-    public function memberDashboardRedirect()
+    public function memberDashboardRedirect(): void
     {
-        if (! is_admin() || (isset($_GET['action']) && 'trash' === $_GET['action']) || defined('DOING_AJAX')) {
+        if (defined('DOING_AJAX') || (isset($_GET['action']) && 'trash' === $_GET['action']) || ! is_admin()) {
             return;
         }
 
@@ -96,7 +96,7 @@ class CoreAction
         }
     }
 
-    public function maybeRedirect()
+    public function maybeRedirect(): void
     {
         if (is_user_logged_in()) {
             return;
@@ -116,7 +116,7 @@ class CoreAction
         $dashboardLink = get_permalink($dashboardPage);
         $collectionLink = get_permalink($collectionPage);
 
-        if (in_array($currentLink, [$collectionLink], true)) {
+        if ($currentLink === $collectionLink) {
             wp_safe_redirect($dashboardLink);
             exit;
         }

@@ -80,20 +80,28 @@ class Collection
     {
         if ($this->startsWith("https://", $link)) {
             return $link;
-        } elseif ($this->startsWith("ipfs://", $link)) {
+        }
+
+        if ($this->startsWith("ipfs://", $link)) {
             return str_replace(
                 'ipfs:/',
                 self::ASSETS_URL,
                 $link,
             );
-        } elseif (
+        }
+
+        if (
             ($this->startsWith("Qm", $link) && 46 === strlen($link)) ||
             ($this->startsWith("baf", $link) && 59 === strlen($link))
         ) {
             return self::ASSETS_URL . $link;
-        } elseif ($base64 && preg_match('/^([0-9a-zA-Z+\/]{4})*(([0-9a-zA-Z+\/]{2}==)|([0-9a-zA-Z+\/]{3}=))?$/', $link)) {
+        }
+
+        if ($base64 && preg_match('/^([0-9a-zA-Z+\/]{4})*(([0-9a-zA-Z+\/]{2}==)|([0-9a-zA-Z+\/]{3}=))?$/', $link)) {
             return "data:image/png;base64," . $link;
-        } elseif ($this->startsWith("data:image", $link)) {
+        }
+
+        if ($this->startsWith("data:image", $link)) {
             return $link;
         }
 
@@ -102,6 +110,6 @@ class Collection
 
     private function startsWith(string $query, string $string): bool
     {
-        return substr($string, 0, strlen($query)) === $query;
+        return 0 === strpos($string, $query);
     }
 }

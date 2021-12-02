@@ -72,7 +72,7 @@ class Templates
         return $default;
     }
 
-    public function getPath(bool $default = false)
+    public function getPath(bool $default = false): string
     {
         if ($default) {
             return $this->load_path;
