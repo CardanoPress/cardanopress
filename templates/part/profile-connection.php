@@ -1,6 +1,6 @@
 <?php
 
-use PBWebDev\NamiPress\Profile;
+use PBWebDev\CardanoPress\Profile;
 
 if (empty($userProfile) || ! $userProfile instanceof Profile) {
     $userProfile = new Profile(wp_get_current_user());
@@ -15,7 +15,7 @@ if (empty($userProfile) || ! $userProfile instanceof Profile) {
         <?php if (! $userProfile->connectedStake()) : ?>
             <button type="button" @click="showModal = true">Reconnect</button>
         <?php else : ?>
-            <?php namiPress()->template('part/asset-sync'); ?>
+            <?php cardanoPress()->template('part/asset-sync'); ?>
         <?php endif; ?>
     </div>
 </h3>

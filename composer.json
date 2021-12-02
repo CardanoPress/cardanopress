@@ -1,6 +1,6 @@
 {
-  "name": "pbwebdev/namipress",
-  "description": "A ThemePlate project for Nami Wallet integration",
+  "name": "pbwebdev/cardanopress",
+  "description": "A ThemePlate project for Cardano WordPress integration",
   "type": "wordpress-plugin",
   "keywords": [
     "generator-themeplate",
@@ -13,8 +13,8 @@
   "authors": [
     {
       "name": "Gene Alyson Fortunado Torcende",
-      "email": "genealyson.torcende@gmail.com",
-      "homepage": "mailto:genealyson.torcende@gmail.com"
+      "email": "mail@pbwebdev.com",
+      "homepage": "https://pbwebdev.com"
     }
   ],
   "config": {
@@ -44,7 +44,7 @@
   },
   "autoload": {
     "psr-4": {
-      "PBWebDev\\NamiPress\\": "src/"
+      "PBWebDev\\CardanoPress\\": "src/"
     }
   },
   "autoload-dev": {

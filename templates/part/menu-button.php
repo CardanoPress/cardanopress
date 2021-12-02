@@ -1,6 +1,6 @@
 <?php
 
-use PBWebDev\NamiPress\Profile;
+use PBWebDev\CardanoPress\Profile;
 
 if (empty($trimmedAddress)) {
     $userProfile = new Profile(wp_get_current_user());

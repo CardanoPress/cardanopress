@@ -5,9 +5,9 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\NamiPress;
+namespace PBWebDev\CardanoPress;
 
-use PBWebDev\NamiPress\Clients\BlockfrostClient;
+use PBWebDev\CardanoPress\Clients\BlockfrostClient;
 
 class Blockfrost
 {

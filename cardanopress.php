@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Plugin Name: NamiPress
- * Plugin URI:  https://github.com/pbwebdev/namipress
+ * Plugin Name: CardanoPress
+ * Plugin URI:  https://github.com/pbwebdev/cardanopress
  * Author:      Gene Alyson Fortunado Torcende
- * Author URI:  mailto:genealyson.torcende@gmail.com
- * Description: A ThemePlate project for Nami Wallet integration
+ * Author URI:  https://pbwebdev.com
+ * Description: A ThemePlate project for Cardano integration to WordPress
  * Version:     0.1.0
  * License:     GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -19,23 +19,23 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-use PBWebDev\NamiPress\Application;
+use PBWebDev\CardanoPress\Application;
 
 /* ==================================================
 Global constants
 ================================================== */
 
-if (! defined('NAMIPRESS_FILE')) {
-    define('NAMIPRESS_FILE', __FILE__);
+if (! defined('CARDANOPRESS_FILE')) {
+    define('CARDANOPRESS_FILE', __FILE__);
 }
 
 // Load the main plugin class
-require_once plugin_dir_path(NAMIPRESS_FILE) . 'vendor/autoload.php';
+require_once plugin_dir_path(CARDANOPRESS_FILE) . 'vendor/autoload.php';
 
 // Instantiate
 Application::instance();
 
-function namiPress(): Application
+function cardanoPress(): Application
 {
     return Application::instance();
 }

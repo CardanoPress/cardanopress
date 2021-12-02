@@ -5,12 +5,12 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\NamiPress\Actions;
+namespace PBWebDev\CardanoPress\Actions;
 
-use PBWebDev\NamiPress\Application;
-use PBWebDev\NamiPress\Blockfrost;
-use PBWebDev\NamiPress\Collection;
-use PBWebDev\NamiPress\Profile;
+use PBWebDev\CardanoPress\Application;
+use PBWebDev\CardanoPress\Blockfrost;
+use PBWebDev\CardanoPress\Collection;
+use PBWebDev\CardanoPress\Profile;
 
 class CoreAction
 {
@@ -23,16 +23,16 @@ class CoreAction
 
     public function injectScriptVariables(): void
     {
-        wp_register_script('namipress-dummy', '');
-        wp_enqueue_script('namipress-dummy');
+        wp_register_script('cardanopress-dummy', '');
+        wp_enqueue_script('cardanopress-dummy');
 
         $data = [
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            '_nonce' => wp_create_nonce('namipress-actions'),
+            '_nonce' => wp_create_nonce('cardanopress-actions'),
             'logged' => is_user_logged_in(),
         ];
 
-        wp_localize_script('namipress-dummy', 'namiPress', $data);
+        wp_localize_script('cardanopress-dummy', 'cardanoPress', $data);
     }
 
     public function checkWalletAssets($username, $user): void

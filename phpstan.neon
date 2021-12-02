@@ -6,6 +6,6 @@ parameters:
   excludePaths:
     - vendor
   scanFiles:
-    - namipress.php
+    - cardanopress.php
   dynamicConstantNames:
     - NP_FILE

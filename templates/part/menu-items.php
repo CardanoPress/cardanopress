@@ -1,7 +1,7 @@
 <?php
 
-$dashboardPage = namiPress()->option('member_dashboard');
-$collectionPage = namiPress()->option('member_collection');
+$dashboardPage = cardanoPress()->option('member_dashboard');
+$collectionPage = cardanoPress()->option('member_collection');
 
 ?>
 

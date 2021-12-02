@@ -5,7 +5,7 @@
  * @since   0.1.0
  */
 
-use PBWebDev\NamiPress\Profile;
+use PBWebDev\CardanoPress\Profile;
 
 $userProfile = new Profile(wp_get_current_user());
 
@@ -22,9 +22,9 @@ get_header();
 
     <template x-if="isConnected">
         <div class="py-6">
-            <?php namiPress()->template('welcome-banner', compact('userProfile')); ?>
+            <?php cardanoPress()->template('welcome-banner', compact('userProfile')); ?>
 
-            <?php namiPress()->template('part/profile-connection', compact('userProfile')); ?>
+            <?php cardanoPress()->template('part/profile-connection', compact('userProfile')); ?>
         </div>
     </template>
 </main>

@@ -7,9 +7,9 @@ if (empty($asset)) {
 ?>
 
 <li class="p-4 w-full sm:w-1/2 lg:w-1/4">
-    <?php namiPress()->template('part/asset-image', compact('asset')); ?>
+    <?php cardanoPress()->template('part/asset-image', compact('asset')); ?>
 
-    <h2><?php namiPress()->template('part/asset-name', compact('asset')); ?></h2>
+    <h2><?php cardanoPress()->template('part/asset-name', compact('asset')); ?></h2>
     <p class="mb-1"><b>Quantity:</b> <?php echo $asset['quantity']; ?></p>
 
     <?php if (! empty($asset['onchain_metadata'])) : ?>

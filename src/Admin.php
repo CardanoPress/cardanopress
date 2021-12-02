@@ -5,7 +5,7 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\NamiPress;
+namespace PBWebDev\CardanoPress;
 
 use Env\Env;
 use Exception;
@@ -17,7 +17,7 @@ class Admin
 {
     protected Data $data;
 
-    public const OPTION_KEY = 'namipress';
+    public const OPTION_KEY = 'cardanopress';
 
     public function __construct()
     {
@@ -39,7 +39,7 @@ class Admin
         try {
             new Page([
                 'id' => self::OPTION_KEY,
-                'title' => 'NamiPress',
+                'title' => 'CardanoPress',
             ]);
         } catch (Exception $exception) {
             error_log($exception->getMessage());
@@ -51,7 +51,7 @@ class Admin
         try {
             $settings = new Settings([
                 'id' => 'blockfrost',
-                'title' => __('Blockfrost Project ID', 'namipress'),
+                'title' => __('Blockfrost Project ID', 'cardanopress'),
                 'page' => self::OPTION_KEY,
                 'context' => 'side',
                 'fields' => [
@@ -63,12 +63,12 @@ class Admin
                         ],
                         'fields' => [
                             'mainnet' => [
-                                'title' => __('Mainnet', 'namipress'),
+                                'title' => __('Mainnet', 'cardanopress'),
                                 'type' => 'text',
                                 'default' => $this->getVariable('BLOCKFROST_MAINNET_PROJECT_ID'),
                             ],
                             'testnet' => [
-                                'title' => __('Testnet', 'namipress'),
+                                'title' => __('Testnet', 'cardanopress'),
                                 'type' => 'text',
                                 'default' => $this->getVariable('BLOCKFROST_TESTNET_PROJECT_ID'),
                             ],
@@ -88,14 +88,14 @@ class Admin
         try {
             $settings = new Settings([
                 'id' => 'policy',
-                'title' => __('Policy IDs', 'namipress'),
+                'title' => __('Policy IDs', 'cardanopress'),
                 'page' => self::OPTION_KEY,
                 'fields' => [
                     'ids' => [
                         'type' => 'group',
                         'default' => [
                             [
-                                'label' => __('Asset Collection', 'namipress'),
+                                'label' => __('Asset Collection', 'cardanopress'),
                                 'value' => $this->getVariable('ASSETS_POLICY_ID'),
                             ],
                         ],
@@ -103,10 +103,10 @@ class Admin
                         'fields' => [
                             'label' => [
                                 'type' => 'text',
-                                'title' => __('Label', 'namipress'),
+                                'title' => __('Label', 'cardanopress'),
                             ],
                             'value' => [
-                                'title' => __('Value', 'namipress'),
+                                'title' => __('Value', 'cardanopress'),
                                 'type' => 'text',
                             ],
                         ],
@@ -125,17 +125,17 @@ class Admin
         try {
             $settings = new Settings([
                 'id' => 'member',
-                'title' => __('Member Pages', 'namipress'),
+                'title' => __('Member Pages', 'cardanopress'),
                 'page' => self::OPTION_KEY,
                 'context' => 'side',
                 'fields' => [
                     'dashboard' => [
                         'type' => 'page',
-                        'title' => __('Dashboard', 'namipress'),
+                        'title' => __('Dashboard', 'cardanopress'),
                     ],
                     'collection' => [
                         'type' => 'page',
-                        'title' => __('Collection', 'namipress'),
+                        'title' => __('Collection', 'cardanopress'),
                     ],
                 ],
             ]);

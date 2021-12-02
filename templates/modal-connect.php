@@ -14,7 +14,7 @@
         x-transition:leave-end="transform opacity-0 scale-75"
         @click.away="showModal = false"
     >
-        <?php namiPress()->template('part/modal-header'); ?>
-        <?php namiPress()->template('part/modal-content'); ?>
+        <?php cardanoPress()->template('part/modal-header'); ?>
+        <?php cardanoPress()->template('part/modal-content'); ?>
     </div>
 </div>

@@ -8,15 +8,15 @@ const cardano = window.cardano || {
     enable: async () => false,
 }
 
-const namiPress = window.namiPress || {
+const cardanoPress = window.cardanoPress || {
     logged: false,
 }
 
 window.Alpine = Alpine
 
-Alpine.data('namiPress', () => ({
-    isAvailable: undefined !== window.cardano && undefined !== window.namiPress,
-    isConnected: namiPress.logged,
+Alpine.data('cardanoPress', () => ({
+    isAvailable: undefined !== window.cardano && undefined !== window.cardanoPress,
+    isConnected: cardanoPress.logged,
     isProcessing: false,
     payAmount: 1,
     showModal: false,
@@ -73,7 +73,7 @@ Alpine.data('namiPress', () => ({
             }
 
             this.isConnected = true
-            namiPress.logged = true
+            cardanoPress.logged = true
         } else {
             addNotice({ type: 'error', text: response.data.message })
         }

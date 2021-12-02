@@ -11,7 +11,7 @@
                 x-transition:leave-end="transform translate-x-full opacity-0"
                 @click="$store.truNotification.remove(notice.id)" class="z-10"
             >
-                <?php namiPress()->template('part/notice-item'); ?>
+                <?php cardanoPress()->template('part/notice-item'); ?>
             </div>
         </template>
     </div>

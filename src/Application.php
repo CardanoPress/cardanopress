@@ -5,11 +5,11 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\NamiPress;
+namespace PBWebDev\CardanoPress;
 
 use Dotenv\Dotenv;
-use PBWebDev\NamiPress\Actions\CoreAction;
-use PBWebDev\NamiPress\Actions\WalletAction;
+use PBWebDev\CardanoPress\Actions\CoreAction;
+use PBWebDev\CardanoPress\Actions\WalletAction;
 use ThemePlate\Enqueue;
 
 class Application
@@ -29,7 +29,7 @@ class Application
 
     private function __construct()
     {
-        $load_path = plugin_dir_path(NAMIPRESS_FILE);
+        $load_path = plugin_dir_path(CARDANOPRESS_FILE);
 
         $this->setupDotEnv($load_path);
 

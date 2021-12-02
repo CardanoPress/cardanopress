@@ -1,5 +1,5 @@
 <div class="relative z-10">
-    <?php namiPress()->template('part/menu-button'); ?>
+    <?php cardanoPress()->template('part/menu-button'); ?>
 
     <ul
         class="list-none pl-0 mt-2 w-40 py-1 bg-white absolute shadow rounded"
@@ -12,6 +12,6 @@
         x-transition:leave-end="transform opacity-0 scale-y-0"
         @click.away="openDropdown = false"
     >
-        <?php namiPress()->template('part/menu-items'); ?>
+        <?php cardanoPress()->template('part/menu-items'); ?>
     </ul>
 </div>

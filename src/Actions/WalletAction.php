@@ -5,25 +5,25 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\NamiPress\Actions;
+namespace PBWebDev\CardanoPress\Actions;
 
-use PBWebDev\NamiPress\Blockfrost;
-use PBWebDev\NamiPress\Profile;
+use PBWebDev\CardanoPress\Blockfrost;
+use PBWebDev\CardanoPress\Profile;
 
 class WalletAction
 {
     public function __construct()
     {
-        add_action('wp_ajax_nopriv_namipress_user_account', [$this, 'initializeUserAccount']);
-        add_action('wp_ajax_namipress_reconnect_account', [$this, 'reconnectUserWallet']);
-        add_action('wp_ajax_namipress_sync_assets', [$this, 'syncUserAssets']);
-        add_action('wp_ajax_namipress_network_change', [$this, 'logoutCurrentUser']);
-        add_action('wp_ajax_namipress_protocol_parameters', [$this, 'getProtocolParameters']);
+        add_action('wp_ajax_nopriv_cardanopress_user_account', [$this, 'initializeUserAccount']);
+        add_action('wp_ajax_cardanopress_reconnect_account', [$this, 'reconnectUserWallet']);
+        add_action('wp_ajax_cardanopress_sync_assets', [$this, 'syncUserAssets']);
+        add_action('wp_ajax_cardanopress_network_change', [$this, 'logoutCurrentUser']);
+        add_action('wp_ajax_cardanopress_protocol_parameters', [$this, 'getProtocolParameters']);
     }
 
     public function initializeUserAccount(): void
     {
-        check_ajax_referer('namipress-actions');
+        check_ajax_referer('cardanopress-actions');
 
         $address = $_POST['wallet_address'];
         $username = md5($address);
@@ -70,7 +70,7 @@ class WalletAction
 
     public function reconnectUserWallet(): void
     {
-        check_ajax_referer('namipress-actions');
+        check_ajax_referer('cardanopress-actions');
 
         $blockfrost = new Blockfrost($_POST['query_network']);
         $response = $blockfrost->stakeAddress($_POST['wallet_address']);
@@ -90,7 +90,7 @@ class WalletAction
 
     public function syncUserAssets(): void
     {
-        check_ajax_referer('namipress-actions');
+        check_ajax_referer('cardanopress-actions');
 
         $userProfile = new Profile(wp_get_current_user());
         $stored = $userProfile->storedAssets();
@@ -121,7 +121,7 @@ class WalletAction
 
     public function getProtocolParameters(): void
     {
-        check_ajax_referer('namipress-actions');
+        check_ajax_referer('cardanopress-actions');
 
         $network = $_POST['query_network'];
         $blockfrost = new Blockfrost($network);

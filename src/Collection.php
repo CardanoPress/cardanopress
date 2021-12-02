@@ -5,7 +5,7 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\NamiPress;
+namespace PBWebDev\CardanoPress;
 
 class Collection
 {

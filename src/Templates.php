@@ -5,12 +5,12 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\NamiPress;
+namespace PBWebDev\CardanoPress;
 
 class Templates
 {
-    protected string $prefix = 'namipress/';
-    protected string $title = 'NamiPress:';
+    protected string $prefix = 'cardanopress/';
+    protected string $title = 'CardanoPress:';
     private array $storage;
     private string $load_path;
 

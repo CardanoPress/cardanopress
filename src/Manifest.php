@@ -5,12 +5,12 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\NamiPress;
+namespace PBWebDev\CardanoPress;
 
 class Manifest
 {
     private array $storage;
-    protected string $prefix = 'namipress-';
+    protected string $prefix = 'cardanopress-';
 
     public function __construct(string $load_path)
     {
@@ -70,7 +70,7 @@ class Manifest
 
     protected function getAssetsBase(): string
     {
-        return plugin_dir_url(NAMIPRESS_FILE) . 'assets/dist/';
+        return plugin_dir_url(CARDANOPRESS_FILE) . 'assets/dist/';
     }
 
     protected function autoEnqueues(): void
@@ -83,17 +83,17 @@ class Manifest
 
     public function injectDataProvider(): void
     {
-        echo '<div x-data="namiPress" @keydown.escape="showModal = false">';
+        echo '<div x-data="cardanoPress" @keydown.escape="showModal = false">';
     }
 
     public function injectModalConnect(): void
     {
-        namiPress()->template('modal-connect');
+        cardanoPress()->template('modal-connect');
     }
 
     public function injectNoticesHandler(): void
     {
-        namiPress()->template('notices-handler');
+        cardanoPress()->template('notices-handler');
     }
 
     public function closeDataProviderTag(): void

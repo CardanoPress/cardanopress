@@ -5,14 +5,14 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\NamiPress;
+namespace PBWebDev\CardanoPress;
 
 use WP_User;
 
 class Profile
 {
     protected WP_User $user;
-    protected string $prefix = 'namipress_';
+    protected string $prefix = 'cardanopress_';
 
     public function __construct(WP_User $user)
     {

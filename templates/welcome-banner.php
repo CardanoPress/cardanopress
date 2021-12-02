@@ -1,6 +1,6 @@
 <?php
 
-use PBWebDev\NamiPress\Profile;
+use PBWebDev\CardanoPress\Profile;
 
 if (empty($userProfile) || ! $userProfile instanceof Profile) {
     $userProfile = new Profile(wp_get_current_user());
@@ -14,5 +14,5 @@ $trimmedAddress = substr($trimmedAddress, 0, 2) . '...' . substr($trimmedAddress
 <div class="flex items-center justify-between pb-6">
     <h2 class="mb-0 mr-2">Welcome <span class="italic"><?php echo $userProfile->getData('user_login'); ?></span>!</h2>
 
-    <?php namiPress()->template('menu-dropdown', compact('trimmedAddress')); ?>
+    <?php cardanoPress()->template('menu-dropdown', compact('trimmedAddress')); ?>
 </div>
