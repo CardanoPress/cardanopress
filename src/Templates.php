@@ -9,7 +9,8 @@ namespace PBWebDev\NamiPress;
 
 class Templates
 {
-    private string $prefix = 'namipress/';
+    protected string $prefix = 'namipress/';
+    protected string $title = 'NamiPress:';
     private array $storage;
     private string $load_path;
 
@@ -34,7 +35,7 @@ class Templates
                 $basename,
                 '.php',
             ]);
-            $templates[$filename] = 'NamiPress: ' . $this->prettyName($basename);
+            $templates[$filename] = $this->title . ' ' . $this->prettyName($basename);
         }
 
         return $templates;
@@ -47,18 +48,16 @@ class Templates
 
     public function setCustomTemplates(array $templates): array
     {
-        $custom = $this->storage;
-
-        return array_merge($templates, $custom);
+        return array_merge($templates, $this->storage);
     }
 
     public function loadCustomTemplate(string $default): string
     {
-        if (is_search() || is_embed() || ! is_page()) {
+        if (is_search() || is_embed()) {
             return $default;
         }
 
-        $page_template = get_page_template_slug();
+        $page_template = $this->getLoaderFile();
         $template_file = locate_template($page_template);
 
         if (! $template_file && isset($this->storage[$page_template])) {
@@ -70,6 +69,11 @@ class Templates
         }
 
         return $default;
+    }
+
+    protected function getLoaderFile(): string
+    {
+        return get_page_template_slug();
     }
 
     public function getPath(bool $default = false): string

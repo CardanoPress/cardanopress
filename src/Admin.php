@@ -14,8 +14,7 @@ use ThemePlate\Settings;
 
 class Admin
 {
-    private Application $application;
-    private Data $data;
+    protected Data $data;
 
     public const OPTION_KEY = 'namipress';
 
@@ -149,13 +148,13 @@ class Admin
 
     public function getOption(string $key)
     {
-        $options = get_option(self::OPTION_KEY, []);
+        $options = get_option(static::OPTION_KEY, []);
         $value = $options[$key] ?? '';
 
         if ($value) {
             return $value;
         }
 
-        return $this->data->get_default(self::OPTION_KEY, $key);
+        return $this->data->get_default(static::OPTION_KEY, $key);
     }
 }

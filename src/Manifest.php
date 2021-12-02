@@ -10,6 +10,7 @@ namespace PBWebDev\NamiPress;
 class Manifest
 {
     private array $storage;
+    protected string $prefix = 'namipress-';
 
     public function __construct(string $load_path)
     {
@@ -18,6 +19,12 @@ class Manifest
         $this->storage = $this->getAssetsManifest($load_path);
 
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
+
+        $this->fireInjectors();
+    }
+
+    protected function fireInjectors(): void
+    {
         add_action('wp_body_open', [$this, 'injectDataProvider']);
         add_action('wp_footer', [$this, 'injectModalConnect']);
         add_action('wp_footer', [$this, 'injectNoticesHandler']);
@@ -47,7 +54,7 @@ class Manifest
 
     public function enqueueAssets(): void
     {
-        $base = plugin_dir_url(NAMIPRESS_FILE) . 'assets/dist/';
+        $base = $this->getAssetsBase();
 
         foreach ($this->storage as $file => $asset) {
             $parts = explode('.', $file);
@@ -55,13 +62,23 @@ class Manifest
             $arg = 'js' === $parts[1] ? true : 'all';
             $func = 'wp_register_' . $type;
 
-            $func('namipress-' . $parts[0], $base . $asset, [], '0.1.0', $arg);
+            $func($this->prefix . $parts[0], $base . $asset, [], '0.1.0', $arg);
         }
 
-        wp_enqueue_style('namipress-style');
-        wp_enqueue_script('namipress-script');
-        wp_script_add_data('namipress-script', 'defer', true);
-        wp_enqueue_script('namipress-notification');
+        $this->autoEnqueues();
+    }
+
+    protected function getAssetsBase(): string
+    {
+        return plugin_dir_url(NAMIPRESS_FILE) . 'assets/dist/';
+    }
+
+    protected function autoEnqueues(): void
+    {
+        wp_enqueue_style($this->prefix . 'style');
+        wp_enqueue_script($this->prefix . 'script');
+        wp_script_add_data($this->prefix . 'script', 'defer', true);
+        wp_enqueue_script($this->prefix . 'notification');
     }
 
     public function injectDataProvider(): void

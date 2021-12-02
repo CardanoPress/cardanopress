@@ -11,23 +11,23 @@ use WP_User;
 
 class Profile
 {
-    private WP_User $user;
-
-    public const META_KEYS = [
-        'connected_network' => 'namipress_connected_network',
-        'connected_wallet' => 'namipress_connected_wallet',
-        'connected_stake' => 'namipress_connected_stake',
-        'stored_assets' => 'namipress_stored_assets',
-    ];
+    protected WP_User $user;
+    protected string $prefix = 'namipress_';
 
     public function __construct(WP_User $user)
     {
         $this->user = $user;
     }
 
+    protected function getMetaKey(string $name): string
+    {
+        return $this->prefix . $name;
+    }
+
+
     public function connectedNetwork(): string
     {
-        $saved = get_user_meta($this->user->ID, self::META_KEYS['connected_network'], true);
+        $saved = get_user_meta($this->user->ID, $this->getMetaKey('connected_network'), true);
 
         return $saved ?? '';
     }
@@ -37,7 +37,7 @@ class Profile
         $isAdded = false;
 
         if ($query_network !== $this->connectedNetwork()) {
-            $isAdded = update_user_meta($this->user->ID, self::META_KEYS['connected_network'], $query_network);
+            $isAdded = update_user_meta($this->user->ID, $this->getMetaKey('connected_network'), $query_network);
         }
 
         return (bool)$isAdded;
@@ -45,7 +45,7 @@ class Profile
 
     public function connectedWallet(): string
     {
-        $saved = get_user_meta($this->user->ID, self::META_KEYS['connected_wallet'], true);
+        $saved = get_user_meta($this->user->ID, $this->getMetaKey('connected_wallet'), true);
 
         return $saved ?? '';
     }
@@ -55,7 +55,7 @@ class Profile
         $isAdded = false;
 
         if ($walletAddress !== $this->connectedWallet()) {
-            $isAdded = update_user_meta($this->user->ID, self::META_KEYS['connected_wallet'], $walletAddress);
+            $isAdded = update_user_meta($this->user->ID, $this->getMetaKey('connected_wallet'), $walletAddress);
         }
 
         return (bool)$isAdded;
@@ -63,7 +63,7 @@ class Profile
 
     public function connectedStake(): string
     {
-        $saved = get_user_meta($this->user->ID, self::META_KEYS['connected_stake'], true);
+        $saved = get_user_meta($this->user->ID, $this->getMetaKey('connected_stake'), true);
 
         return $saved ?? '';
     }
@@ -73,7 +73,7 @@ class Profile
         $isAdded = false;
 
         if ($stakeAddress !== $this->connectedStake()) {
-            $isAdded = update_user_meta($this->user->ID, self::META_KEYS['connected_stake'], $stakeAddress);
+            $isAdded = update_user_meta($this->user->ID, $this->getMetaKey('connected_stake'), $stakeAddress);
         }
 
         return (bool)$isAdded;
@@ -81,14 +81,14 @@ class Profile
 
     public function storedAssets(): array
     {
-        $saved = get_user_meta($this->user->ID, self::META_KEYS['stored_assets'], true);
+        $saved = get_user_meta($this->user->ID, $this->getMetaKey('stored_assets'), true);
 
         return array_filter((array)$saved);
     }
 
     public function saveAssets(array $data): bool
     {
-        return update_user_meta($this->user->ID, self::META_KEYS['stored_assets'], $data);
+        return update_user_meta($this->user->ID, $this->getMetaKey('stored_assets'), $data);
     }
 
     public function setUserAuth(string $username): void
