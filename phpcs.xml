@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ruleset name="Ronin Universe">
+	<!-- Set a description for this ruleset. -->
+	<description>The code standard rules for Ronin Universe.</description>
+
+	<!-- A comma separated list of file extensions to check. -->
+	<arg name="extensions" value="php" />
+
+	<!-- Exclude the Composer Vendor directory. -->
+	<exclude-pattern>/vendor/</exclude-pattern>
+
+	<!-- Include PHP cross-version compatibility. -->
+	<config name="testVersion" value="7.4-"/>
+
+	<!-- Include PHP Compatibility Coding Standard. -->
+	<rule ref="PHPCompatibility" />
+    <rule ref="PSR12" />
+</ruleset>

@@ -1,0 +1,18 @@
+<?php
+
+use PBWebDev\NamiPress\Profile;
+
+if (empty($userProfile) || ! $userProfile instanceof Profile) {
+    $userProfile = new Profile(wp_get_current_user());
+}
+
+$trimmedAddress = str_replace(['addr1', 'addr_test1'], ['', ''], $userProfile->connectedWallet());
+$trimmedAddress = substr($trimmedAddress, 0, 2) . '...' . substr($trimmedAddress, -4);
+
+?>
+
+<div class="flex items-center justify-between pb-6">
+    <h2 class="mb-0 mr-2">Welcome <span class="italic"><?php echo $userProfile->getData('user_login'); ?></span>!</h2>
+
+    <?php namiPress()->template('menu-dropdown', compact('trimmedAddress')); ?>
+</div>
