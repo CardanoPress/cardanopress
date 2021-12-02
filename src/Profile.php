@@ -106,20 +106,6 @@ class Profile
         do_action('wp_logout', $this->user->ID);
     }
 
-    public function adminBar(bool $show): bool
-    {
-        $current_roles = $this->user->roles;
-
-        if (
-            in_array('subscriber', $current_roles, true) &&
-            ! in_array('administrator', $current_roles, true)
-        ) {
-            $show = false;
-        }
-
-        return $show;
-    }
-
     public function getData(string $key = null)
     {
         if (null === $key) {

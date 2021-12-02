@@ -18,19 +18,6 @@ class Collection
         $this->data = $data;
     }
 
-    public function getAssetData(string $name): array
-    {
-        $list = array_values($this->data);
-        $assets = array_column($list, 'asset_name');
-        $index = array_search($name, $assets, true);
-
-        if (false === $index) {
-            return [];
-        }
-
-        return $list[$index];
-    }
-
     public function filteredAsset(): array
     {
         $data = $this->data;

@@ -18,8 +18,6 @@ class CoreAction
     {
         add_action('wp_enqueue_scripts', [$this, 'injectScriptVariables']);
         add_action('wp_login', [$this, 'checkWalletAssets'], 10, 2);
-        add_filter('show_admin_bar', [$this, 'maybeAdminBar']);
-        add_action('wp_loaded', [$this, 'memberDashboardRedirect']);
         add_action('parse_request', [$this, 'maybeRedirect']);
     }
 
@@ -35,13 +33,6 @@ class CoreAction
         ];
 
         wp_localize_script('namipress-dummy', 'namiPress', $data);
-    }
-
-    public function maybeAdminBar(bool $show): bool
-    {
-        $userProfile = new Profile(wp_get_current_user());
-
-        return $userProfile->adminBar($show);
     }
 
     public function checkWalletAssets($username, $user): void
@@ -73,27 +64,6 @@ class CoreAction
         $assets = array_filter($assets);
 
         $userProfile->saveAssets($assets);
-    }
-
-    public function memberDashboardRedirect(): void
-    {
-        if (defined('DOING_AJAX') || (isset($_GET['action']) && 'trash' === $_GET['action']) || ! is_admin()) {
-            return;
-        }
-
-        $userProfile = new Profile(wp_get_current_user());
-
-        if (! $userProfile->adminBar(true)) {
-            $app = Application::instance();
-            $page = $app->option('member_dashboard');
-
-            if (! $page) {
-                $page = get_option('page_on_front');
-            }
-
-            wp_safe_redirect(get_permalink($page));
-            exit();
-        }
     }
 
     public function maybeRedirect(): void

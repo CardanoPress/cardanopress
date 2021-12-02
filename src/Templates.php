@@ -54,7 +54,7 @@ class Templates
 
     public function loadCustomTemplate(string $default): string
     {
-        if (is_search() || is_embed() || (! is_author() && ! is_page())) {
+        if (is_search() || is_embed() || ! is_page()) {
             return $default;
         }
 
