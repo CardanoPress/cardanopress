@@ -1,0 +1,20 @@
+{
+    "name": "themeplate/settings",
+    "description" : "ThemePlate custom settings forms",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Gene Alyson Fortunado Torcende",
+            "email": "genealyson.torcende@gmail.com"
+        }
+    ],
+    "require": {
+		"php": ">=5.6.0",
+    	"themeplate/core": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ThemePlate\\": ""
+        }
+    }
+}

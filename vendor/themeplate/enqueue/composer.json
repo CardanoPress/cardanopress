@@ -1,0 +1,19 @@
+{
+    "name": "themeplate/enqueue",
+    "description" : "Helper for registered dependencies",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Gene Alyson Fortunado Torcende",
+            "email": "genealyson.torcende@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ThemePlate\\": ""
+        }
+    }
+}
