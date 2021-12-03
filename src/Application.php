@@ -66,6 +66,6 @@ class Application
         $projectIds = $this->option('blockfrost_project_id');
         $projectIds = array_filter($projectIds);
 
-        return ! empty($projectIds) || ! $this->option('member_dashboard') || ! $this->option('member_collection');
+        return ! empty($projectIds);
     }
 }

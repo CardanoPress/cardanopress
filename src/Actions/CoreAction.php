@@ -80,9 +80,7 @@ class CoreAction
 
     public function maybeRedirect(): void
     {
-        $app = Application::instance();
-
-        if (! $app->isReady() || is_user_logged_in()) {
+        if (is_user_logged_in()) {
             return;
         }
 
