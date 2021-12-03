@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset name="External Update Manager">
+	<!-- Set a description for this ruleset. -->
+	<description>The code standard rules for External Update Manager.</description>
+
+	<!-- A comma separated list of file extensions to check. -->
+	<arg name="extensions" value="php" />
+
+	<!-- Exclude the Composer Vendor directory. -->
+	<exclude-pattern>/vendor/</exclude-pattern>
+
+	<!-- Include the WordPress ruleset. -->
+	<rule ref="WordPress-Core"/>
+
+	<rule ref="WordPress.Files.FileName">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+	</rule>
+
+	<!-- Include PHP cross-version compatibility. -->
+	<config name="testVersion" value="5.6-"/>
+
+	<!-- Include PHP Compatibility Coding Standard for WordPress. -->
+	<rule ref="PHPCompatibilityWP" />
+</ruleset>

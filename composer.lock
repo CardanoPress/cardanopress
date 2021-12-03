@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed99ed0953c1959e57be0c739734f024",
+    "content-hash": "4dab9cb12bf38c334721cb0fe495fa8c",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -328,6 +328,57 @@
                 }
             ],
             "time": "2021-10-06T17:43:30+00:00"
+        },
+        {
+            "name": "kermage/external-update-manager",
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kermage/External-Update-Manager.git",
+                "reference": "f24f447ab898c1f3eb4f21dccdf2b762eccf07d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kermage/External-Update-Manager/zipball/f24f447ab898c1f3eb4f21dccdf2b762eccf07d0",
+                "reference": "f24f447ab898c1f3eb4f21dccdf2b762eccf07d0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+                "phpcompatibility/phpcompatibility-wp": "^2.1",
+                "squizlabs/php_codesniffer": "^3.5",
+                "wp-coding-standards/wpcs": "^2.2"
+            },
+            "type": "wordpress-dropin",
+            "autoload": {
+                "files": [
+                    "class-external-update-manager.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gene Alyson Fortunado Torcende",
+                    "email": "genealyson.torcende@gmail.com"
+                }
+            ],
+            "description": "A drop-in library for WordPress themes or plugins to manage updates.",
+            "keywords": [
+                "dropin",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/kermage/External-Update-Manager/issues",
+                "source": "https://github.com/kermage/External-Update-Manager/tree/v2.1.1"
+            },
+            "time": "2021-02-12T16:36:42+00:00"
         },
         {
             "name": "psr/http-client",
