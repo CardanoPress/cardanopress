@@ -27,8 +27,6 @@
     "ext-json": "*",
     "themeplate/enqueue": "^1.1",
     "guzzlehttp/guzzle": "^7.4",
-    "oscarotero/env": "^2.1",
-    "vlucas/phpdotenv": "^5.3",
     "themeplate/settings": "^1.2",
     "themeplate/page": "^1.1"
   },
