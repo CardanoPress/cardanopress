@@ -8,8 +8,8 @@ window.addEventListener('alpine:init', () => {
         visible: [],
 
         init() {
-            window.addEventListener('truApp:addNotice', (event) => this.add(event.detail))
-            window.addEventListener('truApp:removeNotice', (event) => this.remove(event.detail))
+            window.addEventListener('cardanoPress:addNotice', (event) => this.add(event.detail))
+            window.addEventListener('cardanoPress:removeNotice', (event) => this.remove(event.detail))
         },
 
         add(data) {

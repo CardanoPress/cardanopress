@@ -14,11 +14,11 @@ export const generateUuid = () => {
 }
 
 export const addNotice = (detail) => {
-    window.dispatchEvent(new CustomEvent('truApp:addNotice', { detail }))
+    window.dispatchEvent(new CustomEvent('cardanoPress:addNotice', { detail }))
 }
 
 export const removeNotice = (detail) => {
-    window.dispatchEvent(new CustomEvent('truApp:removeNotice', { detail }))
+    window.dispatchEvent(new CustomEvent('cardanoPress:removeNotice', { detail }))
 }
 
 export const getNetwork = async (cardano) => {

@@ -6,6 +6,7 @@ import { addNotice, removeNotice } from './api/util'
 const cardano = window.cardano || {
     isEnabled: async () => false,
     enable: async () => false,
+    onNetworkChange: () => 'unavailable',
 }
 
 const cardanoPress = window.cardanoPress || {
@@ -28,12 +29,12 @@ Alpine.data('cardanoPress', () => ({
 
     async init() {
         if (this.isAvailable) {
-            window.cardano.onNetworkChange((networkId) => this.handleLogout(networkId))
+            cardano.onNetworkChange((networkId) => this.handleLogout(networkId))
         }
 
         if (this.isConnected && !localStorage.getItem('_x_isNotified')) {
             addNotice({ type: 'success', text: 'Successfully connected' })
-            localStorage.setItem('_x_isNotified', true)
+            localStorage.setItem('_x_isNotified', 'true')
         } else if (!this.isConnected && localStorage.getItem('_x_isNotified')) {
             localStorage.removeItem('_x_isNotified')
         }
