@@ -109,7 +109,7 @@ class BlockfrostClient
             $value['data'] = json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
         } catch (RequestException $error) {
             $response = $error->getResponse();
-            $value['status_code'] = 500;
+            $value['status_code'] = $response->getStatusCode();
 
             try {
                 $value['error'] = json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
@@ -117,10 +117,8 @@ class BlockfrostClient
                 $value['error'] = $e->getMessage();
             }
         } catch (GuzzleException $e) {
-            $value['status_code'] = 500;
             $value['error'] = $e->getMessage();
         } catch (JsonException $e) {
-            $value['status_code'] = 500;
             $value['error'] = $e->getMessage();
         } finally {
             return $value;
