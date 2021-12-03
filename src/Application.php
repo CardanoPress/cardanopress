@@ -41,7 +41,7 @@ class Application
 
         $this->admin = new Admin();
 
-        Enqueue::init();
+        add_action('plugins_loaded', [Enqueue::class, 'init']);
     }
 
     /**
