@@ -23,6 +23,12 @@ class CoreAction
 
     public function injectScriptVariables(): void
     {
+        $app = Application::instance();
+
+        if (! $app->isReady()) {
+            return;
+        }
+
         wp_register_script('cardanopress-dummy', '');
         wp_enqueue_script('cardanopress-dummy');
 
@@ -37,6 +43,12 @@ class CoreAction
 
     public function checkWalletAssets($username, $user): void
     {
+        $app = Application::instance();
+
+        if (! $app->isReady()) {
+            return;
+        }
+
         $userProfile = new Profile($user);
         $queryNetwork = $userProfile->connectedNetwork();
         $stakeAddress = $userProfile->connectedStake();
@@ -68,7 +80,9 @@ class CoreAction
 
     public function maybeRedirect(): void
     {
-        if (is_user_logged_in()) {
+        $app = Application::instance();
+
+        if (! $app->isReady() || is_user_logged_in()) {
             return;
         }
 
