@@ -7,7 +7,6 @@
 
 namespace PBWebDev\CardanoPress;
 
-use Env\Env;
 use Exception;
 use ThemePlate\Core\Data;
 use ThemePlate\Page;
@@ -58,19 +57,17 @@ class Admin
                     'project_id' => [
                         'type' => 'group',
                         'default' => [
-                            'mainnet' => $this->getVariable('BLOCKFROST_MAINNET_PROJECT_ID'),
-                            'testnet' => $this->getVariable('BLOCKFROST_TESTNET_PROJECT_ID'),
+                            'mainnet' => '',
+                            'testnet' => '',
                         ],
                         'fields' => [
                             'mainnet' => [
                                 'title' => __('Mainnet', 'cardanopress'),
                                 'type' => 'text',
-                                'default' => $this->getVariable('BLOCKFROST_MAINNET_PROJECT_ID'),
                             ],
                             'testnet' => [
                                 'title' => __('Testnet', 'cardanopress'),
                                 'type' => 'text',
-                                'default' => $this->getVariable('BLOCKFROST_TESTNET_PROJECT_ID'),
                             ],
                         ],
                     ],
@@ -95,8 +92,8 @@ class Admin
                         'type' => 'group',
                         'default' => [
                             [
-                                'label' => __('Asset Collection', 'cardanopress'),
-                                'value' => $this->getVariable('ASSETS_POLICY_ID'),
+                                'label' => '',
+                                'value' => '',
                             ],
                         ],
                         'repeatable' => true,
@@ -144,17 +141,6 @@ class Admin
         } catch (Exception $exception) {
             error_log($exception->getMessage());
         }
-    }
-
-    public function getVariable(string $name)
-    {
-        $value = $_ENV[$name] ?? null;
-
-        if (null === $value) {
-            return null;
-        }
-
-        return Env::convert($value);
     }
 
     public function getOption(string $key)

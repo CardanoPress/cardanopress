@@ -7,7 +7,6 @@
 
 namespace PBWebDev\CardanoPress;
 
-use Dotenv\Dotenv;
 use PBWebDev\CardanoPress\Actions\CoreAction;
 use PBWebDev\CardanoPress\Actions\WalletAction;
 use ThemePlate\Enqueue;
@@ -31,8 +30,6 @@ class Application
     {
         $load_path = plugin_dir_path(CARDANOPRESS_FILE);
 
-        $this->setupDotEnv($load_path);
-
         $this->templates = new Templates($load_path . 'templates');
 
         new Manifest($load_path . 'assets');
@@ -42,27 +39,6 @@ class Application
         $this->admin = new Admin();
 
         add_action('plugins_loaded', [Enqueue::class, 'init']);
-    }
-
-    /**
-     * Use Dotenv to set required environment variables and load .env file in root
-     */
-    private function setupDotEnv($path): void
-    {
-        if (file_exists($path . '/.env')) {
-            $dotenv = Dotenv::createImmutable($path);
-            $dotenv->load();
-            $dotenv->required([
-                'BLOCKFROST_MAINNET_PROJECT_ID',
-                'BLOCKFROST_TESTNET_PROJECT_ID',
-                'ASSETS_POLICY_ID',
-            ]);
-        }
-    }
-
-    public function variable(string $name)
-    {
-        return $this->admin->getVariable($name);
     }
 
     public function option(string $key)
