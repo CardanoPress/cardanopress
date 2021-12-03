@@ -60,7 +60,7 @@ class Templates
         $page_template = $this->getLoaderFile();
         $template_file = locate_template($page_template);
 
-        if (! $template_file && isset($this->storage[$page_template])) {
+        if (! $template_file && $this->isCustomPage($page_template)) {
             $template_file = $this->load_path . str_replace($this->prefix, '', $page_template);
         }
 
@@ -83,5 +83,10 @@ class Templates
         }
 
         return $this->prefix;
+    }
+
+    public function isCustomPage(string $template): bool
+    {
+        return isset($this->storage[$template]);
     }
 }
