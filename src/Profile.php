@@ -12,16 +12,20 @@ use WP_User;
 class Profile
 {
     protected WP_User $user;
-    protected string $prefix = 'cardanopress_';
+    private string $prefix = 'cardanopress_';
 
     public function __construct(WP_User $user)
     {
         $this->user = $user;
     }
 
-    protected function getMetaKey(string $name): string
+    public function getMetaKey(string $name, $prefix = null): string
     {
-        return $this->prefix . $name;
+        if (null === $prefix) {
+            $prefix = $this->prefix;
+        }
+
+        return $prefix . $name;
     }
 
 
