@@ -49,9 +49,16 @@ class Blockfrost
         ];
     }
 
-    public function stakeAddress(string $key): array
+    public function getAddressDetails(string $key): array
     {
         $response = $this->client->request('addresses/' . $key);
+
+        return 200 === $response['status_code'] ? $response['data'] : [];
+    }
+
+    public function getAccountDetails(string $stake): array
+    {
+        $response = $this->client->request('accounts/' . $stake);
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }

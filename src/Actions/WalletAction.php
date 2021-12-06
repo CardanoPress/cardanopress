@@ -47,7 +47,7 @@ class WalletAction
 
         if ($newAccount || empty($userProfile->connectedStake())) {
             $blockfrost = new Blockfrost($_POST['query_network']);
-            $response = $blockfrost->stakeAddress($address);
+            $response = $blockfrost->getAddressDetails($address);
 
             if (! empty($response)) {
                 $userProfile->saveNetwork($_POST['query_network']);
@@ -73,7 +73,7 @@ class WalletAction
         check_ajax_referer('cardanopress-actions');
 
         $blockfrost = new Blockfrost($_POST['query_network']);
-        $response = $blockfrost->stakeAddress($_POST['wallet_address']);
+        $response = $blockfrost->getAddressDetails($_POST['wallet_address']);
 
         if (empty($response)) {
             wp_send_json_error(__('Blockfrost API Error. Please try again', 'ronin-universe'));
