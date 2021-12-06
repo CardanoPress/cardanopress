@@ -11,7 +11,7 @@ use PBWebDev\CardanoPress\Clients\BlockfrostClient;
 
 class Blockfrost
 {
-    private BlockfrostClient $client;
+    protected BlockfrostClient $client;
 
     public function __construct(string $query_network)
     {
