@@ -16,3 +16,8 @@ export const ERROR = {
 export const TX = {
     invalid_hereafter: 3600 * 2, //2h from current slot
 }
+
+export const cardanoPress = window.cardanoPress || {
+    ajaxUrl: '',
+    _nonce: '',
+}

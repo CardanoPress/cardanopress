@@ -1,4 +1,3 @@
-import { cardanoPress } from './api/util'
 import { getChangeAddress, getNetwork } from './lib/namiWallet'
 
 export const handleReconnect = async () => {

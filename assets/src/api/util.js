@@ -1,10 +1,5 @@
 import { MultiAsset } from '@emurgo/cardano-serialization-lib-browser'
 
-export const cardanoPress = window.cardanoPress || {
-    ajaxUrl: '',
-    _nonce: '',
-}
-
 export const generateUuid = () => {
     const s4 = () => {
         return Math.floor((1 + Math.random()) * 0x10000)
