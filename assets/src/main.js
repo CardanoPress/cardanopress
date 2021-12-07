@@ -1,17 +1,8 @@
 import Alpine from 'alpinejs'
 import { handleReconnect, handleSync, logMeIn, logMeOut } from './actions'
 import { NETWORK } from './api/config'
-import { addNotice, removeNotice } from './api/util'
-
-const cardano = window.cardano || {
-    isEnabled: async () => false,
-    enable: async () => false,
-    onNetworkChange: () => 'unavailable',
-}
-
-const cardanoPress = window.cardanoPress || {
-    logged: false,
-}
+import { cardanoPress, addNotice, removeNotice } from './api/util'
+import { cardano } from './lib/namiWallet'
 
 window.Alpine = Alpine
 
@@ -19,7 +10,6 @@ Alpine.data('cardanoPress', () => ({
     isAvailable: undefined !== window.cardano && undefined !== window.cardanoPress,
     isConnected: cardanoPress.logged,
     isProcessing: false,
-    payAmount: 1,
     showModal: false,
     openDropdown: false,
 

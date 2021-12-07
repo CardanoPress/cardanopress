@@ -1,40 +1,18 @@
-import { getChangeAddress, getNetwork, getRewardAddress, getStakeKeyHash } from '../api/util'
-import { buildTx, initTx, prepareTx } from '../api/wallet'
+import {
+    getNetwork,
+    getChangeAddress,
+    getRewardAddress,
+    getUtxos,
+    getStakeKeyHash,
+    signAndSubmit
+} from './namiWallet'
+import { buildTx, prepareTx } from '../api/wallet'
 import { Buffer } from 'buffer'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
+import { getDelegation, getProtocol, saveWalletTx } from '../api/util'
 
-const cardano = window.cardano || {}
-const cardanoPress = window.cardanoPress || {
-    ajaxUrl: '',
-    _nonce: '',
-}
-
-const initDelegation = async (network, rewardAddress) => {
-    return await fetch(cardanoPress.ajaxUrl, {
-        method: 'POST',
-        body: new URLSearchParams({
-            _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_pool_delegation',
-            query_network: network,
-            reward_address: rewardAddress,
-        }),
-    }).then((response) => response.json())
-}
-
-const saveWalletTx = async (network, changeAddress, txHash) => {
-    return await fetch(cardanoPress.ajaxUrl, {
-        method: 'POST',
-        body: new URLSearchParams({
-            _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_wallet_transaction',
-            query_network: network,
-            wallet_address: changeAddress,
-            transaction_hash: txHash,
-        }),
-    }).then((response) => response.json())
-}
-
-const delegationCertificates = (accountActive, stakeKeyHash, poolHex) => {
+const delegationCertificates = async (accountActive, poolHex) => {
+    const stakeKeyHash = await getStakeKeyHash()
     const certificates = CSL.Certificates.new()
 
     if (!accountActive) {
@@ -70,55 +48,36 @@ const delegationCertificates = (accountActive, stakeKeyHash, poolHex) => {
 }
 
 export const handleDelegation = async () => {
-    const network = await getNetwork(cardano)
-    const responseTx = await initTx(network, cardanoPress)
+    const network = await getNetwork()
+    const responseProtocol = await getProtocol(network)
 
-    if (!responseTx.success) {
-        return responseTx
+    if (!responseProtocol.success) {
+        return responseProtocol
     }
 
-    const protocolParameters = responseTx.data
-    const rewardAddress = await getRewardAddress(cardano)
-    const responseDelegation = await initDelegation(network, rewardAddress, truOptions)
+    const protocolParameters = responseProtocol.data
+    const rewardAddress = await getRewardAddress()
+    const responseDelegation = await getDelegation(network, rewardAddress)
 
     if (!responseDelegation.success) {
         return responseDelegation
     }
 
     const delegationDetails = responseDelegation.data
-    const rawUtxos = await cardano.getUtxos()
-    const changeAddress = await getChangeAddress(cardano)
-    const { utxos, outputs } = await prepareTx(rawUtxos, protocolParameters.keyDeposit, changeAddress)
-    const stakeKeyHash = await getStakeKeyHash(cardano)
-    const certificates = delegationCertificates(delegationDetails.active, stakeKeyHash, delegationDetails.hex)
+    const utxos = await getUtxos()
+    const changeAddress = await getChangeAddress()
+    const outputs = await prepareTx(protocolParameters.keyDeposit, changeAddress)
+    const certificates = await delegationCertificates(delegationDetails.active, delegationDetails.hex)
     const transaction = await buildTx(changeAddress, utxos, outputs, protocolParameters, certificates)
 
-    let witnesses
-
     try {
-        witnesses = await cardano.signTx(Buffer.from(transaction.to_bytes(), 'hex').toString('hex'))
+        const txHash = await signAndSubmit(transaction)
+
+        return await saveWalletTx(network, changeAddress, txHash)
     } catch (error) {
         return {
             success: false,
-            data: error.info,
+            data: error,
         }
     }
-
-    const signedTx = CSL.Transaction.new(
-        transaction.body(),
-        CSL.TransactionWitnessSet.from_bytes(Buffer.from(witnesses, 'hex'))
-    )
-
-    let txHash
-
-    try {
-        txHash = await cardano.submitTx(Buffer.from(signedTx.to_bytes(), 'hex').toString('hex'))
-    } catch (error) {
-        return {
-            success: false,
-            data: error.info,
-        }
-    }
-
-    return await saveWalletTx(network, changeAddress, txHash)
 }

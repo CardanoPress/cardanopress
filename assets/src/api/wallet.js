@@ -2,21 +2,8 @@ import { ERROR, TX } from './config'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 import CoinSelection from '../lib/coinSelection'
 import { multiAssetCount } from './util'
-import { Buffer } from 'buffer'
 
-export const initTx = async (network, cardanoPress) => {
-    return await fetch(cardanoPress.ajaxUrl, {
-        method: 'POST',
-        body: new URLSearchParams({
-            _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_protocol_parameters',
-            query_network: network,
-        }),
-    }).then((response) => response.json())
-}
-
-export const prepareTx = async (rawUtxos, lovelaceValue, paymentAddress) => {
-    const utxos = rawUtxos.map((utxo) => CSL.TransactionUnspentOutput.from_bytes(Buffer.from(utxo, 'hex')))
+export const prepareTx = async (lovelaceValue, paymentAddress) => {
     const outputs = CSL.TransactionOutputs.new()
 
     outputs.add(
@@ -26,10 +13,7 @@ export const prepareTx = async (rawUtxos, lovelaceValue, paymentAddress) => {
         )
     )
 
-    return {
-        utxos,
-        outputs,
-    }
+    return outputs
 }
 
 export const buildTx = async (changeAddress, utxos, outputs, protocolParameters, certificates = null) => {
