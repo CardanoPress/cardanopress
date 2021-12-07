@@ -7,6 +7,7 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
+use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
 use PBWebDev\CardanoPress\Profile;
 
@@ -19,6 +20,8 @@ class WalletAction
         add_action('wp_ajax_cardanopress_sync_assets', [$this, 'syncUserAssets']);
         add_action('wp_ajax_cardanopress_network_change', [$this, 'logoutCurrentUser']);
         add_action('wp_ajax_cardanopress_protocol_parameters', [$this, 'getProtocolParameters']);
+        add_action('wp_ajax_cardanopress_pool_delegation', [$this, 'getDelegationData']);
+        add_action('wp_ajax_cardanopress_wallet_transaction', [$this, 'saveWalletTransaction']);
     }
 
     public function initializeUserAccount(): void
@@ -133,5 +136,49 @@ class WalletAction
         }
 
         wp_send_json_success($response);
+    }
+
+    public function getDelegationData(): void
+    {
+        check_ajax_referer('cardanopress-actions');
+
+        $network = $_POST['query_network'];
+        $blockfrost = new Blockfrost($network);
+        $account = $blockfrost->getAccountDetails($_POST['reward_address']);
+
+        if (empty($account)) {
+            wp_send_json_error(__('Blockfrost API Error. Please try again', 'ronin-universe'));
+        }
+
+        $app = Application::instance();
+        $poolIds = $app->option('delegation_pool_id');
+        $pool = $blockfrost->getPoolDetails($poolIds[$network]);
+
+        if (empty($pool)) {
+            wp_send_json_error(__('Blockfrost API Error. Please try again', 'ronin-universe'));
+        }
+
+        wp_send_json_success([
+            'active' => $account['active'],
+            'hex' => $pool['hex'],
+        ]);
+    }
+
+    public function saveWalletTransaction(): void
+    {
+        check_ajax_referer('cardanopress-actions');
+
+        $userProfile = new Profile(wp_get_current_user());
+        $success = $userProfile->saveTransaction(
+            $_POST['query_network'],
+            $_POST['wallet_address'],
+            $_POST['transaction_hash']
+        );
+
+        if (! $success) {
+            wp_send_json_error(__('Something is wrong. Please try again', 'ronin-universe'));
+        }
+
+        wp_send_json_success($_POST['transaction_hash']);
     }
 }

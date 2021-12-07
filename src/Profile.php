@@ -95,6 +95,21 @@ class Profile
         return update_user_meta($this->user->ID, $this->getMetaKey('stored_assets'), $data);
     }
 
+    public function allTransactions(): array
+    {
+        $saved = get_user_meta($this->user->ID, $this->getMetaKey('transaction'), false);
+
+        return array_filter((array)$saved);
+    }
+
+    public function saveTransaction(string $network, string $address, string $hash): bool
+    {
+        $data = compact('network', 'address', 'hash');
+        $isSaved = add_user_meta($this->user->ID, $this->getMetaKey('transaction'), $data);
+
+        return (bool)$isSaved;
+    }
+
     public function setUserAuth(string $username): void
     {
         wp_set_current_user($this->user->ID);

@@ -29,6 +29,7 @@ class Admin
     {
         $this->applicationPage();
         $this->blockfrostFields();
+        $this->poolDelegationFields();
         $this->assetsPolicyFields();
         $this->memberPagesFields();
     }
@@ -55,6 +56,40 @@ class Admin
                 'context' => 'side',
                 'fields' => [
                     'project_id' => [
+                        'type' => 'group',
+                        'default' => [
+                            'mainnet' => '',
+                            'testnet' => '',
+                        ],
+                        'fields' => [
+                            'mainnet' => [
+                                'title' => __('Mainnet', 'cardanopress'),
+                                'type' => 'text',
+                            ],
+                            'testnet' => [
+                                'title' => __('Testnet', 'cardanopress'),
+                                'type' => 'text',
+                            ],
+                        ],
+                    ],
+                ],
+            ]);
+
+            $this->data->store($settings->get_config());
+        } catch (Exception $exception) {
+            error_log($exception->getMessage());
+        }
+    }
+
+    private function poolDelegationFields(): void
+    {
+        try {
+            $settings = new Settings([
+                'id' => 'delegation',
+                'title' => __('Delegation: Pool ID', 'cardanopress'),
+                'page' => self::OPTION_KEY,
+                'fields' => [
+                    'pool_id' => [
                         'type' => 'group',
                         'default' => [
                             'mainnet' => '',

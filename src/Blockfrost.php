@@ -63,6 +63,13 @@ class Blockfrost
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
 
+    public function getPoolDetails(string $id): array
+    {
+        $response = $this->client->request('pools/' . $id);
+
+        return 200 === $response['status_code'] ? $response['data'] : [];
+    }
+
     public function associatedAssets(string $address, int $page = 1): array
     {
         $response = $this->client->request('accounts/' . $address . '/addresses/assets', compact('page'));
