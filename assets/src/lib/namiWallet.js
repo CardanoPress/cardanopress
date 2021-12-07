@@ -1,18 +1,6 @@
-import { NETWORK } from '../api/config'
+import { cardano, NETWORK } from '../api/config'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 import { Buffer } from 'buffer'
-
-export const cardano = window.cardano || {
-    enable: async () => null,
-    isEnabled: async () => false,
-    getUtxos: async () => [],
-    getChangeAddress: async () => '',
-    getRewardAddress: async () => '',
-    getNetworkId: async () => 0,
-    signTx: async (tx) => '',
-    submitTx: async (tx) => '',
-    onNetworkChange: (tx) => null,
-}
 
 export const getNetwork = async () => {
     const id = await cardano.getNetworkId()
