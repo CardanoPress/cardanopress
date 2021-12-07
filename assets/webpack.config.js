@@ -12,6 +12,7 @@ module.exports = {
         script: './src/main.js',
         style: './src/main.css',
         notification: './src/notification.js',
+        delegation: './src/delegation.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
