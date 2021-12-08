@@ -1,13 +1,15 @@
-import { getChangeAddress, getNetwork } from './lib/namiWallet'
+import { getNetwork, getChangeAddress, getRewardAddress } from './lib/namiWallet'
 
 export const handleReconnect = async () => {
     const network = await getNetwork()
     const changeAddress = await getChangeAddress()
+    const rewardAddress = await getRewardAddress()
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
             _wpnonce: cardanoPress._nonce,
             action: 'cardanopress_reconnect_account',
+            stake_address: rewardAddress,
             wallet_address: changeAddress,
             query_network: network,
         }),
@@ -15,13 +17,15 @@ export const handleReconnect = async () => {
 }
 
 export const logMeIn = async () => {
-    const changeAddress = await getChangeAddress()
     const network = await getNetwork()
+    const changeAddress = await getChangeAddress()
+    const rewardAddress = await getRewardAddress()
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
             _wpnonce: cardanoPress._nonce,
             action: 'cardanopress_user_account',
+            stake_address: rewardAddress,
             wallet_address: changeAddress,
             query_network: network,
         }),

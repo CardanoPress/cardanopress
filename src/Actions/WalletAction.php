@@ -49,14 +49,9 @@ class WalletAction
         $userProfile = new Profile($user);
 
         if ($newAccount || empty($userProfile->connectedStake())) {
-            $blockfrost = new Blockfrost($_POST['query_network']);
-            $response = $blockfrost->getAddressDetails($address);
-
-            if (! empty($response)) {
-                $userProfile->saveNetwork($_POST['query_network']);
-                $userProfile->saveWallet($address);
-                $userProfile->saveStake($response['stake_address']);
-            }
+            $userProfile->saveNetwork($_POST['query_network']);
+            $userProfile->saveWallet($_POST['wallet_address']);
+            $userProfile->saveStake($_POST['stake_address']);
         }
 
         if ($userId !== get_current_user_id()) {
@@ -75,18 +70,11 @@ class WalletAction
     {
         check_ajax_referer('cardanopress-actions');
 
-        $blockfrost = new Blockfrost($_POST['query_network']);
-        $response = $blockfrost->getAddressDetails($_POST['wallet_address']);
-
-        if (empty($response)) {
-            wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
-        }
-
         $userProfile = new Profile(wp_get_current_user());
 
         $userProfile->saveNetwork($_POST['query_network']);
         $userProfile->saveWallet($_POST['wallet_address']);
-        $userProfile->saveStake($response['stake_address']);
+        $userProfile->saveStake($_POST['stake_address']);
 
         wp_send_json_success();
     }
