@@ -48,7 +48,12 @@ class WalletAction
         $user = get_user_by('id', $userId);
         $userProfile = new Profile($user);
 
-        if ($newAccount || empty($userProfile->connectedStake())) {
+        if (
+            $newAccount ||
+            empty($userProfile->connectedNetwork()) ||
+            empty($userProfile->connectedWallet()) ||
+            empty($userProfile->connectedStake())
+        ) {
             $userProfile->saveNetwork($_POST['query_network']);
             $userProfile->saveWallet($_POST['wallet_address']);
             $userProfile->saveStake($_POST['stake_address']);
@@ -69,6 +74,10 @@ class WalletAction
     public function reconnectUserWallet(): void
     {
         check_ajax_referer('cardanopress-actions');
+
+        if (empty($_POST['query_network']) || empty($_POST['wallet_address']) || empty($_POST['stake_address'])) {
+            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
+        }
 
         $userProfile = new Profile(wp_get_current_user());
 
