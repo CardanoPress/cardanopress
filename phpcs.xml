@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<ruleset name="Ronin Universe">
+<ruleset name="CardanoPress">
 	<!-- Set a description for this ruleset. -->
-	<description>The code standard rules for Ronin Universe.</description>
+	<description>The code standard rules for CardanoPress.</description>
 
 	<!-- A comma separated list of file extensions to check. -->
 	<arg name="extensions" value="php" />

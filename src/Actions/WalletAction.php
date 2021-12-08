@@ -79,7 +79,7 @@ class WalletAction
         $response = $blockfrost->getAddressDetails($_POST['wallet_address']);
 
         if (empty($response)) {
-            wp_send_json_error(__('Blockfrost API Error. Please try again', 'ronin-universe'));
+            wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
         }
 
         $userProfile = new Profile(wp_get_current_user());
@@ -132,7 +132,7 @@ class WalletAction
         $response = $blockfrost->protocolParameters();
 
         if (empty($response)) {
-            wp_send_json_error(__('Blockfrost API Error. Please try again', 'ronin-universe'));
+            wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
         }
 
         wp_send_json_success($response);
@@ -147,7 +147,7 @@ class WalletAction
         $account = $blockfrost->getAccountDetails($_POST['reward_address']);
 
         if (empty($account)) {
-            wp_send_json_error(__('Blockfrost API Error. Please try again', 'ronin-universe'));
+            wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
         }
 
         $app = Application::instance();
@@ -155,7 +155,7 @@ class WalletAction
         $pool = $blockfrost->getPoolDetails($poolIds[$network]);
 
         if (empty($pool)) {
-            wp_send_json_error(__('Blockfrost API Error. Please try again', 'ronin-universe'));
+            wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
         }
 
         wp_send_json_success([
@@ -176,7 +176,7 @@ class WalletAction
         );
 
         if (! $success) {
-            wp_send_json_error(__('Something is wrong. Please try again', 'ronin-universe'));
+            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
         }
 
         wp_send_json_success($_POST['transaction_hash']);
