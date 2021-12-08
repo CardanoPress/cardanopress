@@ -23,6 +23,7 @@ class Admin
         $this->data = new Data();
 
         $this->setup();
+        add_filter('pre_update_option_' . self::OPTION_KEY, [$this, 'getPoolDetails'], 10, 2);
     }
 
     public function setup(): void
@@ -176,6 +177,27 @@ class Admin
         } catch (Exception $exception) {
             error_log($exception->getMessage());
         }
+    }
+
+    public function getPoolDetails($newValue, $oldValue)
+    {
+        if (
+            ! empty($oldValue['delegation_pool_data']) && (
+                $newValue['delegation_pool_id'] === $oldValue['delegation_pool_id'] ||
+                empty(array_filter($newValue['blockfrost_project_id']))
+            )
+        ) {
+            return $newValue;
+        }
+
+        $newValue['delegation_pool_data'] = $oldValue['delegation_pool_data'] ?? [];
+
+        foreach ($newValue['delegation_pool_id'] as $network => $poolId) {
+            $blockfrost = new Blockfrost($network);
+            $newValue['delegation_pool_data'][$network] = $blockfrost->getPoolDetails($poolId);
+        }
+
+        return $newValue;
     }
 
     public function getOption(string $key)

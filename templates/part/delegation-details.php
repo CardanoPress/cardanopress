@@ -1,16 +1,13 @@
 <?php
 
-use PBWebDev\CardanoPress\Blockfrost;
-
 $network = cardanoPress()->userProfile()->connectedNetwork();
 
 if (! $network) {
     return;
 }
 
-$blockfrost = new Blockfrost($network);
-$poolIds = cardanoPress()->option('delegation_pool_id');
-$pool = $blockfrost->getPoolDetails($poolIds[$network]);
+$poolData = cardanoPress()->option('delegation_pool_data');
+$pool = $poolData[$network] ?? [];
 
 if (empty($pool)) {
     return;
