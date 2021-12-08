@@ -5,10 +5,6 @@
  * @since   0.1.0
  */
 
-use PBWebDev\CardanoPress\Profile;
-
-$userProfile = new Profile(wp_get_current_user());
-
 get_header();
 
 ?>
@@ -19,7 +15,7 @@ get_header();
 
         <h1>Assets:</h1>
 
-        <?php cardanoPress()->template('collection-list', compact('userProfile')); ?>
+        <?php cardanoPress()->template('collection-list'); ?>
     </div>
 </main>
 

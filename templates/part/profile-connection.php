@@ -1,13 +1,3 @@
-<?php
-
-use PBWebDev\CardanoPress\Profile;
-
-if (empty($userProfile) || ! $userProfile instanceof Profile) {
-    $userProfile = new Profile(wp_get_current_user());
-}
-
-?>
-
 <h3>
     Account
 

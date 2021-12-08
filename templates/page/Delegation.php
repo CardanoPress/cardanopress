@@ -5,13 +5,9 @@
  * @since   0.1.0
  */
 
-use PBWebDev\CardanoPress\Application;
 use ThemePlate\Enqueue;
 
 Enqueue::asset('script', 'cardanopress-delegation');
-
-$app = Application::instance();
-$poolIds = $app->option('delegate_pool_id');
 
 get_header();
 

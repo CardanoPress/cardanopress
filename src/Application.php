@@ -56,6 +56,8 @@ class Application
         }
 
         if (file_exists($file)) {
+            $userProfile = new Profile(wp_get_current_user());
+
             extract($variables, EXTR_OVERWRITE);
             include $file;
         }
