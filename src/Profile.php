@@ -19,6 +19,11 @@ class Profile
         $this->user = $user;
     }
 
+    public function isConnected(): bool
+    {
+        return $this->connectedNetwork() && $this->connectedWallet() && $this->connectedStake();
+    }
+
     public function getMetaKey(string $name, $prefix = null): string
     {
         if (null === $prefix) {

@@ -8,7 +8,7 @@ $userProfile = cardanoPress()->userProfile();
     Account
 
     <span class="ml-3">
-        <?php if (! $userProfile->connectedStake()) : ?>
+        <?php if (! $userProfile->isConnected()) : ?>
             <button type="button" @click="showModal = true">Reconnect</button>
         <?php else : ?>
             <?php cardanoPress()->template('part/asset-sync'); ?>

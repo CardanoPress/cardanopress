@@ -48,12 +48,7 @@ class WalletAction
         $user = get_user_by('id', $userId);
         $userProfile = new Profile($user);
 
-        if (
-            $newAccount ||
-            empty($userProfile->connectedNetwork()) ||
-            empty($userProfile->connectedWallet()) ||
-            empty($userProfile->connectedStake())
-        ) {
+        if ($newAccount || ! $userProfile->isConnected()) {
             $userProfile->saveNetwork($_POST['query_network']);
             $userProfile->saveWallet($_POST['wallet_address']);
             $userProfile->saveStake($_POST['stake_address']);
