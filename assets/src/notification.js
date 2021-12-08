@@ -3,7 +3,7 @@ import { generateUuid } from './api/util'
 window.addEventListener('alpine:init', () => {
     const Alpine = window.Alpine || {}
 
-    Alpine.store('truNotification', {
+    Alpine.store('toastNotification', {
         list: [],
         visible: [],
 

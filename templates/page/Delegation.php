@@ -21,7 +21,7 @@ get_header();
     <div class="py-6">
         <h1>Delegation:</h1>
 
-        <div x-data="truDelegation">
+        <div x-data="poolDelegation">
             <div class="py-6">
                 <?php cardanoPress()->template('part/delegation-connect'); ?>
             </div>

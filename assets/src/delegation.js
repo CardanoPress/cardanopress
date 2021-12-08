@@ -4,7 +4,7 @@ import { handleDelegation } from './lib/delegation'
 window.addEventListener('alpine:init', () => {
     const Alpine = window.Alpine || {}
 
-    Alpine.data('truDelegation', () => ({
+    Alpine.data('poolDelegation', () => ({
         isProcessing: false,
         transactionHash: '',
 
