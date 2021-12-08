@@ -56,11 +56,20 @@ class Application
         }
 
         if (file_exists($file)) {
-            $userProfile = new Profile(wp_get_current_user());
-
             extract($variables, EXTR_OVERWRITE);
             include $file;
         }
+    }
+
+    public function userProfile(): Profile
+    {
+        static $user;
+
+        if (null === $user) {
+            $user = wp_get_current_user();
+        }
+
+        return new Profile($user);
     }
 
     public function isReady(): bool

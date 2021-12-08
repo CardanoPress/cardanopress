@@ -2,7 +2,7 @@
     Account
 
     <div class="ml-3 inline-block">
-        <?php if (! $userProfile->connectedStake()) : ?>
+        <?php if (! cardanoPress()->userProfile()->connectedStake()) : ?>
             <button type="button" @click="showModal = true">Reconnect</button>
         <?php else : ?>
             <?php cardanoPress()->template('part/asset-sync'); ?>
@@ -14,17 +14,17 @@
     <tbody>
         <tr>
             <th>Network</th>
-            <td><?php echo $userProfile->connectedNetwork(); ?></td>
+            <td><?php echo cardanoPress()->userProfile()->connectedNetwork(); ?></td>
         </tr>
 
         <tr>
             <th>Wallet</th>
-            <td><?php echo $userProfile->connectedWallet(); ?></td>
+            <td><?php echo cardanoPress()->userProfile()->connectedWallet(); ?></td>
         </tr>
 
         <tr>
             <th>Stake</th>
-            <td><?php echo $userProfile->connectedStake(); ?></td>
+            <td><?php echo cardanoPress()->userProfile()->connectedStake(); ?></td>
         </tr>
     </tbody>
 </table>
