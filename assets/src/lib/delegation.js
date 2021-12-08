@@ -1,4 +1,5 @@
 import {
+    hexToBytes,
     getNetwork,
     getChangeAddress,
     getRewardAddress,
@@ -7,7 +8,6 @@ import {
     signAndSubmit
 } from './namiWallet'
 import { buildTx, prepareTx } from '../api/wallet'
-import { Buffer } from 'buffer'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 import { getDelegation, getProtocol, saveWalletTx } from '../api/util'
 
@@ -21,7 +21,7 @@ const delegationCertificates = async (accountActive, poolHex) => {
                 CSL.StakeRegistration.new(
                     CSL.StakeCredential.from_keyhash(
                         CSL.Ed25519KeyHash.from_bytes(
-                            Buffer.from(stakeKeyHash, 'hex')
+                            hexToBytes(stakeKeyHash)
                         )
                     )
                 )
@@ -34,11 +34,11 @@ const delegationCertificates = async (accountActive, poolHex) => {
             CSL.StakeDelegation.new(
                 CSL.StakeCredential.from_keyhash(
                     CSL.Ed25519KeyHash.from_bytes(
-                        Buffer.from(stakeKeyHash, 'hex')
+                        hexToBytes(stakeKeyHash)
                     )
                 ),
                 CSL.Ed25519KeyHash.from_bytes(
-                    Buffer.from(poolHex, 'hex')
+                    hexToBytes(poolHex)
                 )
             )
         )
