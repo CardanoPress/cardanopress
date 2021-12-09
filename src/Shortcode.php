@@ -75,7 +75,6 @@ class Shortcode
     {
         $args = shortcode_atts([
             'key' => '',
-            'sub' => '',
         ], $attributes);
 
         if (empty($args['key'])) {
@@ -84,14 +83,15 @@ class Shortcode
 
         $app = Application::instance();
         $value = $app->delegationPool();
+        $value = $value[$args['key']] ?? '';
 
-        return $this->printOutput($value[$args['key']], $args['sub']);
+        return $this->printOutput($value);
     }
 
-    private function printOutput($value, $sub)
+    private function printOutput($value, string $sub = '')
     {
         if (is_array($value)) {
-            $value = empty($sub) ? $value : $value[$sub];
+            $value = empty($sub) ? $value : $value[$sub] ?? '';
 
             return $this->getString($value);
         }
