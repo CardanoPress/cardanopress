@@ -9,8 +9,10 @@ if (empty($pool)) {
 ?>
 
 <h2>
-    <a href="<?php echo $pool['homepage']; ?>" target="_blank">
-        <span><?php echo $pool['ticker']; ?></span> &mdash; <?php echo $pool['name']; ?>
+    <a href="<?php echo $pool['homepage']; ?>" target="_blank" class="inline-flex items-center">
+        <?php cardanoPress()->template('part/pool-image', compact('pool')); ?>
+
+        <?php cardanoPress()->template('part/pool-name', compact('pool')); ?>
     </a>
 </h2>
 
