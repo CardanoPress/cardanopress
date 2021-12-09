@@ -1,13 +1,6 @@
 <?php
 
-$network = cardanoPress()->userProfile()->connectedNetwork();
-
-if (! $network) {
-    return;
-}
-
-$poolData = cardanoPress()->option('delegation_pool_data');
-$pool = $poolData[$network] ?? [];
+$pool = cardanoPress()->delegationPool();
 
 if (empty($pool)) {
     return;

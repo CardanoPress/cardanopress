@@ -72,6 +72,27 @@ class Application
         return new Profile($user);
     }
 
+    public function delegationPool(): array
+    {
+        static $data;
+
+        if (null !== $data) {
+            return $data;
+        }
+
+        $network = $this->userProfile()->connectedNetwork();
+
+        if (! $network) {
+            return [];
+        }
+
+        $poolData = cardanoPress()->option('delegation_pool_data');
+        /** @noinspection PhpUnnecessaryLocalVariableInspection */
+        $data = $poolData[$network] ?? [];
+
+        return $data;
+    }
+
     public function isReady(): bool
     {
         $projectIds = $this->option('blockfrost_project_id');
