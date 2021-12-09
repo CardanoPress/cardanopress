@@ -17,23 +17,7 @@ get_header();
     <div class="py-6">
         <h1>Delegation:</h1>
 
-        <div x-data="poolDelegation">
-            <div class="py-6">
-                <?php cardanoPress()->template('part/delegation-details'); ?>
-            </div>
-
-            <div class="py-6">
-                <?php cardanoPress()->template('part/delegation-connect'); ?>
-            </div>
-
-            <div class="py-6">
-                <?php cardanoPress()->template('part/delegation-process'); ?>
-            </div>
-
-            <div class="py-6">
-                <?php cardanoPress()->template('part/delegation-result'); ?>
-            </div>
-        </div>
+        <?php cardanoPress()->template('pool-delegation'); ?>
     </div>
 </main>
 
