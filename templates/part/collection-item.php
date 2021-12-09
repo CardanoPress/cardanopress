@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * The template for displaying the single item in collection.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/part/collection.php.
+ *
+ * @package ThemePlate
+ * @since   0.1.0
+ */
+
 if (empty($asset)) {
     return;
 }

@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Page template for displaying the profile dashboard.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/page/Dashboard.php.
+ *
  * @package ThemePlate
  * @since   0.1.0
  */

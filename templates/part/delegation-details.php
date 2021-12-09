@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * The template for displaying the stake pool details to delegate to.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/part/delegation-details.php.
+ *
+ * @package ThemePlate
+ * @since   0.1.0
+ */
+
 $pool = cardanoPress()->delegationPool();
 
 if (empty($pool)) {

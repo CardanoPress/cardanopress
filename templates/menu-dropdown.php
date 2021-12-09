@@ -1,3 +1,15 @@
+<?php
+
+/**
+ * The template for displaying the navigation menu dropdown.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/menu-dropdown.php.
+ *
+ * @package ThemePlate
+ * @since   0.1.0
+ */
+
+?>
 <div class="relative z-10">
     <?php cardanoPress()->template('part/menu-button'); ?>
 

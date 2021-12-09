@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Page template for displaying user's asset collection.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/page/Collection.php.
+ *
  * @package ThemePlate
  * @since   0.1.0
  */

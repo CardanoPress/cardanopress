@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * The template for displaying the stake pool favicon.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/part/pool-image.php.
+ *
+ * @package ThemePlate
+ * @since   0.1.0
+ */
+
 if (empty($pool)) {
     return;
 }

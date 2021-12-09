@@ -1,3 +1,16 @@
+<?php
+
+/**
+ * The template for displaying the connect-to-wallet in a modal popup.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/modal-connect.php.
+ *
+ * @package ThemePlate
+ * @since   0.1.0
+ */
+
+?>
+
 <div
     class="hidden fixed inset-0 z-30 items-center justify-center overflow-auto bg-black bg-opacity-50"
     x-init="$el.classList.remove('hidden'); $el.classList.add('flex')"

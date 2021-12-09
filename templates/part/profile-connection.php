@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * The template for displaying the connected wallet information.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/part/profile-connection.php.
+ *
+ * @package ThemePlate
+ * @since   0.1.0
+ */
+
 $userProfile = cardanoPress()->userProfile();
 
 ?>

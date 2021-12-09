@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * The template for displaying the welcome banner.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/welcome-banner.php.
+ *
+ * @package ThemePlate
+ * @since   0.1.0
+ */
+
 $userProfile = cardanoPress()->userProfile();
 $trimmedAddress = str_replace(['addr1', 'addr_test1'], ['', ''], $userProfile->connectedWallet());
 $trimmedAddress = substr($trimmedAddress, 0, 2) . '...' . substr($trimmedAddress, -4);

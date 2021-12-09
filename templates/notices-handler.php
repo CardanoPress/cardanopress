@@ -1,3 +1,16 @@
+<?php
+
+/**
+ * The template for displaying the toast notifications.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/page/Collection.php.
+ *
+ * @package ThemePlate
+ * @since   0.1.0
+ */
+
+?>
+
 <div class="fixed inset-0 flex flex-col items-end justify-start pointer-events-none z-50">
     <div class="max-w-xs m-6 flex flex-col items-end">
         <template x-for="notice of $store.toastNotification.list" :key="notice.id">

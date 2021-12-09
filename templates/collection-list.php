@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * The template for displaying all the pulled assets by assigned policy IDs.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/collection-list.php.
+ *
  * @package ThemePlate
  * @since   0.1.0
  */

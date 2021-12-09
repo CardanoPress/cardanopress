@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Page template for displaying stake pool delegation flow.
+ *
+ * This can be overridden by copying it to yourtheme/cardanopress/page/Delegation.php.
+ *
  * @package ThemePlate
  * @since   0.1.0
  */
