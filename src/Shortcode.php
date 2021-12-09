@@ -14,6 +14,7 @@ class Shortcode
         add_shortcode('cardanopress_option', [$this, 'doOption']);
         add_shortcode('cardanopress_template', [$this, 'doTemplate']);
         add_shortcode('cardanopress_userprofile', [$this, 'doUserProfile']);
+        add_shortcode('cardanopress_delegationpool', [$this, 'doDelegationPool']);
     }
 
     public function doOption(array $attributes): string
@@ -68,6 +69,23 @@ class Shortcode
         $value = $app->userProfile()->$method();
 
         return $this->printOutput($value, $args['sub']);
+    }
+
+    public function doDelegationPool(array $attributes): string
+    {
+        $args = shortcode_atts([
+            'key' => '',
+            'sub' => '',
+        ], $attributes);
+
+        if (empty($args['key'])) {
+            return '';
+        }
+
+        $app = Application::instance();
+        $value = $app->delegationPool();
+
+        return $this->printOutput($value[$args['key']], $args['sub']);
     }
 
     private function printOutput($value, $sub)
