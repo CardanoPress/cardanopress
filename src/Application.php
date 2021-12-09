@@ -35,6 +35,7 @@ class Application
         new Manifest($load_path . 'assets');
         new CoreAction();
         new WalletAction();
+        new Shortcode();
 
         $this->admin = new Admin();
 
