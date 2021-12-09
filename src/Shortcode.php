@@ -16,10 +16,11 @@ class Shortcode
         add_shortcode('cardanopress_userprofile', [$this, 'doUserProfile']);
     }
 
-    public function doOption(array $attributes)
+    public function doOption(array $attributes): string
     {
         $args = shortcode_atts([
             'key' => '',
+            'sub' => '',
         ], $attributes);
 
         if (empty($args['key'])) {
@@ -27,8 +28,9 @@ class Shortcode
         }
 
         $app = Application::instance();
+        $value = $app->option($args['key']);
 
-        return $app->option($args['key']);
+        return $this->printOutput($value, $args['sub']);
     }
 
     public function doTemplate(array $attributes): string
@@ -50,10 +52,11 @@ class Shortcode
         return ob_get_clean();
     }
 
-    public function doUserProfile(array $attributes)
+    public function doUserProfile(array $attributes): string
     {
         $args = shortcode_atts([
             'method' => '',
+            'sub' => '',
         ], $attributes);
 
         if (empty($args['method'])) {
@@ -62,7 +65,24 @@ class Shortcode
 
         $app = Application::instance();
         $method = $args['method'];
+        $value = $app->userProfile()->$method();
 
-        return $app->userProfile()->$method();
+        return $this->printOutput($value, $args['sub']);
+    }
+
+    private function printOutput($value, $sub)
+    {
+        if (is_array($value)) {
+            $value = empty($sub) ? $value : $value[$sub];
+
+            return $this->getString($value);
+        }
+
+        return $value;
+    }
+
+    private function getString($value): string
+    {
+        return is_array($value) ? json_encode($value) : $value;
     }
 }
