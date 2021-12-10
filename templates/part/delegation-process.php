@@ -9,16 +9,24 @@
  * @since   0.1.0
  */
 
+if (empty($text)) {
+    $text = 'Delegate';
+}
+
+if (empty($textDelegated)) {
+    $textDelegated = 'Delegated';
+}
+
 ?>
 
 <template x-if='!isConnected'>
-    <button type='button' disabled='true'>Delegate</button>
+    <button type='button' disabled='true'><?php echo $text; ?>></button>
 </template>
 
 <template x-if='isConnected && !transactionHash'>
-    <button type='button' @click='handleDelegation()' x-bind:disabled='isProcessing'>Delegate</button>
+    <button type='button' @click='handleDelegation()' x-bind:disabled='isProcessing'><?php echo $text; ?>></button>
 </template>
 
 <template x-if='isConnected && transactionHash'>
-    <button type='button' disabled='true'>Delegated</button>
+    <button type='button' disabled='true'><?php echo $textDelegated; ?>></button>
 </template>

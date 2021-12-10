@@ -9,14 +9,22 @@
  * @since   0.1.0
  */
 
+if (empty($textWaiting)) {
+    $textWaiting = 'Waiting for delegation';
+}
+
+if (empty($textConfirming)) {
+    $textConfirming = 'Confirming transaction';
+}
+
 ?>
 
 <template x-if='isConnected && !isProcessing && !transactionHash'>
-    <p>Waiting for delegation</p>
+    <p><?php echo $textWaiting; ?>></p>
 </template>
 
 <template x-if='isConnected && isProcessing'>
-    <p>Confirming transaction</p>
+    <p><?php echo $textConfirming; ?>></p>
 </template>
 
 <template x-if='isConnected && !isProcessing && transactionHash'>

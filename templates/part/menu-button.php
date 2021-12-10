@@ -9,13 +9,19 @@
  * @since   0.1.0
  */
 
-if (empty($trimmedAddress)) {
-    $trimmedAddress = str_replace(['addr1', 'addr_test1'], ['', ''], cardanoPress()->userProfile()->connectedWallet());
-    $trimmedAddress = substr($trimmedAddress, 0, 2) . '...' . substr($trimmedAddress, -4);
+if (empty($text)) {
+    if (empty($trimmedAddress)) {
+        $connectedWallet = cardanoPress()->userProfile()->connectedWallet();
+        $trimmedAddress = str_replace(['addr1', 'addr_test1'], ['', ''], $connectedWallet);
+        $trimmedAddress = substr($trimmedAddress, 0, 2) . '...' . substr($trimmedAddress, -4);
+    }
+
+    $text = 'Wallet ' . $trimmedAddress;
 }
+
 
 ?>
 
 <button @click="openDropdown = !openDropdown">
-    Wallet <?php echo $trimmedAddress; ?>
+    <?php echo $text; ?>
 </button>

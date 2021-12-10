@@ -9,10 +9,14 @@
  * @since   0.1.0
  */
 
-if (empty($asset)) {
-    return;
+if (empty($text)) {
+    $text = $asset['onchain_metadata']['name'] ?? $asset['packed_name'] ?? '';
+
+    if (! $text) {
+        return;
+    }
 }
 
 ?>
 
-<span class="text-2xl"><?php echo $asset['onchain_metadata']['name'] ?? $asset['packed_name']; ?></span>
+<span class="text-2xl"><?php echo $text; ?></span>

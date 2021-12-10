@@ -9,6 +9,10 @@
  * @since   0.1.0
  */
 
+if (empty($text)) {
+    $text = 'Sync';
+}
+
 ?>
 
-<button x-on:click.prevent='handleSync()' x-bind:disabled="isDisabled()">Sync</button>
+<button x-on:click.prevent='handleSync()' x-bind:disabled="isDisabled()"><?php echo $text; ?></button>

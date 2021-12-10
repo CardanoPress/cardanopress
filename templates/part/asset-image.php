@@ -9,7 +9,15 @@
  * @since   0.1.0
  */
 
-if (empty($asset)) {
+if (empty($source)) {
+    $source = $asset['parsed_image'] ?? '';
+}
+
+if (empty($label)) {
+    $label = $asset['packed_name'] ?? '';
+}
+
+if (! $source && ! $label) {
     return;
 }
 
@@ -17,10 +25,10 @@ if (empty($asset)) {
 
 <div class="relative w-full mb-4" style="padding-top: 100%">
     <div class="absolute inset-0">
-        <?php if ($asset['parsed_image']) : ?>
+        <?php if ($source) : ?>
             <img
-                src="<?php echo $asset['parsed_image']; ?>"
-                alt="<?php echo $asset['packed_name']; ?>"
+                src="<?php echo $source; ?>"
+                alt="<?php echo $label; ?>"
                 class="w-full"
             >
         <?php else : ?>
@@ -29,9 +37,9 @@ if (empty($asset)) {
                     <div
                         role="image"
                         class="text-9xl font-medium uppercase"
-                        aria-label="<?php echo $asset['packed_name']; ?>"
+                        aria-label="<?php echo $label; ?>"
                     >
-                        <?php echo $asset['packed_name'][0]; ?>
+                        <?php echo $label[0]; ?>
                     </div>
                 </div>
             </div>

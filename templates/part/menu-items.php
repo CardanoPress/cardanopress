@@ -9,19 +9,21 @@
  * @since   0.1.0
  */
 
-$dashboardPage = cardanoPress()->option('member_dashboard');
-$collectionPage = cardanoPress()->option('member_collection');
+if (empty($list)) {
+    $dashboardPage = cardanoPress()->option('member_dashboard');
+    $collectionPage = cardanoPress()->option('member_collection');
+
+    $list = [
+        'Dashboard' => get_permalink($dashboardPage),
+        'NFT Collection' => get_permalink($collectionPage),
+        'Disconnect' => wp_logout_url(get_permalink()),
+    ];
+}
 
 ?>
 
-<li>
-    <a href="<?php echo get_permalink($dashboardPage); ?>" class="block py-1 px-2">Dashboard</a>
-</li>
-
-<li>
-    <a href="<?php echo get_permalink($collectionPage); ?>" class="block py-1 px-2">NFT Collection</a>
-</li>
-
-<li>
-    <a href="<?php echo wp_logout_url(get_permalink()); ?>" class="block py-1 px-2">Disconnect</a>
-</li>
+<?php foreach ($list as $label => $link) : ?>
+    <li>
+        <a href="<?php echo $link; ?>" class='block py-1 px-2'><?php echo $label; ?></a>
+    </li>
+<?php endforeach; ?>
