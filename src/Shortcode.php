@@ -45,6 +45,10 @@ class Shortcode
             return '';
         }
 
+        if (isset($attributes['variables'])) {
+            parse_str(str_replace('&amp;', '&', $args['variables']), $args['variables']);
+        }
+
         $app = Application::instance();
 
         ob_start();
