@@ -12,13 +12,14 @@ Checkout our video about the first integration with the Ronin Universe project.
 
 - Nami Wallet login. Sign up and login to a website using your Nami Wallet. Use a NFT or token to verify your access to the website.
 - Assign policy IDs to the website to restrict access by those policy IDs.
+- Stake pool delegation
+- CNFT Minting page for drops, not vending machine, just the frontend to handle a mint with antibot protection.
+
 
 ## Roadmap
 
 - Yoroi Wallet integration
-- NFT minting
 - Accepting of payments
-- Stake pool delegation
 - User profiles and Dashboards
 - Artist collection sales
 
