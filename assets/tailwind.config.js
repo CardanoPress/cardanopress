@@ -1,11 +1,13 @@
 module.exports = {
-    purge: ["./src/*.js", "../templates/*.php"],
-    darkMode: false, // or 'media' or 'class'
+    content: [
+        "./src/**/*.js",
+        "../templates/**/*.php"
+    ],
     theme: {
         extend: {},
     },
-    variants: {
-        extend: {},
+    corePlugins: {
+        preflight: false,
     },
     plugins: [],
 };
