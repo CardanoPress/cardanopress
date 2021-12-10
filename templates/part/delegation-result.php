@@ -20,11 +20,11 @@ if (empty($textConfirming)) {
 ?>
 
 <template x-if='isConnected && !isProcessing && !transactionHash'>
-    <p><?php echo $textWaiting; ?>></p>
+    <p><?php echo $textWaiting; ?></p>
 </template>
 
 <template x-if='isConnected && isProcessing'>
-    <p><?php echo $textConfirming; ?>></p>
+    <p><?php echo $textConfirming; ?></p>
 </template>
 
 <template x-if='isConnected && !isProcessing && transactionHash'>

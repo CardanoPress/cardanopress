@@ -20,9 +20,9 @@ if (empty($textConnected)) {
 ?>
 
 <template x-if='!isConnected'>
-    <button type='button' @click='showModal = true'><?php echo $text; ?>></button>
+    <button type='button' @click='showModal = true'><?php echo $text; ?></button>
 </template>
 
 <template x-if='isConnected'>
-    <button type='button' disabled='true'><?php echo $textConnected; ?>></button>
+    <button type='button' disabled='true'><?php echo $textConnected; ?></button>
 </template>

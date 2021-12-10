@@ -20,13 +20,13 @@ if (empty($textDelegated)) {
 ?>
 
 <template x-if='!isConnected'>
-    <button type='button' disabled='true'><?php echo $text; ?>></button>
+    <button type='button' disabled='true'><?php echo $text; ?></button>
 </template>
 
 <template x-if='isConnected && !transactionHash'>
-    <button type='button' @click='handleDelegation()' x-bind:disabled='isProcessing'><?php echo $text; ?>></button>
+    <button type='button' @click='handleDelegation()' x-bind:disabled='isProcessing'><?php echo $text; ?></button>
 </template>
 
 <template x-if='isConnected && transactionHash'>
-    <button type='button' disabled='true'><?php echo $textDelegated; ?>></button>
+    <button type='button' disabled='true'><?php echo $textDelegated; ?></button>
 </template>
