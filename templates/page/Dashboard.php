@@ -16,7 +16,7 @@ get_header();
 <main class="container">
     <template x-if="!isConnected">
         <div class="py-6">
-            <button type="button" @click="showModal = true">Connect</button>
+            <?php cardanoPress()->template('part/modal-trigger', ['text' => 'Connect Wallet']); ?>
         </div>
     </template>
 

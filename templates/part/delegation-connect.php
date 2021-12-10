@@ -20,7 +20,7 @@ if (empty($textConnected)) {
 ?>
 
 <template x-if='!isConnected'>
-    <button type='button' @click='showModal = true'><?php echo $text; ?></button>
+    <?php cardanoPress()->template('part/modal-trigger', compact('text')); ?>
 </template>
 
 <template x-if='isConnected'>

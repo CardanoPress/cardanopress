@@ -18,7 +18,7 @@ $userProfile = cardanoPress()->userProfile();
 
     <span class="ml-3">
         <?php if (! $userProfile->isConnected()) : ?>
-            <button type="button" @click="showModal = true">Reconnect</button>
+            <?php cardanoPress()->template('part/modal-trigger', ['text' => 'Reconnect']); ?>
         <?php else : ?>
             <?php cardanoPress()->template('part/asset-sync'); ?>
         <?php endif; ?>
