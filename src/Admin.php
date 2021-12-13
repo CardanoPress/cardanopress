@@ -30,7 +30,9 @@ class Admin
     {
         $this->applicationPage();
         $this->blockfrostFields();
+        $this->googleRecaptchaFields();
         $this->poolDelegationFields();
+        $this->paymentAddressFields();
         $this->assetsPolicyFields();
         $this->memberPagesFields();
     }
@@ -82,6 +84,41 @@ class Admin
         }
     }
 
+    private function googleRecaptchaFields(): void
+    {
+        try {
+            $settings = new Settings([
+                'id' => 'recaptcha',
+                'title' => __('Recaptcha Keys', 'cardanopress'),
+                'page' => self::OPTION_KEY,
+                'context' => 'side',
+                'fields' => [
+                    'key' => [
+                        'type' => 'group',
+                        'default' => [
+                            'site' => '',
+                            'secret' => '',
+                        ],
+                        'fields' => [
+                            'site' => [
+                                'title' => __('Site', 'cardanopress'),
+                                'type' => 'text',
+                            ],
+                            'secret' => [
+                                'title' => __('Secret', 'cardanopress'),
+                                'type' => 'text',
+                            ],
+                        ],
+                    ],
+                ],
+            ]);
+
+            $this->data->store($settings->get_config());
+        } catch (Exception $exception) {
+            error_log($exception->getMessage());
+        }
+    }
+
     private function poolDelegationFields(): void
     {
         try {
@@ -91,6 +128,50 @@ class Admin
                 'page' => self::OPTION_KEY,
                 'fields' => [
                     'pool_id' => [
+                        'type' => 'group',
+                        'default' => [
+                            'mainnet' => '',
+                            'testnet' => '',
+                        ],
+                        'fields' => [
+                            'mainnet' => [
+                                'title' => __('Mainnet', 'cardanopress'),
+                                'type' => 'text',
+                            ],
+                            'testnet' => [
+                                'title' => __('Testnet', 'cardanopress'),
+                                'type' => 'text',
+                            ],
+                        ],
+                    ],
+                ],
+            ]);
+
+            $this->data->store($settings->get_config());
+        } catch (Exception $exception) {
+            error_log($exception->getMessage());
+        }
+    }
+
+    private function paymentAddressFields(): void
+    {
+        try {
+            $settings = new Settings([
+                'id' => 'payment',
+                'title' => __('Payment Settings', 'cardanopress'),
+                'page' => self::OPTION_KEY,
+                'fields' => [
+                    'amount' => [
+                        'title' => __('Amount in ADA', 'cardanopress'),
+                        'type' => 'number',
+                        'default' => 1,
+                        'options' => [
+                            'min' => 0.1,
+                            'step' => 0.1,
+                        ],
+                    ],
+                    'address' => [
+                        'title' => __('Wallet Address', 'cardanopress'),
                         'type' => 'group',
                         'default' => [
                             'mainnet' => '',
