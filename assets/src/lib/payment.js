@@ -19,9 +19,9 @@ export const handlePayment = async (lovelaceValue, payee) => {
     const utxos = await getUtxos()
     const changeAddress = await getChangeAddress()
     const outputs = await prepareTx(lovelaceValue, payee)
-    const transaction = await buildTx(changeAddress, utxos, outputs, protocolParameters)
 
     try {
+        const transaction = await buildTx(changeAddress, utxos, outputs, protocolParameters)
         const txHash = await signAndSubmit(transaction)
 
         return await saveWalletTx(network, changeAddress, txHash)

@@ -7,7 +7,7 @@ export const ERROR = {
     accessDenied: 'Access denied',
     wrongPassword: 'Wrong password',
     txTooBig: 'Transaction too big',
-    txNotPossible: 'Transaction not possible',
+    txNotPossible: 'Transaction not possible (maybe insufficient balance)',
     storeNotEmpty: 'Storage key is already set',
     onlyOneAccount: 'Only one account exist in the wallet',
     fullMempool: 'fullMempool',
@@ -19,6 +19,7 @@ export const TX = {
 
 export const cardano = window.cardano || {
     enable: async () => null,
+    getBalance: async () => '',
     isEnabled: async () => false,
     getUtxos: async () => [],
     getChangeAddress: async () => '',

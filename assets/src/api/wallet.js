@@ -24,7 +24,15 @@ export const buildTx = async (changeAddress, utxos, outputs, protocolParameters,
         protocolParameters.linearFee.minFeeB.toString(),
         protocolParameters.maxTxSize.toString()
     )
-    const selection = await CoinSelection.randomImprove(utxos, outputs, 20 + totalAssets)
+
+    let selection
+
+    try {
+        selection = await CoinSelection.randomImprove(utxos, outputs, 20 + totalAssets)
+    } catch {
+        throw ERROR.txNotPossible
+    }
+
     const inputs = selection.input
 
     const txBuilder = CSL.TransactionBuilder.new(

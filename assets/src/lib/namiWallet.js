@@ -16,6 +16,12 @@ export const hexToBech32 = (address) => {
     return CSL.Address.from_bytes(hexToBytes(address)).to_bech32()
 }
 
+export const getBalance = async () => {
+    const balance = await cardano.getBalance()
+
+    return CSL.Value.from_bytes(hexToBytes(balance)).coin().to_str()
+}
+
 export const getChangeAddress = async () => {
     const changeAddress = await cardano.getChangeAddress()
 
