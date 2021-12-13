@@ -22,6 +22,8 @@ class WalletAction
         add_action('wp_ajax_cardanopress_protocol_parameters', [$this, 'getProtocolParameters']);
         add_action('wp_ajax_cardanopress_pool_delegation', [$this, 'getDelegationData']);
         add_action('wp_ajax_cardanopress_wallet_transaction', [$this, 'saveWalletTransaction']);
+        add_action('wp_ajax_nopriv_cardanopress_payment_address', [$this, 'getPaymentAddress']);
+        add_action('wp_ajax_cardanopress_payment_address', [$this, 'getPaymentAddress']);
     }
 
     public function initializeUserAccount(): void
@@ -172,5 +174,20 @@ class WalletAction
         }
 
         wp_send_json_success($_POST['transaction_hash']);
+    }
+
+    public function getPaymentAddress(): void
+    {
+        check_ajax_referer('cardanopress-actions');
+
+        $app = Application::instance();
+        $paymentAddresses = $app->option('payment_address');
+        $connectedNetwork = $app->userProfile()->connectedNetwork();
+
+        if (! $connectedNetwork) {
+            $connectedNetwork = 'mainnet';
+        }
+
+        wp_send_json_success($paymentAddresses[$connectedNetwork]);
     }
 }

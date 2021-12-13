@@ -79,6 +79,11 @@ class Manifest
         wp_enqueue_script($this->prefix . 'script');
         wp_script_add_data($this->prefix . 'script', 'defer', true);
         wp_enqueue_script($this->prefix . 'notification');
+        wp_register_script(
+            $this->prefix . 'recaptcha',
+            'https://www.google.com/recaptcha/api.js?onload=cardanoPressRecaptchaCallback'
+        );
+        wp_script_add_data($this->prefix . 'recaptcha', 'defer', true);
     }
 
     public function injectDataProvider(): void
