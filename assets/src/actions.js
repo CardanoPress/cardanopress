@@ -32,13 +32,14 @@ export const logMeIn = async () => {
     }).then((response) => response.json())
 }
 
-export const logMeOut = async (network) => {
+export const logMeOut = async (network, address) => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
             _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_network_change',
+            action: 'cardanopress_user_change',
             query_network: network,
+            wallet_address: address,
         }),
     }).then((response) => response.json())
 }

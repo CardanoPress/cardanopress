@@ -6,6 +6,7 @@ import { addNotice, removeNotice } from './api/util'
 import * as apiMethods from './api/util'
 import * as walletTransactions from './api/wallet'
 import * as namiHelpers from './lib/namiWallet'
+import { getChangeAddress, getNetwork, hexToBech32 } from './lib/namiWallet'
 
 window.Alpine = Alpine
 
@@ -22,7 +23,8 @@ Alpine.data('cardanoPress', () => ({
 
     async init() {
         if (this.isAvailable) {
-            cardano.onNetworkChange((networkId) => this.handleLogout(networkId))
+            cardano.onNetworkChange((networkId) => this.handleLogout(networkId, 0))
+            cardano.onAccountChange((addresses) => this.handleLogout(-1, addresses))
         }
 
         if (this.isConnected && !localStorage.getItem('_x_isNotified')) {
@@ -73,13 +75,14 @@ Alpine.data('cardanoPress', () => ({
         }
     },
 
-    async handleLogout(id) {
+    async handleLogout(id, addresses) {
         if (!this.isConnected) {
             return
         }
 
-        const network = NETWORK[id]
-        const response = await logMeOut(network)
+        const network = 0 <= id ? NETWORK[id] : await getNetwork()
+        const address = 0 !== addresses ? hexToBech32(addresses[0]) : await getChangeAddress()
+        const response = await logMeOut(network, address)
 
         if (response.success) {
             addNotice({ type: 'success', text: response.data.message })

@@ -27,7 +27,8 @@ export const cardano = window.cardano || {
     getNetworkId: async () => 0,
     signTx: async (tx) => '',
     submitTx: async (tx) => '',
-    onNetworkChange: (tx) => null,
+    onNetworkChange: (networkId) => null,
+    onAccountChange: (addresses) => null,
 }
 
 export const cardanoPress = window.cardanoPress || {

@@ -18,7 +18,7 @@ class WalletAction
         add_action('wp_ajax_nopriv_cardanopress_user_account', [$this, 'initializeUserAccount']);
         add_action('wp_ajax_cardanopress_reconnect_account', [$this, 'reconnectUserWallet']);
         add_action('wp_ajax_cardanopress_sync_assets', [$this, 'syncUserAssets']);
-        add_action('wp_ajax_cardanopress_network_change', [$this, 'logoutCurrentUser']);
+        add_action('wp_ajax_cardanopress_user_change', [$this, 'logoutCurrentUser']);
         add_action('wp_ajax_cardanopress_protocol_parameters', [$this, 'getProtocolParameters']);
         add_action('wp_ajax_cardanopress_pool_delegation', [$this, 'getDelegationData']);
         add_action('wp_ajax_cardanopress_wallet_transaction', [$this, 'saveWalletTransaction']);
@@ -102,7 +102,10 @@ class WalletAction
         $userProfile = new Profile(wp_get_current_user());
         $shouldReload = false;
 
-        if ($_POST['query_network'] !== $userProfile->connectedNetwork()) {
+        if (
+            $_POST['query_network'] !== $userProfile->connectedNetwork() ||
+            $_POST['wallet_address'] !== $userProfile->connectedWallet()
+        ) {
             $shouldReload = true;
 
             $userProfile->unsetUserAuth();
