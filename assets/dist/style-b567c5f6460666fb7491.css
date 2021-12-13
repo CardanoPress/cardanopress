@@ -313,6 +313,10 @@
 .text-left {
     text-align: left
 }
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem
+}
 .text-9xl {
     font-size: 8rem;
     line-height: 1
@@ -320,10 +324,6 @@
 .text-2xl {
     font-size: 1.5rem;
     line-height: 2rem
-}
-.text-sm {
-    font-size: 0.875rem;
-    line-height: 1.25rem
 }
 .text-lg {
     font-size: 1.125rem;

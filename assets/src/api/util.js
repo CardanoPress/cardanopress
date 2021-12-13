@@ -1,4 +1,5 @@
 import { MultiAsset } from '@emurgo/cardano-serialization-lib-browser'
+import { cardanoPress } from './config'
 
 export const generateUuid = () => {
     const s4 = () => {
@@ -70,6 +71,16 @@ export const saveWalletTx = async (network, changeAddress, txHash) => {
             query_network: network,
             wallet_address: changeAddress,
             transaction_hash: txHash,
+        }),
+    }).then((response) => response.json())
+}
+
+export const getPaymentAddress = async () => {
+    return await fetch(cardanoPress.ajaxUrl, {
+        method: 'POST',
+        body: new URLSearchParams({
+            _wpnonce: cardanoPress._nonce,
+            action: 'cardanopress_payment_address',
         }),
     }).then((response) => response.json())
 }

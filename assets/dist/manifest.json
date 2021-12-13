@@ -1,8 +1,9 @@
 {
-  "script.js": "script-20da82110829538586f1.js",
-  "style.css": "style-20da82110829538586f1.css",
-  "style.js": "style-20da82110829538586f1.js",
-  "notification.js": "notification-20da82110829538586f1.js",
-  "delegation.js": "delegation-20da82110829538586f1.js",
+  "script.js": "script-b567c5f6460666fb7491.js",
+  "style.css": "style-b567c5f6460666fb7491.css",
+  "style.js": "style-b567c5f6460666fb7491.js",
+  "notification.js": "notification-b567c5f6460666fb7491.js",
+  "delegation.js": "delegation-b567c5f6460666fb7491.js",
+  "payment.js": "payment-b567c5f6460666fb7491.js",
   "module.wasm": "5e1d212da0f33f29414c.module.wasm"
 }

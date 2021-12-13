@@ -13,6 +13,7 @@ module.exports = {
         style: './src/main.css',
         notification: './src/notification.js',
         delegation: './src/delegation.js',
+        payment: './src/payment.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
