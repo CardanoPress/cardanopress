@@ -15,7 +15,7 @@ Enqueue::asset('script', 'cardanopress-split');
 Enqueue::asset('script', 'cardanopress-payment');
 Enqueue::asset('script', 'cardanopress-recaptcha');
 
-$fixedFee = 340;
+$fixedFee = cardanoPress()->option('payment_split');
 
 get_header();
 

@@ -188,6 +188,15 @@ class Admin
                             ],
                         ],
                     ],
+                    'split' => [
+                        'title' => __('Split Fee in ADA', 'cardanopress'),
+                        'type' => 'number',
+                        'default' => 1,
+                        'options' => [
+                            'min' => 0.1,
+                            'step' => 0.1,
+                        ],
+                    ],
                 ],
             ]);
 

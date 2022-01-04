@@ -1,6 +1,6 @@
 /* global grecaptcha */
 
-import { addNotice, removeNotice, getPaymentAddress } from './api/util'
+import { addNotice, removeNotice } from './api/util'
 import { handlePayment } from './lib/payment'
 import { getBalance } from './lib/namiWallet'
 
