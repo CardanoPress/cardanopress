@@ -11,6 +11,7 @@ window.addEventListener('alpine:init', () => {
         isVerified: false,
         isProcessing: false,
         payAmount: 1,
+        currentBalance: 0,
         remainingBalance: 0,
         transactionHash: '',
         showAddress: false,
@@ -18,7 +19,8 @@ window.addEventListener('alpine:init', () => {
 
         async init() {
             this.payAmount = parseFloat(this.$root.dataset.amount)
-            this.remainingBalance = parseInt(await getBalance()) - parseInt(this.lovelaceValue())
+            this.currentBalance = parseInt(await getBalance())
+            this.remainingBalance = this.currentBalance - parseInt(this.lovelaceValue())
 
             window.addEventListener('cardanoPress:recaptcha', async (event) => {
                 this.isVerified = event.detail

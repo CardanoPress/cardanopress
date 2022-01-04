@@ -32,6 +32,11 @@ get_header();
                 <p class='text-sm italic'>
                     <?php cardanoPress()->template('part/payment-lovelace'); ?> Lovelace
                 </p>
+
+                <h2>Current Balance: <span x-text='currentBalance / 1000000'></span> ADA</h2>
+                <p class='text-sm italic'>
+                    <span x-text='currentBalance'></span> Lovelace
+                </p>
             </div>
 
             <div class="py-6">
