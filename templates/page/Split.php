@@ -69,6 +69,17 @@ get_header();
                         </tr>
                     <?php endfor; ?>
                 </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan='4'>
+                            <h2>Remaining Balance: <span x-text='remainingBalance / 1000000'></span> ADA</h2>
+                            <p class='text-sm italic'>
+                                <span x-text='remainingBalance'></span> Lovelace
+                            </p>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </form>
     </div>
