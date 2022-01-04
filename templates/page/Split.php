@@ -43,6 +43,7 @@ get_header();
                     <tr>
                         <th>Percentage</th>
                         <th>Address</th>
+                        <th>Amount</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -50,13 +51,16 @@ get_header();
                 <tbody>
                     <?php for ($i = 1; $i <= 5; $i++) : ?>
                         <tr x-data="splitForm" data-fee="<?php echo $fixedFee; ?>">
-                            <td class="w-1/4">
-                                <input x-model="percentage" type="number" class="w-full">
+                            <td class="w-1/5">
+                                <input x-model="percentage" type="number" min='0' max='100' class="w-full">
                             </td>
                             <td class="w-1/2">
                                 <input x-model="address" type="text" class="w-full">
                             </td>
-                            <td class="w-1/4">
+                            <td class="w-1/3">
+                                <input x-bind:value='paymentAmount' type="text" class="w-full" readonly disabled>
+                            </td>
+                            <td class="w-1/5">
                                 <button
                                     x-on:click.prevent='handleSend()'
                                     x-bind:disabled='!isConnected || !isReady()'
