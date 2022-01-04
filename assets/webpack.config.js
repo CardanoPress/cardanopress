@@ -14,6 +14,7 @@ module.exports = {
         notification: './src/notification.js',
         delegation: './src/delegation.js',
         payment: './src/payment.js',
+        split: './src/split.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
