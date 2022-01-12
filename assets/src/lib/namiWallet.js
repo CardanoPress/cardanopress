@@ -1,19 +1,11 @@
 import { cardano, NETWORK } from '../api/config'
+import { hexToBech32, hexToBytes } from '../api/util'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
-import { Buffer } from 'buffer'
 
 export const getNetwork = async (wallet) => {
     const id = await wallet.getNetworkId()
 
     return NETWORK[id]
-}
-
-export const hexToBytes = (string) => {
-    return Buffer.from(string, 'hex')
-}
-
-export const hexToBech32 = (address) => {
-    return CSL.Address.from_bytes(hexToBytes(address)).to_bech32()
 }
 
 export const getBalance = async () => {

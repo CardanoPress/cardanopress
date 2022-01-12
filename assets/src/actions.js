@@ -1,16 +1,17 @@
-import { getNetwork, getChangeAddress, getRewardAddress } from './lib/namiWallet'
+import Extension from './lib/extension'
 
-export const handleReconnect = async (wallet) => {
-    if (undefined === wallet) {
+export const handleReconnect = async (walletObject) => {
+    if (undefined === walletObject) {
         return {
             success: false,
             data: 'Wallet extension not available',
         }
     }
 
-    const network = await getNetwork(wallet)
-    const changeAddress = await getChangeAddress(wallet)
-    const rewardAddress = await getRewardAddress(wallet)
+    const Wallet = new Extension(walletObject)
+    const network = await Wallet.getNetwork()
+    const changeAddress = await Wallet.getChangeAddress()
+    const rewardAddress = await Wallet.getRewardAddress()
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -23,10 +24,11 @@ export const handleReconnect = async (wallet) => {
     }).then((response) => response.json())
 }
 
-export const logMeIn = async (wallet) => {
-    const network = await getNetwork(wallet)
-    const changeAddress = await getChangeAddress(wallet)
-    const rewardAddress = await getRewardAddress(wallet)
+export const logMeIn = async (walletObject) => {
+    const Wallet = new Extension(walletObject)
+    const network = await Wallet.getNetwork()
+    const changeAddress = await Wallet.getChangeAddress()
+    const rewardAddress = await Wallet.getRewardAddress()
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({

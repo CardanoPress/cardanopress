@@ -1,5 +1,4 @@
 import {
-    hexToBytes,
     getNetwork,
     getChangeAddress,
     getRewardAddress,
@@ -9,7 +8,7 @@ import {
 } from './namiWallet'
 import { buildTx, prepareTx } from '../api/wallet'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
-import { getDelegation, getProtocol, saveWalletTx } from '../api/util'
+import { hexToBytes, getDelegation, getProtocol, saveWalletTx } from '../api/util'
 
 const delegationCertificates = async (accountActive, poolHex) => {
     const stakeKeyHash = await getStakeKeyHash()

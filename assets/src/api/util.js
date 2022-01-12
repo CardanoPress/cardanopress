@@ -1,5 +1,14 @@
-import { MultiAsset } from '@emurgo/cardano-serialization-lib-browser'
+import { Address, MultiAsset } from '@emurgo/cardano-serialization-lib-browser'
 import { cardanoPress } from './config'
+import { Buffer } from 'buffer'
+
+export const hexToBytes = (string) => {
+    return Buffer.from(string, 'hex')
+}
+
+export const hexToBech32 = (address) => {
+    return Address.from_bytes(hexToBytes(address)).to_bech32()
+}
 
 export const generateUuid = () => {
     const s4 = () => {

@@ -2,11 +2,11 @@ import Alpine from 'alpinejs'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 import { handleReconnect, handleSync, logMeIn, logMeOut } from './actions'
 import { NETWORK, cardano, cardanoPress, browser } from './api/config'
-import { addNotice, removeNotice } from './api/util'
+import { addNotice, removeNotice, hexToBech32 } from './api/util'
 import * as apiMethods from './api/util'
 import * as walletTransactions from './api/wallet'
 import * as namiHelpers from './lib/namiWallet'
-import { getChangeAddress, getNetwork, hexToBech32 } from './lib/namiWallet'
+import { getChangeAddress, getNetwork } from './lib/namiWallet'
 import Extensions from './lib/extensions'
 
 window.Alpine = Alpine
