@@ -1,7 +1,7 @@
 import Alpine from 'alpinejs'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 import { handleReconnect, handleSync, logMeIn, logMeOut } from './actions'
-import { NETWORK, cardano, cardanoPress } from './api/config'
+import { NETWORK, cardano, cardanoPress, browser } from './api/config'
 import { addNotice, removeNotice } from './api/util'
 import * as apiMethods from './api/util'
 import * as walletTransactions from './api/wallet'
@@ -16,12 +16,19 @@ Alpine.data('cardanoPress', () => ({
     isProcessing: false,
     showModal: false,
     openDropdown: false,
+    hasNami: false,
+    hasCcvault: false,
 
     isDisabled() {
         return !!(!this.isAvailable || this.isProcessing)
     },
 
     async init() {
+        this.$watch('showModal', () => {
+            this.hasNami = browser.hasNami()
+            this.hasCcvault = browser.hasCcvault()
+        })
+
         if (this.isAvailable) {
             cardano.onNetworkChange((networkId) => this.handleLogout(networkId, 0))
             cardano.onAccountChange((addresses) => this.handleLogout(-1, addresses))

@@ -15,7 +15,15 @@
     <button x-on:click.prevent='isConnected ? handleReconnect() : handleConnect()' x-bind:disabled="isDisabled()">
         Nami
 
-        <template x-if="!isAvailable">
+        <template x-if="!isAvailable || !hasNami()">
+            <span class="block italic text-sm">(Not available)</span>
+        </template>
+    </button>
+
+    <button x-on:click.prevent='isConnected ? handleReconnect() : handleConnect()' x-bind:disabled="isDisabled()">
+        ccvault
+
+        <template x-if="!isAvailable || !hasCcvault()">
             <span class="block italic text-sm">(Not available)</span>
         </template>
     </button>
