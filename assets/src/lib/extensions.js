@@ -1,14 +1,12 @@
 import { browser } from '../api/config'
 
 class Extensions {
-    constructor() {
-        this.namiObject = undefined;
-        this.ccvaultObject = undefined;
-    }
+    static namiObject = undefined
+    static ccvaultObject = undefined
 
-    async getNami() {
+    static async getNami() {
         if (! browser.hasNami()) {
-            throw new Error('Nami extension is not available')
+            return undefined
         }
 
         if (undefined === this.namiObject && (await window.cardano.isEnabled() || await window.cardano.enable())) {
@@ -18,9 +16,9 @@ class Extensions {
         return this.namiObject;
     }
 
-    async getCcvault() {
+    static async getCcvault() {
         if (! browser.hasCcvault()) {
-            throw new Error('ccvault extension is not available')
+            return undefined
         }
 
         if (undefined === this.ccvaultObject) {
@@ -34,13 +32,17 @@ class Extensions {
         return this.ccvaultObject;
     }
 
-    async getWallet(type) {
+    static async getWallet(type) {
         let object
 
         if ('ccvault' === type) {
             object = await this.getCcvault()
         } else if ('nami' === type) {
             object = await this.getNami()
+        }
+
+        if (undefined === object) {
+            return undefined
         }
 
         return { ...object, type }

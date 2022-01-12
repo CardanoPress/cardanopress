@@ -38,15 +38,15 @@ Alpine.data('cardanoPress', () => ({
         if (this.isConnected && !localStorage.getItem('_x_isNotified')) {
             addNotice({ type: 'success', text: 'Successfully connected' })
             localStorage.setItem('_x_isNotified', 'true')
-        } else if (!this.isConnected && localStorage.getItem('_x_isNotified')) {
-            localStorage.removeItem('_x_isNotified')
+        } else if (!this.isConnected) {
+            localStorage.getItem('_x_isNotified') && localStorage.removeItem('_x_isNotified')
+            localStorage.getItem('_x_connectedWallet') && localStorage.removeItem('_x_connectedWallet')
         }
     },
 
     async handleConnect(type) {
         this.isProcessing = true
-        const extensions = new Extensions()
-        const wallet = await extensions.getWallet(type)
+        const wallet = await Extensions.getWallet(type)
 
         if (undefined !== wallet) {
             addNotice({
@@ -66,7 +66,7 @@ Alpine.data('cardanoPress', () => ({
         if (response.success) {
             removeNotice('loginConnect')
             addNotice({ type: 'success', text: response.data.message })
-            localStorage.setItem('_x_connectedWallet', wallet)
+            localStorage.setItem('_x_connectedWallet', wallet.type)
 
             if (response.data.reload) {
                 return setTimeout(() => {
@@ -106,8 +106,7 @@ Alpine.data('cardanoPress', () => ({
     },
 
     async handleReconnect(type) {
-        const extensions = new Extensions()
-        const wallet = await extensions.getWallet(type)
+        const wallet = await Extensions.getWallet(type)
 
         addNotice({
             id: 'reconnect',
@@ -122,7 +121,7 @@ Alpine.data('cardanoPress', () => ({
 
         if (response.success) {
             addNotice({ type: 'success', text: 'Wallet reconnected' })
-            localStorage.setItem('_x_connectedWallet', wallet)
+            localStorage.setItem('_x_connectedWallet', wallet.type)
 
             return setTimeout(() => {
                 window.location.reload()

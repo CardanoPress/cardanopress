@@ -1,6 +1,13 @@
 import { getNetwork, getChangeAddress, getRewardAddress } from './lib/namiWallet'
 
 export const handleReconnect = async (wallet) => {
+    if (undefined === wallet) {
+        return {
+            success: false,
+            data: 'Wallet extension not available',
+        }
+    }
+
     const network = await getNetwork(wallet)
     const changeAddress = await getChangeAddress(wallet)
     const rewardAddress = await getRewardAddress(wallet)
