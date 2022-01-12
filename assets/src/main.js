@@ -7,6 +7,7 @@ import * as apiMethods from './api/util'
 import * as walletTransactions from './api/wallet'
 import * as namiHelpers from './lib/namiWallet'
 import { getChangeAddress, getNetwork, hexToBech32 } from './lib/namiWallet'
+import Extensions from './lib/extensions'
 
 window.Alpine = Alpine
 
@@ -42,32 +43,30 @@ Alpine.data('cardanoPress', () => ({
         }
     },
 
-    async handleConnect() {
+    async handleConnect(type) {
         this.isProcessing = true
-        let isEnabled = await cardano.isEnabled()
+        const extensions = new Extensions()
+        const wallet = await extensions.getWallet(type)
 
-        if (!isEnabled) {
-            isEnabled = await cardano.enable()
-        }
-
-        if (isEnabled) {
+        if (undefined !== wallet) {
             addNotice({
                 id: 'loginConnect',
                 type: 'info',
                 text: 'Connecting...',
             })
-            await this.handleLogin()
+            await this.handleLogin(wallet)
         }
 
         this.isProcessing = false
     },
 
-    async handleLogin() {
-        const response = await logMeIn()
+    async handleLogin(wallet) {
+        const response = await logMeIn(wallet)
 
         if (response.success) {
             removeNotice('loginConnect')
             addNotice({ type: 'success', text: response.data.message })
+            localStorage.setItem('_x_connectedWallet', wallet)
 
             if (response.data.reload) {
                 return setTimeout(() => {
@@ -94,6 +93,7 @@ Alpine.data('cardanoPress', () => ({
         if (response.success) {
             addNotice({ type: 'success', text: response.data.message })
             localStorage.removeItem('_x_isNotified')
+            localStorage.removeItem('_x_connectedWallet')
 
             if (response.data.reload) {
                 return setTimeout(() => {
@@ -105,7 +105,10 @@ Alpine.data('cardanoPress', () => ({
         }
     },
 
-    async handleReconnect() {
+    async handleReconnect(type) {
+        const extensions = new Extensions()
+        const wallet = await extensions.getWallet(type)
+
         addNotice({
             id: 'reconnect',
             type: 'info',
@@ -113,12 +116,13 @@ Alpine.data('cardanoPress', () => ({
         })
 
         this.isProcessing = true
-        const response = await handleReconnect()
+        const response = await handleReconnect(wallet)
 
         removeNotice('reconnect')
 
         if (response.success) {
             addNotice({ type: 'success', text: 'Wallet reconnected' })
+            localStorage.setItem('_x_connectedWallet', wallet)
 
             return setTimeout(() => {
                 window.location.reload()

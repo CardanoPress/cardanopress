@@ -2,8 +2,8 @@ import { cardano, NETWORK } from '../api/config'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 import { Buffer } from 'buffer'
 
-export const getNetwork = async () => {
-    const id = await cardano.getNetworkId()
+export const getNetwork = async (wallet) => {
+    const id = await wallet.getNetworkId()
 
     return NETWORK[id]
 }
@@ -22,14 +22,14 @@ export const getBalance = async () => {
     return CSL.Value.from_bytes(hexToBytes(balance)).coin().to_str()
 }
 
-export const getChangeAddress = async () => {
-    const changeAddress = await cardano.getChangeAddress()
+export const getChangeAddress = async (wallet) => {
+    const changeAddress = await wallet.getChangeAddress()
 
     return hexToBech32(changeAddress)
 }
 
-export const getRewardAddress = async () => {
-    const rewardAddress = await cardano.getRewardAddress()
+export const getRewardAddress = async (wallet) => {
+    const rewardAddress = await wallet.getRewardAddress()
 
     return hexToBech32(rewardAddress)
 }
