@@ -2,7 +2,8 @@
 
 import { addNotice, removeNotice } from './api/util'
 import { handlePayment } from './lib/payment'
-import { getBalance } from './lib/namiWallet'
+import Extensions from './lib/extensions'
+import Extension from './lib/extension'
 
 window.addEventListener('alpine:init', () => {
     const Alpine = window.Alpine || {}
@@ -16,7 +17,9 @@ window.addEventListener('alpine:init', () => {
         transactionHash: '',
 
         async init() {
-            this.remainingBalance = parseInt(await getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
+            const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedWallet'))
+            const Wallet = new Extension(walletObject)
+            this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
 
             window.addEventListener('cardanoPress:recaptcha', async (event) => {
                 this.isVerified = event.detail

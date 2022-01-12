@@ -1,17 +1,10 @@
-import {
-    getNetwork,
-    getChangeAddress,
-    getRewardAddress,
-    getUtxos,
-    getStakeKeyHash,
-    signAndSubmit
-} from './namiWallet'
 import { buildTx, prepareTx } from '../api/wallet'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 import { hexToBytes, getDelegation, getProtocol, saveWalletTx } from '../api/util'
+import Extensions from './extensions'
+import Extension from './extension'
 
-const delegationCertificates = async (accountActive, poolHex) => {
-    const stakeKeyHash = await getStakeKeyHash()
+const delegationCertificates = async (stakeKeyHash, accountActive, poolHex) => {
     const certificates = CSL.Certificates.new()
 
     if (!accountActive) {
@@ -47,7 +40,9 @@ const delegationCertificates = async (accountActive, poolHex) => {
 }
 
 export const handleDelegation = async () => {
-    const network = await getNetwork()
+    const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedWallet'))
+    const Wallet = new Extension(walletObject)
+    const network = await Wallet.getNetwork()
     const responseProtocol = await getProtocol(network)
 
     if (!responseProtocol.success) {
@@ -55,7 +50,7 @@ export const handleDelegation = async () => {
     }
 
     const protocolParameters = responseProtocol.data
-    const rewardAddress = await getRewardAddress()
+    const rewardAddress = await Wallet.getRewardAddress()
     const responseDelegation = await getDelegation(network, rewardAddress)
 
     if (!responseDelegation.success) {
@@ -63,14 +58,14 @@ export const handleDelegation = async () => {
     }
 
     const delegationDetails = responseDelegation.data
-    const utxos = await getUtxos()
-    const changeAddress = await getChangeAddress()
+    const utxos = await Wallet.getUtxos()
+    const changeAddress = await Wallet.getChangeAddress()
     const outputs = await prepareTx(protocolParameters.keyDeposit, changeAddress)
-    const certificates = await delegationCertificates(delegationDetails.active, delegationDetails.hex)
+    const certificates = await delegationCertificates(await Wallet.getStakeKeyHash(), delegationDetails.active, delegationDetails.hex)
 
     try {
         const transaction = await buildTx(changeAddress, utxos, outputs, protocolParameters, certificates)
-        const txHash = await signAndSubmit(transaction)
+        const txHash = await Wallet.signAndSubmit(transaction)
 
         return await saveWalletTx(network, changeAddress, txHash)
     } catch (error) {

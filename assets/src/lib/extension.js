@@ -25,13 +25,13 @@ class Extension {
         return hexToBech32(changeAddress)
     }
 
-    getUsedAddress = async () => {
+    getUsedAddresses = async () => {
         const usedAddresses = await this.cardano.getUsedAddresses()
 
         return usedAddresses.map((address) => hexToBech32(address))
     }
 
-    getUnusedAddress = async () => {
+    getUnusedAddresses = async () => {
         const unusedAddresses = await this.cardano.getUnusedAddresses()
 
         return unusedAddresses.map((address) => hexToBech32(address))
@@ -57,7 +57,7 @@ class Extension {
     }
 
     getStakeKeyHash = async () => {
-        const rewardAddress = await getRewardAddress()
+        const rewardAddress = await this.getRewardAddress()
 
         return CSL.RewardAddress.from_address(
             CSL.Address.from_bech32(rewardAddress)

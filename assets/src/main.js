@@ -6,8 +6,8 @@ import { addNotice, removeNotice, hexToBech32 } from './api/util'
 import * as apiMethods from './api/util'
 import * as walletTransactions from './api/wallet'
 import * as namiHelpers from './lib/namiWallet'
-import { getChangeAddress, getNetwork } from './lib/namiWallet'
 import Extensions from './lib/extensions'
+import Extension from './lib/extension'
 
 window.Alpine = Alpine
 
@@ -86,8 +86,10 @@ Alpine.data('cardanoPress', () => ({
             return
         }
 
-        const network = 0 <= id ? NETWORK[id] : await getNetwork()
-        const address = 0 !== addresses ? hexToBech32(addresses[0]) : await getChangeAddress()
+        const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedWallet'))
+        const Wallet = new Extension(walletObject)
+        const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
+        const address = 0 !== addresses ? hexToBech32(addresses[0]) : await Wallet.getChangeAddress()
         const response = await logMeOut(network, address)
 
         if (response.success) {
