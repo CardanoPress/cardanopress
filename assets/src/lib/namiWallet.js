@@ -28,8 +28,27 @@ export const getChangeAddress = async (wallet) => {
     return hexToBech32(changeAddress)
 }
 
+export const getUsedAddress = async (wallet) => {
+    const usedAddresses = await wallet.getUsedAddresses()
+
+    return usedAddresses.map((address) => hexToBech32(address))
+}
+
+export const getUnusedAddress = async (wallet) => {
+    const unusedAddresses = await wallet.getUnusedAddresses()
+
+    return unusedAddresses.map((address) => hexToBech32(address))
+}
+
 export const getRewardAddress = async (wallet) => {
-    const rewardAddress = await wallet.getRewardAddress()
+    let rewardAddress
+
+    if ('ccvault' === wallet.type) {
+        rewardAddress = await wallet.getRewardAddresses()
+        rewardAddress = rewardAddress[0]
+    } else {
+        rewardAddress = await wallet.getRewardAddress()
+    }
 
     return hexToBech32(rewardAddress)
 }

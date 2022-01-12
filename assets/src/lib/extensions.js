@@ -35,11 +35,15 @@ class Extensions {
     }
 
     async getWallet(type) {
+        let object
+
         if ('ccvault' === type) {
-            return this.getCcvault()
+            object = await this.getCcvault()
+        } else if ('nami' === type) {
+            object = await this.getNami()
         }
 
-        return this.getNami()
+        return { ...object, type }
     }
 }
 
