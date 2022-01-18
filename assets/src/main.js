@@ -31,11 +31,6 @@ Alpine.data('cardanoPress', () => ({
             this.hasCcvault = browser.hasCcvault()
         })
 
-        if (this.isAvailable) {
-            cardano.onNetworkChange((networkId) => this.handleLogout(networkId, 0))
-            cardano.onAccountChange((addresses) => this.handleLogout(-1, addresses))
-        }
-
         if (this.isConnected && !localStorage.getItem('_x_isNotified')) {
             addNotice({ type: 'success', text: 'Successfully connected' })
             localStorage.setItem('_x_isNotified', 'true')
@@ -45,6 +40,13 @@ Alpine.data('cardanoPress', () => ({
         }
 
         this.connectedExtension = localStorage.getItem('_x_connectedExtension')
+
+        if (this.isAvailable && 'Nami' === this.connectedExtension) {
+            const wallet = await Extensions.getWallet(this.connectedExtension)
+
+            wallet.onNetworkChange((networkId) => this.handleLogout(networkId, 0))
+            wallet.onAccountChange((addresses) => this.handleLogout(-1, addresses))
+        }
     },
 
     async handleConnect(type) {
