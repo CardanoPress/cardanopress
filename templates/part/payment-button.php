@@ -34,6 +34,6 @@ if (empty($textNotConnected)) {
     >
         <?php echo $text; ?>
 
-        <span class='block italic text-sm' x-text="'(Connected to ' + connectedWallet + ')'"></span>
+        <span class='block italic text-sm' x-text="'(Connected to ' + connectedExtension + ')'"></span>
     </button>
 </template>

@@ -17,7 +17,7 @@ window.addEventListener('alpine:init', () => {
         transactionHash: '',
 
         async init() {
-            const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedWallet'))
+            const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedExtension'))
             const Wallet = new Extension(walletObject)
             this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
 

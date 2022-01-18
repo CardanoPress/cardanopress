@@ -40,7 +40,7 @@ const delegationCertificates = async (stakeKeyHash, accountActive, poolHex) => {
 }
 
 export const handleDelegation = async () => {
-    const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedWallet'))
+    const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedExtension'))
     const Wallet = new Extension(walletObject)
     const network = await Wallet.getNetwork()
     const responseProtocol = await getProtocol(network)

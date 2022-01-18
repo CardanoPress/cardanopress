@@ -19,7 +19,7 @@ Alpine.data('cardanoPress', () => ({
     openDropdown: false,
     hasNami: false,
     hasCcvault: false,
-    connectedWallet: '',
+    connectedExtension: '',
 
     isDisabled() {
         return !!(!this.isAvailable || this.isProcessing)
@@ -41,10 +41,10 @@ Alpine.data('cardanoPress', () => ({
             localStorage.setItem('_x_isNotified', 'true')
         } else if (!this.isConnected) {
             localStorage.getItem('_x_isNotified') && localStorage.removeItem('_x_isNotified')
-            localStorage.getItem('_x_connectedWallet') && localStorage.removeItem('_x_connectedWallet')
+            localStorage.getItem('_x_connectedExtension') && localStorage.removeItem('_x_connectedExtension')
         }
 
-        this.connectedWallet = localStorage.getItem('_x_connectedWallet')
+        this.connectedExtension = localStorage.getItem('_x_connectedExtension')
     },
 
     async handleConnect(type) {
@@ -69,7 +69,7 @@ Alpine.data('cardanoPress', () => ({
         if (response.success) {
             removeNotice('loginConnect')
             addNotice({ type: 'success', text: response.data.message })
-            localStorage.setItem('_x_connectedWallet', wallet.type)
+            localStorage.setItem('_x_connectedExtension', wallet.type)
 
             if (response.data.reload) {
                 return setTimeout(() => {
@@ -89,7 +89,7 @@ Alpine.data('cardanoPress', () => ({
             return
         }
 
-        const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedWallet'))
+        const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedExtension'))
         const Wallet = new Extension(walletObject)
         const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
         const address = 0 !== addresses ? hexToBech32(addresses[0]) : await Wallet.getChangeAddress()
@@ -98,7 +98,7 @@ Alpine.data('cardanoPress', () => ({
         if (response.success) {
             addNotice({ type: 'success', text: response.data.message })
             localStorage.removeItem('_x_isNotified')
-            localStorage.removeItem('_x_connectedWallet')
+            localStorage.removeItem('_x_connectedExtension')
 
             if (response.data.reload) {
                 return setTimeout(() => {
@@ -126,7 +126,7 @@ Alpine.data('cardanoPress', () => ({
 
         if (response.success) {
             addNotice({ type: 'success', text: 'Wallet reconnected' })
-            localStorage.setItem('_x_connectedWallet', wallet.type)
+            localStorage.setItem('_x_connectedExtension', wallet.type)
 
             return setTimeout(() => {
                 window.location.reload()

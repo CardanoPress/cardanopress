@@ -19,7 +19,7 @@ window.addEventListener('alpine:init', () => {
         paymentAddress: '',
 
         async init() {
-                const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedWallet'))
+                const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedExtension'))
                 const Wallet = new Extension(walletObject)
                 this.payAmount = parseFloat(this.$root.dataset.amount)
                 this.currentBalance = parseInt(await Wallet.getBalance())
