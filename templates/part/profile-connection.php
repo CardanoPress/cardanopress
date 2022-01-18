@@ -28,6 +28,11 @@ $userProfile = cardanoPress()->userProfile();
 <table class="w-full table-auto border-collapse">
     <tbody>
         <tr>
+            <th>Extension</th>
+            <td x-text="connectedExtension"></td>
+        </tr>
+
+        <tr>
             <th>Network</th>
             <td><?php echo $userProfile->connectedNetwork(); ?></td>
         </tr>

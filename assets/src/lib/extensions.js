@@ -39,7 +39,7 @@ class Extensions {
             case 'ccvault':
                 object = await this.getCcvault()
                 break
-            case 'nami':
+            case 'Nami':
             default:
                 object = await this.getNami()
         }
