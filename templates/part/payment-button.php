@@ -33,5 +33,7 @@ if (empty($textNotConnected)) {
         x-bind:disabled='!isReady()'
     >
         <?php echo $text; ?>
+
+        <span class='block italic text-sm' x-text="'(Connected to ' + connectedWallet + ')'"></span>
     </button>
 </template>

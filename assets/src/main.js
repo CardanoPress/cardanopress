@@ -19,6 +19,7 @@ Alpine.data('cardanoPress', () => ({
     openDropdown: false,
     hasNami: false,
     hasCcvault: false,
+    connectedWallet: '',
 
     isDisabled() {
         return !!(!this.isAvailable || this.isProcessing)
@@ -42,6 +43,8 @@ Alpine.data('cardanoPress', () => ({
             localStorage.getItem('_x_isNotified') && localStorage.removeItem('_x_isNotified')
             localStorage.getItem('_x_connectedWallet') && localStorage.removeItem('_x_connectedWallet')
         }
+
+        this.connectedWallet = localStorage.getItem('_x_connectedWallet')
     },
 
     async handleConnect(type) {
