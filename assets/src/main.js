@@ -60,6 +60,8 @@ Alpine.data('cardanoPress', () => ({
                 text: 'Connecting...',
             })
             await this.handleLogin(wallet)
+        } else {
+            addNotice({ type: 'error', text: 'Unable to connect to wallet' })
         }
 
         this.isProcessing = false
