@@ -44,8 +44,8 @@ Alpine.data('cardanoPress', () => ({
         if (this.isAvailable && 'Nami' === this.connectedExtension) {
             const wallet = await Extensions.getWallet(this.connectedExtension)
 
-            wallet.onNetworkChange((networkId) => this.handleLogout(networkId, 0))
-            wallet.onAccountChange((addresses) => this.handleLogout(-1, addresses))
+            wallet.experimental.on('networkChange', (networkId) => this.handleLogout(networkId, 0))
+            wallet.experimental.on('accountChange', (addresses) => this.handleLogout(-1, addresses))
         }
     },
 
