@@ -40,6 +40,11 @@ export const cardanoPress = window.cardanoPress || {
 }
 
 export const browser = {
+    has(type) {
+        const method = `has${type.charAt(0).toUpperCase() + type.slice(1)}`
+
+        return this[method]()
+    },
     hasNami() {
         return !!window.cardano?.nami;
     },

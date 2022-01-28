@@ -12,7 +12,7 @@
 ?>
 
 <div class="px-6 py-4">
-    <button x-on:click.prevent="isConnected ? handleReconnect('Nami') : handleConnect('Nami')" x-bind:disabled="isDisabled()">
+    <button x-on:click.prevent="isConnected ? handleReconnect('Nami') : handleConnect('Nami')" x-bind:disabled="isDisabled('Nami')">
         Nami
 
         <template x-if="!isAvailable || !hasNami">
@@ -20,7 +20,7 @@
         </template>
     </button>
 
-    <button x-on:click.prevent="isConnected ? handleReconnect('ccvault') : handleConnect('ccvault')" x-bind:disabled="isDisabled()">
+    <button x-on:click.prevent="isConnected ? handleReconnect('ccvault') : handleConnect('ccvault')" x-bind:disabled="isDisabled('ccvault')">
         ccvault
 
         <template x-if="!isAvailable || !hasCcvault">

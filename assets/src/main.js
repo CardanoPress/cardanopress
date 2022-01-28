@@ -21,8 +21,8 @@ Alpine.data('cardanoPress', () => ({
     hasCcvault: false,
     connectedExtension: '',
 
-    isDisabled() {
-        return !!(!this.isAvailable || this.isProcessing)
+    isDisabled(type = null) {
+        return !!(!this.isAvailable || this.isProcessing || (null !== type && !browser.has(type)))
     },
 
     async init() {
