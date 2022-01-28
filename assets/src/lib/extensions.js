@@ -9,8 +9,12 @@ class Extensions {
             return undefined
         }
 
-        if (undefined === this.namiObject && (await window.cardano.isEnabled() || await window.cardano.enable())) {
-            this.namiObject = window.cardano;
+        if (undefined === this.namiObject) {
+            try {
+                this.namiObject = await window.cardano.nami.enable();
+            } catch {
+                this.namiObject = undefined;
+            }
         }
 
         return this.namiObject;

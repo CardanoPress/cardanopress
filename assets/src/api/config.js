@@ -41,14 +41,7 @@ export const cardanoPress = window.cardanoPress || {
 
 export const browser = {
     hasNami() {
-        const tmpEvtController = window.cardano?.onAccountChange(console.log);
-
-        if (undefined !== typeof tmpEvtController) {
-            tmpEvtController.remove();
-            return true;
-        }
-
-        return false;
+        return !!window.cardano?.nami;
     },
     hasCcvault() {
         return !!window.cardano?.ccvault;
