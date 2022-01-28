@@ -38,16 +38,9 @@ class Extension {
     }
 
     getRewardAddress = async () => {
-        let rewardAddress
+        const rewardAddress = await this.cardano.getRewardAddresses()
 
-        if ('ccvault' === this.cardano.type) {
-            rewardAddress = await this.cardano.getRewardAddresses()
-            rewardAddress = rewardAddress[0]
-        } else {
-            rewardAddress = await this.cardano.getRewardAddress()
-        }
-
-        return hexToBech32(rewardAddress)
+        return hexToBech32(rewardAddress[0])
     }
 
     getUtxos = async () => {
