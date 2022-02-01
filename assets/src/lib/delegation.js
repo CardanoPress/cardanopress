@@ -60,10 +60,10 @@ export const handleDelegation = async () => {
     const delegationDetails = responseDelegation.data
     const utxos = await Wallet.getUtxos()
     const changeAddress = await Wallet.getChangeAddress()
-    const outputs = await prepareTx(protocolParameters.keyDeposit, changeAddress)
     const certificates = await delegationCertificates(await Wallet.getStakeKeyHash(), delegationDetails.active, delegationDetails.hex)
 
     try {
+        const outputs = await prepareTx(protocolParameters.keyDeposit, changeAddress)
         const transaction = await buildTx(changeAddress, utxos, outputs, protocolParameters, certificates)
         const txHash = await Wallet.signAndSubmit(transaction)
 
