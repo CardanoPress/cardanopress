@@ -18,6 +18,7 @@ class CoreAction
     {
         add_action('wp_enqueue_scripts', [$this, 'injectScriptVariables']);
         add_action('wp_login', [$this, 'checkWalletAssets'], 10, 2);
+        add_action('wp_login', [$this, 'checkDelegationStatus'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
     }
 
@@ -76,6 +77,53 @@ class CoreAction
         $assets = array_filter($assets);
 
         $userProfile->saveAssets($assets);
+    }
+
+    public function checkDelegationStatus($username, $user): void
+    {
+        $app = Application::instance();
+
+        if (! $app->isReady()) {
+            return;
+        }
+
+        $userProfile = new Profile($user);
+        $queryNetwork = $userProfile->connectedNetwork();
+        $stakeAddress = $userProfile->connectedStake();
+
+        if (! $queryNetwork || ! $stakeAddress) {
+            return;
+        }
+
+        $poolIds = $app->option('delegation_pool_id');
+        $blockfrost = new Blockfrost($queryNetwork);
+        $wanted = [];
+        $page = 1;
+
+        do {
+            $response = $blockfrost->getAccountHistory($stakeAddress, $page);
+
+            foreach ($response as $history) {
+                if ($history['pool_id'] === $poolIds[$queryNetwork]) {
+                    $wanted = $history;
+                    break;
+                }
+            }
+
+            $page++;
+        } while (100 === count($response));
+
+        if (! empty($wanted)) {
+            $latest = $blockfrost->getEpochsLatest();
+
+            if (! empty($latest)) {
+                $active = $latest['epoch'] - $wanted['active_epoch'];
+
+                if ($active >= $app->option('ua_required_epoch')) {
+                    $userProfile->addRole($app->option('ua_additional_role'));
+                }
+            }
+        }
     }
 
     public function maybeRedirect(): void

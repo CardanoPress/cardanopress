@@ -138,4 +138,9 @@ class Profile
 
         return $this->user->$key;
     }
+    
+    public function addRole(string $role)
+    {
+        $this->user->add_role($role);
+    }
 }
