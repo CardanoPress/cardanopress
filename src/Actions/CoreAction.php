@@ -88,6 +88,12 @@ class CoreAction
         }
 
         $userProfile = new Profile($user);
+        $customRole = $app->option('ua_additional_role');
+
+        if ($userProfile->hasRole($customRole)) {
+            return;
+        }
+
         $queryNetwork = $userProfile->connectedNetwork();
         $stakeAddress = $userProfile->connectedStake();
 
@@ -120,7 +126,7 @@ class CoreAction
                 $active = $latest['epoch'] - $wanted['active_epoch'];
 
                 if ($active >= $app->option('ua_required_epoch')) {
-                    $userProfile->addRole($app->option('ua_additional_role'));
+                    $userProfile->addRole($customRole);
                 }
             }
         }

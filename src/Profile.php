@@ -138,9 +138,14 @@ class Profile
 
         return $this->user->$key;
     }
-    
-    public function addRole(string $role)
+
+    public function addRole(string $role): void
     {
         $this->user->add_role($role);
+    }
+
+    public function hasRole(string $role): bool
+    {
+        return in_array($role, $this->user->roles, true);
     }
 }
