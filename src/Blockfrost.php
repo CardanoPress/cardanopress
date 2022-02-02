@@ -63,6 +63,20 @@ class Blockfrost
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
 
+    public function getAccountHistory(string $address, int $page = 1): array
+    {
+        $response = $this->client->request('accounts/' . $address . '/history', compact('page'));
+
+        return 200 === $response['status_code'] ? $response['data'] : [];
+    }
+
+    public function getEpochsLatest(): array
+    {
+        $response = $this->client->request('epochs/latest');
+
+        return 200 === $response['status_code'] ? $response['data'] : [];
+    }
+
     public function getPoolDetails(string $id): array
     {
         $response = $this->client->request('pools/' . $id . '/metadata');
