@@ -35,6 +35,7 @@ class Admin
         $this->paymentAddressFields();
         $this->assetsPolicyFields();
         $this->memberPagesFields();
+        $this->userAccessFields();
     }
 
     private function applicationPage(): void
@@ -259,6 +260,38 @@ class Admin
                     'collection' => [
                         'type' => 'page',
                         'title' => __('Collection', 'cardanopress'),
+                    ],
+                ],
+            ]);
+
+            $this->data->store($settings->get_config());
+        } catch (Exception $exception) {
+            error_log($exception->getMessage());
+        }
+    }
+
+    private function userAccessFields(): void
+    {
+        try {
+            $settings = new Settings([
+                'id' => 'ua',
+                'title' => __('User Access', 'cardanopress'),
+                'page' => self::OPTION_KEY,
+                'context' => 'side',
+                'fields' => [
+                    'required_epoch' => [
+                        'type' => 'number',
+                        'title' => __('Required Epoch', 'cardanopress'),
+                        'default' => 1,
+                        'options' => [
+                            'min' => 1,
+                            'step' => 1,
+                        ],
+                    ],
+                    'additional_role' => [
+                        'type' => 'select',
+                        'title' => __('Additional Role', 'cardanopress'),
+                        'options' => wp_roles()->role_names,
                     ],
                 ],
             ]);
