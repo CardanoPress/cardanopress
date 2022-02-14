@@ -4,6 +4,7 @@ class Extensions {
     static namiObject = undefined
     static ccvaultObject = undefined
     static yoroiObject = undefined
+    static flintObject = undefined
 
     static async getNami() {
         if (! browser.hasNami()) {
@@ -53,10 +54,29 @@ class Extensions {
         return this.yoroiObject;
     }
 
+    static async getFlint() {
+        if (! browser.hasFlint()) {
+            return undefined
+        }
+
+        if (undefined === this.flintObject) {
+            try {
+                this.flintObject = await window.cardano.flint.enable();
+            } catch {
+                this.flintObject = undefined;
+            }
+        }
+
+        return this.flintObject;
+    }
+
     static async getWallet(type) {
         let object
 
         switch (type) {
+            case 'Flint':
+                object = await this.getFlint()
+                break
             case 'Yoroi':
                 object = await this.getYoroi()
                 break

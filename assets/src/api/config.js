@@ -54,4 +54,7 @@ export const browser = {
     hasYoroi() {
         return !!window.cardano?.yoroi;
     },
+    hasFlint() {
+        return !!window.cardano?.flint;
+    },
 }

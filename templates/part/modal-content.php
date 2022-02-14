@@ -35,4 +35,12 @@
             <span class="block italic text-sm">(Not available)</span>
         </template>
     </button>
+
+    <button x-on:click.prevent="isConnected ? handleReconnect('Flint') : handleConnect('Flint')" x-bind:disabled="isDisabled('Flint')">
+        Flint
+
+        <template x-if="!isAvailable || !hasFlint">
+            <span class="block italic text-sm">(Not available)</span>
+        </template>
+    </button>
 </div>
