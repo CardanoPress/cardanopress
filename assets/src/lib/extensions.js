@@ -3,6 +3,7 @@ import { browser } from '../api/config'
 class Extensions {
     static namiObject = undefined
     static ccvaultObject = undefined
+    static yoroiObject = undefined
 
     static async getNami() {
         if (! browser.hasNami()) {
@@ -36,10 +37,29 @@ class Extensions {
         return this.ccvaultObject;
     }
 
+    static async getYoroi() {
+        if (! browser.hasYoroi()) {
+            return undefined
+        }
+
+        if (undefined === this.yoroiObject) {
+            try {
+                this.yoroiObject = await window.cardano.yoroi.enable();
+            } catch {
+                this.yoroiObject = undefined;
+            }
+        }
+
+        return this.yoroiObject;
+    }
+
     static async getWallet(type) {
         let object
 
         switch (type) {
+            case 'Yoroi':
+                object = await this.getYoroi()
+                break
             case 'ccvault':
                 object = await this.getCcvault()
                 break

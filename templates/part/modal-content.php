@@ -27,4 +27,12 @@
             <span class="block italic text-sm">(Not available)</span>
         </template>
     </button>
+
+    <button x-on:click.prevent="isConnected ? handleReconnect('Yoroi') : handleConnect('Yoroi')" x-bind:disabled="isDisabled('Yoroi')">
+        Yoroi
+
+        <template x-if="!isAvailable || !hasYoroi">
+            <span class="block italic text-sm">(Not available)</span>
+        </template>
+    </button>
 </div>

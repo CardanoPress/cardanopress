@@ -51,4 +51,7 @@ export const browser = {
     hasCcvault() {
         return !!window.cardano?.ccvault;
     },
+    hasYoroi() {
+        return !!window.cardano?.yoroi;
+    },
 }

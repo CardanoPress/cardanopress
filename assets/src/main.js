@@ -19,6 +19,7 @@ Alpine.data('cardanoPress', () => ({
     openDropdown: false,
     hasNami: false,
     hasCcvault: false,
+    hasYoroi: false,
     connectedExtension: '',
 
     isDisabled(type = null) {
@@ -29,6 +30,7 @@ Alpine.data('cardanoPress', () => ({
         this.$watch('showModal', () => {
             this.hasNami = browser.hasNami()
             this.hasCcvault = browser.hasCcvault()
+            this.hasYoroi = browser.hasYoroi()
         })
 
         if (this.isConnected && !localStorage.getItem('_x_isNotified')) {
