@@ -92,7 +92,13 @@ class Extensions {
             return undefined
         }
 
-        return { ...object, type }
+        if ('Yoroi' === type) {
+            object = Object.create(object)
+        }
+
+        object.type = type
+
+        return object
     }
 }
 
