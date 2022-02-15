@@ -19,6 +19,7 @@ class CoreAction
         add_action('wp_enqueue_scripts', [$this, 'injectScriptVariables']);
         add_action('wp_login', [$this, 'checkWalletAssets'], 10, 2);
         add_action('wp_login', [$this, 'checkDelegationStatus'], 10, 2);
+        add_action('wp_login', [$this, 'checkAssetsAccess'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
     }
 
@@ -130,6 +131,45 @@ class CoreAction
                 }
             }
         }
+    }
+
+    public function checkAssetsAccess($username, $user): void
+    {
+        $app = Application::instance();
+
+        if (! $app->isReady()) {
+            return;
+        }
+
+        $userProfile = new Profile($user);
+        $queryNetwork = $userProfile->connectedNetwork();
+        $stakeAddress = $userProfile->connectedStake();
+
+        if (! $queryNetwork || ! $stakeAddress) {
+            return;
+        }
+
+        $wanted = $app->option('asset_access');
+        $policyIds = array_column($wanted, 'id');
+        $blockfrost = new Blockfrost($queryNetwork);
+        $page = 1;
+
+        do {
+            $response = $blockfrost->associatedAssets($stakeAddress, $page);
+
+            foreach ($response as $asset) {
+                $data = $blockfrost->specificAsset($asset['unit']);
+                $index = array_search($data['policy_id'], $policyIds, true);
+
+                if (false === $index || $userProfile->hasRole($wanted[$index]['role'])) {
+                    continue;
+                }
+
+                $userProfile->addRole($wanted[$index]['role']);
+            }
+
+            $page++;
+        } while (100 === count($response));
     }
 
     public function maybeRedirect(): void

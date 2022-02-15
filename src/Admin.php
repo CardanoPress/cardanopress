@@ -36,6 +36,7 @@ class Admin
         $this->assetsPolicyFields();
         $this->memberPagesFields();
         $this->userAccessFields();
+        $this->assetAccessFields();
     }
 
     private function applicationPage(): void
@@ -292,6 +293,49 @@ class Admin
                         'type' => 'select',
                         'title' => __('Additional Role', 'cardanopress'),
                         'options' => wp_roles()->role_names,
+                    ],
+                ],
+            ]);
+
+            $this->data->store($settings->get_config());
+        } catch (Exception $exception) {
+            error_log($exception->getMessage());
+        }
+    }
+
+    private function assetAccessFields(): void
+    {
+        try {
+            $settings = new Settings([
+                'id' => 'asset',
+                'title' => __('Asset Access', 'cardanopress'),
+                'page' => self::OPTION_KEY,
+                'fields' => [
+                    'access' => [
+                        'type' => 'group',
+                        'default' => [
+                            [
+                                'name' => '',
+                                'id' => '',
+                                'role' => '',
+                            ],
+                        ],
+                        'repeatable' => true,
+                        'fields' => [
+                            'name' => [
+                                'type' => 'text',
+                                'title' => __('Asset Name', 'cardanopress'),
+                            ],
+                            'id' => [
+                                'type' => 'text',
+                                'title' => __('Policy ID', 'cardanopress'),
+                            ],
+                            'role' => [
+                                'type' => 'select',
+                                'title' => __('Additional Role', 'cardanopress'),
+                                'options' => wp_roles()->role_names,
+                            ],
+                        ],
                     ],
                 ],
             ]);
