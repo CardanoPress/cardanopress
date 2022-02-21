@@ -5,6 +5,7 @@ class Extensions {
     static ccvaultObject = undefined
     static yoroiObject = undefined
     static flintObject = undefined
+    static typhonObject = undefined
 
     static async getNami() {
         if (! browser.hasNami()) {
@@ -70,10 +71,25 @@ class Extensions {
         return this.flintObject;
     }
 
+    static async getTyphon() {
+        if (! browser.hasTyphon()) {
+            return undefined
+        }
+
+        if (undefined === this.typhonObject) {
+            this.typhonObject = await window.cardano.typhon;
+        }
+
+        return this.typhonObject;
+    }
+
     static async getWallet(type) {
         let object
 
         switch (type) {
+            case 'Typhon':
+                object = await this.getTyphon()
+                break
             case 'Flint':
                 object = await this.getFlint()
                 break

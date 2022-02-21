@@ -57,4 +57,7 @@ export const browser = {
     hasFlint() {
         return !!window.cardano?.flint;
     },
+    hasTyphon() {
+        return !!window.cardano?.typhon;
+    },
 }

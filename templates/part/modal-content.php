@@ -43,4 +43,12 @@
             <span class="block italic text-sm">(Not available)</span>
         </template>
     </button>
+
+    <button x-on:click.prevent="isConnected ? handleReconnect('Typhon') : handleConnect('Typhon')" x-bind:disabled="isDisabled('Typhon')">
+        Typhon
+
+        <template x-if="!isAvailable || !hasTyphon">
+            <span class="block italic text-sm">(Not available)</span>
+        </template>
+    </button>
 </div>
