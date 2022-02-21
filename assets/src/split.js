@@ -17,9 +17,15 @@ window.addEventListener('alpine:init', () => {
         transactionHash: '',
 
         async init() {
-            const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedExtension'))
-            const Wallet = new Extension(walletObject)
-            this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
+            window.addEventListener('load', async () => {
+                const connectedExtension = localStorage.getItem('_x_connectedExtension')
+
+                if (connectedExtension) {
+                    const walletObject = await Extensions.getWallet(connectedExtension)
+                    const Wallet = new Extension(walletObject)
+                    this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
+                }
+            })
 
             window.addEventListener('cardanoPress:recaptcha', async (event) => {
                 this.isVerified = event.detail
