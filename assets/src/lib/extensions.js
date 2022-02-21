@@ -80,7 +80,7 @@ class Extensions {
             case 'Yoroi':
                 object = await this.getYoroi()
                 break
-            case 'ccvault':
+            case 'Ccvault':
                 object = await this.getCcvault()
                 break
             case 'Nami':
