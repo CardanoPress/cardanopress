@@ -40,7 +40,8 @@ const delegationCertificates = async (stakeKeyHash, accountActive, poolHex) => {
 }
 
 export const handleDelegation = async () => {
-    const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedExtension'))
+    const connectedExtension = localStorage.getItem('_x_connectedExtension')
+    const walletObject = await Extensions.getWallet(connectedExtension)
     const Wallet = new Extension(walletObject)
     const network = await Wallet.getNetwork()
     const responseProtocol = await getProtocol(network)
@@ -58,6 +59,29 @@ export const handleDelegation = async () => {
     }
 
     const delegationDetails = responseDelegation.data
+
+    if ('Typhon' === connectedExtension) {
+        try {
+            const response = await walletObject.delegationTransaction({
+                poolId: delegationDetails.hex
+            })
+
+            if (response.status) {
+                return await saveWalletTx(network, await Wallet.getChangeAddress(), response.data.transactionId)
+            }
+
+            return {
+                success: false,
+                data: response.reason,
+            }
+        } catch (error) {
+            return {
+                success: false,
+                data: error,
+            }
+        }
+    }
+
     const utxos = await Wallet.getUtxos()
     const changeAddress = await Wallet.getChangeAddress()
     const certificates = await delegationCertificates(await Wallet.getStakeKeyHash(), delegationDetails.active, delegationDetails.hex)
