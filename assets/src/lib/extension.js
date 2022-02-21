@@ -12,18 +12,34 @@ class Extension {
             return NETWORK[1]
         }
 
-        const id = await this.cardano.getNetworkId()
+        let id = await this.cardano.getNetworkId()
+
+        if ('Typhon' === this.cardano.type) {
+            id = id.data
+        }
 
         return NETWORK[id]
     }
 
     getBalance = async () => {
+        if ('Typhon' === this.cardano.type) {
+            const response = await this.cardano.getBalance()
+
+            return response.data.ada
+        }
+
         const balance = await this.cardano.getBalance()
 
         return CSL.Value.from_bytes(hexToBytes(balance)).coin().to_str()
     }
 
     getChangeAddress = async () => {
+        if ('Typhon' === this.cardano.type) {
+            const response = await this.cardano.getAddress()
+
+            return response.data
+        }
+
         const changeAddress = await this.cardano.getChangeAddress()
 
         return hexToBech32(changeAddress)
@@ -42,6 +58,12 @@ class Extension {
     }
 
     getRewardAddress = async () => {
+        if ('Typhon' === this.cardano.type) {
+            const response = await this.cardano.getRewardAddress()
+
+            return response.data
+        }
+
         const rewardAddress = await this.cardano.getRewardAddresses()
 
         return hexToBech32(rewardAddress[0])

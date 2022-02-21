@@ -77,7 +77,13 @@ class Extensions {
         }
 
         if (undefined === this.typhonObject) {
-            this.typhonObject = await window.cardano.typhon;
+            const response = await window.cardano.typhon.enable();
+
+            if (response.status === true) {
+                this.typhonObject = await window.cardano.typhon;
+            } else {
+                this.typhonObject = undefined;
+            }
         }
 
         return this.typhonObject;

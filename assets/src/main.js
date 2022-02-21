@@ -24,8 +24,14 @@ Alpine.data('cardanoPress', () => ({
     hasTyphon: false,
     connectedExtension: '',
 
+    has(type) {
+        const method = `has${type.charAt(0).toUpperCase() + type.slice(1)}`
+
+        return this[method]
+    },
+
     isDisabled(type = null) {
-        return !!(!this.isAvailable || this.isProcessing || (null !== type && !browser.has(type)))
+        return !!(!this.isAvailable || this.isProcessing || (null !== type && !this.has(type)))
     },
 
     async init() {
