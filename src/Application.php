@@ -31,6 +31,7 @@ class Application
         $this->setup();
 
         add_action('plugins_loaded', [$this, 'loaded'], -1);
+        add_action('init', [Enqueue::class, 'init']);
     }
 
     private function setup(): void
@@ -49,7 +50,6 @@ class Application
 
     public function loaded(): void
     {
-        Enqueue::init();
         do_action('cardanopress_loaded');
     }
 
