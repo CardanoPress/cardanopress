@@ -15,7 +15,7 @@ window.Alpine = Alpine
 
 Alpine.data('cardanoPress', () => ({
     isAvailable: undefined !== window.cardano && undefined !== window.cardanoPress,
-    isConnected: cardanoPress.logged,
+    isConnected: false,
     isProcessing: false,
     showModal: false,
     openDropdown: false,
@@ -45,15 +45,17 @@ Alpine.data('cardanoPress', () => ({
             this.hasTyphon = browser.hasTyphon()
         })
 
-        if (this.isConnected && !localStorage.getItem('_x_isNotified')) {
+        if (cardanoPress.logged && !localStorage.getItem('_x_isNotified')) {
             addNotice({ type: 'success', text: 'Successfully connected' })
             localStorage.setItem('_x_isNotified', 'true')
-        } else if (!this.isConnected) {
+        } else if (!cardanoPress.logged) {
             localStorage.getItem('_x_isNotified') && localStorage.removeItem('_x_isNotified')
             localStorage.getItem('_x_connectedExtension') && localStorage.removeItem('_x_connectedExtension')
         }
 
-        this.connectedExtension = localStorage.getItem('_x_connectedExtension')
+        this.connectedExtension = localStorage.getItem('_x_connectedExtension') || ''
+        this.isConnected = this.connectedExtension || false
+        window.cardanoPress.extension = this.connectedExtension
 
         if (this.isAvailable && 'Nami' === this.connectedExtension) {
             const wallet = await Extensions.getWallet(this.connectedExtension)

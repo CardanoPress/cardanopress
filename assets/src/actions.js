@@ -1,7 +1,7 @@
 import { saveWalletTx } from './api/actions'
 import { cardanoPress } from './api/config'
-import delegation from './api/delegation'
-import payment from './api/payment'
+import { delegation } from './api/delegation'
+import { payment } from './api/payment'
 import Extension from './lib/extension'
 
 export const handleReconnect = async (walletObject) => {

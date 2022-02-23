@@ -37,6 +37,7 @@ export const cardano = window.cardano || {
 export const cardanoPress = window.cardanoPress || {
     ajaxUrl: '',
     _nonce: '',
+    logged: '',
 }
 
 export const browser = {
