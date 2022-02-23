@@ -52,25 +52,27 @@ export const getAccount = async (network, rewardAddress) => {
     }).then((response) => response.json())
 }
 
-export const saveWalletTx = async (network, changeAddress, txHash) => {
+export const getPool = async (network, poolId) => {
+    return await fetch(cardanoPress.ajaxUrl, {
+        method: 'POST',
+        body: new URLSearchParams({
+            _wpnonce: cardanoPress._nonce,
+            action: 'cardanopress_pool_details',
+            query_network: network,
+            reward_address: poolId,
+        }),
+    }).then((response) => response.json())
+}
+
+export const saveWalletTx = async (network, txAction, txHash) => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
             _wpnonce: cardanoPress._nonce,
             action: 'cardanopress_wallet_transaction',
             query_network: network,
-            wallet_address: changeAddress,
+            transaction_action: txAction,
             transaction_hash: txHash,
-        }),
-    }).then((response) => response.json())
-}
-
-export const getPaymentAddress = async () => {
-    return await fetch(cardanoPress.ajaxUrl, {
-        method: 'POST',
-        body: new URLSearchParams({
-            _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_payment_address',
         }),
     }).then((response) => response.json())
 }

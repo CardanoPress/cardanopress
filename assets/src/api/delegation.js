@@ -1,5 +1,5 @@
 import { buildTx, prepareTx } from './wallet'
-import { hexToBytes, getProtocol, getAccount, saveWalletTx } from './util'
+import { hexToBytes, getProtocol, getAccount } from './util'
 import Extensions from '../lib/extensions'
 import Extension from '../lib/extension'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'

@@ -67,11 +67,21 @@ export const handleSync = async () => {
     }).then((response) => response.json())
 }
 
+export const getPaymentAddress = async () => {
+    return await fetch(cardanoPress.ajaxUrl, {
+        method: 'POST',
+        body: new URLSearchParams({
+            _wpnonce: cardanoPress._nonce,
+            action: 'cardanopress_payment_address',
+        }),
+    }).then((response) => response.json())
+}
+
 export const handlePayment = async (lovelaceValue, payee) => {
     const result = await payment(payee, lovelaceValue)
 
     if (result.success) {
-        return await saveWalletTx(result.data.network, payee, result.data.transaction)
+        return await saveWalletTx(result.data.network, 'payment', result.data.transaction)
     }
 
     return result
@@ -98,7 +108,7 @@ export const handleDelegation = async () => {
     const result = await delegation(poolId)
 
     if (result.success) {
-        return await saveWalletTx(result.data.network, poolId, result.data.transaction)
+        return await saveWalletTx(result.data.network, 'delegation', result.data.transaction)
     }
 
     return result

@@ -1,7 +1,7 @@
 /* global grecaptcha */
 
-import { addNotice, removeNotice, getPaymentAddress } from './api/util'
-import { handlePayment } from './actions'
+import { addNotice, removeNotice } from './api/util'
+import { getPaymentAddress, handlePayment } from './actions'
 import Extensions from './lib/extensions'
 import Extension from './lib/extension'
 

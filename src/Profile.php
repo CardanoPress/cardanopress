@@ -107,9 +107,9 @@ class Profile
         return array_filter((array)$saved);
     }
 
-    public function saveTransaction(string $network, string $address, string $hash): bool
+    public function saveTransaction(string $network, string $action, string $hash): bool
     {
-        $data = compact('network', 'address', 'hash');
+        $data = compact('network', 'action', 'hash');
         $isSaved = add_user_meta($this->user->ID, $this->getMetaKey('transaction'), $data);
 
         return (bool)$isSaved;
