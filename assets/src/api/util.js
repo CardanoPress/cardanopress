@@ -1,5 +1,5 @@
-import { Address, MultiAsset } from '@emurgo/cardano-serialization-lib-browser'
 import { cardanoPress } from './config'
+import { Address } from '@emurgo/cardano-serialization-lib-browser'
 import { Buffer } from 'buffer'
 
 export const hexToBytes = (string) => {
@@ -27,25 +27,6 @@ export const addNotice = (detail) => {
 
 export const removeNotice = (detail) => {
     window.dispatchEvent(new CustomEvent('cardanoPress:removeNotice', { detail }))
-}
-
-/**
- * @param {MultiAsset} multiAsset
- * @returns
- */
-export const multiAssetCount = async (multiAsset) => {
-    if (!multiAsset) return 0
-    let count = 0
-    const policies = multiAsset.keys()
-    for (let j = 0; j < multiAsset.len(); j++) {
-        const policy = policies.get(j)
-        const policyAssets = multiAsset.get(policy)
-        const assetNames = policyAssets.keys()
-        for (let k = 0; k < assetNames.len(); k++) {
-            count++
-        }
-    }
-    return count
 }
 
 export const getProtocol = async (network) => {

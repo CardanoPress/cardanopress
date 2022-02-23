@@ -1,13 +1,12 @@
 import Alpine from 'alpinejs'
-import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 import { handleReconnect, handleSync, logMeIn, logMeOut } from './actions'
-import { NETWORK, cardano, cardanoPress, browser } from './api/config'
+import { NETWORK, cardanoPress, browser } from './api/config'
 import { addNotice, removeNotice, hexToBech32 } from './api/util'
-import * as apiMethods from './api/util'
-import * as walletTransactions from './api/wallet'
-import * as namiHelpers from './lib/namiWallet'
 import Extensions from './lib/extensions'
 import Extension from './lib/extension'
+import * as api from './api/util'
+import * as wallet from './api/wallet'
+import * as csl from '@emurgo/cardano-serialization-lib-browser'
 
 window.Alpine = Alpine
 
@@ -182,10 +181,9 @@ Alpine.data('cardanoPress', () => ({
 
 window.cardanoPress = {
     ...cardanoPress,
-    api: apiMethods,
-    csl: CSL,
-    helpers: namiHelpers,
-    wallet: walletTransactions,
+    api,
+    csl,
+    wallet,
 }
 
 Alpine.start()
