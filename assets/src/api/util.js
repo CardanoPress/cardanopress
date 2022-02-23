@@ -1,6 +1,9 @@
-import { cardanoPress } from './config'
 import { Address } from '@emurgo/cardano-serialization-lib-browser'
 import { Buffer } from 'buffer'
+
+export const adaToLovelace = (value) => {
+    return (parseFloat(value || '1') * 1000000).toFixed()
+}
 
 export const hexToBytes = (string) => {
     return Buffer.from(string, 'hex')
@@ -27,52 +30,4 @@ export const addNotice = (detail) => {
 
 export const removeNotice = (detail) => {
     window.dispatchEvent(new CustomEvent('cardanoPress:removeNotice', { detail }))
-}
-
-export const getProtocol = async (network) => {
-    return await fetch(cardanoPress.ajaxUrl, {
-        method: 'POST',
-        body: new URLSearchParams({
-            _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_protocol_parameters',
-            query_network: network,
-        }),
-    }).then((response) => response.json())
-}
-
-export const getAccount = async (network, rewardAddress) => {
-    return await fetch(cardanoPress.ajaxUrl, {
-        method: 'POST',
-        body: new URLSearchParams({
-            _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_account_details',
-            query_network: network,
-            reward_address: rewardAddress,
-        }),
-    }).then((response) => response.json())
-}
-
-export const getPool = async (network, poolId) => {
-    return await fetch(cardanoPress.ajaxUrl, {
-        method: 'POST',
-        body: new URLSearchParams({
-            _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_pool_details',
-            query_network: network,
-            reward_address: poolId,
-        }),
-    }).then((response) => response.json())
-}
-
-export const saveWalletTx = async (network, txAction, txHash) => {
-    return await fetch(cardanoPress.ajaxUrl, {
-        method: 'POST',
-        body: new URLSearchParams({
-            _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_wallet_transaction',
-            query_network: network,
-            transaction_action: txAction,
-            transaction_hash: txHash,
-        }),
-    }).then((response) => response.json())
 }

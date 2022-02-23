@@ -2,9 +2,12 @@ import Alpine from 'alpinejs'
 import { handleReconnect, handleSync, logMeIn, logMeOut } from './actions'
 import { NETWORK, cardanoPress, browser } from './api/config'
 import { addNotice, removeNotice, hexToBech32 } from './api/util'
+import { delegation as delegationTx } from './api/delegation'
+import { payment as paymentTx } from './api/payment'
 import Extensions from './lib/extensions'
 import Extension from './lib/extension'
-import * as api from './api/util'
+import * as actions from './api/actions'
+import * as util from './api/util'
 import * as wallet from './api/wallet'
 import * as csl from '@emurgo/cardano-serialization-lib-browser'
 
@@ -181,9 +184,17 @@ Alpine.data('cardanoPress', () => ({
 
 window.cardanoPress = {
     ...cardanoPress,
-    api,
+    api: {
+        ...actions,
+        ...util,
+    },
+    browser,
     csl,
-    wallet,
+    wallet: {
+        delegationTx,
+        paymentTx,
+        ...wallet
+    },
 }
 
 Alpine.start()

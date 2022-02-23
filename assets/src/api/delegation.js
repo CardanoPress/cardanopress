@@ -1,10 +1,11 @@
 import { buildTx, prepareTx } from './wallet'
-import { hexToBytes, getProtocol, getAccount } from './util'
+import { hexToBytes } from './util'
+import { getProtocol, getAccount } from './actions'
 import Extensions from '../lib/extensions'
 import Extension from '../lib/extension'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 
-const delegationCertificates = async (stakeKeyHash, accountActive, poolHex) => {
+const createCertificates = async (stakeKeyHash, accountActive, poolHex) => {
     const certificates = CSL.Certificates.new()
 
     if (!accountActive) {
@@ -93,7 +94,7 @@ export const delegation = async (poolId) => {
         const utxos = await Wallet.getUtxos()
         const outputs = await prepareTx(protocolParameters.keyDeposit, changeAddress)
         const stakeKeyHash = await Wallet.getStakeKeyHash()
-        const certificates = await delegationCertificates(stakeKeyHash, accountDetails.active, poolId)
+        const certificates = await createCertificates(stakeKeyHash, accountDetails.active, poolId)
         const transaction = await buildTx(changeAddress, utxos, outputs, protocolParameters, certificates)
 
         return {

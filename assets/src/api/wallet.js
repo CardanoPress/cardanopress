@@ -6,7 +6,7 @@ import * as CSL from '@emurgo/cardano-serialization-lib-browser'
  * @param {CSL.MultiAsset} multiAsset
  * @returns
  */
-export const multiAssetCount = async (multiAsset) => {
+const multiAssetCount = async (multiAsset) => {
     if (!multiAsset) return 0
     let count = 0
     const policies = multiAsset.keys()

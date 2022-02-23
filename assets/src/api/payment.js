@@ -1,5 +1,5 @@
 import { buildTx, prepareTx } from './wallet'
-import { getProtocol } from './util'
+import { getProtocol } from './actions'
 import Extensions from '../lib/extensions'
 import Extension from '../lib/extension'
 

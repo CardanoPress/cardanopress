@@ -1,6 +1,6 @@
 /* global grecaptcha */
 
-import { addNotice, removeNotice } from './api/util'
+import { adaToLovelace, addNotice, removeNotice } from './api/util'
 import { handlePayment } from './actions'
 import Extensions from './lib/extensions'
 import Extension from './lib/extension'
@@ -37,7 +37,7 @@ window.addEventListener('alpine:init', () => {
         },
 
         lovelaceValue(amount) {
-            return (parseFloat(amount || '1') * 1000000).toFixed()
+            return adaToLovelace(amount)
         },
 
         paymentAmount() {
