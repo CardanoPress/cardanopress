@@ -28,6 +28,13 @@ class Application
 
     private function __construct()
     {
+        $this->setup();
+
+        add_action('plugins_loaded', [$this, 'loaded'], -1);
+    }
+
+    private function setup(): void
+    {
         $load_path = plugin_dir_path(CARDANOPRESS_FILE);
 
         $this->templates = new Templates($load_path . 'templates');
@@ -38,8 +45,12 @@ class Application
         new Shortcode();
 
         $this->admin = new Admin();
+    }
 
-        add_action('plugins_loaded', [Enqueue::class, 'init']);
+    public function loaded(): void
+    {
+        Enqueue::init();
+        do_action('cardanopress_loaded');
     }
 
     public function option(string $key)
