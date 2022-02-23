@@ -14,14 +14,27 @@ Checkout our video about the first integration with the Ronin Universe project.
 - Assign policy IDs to the website to restrict access by those policy IDs.
 - Stake pool delegation
 - CNFT Minting page for drops, not vending machine, just the frontend to handle a mint with antibot protection.
-
+- Flint Wallet, Typhon, Nami, Yoroi dApp Connector and CCVault are now all supported.
+- Accepting payments
+- Permissions and roles based on your stake delegation
+- Permissions and roles base on NFT in your wallet giving user access to pay wall content
 
 ## Roadmap
 
-- Yoroi Wallet integration
-- Accepting of payments
 - User profiles and Dashboards
-- Artist collection sales
+- Sexy theme and template for dashboard
+
+## Installation
+
+Install the plugin as you would any other WordPress plugin.
+
+The Emurgo Serialization lib will only work with if the file type is enabled on your server. For Apache based servers, please add this MIME Type to your config or htaccess file:
+
+AddType application/wasm .wasm
+
+That will allow for the .wasm files to load on your server.
+
+Without this the server will not be able to load the required libraries to load the various wallets to connect to the website.
 
 ## Feature Requests
 
