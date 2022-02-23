@@ -20,7 +20,8 @@ class WalletAction
         add_action('wp_ajax_cardanopress_sync_assets', [$this, 'syncUserAssets']);
         add_action('wp_ajax_cardanopress_user_change', [$this, 'logoutCurrentUser']);
         add_action('wp_ajax_cardanopress_protocol_parameters', [$this, 'getProtocolParameters']);
-        add_action('wp_ajax_cardanopress_pool_delegation', [$this, 'getDelegationData']);
+        add_action('wp_ajax_cardanopress_account_details', [$this, 'getAccountDetails']);
+        add_action('wp_ajax_cardanopress_delegation_data', [$this, 'getDelegationData']);
         add_action('wp_ajax_cardanopress_wallet_transaction', [$this, 'saveWalletTransaction']);
         add_action('wp_ajax_nopriv_cardanopress_payment_address', [$this, 'getPaymentAddress']);
         add_action('wp_ajax_cardanopress_payment_address', [$this, 'getPaymentAddress']);
@@ -135,30 +136,35 @@ class WalletAction
         wp_send_json_success($response);
     }
 
-    public function getDelegationData(): void
+    public function getAccountDetails(): void
     {
         check_ajax_referer('cardanopress-actions');
 
         $network = $_POST['query_network'];
         $blockfrost = new Blockfrost($network);
-        $account = $blockfrost->getAccountDetails($_POST['reward_address']);
+        $response = $blockfrost->getAccountDetails($_POST['reward_address']);
 
-        if (empty($account)) {
+        if (empty($response)) {
             wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
         }
+
+        wp_send_json_success($response);
+    }
+
+    public function getDelegationData(): void
+    {
+        check_ajax_referer('cardanopress-actions');
 
         $app = Application::instance();
-        $poolIds = $app->option('delegation_pool_id');
-        $pool = $blockfrost->getPoolDetails($poolIds[$network]);
+        $userProfile = new Profile(wp_get_current_user());
+        $poolData = $app->option('delegation_pool_data');
+        $response = $poolData[$userProfile->connectedNetwork()]['hex'] ?? '';
 
-        if (empty($pool)) {
-            wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
+        if (empty($response)) {
+            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
         }
 
-        wp_send_json_success([
-            'active' => $account['active'],
-            'hex' => $pool['hex'],
-        ]);
+        wp_send_json_success($response);
     }
 
     public function saveWalletTransaction(): void

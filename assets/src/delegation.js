@@ -1,5 +1,5 @@
 import { addNotice, removeNotice } from './api/util'
-import { handleDelegation } from './lib/delegation'
+import { handleDelegation } from './actions'
 
 window.addEventListener('alpine:init', () => {
     const Alpine = window.Alpine || {}

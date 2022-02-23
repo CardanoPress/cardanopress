@@ -1,3 +1,7 @@
+import { saveWalletTx } from './api/util'
+import { payment } from './api/payment'
+import { delegation } from './api/delegation'
+import { cardanoPress } from './api/config'
 import Extension from './lib/extension'
 
 export const handleReconnect = async (walletObject) => {
@@ -61,4 +65,41 @@ export const handleSync = async () => {
             action: 'cardanopress_sync_assets',
         }),
     }).then((response) => response.json())
+}
+
+export const handlePayment = async (lovelaceValue, payee) => {
+    const result = await payment(payee, lovelaceValue)
+
+    if (result.success) {
+        return await saveWalletTx(result.data.network, payee, result.data.transaction)
+    }
+
+    return result
+}
+
+const getDelegation = async () => {
+    return await fetch(cardanoPress.ajaxUrl, {
+        method: 'POST',
+        body: new URLSearchParams({
+            _wpnonce: cardanoPress._nonce,
+            action: 'cardanopress_delegation_data',
+        }),
+    }).then((response) => response.json())
+}
+
+export const handleDelegation = async () => {
+    const response = await getDelegation()
+
+    if (!response.success) {
+        return response
+    }
+
+    const poolId = response.data
+    const result = await delegation(poolId)
+
+    if (result.success) {
+        return await saveWalletTx(result.data.network, poolId, result.data.transaction)
+    }
+
+    return result
 }

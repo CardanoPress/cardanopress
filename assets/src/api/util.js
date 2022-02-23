@@ -40,12 +40,12 @@ export const getProtocol = async (network) => {
     }).then((response) => response.json())
 }
 
-export const getDelegation = async (network, rewardAddress) => {
+export const getAccount = async (network, rewardAddress) => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
             _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_pool_delegation',
+            action: 'cardanopress_account_details',
             query_network: network,
             reward_address: rewardAddress,
         }),

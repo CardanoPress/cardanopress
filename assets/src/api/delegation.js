@@ -1,8 +1,8 @@
-import { buildTx, prepareTx } from '../api/wallet'
+import { buildTx, prepareTx } from './wallet'
+import { hexToBytes, getProtocol, getAccount, saveWalletTx } from './util'
+import Extensions from '../lib/extensions'
+import Extension from '../lib/extension'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
-import { hexToBytes, getDelegation, getProtocol, saveWalletTx } from '../api/util'
-import Extensions from './extensions'
-import Extension from './extension'
 
 const delegationCertificates = async (stakeKeyHash, accountActive, poolHex) => {
     const certificates = CSL.Certificates.new()
@@ -39,35 +39,26 @@ const delegationCertificates = async (stakeKeyHash, accountActive, poolHex) => {
     return certificates
 }
 
-export const handleDelegation = async () => {
+export const delegation = async (poolId) => {
     const connectedExtension = localStorage.getItem('_x_connectedExtension')
     const walletObject = await Extensions.getWallet(connectedExtension)
     const Wallet = new Extension(walletObject)
     const network = await Wallet.getNetwork()
-    const responseProtocol = await getProtocol(network)
-
-    if (!responseProtocol.success) {
-        return responseProtocol
-    }
-
-    const protocolParameters = responseProtocol.data
-    const rewardAddress = await Wallet.getRewardAddress()
-    const responseDelegation = await getDelegation(network, rewardAddress)
-
-    if (!responseDelegation.success) {
-        return responseDelegation
-    }
-
-    const delegationDetails = responseDelegation.data
 
     if ('Typhon' === connectedExtension) {
         try {
             const response = await walletObject.delegationTransaction({
-                poolId: delegationDetails.hex
+                poolId,
             })
 
             if (response.status) {
-                return await saveWalletTx(network, await Wallet.getChangeAddress(), response.data.transactionId)
+                return {
+                    success: true,
+                    data: {
+                        network,
+                        transaction: response.data.transactionId,
+                    },
+                }
             }
 
             return {
@@ -82,16 +73,36 @@ export const handleDelegation = async () => {
         }
     }
 
-    const utxos = await Wallet.getUtxos()
-    const changeAddress = await Wallet.getChangeAddress()
-    const certificates = await delegationCertificates(await Wallet.getStakeKeyHash(), delegationDetails.active, delegationDetails.hex)
+    const responseProtocol = await getProtocol(network)
+
+    if (!responseProtocol.success) {
+        return responseProtocol
+    }
+
+    const rewardAddress = await Wallet.getRewardAddress()
+    const responseAccount = await getAccount(network, rewardAddress)
+
+    if (!responseAccount.success) {
+        return responseAccount
+    }
 
     try {
+        const accountDetails = responseAccount.data
+        const protocolParameters = responseProtocol.data
+        const changeAddress = await Wallet.getChangeAddress()
+        const utxos = await Wallet.getUtxos()
         const outputs = await prepareTx(protocolParameters.keyDeposit, changeAddress)
+        const stakeKeyHash = await Wallet.getStakeKeyHash()
+        const certificates = await delegationCertificates(stakeKeyHash, accountDetails.active, poolId)
         const transaction = await buildTx(changeAddress, utxos, outputs, protocolParameters, certificates)
-        const txHash = await Wallet.signAndSubmit(transaction)
 
-        return await saveWalletTx(network, changeAddress, txHash)
+        return {
+            success: true,
+            data: {
+                network,
+                transaction: await Wallet.signAndSubmit(transaction),
+            },
+        }
     } catch (error) {
         return {
             success: false,
