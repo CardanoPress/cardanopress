@@ -1,6 +1,6 @@
 import Alpine from 'alpinejs'
 import { handleReconnect, handleSync, logMeIn, logMeOut } from './actions'
-import { NETWORK, cardanoPress, browser } from './api/config'
+import { NETWORK, cardanoPress, toPropertyName, supportedWallets, browser } from './api/config'
 import { addNotice, removeNotice, hexToBech32 } from './api/util'
 import { delegation as delegationTx } from './api/delegation'
 import { payment as paymentTx } from './api/payment'
@@ -19,21 +19,16 @@ Alpine.data('cardanoPress', () => ({
     isProcessing: false,
     showModal: false,
     openDropdown: false,
-    hasNami: false,
-    hasCcvault: false,
-    hasYoroi: false,
-    hasFlint: false,
-    hasTyphon: false,
     connectedExtension: '',
 
-    has(type) {
-        const method = `has${type.charAt(0).toUpperCase() + type.slice(1)}`
+    has(wallet) {
+        const method = `has${toPropertyName(wallet)}`
 
         return this[method]
     },
 
-    isDisabled(type = null) {
-        return !!(!this.isAvailable || this.isProcessing || (null !== type && !this.has(type)))
+    isDisabled(wallet = null) {
+        return !!(!this.isAvailable || this.isProcessing || (null !== wallet && !this.has(wallet)))
     },
 
     walletAvailable(type) {
@@ -41,12 +36,15 @@ Alpine.data('cardanoPress', () => ({
     },
 
     async init() {
+        supportedWallets.forEach(wallet => {
+            this[`has${toPropertyName(wallet)}`] = false
+        })
+
         this.$watch('showModal', () => {
-            this.hasNami = browser.hasNami()
-            this.hasCcvault = browser.hasCcvault()
-            this.hasYoroi = browser.hasYoroi()
-            this.hasFlint = browser.hasFlint()
-            this.hasTyphon = browser.hasTyphon()
+            supportedWallets.forEach(wallet => {
+                const method = `has${toPropertyName(wallet)}`
+                this[method] = browser[method]()
+            })
         })
 
         if (cardanoPress.logged) {

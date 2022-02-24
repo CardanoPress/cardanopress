@@ -40,20 +40,17 @@ export const cardanoPress = window.cardanoPress || {
     logged: '',
 }
 
-export const browser = {
-    hasNami() {
-        return !!window.cardano?.nami;
-    },
-    hasCcvault() {
-        return !!window.cardano?.ccvault;
-    },
-    hasYoroi() {
-        return !!window.cardano?.yoroi;
-    },
-    hasFlint() {
-        return !!window.cardano?.flint;
-    },
-    hasTyphon() {
-        return !!window.cardano?.typhon;
-    },
-}
+export const toPropertyName = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+
+export const supportedWallets = [
+    'Nami',
+    'ccvault',
+    'Yoroi',
+    'Flint',
+    'Typhon',
+]
+
+export const browser = supportedWallets.reduce((a, v) => ({
+    ...a,
+    [`has${toPropertyName(v)}`]: () => !!window.cardano?.[v.toLowerCase()],
+}), {})
