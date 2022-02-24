@@ -36,6 +36,10 @@ Alpine.data('cardanoPress', () => ({
         return !!(!this.isAvailable || this.isProcessing || (null !== type && !this.has(type)))
     },
 
+    walletAvailable(type) {
+        return this.isAvailable && this.has(type)
+    },
+
     async init() {
         this.$watch('showModal', () => {
             this.hasNami = browser.hasNami()
@@ -64,6 +68,14 @@ Alpine.data('cardanoPress', () => ({
 
             wallet.experimental.on('networkChange', (networkId) => this.handleLogout(networkId, 0))
             wallet.experimental.on('accountChange', (addresses) => this.handleLogout(-1, addresses))
+        }
+    },
+
+    async walletConnect(type) {
+        if (this.isConnected) {
+            this.handleReconnect(type)
+        } else {
+            this.handleConnect(type)
         }
     },
 
@@ -104,6 +116,8 @@ Alpine.data('cardanoPress', () => ({
             this.showModal = false
             this.isConnected = true
             cardanoPress.logged = true
+            this.connectedExtension = wallet.type
+            window.cardanoPress.extension = this.connectedExtension
         } else {
             addNotice({ type: 'error', text: response.data.message })
         }
