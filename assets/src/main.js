@@ -208,8 +208,16 @@ window.cardanoPress = {
         ...actions,
         ...util,
     },
-    browser,
+    browser: {
+        supports: supportedWallets,
+        ...browser,
+        ...supportedWallets.reduce((a, v) => ({
+            ...a,
+            [`get${toPropertyName(v)}`]: async () => new Extension(await Extensions.getWallet(v)),
+        }), {})
+    },
     csl,
+    extension: '',
     wallet: {
         delegationTx,
         paymentTx,

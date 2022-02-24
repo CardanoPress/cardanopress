@@ -45,18 +45,6 @@ class Extension {
         return hexToBech32(changeAddress)
     }
 
-    getUsedAddresses = async () => {
-        const usedAddresses = await this.cardano.getUsedAddresses()
-
-        return usedAddresses.map((address) => hexToBech32(address))
-    }
-
-    getUnusedAddresses = async () => {
-        const unusedAddresses = await this.cardano.getUnusedAddresses()
-
-        return unusedAddresses.map((address) => hexToBech32(address))
-    }
-
     getRewardAddress = async () => {
         if ('Typhon' === this.cardano.type) {
             const response = await this.cardano.getRewardAddress()
@@ -70,6 +58,10 @@ class Extension {
     }
 
     getUtxos = async () => {
+        if ('Typhon' === this.cardano.type) {
+            return []
+        }
+
         const rawUtxos = await this.cardano.getUtxos()
 
         return rawUtxos.map((utxo) => CSL.TransactionUnspentOutput.from_bytes(hexToBytes(utxo)))
@@ -84,6 +76,10 @@ class Extension {
     }
 
     signAndSubmit = async (transaction) => {
+        if ('Typhon' === this.cardano.type) {
+            throw 'No implementation from the extension'
+        }
+
         try {
             const witnesses = await this.cardano.signTx(hexToBytes(transaction.to_bytes()).toString('hex'))
             const signedTx = CSL.Transaction.new(
