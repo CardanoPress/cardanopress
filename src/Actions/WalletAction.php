@@ -16,7 +16,8 @@ class WalletAction
     public function __construct()
     {
         add_action('wp_ajax_nopriv_cardanopress_user_account', [$this, 'initializeUserAccount']);
-        add_action('wp_ajax_cardanopress_reconnect_account', [$this, 'reconnectUserWallet']);
+        add_action('wp_ajax_cardanopress_user_account', [$this, 'connectUserWallet']);
+        add_action('wp_ajax_cardanopress_reconnect_account', [$this, 'connectUserWallet']);
         add_action('wp_ajax_cardanopress_sync_assets', [$this, 'syncUserAssets']);
         add_action('wp_ajax_cardanopress_user_change', [$this, 'logoutCurrentUser']);
         add_action('wp_ajax_cardanopress_protocol_parameters', [$this, 'getProtocolParameters']);
@@ -70,7 +71,7 @@ class WalletAction
         ]);
     }
 
-    public function reconnectUserWallet(): void
+    public function connectUserWallet(): void
     {
         check_ajax_referer('cardanopress-actions');
 
@@ -84,7 +85,10 @@ class WalletAction
         $userProfile->saveWallet($_POST['wallet_address']);
         $userProfile->saveStake($_POST['stake_address']);
 
-        wp_send_json_success();
+        wp_send_json_success([
+            'message' => 'Successfully connected',
+            'reload' => false,
+        ]);
     }
 
     public function syncUserAssets(): void

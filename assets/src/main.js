@@ -97,6 +97,9 @@ Alpine.data('cardanoPress', () => ({
                 }, 500)
             }
 
+            localStorage.setItem('_x_isNotified', 'true')
+
+            this.showModal = false
             this.isConnected = true
             cardanoPress.logged = true
         } else {
