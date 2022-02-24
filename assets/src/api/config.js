@@ -42,15 +42,15 @@ export const cardanoPress = window.cardanoPress || {
 
 export const toPropertyName = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
-export const supportedWallets = [
+export const supportedWallets = Object.freeze([
     'Nami',
     'ccvault',
     'Yoroi',
     'Flint',
     'Typhon',
-]
+])
 
-export const browser = supportedWallets.reduce((a, v) => ({
+export const browser = Object.freeze(supportedWallets.reduce((a, v) => ({
     ...a,
     [`has${toPropertyName(v)}`]: () => !!window.cardano?.[v.toLowerCase()],
-}), {})
+}), {}))

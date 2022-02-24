@@ -120,7 +120,7 @@ class Extensions {
 
         object.type = type
 
-        return object
+        return Object.freeze(object)
     }
 }
 
