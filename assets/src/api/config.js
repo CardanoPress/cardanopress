@@ -48,6 +48,7 @@ export const supportedWallets = Object.freeze([
     'Yoroi',
     'Flint',
     'Typhon',
+    'GeroWallet',
 ])
 
 export const browser = Object.freeze(supportedWallets.reduce((a, v) => ({
