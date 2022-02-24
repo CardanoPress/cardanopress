@@ -1,126 +1,42 @@
-import { browser } from '../api/config'
+import { toPropertyName, supportedWallets, browser } from '../api/config'
 
 class Extensions {
-    static namiObject = undefined
-    static ccvaultObject = undefined
-    static yoroiObject = undefined
-    static flintObject = undefined
-    static typhonObject = undefined
-
-    static async getNami() {
-        if (! browser.hasNami()) {
-            return undefined
-        }
-
-        if (undefined === this.namiObject) {
-            try {
-                this.namiObject = await window.cardano.nami.enable();
-            } catch {
-                this.namiObject = undefined;
-            }
-        }
-
-        return this.namiObject;
-    }
-
-    static async getCcvault() {
-        if (! browser.hasCcvault()) {
-            return undefined
-        }
-
-        if (undefined === this.ccvaultObject) {
-            try {
-                this.ccvaultObject = await window.cardano.ccvault.enable();
-            } catch {
-                this.ccvaultObject = undefined;
-            }
-        }
-
-        return this.ccvaultObject;
-    }
-
-    static async getYoroi() {
-        if (! browser.hasYoroi()) {
-            return undefined
-        }
-
-        if (undefined === this.yoroiObject) {
-            try {
-                this.yoroiObject = await window.cardano.yoroi.enable();
-            } catch {
-                this.yoroiObject = undefined;
-            }
-        }
-
-        return this.yoroiObject;
-    }
-
-    static async getFlint() {
-        if (! browser.hasFlint()) {
-            return undefined
-        }
-
-        if (undefined === this.flintObject) {
-            try {
-                this.flintObject = await window.cardano.flint.enable();
-            } catch {
-                this.flintObject = undefined;
-            }
-        }
-
-        return this.flintObject;
-    }
-
-    static async getTyphon() {
-        if (! browser.hasTyphon()) {
-            return undefined
-        }
-
-        if (undefined === this.typhonObject) {
-            const response = await window.cardano.typhon.enable();
-
-            if (response.status === true) {
-                this.typhonObject = await window.cardano.typhon;
-            } else {
-                this.typhonObject = undefined;
-            }
-        }
-
-        return this.typhonObject;
-    }
-
     static async getWallet(type) {
-        let object
-
-        switch (type) {
-            case 'Typhon':
-                object = await this.getTyphon()
-                break
-            case 'Flint':
-                object = await this.getFlint()
-                break
-            case 'Yoroi':
-                object = await this.getYoroi()
-                break
-            case 'ccvault':
-                object = await this.getCcvault()
-                break
-            case 'Nami':
-            default:
-                object = await this.getNami()
-        }
-
-        if (undefined === object) {
+        if (! supportedWallets.includes(type)) {
             return undefined
         }
 
-        if ('Yoroi' === type) {
-            object = Object.create(object)
+        const method = `has${toPropertyName(type)}`
+        const wallet =  type.toLowerCase()
+        const object = `${wallet}Object`
+
+        if (! browser[method]()) {
+            return undefined
         }
 
-        object.type = type
+        if (undefined === this[object]) {
+            try {
+                const response = await window.cardano[wallet].enable();
 
-        return Object.freeze(object)
+                if ('Typhon' === type) {
+                    if (response.status === true) {
+                        this[object] = await window.cardano[wallet];
+                    }
+                } else {
+                    this[object] = response
+                }
+
+                if ('Yoroi' === type) {
+                    this[object] = Object.create(this[object])
+                }
+
+                this[object].type = type
+            } catch {
+                this[object] = undefined;
+            }
+        }
+
+        return Object.freeze(this[object]);
     }
 }
 
