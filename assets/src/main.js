@@ -20,6 +20,7 @@ Alpine.data('cardanoPress', () => ({
     showModal: false,
     openDropdown: false,
     connectedExtension: '',
+    supportedWallets,
 
     has(wallet) {
         const method = `has${toPropertyName(wallet)}`
