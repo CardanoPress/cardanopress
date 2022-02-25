@@ -26,13 +26,7 @@ class Extensions {
                     this[object] = response
                 }
 
-                if ('Yoroi' === type) {
-                    this[object] = Object.create(this[object])
-                }
-
-                this[object].type = type
-
-                this[object] = new Extension(this[object])
+                this[object] = new Extension(type, this[object])
             } catch {
                 this[object] = undefined;
             }

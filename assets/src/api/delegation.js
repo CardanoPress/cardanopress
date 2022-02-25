@@ -53,7 +53,7 @@ export const delegation = async (poolId) => {
 
     const network = await Wallet.getNetwork()
 
-    if ('Typhon' === Wallet.cardano.type) {
+    if ('Typhon' === Wallet.type) {
         try {
             const response = await Wallet.cardano.delegationTransaction({
                 poolId,

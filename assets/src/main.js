@@ -115,7 +115,7 @@ Alpine.data('cardanoPress', () => ({
         if (response.success) {
             removeNotice('loginConnect')
             addNotice({ type: 'success', text: response.data.message })
-            setConnectedExtension(wallet.cardano.type)
+            setConnectedExtension(wallet.type)
 
             if (response.data.reload) {
                 return setTimeout(() => {
@@ -128,7 +128,7 @@ Alpine.data('cardanoPress', () => ({
             this.showModal = false
             this.isConnected = true
             cardanoPress.logged = true
-            this.connectedExtension = wallet.cardano.type
+            this.connectedExtension = wallet.type
             window.cardanoPress.extension = this.connectedExtension
         } else {
             addNotice({ type: 'error', text: response.data.message })
@@ -182,7 +182,7 @@ Alpine.data('cardanoPress', () => ({
 
             if (response.success) {
                 addNotice({ type: 'success', text: 'Wallet reconnected' })
-                setConnectedExtension(wallet.cardano.type)
+                setConnectedExtension(wallet.type)
 
                 return setTimeout(() => {
                     window.location.reload()

@@ -16,7 +16,7 @@ export const payment = async (address, amount) => {
 
     const network = await Wallet.getNetwork()
 
-    if ('Typhon' === Wallet.cardano.type) {
+    if ('Typhon' === Wallet.type) {
         try {
             const response = await Wallet.cardano.paymentTransaction({
                 outputs: [{

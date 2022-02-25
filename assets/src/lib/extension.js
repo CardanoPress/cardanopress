@@ -3,18 +3,19 @@ import * as CSL from '@emurgo/cardano-serialization-lib-browser'
 import { hexToBech32, hexToBytes } from '../api/util'
 
 class Extension {
-    constructor(wallet) {
-        this.cardano = wallet
+    constructor(type, cardano) {
+        this.type = type
+        this.cardano = cardano
     }
 
     getNetwork = async () => {
-        if ('Yoroi' === this.cardano.type) {
+        if ('Yoroi' === this.type) {
             return NETWORK[1]
         }
 
         let id = await this.cardano.getNetworkId()
 
-        if ('Typhon' === this.cardano.type) {
+        if ('Typhon' === this.type) {
             id = id.data
         }
 
@@ -22,7 +23,7 @@ class Extension {
     }
 
     getBalance = async () => {
-        if ('Typhon' === this.cardano.type) {
+        if ('Typhon' === this.type) {
             const response = await this.cardano.getBalance()
 
             return response.data.ada
@@ -34,7 +35,7 @@ class Extension {
     }
 
     getChangeAddress = async () => {
-        if ('Typhon' === this.cardano.type) {
+        if ('Typhon' === this.type) {
             const response = await this.cardano.getAddress()
 
             return response.data
@@ -46,7 +47,7 @@ class Extension {
     }
 
     getRewardAddress = async () => {
-        if ('Typhon' === this.cardano.type) {
+        if ('Typhon' === this.type) {
             const response = await this.cardano.getRewardAddress()
 
             return response.data
@@ -58,7 +59,7 @@ class Extension {
     }
 
     getUtxos = async () => {
-        if ('Typhon' === this.cardano.type) {
+        if ('Typhon' === this.type) {
             return []
         }
 
@@ -76,7 +77,7 @@ class Extension {
     }
 
     signAndSubmit = async (transaction) => {
-        if ('Typhon' === this.cardano.type) {
+        if ('Typhon' === this.type) {
             throw 'No implementation from the extension'
         }
 
