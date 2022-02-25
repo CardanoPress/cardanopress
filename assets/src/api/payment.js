@@ -37,7 +37,7 @@ export const payment = async (address, amount) => {
 
             return {
                 success: false,
-                data: response.reason,
+                data: response?.error ?? response.reason,
             }
         } catch (error) {
             return {

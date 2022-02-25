@@ -70,7 +70,7 @@ export const delegation = async (poolId) => {
 
             return {
                 success: false,
-                data: response.reason,
+                data: response?.error ?? response.reason,
             }
         } catch (error) {
             return {
