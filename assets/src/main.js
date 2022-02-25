@@ -4,6 +4,7 @@ import {
     browser,
     cardanoPress,
     getConnectedExtension,
+    getConnectedWallet,
     isNotified,
     NETWORK,
     setConnectedExtension,
@@ -71,7 +72,7 @@ Alpine.data('cardanoPress', () => ({
         }
 
         if (this.isAvailable && 'Nami' === this.connectedExtension) {
-            const wallet = await Extensions.getWallet(this.connectedExtension)
+            const wallet = await getConnectedWallet()
 
             wallet.experimental.on('networkChange', (networkId) => this.handleLogout(networkId, 0))
             wallet.experimental.on('accountChange', (addresses) => this.handleLogout(-1, addresses))
@@ -141,7 +142,7 @@ Alpine.data('cardanoPress', () => ({
         }
 
         try {
-            const walletObject = await Extensions.getWallet(getConnectedExtension())
+            const walletObject = await getConnectedWallet()
             const Wallet = new Extension(walletObject)
             const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
             const address = 0 !== addresses ? hexToBech32(addresses[0]) : await Wallet.getChangeAddress()

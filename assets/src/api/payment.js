@@ -1,15 +1,13 @@
 import { buildTx, prepareTx } from './wallet'
-import { getConnectedExtension } from './config'
 import { getProtocol } from './actions'
-import Extensions from '../lib/extensions'
 import Extension from '../lib/extension'
+import { getConnectedWallet } from './config'
 
 export const payment = async (address, amount) => {
-    const connectedExtension = getConnectedExtension()
     let walletObject
 
     try {
-        walletObject = await Extensions.getWallet(connectedExtension)
+        walletObject = await getConnectedWallet()
     } catch (error) {
         return {
             success: false,
@@ -20,7 +18,7 @@ export const payment = async (address, amount) => {
     const Wallet = new Extension(walletObject)
     const network = await Wallet.getNetwork()
 
-    if ('Typhon' === connectedExtension) {
+    if ('Typhon' === walletObject.type) {
         try {
             const response = await walletObject.paymentTransaction({
                 outputs: [{

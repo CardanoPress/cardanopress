@@ -1,9 +1,8 @@
 /* global grecaptcha */
 
-import { getConnectedExtension } from './api/config'
+import { getConnectedExtension, getConnectedWallet } from './api/config'
 import { adaToLovelace, addNotice, removeNotice } from './api/util'
 import { handlePayment } from './actions'
-import Extensions from './lib/extensions'
 import Extension from './lib/extension'
 
 window.addEventListener('alpine:init', () => {
@@ -19,11 +18,9 @@ window.addEventListener('alpine:init', () => {
 
         async init() {
             window.addEventListener('load', async () => {
-                const connectedExtension = getConnectedExtension()
-
-                if (connectedExtension) {
+                if (getConnectedExtension()) {
                     try {
-                        const walletObject = await Extensions.getWallet(connectedExtension)
+                        const walletObject = await getConnectedWallet()
                         const Wallet = new Extension(walletObject)
                         this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
                     } catch (error) {

@@ -1,10 +1,9 @@
 import { buildTx, prepareTx } from './wallet'
 import { hexToBytes } from './util'
-import { getConnectedExtension } from './config'
 import { getProtocol, getAccount } from './actions'
-import Extensions from '../lib/extensions'
 import Extension from '../lib/extension'
 import * as CSL from '@emurgo/cardano-serialization-lib-browser'
+import { getConnectedWallet } from './config'
 
 const createCertificates = async (stakeKeyHash, accountActive, poolHex) => {
     const certificates = CSL.Certificates.new()
@@ -42,11 +41,10 @@ const createCertificates = async (stakeKeyHash, accountActive, poolHex) => {
 }
 
 export const delegation = async (poolId) => {
-    const connectedExtension = getConnectedExtension()
     let walletObject
 
     try {
-        walletObject = await Extensions.getWallet(connectedExtension)
+        walletObject = await getConnectedWallet()
     } catch (error) {
         return {
             success: false,
@@ -57,7 +55,7 @@ export const delegation = async (poolId) => {
     const Wallet = new Extension(walletObject)
     const network = await Wallet.getNetwork()
 
-    if ('Typhon' === connectedExtension) {
+    if ('Typhon' === walletObject.type) {
         try {
             const response = await walletObject.delegationTransaction({
                 poolId,

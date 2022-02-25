@@ -1,3 +1,5 @@
+import Extensions from '../lib/extensions'
+
 export const NETWORK = {
     0: 'testnet',
     1: 'mainnet',
@@ -60,3 +62,12 @@ export const getConnectedExtension = () => localStorage.getItem('_x_connectedExt
 export const setConnectedExtension = value => localStorage.setItem('_x_connectedExtension', value)
 export const isNotified = () => localStorage.getItem('_x_isNotified') || 'false'
 export const setNotified = value => localStorage.setItem('_x_isNotified', value)
+export const getConnectedWallet = async () => {
+    const connectedExtension = getConnectedExtension()
+
+    if (!connectedExtension) {
+        throw `Not connected to a wallet`
+    }
+
+    return await Extensions.getWallet(connectedExtension)
+}
