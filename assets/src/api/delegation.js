@@ -1,5 +1,6 @@
 import { buildTx, prepareTx } from './wallet'
 import { hexToBytes } from './util'
+import { getConnectedExtension } from './config'
 import { getProtocol, getAccount } from './actions'
 import Extensions from '../lib/extensions'
 import Extension from '../lib/extension'
@@ -41,7 +42,7 @@ const createCertificates = async (stakeKeyHash, accountActive, poolHex) => {
 }
 
 export const delegation = async (poolId) => {
-    const connectedExtension = localStorage.getItem('_x_connectedExtension')
+    const connectedExtension = getConnectedExtension()
     let walletObject
 
     try {

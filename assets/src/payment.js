@@ -1,5 +1,6 @@
 /* global grecaptcha */
 
+import { getConnectedExtension } from './api/config'
 import { adaToLovelace, addNotice, removeNotice } from './api/util'
 import { getPaymentAddress, handlePayment } from './actions'
 import Extensions from './lib/extensions'
@@ -22,7 +23,7 @@ window.addEventListener('alpine:init', () => {
             this.payAmount = parseFloat(this.$root.dataset.amount)
 
             window.addEventListener('load', async () => {
-                const connectedExtension = localStorage.getItem('_x_connectedExtension')
+                const connectedExtension = getConnectedExtension()
 
                 if (connectedExtension) {
                     try {

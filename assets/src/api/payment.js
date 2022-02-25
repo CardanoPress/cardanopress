@@ -1,10 +1,11 @@
 import { buildTx, prepareTx } from './wallet'
+import { getConnectedExtension } from './config'
 import { getProtocol } from './actions'
 import Extensions from '../lib/extensions'
 import Extension from '../lib/extension'
 
 export const payment = async (address, amount) => {
-    const connectedExtension = localStorage.getItem('_x_connectedExtension')
+    const connectedExtension = getConnectedExtension()
     let walletObject
 
     try {
