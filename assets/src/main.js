@@ -80,17 +80,22 @@ Alpine.data('cardanoPress', () => ({
 
     async handleConnect(type) {
         this.isProcessing = true
-        const wallet = await Extensions.getWallet(type)
 
-        if (undefined !== wallet) {
-            addNotice({
-                id: 'loginConnect',
-                type: 'info',
-                text: 'Connecting...',
-            })
-            await this.handleLogin(wallet)
-        } else {
-            addNotice({ type: 'error', text: 'Unable to connect to wallet' })
+        try {
+            const wallet = await Extensions.getWallet(type)
+
+            if (undefined !== wallet) {
+                addNotice({
+                    id: 'loginConnect',
+                    type: 'info',
+                    text: 'Connecting...',
+                })
+                await this.handleLogin(wallet)
+            } else {
+                addNotice({ type: 'error', text: 'Unable to connect to wallet' })
+            }
+        } catch (error) {
+            addNotice({ type: 'error', text: error })
         }
 
         this.isProcessing = false
@@ -127,50 +132,59 @@ Alpine.data('cardanoPress', () => ({
             return
         }
 
-        const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedExtension'))
-        const Wallet = new Extension(walletObject)
-        const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
-        const address = 0 !== addresses ? hexToBech32(addresses[0]) : await Wallet.getChangeAddress()
-        const response = await logMeOut(network, address)
+        try {
+            const walletObject = await Extensions.getWallet(localStorage.getItem('_x_connectedExtension'))
+            const Wallet = new Extension(walletObject)
+            const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
+            const address = 0 !== addresses ? hexToBech32(addresses[0]) : await Wallet.getChangeAddress()
+            const response = await logMeOut(network, address)
 
-        if (response.success) {
-            addNotice({ type: 'success', text: response.data.message })
-            localStorage.removeItem('_x_isNotified')
-            localStorage.removeItem('_x_connectedExtension')
+            if (response.success) {
+                addNotice({ type: 'success', text: response.data.message })
+                localStorage.removeItem('_x_isNotified')
+                localStorage.removeItem('_x_connectedExtension')
 
-            if (response.data.reload) {
-                return setTimeout(() => {
-                    window.location.reload()
-                }, 500)
+                if (response.data.reload) {
+                    return setTimeout(() => {
+                        window.location.reload()
+                    }, 500)
+                }
+            } else {
+                addNotice({ type: 'error', text: response.data.message })
             }
-        } else {
-            addNotice({ type: 'error', text: response.data.message })
+        } catch (error) {
+            addNotice({ type: 'error', text: error })
         }
     },
 
     async handleReconnect(type) {
-        const wallet = await Extensions.getWallet(type)
-
-        addNotice({
-            id: 'reconnect',
-            type: 'info',
-            text: 'Reconnecting...',
-        })
-
         this.isProcessing = true
-        const response = await handleReconnect(wallet)
 
-        removeNotice('reconnect')
+        try {
+            const wallet = await Extensions.getWallet(type)
 
-        if (response.success) {
-            addNotice({ type: 'success', text: 'Wallet reconnected' })
-            localStorage.setItem('_x_connectedExtension', wallet.type)
+            addNotice({
+                id: 'reconnect',
+                type: 'info',
+                text: 'Reconnecting...',
+            })
 
-            return setTimeout(() => {
-                window.location.reload()
-            }, 500)
-        } else {
-            addNotice({ type: 'error', text: response.data })
+            const response = await handleReconnect(wallet)
+
+            removeNotice('reconnect')
+
+            if (response.success) {
+                addNotice({ type: 'success', text: 'Wallet reconnected' })
+                localStorage.setItem('_x_connectedExtension', wallet.type)
+
+                return setTimeout(() => {
+                    window.location.reload()
+                }, 500)
+            } else {
+                addNotice({ type: 'error', text: response.data })
+            }
+        } catch (error) {
+            addNotice({ type: 'error', text: error })
         }
 
         this.isProcessing = false

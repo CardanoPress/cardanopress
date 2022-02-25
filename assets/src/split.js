@@ -21,9 +21,13 @@ window.addEventListener('alpine:init', () => {
                 const connectedExtension = localStorage.getItem('_x_connectedExtension')
 
                 if (connectedExtension) {
-                    const walletObject = await Extensions.getWallet(connectedExtension)
-                    const Wallet = new Extension(walletObject)
-                    this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
+                    try {
+                        const walletObject = await Extensions.getWallet(connectedExtension)
+                        const Wallet = new Extension(walletObject)
+                        this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
+                    } catch (error) {
+                        addNotice({ type: 'error', text: error })
+                    }
                 }
             })
 

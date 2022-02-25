@@ -5,7 +5,17 @@ import Extension from '../lib/extension'
 
 export const payment = async (address, amount) => {
     const connectedExtension = localStorage.getItem('_x_connectedExtension')
-    const walletObject = await Extensions.getWallet(connectedExtension)
+    let walletObject
+
+    try {
+        walletObject = await Extensions.getWallet(connectedExtension)
+    } catch (error) {
+        return {
+            success: false,
+            data: error,
+        }
+    }
+
     const Wallet = new Extension(walletObject)
     const network = await Wallet.getNetwork()
 

@@ -42,7 +42,17 @@ const createCertificates = async (stakeKeyHash, accountActive, poolHex) => {
 
 export const delegation = async (poolId) => {
     const connectedExtension = localStorage.getItem('_x_connectedExtension')
-    const walletObject = await Extensions.getWallet(connectedExtension)
+    let walletObject
+
+    try {
+        walletObject = await Extensions.getWallet(connectedExtension)
+    } catch (error) {
+        return {
+            success: false,
+            data: error,
+        }
+    }
+
     const Wallet = new Extension(walletObject)
     const network = await Wallet.getNetwork()
 

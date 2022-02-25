@@ -3,7 +3,7 @@ import { toPropertyName, supportedWallets, browser } from '../api/config'
 class Extensions {
     static async getWallet(type) {
         if (! supportedWallets.includes(type)) {
-            return undefined
+            throw `Not supported wallet "${type}"`
         }
 
         const method = `has${toPropertyName(type)}`
@@ -11,7 +11,7 @@ class Extensions {
         const object = `${wallet}Object`
 
         if (! browser[method]()) {
-            return undefined
+            throw `Not available wallet "${type}"`
         }
 
         if (undefined === this[object]) {
