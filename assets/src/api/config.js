@@ -40,7 +40,7 @@ export const cardanoPress = window.cardanoPress || {
     logged: '',
 }
 
-export const toPropertyName = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+export const toPropertyName = (string, prefix = '', suffix = '') => prefix + string.charAt(0).toUpperCase() + string.slice(1) + suffix
 
 export const supportedWallets = Object.freeze([
     'Nami',
@@ -53,10 +53,10 @@ export const supportedWallets = Object.freeze([
 
 export const browser = Object.freeze(supportedWallets.reduce((a, v) => ({
     ...a,
-    [`has${toPropertyName(v)}`]: () => !!window.cardano?.[v.toLowerCase()],
+    [toPropertyName(v, 'has')]: () => !!window.cardano?.[v.toLowerCase()],
 }), {}))
 
-export const getConnectedExtension = () => localStorage.getItem('_x_connectedExtension')
+export const getConnectedExtension = () => localStorage.getItem('_x_connectedExtension') || ''
 export const setConnectedExtension = value => localStorage.setItem('_x_connectedExtension', value)
-export const isNotified = () => localStorage.getItem('_x_isNotified')
+export const isNotified = () => localStorage.getItem('_x_isNotified') || 'false'
 export const setNotified = value => localStorage.setItem('_x_isNotified', value)

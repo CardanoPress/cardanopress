@@ -6,11 +6,10 @@ class Extensions {
             throw `Not supported wallet "${type}"`
         }
 
-        const method = `has${toPropertyName(type)}`
         const wallet =  type.toLowerCase()
         const object = `${wallet}Object`
 
-        if (! browser[method]()) {
+        if (! browser[toPropertyName(type, 'has')]) {
             throw `Not available wallet "${type}"`
         }
 

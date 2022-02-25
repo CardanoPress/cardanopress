@@ -33,9 +33,7 @@ Alpine.data('cardanoPress', () => ({
     supportedWallets,
 
     has(wallet) {
-        const method = `has${toPropertyName(wallet)}`
-
-        return this[method]
+        return this[toPropertyName(wallet, 'has')]
     },
 
     isDisabled(wallet = null) {
@@ -48,27 +46,27 @@ Alpine.data('cardanoPress', () => ({
 
     async init() {
         supportedWallets.forEach(wallet => {
-            this[`has${toPropertyName(wallet)}`] = false
+            this[toPropertyName(wallet, 'has')] = false
         })
 
         this.$watch('showModal', () => {
             supportedWallets.forEach(wallet => {
-                const method = `has${toPropertyName(wallet)}`
+                const method = toPropertyName(wallet, 'has')
                 this[method] = browser[method]()
             })
         })
 
         if (cardanoPress.logged) {
-            this.connectedExtension = getConnectedExtension() || ''
-            this.isConnected = this.connectedExtension || false
+            this.connectedExtension = getConnectedExtension()
+            this.isConnected = !!this.connectedExtension
             window.cardanoPress.extension = this.connectedExtension
 
             if (this.isConnected && !isNotified()) {
                 addNotice({ type: 'success', text: 'Successfully connected' })
-                setNotified('true')
+                setNotified(true)
             }
         } else {
-            isNotified() && setNotified('false')
+            isNotified() && setNotified(false)
             getConnectedExtension() && setConnectedExtension('')
         }
 
@@ -125,7 +123,7 @@ Alpine.data('cardanoPress', () => ({
                 }, 500)
             }
 
-            setNotified('true')
+            setNotified(true)
 
             this.showModal = false
             this.isConnected = true
@@ -151,7 +149,7 @@ Alpine.data('cardanoPress', () => ({
 
             if (response.success) {
                 addNotice({ type: 'success', text: response.data.message })
-                setNotified('false')
+                setNotified(false)
                 setConnectedExtension('')
 
                 if (response.data.reload) {
@@ -237,7 +235,7 @@ window.cardanoPress = {
         ...browser,
         ...supportedWallets.reduce((a, v) => ({
             ...a,
-            [`get${toPropertyName(v)}`]: async () => new Extension(await Extensions.getWallet(v)),
+            [toPropertyName(v, 'get')]: async () => new Extension(await Extensions.getWallet(v)),
         }), {})
     },
     csl,
