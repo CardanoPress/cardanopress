@@ -1,13 +1,12 @@
 import { buildTx, prepareTx } from './wallet'
 import { getProtocol } from './actions'
-import Extension from '../lib/extension'
 import { getConnectedWallet } from './config'
 
 export const payment = async (address, amount) => {
-    let walletObject
+    let Wallet
 
     try {
-        walletObject = await getConnectedWallet()
+        Wallet = await getConnectedWallet()
     } catch (error) {
         return {
             success: false,
@@ -15,12 +14,11 @@ export const payment = async (address, amount) => {
         }
     }
 
-    const Wallet = new Extension(walletObject)
     const network = await Wallet.getNetwork()
 
-    if ('Typhon' === walletObject.type) {
+    if ('Typhon' === Wallet.cardano.type) {
         try {
-            const response = await walletObject.paymentTransaction({
+            const response = await Wallet.cardano.paymentTransaction({
                 outputs: [{
                     address,
                     amount,

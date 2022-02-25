@@ -1,4 +1,5 @@
 import { toPropertyName, supportedWallets, browser } from '../api/config'
+import Extension from './extension'
 
 class Extensions {
     static async getWallet(type) {
@@ -30,6 +31,8 @@ class Extensions {
                 }
 
                 this[object].type = type
+
+                this[object] = new Extension(this[object])
             } catch {
                 this[object] = undefined;
             }

@@ -16,7 +16,6 @@ import { addNotice, hexToBech32, removeNotice } from './api/util'
 import { delegation as delegationTx } from './api/delegation'
 import { payment as paymentTx } from './api/payment'
 import Extensions from './lib/extensions'
-import Extension from './lib/extension'
 import * as actions from './api/actions'
 import * as util from './api/util'
 import * as wallet from './api/wallet'
@@ -74,8 +73,8 @@ Alpine.data('cardanoPress', () => ({
         if (this.isAvailable && 'Nami' === this.connectedExtension) {
             const wallet = await getConnectedWallet()
 
-            wallet.experimental.on('networkChange', (networkId) => this.handleLogout(networkId, 0))
-            wallet.experimental.on('accountChange', (addresses) => this.handleLogout(-1, addresses))
+            wallet.cardano.experimental.on('networkChange', (networkId) => this.handleLogout(networkId, 0))
+            wallet.cardano.experimental.on('accountChange', (addresses) => this.handleLogout(-1, addresses))
         }
     },
 
@@ -116,7 +115,7 @@ Alpine.data('cardanoPress', () => ({
         if (response.success) {
             removeNotice('loginConnect')
             addNotice({ type: 'success', text: response.data.message })
-            setConnectedExtension(wallet.type)
+            setConnectedExtension(wallet.cardano.type)
 
             if (response.data.reload) {
                 return setTimeout(() => {
@@ -129,7 +128,7 @@ Alpine.data('cardanoPress', () => ({
             this.showModal = false
             this.isConnected = true
             cardanoPress.logged = true
-            this.connectedExtension = wallet.type
+            this.connectedExtension = wallet.cardano.type
             window.cardanoPress.extension = this.connectedExtension
         } else {
             addNotice({ type: 'error', text: response.data.message })
@@ -142,8 +141,7 @@ Alpine.data('cardanoPress', () => ({
         }
 
         try {
-            const walletObject = await getConnectedWallet()
-            const Wallet = new Extension(walletObject)
+            const Wallet = await getConnectedWallet()
             const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
             const address = 0 !== addresses ? hexToBech32(addresses[0]) : await Wallet.getChangeAddress()
             const response = await logMeOut(network, address)
@@ -184,7 +182,7 @@ Alpine.data('cardanoPress', () => ({
 
             if (response.success) {
                 addNotice({ type: 'success', text: 'Wallet reconnected' })
-                setConnectedExtension(wallet.type)
+                setConnectedExtension(wallet.cardano.type)
 
                 return setTimeout(() => {
                     window.location.reload()
@@ -236,7 +234,7 @@ window.cardanoPress = {
         ...browser,
         ...supportedWallets.reduce((a, v) => ({
             ...a,
-            [toPropertyName(v, 'get')]: async () => new Extension(await Extensions.getWallet(v)),
+            [toPropertyName(v, 'get')]: async () => await Extensions.getWallet(v),
         }), {})
     },
     csl,

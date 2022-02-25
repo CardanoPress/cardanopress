@@ -3,7 +3,6 @@
 import { getConnectedExtension, getConnectedWallet } from './api/config'
 import { adaToLovelace, addNotice, removeNotice } from './api/util'
 import { handlePayment } from './actions'
-import Extension from './lib/extension'
 
 window.addEventListener('alpine:init', () => {
     const Alpine = window.Alpine || {}
@@ -20,8 +19,7 @@ window.addEventListener('alpine:init', () => {
             window.addEventListener('load', async () => {
                 if (getConnectedExtension()) {
                     try {
-                        const walletObject = await getConnectedWallet()
-                        const Wallet = new Extension(walletObject)
+                        const Wallet = await getConnectedWallet()
                         this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
                     } catch (error) {
                         addNotice({ type: 'error', text: error })

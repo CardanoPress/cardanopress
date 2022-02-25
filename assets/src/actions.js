@@ -2,17 +2,8 @@ import { saveWalletTx } from './api/actions'
 import { cardanoPress } from './api/config'
 import { delegation } from './api/delegation'
 import { payment } from './api/payment'
-import Extension from './lib/extension'
 
-export const handleReconnect = async (walletObject) => {
-    if (undefined === walletObject) {
-        return {
-            success: false,
-            data: 'Wallet extension not available',
-        }
-    }
-
-    const Wallet = new Extension(walletObject)
+export const handleReconnect = async (Wallet) => {
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
@@ -28,8 +19,7 @@ export const handleReconnect = async (walletObject) => {
     }).then((response) => response.json())
 }
 
-export const logMeIn = async (walletObject) => {
-    const Wallet = new Extension(walletObject)
+export const logMeIn = async (Wallet) => {
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
