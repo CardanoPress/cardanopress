@@ -4,7 +4,6 @@ import {
     browser,
     cardanoPress,
     getConnectedExtension,
-    getConnectedWallet,
     isNotified,
     NETWORK,
     setConnectedExtension,
@@ -12,7 +11,7 @@ import {
     supportedWallets,
     toPropertyName
 } from './api/config'
-import { addNotice, hexToBech32, removeNotice } from './api/util'
+import { addNotice, getConnectedWallet, hexToBech32, removeNotice } from './api/util'
 import { delegation as delegationTx } from './api/delegation'
 import { payment as paymentTx } from './api/payment'
 import Extensions from './lib/extensions'

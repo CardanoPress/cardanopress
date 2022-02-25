@@ -1,6 +1,6 @@
 import { buildTx, prepareTx } from './wallet'
 import { getProtocol } from './actions'
-import { getConnectedWallet } from './config'
+import { getConnectedWallet } from './util'
 
 export const payment = async (address, amount) => {
     let Wallet

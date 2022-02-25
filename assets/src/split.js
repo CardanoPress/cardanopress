@@ -1,7 +1,7 @@
 /* global grecaptcha */
 
-import { getConnectedExtension, getConnectedWallet } from './api/config'
-import { adaToLovelace, addNotice, removeNotice } from './api/util'
+import { getConnectedExtension} from './api/config'
+import { adaToLovelace, addNotice, getConnectedWallet, removeNotice } from './api/util'
 import { handlePayment } from './actions'
 
 window.addEventListener('alpine:init', () => {

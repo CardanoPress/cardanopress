@@ -1,5 +1,7 @@
 import { Address } from '@emurgo/cardano-serialization-lib-browser'
 import { Buffer } from 'buffer'
+import { getConnectedExtension } from './config'
+import Extensions from '../lib/extensions'
 
 export const adaToLovelace = (value) => {
     return (parseFloat(value || '1') * 1000000).toFixed()
@@ -30,4 +32,14 @@ export const addNotice = (detail) => {
 
 export const removeNotice = (detail) => {
     window.dispatchEvent(new CustomEvent('cardanoPress:removeNotice', { detail }))
+}
+
+export const getConnectedWallet = async () => {
+    const connectedExtension = getConnectedExtension()
+
+    if (!connectedExtension) {
+        throw `Not connected to a wallet`
+    }
+
+    return await Extensions.getWallet(connectedExtension)
 }
