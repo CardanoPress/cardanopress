@@ -23,9 +23,7 @@ window.addEventListener('alpine:init', () => {
             }
 
             this.list.push(data)
-            setTimeout(() => {
-                this.visible.push(data)
-            })
+            this.visible.push(data)
 
             if (data?.unique) {
                 setTimeout(() => {
@@ -34,18 +32,15 @@ window.addEventListener('alpine:init', () => {
             }
         },
 
-        remove(id, visibleNotice = true) {
-            const container = visibleNotice ? this.visible : this.list
-            const notice = container.find((notice) => notice.id === id)
-            const index = container.indexOf(notice)
+        remove(id) {
+            [this.visible, this.list].forEach(container => {
+                const notice = container.find((notice) => notice.id === id)
+                const index = container.indexOf(notice)
 
-            if (0 <= index) {
-                container.splice(index, 1)
-
-                setTimeout(() => {
-                    this.remove(notice.id, false)
-                })
-            }
+                if (0 <= index) {
+                    container.splice(index, 1)
+                }
+            })
         },
     })
 })
