@@ -91,16 +91,12 @@ Alpine.data('cardanoPress', () => ({
         try {
             const wallet = await Extensions.getWallet(type)
 
-            if (undefined !== wallet) {
-                addNotice({
-                    id: 'loginConnect',
-                    type: 'info',
-                    text: 'Connecting...',
-                })
-                await this.handleLogin(wallet)
-            } else {
-                addNotice({ type: 'error', text: 'Unable to connect to wallet' })
-            }
+            addNotice({
+                id: 'loginConnect',
+                type: 'info',
+                text: 'Connecting...',
+            })
+            await this.handleLogin(wallet)
         } catch (error) {
             addNotice({ type: 'error', text: error })
         }

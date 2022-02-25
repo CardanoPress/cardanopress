@@ -1,14 +1,28 @@
 import { toPropertyName, supportedWallets, browser } from '../api/config'
 import Extension from './extension'
 
+const getWalletApi = async (namespace) => {
+    const response = await window.cardano[namespace].enable();
+
+    if ('typhon' === namespace) {
+        if (false === response.status) {
+            throw response?.error ?? response.reason
+        }
+
+        return await window.cardano[namespace];
+    }
+
+    return response
+}
+
 class Extensions {
     static async getWallet(type) {
         if (! supportedWallets.includes(type)) {
             throw `Not supported wallet "${type}"`
         }
 
-        const wallet =  type.toLowerCase()
-        const object = `${wallet}Object`
+        const namespace = type.toLowerCase()
+        const object = `${namespace}Object`
 
         if (! browser[toPropertyName(type, 'has')]) {
             throw `Not available wallet "${type}"`
@@ -16,19 +30,9 @@ class Extensions {
 
         if (undefined === this[object]) {
             try {
-                const response = await window.cardano[wallet].enable();
-
-                if ('Typhon' === type) {
-                    if (response.status === true) {
-                        this[object] = await window.cardano[wallet];
-                    }
-                } else {
-                    this[object] = response
-                }
-
-                this[object] = new Extension(type, this[object])
-            } catch {
-                this[object] = undefined;
+                this[object] = new Extension(type, await getWalletApi(namespace))
+            } catch (error) {
+                throw typeof error === 'string' ? error : ( error.info || error.message || 'user abort connection' )
             }
         }
 
