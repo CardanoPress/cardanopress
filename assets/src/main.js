@@ -147,10 +147,11 @@ Alpine.data('cardanoPress', () => ({
 
             if (response.success) {
                 addNotice({ type: 'success', text: response.data.message })
-                setNotified(false)
-                setConnectedExtension('')
 
                 if (response.data.reload) {
+                    setNotified(false)
+                    setConnectedExtension('')
+
                     return setTimeout(() => {
                         window.location.reload()
                     }, 500)
