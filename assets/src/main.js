@@ -79,9 +79,9 @@ Alpine.data('cardanoPress', () => ({
 
     async walletConnect(type) {
         if (this.isConnected) {
-            this.handleReconnect(type)
+            await this.handleReconnect(type)
         } else {
-            this.handleConnect(type)
+            await this.handleConnect(type)
         }
     },
 
