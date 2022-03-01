@@ -28,10 +28,16 @@ class Application
 
     private function __construct()
     {
+        register_activation_hook(CARDANOPRESS_FILE, [$this, 'activate']);
         $this->setup();
 
         add_action('plugins_loaded', [$this, 'loaded'], -1);
         add_action('init', [Enqueue::class, 'init']);
+    }
+
+    public function activate(): void
+    {
+        $this->templates->createPages();
     }
 
     private function setup(): void

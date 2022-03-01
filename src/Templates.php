@@ -35,7 +35,7 @@ class Templates
                 $basename,
                 '.php',
             ]);
-            $templates[$filename] = $this->title . ' ' . $this->prettyName($basename);
+            $templates[$filename] = $this->title . $this->prettyName($basename);
         }
 
         return $templates;
@@ -88,5 +88,20 @@ class Templates
     public function isCustomPage(string $template): bool
     {
         return isset($this->storage[$template]);
+    }
+
+    public function createPages(): void
+    {
+        foreach ($this->storage as $template => $name) {
+            $postId = wp_insert_post([
+                'post_status' => 'publish',
+                'post_type' => 'page',
+                'post_title' => substr($name, strlen($this->title) + 1),
+            ]);
+
+            if ($postId) {
+                update_post_meta($postId, '_wp_page_template', $template);
+            }
+        }
     }
 }
