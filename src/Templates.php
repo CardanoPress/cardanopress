@@ -93,15 +93,26 @@ class Templates
     public function createPages(): void
     {
         foreach ($this->storage as $template => $name) {
-            $postId = wp_insert_post([
-                'post_status' => 'publish',
-                'post_type' => 'page',
-                'post_title' => substr($name, strlen($this->title) + 1),
-            ]);
+            $postId = $this->createPage(substr($name, strlen($this->title) + 1));
 
             if ($postId) {
                 update_post_meta($postId, '_wp_page_template', $template);
             }
         }
+    }
+
+    protected function createPage(string $title): int
+    {
+        $found = get_page_by_path(sanitize_title($title));
+
+        if (null !== $found) {
+            return $found->ID;
+        }
+
+        return wp_insert_post([
+            'post_status' => 'publish',
+            'post_type' => 'page',
+            'post_title' => $title,
+        ]);
     }
 }
