@@ -262,6 +262,18 @@ class Admin
                         'type' => 'page',
                         'title' => __('Collection', 'cardanopress'),
                     ],
+                    'payment' => [
+                        'type' => 'page',
+                        'title' => __('Payment', 'cardanopress'),
+                    ],
+                    'delegation' => [
+                        'type' => 'page',
+                        'title' => __('Delegation', 'cardanopress'),
+                    ],
+                    'split' => [
+                        'type' => 'page',
+                        'title' => __('Split', 'cardanopress'),
+                    ],
                 ],
             ]);
 
