@@ -38,11 +38,18 @@ class Application
 
     public function activate(): void
     {
+        if ('yes' === get_transient('cardanopress_activating')) {
+            return;
+        }
+
+        set_transient('cardanopress_activating', 'yes', MINUTE_IN_SECONDS * 2);
+
         if (empty(get_option('cardanopress_version'))) {
             $this->templates->createPages();
         }
 
         update_option('cardanopress_version', self::VERSION);
+        delete_transient('cardanopress_activating');
     }
 
     private function setup(): void
