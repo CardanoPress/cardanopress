@@ -96,7 +96,11 @@ class Templates
             $postId = $this->createPage(substr($name, strlen($this->title) + 1));
 
             if ($postId) {
-                update_post_meta($postId, '_wp_page_template', $template);
+                $currentTemplate = get_post_meta($postId, '_wp_page_template', true);
+
+                if (! $currentTemplate || 'default' === $currentTemplate) {
+                    update_post_meta($postId, '_wp_page_template', $template);
+                }
             }
         }
     }
