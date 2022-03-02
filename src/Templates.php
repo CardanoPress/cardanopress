@@ -105,14 +105,11 @@ class Templates
             $postId = $this->createPage($title, $template);
 
             if ($postId) {
+                $optionsValue[$slug] = $postId;
                 $currentTemplate = get_post_meta($postId, '_wp_page_template', true);
 
                 if ('default' === $currentTemplate) {
                     update_post_meta($postId, '_wp_page_template', $template);
-                }
-
-                if ($template === $currentTemplate) {
-                    $optionsValue[$slug] = $postId;
                 }
             }
         }
@@ -124,7 +121,13 @@ class Templates
     {
         $found = get_page_by_path(sanitize_title($title));
 
-        if (null !== $found) {
+        if (
+            null !== $found && in_array(
+                get_post_meta($found->ID, '_wp_page_template', true),
+                ['default', $template],
+                true
+            )
+        ) {
             return $found->ID;
         }
 
