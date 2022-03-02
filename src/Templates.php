@@ -96,8 +96,13 @@ class Templates
 
         foreach ($this->storage as $template => $name) {
             $title = substr($name, strlen($this->title) + 1);
-            $postId = $this->createPage($title, $template);
             $slug = 'member_' . sanitize_title($title);
+
+            if (! empty($optionsValue[$slug])) {
+                continue;
+            }
+
+            $postId = $this->createPage($title, $template);
 
             if ($postId) {
                 $currentTemplate = get_post_meta($postId, '_wp_page_template', true);
