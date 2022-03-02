@@ -16,6 +16,7 @@ class Application
     private static Application $instance;
     private Admin $admin;
     private Templates $templates;
+    public const VERSION = '0.18.0';
 
     public static function instance(): Application
     {
@@ -37,7 +38,11 @@ class Application
 
     public function activate(): void
     {
-        $this->templates->createPages();
+        if (empty(get_option('cardanopress_version'))) {
+            $this->templates->createPages();
+        }
+
+        update_option('cardanopress_version', self::VERSION);
     }
 
     private function setup(): void
