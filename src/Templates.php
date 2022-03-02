@@ -92,20 +92,30 @@ class Templates
 
     public function createPages(): void
     {
+        $optionsValue = get_option(Admin::OPTION_KEY, []);
+
         foreach ($this->storage as $template => $name) {
-            $postId = $this->createPage(substr($name, strlen($this->title) + 1));
+            $title = substr($name, strlen($this->title) + 1);
+            $postId = $this->createPage($title, $template);
+            $slug = 'member_' . sanitize_title($title);
 
             if ($postId) {
                 $currentTemplate = get_post_meta($postId, '_wp_page_template', true);
 
-                if (! $currentTemplate || 'default' === $currentTemplate) {
+                if ('default' === $currentTemplate) {
                     update_post_meta($postId, '_wp_page_template', $template);
+                }
+
+                if ($template === $currentTemplate) {
+                    $optionsValue[$slug] = $postId;
                 }
             }
         }
+
+        update_option(Admin::OPTION_KEY, $optionsValue);
     }
 
-    protected function createPage(string $title): int
+    protected function createPage(string $title, string $template): int
     {
         $found = get_page_by_path(sanitize_title($title));
 
@@ -117,6 +127,9 @@ class Templates
             'post_status' => 'publish',
             'post_type' => 'page',
             'post_title' => $title,
+            'meta_input' => [
+                '_wp_page_template' => $template,
+            ],
         ]);
     }
 }
