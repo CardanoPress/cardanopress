@@ -11,4 +11,7 @@
 
 ?>
 
-<span x-text='paymentAddress'></span>
+<div class="flex">
+    <input x-bind:value="paymentAddress" type="text" class="w-full" readonly disabled>
+    <button @click.prevent="clipboardValue(paymentAddress)">Copy</button>
+</div>

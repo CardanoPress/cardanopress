@@ -60,6 +60,10 @@ window.addEventListener('alpine:init', () => {
             return inAdaValue ? amount : adaToLovelace(amount)
         },
 
+        clipboardValue(target) {
+            window.navigator.clipboard.writeText(target)
+        },
+
         async handlePayment() {
             this.transactionHash = ''
 

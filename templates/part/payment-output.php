@@ -11,4 +11,7 @@
 
 ?>
 
-<span x-text='transactionHash'></span>
+<div class='flex'>
+    <input x-bind:value="transactionHash" type="text" class="w-full" readonly disabled>
+    <button @click.prevent="clipboardValue(transactionHash)">Copy</button>
+</div>
