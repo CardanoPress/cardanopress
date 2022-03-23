@@ -36,16 +36,14 @@ window.addEventListener('alpine:init', () => {
             window.addEventListener('cardanoPress:recaptcha', async (event) => {
                 this.isVerified = event.detail
 
-                if (!this.isVerified) {
-                    this.showAddress = false
-                } else if (!this.paymentAddress) {
+                if (this.isVerified && !this.paymentAddress) {
                     const response = await getPaymentAddress()
 
                     if (response.success) {
                         this.paymentAddress = response.data
                     }
                 }
-            })
+            }, { once: true })
         },
 
         isReady(type = 'extension') {
