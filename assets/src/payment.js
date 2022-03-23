@@ -11,6 +11,7 @@ window.addEventListener('alpine:init', () => {
         isVerified: false,
         isProcessing: false,
         payAmount: 1,
+        quantity: 1,
         currentBalance: 0,
         remainingBalance: 0,
         transactionHash: '',
@@ -53,6 +54,10 @@ window.addEventListener('alpine:init', () => {
 
         lovelaceValue() {
             return adaToLovelace(this.payAmount)
+        },
+
+        totalAmount() {
+            return this.payAmount * this.quantity
         },
 
         async handlePayment() {

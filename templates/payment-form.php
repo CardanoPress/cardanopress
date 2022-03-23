@@ -20,6 +20,12 @@ $paymentAmount = cardanoPress()->option('payment_amount');
         <p class='text-sm italic'>
             <?php cardanoPress()->template('part/payment-lovelace'); ?> Lovelace
         </p>
+
+        <label>
+            Quantity: <?php cardanoPress()->template('part/payment-quantity'); ?>
+        </label>
+
+        <h3>Total: <?php cardanoPress()->template('part/payment-total'); ?> ADA</h3>
     </div>
 
     <div class="py-6">
