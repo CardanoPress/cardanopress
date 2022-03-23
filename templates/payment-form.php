@@ -32,6 +32,10 @@ $paymentAmount = cardanoPress()->option('payment_amount');
         </p>
     </div>
 
+    <div class='py-6'>
+        <?php cardanoPress()->template('part/payment-button'); ?>
+    </div>
+
     <div class="py-6">
         <?php cardanoPress()->template('part/payment-recaptcha'); ?>
     </div>
@@ -42,10 +46,6 @@ $paymentAmount = cardanoPress()->option('payment_amount');
         <template x-if='showAddress'>
             <?php cardanoPress()->template('part/payment-address'); ?>
         </template>
-    </div>
-
-    <div class="py-6">
-        <?php cardanoPress()->template('part/payment-button'); ?>
     </div>
 
     <template x-if='transactionHash'>

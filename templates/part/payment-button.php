@@ -20,11 +20,7 @@ if (empty($textNotConnected)) {
 ?>
 
 <template x-if='!isConnected'>
-    <button disabled='true'>
-        <?php echo $text; ?>
-
-        <span class='block italic text-sm'><?php echo $textNotConnected; ?></span>
-    </button>
+    <?php cardanoPress()->template('part/modal-trigger', ['text' => 'Connect Wallet']); ?>
 </template>
 
 <template x-if='isConnected'>
