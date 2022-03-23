@@ -48,8 +48,8 @@ window.addEventListener('alpine:init', () => {
             })
         },
 
-        isReady() {
-            return !!(this.isVerified && !this.isProcessing)
+        isReady(type = 'extension') {
+            return !!(('extension' !== type ? this.isVerified : true) && !this.isProcessing)
         },
 
         lovelaceValue() {
