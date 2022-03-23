@@ -9,6 +9,8 @@
  * @since   0.1.0
  */
 
+$inAdaValue = empty($format) || $format === 'ADA';
+
 ?>
 
-<span x-text="totalAmount()"></span>
+<span x-text="totalAmount(<?php echo $inAdaValue ? 'true' : 'false'; ?>)"></span>

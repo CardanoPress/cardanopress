@@ -56,8 +56,10 @@ window.addEventListener('alpine:init', () => {
             return adaToLovelace(this.payAmount)
         },
 
-        totalAmount() {
-            return this.payAmount * this.quantity
+        totalAmount(inAdaValue = true) {
+            const amount = this.payAmount * this.quantity
+
+            return inAdaValue ? amount : adaToLovelace(amount)
         },
 
         async handlePayment() {
