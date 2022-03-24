@@ -16,7 +16,7 @@ class Application
     private static Application $instance;
     private Admin $admin;
     private Templates $templates;
-    public const VERSION = '0.18.0';
+    public const VERSION = '0.20.0';
 
     public static function instance(): Application
     {
