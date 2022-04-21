@@ -3,7 +3,7 @@
 /**
  * The template for displaying the toast notifications.
  *
- * This can be overridden by copying it to yourtheme/cardanopress/page/Collection.php.
+ * This can be overridden by copying it to yourtheme/cardanopress/notices-handler.php.
  *
  * @package ThemePlate
  * @since   0.1.0

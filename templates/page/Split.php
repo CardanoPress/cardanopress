@@ -3,7 +3,7 @@
 /**
  * Page template for displaying split payments flow.
  *
- * This can be overridden by copying it to yourtheme/cardanopress/page/SplitPayments.php.
+ * This can be overridden by copying it to yourtheme/cardanopress/page/Split.php.
  *
  * @package ThemePlate
  * @since   0.1.0

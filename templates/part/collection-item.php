@@ -3,7 +3,7 @@
 /**
  * The template for displaying the single item in collection.
  *
- * This can be overridden by copying it to yourtheme/cardanopress/part/collection.php.
+ * This can be overridden by copying it to yourtheme/cardanopress/part/collection-item.php.
  *
  * @package ThemePlate
  * @since   0.1.0
