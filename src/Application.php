@@ -10,10 +10,12 @@ namespace PBWebDev\CardanoPress;
 use PBWebDev\CardanoPress\Actions\CoreAction;
 use PBWebDev\CardanoPress\Actions\WalletAction;
 use ThemePlate\Enqueue;
+use ThemePlate\Logger;
 
 class Application
 {
     private static Application $instance;
+    private static Logger $logger;
     private Admin $admin;
     private Templates $templates;
     public const VERSION = '0.20.0';
@@ -39,12 +41,16 @@ class Application
     public function activate(): void
     {
         if ('yes' === get_transient('cardanopress_activating')) {
+            self::logger()->channel('application')->info('Is already activating');
+
             return;
         }
 
+        self::logger()->channel('application')->info('Activating version ' . self::VERSION);
         set_transient('cardanopress_activating', 'yes', MINUTE_IN_SECONDS * 2);
 
         if (empty(get_option('cardanopress_version'))) {
+            self::logger()->channel('application')->info('Creating initial pages');
             $this->templates->createPages();
         }
 
@@ -57,6 +63,7 @@ class Application
         $load_path = plugin_dir_path(CARDANOPRESS_FILE);
 
         $this->templates = new Templates($load_path . 'templates');
+        self::$logger = new Logger($load_path . 'logs');
 
         new Manifest($load_path . 'assets');
         new CoreAction();
@@ -69,6 +76,11 @@ class Application
     public function loaded(): void
     {
         do_action('cardanopress_loaded');
+    }
+
+    public static function logger(): Logger
+    {
+        return self::$logger;
     }
 
     public function option(string $key)

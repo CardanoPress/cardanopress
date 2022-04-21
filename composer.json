@@ -19,7 +19,10 @@
     }
   ],
   "config": {
-    "optimize-autoloader": true
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -30,6 +33,7 @@
     "guzzlehttp/guzzle": "^7.4",
     "themeplate/settings": "^1.2",
     "themeplate/page": "^1.1",
+    "themeplate/logger": "^1.0",
     "kermage/external-update-manager": "^2.1"
   },
   "require-dev": {
