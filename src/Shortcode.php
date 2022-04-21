@@ -39,6 +39,7 @@ class Shortcode
         $args = shortcode_atts([
             'name' => '',
             'variables' => [],
+            'if' => '',
         ], $attributes);
 
         if (empty($args['name'])) {
@@ -54,7 +55,13 @@ class Shortcode
         ob_start();
         $app->template($args['name'], $args['variables']);
 
-        return ob_get_clean();
+        $html = ob_get_clean();
+
+        if (empty($args['if'])) {
+            return $html;
+        }
+
+        return '<template x-if="' . $args['if'] . '">' . $html . '</template>';
     }
 
     public function doUserProfile(array $attributes): string
