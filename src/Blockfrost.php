@@ -12,6 +12,7 @@ use PBWebDev\CardanoPress\Clients\BlockfrostClient;
 class Blockfrost
 {
     protected BlockfrostClient $client;
+    protected array $lastResponse = [];
 
     public function __construct(string $query_network)
     {
@@ -21,6 +22,7 @@ class Blockfrost
     public function request(string $endpoint, array $query = []): array
     {
         $response = $this->client->request($endpoint, $query);
+        $this->lastResponse = $response;
 
         if (200 !== $response['status_code'] || ! empty($response['error'])) {
             Application::logger()->channel('blockfrost')->info($endpoint);
@@ -29,6 +31,15 @@ class Blockfrost
         }
 
         return $response;
+    }
+
+    public function getResponse(string $key = null)
+    {
+        if (null === $key) {
+            return $this->lastResponse;
+        }
+
+        return $this->lastResponse[$key] ?? null;
     }
 
     public function protocolParameters(): array
