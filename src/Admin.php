@@ -47,7 +47,7 @@ class Admin
                 'title' => 'CardanoPress',
             ]);
         } catch (Exception $exception) {
-            Application::logger()->channel('admin')->error($exception->getMessage());
+            Application::logger('admin')->error($exception->getMessage());
         }
     }
 
@@ -82,7 +82,7 @@ class Admin
 
             $this->data->store($settings->get_config());
         } catch (Exception $exception) {
-            Application::logger()->channel('admin')->error($exception->getMessage());
+            Application::logger('admin')->error($exception->getMessage());
         }
     }
 
@@ -117,7 +117,7 @@ class Admin
 
             $this->data->store($settings->get_config());
         } catch (Exception $exception) {
-            Application::logger()->channel('admin')->error($exception->getMessage());
+            Application::logger('admin')->error($exception->getMessage());
         }
     }
 
@@ -151,7 +151,7 @@ class Admin
 
             $this->data->store($settings->get_config());
         } catch (Exception $exception) {
-            Application::logger()->channel('admin')->error($exception->getMessage());
+            Application::logger('admin')->error($exception->getMessage());
         }
     }
 
@@ -204,7 +204,7 @@ class Admin
 
             $this->data->store($settings->get_config());
         } catch (Exception $exception) {
-            Application::logger()->channel('admin')->error($exception->getMessage());
+            Application::logger('admin')->error($exception->getMessage());
         }
     }
 
@@ -241,7 +241,7 @@ class Admin
 
             $this->data->store($settings->get_config());
         } catch (Exception $exception) {
-            Application::logger()->channel('admin')->error($exception->getMessage());
+            Application::logger('admin')->error($exception->getMessage());
         }
     }
 
@@ -279,7 +279,7 @@ class Admin
 
             $this->data->store($settings->get_config());
         } catch (Exception $exception) {
-            Application::logger()->channel('admin')->error($exception->getMessage());
+            Application::logger('admin')->error($exception->getMessage());
         }
     }
 
@@ -311,7 +311,7 @@ class Admin
 
             $this->data->store($settings->get_config());
         } catch (Exception $exception) {
-            Application::logger()->channel('admin')->error($exception->getMessage());
+            Application::logger('admin')->error($exception->getMessage());
         }
     }
 
@@ -354,7 +354,7 @@ class Admin
 
             $this->data->store($settings->get_config());
         } catch (Exception $exception) {
-            Application::logger()->channel('admin')->error($exception->getMessage());
+            Application::logger('admin')->error($exception->getMessage());
         }
     }
 

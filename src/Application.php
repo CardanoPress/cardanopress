@@ -7,6 +7,7 @@
 
 namespace PBWebDev\CardanoPress;
 
+use Monolog\Logger as MonoLogger;
 use PBWebDev\CardanoPress\Actions\CoreAction;
 use PBWebDev\CardanoPress\Actions\WalletAction;
 use ThemePlate\Enqueue;
@@ -41,16 +42,16 @@ class Application
     public function activate(): void
     {
         if ('yes' === get_transient('cardanopress_activating')) {
-            self::logger()->channel('application')->info('Is already activating');
+            self::logger('application')->info('Is already activating');
 
             return;
         }
 
-        self::logger()->channel('application')->info('Activating version ' . self::VERSION);
+        self::logger('application')->info('Activating version ' . self::VERSION);
         set_transient('cardanopress_activating', 'yes', MINUTE_IN_SECONDS * 2);
 
         if (empty(get_option('cardanopress_version'))) {
-            self::logger()->channel('application')->info('Creating initial pages');
+            self::logger('application')->info('Creating initial pages');
             $this->templates->createPages();
         }
 
@@ -78,9 +79,9 @@ class Application
         do_action('cardanopress_loaded');
     }
 
-    public static function logger(): Logger
+    public static function logger(string $channel): MonoLogger
     {
-        return self::$logger;
+        return self::$logger->channel($channel);
     }
 
     public function option(string $key)

@@ -25,9 +25,9 @@ class Blockfrost
         $this->lastResponse = $response;
 
         if (200 !== $response['status_code'] || ! empty($response['error'])) {
-            Application::logger()->channel('blockfrost')->info($endpoint);
-            Application::logger()->channel('blockfrost')->info(print_r($query, true));
-            Application::logger()->channel('blockfrost')->info(print_r($response, true));
+            Application::logger('blockfrost')->info($endpoint);
+            Application::logger('blockfrost')->info(print_r($query, true));
+            Application::logger('blockfrost')->info(print_r($response, true));
         }
 
         return $response;
