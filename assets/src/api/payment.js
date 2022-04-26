@@ -1,4 +1,4 @@
-import { buildTx, prepareTx } from '@kermage/cardano-wallet-browser-extensions-interface/wallet'
+import { buildTx, prepareTx } from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
 import { getProtocol } from './actions'
 import { getConnectedWallet } from './util'
 

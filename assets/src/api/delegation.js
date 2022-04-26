@@ -1,8 +1,8 @@
 import { getConnectedWallet } from './util'
 import { getProtocol, getAccount } from './actions'
-import { CSL } from '@kermage/cardano-wallet-browser-extensions-interface'
-import { hexToBytes } from '@kermage/cardano-wallet-browser-extensions-interface/utils'
-import { buildTx, prepareTx } from '@kermage/cardano-wallet-browser-extensions-interface/wallet'
+import { CSL } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
+import { hexToBytes } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
+import { buildTx, prepareTx } from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
 
 const createCertificates = async (stakeKeyHash, accountActive, poolHex) => {
     const certificates = CSL.Certificates.new()

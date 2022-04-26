@@ -3,7 +3,7 @@
 import { getConnectedExtension} from './api/config'
 import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 import { handlePayment } from './actions'
-import { adaToLovelace } from '@kermage/cardano-wallet-browser-extensions-interface/utils'
+import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 
 window.addEventListener('alpine:init', () => {
     const Alpine = window.Alpine || {}

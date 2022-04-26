@@ -12,17 +12,17 @@ import {
     browser,
     NETWORK,
     supportedWallets,
-} from '@kermage/cardano-wallet-browser-extensions-interface/config'
-import { hexToBech32 } from '@kermage/cardano-wallet-browser-extensions-interface/utils'
+} from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
+import { hexToBech32 } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 import { delegation as delegationTx } from './api/delegation'
 import { payment as paymentTx } from './api/payment'
-import Extensions from '@kermage/cardano-wallet-browser-extensions-interface'
+import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 import * as actions from './api/actions'
 import * as util from './api/util'
-import * as utils from '@kermage/cardano-wallet-browser-extensions-interface/utils'
-import * as wallet from '@kermage/cardano-wallet-browser-extensions-interface/wallet'
-import { CSL as csl } from '@kermage/cardano-wallet-browser-extensions-interface'
+import * as utils from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
+import * as wallet from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
+import { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 
 window.Alpine = Alpine
 

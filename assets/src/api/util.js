@@ -1,5 +1,5 @@
 import { getConnectedExtension } from './config'
-import Extensions from '@kermage/cardano-wallet-browser-extensions-interface'
+import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 
 export const generateUuid = () => {
     const s4 = () => {

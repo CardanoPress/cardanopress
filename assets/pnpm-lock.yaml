@@ -5,12 +5,10 @@ specifiers:
   '@babel/plugin-transform-runtime': ^7.16.4
   '@babel/preset-env': 7.16.4
   '@babel/runtime': ^7.16.3
-  '@emurgo/cardano-serialization-lib-browser': 9.1.2
-  '@kermage/cardano-wallet-browser-extensions-interface': ^0.1.0
+  '@pbwebdev/cardano-wallet-browser-extensions-interface': ^0.1.0
   alpinejs: 3.7.0
   autoprefixer: ^10.4.0
   babel-loader: ^8.2.3
-  buffer: ^6.0.3
   clean-webpack-plugin: ^4.0.0
   css-loader: ^6.5.1
   mini-css-extract-plugin: 2.4.5
@@ -24,17 +22,15 @@ specifiers:
 
 dependencies:
   '@babel/runtime': 7.16.3
-  '@kermage/cardano-wallet-browser-extensions-interface': 0.1.0
+  '@pbwebdev/cardano-wallet-browser-extensions-interface': 0.1.0
 
 devDependencies:
   '@babel/core': 7.16.0
   '@babel/plugin-transform-runtime': 7.16.4_@babel+core@7.16.0
   '@babel/preset-env': 7.16.4_@babel+core@7.16.0
-  '@emurgo/cardano-serialization-lib-browser': 9.1.2
   alpinejs: 3.7.0
   autoprefixer: 10.4.0_postcss@8.4.4
   babel-loader: 8.2.3_8dd2b11efd9b7265f9b7da54f0e73ab1
-  buffer: 6.0.3
   clean-webpack-plugin: 4.0.0_webpack@5.65.0
   css-loader: 6.5.1_webpack@5.65.0
   mini-css-extract-plugin: 2.4.5_webpack@5.65.0
@@ -1220,13 +1216,6 @@ packages:
 
   /@emurgo/cardano-serialization-lib-browser/9.1.2:
     resolution: {integrity: sha512-eQnS0VaRbpgJLCMVLDuYqk1C0mp8TYDptYwaESGk9ZvQxga+Brl4vnlH/XHRjN6HIVm2vNBjujs758dE3uc7cg==}
-
-  /@kermage/cardano-wallet-browser-extensions-interface/0.1.0:
-    resolution: {integrity: sha512-ui8RYrQBldjj7/Jap9y1xtLwMfrYnReM9AyZdDr61BsetybCEimPpCFUAmxzkFZ3j1q+1uXPPzYTNFTFwvVnng==, tarball: download/@kermage/cardano-wallet-browser-extensions-interface/0.1.0/bf24db2cab5ed62605ec9f8dba3e38621fb75233eddf904bda5fa5d01f7725f2}
-    dependencies:
-      '@babel/runtime': 7.17.9
-      '@emurgo/cardano-serialization-lib-browser': 9.1.2
-      buffer: 6.0.3
     dev: false
 
   /@nodelib/fs.scandir/2.1.5:
@@ -1249,6 +1238,14 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: true
+
+  /@pbwebdev/cardano-wallet-browser-extensions-interface/0.1.0:
+    resolution: {integrity: sha512-sroByGw/K5ZuTHvUCrrBaJTvOpSb+w0wxWmFFX0WMnWIAcPX4MUoKRRgC2aVcyZ0NrYQ3Occ/37n1WxZFK3aLQ==}
+    dependencies:
+      '@babel/runtime': 7.17.9
+      '@emurgo/cardano-serialization-lib-browser': 9.1.2
+      buffer: 6.0.3
+    dev: false
 
   /@types/eslint-scope/3.7.1:
     resolution: {integrity: sha512-SCFeogqiptms4Fg29WpOTk5nHIzfpKCemSN63ksBQYKTcXoJEmJagV+DhVmbapZzY4/5YaOV1nZwrsU79fFm1g==}
@@ -1646,6 +1643,7 @@ packages:
 
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    dev: false
 
   /big.js/5.2.2:
     resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
@@ -1691,6 +1689,7 @@ packages:
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
+    dev: false
 
   /call-bind/1.0.2:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
@@ -2197,6 +2196,7 @@ packages:
 
   /ieee754/1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
+    dev: false
 
   /import-cwd/3.0.0:
     resolution: {integrity: sha512-4pnzH16plW+hgvRECbDWpQl3cqtvSofHWh44met7ESfZ8UZOWWddm8hEyDTqREJ9RbYHY8gi8DqmaelApoOGMg==}
