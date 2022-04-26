@@ -6,6 +6,7 @@ specifiers:
   '@babel/preset-env': 7.16.4
   '@babel/runtime': ^7.16.3
   '@emurgo/cardano-serialization-lib-browser': 9.1.2
+  '@kermage/cardano-wallet-browser-extensions-interface': ^0.1.0
   alpinejs: 3.7.0
   autoprefixer: ^10.4.0
   babel-loader: ^8.2.3
@@ -23,6 +24,7 @@ specifiers:
 
 dependencies:
   '@babel/runtime': 7.16.3
+  '@kermage/cardano-wallet-browser-extensions-interface': 0.1.0
 
 devDependencies:
   '@babel/core': 7.16.0
@@ -1169,6 +1171,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.9
+    dev: false
+
+  /@babel/runtime/7.17.9:
+    resolution: {integrity: sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.9
 
   /@babel/template/7.16.0:
     resolution: {integrity: sha512-MnZdpFD/ZdYhXwiunMqqgyZyucaYsbL0IrjoGjaVhGilz+x8YB++kRfygSOIj1yOtWKPlx7NBp+9I1RQSgsd5A==}
@@ -1211,7 +1220,14 @@ packages:
 
   /@emurgo/cardano-serialization-lib-browser/9.1.2:
     resolution: {integrity: sha512-eQnS0VaRbpgJLCMVLDuYqk1C0mp8TYDptYwaESGk9ZvQxga+Brl4vnlH/XHRjN6HIVm2vNBjujs758dE3uc7cg==}
-    dev: true
+
+  /@kermage/cardano-wallet-browser-extensions-interface/0.1.0:
+    resolution: {integrity: sha512-ui8RYrQBldjj7/Jap9y1xtLwMfrYnReM9AyZdDr61BsetybCEimPpCFUAmxzkFZ3j1q+1uXPPzYTNFTFwvVnng==, tarball: download/@kermage/cardano-wallet-browser-extensions-interface/0.1.0/bf24db2cab5ed62605ec9f8dba3e38621fb75233eddf904bda5fa5d01f7725f2}
+    dependencies:
+      '@babel/runtime': 7.17.9
+      '@emurgo/cardano-serialization-lib-browser': 9.1.2
+      buffer: 6.0.3
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1630,7 +1646,6 @@ packages:
 
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
-    dev: true
 
   /big.js/5.2.2:
     resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
@@ -1676,7 +1691,6 @@ packages:
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
-    dev: true
 
   /call-bind/1.0.2:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
@@ -2183,7 +2197,6 @@ packages:
 
   /ieee754/1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
-    dev: true
 
   /import-cwd/3.0.0:
     resolution: {integrity: sha512-4pnzH16plW+hgvRECbDWpQl3cqtvSofHWh44met7ESfZ8UZOWWddm8hEyDTqREJ9RbYHY8gi8DqmaelApoOGMg==}
@@ -2837,7 +2850,7 @@ packages:
   /regenerator-transform/0.14.5:
     resolution: {integrity: sha512-eOf6vka5IO151Jfsw2NO9WpGX58W6wWmefK3I1zEGr0lOD0u8rwPaNqQL1aRxUaxLeKO3ArNh3VYg1KbaD+FFw==}
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.9
     dev: true
 
   /regexpu-core/4.8.0:

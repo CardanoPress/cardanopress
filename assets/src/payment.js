@@ -1,8 +1,9 @@
 /* global grecaptcha */
 
 import { getConnectedExtension} from './api/config'
-import { adaToLovelace, addNotice, getConnectedWallet, removeNotice } from './api/util'
+import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 import { getPaymentAddress, handlePayment } from './actions'
+import { adaToLovelace } from '@kermage/cardano-wallet-browser-extensions-interface/utils'
 
 window.addEventListener('alpine:init', () => {
     const Alpine = window.Alpine || {}

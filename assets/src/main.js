@@ -1,24 +1,28 @@
 import Alpine from 'alpinejs'
 import { handleReconnect, handleSync, logMeIn, logMeOut } from './actions'
 import {
-    browser,
     cardanoPress,
     getConnectedExtension,
     isNotified,
-    NETWORK,
     setConnectedExtension,
     setNotified,
-    supportedWallets,
-    toPropertyName
 } from './api/config'
-import { addNotice, getConnectedWallet, hexToBech32, removeNotice } from './api/util'
+import {
+    toPropertyName,
+    browser,
+    NETWORK,
+    supportedWallets,
+} from '@kermage/cardano-wallet-browser-extensions-interface/config'
+import { hexToBech32 } from '@kermage/cardano-wallet-browser-extensions-interface/utils'
+import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 import { delegation as delegationTx } from './api/delegation'
 import { payment as paymentTx } from './api/payment'
-import Extensions from './lib/extensions'
+import Extensions from '@kermage/cardano-wallet-browser-extensions-interface'
 import * as actions from './api/actions'
 import * as util from './api/util'
-import * as wallet from './api/wallet'
-import * as csl from '@emurgo/cardano-serialization-lib-browser'
+import * as utils from '@kermage/cardano-wallet-browser-extensions-interface/utils'
+import * as wallet from '@kermage/cardano-wallet-browser-extensions-interface/wallet'
+import { CSL as csl } from '@kermage/cardano-wallet-browser-extensions-interface'
 
 window.Alpine = Alpine
 
@@ -224,6 +228,7 @@ window.cardanoPress = {
     api: {
         ...actions,
         ...util,
+        ...utils,
     },
     browser: {
         supports: supportedWallets,
