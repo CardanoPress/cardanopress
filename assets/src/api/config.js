@@ -21,6 +21,8 @@ export const cardanoPress = window.cardanoPress || {
     logged: '',
 }
 
+export const toPropertyName = (string, prefix = '', suffix = '') => prefix + string.charAt(0).toUpperCase() + string.slice(1) + suffix
+
 export const getConnectedExtension = () => localStorage.getItem('_x_connectedExtension') || ''
 export const setConnectedExtension = value => localStorage.setItem('_x_connectedExtension', value)
 export const isNotified = () => localStorage.getItem('_x_isNotified') || 'false'

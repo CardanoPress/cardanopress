@@ -5,7 +5,7 @@ specifiers:
   '@babel/plugin-transform-runtime': ^7.16.4
   '@babel/preset-env': 7.16.4
   '@babel/runtime': ^7.16.3
-  '@pbwebdev/cardano-wallet-browser-extensions-interface': ^0.1.0
+  '@pbwebdev/cardano-wallet-browser-extensions-interface': ^0.2.0
   alpinejs: 3.7.0
   autoprefixer: ^10.4.0
   babel-loader: ^8.2.3
@@ -22,7 +22,7 @@ specifiers:
 
 dependencies:
   '@babel/runtime': 7.16.3
-  '@pbwebdev/cardano-wallet-browser-extensions-interface': 0.1.0
+  '@pbwebdev/cardano-wallet-browser-extensions-interface': 0.2.0
 
 devDependencies:
   '@babel/core': 7.16.0
@@ -1239,8 +1239,8 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@pbwebdev/cardano-wallet-browser-extensions-interface/0.1.0:
-    resolution: {integrity: sha512-sroByGw/K5ZuTHvUCrrBaJTvOpSb+w0wxWmFFX0WMnWIAcPX4MUoKRRgC2aVcyZ0NrYQ3Occ/37n1WxZFK3aLQ==}
+  /@pbwebdev/cardano-wallet-browser-extensions-interface/0.2.0:
+    resolution: {integrity: sha512-7IqDjFoWW0HPwVQVw9O34m9qY9j8H2ysr2To6IIB/JrGO07htjgaFnHYeJca05hSfeaq8BnxOMDRVNuzbN77Jw==}
     dependencies:
       '@babel/runtime': 7.17.9
       '@emurgo/cardano-serialization-lib-browser': 9.1.2

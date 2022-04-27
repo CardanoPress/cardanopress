@@ -2,14 +2,13 @@ import Alpine from 'alpinejs'
 import { handleReconnect, handleSync, logMeIn, logMeOut } from './actions'
 import {
     cardanoPress,
+    toPropertyName,
     getConnectedExtension,
     isNotified,
     setConnectedExtension,
     setNotified,
 } from './api/config'
 import {
-    toPropertyName,
-    browser,
     NETWORK,
     supportedWallets,
 } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
@@ -54,8 +53,7 @@ Alpine.data('cardanoPress', () => ({
 
         this.$watch('showModal', () => {
             supportedWallets.forEach(wallet => {
-                const method = toPropertyName(wallet, 'has')
-                this[method] = browser[method]()
+                this[toPropertyName(wallet, 'has')] = Extensions.hasWallet(wallet)
             })
         })
 
@@ -232,9 +230,9 @@ window.cardanoPress = {
     },
     browser: {
         supports: supportedWallets,
-        ...browser,
         ...supportedWallets.reduce((a, v) => ({
             ...a,
+            [toPropertyName(v, 'has')]: async () => await Extensions.hasWallet(v),
             [toPropertyName(v, 'get')]: async () => await Extensions.getWallet(v),
         }), {})
     },
