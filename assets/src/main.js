@@ -229,7 +229,9 @@ window.cardanoPress = {
         ...utils,
     },
     browser: {
+        Extensions,
         supports: supportedWallets,
+        isSupported: type => Extensions.isSupported(type),
         ...supportedWallets.reduce((a, v) => ({
             ...a,
             [toPropertyName(v, 'has')]: async () => await Extensions.hasWallet(v),
