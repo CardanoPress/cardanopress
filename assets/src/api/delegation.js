@@ -1,43 +1,5 @@
 import { getConnectedWallet } from './util'
 import { getProtocol, getAccount } from './actions'
-import { CSL } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
-import { hexToBytes } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
-import { buildTx, prepareTx } from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
-
-const createCertificates = async (stakeKeyHash, accountActive, poolHex) => {
-    const certificates = CSL.Certificates.new()
-
-    if (!accountActive) {
-        certificates.add(
-            CSL.Certificate.new_stake_registration(
-                CSL.StakeRegistration.new(
-                    CSL.StakeCredential.from_keyhash(
-                        CSL.Ed25519KeyHash.from_bytes(
-                            hexToBytes(stakeKeyHash)
-                        )
-                    )
-                )
-            )
-        )
-    }
-
-    certificates.add(
-        CSL.Certificate.new_stake_delegation(
-            CSL.StakeDelegation.new(
-                CSL.StakeCredential.from_keyhash(
-                    CSL.Ed25519KeyHash.from_bytes(
-                        hexToBytes(stakeKeyHash)
-                    )
-                ),
-                CSL.Ed25519KeyHash.from_bytes(
-                    hexToBytes(poolHex)
-                )
-            )
-        )
-    )
-
-    return certificates
-}
 
 export const delegation = async (poolId) => {
     let Wallet
@@ -53,62 +15,34 @@ export const delegation = async (poolId) => {
 
     const network = await Wallet.getNetwork()
 
-    if ('Typhon' === Wallet.type) {
-        try {
-            const response = await Wallet.cardano.delegationTransaction({
-                poolId,
-            })
-
-            if (response.status) {
-                return {
-                    success: true,
-                    data: {
-                        network,
-                        transaction: response.data.transactionId,
-                    },
-                }
-            }
-
-            return {
-                success: false,
-                data: response?.error ?? response.reason,
-            }
-        } catch (error) {
-            return {
-                success: false,
-                data: error,
-            }
-        }
-    }
-
-    const responseProtocol = await getProtocol(network)
-
-    if (!responseProtocol.success) {
-        return responseProtocol
-    }
-
-    const rewardAddress = await Wallet.getRewardAddress()
-    const responseAccount = await getAccount(network, rewardAddress)
-
-    if (!responseAccount.success) {
-        return responseAccount
-    }
-
     try {
-        const accountDetails = responseAccount.data
-        const protocolParameters = responseProtocol.data
-        const changeAddress = await Wallet.getChangeAddress()
-        const utxos = await Wallet.getUtxos()
-        const outputs = await prepareTx(protocolParameters.keyDeposit, changeAddress)
-        const stakeKeyHash = await Wallet.getStakeKeyHash()
-        const certificates = await createCertificates(stakeKeyHash, accountDetails.active, poolId)
-        const transaction = await buildTx(changeAddress, utxos, outputs, protocolParameters, certificates)
+        let protocolParameters = null
+        let accountInformation = null
+
+        if ('Typhon' !== Wallet.type) {
+            const responseProtocol = await getProtocol(network)
+
+            if (!responseProtocol.success) {
+                return responseProtocol
+            }
+
+            protocolParameters = responseProtocol.data
+
+            const rewardAddress = await Wallet.getRewardAddress()
+            const responseAccount = await getAccount(network, rewardAddress)
+
+            if (!responseAccount.success) {
+                return responseAccount
+            }
+
+            accountInformation = responseAccount.data
+        }
 
         return {
             success: true,
             data: {
                 network,
-                transaction: await Wallet.signAndSubmit(transaction),
+                transaction: await Wallet.delegateTo(poolId, protocolParameters, accountInformation),
             },
         }
     } catch (error) {

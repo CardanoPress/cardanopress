@@ -1,4 +1,3 @@
-import { buildTx, prepareTx } from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
 import { getProtocol } from './actions'
 import { getConnectedWallet } from './util'
 
@@ -16,55 +15,24 @@ export const payment = async (address, amount) => {
 
     const network = await Wallet.getNetwork()
 
-    if ('Typhon' === Wallet.type) {
-        try {
-            const response = await Wallet.cardano.paymentTransaction({
-                outputs: [{
-                    address,
-                    amount,
-                }],
-            })
-
-            if (response.status) {
-                return {
-                    success: true,
-                    data: {
-                        network,
-                        transaction: response.data.transactionId,
-                    },
-                }
-            }
-
-            return {
-                success: false,
-                data: response?.error ?? response.reason,
-            }
-        } catch (error) {
-            return {
-                success: false,
-                data: error,
-            }
-        }
-    }
-
-    const response = await getProtocol(network)
-
-    if (!response.success) {
-        return response
-    }
-
     try {
-        const changeAddress = await Wallet.getChangeAddress()
-        const utxos = await Wallet.getUtxos()
-        const outputs = await prepareTx(amount, address)
-        const protocolParameters = response.data
-        const transaction = await buildTx(changeAddress, utxos, outputs, protocolParameters)
+        let protocolParameters = null
+
+        if ('Typhon' !== Wallet.type) {
+            const response = await getProtocol(network)
+
+            if (!response.success) {
+                return response
+            }
+
+            protocolParameters = response.data
+        }
 
         return {
             success: true,
             data: {
                 network,
-                transaction: await Wallet.signAndSubmit(transaction),
+                transaction: await Wallet.payTo(address, amount, protocolParameters),
             },
         }
     } catch (error) {
