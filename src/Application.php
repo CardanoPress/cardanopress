@@ -66,7 +66,7 @@ class Application
         $this->templates = new Templates($load_path . 'templates');
         self::$logger = new Logger($load_path . 'logs');
 
-        new Manifest($load_path . 'assets');
+        new Manifest($load_path . 'assets/dist', self::VERSION);
         new CoreAction();
         new WalletAction();
         new Shortcode();

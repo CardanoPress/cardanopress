@@ -8,23 +8,13 @@
 namespace PBWebDev\CardanoPress;
 
 use Exception;
-use ThemePlate\Core\Data;
+use PBWebDev\CardanoPress\Foundation\AbstractAdmin;
 use ThemePlate\Page;
 use ThemePlate\Settings;
 
-class Admin
+class Admin extends AbstractAdmin
 {
-    protected Data $data;
-
     public const OPTION_KEY = 'cardanopress';
-
-    public function __construct()
-    {
-        $this->data = new Data();
-
-        $this->setup();
-        add_filter('pre_update_option_' . self::OPTION_KEY, [$this, 'getPoolDetails'], 10, 2);
-    }
 
     public function setup(): void
     {
@@ -37,6 +27,8 @@ class Admin
         $this->memberPagesFields();
         $this->userAccessFields();
         $this->assetAccessFields();
+
+        add_filter('pre_update_option_' . self::OPTION_KEY, [$this, 'getPoolDetails'], 10, 2);
     }
 
     private function applicationPage(): void
@@ -377,17 +369,5 @@ class Admin
         }
 
         return $newValue;
-    }
-
-    public function getOption(string $key)
-    {
-        $options = get_option(static::OPTION_KEY, []);
-        $value = $options[$key] ?? '';
-
-        if ($value) {
-            return $value;
-        }
-
-        return $this->data->get_default(static::OPTION_KEY, $key);
     }
 }

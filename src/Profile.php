@@ -7,17 +7,11 @@
 
 namespace PBWebDev\CardanoPress;
 
-use WP_User;
+use PBWebDev\CardanoPress\Foundation\AbstractProfile;
 
-class Profile
+class Profile extends AbstractProfile
 {
-    protected WP_User $user;
     private string $prefix = 'cardanopress_';
-
-    public function __construct(WP_User $user)
-    {
-        $this->user = $user;
-    }
 
     public function isConnected(): bool
     {
@@ -113,39 +107,5 @@ class Profile
         $isSaved = add_user_meta($this->user->ID, $this->getMetaKey('transaction'), $data);
 
         return (bool)$isSaved;
-    }
-
-    public function setUserAuth(string $username): void
-    {
-        wp_set_current_user($this->user->ID);
-        wp_set_auth_cookie($this->user->ID);
-        do_action('wp_login', $username, $this->user);
-    }
-
-    public function unsetUserAuth(): void
-    {
-        wp_destroy_current_session();
-        wp_clear_auth_cookie();
-        wp_set_current_user(0);
-        do_action('wp_logout', $this->user->ID);
-    }
-
-    public function getData(string $key = null)
-    {
-        if (null === $key) {
-            return $this->user;
-        }
-
-        return $this->user->$key;
-    }
-
-    public function addRole(string $role): void
-    {
-        $this->user->add_role($role);
-    }
-
-    public function hasRole(string $role): bool
-    {
-        return in_array($role, $this->user->roles, true);
     }
 }
