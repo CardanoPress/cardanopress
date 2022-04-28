@@ -21,7 +21,7 @@ window.addEventListener('alpine:init', () => {
                 if (getConnectedExtension()) {
                     try {
                         const Wallet = await getConnectedWallet()
-                        this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(this.lovelaceValue(this.$root.dataset.fee))
+                        this.remainingBalance = parseInt(await Wallet.getBalance()) - parseInt(adaToLovelace(this.$root.dataset.fee))
                     } catch (error) {
                         addNotice({ type: 'error', text: error })
                     }
@@ -35,10 +35,6 @@ window.addEventListener('alpine:init', () => {
 
         isReady() {
             return !!(this.isVerified && !this.isProcessing && this.percentage && this.address)
-        },
-
-        lovelaceValue(amount) {
-            return adaToLovelace(amount)
         },
 
         paymentAmount() {

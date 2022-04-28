@@ -51,6 +51,12 @@ window.addEventListener('alpine:init', () => {
             return !!(('extension' !== type ? this.isVerified : true) && !this.isProcessing)
         },
 
+        balanceValue(type, inAda = true) {
+            const amount = this[type + 'Balance']
+
+            return amount / (inAda ? 1000000 : 1)
+        },
+
         lovelaceValue() {
             return adaToLovelace(this.payAmount)
         },
