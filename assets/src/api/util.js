@@ -1,6 +1,26 @@
 import { getConnectedExtension } from './config'
 import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 
+export const waitElement = (selector) => {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(() => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
+}
+
 export const generateUuid = () => {
     const s4 = () => {
         return Math.floor((1 + Math.random()) * 0x10000)

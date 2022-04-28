@@ -1,7 +1,7 @@
 /* global grecaptcha */
 
 import { getConnectedExtension} from './api/config'
-import { addNotice, getConnectedWallet, removeNotice } from './api/util'
+import { addNotice, getConnectedWallet, removeNotice, waitElement } from './api/util'
 import { getPaymentAddress, handlePayment } from './actions'
 import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 
@@ -103,15 +103,17 @@ window.addEventListener('alpine:init', () => {
 window.cardanoPressRecaptchaCallback = () => {
     const sendVerified = (status) => window.dispatchEvent(new CustomEvent('cardanoPress:recaptcha', { 'detail': status }))
 
-    grecaptcha.render('cardanopress-recaptcha', {
-        'callback': () => {
-            sendVerified(true)
-        },
-        'expired-callback': () => {
-            sendVerified(false)
-        },
-        'error-callback': () => {
-            sendVerified(false)
-        },
+    waitElement('#cardanopress-recaptcha').then((element) => {
+        grecaptcha.render(element, {
+            'callback': () => {
+                sendVerified(true)
+            },
+            'expired-callback': () => {
+                sendVerified(false)
+            },
+            'error-callback': () => {
+                sendVerified(false)
+            },
+        })
     })
 }
