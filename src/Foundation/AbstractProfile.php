@@ -47,6 +47,11 @@ abstract class AbstractProfile
         $this->user->add_role($role);
     }
 
+    public function removeRole(string $role): void
+    {
+        $this->user->remove_role($role);
+    }
+
     public function hasRole(string $role): bool
     {
         return in_array($role, $this->user->roles, true);

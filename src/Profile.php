@@ -18,19 +18,10 @@ class Profile extends AbstractProfile
         return $this->connectedNetwork() && $this->connectedWallet() && $this->connectedStake();
     }
 
-    public function getMetaKey(string $name, $prefix = null): string
-    {
-        if (null === $prefix) {
-            $prefix = $this->prefix;
-        }
-
-        return $prefix . $name;
-    }
-
 
     public function connectedNetwork(): string
     {
-        $saved = get_user_meta($this->user->ID, $this->getMetaKey('connected_network'), true);
+        $saved = get_user_meta($this->user->ID, $this->prefix . 'connected_network', true);
 
         return $saved ?? '';
     }
@@ -40,7 +31,7 @@ class Profile extends AbstractProfile
         $isAdded = false;
 
         if ($query_network !== $this->connectedNetwork()) {
-            $isAdded = update_user_meta($this->user->ID, $this->getMetaKey('connected_network'), $query_network);
+            $isAdded = update_user_meta($this->user->ID, $this->prefix . 'connected_network', $query_network);
         }
 
         return (bool)$isAdded;
@@ -48,7 +39,7 @@ class Profile extends AbstractProfile
 
     public function connectedWallet(): string
     {
-        $saved = get_user_meta($this->user->ID, $this->getMetaKey('connected_wallet'), true);
+        $saved = get_user_meta($this->user->ID, $this->prefix . 'connected_wallet', true);
 
         return $saved ?? '';
     }
@@ -58,7 +49,7 @@ class Profile extends AbstractProfile
         $isAdded = false;
 
         if ($walletAddress !== $this->connectedWallet()) {
-            $isAdded = update_user_meta($this->user->ID, $this->getMetaKey('connected_wallet'), $walletAddress);
+            $isAdded = update_user_meta($this->user->ID, $this->prefix . 'connected_wallet', $walletAddress);
         }
 
         return (bool)$isAdded;
@@ -66,7 +57,7 @@ class Profile extends AbstractProfile
 
     public function connectedStake(): string
     {
-        $saved = get_user_meta($this->user->ID, $this->getMetaKey('connected_stake'), true);
+        $saved = get_user_meta($this->user->ID, $this->prefix . 'connected_stake', true);
 
         return $saved ?? '';
     }
@@ -76,7 +67,7 @@ class Profile extends AbstractProfile
         $isAdded = false;
 
         if ($stakeAddress !== $this->connectedStake()) {
-            $isAdded = update_user_meta($this->user->ID, $this->getMetaKey('connected_stake'), $stakeAddress);
+            $isAdded = update_user_meta($this->user->ID, $this->prefix . 'connected_stake', $stakeAddress);
         }
 
         return (bool)$isAdded;
@@ -84,19 +75,19 @@ class Profile extends AbstractProfile
 
     public function storedAssets(): array
     {
-        $saved = get_user_meta($this->user->ID, $this->getMetaKey('stored_assets'), true);
+        $saved = get_user_meta($this->user->ID, $this->prefix . 'stored_assets', true);
 
         return array_filter((array)$saved);
     }
 
     public function saveAssets(array $data): bool
     {
-        return update_user_meta($this->user->ID, $this->getMetaKey('stored_assets'), $data);
+        return update_user_meta($this->user->ID, $this->prefix . 'stored_assets', $data);
     }
 
     public function allTransactions(): array
     {
-        $saved = get_user_meta($this->user->ID, $this->getMetaKey('transaction'), false);
+        $saved = get_user_meta($this->user->ID, $this->prefix . 'transaction', false);
 
         return array_filter((array)$saved);
     }
@@ -104,7 +95,7 @@ class Profile extends AbstractProfile
     public function saveTransaction(string $network, string $action, string $hash): bool
     {
         $data = compact('network', 'action', 'hash');
-        $isSaved = add_user_meta($this->user->ID, $this->getMetaKey('transaction'), $data);
+        $isSaved = add_user_meta($this->user->ID, $this->prefix . 'transaction', $data);
 
         return (bool)$isSaved;
     }
