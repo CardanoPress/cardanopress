@@ -74,6 +74,14 @@ window.addEventListener('alpine:init', () => {
                 text: 'Processing...',
             })
 
+            if (!this.paymentAddress) {
+                const { success, data } = await getPaymentAddress()
+
+                if (success) {
+                    this.paymentAddress = data
+                }
+            }
+
             this.isProcessing = true
             const response = await handlePayment(this.lovelaceValue(), this.paymentAddress)
 
