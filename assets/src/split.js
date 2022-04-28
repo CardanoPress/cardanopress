@@ -30,7 +30,7 @@ window.addEventListener('alpine:init', () => {
 
             window.addEventListener('cardanoPress:recaptcha', async (event) => {
                 this.isVerified = event.detail
-            })
+            }, { once: true })
         },
 
         isReady() {

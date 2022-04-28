@@ -39,9 +39,11 @@ get_header();
                 </p>
             </div>
 
-            <div class="py-6">
-                <?php cardanoPress()->template('part/payment-recaptcha'); ?>
-            </div>
+            <template x-if='!isVerified'>
+                <div class="py-6">
+                    <?php cardanoPress()->template('part/payment-recaptcha'); ?>
+                </div>
+            </template>
 
             <table class="w-full">
                 <thead>
