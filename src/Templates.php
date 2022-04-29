@@ -21,11 +21,20 @@ class Templates extends AbstractTemplates
         return 'CardanoPress:';
     }
 
+    protected function getLoaderFile(): string
+    {
+        if (is_page_template()) {
+            return get_page_template_slug();
+        }
+
+        return '';
+    }
+
     public function createPages(): void
     {
         $optionsValue = get_option(Admin::OPTION_KEY, []);
 
-        foreach ($this->storage as $template => $name) {
+        foreach ($this->pageTemplates as $template => $name) {
             $title = substr($name, strlen($this->getTitlePrefix()) + 1);
             $slug = 'member_' . sanitize_title($title);
 

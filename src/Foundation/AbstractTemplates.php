@@ -9,23 +9,25 @@ namespace PBWebDev\CardanoPress\Foundation;
 
 abstract class AbstractTemplates
 {
-    protected array $storage;
+    protected array $pageTemplates;
     protected string $load_path;
 
     public function __construct(string $load_path)
     {
         $this->load_path = trailingslashit($load_path);
-        $this->storage = $this->getCustomTemplates($this->load_path);
+        $this->pageTemplates = $this->getPageTemplates($this->load_path);
 
-        add_filter('theme_page_templates', [$this, 'setCustomTemplates']);
-        add_filter('template_include', [$this, 'loadCustomTemplate']);
+        add_filter('theme_page_templates', [$this, 'setPageTemplates']);
+        add_filter('template_include', [$this, 'loadCustomTemplate'], -1);
     }
 
     abstract protected function getPathPrefix(): string;
 
     abstract protected function getTitlePrefix(): string;
 
-    protected function getCustomTemplates(string $path): array
+    abstract protected function getLoaderFile(): string;
+
+    protected function getPageTemplates(string $path): array
     {
         $templates = [];
 
@@ -48,23 +50,28 @@ abstract class AbstractTemplates
         return implode(' ', preg_split('/(?=[A-Z])/', $string));
     }
 
-    public function setCustomTemplates(array $templates): array
+    public function setPageTemplates(array $templates): array
     {
-        return array_merge($templates, $this->storage);
+        return array_merge($templates, $this->pageTemplates);
     }
 
     public function loadCustomTemplate(string $default): string
     {
-        if (is_search() || is_embed()) {
+        if (is_embed()) {
             return $default;
         }
 
-        $page_template = $this->getLoaderFile();
-        $template_file = locate_template($page_template);
+        $loaderFile = $this->getLoaderFile();
 
-        if (! $template_file && $this->isCustomPage($page_template)) {
+        if (empty($loaderFile)) {
+            return $default;
+        }
+
+        $template_file = locate_template($loaderFile);
+
+        if (! $template_file) {
             $pathPrefix = trailingslashit($this->getPathPrefix());
-            $template_file = $this->load_path . str_replace($pathPrefix, '', $page_template);
+            $template_file = $this->load_path . str_replace($pathPrefix, '', $loaderFile);
         }
 
         if (file_exists($template_file)) {
@@ -72,11 +79,6 @@ abstract class AbstractTemplates
         }
 
         return $default;
-    }
-
-    protected function getLoaderFile(): string
-    {
-        return get_page_template_slug();
     }
 
     public function getPath(bool $default = false): string
