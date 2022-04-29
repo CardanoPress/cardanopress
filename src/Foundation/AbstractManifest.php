@@ -49,7 +49,7 @@ abstract class AbstractManifest
 
     public function enqueueAssets(): void
     {
-        $base = $this->getAssetsBase();
+        $base = trailingslashit($this->getAssetsBase());
 
         foreach ($this->storage as $file => $asset) {
             $parts = explode('.', $file);

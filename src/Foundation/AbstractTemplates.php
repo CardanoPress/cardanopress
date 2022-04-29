@@ -32,7 +32,7 @@ abstract class AbstractTemplates
         foreach (glob($path . 'page/*.php') as $file) {
             $basename = basename($file, '.php');
             $filename = implode('', [
-                $this->getPathPrefix(),
+                trailingslashit($this->getPathPrefix()),
                 'page/',
                 $basename,
                 '.php',
@@ -63,7 +63,8 @@ abstract class AbstractTemplates
         $template_file = locate_template($page_template);
 
         if (! $template_file && $this->isCustomPage($page_template)) {
-            $template_file = $this->load_path . str_replace($this->getPathPrefix(), '', $page_template);
+            $pathPrefix = trailingslashit($this->getPathPrefix());
+            $template_file = $this->load_path . str_replace($pathPrefix, '', $page_template);
         }
 
         if (file_exists($template_file)) {
@@ -84,7 +85,7 @@ abstract class AbstractTemplates
             return $this->load_path;
         }
 
-        return $this->getPathPrefix();
+        return trailingslashit($this->getPathPrefix());
     }
 
     public function isCustomPage(string $template): bool
