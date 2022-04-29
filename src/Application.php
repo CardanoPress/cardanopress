@@ -143,11 +143,4 @@ class Application
 
         return ! empty($projectIds);
     }
-
-    public function isTemplatePage($post = null): bool
-    {
-        $template = get_page_template_slug($post);
-
-        return $this->templates->isCustomPage($template);
-    }
 }

@@ -89,9 +89,4 @@ abstract class AbstractTemplates
 
         return trailingslashit($this->getPathPrefix());
     }
-
-    public function isCustomPage(string $template): bool
-    {
-        return isset($this->storage[$template]);
-    }
 }
