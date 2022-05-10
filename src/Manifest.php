@@ -52,12 +52,12 @@ class Manifest extends AbstractManifest
 
     public function injectModalConnect(): void
     {
-        cardanoPress()->template('modal-connect');
+        Application::instance()->template('modal-connect');
     }
 
     public function injectNoticesHandler(): void
     {
-        cardanoPress()->template('notices-handler');
+        Application::instance()->template('notices-handler');
     }
 
     public function closeDataProviderTag(): void

@@ -129,7 +129,7 @@ class Application
             return [];
         }
 
-        $poolData = cardanoPress()->option('delegation_pool_data');
+        $poolData = $this->option('delegation_pool_data');
         /** @noinspection PhpUnnecessaryLocalVariableInspection */
         $data = $poolData[$network] ?? [];
 
