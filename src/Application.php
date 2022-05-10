@@ -123,15 +123,22 @@ class Application
             return $data;
         }
 
-        $network = $this->userProfile()->connectedNetwork();
+        $poolData = $this->option('delegation_pool_data');
+        $data = $poolData[$this->getNetwork()] ?? [];
 
-        if (! $network) {
-            return [];
+        return $data;
+    }
+
+    public function paymentAddress(): string
+    {
+        static $data;
+
+        if (null !== $data) {
+            return $data;
         }
 
-        $poolData = $this->option('delegation_pool_data');
-        /** @noinspection PhpUnnecessaryLocalVariableInspection */
-        $data = $poolData[$network] ?? [];
+        $paymentAddresses = $this->option('payment_address');
+        $data = $paymentAddresses[$this->getNetwork()] ?? '';
 
         return $data;
     }
@@ -142,5 +149,16 @@ class Application
         $projectIds = array_filter($projectIds);
 
         return ! empty($projectIds);
+    }
+
+    public function getNetwork(): string
+    {
+        $network = $this->userProfile()->connectedNetwork();
+
+        if (! $network || ! Blockfrost::isReady($network)) {
+            $network = 'mainnet';
+        }
+
+        return $network;
     }
 }
