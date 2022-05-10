@@ -188,10 +188,8 @@ class WalletAction
     {
         $this->maybeInvalid();
 
-        $app = Application::instance();
-        $userProfile = new Profile(wp_get_current_user());
-        $poolData = $app->option('delegation_pool_data');
-        $response = $poolData[$userProfile->connectedNetwork()]['hex'] ?? '';
+        $poolData = Application::instance()->option('delegation_pool_data');
+        $response = $poolData[$this->getNetwork()]['hex'] ?? '';
 
         if (empty($response)) {
             wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
@@ -222,15 +220,21 @@ class WalletAction
     {
         $this->maybeInvalid();
 
-        $app = Application::instance();
-        $paymentAddresses = $app->option('payment_address');
-        $connectedNetwork = $app->userProfile()->connectedNetwork();
+        $paymentAddresses = Application::instance()->option('payment_address');
 
-        if (! $connectedNetwork) {
-            $connectedNetwork = 'mainnet';
+        wp_send_json_success($paymentAddresses[$this->getNetwork()]);
+    }
+
+    private function getNetwork(): string
+    {
+        $app = Application::instance();
+        $network = $app->userProfile()->connectedNetwork();
+
+        if (! $network || ! Blockfrost::isReady($network)) {
+            $network = 'mainnet';
         }
 
-        wp_send_json_success($paymentAddresses[$connectedNetwork]);
+        return $network;
     }
 
     private function maybeInvalid(array $postVars = array()): void
