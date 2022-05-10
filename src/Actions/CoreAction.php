@@ -54,7 +54,7 @@ class CoreAction
         $queryNetwork = $userProfile->connectedNetwork();
         $stakeAddress = $userProfile->connectedStake();
 
-        if (! $queryNetwork || ! $stakeAddress) {
+        if (! $queryNetwork || ! $stakeAddress || ! Blockfrost::isReady($queryNetwork)) {
             return;
         }
 
@@ -106,7 +106,7 @@ class CoreAction
         $queryNetwork = $userProfile->connectedNetwork();
         $stakeAddress = $userProfile->connectedStake();
 
-        if (! $queryNetwork || ! $stakeAddress) {
+        if (! $queryNetwork || ! $stakeAddress || ! Blockfrost::isReady($queryNetwork)) {
             return;
         }
 

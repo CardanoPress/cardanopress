@@ -130,6 +130,11 @@ class WalletAction
         check_ajax_referer('cardanopress-actions');
 
         $network = $_POST['query_network'];
+
+        if (! Blockfrost::isReady($network)) {
+            wp_send_json_error(__('Unsupported network ' . $network, 'cardanopress'));
+        }
+
         $blockfrost = new Blockfrost($network);
 
         $response = $blockfrost->protocolParameters();
@@ -146,6 +151,11 @@ class WalletAction
         check_ajax_referer('cardanopress-actions');
 
         $network = $_POST['query_network'];
+
+        if (! Blockfrost::isReady($network)) {
+            wp_send_json_error(__('Unsupported network ' . $network, 'cardanopress'));
+        }
+
         $blockfrost = new Blockfrost($network);
         $response = $blockfrost->getAccountDetails($_POST['reward_address']);
 
@@ -161,6 +171,11 @@ class WalletAction
         check_ajax_referer('cardanopress-actions');
 
         $network = $_POST['query_network'];
+
+        if (! Blockfrost::isReady($network)) {
+            wp_send_json_error(__('Unsupported network ' . $network, 'cardanopress'));
+        }
+
         $blockfrost = new Blockfrost($network);
         $response = $blockfrost->getPoolDetails($_POST['pool_id']);
 
