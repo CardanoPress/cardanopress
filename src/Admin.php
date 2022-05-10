@@ -62,6 +62,7 @@ class Admin extends AbstractAdmin
                             'mainnet' => [
                                 'title' => __('Mainnet', 'cardanopress'),
                                 'type' => 'text',
+                                'required' => true,
                             ],
                             'testnet' => [
                                 'title' => __('Testnet', 'cardanopress'),
