@@ -128,7 +128,7 @@ Alpine.data('cardanoPress', () => ({
             this.connectedExtension = wallet.type
             window.cardanoPress.extension = this.connectedExtension
         } else {
-            addNotice({ type: 'error', text: response.data.message })
+            addNotice({ type: 'error', text: response.data })
         }
     },
 

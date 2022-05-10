@@ -33,6 +33,10 @@ class WalletAction
     {
         check_ajax_referer('cardanopress-actions');
 
+        if (empty($_POST['query_network']) || empty($_POST['wallet_address']) || empty($_POST['stake_address'])) {
+            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
+        }
+
         $address = $_POST['wallet_address'];
         $username = md5($address);
         $userId = username_exists($username);
