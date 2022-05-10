@@ -124,17 +124,22 @@ class Blockfrost
 
     private function getClient(string $query_network): BlockfrostClient
     {
-        $projectId = $this->getProjectId($query_network);
+        $projectId = self::getProjectId($query_network);
 
         return new BlockfrostClient($projectId, $query_network);
     }
 
-    private function getProjectId(string $network): string
+    public static function getProjectId(string $network): string
     {
         $app = Application::instance();
         $project_ids = $app->option('blockfrost_project_id');
 
-        return $project_ids[$network];
+        return $project_ids[$network] ?? '';
+    }
+
+    public static function isReady(string $network): bool
+    {
+        return '' !== self::getProjectId($network);
     }
 
     private function blocksLatest(): array
