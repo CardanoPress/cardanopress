@@ -32,10 +32,10 @@ class BlockfrostClient
     /**
      * Create a new BlockfrostClient instance
      */
-    public function __construct(string $project_id, string $network = 'testnet')
+    public function __construct(string $project_id, string $network = 'mainnet')
     {
         if (! array_key_exists($network, self::ENDPOINT)) {
-            $network = 'testnet';
+            $network = 'mainnet';
         }
 
         $Accept = 'application/json';
