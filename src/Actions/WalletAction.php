@@ -31,11 +31,7 @@ class WalletAction
 
     public function initializeUserAccount(): void
     {
-        check_ajax_referer('cardanopress-actions');
-
-        if (empty($_POST['query_network']) || empty($_POST['wallet_address']) || empty($_POST['stake_address'])) {
-            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
-        }
+        $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
 
         $address = $_POST['wallet_address'];
         $username = md5($address);
@@ -77,11 +73,7 @@ class WalletAction
 
     public function connectUserWallet(): void
     {
-        check_ajax_referer('cardanopress-actions');
-
-        if (empty($_POST['query_network']) || empty($_POST['wallet_address']) || empty($_POST['stake_address'])) {
-            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
-        }
+        $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
 
         $userProfile = new Profile(wp_get_current_user());
 
@@ -97,7 +89,7 @@ class WalletAction
 
     public function syncUserAssets(): void
     {
-        check_ajax_referer('cardanopress-actions');
+        $this->maybeInvalid();
 
         $userProfile = new Profile(wp_get_current_user());
         $stored = $userProfile->storedAssets();
@@ -109,6 +101,8 @@ class WalletAction
 
     public function logoutCurrentUser(): void
     {
+        $this->maybeInvalid(['query_network', 'wallet_address']);
+
         $userProfile = new Profile(wp_get_current_user());
         $shouldReload = false;
 
@@ -131,7 +125,7 @@ class WalletAction
 
     public function getProtocolParameters(): void
     {
-        check_ajax_referer('cardanopress-actions');
+        $this->maybeInvalid(['query_network']);
 
         $network = $_POST['query_network'];
 
@@ -152,7 +146,7 @@ class WalletAction
 
     public function getAccountDetails(): void
     {
-        check_ajax_referer('cardanopress-actions');
+        $this->maybeInvalid(['query_network', 'reward_address']);
 
         $network = $_POST['query_network'];
 
@@ -172,7 +166,7 @@ class WalletAction
 
     public function getPoolDetails(): void
     {
-        check_ajax_referer('cardanopress-actions');
+        $this->maybeInvalid(['query_network', 'pool_id']);
 
         $network = $_POST['query_network'];
 
@@ -192,7 +186,7 @@ class WalletAction
 
     public function getDelegationData(): void
     {
-        check_ajax_referer('cardanopress-actions');
+        $this->maybeInvalid();
 
         $app = Application::instance();
         $userProfile = new Profile(wp_get_current_user());
@@ -208,7 +202,7 @@ class WalletAction
 
     public function saveWalletTransaction(): void
     {
-        check_ajax_referer('cardanopress-actions');
+        $this->maybeInvalid(['query_network', 'transaction_action', 'transaction_hash']);
 
         $userProfile = new Profile(wp_get_current_user());
         $success = $userProfile->saveTransaction(
@@ -226,7 +220,7 @@ class WalletAction
 
     public function getPaymentAddress(): void
     {
-        check_ajax_referer('cardanopress-actions');
+        $this->maybeInvalid();
 
         $app = Application::instance();
         $paymentAddresses = $app->option('payment_address');
@@ -237,5 +231,16 @@ class WalletAction
         }
 
         wp_send_json_success($paymentAddresses[$connectedNetwork]);
+    }
+
+    private function maybeInvalid(array $postVars = array()): void
+    {
+        check_ajax_referer('cardanopress-actions');
+
+        if (empty($postVars) || empty(array_diff($postVars, array_keys($_POST)))) {
+            return;
+        }
+
+        wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
     }
 }
