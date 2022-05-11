@@ -36,13 +36,27 @@ class Manifest extends AbstractManifest
     {
         wp_enqueue_style($this->getAssetPrefix() . 'style');
         wp_enqueue_script($this->getAssetPrefix() . 'script');
-        wp_script_add_data($this->getAssetPrefix() . 'script', 'defer', true);
         wp_enqueue_script($this->getAssetPrefix() . 'notification');
         wp_register_script(
             $this->getAssetPrefix() . 'recaptcha',
             'https://www.google.com/recaptcha/api.js?onload=cardanoPressRecaptchaCallback'
         );
         wp_script_add_data($this->getAssetPrefix() . 'recaptcha', 'defer', true);
+
+        foreach ($this->storage as $file => $asset) {
+            $parts = explode('.', $file);
+            $type = 'js' === $parts[1] ? 'script' : 'style';
+
+            if ('style' === $type) {
+                continue;
+            }
+
+            wp_script_add_data(
+                $this->getAssetPrefix() . $parts[0],
+                'script' === $parts[0] ? 'defer' : 'async',
+                true
+            );
+        }
 
         $data = [
             'ajaxUrl' => admin_url('admin-ajax.php'),
