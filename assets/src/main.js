@@ -247,4 +247,4 @@ window.cardanoPress = {
     },
 }
 
-Alpine.start()
+window.addEventListener('load', () => Alpine.start())
