@@ -13,7 +13,7 @@ import {
     supportedWallets,
 } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
 import { hexToBech32 } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
-import { addNotice, getConnectedWallet, removeNotice } from './api/util'
+import { addNotice, getConnectedWallet, removeNotice, windowLoader } from './api/util'
 import { delegation as delegationTx } from './api/delegation'
 import { payment as paymentTx } from './api/payment'
 import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
@@ -247,4 +247,4 @@ window.cardanoPress = {
     },
 }
 
-window.addEventListener('load', () => Alpine.start())
+windowLoader(() => Alpine.start())

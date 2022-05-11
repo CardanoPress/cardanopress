@@ -21,6 +21,14 @@ export const waitElement = (selector) => {
     });
 }
 
+export const windowLoader = (callback) => {
+    if ('complete' === document.readyState) {
+        callback();
+    } else {
+        window.addEventListener('load', callback);
+    }
+}
+
 export const generateUuid = () => {
     const s4 = () => {
         return Math.floor((1 + Math.random()) * 0x10000)
