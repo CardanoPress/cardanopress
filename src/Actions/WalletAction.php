@@ -7,6 +7,7 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
+use PBWebDev\CardanoPress\Admin;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
 use PBWebDev\CardanoPress\Profile;
@@ -231,7 +232,7 @@ class WalletAction
 
     private function maybeInvalid(array $postVars = array()): void
     {
-        check_ajax_referer('cardanopress-actions');
+        check_ajax_referer(Admin::OPTION_KEY . '-actions');
 
         if (empty($postVars) || empty(array_diff($postVars, array_keys($_POST)))) {
             return;

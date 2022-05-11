@@ -43,6 +43,14 @@ class Manifest extends AbstractManifest
             'https://www.google.com/recaptcha/api.js?onload=cardanoPressRecaptchaCallback'
         );
         wp_script_add_data($this->getAssetPrefix() . 'recaptcha', 'defer', true);
+
+        $data = [
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            '_nonce' => wp_create_nonce(Admin::OPTION_KEY . '-actions'),
+            'logged' => is_user_logged_in(),
+        ];
+
+        wp_localize_script($this->getAssetPrefix() . 'script', 'cardanoPress', $data);
     }
 
     public function injectDataProvider(): void

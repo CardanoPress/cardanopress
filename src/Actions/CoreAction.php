@@ -16,30 +16,9 @@ class CoreAction
 {
     public function __construct()
     {
-        add_action('wp_enqueue_scripts', [$this, 'injectScriptVariables']);
         add_action('wp_login', [$this, 'checkWalletAssets'], 10, 2);
         add_action('wp_login', [$this, 'checkDelegationStatus'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
-    }
-
-    public function injectScriptVariables(): void
-    {
-        $app = Application::instance();
-
-        if (! $app->isReady()) {
-            return;
-        }
-
-        wp_register_script('cardanopress-dummy', '');
-        wp_enqueue_script('cardanopress-dummy');
-
-        $data = [
-            'ajaxUrl' => admin_url('admin-ajax.php'),
-            '_nonce' => wp_create_nonce('cardanopress-actions'),
-            'logged' => is_user_logged_in(),
-        ];
-
-        wp_localize_script('cardanopress-dummy', 'cardanoPress', $data);
     }
 
     public function checkWalletAssets($username, $user): void
