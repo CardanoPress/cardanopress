@@ -56,8 +56,13 @@ abstract class AbstractManifest
             $type = 'js' === $parts[1] ? 'script' : 'style';
             $arg = 'js' === $parts[1] ? true : 'all';
             $func = 'wp_register_' . $type;
+            $deps = [];
 
-            $func($this->getAssetPrefix() . $parts[0], $base . $asset, [], $this->version, $arg);
+            if ('script' === $type && 'script' !== $parts[0]) {
+                $deps[] = $this->getAssetPrefix() . 'script';
+            }
+
+            $func($this->getAssetPrefix() . $parts[0], $base . $asset, $deps, $this->version, $arg);
         }
     }
 }
