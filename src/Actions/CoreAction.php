@@ -7,6 +7,7 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
+use PBWebDev\CardanoPress\Admin;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
 use PBWebDev\CardanoPress\Collection;
@@ -16,9 +17,23 @@ class CoreAction
 {
     public function __construct()
     {
+        add_filter('plugin_action_links_' . plugin_basename(CARDANOPRESS_FILE), [$this, 'addSettingsLink']);
         add_action('wp_login', [$this, 'checkWalletAssets'], 10, 2);
         add_action('wp_login', [$this, 'checkDelegationStatus'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
+    }
+
+    public function addSettingsLink(array $links): array
+    {
+        $settings = sprintf(
+            '<a href="%1$s" id="settings-%2$s" aria-label="%3$s">%4$s</a>',
+            admin_url('admin.php?page=' . Admin::OPTION_KEY),
+            Admin::OPTION_KEY,
+            __('Settings CardanoPress', 'cardanopress'),
+            __('Settings', 'cardanopress'),
+        );
+
+        return array_merge(compact('settings'), $links);
     }
 
     public function checkWalletAssets($username, $user): void
