@@ -30,7 +30,13 @@ class Collection
         $data['parsed_image'] = '';
 
         if (isset($data['onchain_metadata']['image'])) {
-            $data['parsed_image'] = $this->getImageSrc($data['onchain_metadata']['image']);
+            $link = $data['onchain_metadata']['image'];
+
+            if (is_array($link)) {
+                $link = implode('', $link);
+            }
+
+            $data['parsed_image'] = $this->getImageSrc($link);
         } elseif (isset($data['metadata']['logo'])) {
             $data['parsed_image'] = $this->getImageSrc($data['metadata']['logo'], true);
         }
