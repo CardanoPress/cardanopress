@@ -35,7 +35,7 @@ class Application
         $load_path = plugin_dir_path(CARDANOPRESS_FILE);
 
         $this->templates = new Templates($load_path . 'templates');
-        self::$logger = new Logger($load_path . 'logs');
+        self::$logger = new Logger('cardanopress-logs');
 
         new Manifest($load_path . 'assets/dist', self::VERSION);
         new CoreAction();

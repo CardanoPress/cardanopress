@@ -14,8 +14,8 @@
 		"psr/log": "^1.1"
 	},
 	"autoload": {
-		"files": [
-			"Logger.php"
-		]
+		"psr-4": {
+			"ThemePlate\\": "src"
+		}
 	}
 }

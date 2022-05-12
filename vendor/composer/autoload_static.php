@@ -13,7 +13,6 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'e2fb8214a7589690aae8ec82f7aa8973' => __DIR__ . '/..' . '/kermage/external-update-manager/class-external-update-manager.php',
-        'd04c174ee664ae134dd68fd7b5719611' => __DIR__ . '/..' . '/themeplate/logger/Logger.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -51,6 +50,7 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
             0 => __DIR__ . '/..' . '/themeplate/enqueue',
             1 => __DIR__ . '/..' . '/themeplate/page',
             2 => __DIR__ . '/..' . '/themeplate/settings',
+            3 => __DIR__ . '/..' . '/themeplate/logger/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -299,6 +299,7 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         'PBWebDev\\CardanoPress\\Foundation\\AbstractManifest' => __DIR__ . '/../..' . '/src/Foundation/AbstractManifest.php',
         'PBWebDev\\CardanoPress\\Foundation\\AbstractProfile' => __DIR__ . '/../..' . '/src/Foundation/AbstractProfile.php',
         'PBWebDev\\CardanoPress\\Foundation\\AbstractTemplates' => __DIR__ . '/../..' . '/src/Foundation/AbstractTemplates.php',
+        'PBWebDev\\CardanoPress\\Installer' => __DIR__ . '/../..' . '/src/Installer.php',
         'PBWebDev\\CardanoPress\\Manifest' => __DIR__ . '/../..' . '/src/Manifest.php',
         'PBWebDev\\CardanoPress\\Profile' => __DIR__ . '/../..' . '/src/Profile.php',
         'PBWebDev\\CardanoPress\\Shortcode' => __DIR__ . '/../..' . '/src/Shortcode.php',
@@ -352,6 +353,7 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         'ThemePlate\\Core\\Helper\\Main' => __DIR__ . '/..' . '/themeplate/core/Helper/Main.php',
         'ThemePlate\\Core\\Helper\\Meta' => __DIR__ . '/..' . '/themeplate/core/Helper/Meta.php',
         'ThemePlate\\Enqueue' => __DIR__ . '/..' . '/themeplate/enqueue/Enqueue.php',
+        'ThemePlate\\Logger' => __DIR__ . '/..' . '/themeplate/logger/src/Logger.php',
         'ThemePlate\\Page' => __DIR__ . '/..' . '/themeplate/page/Page.php',
         'ThemePlate\\Settings' => __DIR__ . '/..' . '/themeplate/settings/Settings.php',
     );

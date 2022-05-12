@@ -217,6 +217,7 @@ return array(
     'PBWebDev\\CardanoPress\\Foundation\\AbstractManifest' => $baseDir . '/src/Foundation/AbstractManifest.php',
     'PBWebDev\\CardanoPress\\Foundation\\AbstractProfile' => $baseDir . '/src/Foundation/AbstractProfile.php',
     'PBWebDev\\CardanoPress\\Foundation\\AbstractTemplates' => $baseDir . '/src/Foundation/AbstractTemplates.php',
+    'PBWebDev\\CardanoPress\\Installer' => $baseDir . '/src/Installer.php',
     'PBWebDev\\CardanoPress\\Manifest' => $baseDir . '/src/Manifest.php',
     'PBWebDev\\CardanoPress\\Profile' => $baseDir . '/src/Profile.php',
     'PBWebDev\\CardanoPress\\Shortcode' => $baseDir . '/src/Shortcode.php',
@@ -270,6 +271,7 @@ return array(
     'ThemePlate\\Core\\Helper\\Main' => $vendorDir . '/themeplate/core/Helper/Main.php',
     'ThemePlate\\Core\\Helper\\Meta' => $vendorDir . '/themeplate/core/Helper/Meta.php',
     'ThemePlate\\Enqueue' => $vendorDir . '/themeplate/enqueue/Enqueue.php',
+    'ThemePlate\\Logger' => $vendorDir . '/themeplate/logger/src/Logger.php',
     'ThemePlate\\Page' => $vendorDir . '/themeplate/page/Page.php',
     'ThemePlate\\Settings' => $vendorDir . '/themeplate/settings/Settings.php',
 );

@@ -2,7 +2,7 @@
 	"name": "kermage/external-update-manager",
 	"description": "A drop-in library for WordPress themes or plugins to manage updates.",
 	"type": "wordpress-dropin",
-	"license": "GPL-3.0",
+	"license": "GPL-3.0-only",
 	"authors": [
 		{
 			"name": "Gene Alyson Fortunado Torcende",

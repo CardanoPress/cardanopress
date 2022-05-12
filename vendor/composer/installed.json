@@ -334,17 +334,17 @@
         },
         {
             "name": "kermage/external-update-manager",
-            "version": "v2.1.1",
-            "version_normalized": "2.1.1.0",
+            "version": "v2.2.0",
+            "version_normalized": "2.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kermage/External-Update-Manager.git",
-                "reference": "f24f447ab898c1f3eb4f21dccdf2b762eccf07d0"
+                "reference": "00506d4e76047026d0c19f39223a8f2051593686"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kermage/External-Update-Manager/zipball/f24f447ab898c1f3eb4f21dccdf2b762eccf07d0",
-                "reference": "f24f447ab898c1f3eb4f21dccdf2b762eccf07d0",
+                "url": "https://api.github.com/repos/kermage/External-Update-Manager/zipball/00506d4e76047026d0c19f39223a8f2051593686",
+                "reference": "00506d4e76047026d0c19f39223a8f2051593686",
                 "shasum": ""
             },
             "require": {
@@ -357,7 +357,7 @@
                 "squizlabs/php_codesniffer": "^3.5",
                 "wp-coding-standards/wpcs": "^2.2"
             },
-            "time": "2021-02-12T16:36:42+00:00",
+            "time": "2022-04-25T11:28:19+00:00",
             "type": "wordpress-dropin",
             "installation-source": "dist",
             "autoload": {
@@ -367,7 +367,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-3.0"
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -382,7 +382,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kermage/External-Update-Manager/issues",
-                "source": "https://github.com/kermage/External-Update-Manager/tree/v2.1.1"
+                "source": "https://github.com/kermage/External-Update-Manager/tree/v2.2.0"
             },
             "install-path": "../kermage/external-update-manager"
         },
@@ -918,17 +918,17 @@
         },
         {
             "name": "themeplate/logger",
-            "version": "v1.0.0",
-            "version_normalized": "1.0.0.0",
+            "version": "v1.1.0",
+            "version_normalized": "1.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Logger.git",
-                "reference": "1dc283a367a10da7989debd20409c9b26c2c1c47"
+                "reference": "97068d3ce39ad3664899b7fbcc971955dbffa7fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Logger/zipball/1dc283a367a10da7989debd20409c9b26c2c1c47",
-                "reference": "1dc283a367a10da7989debd20409c9b26c2c1c47",
+                "url": "https://api.github.com/repos/ThemePlate/Logger/zipball/97068d3ce39ad3664899b7fbcc971955dbffa7fc",
+                "reference": "97068d3ce39ad3664899b7fbcc971955dbffa7fc",
                 "shasum": ""
             },
             "require": {
@@ -936,13 +936,13 @@
                 "php": "^7.4|^8.0",
                 "psr/log": "^1.1"
             },
-            "time": "2022-04-15T02:44:39+00:00",
+            "time": "2022-05-08T01:38:30+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
-                "files": [
-                    "Logger.php"
-                ]
+                "psr-4": {
+                    "ThemePlate\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -957,7 +957,7 @@
             "description": "Opinionated logging structure",
             "support": {
                 "issues": "https://github.com/ThemePlate/Logger/issues",
-                "source": "https://github.com/ThemePlate/Logger/tree/v1.0.0"
+                "source": "https://github.com/ThemePlate/Logger/tree/v1.1.0"
             },
             "install-path": "../themeplate/logger"
         },

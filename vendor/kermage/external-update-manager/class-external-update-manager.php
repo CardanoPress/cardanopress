@@ -9,7 +9,7 @@
  * @package External Update Manager
  * @link    https://github.com/kermage/External-Update-Manager
  * @author  Gene Alyson Fortunado Torcende
- * @version 2.1.1
+ * @version 2.2.0
  * @license GPL-3.0
  */
 
@@ -51,16 +51,16 @@ if ( ! class_exists( 'EUM_Handler' ) ) {
 
 }
 
-if ( ! class_exists( 'External_Update_Manager_2_1_1' ) ) {
+if ( ! class_exists( 'External_Update_Manager_2_2_0' ) ) {
 
-	EUM_Handler::add_version( '2.1.1' );
+	EUM_Handler::add_version( '2.2.0' );
 
 	/**
 	 * @package External Update Manager
 	 * @since   0.1.0
 	 */
 	// phpcs:ignore Generic.Files.OneObjectStructurePerFile.MultipleFound
-	class External_Update_Manager_2_1_1 {
+	class External_Update_Manager_2_2_0 {
 
 		private $update_url;
 		private $custom_arg;
@@ -94,6 +94,8 @@ if ( ! class_exists( 'External_Update_Manager_2_1_1' ) ) {
 			add_action( 'admin_init', array( $this, 'do_notices' ) );
 			add_action( 'load-update-core.php', array( $this, 'maybe_delete_transient' ) );
 			add_action( 'upgrader_process_complete', array( $this, 'maybe_delete_transient' ), 10, 2 );
+			add_action( 'admin_footer', array( $this, 'dismiss_notice_script' ) );
+			add_action( 'wp_ajax_eum_dismiss_notice', array( $this, 'dismiss_notice_action' ) );
 		}
 
 		private function get_file_details( $path ) {
@@ -303,6 +305,10 @@ if ( ! class_exists( 'External_Update_Manager_2_1_1' ) ) {
 		}
 
 		public function do_notices() {
+			if ( ! empty( $_COOKIE[ $this->transient ] ) ) {
+				return;
+			}
+
 			$updates = get_site_transient( 'update_' . $this->item_type . 's' );
 
 			if ( isset( $updates->response[ $this->item_key ] ) && current_user_can( 'install_plugins' ) ) {
@@ -355,7 +361,7 @@ if ( ! class_exists( 'External_Update_Manager_2_1_1' ) ) {
 			$update_url  = add_query_arg( $update_args, self_admin_url( 'update.php' ) );
 
 			/* phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped */
-			echo '<div class="notice notice-info is-dismissible"><p><strong>';
+			echo '<div class="notice notice-info is-dismissible eum-notice" data-eum="' . esc_attr( $this->transient ) . '"><p><strong>';
 			printf(
 				/* translators: 1: plugin name, 2: details URL, 3: additional link attributes, 4: version number, 5: update URL, 6: additional link attributes */
 				__( 'There is a new version of %1$s available. <a href="%2$s" %3$s>View version %4$s details</a> or <a href="%5$s" %6$s>update now</a>.' ),
@@ -382,6 +388,43 @@ if ( ! class_exists( 'External_Update_Manager_2_1_1' ) ) {
 			if ( ! empty( $plugin_data['upgrade_notice'] ) ) {
 				echo '<br>' . esc_html( $plugin_data['upgrade_notice'] );
 			}
+		}
+
+		public function dismiss_notice_script() {
+			if ( wp_cache_get( 'eum_dismiss_notice' ) ) {
+				return;
+			}
+
+			ob_start();
+			?>
+
+			<script id="eum-notice-js" type="text/javascript">
+				jQuery( document ).on( 'click', '.eum-notice .notice-dismiss', function() {
+					jQuery.ajax( {
+						type : 'POST',
+						url : ajaxurl,
+						data : {
+							action: 'eum_dismiss_notice',
+							name: jQuery( this ).parent().data( 'eum' ),
+						},
+					});
+				});
+			</script>
+
+			<?php
+			echo ob_get_clean();
+
+			wp_cache_set( 'eum_dismiss_notice', true );
+		}
+
+		public function dismiss_notice_action() {
+			$name   = sanitize_text_field( $_POST['name'] );
+			$expire = time() + HOUR_IN_SECONDS;
+			$secure = is_ssl();
+
+			setcookie( $name, true, $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true );
+
+			wp_die();
 		}
 
 	}

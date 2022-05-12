@@ -16,13 +16,9 @@ class Logger {
 	private string $path;
 
 
-	public function __construct( string $path = '' ) {
+	public function __construct( string $folder_name = 'logs', string $base_path = WP_CONTENT_DIR ) {
 
-		if ( '' === $path ) {
-			$path = trailingslashit( WP_CONTENT_DIR ) . 'logs';
-		}
-
-		$this->path = $path;
+		$this->path = trailingslashit( $base_path ) . $folder_name;
 
 	}
 
