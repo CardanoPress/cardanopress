@@ -232,7 +232,9 @@ class WalletAction
 
     private function maybeInvalid(array $postVars = array()): void
     {
-        check_ajax_referer(Admin::OPTION_KEY . '-actions');
+        if (is_user_logged_in()) {
+            check_ajax_referer(Admin::OPTION_KEY . '-actions');
+        }
 
         if (empty($postVars) || empty(array_diff($postVars, array_keys($_POST)))) {
             return;
