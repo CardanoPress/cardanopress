@@ -32,35 +32,6 @@ class Application
 
     private function __construct()
     {
-        register_activation_hook(CARDANOPRESS_FILE, [$this, 'activate']);
-        $this->setup();
-
-        add_action('plugins_loaded', [$this, 'loaded'], -1);
-        add_action('init', [Enqueue::class, 'init']);
-    }
-
-    public function activate(): void
-    {
-        if ('yes' === get_transient('cardanopress_activating')) {
-            self::logger('application')->info('Is already activating');
-
-            return;
-        }
-
-        self::logger('application')->info('Activating version ' . self::VERSION);
-        set_transient('cardanopress_activating', 'yes', MINUTE_IN_SECONDS * 2);
-
-        if (empty(get_option('cardanopress_version'))) {
-            self::logger('application')->info('Creating initial pages');
-            $this->templates->createPages();
-        }
-
-        update_option('cardanopress_version', self::VERSION);
-        delete_transient('cardanopress_activating');
-    }
-
-    private function setup(): void
-    {
         $load_path = plugin_dir_path(CARDANOPRESS_FILE);
 
         $this->templates = new Templates($load_path . 'templates');
@@ -72,11 +43,8 @@ class Application
         new Shortcode();
 
         $this->admin = new Admin();
-    }
 
-    public function loaded(): void
-    {
-        do_action('cardanopress_loaded');
+        add_action('init', [Enqueue::class, 'init']);
     }
 
     public static function logger(string $channel): MonoLogger

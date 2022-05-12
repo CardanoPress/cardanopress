@@ -20,6 +20,7 @@ if (! defined('ABSPATH')) {
 }
 
 use PBWebDev\CardanoPress\Application;
+use PBWebDev\CardanoPress\Installer;
 
 /* ==================================================
 Global constants
@@ -37,6 +38,7 @@ EUM_Handler::run(CARDANOPRESS_FILE, 'https://raw.githubusercontent.com/pbwebdev/
 
 // Instantiate
 Application::instance();
+register_activation_hook(CARDANOPRESS_FILE, [Installer::instance(), 'activate']);
 
 function cardanoPress(): Application
 {
