@@ -34,7 +34,7 @@ class WalletAction
     {
         $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
 
-        $address = $_POST['wallet_address'];
+        $address = $_POST['stake_address'];
         $username = md5($address);
         $userId = username_exists($username);
         $shouldReload = false;
