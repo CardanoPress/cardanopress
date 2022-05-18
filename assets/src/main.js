@@ -60,6 +60,7 @@ Alpine.data('cardanoPress', () => ({
 
         if (cardanoPress.logged) {
             this.connectedExtension = getConnectedExtension()
+            this.selectedHandle = this.$root.dataset.handle;
             this.isConnected = !!this.connectedExtension
             window.cardanoPress.extension = this.connectedExtension
 

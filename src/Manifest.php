@@ -55,7 +55,13 @@ class Manifest extends AbstractManifest
 
     public function injectDataProvider(): void
     {
-        echo '<div x-data="cardanoPress" @keydown.escape="showModal = false">';
+        $handle = '';
+
+        if (is_user_logged_in()) {
+            $handle = Application::instance()->userProfile()->getFavoriteHandle();
+        }
+
+        echo '<div x-data="cardanoPress" @keydown.escape="showModal = false" data-handle="' . $handle . '">';
     }
 
     public function injectModalConnect(): void
