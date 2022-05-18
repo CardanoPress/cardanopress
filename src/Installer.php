@@ -29,6 +29,7 @@ class Installer
         $this->templates = new Templates($load_path . 'templates');
 
         add_action('plugins_loaded', [$this, 'loaded'], -1);
+        add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
     }
 
     public function log(string $message): void
@@ -59,5 +60,37 @@ class Installer
     public function loaded(): void
     {
         do_action('cardanopress_loaded');
+    }
+
+    public function getSettingsLink(string $text, string $target = '_self'): string
+    {
+        return sprintf(
+            '<a href="%1$s" id="settings-%2$s" aria-label="%3$s" target="%4$s">%5$s</a>',
+            admin_url('admin.php?page=' . Admin::OPTION_KEY),
+            Admin::OPTION_KEY,
+            __('Settings CardanoPress', 'cardanopress'),
+            $target,
+            $text,
+        );
+    }
+
+    public function noticeApplicationNotReady(): void
+    {
+        if ($this->application->isReady()) {
+            return;
+        }
+
+        ob_start();
+
+        ?>
+        <div class="notice notice-info">
+            <p>
+                <strong>CardanoPress</strong> requires Blockfrost API Token.
+                <?php echo $this->getSettingsLink(__('Please set here', 'cardanopress'), '_blank'); ?>
+            </p>
+        </div>
+        <?php
+
+        echo ob_get_clean();
     }
 }

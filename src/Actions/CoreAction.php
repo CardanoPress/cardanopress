@@ -7,10 +7,10 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
-use PBWebDev\CardanoPress\Admin;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
 use PBWebDev\CardanoPress\Collection;
+use PBWebDev\CardanoPress\Installer;
 use PBWebDev\CardanoPress\Profile;
 
 class CoreAction
@@ -25,13 +25,7 @@ class CoreAction
 
     public function addSettingsLink(array $links): array
     {
-        $settings = sprintf(
-            '<a href="%1$s" id="settings-%2$s" aria-label="%3$s">%4$s</a>',
-            admin_url('admin.php?page=' . Admin::OPTION_KEY),
-            Admin::OPTION_KEY,
-            __('Settings CardanoPress', 'cardanopress'),
-            __('Settings', 'cardanopress'),
-        );
+        $settings = Installer::instance()->getSettingsLink(__('Settings', 'cardanopress'));
 
         return array_merge(compact('settings'), $links);
     }
