@@ -47,6 +47,10 @@ Alpine.data('cardanoPress', () => ({
         return this.isAvailable && this.has(type)
     },
 
+    getWalletHandle($default) {
+        return this.selectedHandle || $default
+    },
+
     async init() {
         supportedWallets.forEach(wallet => {
             this[toPropertyName(wallet, 'has')] = false
