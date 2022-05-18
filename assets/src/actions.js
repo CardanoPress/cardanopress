@@ -57,6 +57,17 @@ export const handleSync = async () => {
     }).then((response) => response.json())
 }
 
+export const handleSave = async ($handle) => {
+    return await fetch(cardanoPress.ajaxUrl, {
+        method: 'POST',
+        body: new URLSearchParams({
+            _wpnonce: cardanoPress._nonce,
+            action: 'cardanopress_save_handle',
+            ada_handle: $handle,
+        }),
+    }).then((response) => response.json())
+}
+
 export const getPaymentAddress = async () => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',

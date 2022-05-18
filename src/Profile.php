@@ -97,6 +97,11 @@ class Profile extends AbstractProfile
         return update_user_meta($this->user->ID, $this->prefix . 'stored_handles', $data);
     }
 
+    public function saveFavoriteHandle(string $handle): bool
+    {
+        return update_user_meta($this->user->ID, $this->prefix . 'favorite_handle', $handle);
+    }
+
     public function allTransactions(): array
     {
         $saved = get_user_meta($this->user->ID, $this->prefix . 'transaction', false);

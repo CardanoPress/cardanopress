@@ -1,5 +1,5 @@
 import Alpine from 'alpinejs'
-import { handleReconnect, handleSync, logMeIn, logMeOut } from './actions'
+import { handleReconnect, handleSave, handleSync, logMeIn, logMeOut } from './actions'
 import {
     cardanoPress,
     toPropertyName,
@@ -32,6 +32,7 @@ Alpine.data('cardanoPress', () => ({
     showModal: false,
     openDropdown: false,
     connectedExtension: '',
+    selectedHandle: '',
     supportedWallets,
 
     has(wallet) {
@@ -213,6 +214,27 @@ Alpine.data('cardanoPress', () => ({
             if (response.data) {
                 addNotice({ type: 'info', text: 'New assets pulled' })
             }
+        } else {
+            addNotice({ type: 'error', text: 'Something is wrong' })
+        }
+
+        this.isProcessing = false
+    },
+
+    async handleSave() {
+        addNotice({
+            id: 'save',
+            type: 'info',
+            text: 'Saving...',
+        })
+
+        this.isProcessing = true
+        const response = await handleSave(this.selectedHandle)
+
+        removeNotice('save')
+
+        if (response.success) {
+            addNotice({ type: 'success', text: 'Successfully saved' })
         } else {
             addNotice({ type: 'error', text: 'Something is wrong' })
         }

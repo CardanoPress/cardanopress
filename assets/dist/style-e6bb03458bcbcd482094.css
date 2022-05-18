@@ -97,6 +97,10 @@
     margin-top: 0.5rem;
     margin-bottom: 0.5rem
 }
+.-mx-2 {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem
+}
 .mt-2 {
     margin-top: 0.5rem
 }
@@ -284,6 +288,9 @@
 }
 .p-4 {
     padding: 1rem
+}
+.p-2 {
+    padding: 0.5rem
 }
 .py-1 {
     padding-top: 0.25rem;

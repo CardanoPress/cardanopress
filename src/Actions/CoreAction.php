@@ -7,6 +7,7 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
+use PBWebDev\CardanoPress\Admin;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
 use PBWebDev\CardanoPress\Collection;
@@ -21,6 +22,7 @@ class CoreAction
         add_action('wp_login', [$this, 'checkWalletAssets'], 10, 2);
         add_action('wp_login', [$this, 'checkDelegationStatus'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
+        add_action('wp_ajax_cardanopress_save_handle', [$this, 'saveUserHandle']);
     }
 
     public function addSettingsLink(array $links): array
@@ -157,5 +159,19 @@ class CoreAction
             wp_safe_redirect($dashboardLink);
             exit;
         }
+    }
+
+    public function saveUserHandle()
+    {
+        check_ajax_referer(Admin::OPTION_KEY . '-actions');
+
+        if (empty($_POST['ada_handle'])) {
+            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
+        }
+
+        $userProfile = new Profile(wp_get_current_user());
+
+        $userProfile->saveFavoriteHandle($_POST['ada_handle']);
+        wp_send_json_success();
     }
 }
