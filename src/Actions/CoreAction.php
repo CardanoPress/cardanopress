@@ -50,6 +50,7 @@ class CoreAction
         $assetAccess = $app->option('asset_access');
         $policyIds = array_column($assetAccess, 'id');
         $assets = [];
+        $handles = [];
         $page = 1;
 
         do {
@@ -59,6 +60,7 @@ class CoreAction
                 $data = $blockfrost->specificAsset($asset['unit']);
                 $collection = new Collection($data);
                 $assets[] = $collection->filteredAsset();
+                $handles[] = $collection->grabHandle();
                 $index = array_search($data['policy_id'], $policyIds, true);
 
                 if (false === $index || $userProfile->hasRole($assetAccess[$index]['role'])) {
@@ -72,8 +74,10 @@ class CoreAction
         } while (100 === count($response));
 
         $assets = array_filter($assets);
+        $handles = array_filter($handles);
 
         $userProfile->saveAssets($assets);
+        $userProfile->saveHandles($handles);
     }
 
     public function checkDelegationStatus($username, $user): void

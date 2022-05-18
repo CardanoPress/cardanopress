@@ -12,6 +12,10 @@ class Collection
     private array $data;
 
     public const ASSETS_URL = 'https://ipfs.blockfrost.dev/ipfs';
+    public const ADA_HANDLE = [
+        'mainnet' => 'f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a',
+        'testnet' => 'c21f8b778503fbcee295d6e633c125f70bcc16c897d8873163c6577e',
+    ];
 
     public function __construct(array $data)
     {
@@ -42,6 +46,17 @@ class Collection
         }
 
         return $data;
+    }
+
+    public function grabHandle(): string
+    {
+        $data = $this->data;
+
+        if (empty($data) || ! in_array($data['policy_id'], self::ADA_HANDLE, true)) {
+            return '';
+        }
+
+        return $data['onchain_metadata']['name'] ?? '';
     }
 
     private function shouldSkip(array $data): bool
