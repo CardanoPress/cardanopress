@@ -85,6 +85,13 @@ class Profile extends AbstractProfile
         return update_user_meta($this->user->ID, $this->prefix . 'stored_assets', $data);
     }
 
+    public function storedHandles(): array
+    {
+        $saved = get_user_meta($this->user->ID, $this->prefix . 'stored_handles', true);
+
+        return array_filter((array)$saved);
+    }
+
     public function saveHandles(array $data): bool
     {
         return update_user_meta($this->user->ID, $this->prefix . 'stored_handles', $data);

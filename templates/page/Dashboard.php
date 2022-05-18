@@ -25,6 +25,7 @@ get_header();
             <?php cardanoPress()->template('welcome-banner'); ?>
 
             <?php cardanoPress()->template('part/profile-connection'); ?>
+            <?php cardanoPress()->template('part/profile-adahandles'); ?>
         </div>
     </template>
 </main>
