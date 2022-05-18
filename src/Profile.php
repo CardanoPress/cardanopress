@@ -97,6 +97,20 @@ class Profile extends AbstractProfile
         return update_user_meta($this->user->ID, $this->prefix . 'stored_handles', $data);
     }
 
+    public function getFavoriteHandle(): string
+    {
+        $saved = get_user_meta($this->user->ID, $this->prefix . 'favorite_handle', true);
+
+        return $saved ?? '';
+    }
+
+    public function getTrimmedAddress(): string
+    {
+        $trimmedAddress = str_replace(['addr1', 'addr_test1'], ['', ''], $this->connectedWallet());
+
+        return substr($trimmedAddress, 0, 2) . '...' . substr($trimmedAddress, -4);
+    }
+
     public function saveFavoriteHandle(string $handle): bool
     {
         return update_user_meta($this->user->ID, $this->prefix . 'favorite_handle', $handle);
