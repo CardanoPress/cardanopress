@@ -49,7 +49,7 @@ class CoreAction
 
         $blockfrost = new Blockfrost($queryNetwork);
 
-        do_action('cardanopress_wallet_status_checks', $userProfile, $blockfrost);
+        do_action('cardanopress_wallet_status_checks', $user, $blockfrost);
 
         $this->checkWalletAssets($stakeAddress, $userProfile, $blockfrost);
         $this->checkDelegationStatus($stakeAddress, $queryNetwork, $userProfile, $blockfrost);
