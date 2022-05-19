@@ -30,6 +30,7 @@ class Installer
 
         add_action('plugins_loaded', [$this, 'loaded'], -1);
         add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
+        add_action('admin_init', [$this, 'maybeDoUpgrades']);
     }
 
     public function log(string $message): void
@@ -53,7 +54,8 @@ class Installer
             $this->templates->createPages();
         }
 
-        update_option('cardanopress_version', $this->application::VERSION);
+        $this->maybeDoUpgrades(true);
+        remove_action('admin_init', [$this, 'maybeDoUpgrades']);
         delete_transient('cardanopress_activating');
     }
 
@@ -92,5 +94,50 @@ class Installer
         <?php
 
         echo ob_get_clean();
+    }
+
+    public function maybeDoUpgrades($isActivating = false): void
+    {
+        $current = get_option('cardanopress_version');
+
+        if (version_compare($current, $this->application::VERSION, '<')) {
+            if (! $isActivating) {
+                $this->log('Upgrading version ' . $this->application::VERSION);
+            }
+
+            if (version_compare($current, '0.29.0', '<')) {
+                $this->updateOldPasswords();
+            }
+
+            update_option('cardanopress_version', $this->application::VERSION);
+        }
+    }
+
+    public function updateOldPasswords()
+    {
+        $this->log('Checking for old user passwords');
+
+        foreach (get_users() as $user) {
+            $userProfile = new Profile($user);
+            $userId = $userProfile->getData('ID');
+
+            if (! $userProfile->isConnected()) {
+                $this->log('Skipped user ' . $userId);
+                continue;
+            }
+
+            $currentPassword = $userProfile->getData('user_pass');
+            $stakeAddress = $userProfile->connectedStake();
+
+            if (
+                wp_check_password($userProfile->connectedWallet(), $currentPassword) ||
+                wp_check_password($stakeAddress, $currentPassword)
+            ) {
+                wp_set_password(wp_hash_password($stakeAddress), $userId);
+                $this->log('Updated user ' . $userId);
+            } else {
+                $this->log('Checked user ' . $userId);
+            }
+        }
     }
 }
