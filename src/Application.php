@@ -19,7 +19,7 @@ class Application
     private static Logger $logger;
     private Admin $admin;
     private Templates $templates;
-    public const VERSION = '0.28.0';
+    public const VERSION = '0.29.0';
 
     public static function instance(): Application
     {
