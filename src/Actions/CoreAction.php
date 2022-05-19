@@ -19,8 +19,7 @@ class CoreAction
     public function __construct()
     {
         add_filter('plugin_action_links_' . plugin_basename(CARDANOPRESS_FILE), [$this, 'addSettingsLink']);
-        add_action('wp_login', [$this, 'checkWalletAssets'], 10, 2);
-        add_action('wp_login', [$this, 'checkDelegationStatus'], 10, 2);
+        add_action('wp_login', [$this, 'doWalletStatusChecks'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
         add_action('wp_ajax_cardanopress_save_handle', [$this, 'saveUserHandle']);
     }
@@ -32,7 +31,7 @@ class CoreAction
         return array_merge(compact('settings'), $links);
     }
 
-    public function checkWalletAssets($username, $user): void
+    public function doWalletStatusChecks($username, $user): void
     {
         $app = Application::instance();
 
@@ -49,6 +48,16 @@ class CoreAction
         }
 
         $blockfrost = new Blockfrost($queryNetwork);
+
+        do_action('cardanopress_wallet_status_checks', $userProfile, $blockfrost);
+
+        $this->checkWalletAssets($stakeAddress, $userProfile, $blockfrost);
+        $this->checkDelegationStatus($stakeAddress, $queryNetwork, $userProfile, $blockfrost);
+    }
+
+    public function checkWalletAssets(string $stakeAddress, Profile $userProfile, Blockfrost $blockfrost): void
+    {
+        $app = Application::instance();
         $assetAccess = $app->option('asset_access');
         $assetAccessPolicyIds = array_column($assetAccess, 'id');
         $wantedPolicyIds = Collection::wantedPolicyIds($assetAccessPolicyIds);
@@ -59,6 +68,8 @@ class CoreAction
 
         do {
             $response = $blockfrost->associatedAssets($stakeAddress, $page);
+
+            do_action('cardanopress_associated_assets', $stakeAddress, $response, $page);
 
             foreach ($response as $asset) {
                 if (! preg_match($wantedPolicyIdsRegExPattern, $asset['unit'])) {
@@ -88,35 +99,27 @@ class CoreAction
         $userProfile->saveHandles($handles);
     }
 
-    public function checkDelegationStatus($username, $user): void
-    {
+    public function checkDelegationStatus(
+        string $stakeAddress,
+        string $queryNetwork,
+        Profile $userProfile,
+        Blockfrost $blockfrost
+    ): void {
         $app = Application::instance();
-
-        if (! $app->isReady()) {
-            return;
-        }
-
-        $userProfile = new Profile($user);
         $customRole = $app->option('ua_additional_role');
 
         if ($userProfile->hasRole($customRole)) {
             return;
         }
 
-        $queryNetwork = $userProfile->connectedNetwork();
-        $stakeAddress = $userProfile->connectedStake();
-
-        if (! $queryNetwork || ! $stakeAddress || ! Blockfrost::isReady($queryNetwork)) {
-            return;
-        }
-
         $poolIds = $app->option('delegation_pool_id');
-        $blockfrost = new Blockfrost($queryNetwork);
         $wanted = [];
         $page = 1;
 
         do {
             $response = $blockfrost->getAccountHistory($stakeAddress, $page);
+
+            do_action('cardanopress_account_history', $stakeAddress, $response, $page);
 
             foreach ($response as $history) {
                 if ($history['pool_id'] === $poolIds[$queryNetwork]) {
