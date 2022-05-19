@@ -77,10 +77,10 @@ class Application
         static $user;
 
         if (null === $user) {
-            $user = wp_get_current_user();
+            $user =  new Profile(wp_get_current_user());
         }
 
-        return new Profile($user);
+        return $user;
     }
 
     public function delegationPool(): array

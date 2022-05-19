@@ -178,7 +178,7 @@ class CoreAction
             wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
         }
 
-        $userProfile = new Profile(wp_get_current_user());
+        $userProfile = Application::instance()->userProfile();
 
         $userProfile->saveFavoriteHandle($_POST['ada_handle']);
         wp_send_json_success();

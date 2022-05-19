@@ -76,7 +76,7 @@ class WalletAction
     {
         $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
 
-        $userProfile = new Profile(wp_get_current_user());
+        $userProfile = Application::instance()->userProfile();
 
         $userProfile->saveNetwork($_POST['query_network']);
         $userProfile->saveWallet($_POST['wallet_address']);
@@ -92,7 +92,7 @@ class WalletAction
     {
         $this->maybeInvalid();
 
-        $userProfile = new Profile(wp_get_current_user());
+        $userProfile = Application::instance()->userProfile();
         $stored = $userProfile->storedAssets();
 
         do_action('wp_login', $userProfile->getData('user_login'), $userProfile->getData());
@@ -104,7 +104,7 @@ class WalletAction
     {
         $this->maybeInvalid(['query_network', 'wallet_address']);
 
-        $userProfile = new Profile(wp_get_current_user());
+        $userProfile = Application::instance()->userProfile();
         $shouldReload = false;
 
         if (
@@ -203,7 +203,7 @@ class WalletAction
     {
         $this->maybeInvalid(['query_network', 'transaction_action', 'transaction_hash']);
 
-        $userProfile = new Profile(wp_get_current_user());
+        $userProfile = Application::instance()->userProfile();
         $success = $userProfile->saveTransaction(
             $_POST['query_network'],
             $_POST['transaction_action'],
