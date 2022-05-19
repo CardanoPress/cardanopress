@@ -50,7 +50,9 @@ class CoreAction
 
         $blockfrost = new Blockfrost($queryNetwork);
         $assetAccess = $app->option('asset_access');
-        $policyIds = array_column($assetAccess, 'id');
+        $assetAccessPolicyIds = array_column($assetAccess, 'id');
+        $wantedPolicyIds = Collection::wantedPolicyIds($assetAccessPolicyIds);
+        $wantedPolicyIdsRegExPattern = '/^' . implode('|', $wantedPolicyIds) . '/';
         $assets = [];
         $handles = [];
         $page = 1;
@@ -59,11 +61,15 @@ class CoreAction
             $response = $blockfrost->associatedAssets($stakeAddress, $page);
 
             foreach ($response as $asset) {
+                if (! preg_match($wantedPolicyIdsRegExPattern, $asset['unit'])) {
+                    continue;
+                }
+
                 $data = $blockfrost->specificAsset($asset['unit']);
                 $collection = new Collection($data);
                 $assets[] = $collection->filteredAsset();
                 $handles[] = $collection->grabHandle();
-                $index = array_search($data['policy_id'], $policyIds, true);
+                $index = array_search($data['policy_id'], $assetAccessPolicyIds, true);
 
                 if (false === $index || $userProfile->hasRole($assetAccess[$index]['role'])) {
                     continue;

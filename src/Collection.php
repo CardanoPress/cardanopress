@@ -22,6 +22,17 @@ class Collection
         $this->data = $data;
     }
 
+    public static function wantedPolicyIds(array $custom = array()): array
+    {
+        $policyIds = Application::instance()->option('policy_ids');
+
+        return array_merge(
+            array_values(self::ADA_HANDLE),
+            array_column($policyIds, 'value'),
+            array_filter($custom)
+        );
+    }
+
     public function filteredAsset(): array
     {
         $data = $this->data;
@@ -62,14 +73,6 @@ class Collection
     private function shouldSkip(array $data): bool
     {
         if (empty($data)) {
-            return true;
-        }
-
-        $app = Application::instance();
-        $policyIds = $app->option('policy_ids');
-        $values = array_column($policyIds, 'value');
-
-        if (! in_array($data['policy_id'], $values, true)) {
             return true;
         }
 
