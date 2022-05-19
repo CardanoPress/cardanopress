@@ -41,7 +41,7 @@ class WalletAction
         $newAccount = false;
 
         if (! $userId) {
-            $userId = wp_create_user($username, $address);
+            $userId = wp_create_user($username, wp_hash_password($address));
             $newAccount = true;
 
             if (is_wp_error($userId)) {
