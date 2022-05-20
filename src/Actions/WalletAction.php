@@ -45,9 +45,8 @@ class WalletAction
             $newAccount = true;
 
             if (is_wp_error($userId)) {
-                wp_send_json_error([
-                    'message' => sprintf(__('API Error: %s', 'cardanopress'), $userId->get_error_message()),
-                ]);
+                Application::logger('actions')->error($userId->get_error_message());
+                wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
             }
         }
 
