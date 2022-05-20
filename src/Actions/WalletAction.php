@@ -46,7 +46,7 @@ class WalletAction
 
             if (is_wp_error($userId)) {
                 wp_send_json_error([
-                    'message' => 'API Error: ' . $userId->get_error_message(),
+                    'message' => sprintf(__('API Error: %s', 'cardanopress'), $userId->get_error_message()),
                 ]);
             }
         }
@@ -67,7 +67,7 @@ class WalletAction
         }
 
         wp_send_json_success([
-            'message' => 'Welcome ' . $username,
+            'message' => sprintf(__('Welcome %s', 'cardanopress'), $username),
             'reload' => $shouldReload,
         ]);
     }
@@ -83,7 +83,7 @@ class WalletAction
         $userProfile->saveStake($_POST['stake_address']);
 
         wp_send_json_success([
-            'message' => 'Successfully connected',
+            'message' => __('Successfully connected', 'cardanopress'),
             'reload' => false,
         ]);
     }
@@ -98,7 +98,7 @@ class WalletAction
         do_action('wp_login', $userProfile->getData('user_login'), $userProfile->getData());
 
         wp_send_json_success([
-            'message' => 'Successfully synced',
+            'message' => __('Successfully synced', 'cardanopress'),
             'updated' => $stored !== $userProfile->storedAssets(),
         ]);
     }
@@ -122,7 +122,7 @@ class WalletAction
         $message = $shouldReload ? 'Bye' : 'Hello';
 
         wp_send_json_success([
-            'message' => $message . ' ' . $userProfile->getData('user_login'),
+            'message' => sprintf(__('%s %s', 'cardanopress'), $message, $userProfile->getData('user_login')),
             'reload' => $shouldReload,
         ]);
     }
@@ -134,7 +134,7 @@ class WalletAction
         $network = $_POST['query_network'];
 
         if (! Blockfrost::isReady($network)) {
-            wp_send_json_error(__('Unsupported network ' . $network, 'cardanopress'));
+            wp_send_json_error(sprintf(__('Unsupported network %s', 'cardanopress'), $network));
         }
 
         $blockfrost = new Blockfrost($network);
@@ -155,7 +155,7 @@ class WalletAction
         $network = $_POST['query_network'];
 
         if (! Blockfrost::isReady($network)) {
-            wp_send_json_error(__('Unsupported network ' . $network, 'cardanopress'));
+            wp_send_json_error(sprintf(__('Unsupported network %s', 'cardanopress'), $network));
         }
 
         $blockfrost = new Blockfrost($network);
@@ -175,7 +175,7 @@ class WalletAction
         $network = $_POST['query_network'];
 
         if (! Blockfrost::isReady($network)) {
-            wp_send_json_error(__('Unsupported network ' . $network, 'cardanopress'));
+            wp_send_json_error(sprintf(__('Unsupported network %s', 'cardanopress'), $network));
         }
 
         $blockfrost = new Blockfrost($network);
@@ -218,7 +218,7 @@ class WalletAction
         }
 
         wp_send_json_success([
-            'message' => 'Successful ' . $_POST['transaction_action'],
+            'message' => sprintf(__('Successful %s', 'cardanopress'), $_POST['transaction_action']),
             'hash' => $_POST['transaction_hash'],
         ]);
     }
