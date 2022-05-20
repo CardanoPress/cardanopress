@@ -1,8 +1,8 @@
 {
-  "new_version"    : "0.29.0",
+  "new_version"    : "0.30.0",
   "homepage"       : "https://github.com/pbwebdev/cardanopress",
-  "download_link"  : "https://github.com/pbwebdev/cardanopress/archive/refs/tags/v0.29.0.zip",
-  "last_updated"   : "2022-05-19",
+  "download_link"  : "https://github.com/pbwebdev/cardanopress/archive/refs/tags/v0.30.0.zip",
+  "last_updated"   : "2022-05-20",
   "author"         : "Gene Alyson Fortunado Torcende",
   "author_profile" : "https://pbwebdev.com",
   "requires"       : "5.8.0",
