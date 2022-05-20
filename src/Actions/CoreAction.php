@@ -25,21 +25,48 @@ class CoreAction
         add_action('wp_enqueue_scripts', [$this, 'localizeMessages']);
     }
 
-    public function localizeMessages()
+    protected static function customizableMessages(string $type): array
     {
         $data = [
-            'connected' => __('Successfully connected', 'cardanopress'),
-            'connecting' => __('Connecting...', 'cardanopress'),
-            'reconnected' => __('Wallet reconnected', 'cardanopress'),
-            'reconnecting' => __('Reconnecting...', 'cardanopress'),
-            'walletSyncing' => __('Syncing...', 'cardanopress'),
-            'newAssetsPulled' => __('New assets pulled', 'cardanopress'),
-            'handleSaving' => __('Saving...', 'cardanopress'),
-            'delegating' => __('Processing...', 'cardanopress'),
-            'paying' => __('Processing...', 'cardanopress'),
+            'script' => [
+                'connected' => __('Successfully connected', 'cardanopress'),
+                'connecting' => __('Connecting...', 'cardanopress'),
+                'reconnected' => __('Wallet reconnected', 'cardanopress'),
+                'reconnecting' => __('Reconnecting...', 'cardanopress'),
+                'walletSyncing' => __('Syncing...', 'cardanopress'),
+                'newAssetsPulled' => __('New assets pulled', 'cardanopress'),
+                'handleSaving' => __('Saving...', 'cardanopress'),
+                'delegating' => __('Processing...', 'cardanopress'),
+                'paying' => __('Processing...', 'cardanopress'),
+            ],
+            'ajax' => [
+                'welcome' => __('Welcome %s', 'cardanopress'),
+                'connected' => __('Successfully connected', 'cardanopress'),
+                'walletSynced' => __('Successfully synced', 'cardanopress'),
+                'handleSaved' => __('Successfully saved', 'cardanopress'),
+                'successfulTransaction' => __('Successful %s', 'cardanopress'),
+                'somethingWrong' => __('Something is wrong. Please try again', 'cardanopress'),
+                'unsupportedNetwork' => __('Unsupported network %s', 'cardanopress'),
+                'blockfrostError' => __('Blockfrost API Error. Please try again', 'cardanopress'),
+                'notPermitted' => __('You don\'t have permission to do this.', 'cardanopress'),
+            ],
         ];
 
-        wp_localize_script(Admin::OPTION_KEY . '-script', 'cardanoPressMessages', $data);
+        return $data[$type];
+    }
+
+    public static function getAjaxMessage(string $type): string
+    {
+        $messages = apply_filters('cardanopress_ajax_messages', self::customizableMessages('ajax'));
+
+        return $messages[$type] ?? '';
+    }
+
+    public function localizeMessages()
+    {
+        $messages = apply_filters('cardanopress_script_messages', $this->customizableMessages('script'));
+
+        wp_localize_script(Admin::OPTION_KEY . '-script', 'cardanoPressMessages', $messages);
     }
 
     public function addSettingsLink(array $links): array
@@ -193,12 +220,12 @@ class CoreAction
         check_ajax_referer(Admin::OPTION_KEY . '-actions');
 
         if (empty($_POST['ada_handle'])) {
-            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
+            wp_send_json_error($this->getAjaxMessage('somethingWrong'));
         }
 
         $userProfile = Application::instance()->userProfile();
 
         $userProfile->saveFavoriteHandle($_POST['ada_handle']);
-        wp_send_json_success(__('Successfully saved', 'cardanopress'));
+        wp_send_json_success($this->getAjaxMessage('handleSaved'));
     }
 }

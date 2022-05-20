@@ -46,7 +46,7 @@ class WalletAction
 
             if (is_wp_error($userId)) {
                 Application::logger('actions')->error($userId->get_error_message());
-                wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
+                wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
             }
         }
 
@@ -66,7 +66,7 @@ class WalletAction
         }
 
         wp_send_json_success([
-            'message' => sprintf(__('Welcome %s', 'cardanopress'), $username),
+            'message' => sprintf(CoreAction::getAjaxMessage('welcome'), $username),
             'reload' => $shouldReload,
         ]);
     }
@@ -82,7 +82,7 @@ class WalletAction
         $userProfile->saveStake($_POST['stake_address']);
 
         wp_send_json_success([
-            'message' => __('Successfully connected', 'cardanopress'),
+            'message' => CoreAction::getAjaxMessage('connected'),
             'reload' => false,
         ]);
     }
@@ -97,7 +97,7 @@ class WalletAction
         do_action('wp_login', $userProfile->getData('user_login'), $userProfile->getData());
 
         wp_send_json_success([
-            'message' => __('Successfully synced', 'cardanopress'),
+            'message' => CoreAction::getAjaxMessage('walletSynced'),
             'updated' => $stored !== $userProfile->storedAssets(),
         ]);
     }
@@ -133,7 +133,7 @@ class WalletAction
         $network = $_POST['query_network'];
 
         if (! Blockfrost::isReady($network)) {
-            wp_send_json_error(sprintf(__('Unsupported network %s', 'cardanopress'), $network));
+            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $network));
         }
 
         $blockfrost = new Blockfrost($network);
@@ -141,7 +141,7 @@ class WalletAction
         $response = $blockfrost->protocolParameters();
 
         if (empty($response)) {
-            wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
+            wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
         }
 
         wp_send_json_success($response);
@@ -154,14 +154,14 @@ class WalletAction
         $network = $_POST['query_network'];
 
         if (! Blockfrost::isReady($network)) {
-            wp_send_json_error(sprintf(__('Unsupported network %s', 'cardanopress'), $network));
+            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $network));
         }
 
         $blockfrost = new Blockfrost($network);
         $response = $blockfrost->getAccountDetails($_POST['reward_address']);
 
         if (empty($response)) {
-            wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
+            wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
         }
 
         wp_send_json_success($response);
@@ -174,14 +174,14 @@ class WalletAction
         $network = $_POST['query_network'];
 
         if (! Blockfrost::isReady($network)) {
-            wp_send_json_error(sprintf(__('Unsupported network %s', 'cardanopress'), $network));
+            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $network));
         }
 
         $blockfrost = new Blockfrost($network);
         $response = $blockfrost->getPoolDetails($_POST['pool_id']);
 
         if (empty($response)) {
-            wp_send_json_error(__('Blockfrost API Error. Please try again', 'cardanopress'));
+            wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
         }
 
         wp_send_json_success($response);
@@ -195,7 +195,7 @@ class WalletAction
         $response = $poolData['hex'] ?? '';
 
         if (empty($response)) {
-            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
+            wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
         }
 
         wp_send_json_success($response);
@@ -213,11 +213,11 @@ class WalletAction
         );
 
         if (! $success) {
-            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
+            wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
         }
 
         wp_send_json_success([
-            'message' => sprintf(__('Successful %s', 'cardanopress'), $_POST['transaction_action']),
+            'message' => sprintf(CoreAction::getAjaxMessage('successfulTransaction'), $_POST['transaction_action']),
             'hash' => $_POST['transaction_hash'],
         ]);
     }
@@ -229,7 +229,7 @@ class WalletAction
         $response = Application::instance()->paymentAddress();
 
         if (empty($response)) {
-            wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
+            wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
         }
 
         wp_send_json_success($response);
@@ -240,13 +240,13 @@ class WalletAction
         if (is_user_logged_in()) {
             check_ajax_referer(Admin::OPTION_KEY . '-actions');
         } elseif (! is_allowed_http_origin()) {
-            wp_send_json_error(__('You don\'t have permission to do this.', 'cardanopress'));
+            wp_send_json_error(CoreAction::getAjaxMessage('notPermitted'));
         }
 
         if (empty($postVars) || empty(array_diff($postVars, array_keys($_POST)))) {
             return;
         }
 
-        wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
+        wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
     }
 }
