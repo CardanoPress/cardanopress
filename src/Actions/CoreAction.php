@@ -22,6 +22,29 @@ class CoreAction
         add_action('wp_login', [$this, 'doWalletStatusChecks'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
         add_action('wp_ajax_cardanopress_save_handle', [$this, 'saveUserHandle']);
+        add_action('wp_enqueue_scripts', [$this, 'localizeMessages']);
+    }
+
+    public function localizeMessages()
+    {
+        $data = [
+            'connected' => __('Successfully connected', 'cardanopress'),
+            'connecting' => __('Connecting...', 'cardanopress'),
+            'reconnected' => __('Wallet reconnected', 'cardanopress'),
+            'reconnecting' => __('Reconnecting...', 'cardanopress'),
+            'walletSynced' => __('Successfully synced', 'cardanopress'),
+            'walletSyncing' => __('Syncing...', 'cardanopress'),
+            'newAssetsPulled' => __('New assets pulled', 'cardanopress'),
+            'handleSaved' => __('Successfully saved', 'cardanopress'),
+            'handleSaving' => __('Saving...', 'cardanopress'),
+            'delegated' => __('Delegation successful', 'cardanopress'),
+            'delegating' => __('Processing...', 'cardanopress'),
+            'payed' => __('Payment successful', 'cardanopress'),
+            'paying' => __('Processing...', 'cardanopress'),
+            'somethingWrong' => __('Something is wrong', 'cardanopress'),
+        ];
+
+        wp_localize_script(Admin::OPTION_KEY . '-script', 'cardanoPressMessages', $data);
     }
 
     public function addSettingsLink(array $links): array

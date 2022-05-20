@@ -2,6 +2,7 @@ import Alpine from 'alpinejs'
 import { handleReconnect, handleSave, handleSync, logMeIn, logMeOut } from './actions'
 import {
     cardanoPress,
+    cardanoPressMessages,
     toPropertyName,
     getConnectedExtension,
     isNotified,
@@ -69,7 +70,7 @@ Alpine.data('cardanoPress', () => ({
             window.cardanoPress.extension = this.connectedExtension
 
             if (this.isConnected && !isNotified()) {
-                addNotice({ type: 'success', text: 'Successfully connected' })
+                addNotice({ type: 'success', text: cardanoPressMessages.connected })
                 setNotified(true)
             }
         } else {
@@ -102,7 +103,7 @@ Alpine.data('cardanoPress', () => ({
             addNotice({
                 id: 'loginConnect',
                 type: 'info',
-                text: 'Connecting...',
+                text: cardanoPressMessages.connecting,
             })
             await this.handleLogin(wallet)
         } catch (error) {
@@ -177,7 +178,7 @@ Alpine.data('cardanoPress', () => ({
             addNotice({
                 id: 'reconnect',
                 type: 'info',
-                text: 'Reconnecting...',
+                text: cardanoPressMessages.reconnecting,
             })
 
             const response = await handleReconnect(wallet)
@@ -185,7 +186,7 @@ Alpine.data('cardanoPress', () => ({
             removeNotice('reconnect')
 
             if (response.success) {
-                addNotice({ type: 'success', text: 'Wallet reconnected' })
+                addNotice({ type: 'success', text: cardanoPressMessages.reconnected })
                 setConnectedExtension(wallet.type)
 
                 return setTimeout(() => {
@@ -205,7 +206,7 @@ Alpine.data('cardanoPress', () => ({
         addNotice({
             id: 'sync',
             type: 'info',
-            text: 'Syncing...',
+            text: cardanoPressMessages.walletSyncing,
         })
 
         this.isProcessing = true
@@ -214,13 +215,13 @@ Alpine.data('cardanoPress', () => ({
         removeNotice('sync')
 
         if (response.success) {
-            addNotice({ type: 'success', text: 'Successfully synced' })
+            addNotice({ type: 'success', text: cardanoPressMessages.walletSynced })
 
             if (response.data) {
-                addNotice({ type: 'info', text: 'New assets pulled' })
+                addNotice({ type: 'info', text: cardanoPressMessages.newAssetsPulled })
             }
         } else {
-            addNotice({ type: 'error', text: 'Something is wrong' })
+            addNotice({ type: 'error', text: cardanoPressMessages.somethingWrong })
         }
 
         this.isProcessing = false
@@ -230,7 +231,7 @@ Alpine.data('cardanoPress', () => ({
         addNotice({
             id: 'save',
             type: 'info',
-            text: 'Saving...',
+            text: cardanoPressMessages.handleSaving,
         })
 
         this.isProcessing = true
@@ -239,9 +240,9 @@ Alpine.data('cardanoPress', () => ({
         removeNotice('save')
 
         if (response.success) {
-            addNotice({ type: 'success', text: 'Successfully saved' })
+            addNotice({ type: 'success', text: cardanoPressMessages.handleSaved })
         } else {
-            addNotice({ type: 'error', text: 'Something is wrong' })
+            addNotice({ type: 'error', text: cardanoPressMessages.somethingWrong })
         }
 
         this.isProcessing = false

@@ -1,6 +1,6 @@
 /* global grecaptcha */
 
-import { getConnectedExtension} from './api/config'
+import { cardanoPressMessages, getConnectedExtension } from './api/config'
 import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 import { handlePayment } from './actions'
 import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
@@ -47,7 +47,7 @@ window.addEventListener('alpine:init', () => {
             addNotice({
                 id: 'payment',
                 type: 'info',
-                text: 'Processing...',
+                text: cardanoPressMessages.paying,
             })
 
             this.isProcessing = true
@@ -58,7 +58,7 @@ window.addEventListener('alpine:init', () => {
             if (response.success) {
                 this.transactionHash = response.data
 
-                addNotice({ type: 'info', text: 'Payment successful' })
+                addNotice({ type: 'info', text: cardanoPressMessages.payed })
             } else {
                 addNotice({ type: 'warning', text: response.data })
             }

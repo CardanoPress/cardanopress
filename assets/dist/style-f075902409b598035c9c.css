@@ -286,11 +286,11 @@
 .p-0 {
     padding: 0px
 }
-.p-4 {
-    padding: 1rem
-}
 .p-2 {
     padding: 0.5rem
+}
+.p-4 {
+    padding: 1rem
 }
 .py-1 {
     padding-top: 0.25rem;

@@ -21,6 +21,23 @@ export const cardanoPress = window.cardanoPress || {
     logged: '',
 }
 
+export const cardanoPressMessages = window.cardanoPressMessages || {
+    connected: '',
+    connecting: '',
+    reconnected: '',
+    reconnecting: '',
+    walletSynced: '',
+    walletSyncing: '',
+    newAssetsPulled: '',
+    handleSaved: '',
+    handleSaving: '',
+    delegated: '',
+    delegating: '',
+    payed: '',
+    paying: '',
+    somethingWrong: '',
+}
+
 export const toPropertyName = (string, prefix = '', suffix = '') => prefix + string.charAt(0).toUpperCase() + string.slice(1) + suffix
 
 export const getConnectedExtension = () => localStorage.getItem('_x_connectedExtension') || ''

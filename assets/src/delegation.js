@@ -1,5 +1,6 @@
 import { addNotice, removeNotice } from './api/util'
 import { handleDelegation } from './actions'
+import { cardanoPressMessages } from './api/config'
 
 window.addEventListener('alpine:init', () => {
     const Alpine = window.Alpine || {}
@@ -14,7 +15,7 @@ window.addEventListener('alpine:init', () => {
             addNotice({
                 id: 'delegation',
                 type: 'info',
-                text: 'Processing...',
+                text: cardanoPressMessages.delegating,
             })
 
             this.isProcessing = true
@@ -25,7 +26,7 @@ window.addEventListener('alpine:init', () => {
             if (response.success) {
                 this.transactionHash = response.data
 
-                addNotice({ type: 'info', text: 'Delegation successful' })
+                addNotice({ type: 'info', text: cardanoPressMessages.delegated })
             } else {
                 addNotice({ type: 'warning', text: response.data })
             }
