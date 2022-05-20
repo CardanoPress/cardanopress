@@ -32,16 +32,11 @@ class CoreAction
             'connecting' => __('Connecting...', 'cardanopress'),
             'reconnected' => __('Wallet reconnected', 'cardanopress'),
             'reconnecting' => __('Reconnecting...', 'cardanopress'),
-            'walletSynced' => __('Successfully synced', 'cardanopress'),
             'walletSyncing' => __('Syncing...', 'cardanopress'),
             'newAssetsPulled' => __('New assets pulled', 'cardanopress'),
-            'handleSaved' => __('Successfully saved', 'cardanopress'),
             'handleSaving' => __('Saving...', 'cardanopress'),
-            'delegated' => __('Delegation successful', 'cardanopress'),
             'delegating' => __('Processing...', 'cardanopress'),
-            'payed' => __('Payment successful', 'cardanopress'),
             'paying' => __('Processing...', 'cardanopress'),
-            'somethingWrong' => __('Something is wrong', 'cardanopress'),
         ];
 
         wp_localize_script(Admin::OPTION_KEY . '-script', 'cardanoPressMessages', $data);
@@ -204,6 +199,6 @@ class CoreAction
         $userProfile = Application::instance()->userProfile();
 
         $userProfile->saveFavoriteHandle($_POST['ada_handle']);
-        wp_send_json_success();
+        wp_send_json_success(__('Successfully saved', 'cardanopress'));
     }
 }

@@ -215,13 +215,13 @@ Alpine.data('cardanoPress', () => ({
         removeNotice('sync')
 
         if (response.success) {
-            addNotice({ type: 'success', text: cardanoPressMessages.walletSynced })
+            addNotice({ type: 'success', text: response.data.message })
 
-            if (response.data) {
+            if (response.data.updated) {
                 addNotice({ type: 'info', text: cardanoPressMessages.newAssetsPulled })
             }
         } else {
-            addNotice({ type: 'error', text: cardanoPressMessages.somethingWrong })
+            addNotice({ type: 'error', text: response.data })
         }
 
         this.isProcessing = false
@@ -238,12 +238,7 @@ Alpine.data('cardanoPress', () => ({
         const response = await handleSave(this.selectedHandle)
 
         removeNotice('save')
-
-        if (response.success) {
-            addNotice({ type: 'success', text: cardanoPressMessages.handleSaved })
-        } else {
-            addNotice({ type: 'error', text: cardanoPressMessages.somethingWrong })
-        }
+        addNotice({ type: response.success ? 'success' : 'error', text: response.data })
 
         this.isProcessing = false
     },

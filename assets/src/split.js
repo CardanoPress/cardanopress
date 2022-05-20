@@ -56,9 +56,9 @@ window.addEventListener('alpine:init', () => {
             removeNotice('payment')
 
             if (response.success) {
-                this.transactionHash = response.data
+                this.transactionHash = response.data.hash
 
-                addNotice({ type: 'info', text: cardanoPressMessages.payed })
+                addNotice({ type: 'info', text: response.data.message })
             } else {
                 addNotice({ type: 'warning', text: response.data })
             }

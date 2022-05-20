@@ -26,16 +26,11 @@ export const cardanoPressMessages = window.cardanoPressMessages || {
     connecting: '',
     reconnected: '',
     reconnecting: '',
-    walletSynced: '',
     walletSyncing: '',
     newAssetsPulled: '',
-    handleSaved: '',
     handleSaving: '',
-    delegated: '',
     delegating: '',
-    payed: '',
     paying: '',
-    somethingWrong: '',
 }
 
 export const toPropertyName = (string, prefix = '', suffix = '') => prefix + string.charAt(0).toUpperCase() + string.slice(1) + suffix

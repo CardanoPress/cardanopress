@@ -97,7 +97,10 @@ class WalletAction
 
         do_action('wp_login', $userProfile->getData('user_login'), $userProfile->getData());
 
-        wp_send_json_success($stored !== $userProfile->storedAssets());
+        wp_send_json_success([
+            'message' => 'Successfully synced',
+            'updated' => $stored !== $userProfile->storedAssets(),
+        ]);
     }
 
     public function logoutCurrentUser(): void
@@ -214,7 +217,10 @@ class WalletAction
             wp_send_json_error(__('Something is wrong. Please try again', 'cardanopress'));
         }
 
-        wp_send_json_success($_POST['transaction_hash']);
+        wp_send_json_success([
+            'message' => 'Successful ' . $_POST['transaction_action'],
+            'hash' => $_POST['transaction_hash'],
+        ]);
     }
 
     public function getPaymentAddress(): void
