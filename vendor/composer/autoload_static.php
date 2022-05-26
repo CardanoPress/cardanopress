@@ -7,8 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
 {
     public static $files = array (
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'af4b52693518d6f741d0dab964786a35' => __DIR__ . '/..' . '/themeplate/core/functions.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -38,6 +38,10 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'C' => 
+        array (
+            'CardanoPress\\' => 13,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -48,9 +52,9 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         'ThemePlate\\' => 
         array (
             0 => __DIR__ . '/..' . '/themeplate/enqueue',
-            1 => __DIR__ . '/..' . '/themeplate/page',
-            2 => __DIR__ . '/..' . '/themeplate/settings',
-            3 => __DIR__ . '/..' . '/themeplate/logger/src',
+            1 => __DIR__ . '/..' . '/themeplate/logger/src',
+            2 => __DIR__ . '/..' . '/themeplate/page',
+            3 => __DIR__ . '/..' . '/themeplate/settings',
         ),
         'Psr\\Log\\' => 
         array (
@@ -85,9 +89,35 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'CardanoPress\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cardanopress/framework/src',
+        ),
     );
 
     public static $classMap = array (
+        'CardanoPress\\Clients\\BlockfrostClient' => __DIR__ . '/..' . '/cardanopress/framework/src/Clients/BlockfrostClient.php',
+        'CardanoPress\\Foundation\\AbstractAdmin' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractAdmin.php',
+        'CardanoPress\\Foundation\\AbstractApplication' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractApplication.php',
+        'CardanoPress\\Foundation\\AbstractInstaller' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractInstaller.php',
+        'CardanoPress\\Foundation\\AbstractManifest' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractManifest.php',
+        'CardanoPress\\Foundation\\AbstractProfile' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractProfile.php',
+        'CardanoPress\\Foundation\\AbstractTemplates' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractTemplates.php',
+        'CardanoPress\\Interfaces\\AdminInterface' => __DIR__ . '/..' . '/cardanopress/framework/src/Interfaces/AdminInterface.php',
+        'CardanoPress\\Interfaces\\ApplicationInterface' => __DIR__ . '/..' . '/cardanopress/framework/src/Interfaces/ApplicationInterface.php',
+        'CardanoPress\\Interfaces\\HookInterface' => __DIR__ . '/..' . '/cardanopress/framework/src/Interfaces/HookInterface.php',
+        'CardanoPress\\Interfaces\\InstallerInterface' => __DIR__ . '/..' . '/cardanopress/framework/src/Interfaces/InstallerInterface.php',
+        'CardanoPress\\Interfaces\\ManifestInterface' => __DIR__ . '/..' . '/cardanopress/framework/src/Interfaces/ManifestInterface.php',
+        'CardanoPress\\Interfaces\\TemplatesInterface' => __DIR__ . '/..' . '/cardanopress/framework/src/Interfaces/TemplatesInterface.php',
+        'CardanoPress\\SharedBase' => __DIR__ . '/..' . '/cardanopress/framework/src/SharedBase.php',
+        'CardanoPress\\Traits\\Configurable' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/Configurable.php',
+        'CardanoPress\\Traits\\Enqueueable' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/Enqueueable.php',
+        'CardanoPress\\Traits\\HasData' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/HasData.php',
+        'CardanoPress\\Traits\\HasPageTemplates' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/HasPageTemplates.php',
+        'CardanoPress\\Traits\\HasSettingsLink' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/HasSettingsLink.php',
+        'CardanoPress\\Traits\\Instantiable' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/Instantiable.php',
+        'CardanoPress\\Traits\\Loggable' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/Loggable.php',
+        'CardanoPress\\Traits\\Templatable' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/Templatable.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'GuzzleHttp\\BodySummarizer' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/BodySummarizer.php',
         'GuzzleHttp\\BodySummarizerInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/BodySummarizerInterface.php',
@@ -259,6 +289,7 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         'Monolog\\Handler\\SqsHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SqsHandler.php',
         'Monolog\\Handler\\StreamHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/StreamHandler.php',
         'Monolog\\Handler\\SwiftMailerHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SwiftMailerHandler.php',
+        'Monolog\\Handler\\SymfonyMailerHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SymfonyMailerHandler.php',
         'Monolog\\Handler\\SyslogHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SyslogHandler.php',
         'Monolog\\Handler\\SyslogUdpHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SyslogUdpHandler.php',
         'Monolog\\Handler\\SyslogUdp\\UdpSocket' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SyslogUdp/UdpSocket.php',
@@ -292,10 +323,8 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         'PBWebDev\\CardanoPress\\Admin' => __DIR__ . '/../..' . '/src/Admin.php',
         'PBWebDev\\CardanoPress\\Application' => __DIR__ . '/../..' . '/src/Application.php',
         'PBWebDev\\CardanoPress\\Blockfrost' => __DIR__ . '/../..' . '/src/Blockfrost.php',
-        'PBWebDev\\CardanoPress\\Clients\\BlockfrostClient' => __DIR__ . '/../..' . '/src/Clients/BlockfrostClient.php',
         'PBWebDev\\CardanoPress\\Collection' => __DIR__ . '/../..' . '/src/Collection.php',
         'PBWebDev\\CardanoPress\\Foundation\\AbstractAdmin' => __DIR__ . '/../..' . '/src/Foundation/AbstractAdmin.php',
-        'PBWebDev\\CardanoPress\\Foundation\\AbstractApplication' => __DIR__ . '/../..' . '/src/Foundation/AbstractApplication.php',
         'PBWebDev\\CardanoPress\\Foundation\\AbstractManifest' => __DIR__ . '/../..' . '/src/Foundation/AbstractManifest.php',
         'PBWebDev\\CardanoPress\\Foundation\\AbstractProfile' => __DIR__ . '/../..' . '/src/Foundation/AbstractProfile.php',
         'PBWebDev\\CardanoPress\\Foundation\\AbstractTemplates' => __DIR__ . '/../..' . '/src/Foundation/AbstractTemplates.php',

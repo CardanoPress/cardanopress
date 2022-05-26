@@ -1,0 +1,34 @@
+{
+  "name": "cardanopress/framework",
+  "description": "A ThemePlate project for Cardano WordPress integration",
+  "keywords": [
+    "generator-themeplate",
+    "themeplate",
+    "wordpress",
+    "cardano",
+    "cardanopress"
+  ],
+  "license": "GPL-2.0-only",
+  "authors": [
+    {
+      "name": "Gene Alyson Fortunado Torcende",
+      "email": "mail@pbwebdev.com",
+      "homepage": "https://pbwebdev.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^7.4",
+    "themeplate/core": "^1.7",
+    "themeplate/enqueue": "^v1.1",
+    "themeplate/logger": "^1.3",
+    "themeplate/page": "^1.1",
+    "themeplate/settings": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "CardanoPress\\": "src/"
+    }
+  }
+}

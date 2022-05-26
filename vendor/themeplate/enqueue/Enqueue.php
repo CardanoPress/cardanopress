@@ -53,7 +53,7 @@ class Enqueue {
 		global $wp_scripts, $wp_styles;
 
 		foreach ( array( $wp_scripts, $wp_styles ) as $dependencies ) {
-			if ( empty( $dependencies->queue ) ) {
+			if ( empty( $dependencies->queue ) || empty( $dependencies->registered ) ) {
 				continue;
 			}
 

@@ -1,18 +1,77 @@
 {
     "packages": [
         {
-            "name": "guzzlehttp/guzzle",
-            "version": "7.4.0",
-            "version_normalized": "7.4.0.0",
+            "name": "cardanopress/framework",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "868b3571a039f0ebc11ac8f344f4080babe2cb94"
+                "url": "https://github.com/kermage/cardanopress-framework.git",
+                "reference": "f81cb7e338301c04836cdaae5ac0b29381a2fc41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/868b3571a039f0ebc11ac8f344f4080babe2cb94",
-                "reference": "868b3571a039f0ebc11ac8f344f4080babe2cb94",
+                "url": "https://api.github.com/repos/kermage/cardanopress-framework/zipball/f81cb7e338301c04836cdaae5ac0b29381a2fc41",
+                "reference": "f81cb7e338301c04836cdaae5ac0b29381a2fc41",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.4",
+                "php": "^7.4|^8.0",
+                "themeplate/core": "^1.7",
+                "themeplate/enqueue": "^v1.1",
+                "themeplate/logger": "^1.3",
+                "themeplate/page": "^1.1",
+                "themeplate/settings": "^1.2"
+            },
+            "time": "2022-05-26T06:54:25+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "CardanoPress\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Gene Alyson Fortunado Torcende",
+                    "email": "mail@pbwebdev.com",
+                    "homepage": "https://pbwebdev.com"
+                }
+            ],
+            "description": "A ThemePlate project for Cardano WordPress integration",
+            "keywords": [
+                "cardano",
+                "cardanopress",
+                "generator-themeplate",
+                "themeplate",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/kermage/cardanopress-framework/issues",
+                "source": "https://github.com/kermage/cardanopress-framework/tree/main"
+            },
+            "install-path": "../cardanopress/framework"
+        },
+        {
+            "name": "guzzlehttp/guzzle",
+            "version": "7.4.3",
+            "version_normalized": "7.4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "74a8602c6faec9ef74b7a9391ac82c5e65b1cdab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/74a8602c6faec9ef74b7a9391ac82c5e65b1cdab",
+                "reference": "74a8602c6faec9ef74b7a9391ac82c5e65b1cdab",
                 "shasum": ""
             },
             "require": {
@@ -21,7 +80,7 @@
                 "guzzlehttp/psr7": "^1.8.3 || ^2.1",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
-                "symfony/deprecation-contracts": "^2.2"
+                "symfony/deprecation-contracts": "^2.2 || ^3.0"
             },
             "provide": {
                 "psr/http-client-implementation": "1.0"
@@ -38,7 +97,7 @@
                 "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
-            "time": "2021-10-18T09:52:00+00:00",
+            "time": "2022-05-25T13:24:33+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -47,12 +106,12 @@
             },
             "installation-source": "dist",
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -109,7 +168,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.4.0"
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.3"
             },
             "funding": [
                 {
@@ -216,17 +275,17 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.1.0",
-            "version_normalized": "2.1.0.0",
+            "version": "2.2.1",
+            "version_normalized": "2.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "089edd38f5b8abba6cb01567c2a8aaa47cec4c72"
+                "reference": "c94a94f120803a18554c1805ef2e539f8285f9a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/089edd38f5b8abba6cb01567c2a8aaa47cec4c72",
-                "reference": "089edd38f5b8abba6cb01567c2a8aaa47cec4c72",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/c94a94f120803a18554c1805ef2e539f8285f9a2",
+                "reference": "c94a94f120803a18554c1805ef2e539f8285f9a2",
                 "shasum": ""
             },
             "require": {
@@ -247,11 +306,11 @@
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "time": "2021-10-06T17:43:30+00:00",
+            "time": "2022-03-20T21:55:58+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "installation-source": "dist",
@@ -314,7 +373,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.1.0"
+                "source": "https://github.com/guzzle/psr7/tree/2.2.1"
             },
             "funding": [
                 {
@@ -388,17 +447,17 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.5.0",
-            "version_normalized": "2.5.0.0",
+            "version": "2.6.0",
+            "version_normalized": "2.6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "4192345e260f1d51b365536199744b987e160edc"
+                "reference": "247918972acd74356b0a91dfaa5adcaec069b6c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/4192345e260f1d51b365536199744b987e160edc",
-                "reference": "4192345e260f1d51b365536199744b987e160edc",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/247918972acd74356b0a91dfaa5adcaec069b6c0",
+                "reference": "247918972acd74356b0a91dfaa5adcaec069b6c0",
                 "shasum": ""
             },
             "require": {
@@ -411,18 +470,23 @@
             "require-dev": {
                 "aws/aws-sdk-php": "^2.4.9 || ^3.0",
                 "doctrine/couchdb": "~1.0@dev",
-                "elasticsearch/elasticsearch": "^7",
+                "elasticsearch/elasticsearch": "^7 || ^8",
+                "ext-json": "*",
                 "graylog2/gelf-php": "^1.4.2",
+                "guzzlehttp/guzzle": "^7.4",
+                "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
                 "php-amqplib/php-amqplib": "~2.4 || ^3",
                 "php-console/php-console": "^3.1.3",
-                "phpspec/prophecy": "^1.6.1",
+                "phpspec/prophecy": "^1.15",
                 "phpstan/phpstan": "^0.12.91",
-                "phpunit/phpunit": "^8.5",
+                "phpunit/phpunit": "^8.5.14",
                 "predis/predis": "^1.1",
                 "rollbar/rollbar": "^1.3 || ^2 || ^3",
-                "ruflin/elastica": ">=0.90@dev",
-                "swiftmailer/swiftmailer": "^5.3|^6.0"
+                "ruflin/elastica": "^7",
+                "swiftmailer/swiftmailer": "^5.3|^6.0",
+                "symfony/mailer": "^5.4 || ^6",
+                "symfony/mime": "^5.4 || ^6"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -441,7 +505,7 @@
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
                 "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
-            "time": "2022-04-08T15:43:54+00:00",
+            "time": "2022-05-10T09:36:00+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -474,7 +538,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.5.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.6.0"
             },
             "funding": [
                 {
@@ -759,23 +823,23 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v2.5.0",
-            "version_normalized": "2.5.0.0",
+            "version": "v2.5.1",
+            "version_normalized": "2.5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "6f981ee24cf69ee7ce9736146d1c57c2780598a8"
+                "reference": "e8b495ea28c1d97b5e0c121748d6f9b53d075c66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/6f981ee24cf69ee7ce9736146d1c57c2780598a8",
-                "reference": "6f981ee24cf69ee7ce9736146d1c57c2780598a8",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/e8b495ea28c1d97b5e0c121748d6f9b53d075c66",
+                "reference": "e8b495ea28c1d97b5e0c121748d6f9b53d075c66",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1"
             },
-            "time": "2021-07-12T14:48:14+00:00",
+            "time": "2022-01-02T09:53:40+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -809,7 +873,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.5.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.5.1"
             },
             "funding": [
                 {
@@ -875,23 +939,23 @@
         },
         {
             "name": "themeplate/enqueue",
-            "version": "v1.1.0",
-            "version_normalized": "1.1.0.0",
+            "version": "v1.1.1",
+            "version_normalized": "1.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Enqueue.git",
-                "reference": "68c2cef8afe67a7d20be5d5504edf37692a4bae7"
+                "reference": "40b7b8e76dba55a7a00434f4adf00762ac41ab50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/68c2cef8afe67a7d20be5d5504edf37692a4bae7",
-                "reference": "68c2cef8afe67a7d20be5d5504edf37692a4bae7",
+                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/40b7b8e76dba55a7a00434f4adf00762ac41ab50",
+                "reference": "40b7b8e76dba55a7a00434f4adf00762ac41ab50",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2|^8.0"
             },
-            "time": "2021-01-17T11:44:37+00:00",
+            "time": "2021-10-23T12:11:56+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -912,23 +976,23 @@
             "description": "Helper for registered dependencies",
             "support": {
                 "issues": "https://github.com/ThemePlate/Enqueue/issues",
-                "source": "https://github.com/ThemePlate/Enqueue/tree/v1.1.0"
+                "source": "https://github.com/ThemePlate/Enqueue/tree/v1.1.1"
             },
             "install-path": "../themeplate/enqueue"
         },
         {
             "name": "themeplate/logger",
-            "version": "v1.1.0",
-            "version_normalized": "1.1.0.0",
+            "version": "v1.3.0",
+            "version_normalized": "1.3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Logger.git",
-                "reference": "97068d3ce39ad3664899b7fbcc971955dbffa7fc"
+                "reference": "b6bc9b7252338600231b485e5604a529a50e00a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Logger/zipball/97068d3ce39ad3664899b7fbcc971955dbffa7fc",
-                "reference": "97068d3ce39ad3664899b7fbcc971955dbffa7fc",
+                "url": "https://api.github.com/repos/ThemePlate/Logger/zipball/b6bc9b7252338600231b485e5604a529a50e00a0",
+                "reference": "b6bc9b7252338600231b485e5604a529a50e00a0",
                 "shasum": ""
             },
             "require": {
@@ -936,7 +1000,10 @@
                 "php": "^7.4|^8.0",
                 "psr/log": "^1.1"
             },
-            "time": "2022-05-08T01:38:30+00:00",
+            "require-dev": {
+                "themeplate/tester": "^1.1"
+            },
+            "time": "2022-05-18T14:10:49+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -957,7 +1024,7 @@
             "description": "Opinionated logging structure",
             "support": {
                 "issues": "https://github.com/ThemePlate/Logger/issues",
-                "source": "https://github.com/ThemePlate/Logger/tree/v1.1.0"
+                "source": "https://github.com/ThemePlate/Logger/tree/v1.3.0"
             },
             "install-path": "../themeplate/logger"
         },

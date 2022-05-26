@@ -5,7 +5,7 @@
  * @since   0.1.0
  */
 
-namespace PBWebDev\CardanoPress\Clients;
+namespace CardanoPress\Clients;
 
 use Closure;
 use GuzzleHttp\Client;

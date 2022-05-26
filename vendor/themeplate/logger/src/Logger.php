@@ -14,18 +14,37 @@ use Monolog\Handler\RotatingFileHandler;
 class Logger {
 
 	private string $path;
+	/**
+	 * @var array<string, BaseLogger>
+	 */
+	private static array $instances = array();
 
 
 	public function __construct( string $folder_name = 'logs', string $base_path = WP_CONTENT_DIR ) {
 
-		$this->path = trailingslashit( $base_path ) . $folder_name;
+		$this->path = trailingslashit( $base_path ) . trim( $folder_name, '/\\' );
 
 	}
 
 
-	public function channel( string $name ): BaseLogger {
+	public function get_path(): string {
 
-		return new BaseLogger( $name, array( $this->handler( $name ) ) );
+		return $this->path;
+
+	}
+
+
+	public function channel( string $name, bool $context = false ): BaseLogger {
+
+		if ( ! isset( self::$instances[ $name ] ) ) {
+			self::$instances[ $name ] = new BaseLogger(
+				$name,
+				array( $this->handler( $name ) ),
+				array( $this->processor( $context ) )
+			);
+		}
+
+		return self::$instances[ $name ];
 
 	}
 
@@ -55,6 +74,32 @@ class Logger {
 		$format = "[%datetime%] %level_name% > %message% %context% %extra%\n";
 
 		return new LineFormatter( $format, 'Y-m-d H:i:s', true, true );
+
+	}
+
+
+	protected function processor( bool $context ): callable {
+
+		return static function( $record ) use ( $context ) {
+
+			$forced = array_key_exists( 'wp', $record['context'] ) ? 'wp' : array_search( 'wp', $record['context'], true );
+
+			if ( $context || false !== $forced ) {
+				$record['extra'] = array_merge(
+					$record['extra'],
+					array(
+						'doing_cron' => defined( 'DOING_CRON' ) && DOING_CRON,
+						'doing_ajax' => defined( 'DOING_AJAX' ) && DOING_AJAX,
+						'is_admin'   => defined( 'WP_ADMIN' ) && WP_ADMIN,
+					)
+				);
+
+				unset( $record['context'][ $forced ] );
+			}
+
+			return $record;
+
+		};
 
 	}
 
