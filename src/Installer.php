@@ -7,73 +7,33 @@
 
 namespace PBWebDev\CardanoPress;
 
-class Installer
+use CardanoPress\Foundation\AbstractInstaller;
+use CardanoPress\Traits\HasSettingsLink;
+
+class Installer extends AbstractInstaller
 {
-    private static Installer $instance;
-    private Application $application;
-    private Templates $templates;
+    use HasSettingsLink;
 
-    public static function instance(): Installer
+    public const DATA_PREFIX = 'cardanopress_';
+
+    protected function initialize(): void
     {
-        if (! isset(self::$instance)) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
+        $this->setSettingsLinkUrl(admin_url('admin.php?page=' . Admin::OPTION_KEY));
     }
 
-    private function __construct()
+    public function setupHooks(): void
     {
-        $load_path = plugin_dir_path(CARDANOPRESS_FILE);
-        $this->application = Application::instance();
-        $this->templates = new Templates($load_path . 'templates');
+        parent::setupHooks();
 
         add_action('plugins_loaded', [$this, 'loaded'], -1);
         add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
-        add_action('admin_init', [$this, 'maybeDoUpgrades']);
-    }
-
-    public function log(string $message): void
-    {
-        $this->application::logger('installer')->info($message);
-    }
-
-    public function activate(): void
-    {
-        if ('yes' === get_transient('cardanopress_activating')) {
-            $this->log('Is already activating');
-
-            return;
-        }
-
-        $this->log('Activating version ' . $this->application::VERSION);
-        set_transient('cardanopress_activating', 'yes', MINUTE_IN_SECONDS * 2);
-
-        if (empty(get_option('cardanopress_version'))) {
-            $this->log('Creating initial pages');
-            $this->templates->createPages();
-        }
-
-        $this->maybeDoUpgrades(true);
-        remove_action('admin_init', [$this, 'maybeDoUpgrades']);
-        delete_transient('cardanopress_activating');
+        add_action(self::DATA_PREFIX . 'upgrading', [$this, 'doUpgrade'], 10, 2);
+        add_filter('plugin_action_links_' . $this->pluginBaseName, [$this, 'mergeSettingsLink']);
     }
 
     public function loaded(): void
     {
         do_action('cardanopress_loaded');
-    }
-
-    public function getSettingsLink(string $text, string $target = '_self'): string
-    {
-        return sprintf(
-            '<a href="%1$s" id="settings-%2$s" aria-label="%3$s" target="%4$s">%5$s</a>',
-            admin_url('admin.php?page=' . Admin::OPTION_KEY),
-            Admin::OPTION_KEY,
-            __('Settings CardanoPress', 'cardanopress'),
-            $target,
-            $text,
-        );
     }
 
     public function noticeApplicationNotReady(): void
@@ -96,20 +56,15 @@ class Installer
         echo ob_get_clean();
     }
 
-    public function maybeDoUpgrades($isActivating = false): void
+    protected function doUpgrade(string $currentVersion): void
     {
-        $current = get_option('cardanopress_version');
+        if ('' === $currentVersion) {
+            $path = plugin_dir_path($this->application->getPluginFile());
 
-        if (version_compare($current, $this->application::VERSION, '<')) {
-            if (! $isActivating) {
-                $this->log('Upgrading version ' . $this->application::VERSION);
-            }
-
-            if (version_compare($current, '0.29.0', '<')) {
-                $this->updateOldPasswords();
-            }
-
-            update_option('cardanopress_version', $this->application::VERSION);
+            $this->log('Creating initial pages');
+            (new Templates($path . 'templates'))->createPages();
+        } elseif (version_compare($currentVersion, '0.29.0', '<')) {
+            $this->updateOldPasswords();
         }
     }
 

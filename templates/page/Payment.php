@@ -9,10 +9,8 @@
  * @since   0.1.0
  */
 
-use ThemePlate\Enqueue;
-
-Enqueue::asset('script', 'cardanopress-payment');
-Enqueue::asset('script', 'cardanopress-recaptcha');
+cardanoPress()->enqueue('script', 'cardanopress-payment');
+cardanoPress()->enqueue('script', 'cardanopress-recaptcha');
 
 get_header();
 

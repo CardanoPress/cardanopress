@@ -7,7 +7,7 @@
 
 namespace PBWebDev\CardanoPress;
 
-use PBWebDev\CardanoPress\Clients\BlockfrostClient;
+use CardanoPress\Clients\BlockfrostClient;
 
 class Blockfrost
 {
@@ -25,9 +25,11 @@ class Blockfrost
         $this->lastResponse = $response;
 
         if (200 !== $response['status_code'] || ! empty($response['error'])) {
-            Application::logger('blockfrost')->info($endpoint);
-            Application::logger('blockfrost')->info(print_r($query, true));
-            Application::logger('blockfrost')->info(print_r($response, true));
+            $app = Application::getInstance();
+
+            $app->logger('blockfrost')->info($endpoint);
+            $app->logger('blockfrost')->info(print_r($query, true));
+            $app->logger('blockfrost')->info(print_r($response, true));
         }
 
         return $response;
@@ -131,7 +133,7 @@ class Blockfrost
 
     public static function getProjectId(string $network): string
     {
-        $app = Application::instance();
+        $app = Application::getInstance();
         $project_ids = $app->option('blockfrost_project_id');
 
         return $project_ids[$network] ?? '';

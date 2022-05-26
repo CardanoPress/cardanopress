@@ -7,22 +7,28 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
-use PBWebDev\CardanoPress\Admin;
+use CardanoPress\Interfaces\HookInterface;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
 use PBWebDev\CardanoPress\Collection;
-use PBWebDev\CardanoPress\Installer;
+use PBWebDev\CardanoPress\Manifest;
 use PBWebDev\CardanoPress\Profile;
 
-class CoreAction
+class CoreAction implements HookInterface
 {
+    protected Application $application;
+
     public function __construct()
     {
-        add_filter('plugin_action_links_' . plugin_basename(CARDANOPRESS_FILE), [$this, 'addSettingsLink']);
+        $this->application = Application::getInstance();
+    }
+
+    public function setupHooks(): void
+    {
         add_action('wp_login', [$this, 'doWalletStatusChecks'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
         add_action('wp_ajax_cardanopress_save_handle', [$this, 'saveUserHandle']);
-        add_action('wp_enqueue_scripts', [$this, 'localizeMessages']);
+        add_action('wp_enqueue_scripts', [$this, 'localizeMessages'], 20);
     }
 
     protected static function customizableMessages(string $type): array
@@ -66,21 +72,12 @@ class CoreAction
     {
         $messages = apply_filters('cardanopress_script_messages', $this->customizableMessages('script'));
 
-        wp_localize_script(Admin::OPTION_KEY . '-script', 'cardanoPressMessages', $messages);
-    }
-
-    public function addSettingsLink(array $links): array
-    {
-        $settings = Installer::instance()->getSettingsLink(__('Settings', 'cardanopress'));
-
-        return array_merge(compact('settings'), $links);
+        wp_localize_script(Manifest::HANDLE_PREFIX . 'script', 'cardanoPressMessages', $messages);
     }
 
     public function doWalletStatusChecks($username, $user): void
     {
-        $app = Application::instance();
-
-        if (! $app->isReady()) {
+        if (! $this->application->isReady()) {
             return;
         }
 
@@ -102,8 +99,7 @@ class CoreAction
 
     public function checkWalletAssets(string $stakeAddress, Profile $userProfile, Blockfrost $blockfrost): void
     {
-        $app = Application::instance();
-        $assetAccess = $app->option('asset_access');
+        $assetAccess = $this->application->option('asset_access');
         $assetAccessPolicyIds = array_column($assetAccess, 'id');
         $wantedPolicyIds = Collection::wantedPolicyIds($assetAccessPolicyIds);
         $wantedPolicyIdsRegExPattern = '/^' . implode('|', $wantedPolicyIds) . '/';
@@ -150,14 +146,13 @@ class CoreAction
         Profile $userProfile,
         Blockfrost $blockfrost
     ): void {
-        $app = Application::instance();
-        $customRole = $app->option('ua_additional_role');
+        $customRole = $this->application->option('ua_additional_role');
 
         if ($userProfile->hasRole($customRole)) {
             return;
         }
 
-        $poolIds = $app->option('delegation_pool_id');
+        $poolIds = $this->application->option('delegation_pool_id');
         $wanted = [];
         $page = 1;
 
@@ -182,7 +177,7 @@ class CoreAction
             if (! empty($latest)) {
                 $active = $latest['epoch'] - $wanted['active_epoch'];
 
-                if ($active >= $app->option('ua_required_epoch')) {
+                if ($active >= $this->application->option('ua_required_epoch')) {
                     $userProfile->addRole($customRole);
                 }
             }
@@ -195,9 +190,8 @@ class CoreAction
             return;
         }
 
-        $app = Application::instance();
-        $dashboardPage = $app->option('member_dashboard');
-        $collectionPage = $app->option('member_collection');
+        $dashboardPage = $this->application->option('member_dashboard');
+        $collectionPage = $this->application->option('member_collection');
 
         if (! $dashboardPage) {
             $dashboardPage = get_option('page_on_front');
@@ -217,13 +211,13 @@ class CoreAction
 
     public function saveUserHandle()
     {
-        check_ajax_referer(Admin::OPTION_KEY . '-actions');
+        check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
 
         if (empty($_POST['ada_handle'])) {
             wp_send_json_error($this->getAjaxMessage('somethingWrong'));
         }
 
-        $userProfile = Application::instance()->userProfile();
+        $userProfile = $this->application->userProfile();
 
         $userProfile->saveFavoriteHandle($_POST['ada_handle']);
         wp_send_json_success($this->getAjaxMessage('handleSaved'));

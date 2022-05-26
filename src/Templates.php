@@ -7,35 +7,34 @@
 
 namespace PBWebDev\CardanoPress;
 
-use PBWebDev\CardanoPress\Foundation\AbstractTemplates;
+use CardanoPress\Foundation\AbstractTemplates;
+use CardanoPress\Traits\HasPageTemplates;
 
 class Templates extends AbstractTemplates
 {
-    public function getPathPrefix(): string
+    use HasPageTemplates;
+
+    public const OVERRIDES_PREFIX = 'cardanopress/';
+
+    protected function initialize(): void
     {
-        return 'cardanopress/';
+        $this->setPageTitlePrefix('CardanoPress:');
+        $this->searchPageTemplates($this->path . 'page/*.php', self::OVERRIDES_PREFIX);
     }
 
-    public function getTitlePrefix(): string
+    public function setupHooks(): void
     {
-        return 'CardanoPress:';
-    }
+        parent::setupHooks();
 
-    protected function getLoaderFile(): string
-    {
-        if (is_page_template()) {
-            return get_page_template_slug();
-        }
-
-        return '';
+        add_filter('theme_page_templates', [$this, 'mergePageTemplates']);
     }
 
     public function createPages(): void
     {
         $optionsValue = get_option(Admin::OPTION_KEY, []);
 
-        foreach ($this->pageTemplates as $template => $name) {
-            $title = substr($name, strlen($this->getTitlePrefix()) + 1);
+        foreach ($this->getPageTemplates() as $template => $name) {
+            $title = substr($name, strlen($this->pageTitlePrefix) + 1);
             $slug = 'member_' . sanitize_title($title);
 
             if (! empty($optionsValue[$slug])) {

@@ -7,21 +7,24 @@
 
 namespace PBWebDev\CardanoPress;
 
-use PBWebDev\CardanoPress\Foundation\AbstractProfile;
+use CardanoPress\Foundation\AbstractProfile;
 
 class Profile extends AbstractProfile
 {
     private string $prefix = 'cardanopress_';
+
+    protected function initialize(): void
+    {
+    }
 
     public function isConnected(): bool
     {
         return $this->connectedNetwork() && $this->connectedWallet() && $this->connectedStake();
     }
 
-
     public function connectedNetwork(): string
     {
-        $saved = get_user_meta($this->user->ID, $this->prefix . 'connected_network', true);
+        $saved = $this->getMeta($this->prefix . 'connected_network', true);
 
         return $saved ?? '';
     }
@@ -31,7 +34,7 @@ class Profile extends AbstractProfile
         $isAdded = false;
 
         if ($query_network !== $this->connectedNetwork()) {
-            $isAdded = update_user_meta($this->user->ID, $this->prefix . 'connected_network', $query_network);
+            $isAdded = $this->updateMeta($this->prefix . 'connected_network', $query_network);
         }
 
         return (bool)$isAdded;
@@ -39,7 +42,7 @@ class Profile extends AbstractProfile
 
     public function connectedWallet(): string
     {
-        $saved = get_user_meta($this->user->ID, $this->prefix . 'connected_wallet', true);
+        $saved = $this->getMeta($this->prefix . 'connected_wallet', true);
 
         return $saved ?? '';
     }
@@ -49,7 +52,7 @@ class Profile extends AbstractProfile
         $isAdded = false;
 
         if ($walletAddress !== $this->connectedWallet()) {
-            $isAdded = update_user_meta($this->user->ID, $this->prefix . 'connected_wallet', $walletAddress);
+            $isAdded = $this->updateMeta($this->prefix . 'connected_wallet', $walletAddress);
         }
 
         return (bool)$isAdded;
@@ -57,7 +60,7 @@ class Profile extends AbstractProfile
 
     public function connectedStake(): string
     {
-        $saved = get_user_meta($this->user->ID, $this->prefix . 'connected_stake', true);
+        $saved = $this->getMeta($this->prefix . 'connected_stake', true);
 
         return $saved ?? '';
     }
@@ -67,7 +70,7 @@ class Profile extends AbstractProfile
         $isAdded = false;
 
         if ($stakeAddress !== $this->connectedStake()) {
-            $isAdded = update_user_meta($this->user->ID, $this->prefix . 'connected_stake', $stakeAddress);
+            $isAdded = $this->updateMeta($this->prefix . 'connected_stake', $stakeAddress);
         }
 
         return (bool)$isAdded;
@@ -75,31 +78,31 @@ class Profile extends AbstractProfile
 
     public function storedAssets(): array
     {
-        $saved = get_user_meta($this->user->ID, $this->prefix . 'stored_assets', true);
+        $saved = $this->getMeta($this->prefix . 'stored_assets', true);
 
         return array_filter((array)$saved);
     }
 
     public function saveAssets(array $data): bool
     {
-        return update_user_meta($this->user->ID, $this->prefix . 'stored_assets', $data);
+        return $this->updateMeta($this->prefix . 'stored_assets', $data);
     }
 
     public function storedHandles(): array
     {
-        $saved = get_user_meta($this->user->ID, $this->prefix . 'stored_handles', true);
+        $saved = $this->getMeta($this->prefix . 'stored_handles', true);
 
         return array_filter((array)$saved);
     }
 
     public function saveHandles(array $data): bool
     {
-        return update_user_meta($this->user->ID, $this->prefix . 'stored_handles', $data);
+        return $this->updateMeta($this->prefix . 'stored_handles', $data);
     }
 
     public function getFavoriteHandle(): string
     {
-        $saved = get_user_meta($this->user->ID, $this->prefix . 'favorite_handle', true);
+        $saved = $this->getMeta($this->prefix . 'favorite_handle', true);
 
         return $saved ?? '';
     }
@@ -113,12 +116,12 @@ class Profile extends AbstractProfile
 
     public function saveFavoriteHandle(string $handle): bool
     {
-        return update_user_meta($this->user->ID, $this->prefix . 'favorite_handle', $handle);
+        return $this->updateMeta($this->prefix . 'favorite_handle', $handle);
     }
 
     public function allTransactions(): array
     {
-        $saved = get_user_meta($this->user->ID, $this->prefix . 'transaction', false);
+        $saved = $this->getMeta($this->prefix . 'transaction');
 
         return array_filter((array)$saved);
     }
@@ -126,7 +129,7 @@ class Profile extends AbstractProfile
     public function saveTransaction(string $network, string $action, string $hash): bool
     {
         $data = compact('network', 'action', 'hash');
-        $isSaved = add_user_meta($this->user->ID, $this->prefix . 'transaction', $data);
+        $isSaved = $this->addMeta($this->prefix . 'transaction', $data);
 
         return (bool)$isSaved;
     }

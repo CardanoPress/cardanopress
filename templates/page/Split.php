@@ -9,11 +9,9 @@
  * @since   0.1.0
  */
 
-use ThemePlate\Enqueue;
-
-Enqueue::asset('script', 'cardanopress-split');
-Enqueue::asset('script', 'cardanopress-payment');
-Enqueue::asset('script', 'cardanopress-recaptcha');
+cardanoPress()->enqueue('script', 'cardanopress-split');
+cardanoPress()->enqueue('script', 'cardanopress-payment');
+cardanoPress()->enqueue('script', 'cardanopress-recaptcha');
 
 $fixedFee = cardanoPress()->option('payment_split');
 

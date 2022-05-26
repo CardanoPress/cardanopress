@@ -7,69 +7,53 @@
 
 namespace PBWebDev\CardanoPress;
 
-use Monolog\Logger as MonoLogger;
+use CardanoPress\Foundation\AbstractApplication;
+use CardanoPress\Traits\Configurable;
+use CardanoPress\Traits\Enqueueable;
+use CardanoPress\Traits\Instantiable;
+use CardanoPress\Traits\Templatable;
 use PBWebDev\CardanoPress\Actions\CoreAction;
 use PBWebDev\CardanoPress\Actions\WalletAction;
-use ThemePlate\Enqueue;
-use ThemePlate\Logger;
 
-class Application
+class Application extends AbstractApplication
 {
-    private static Application $instance;
-    private static Logger $logger;
-    private Admin $admin;
-    private Templates $templates;
-    public const VERSION = '0.30.0';
+    use Configurable;
+    use Enqueueable;
+    use Instantiable;
+    use Templatable;
 
-    public static function instance(): Application
+    protected function initialize(): void
     {
-        if (! isset(self::$instance)) {
-            self::$instance = new self();
-        }
+        $this->setInstance($this);
 
-        return self::$instance;
+        $path = plugin_dir_path($this->getPluginFile());
+        $this->admin = new Admin($this->logger('admin'));
+        $this->manifest = new Manifest($path . 'assets/dist', $this->getData('Version'));
+        $this->templates = new Templates($path . 'templates');
     }
 
-    private function __construct()
+    public function setupHooks(): void
     {
-        $load_path = plugin_dir_path(CARDANOPRESS_FILE);
+        $this->admin->setupHooks();
+        $this->manifest->setupHooks();
+        $this->templates->setupHooks();
 
-        $this->templates = new Templates($load_path . 'templates');
-        self::$logger = new Logger('cardanopress-logs');
-
-        new Manifest($load_path . 'assets/dist', self::VERSION);
-        new CoreAction();
-        new WalletAction();
-        new Shortcode();
-
-        $this->admin = new Admin();
-
-        add_action('init', [Enqueue::class, 'init']);
+        add_action('cardanopress_loaded', [$this, 'init']);
     }
 
-    public static function logger(string $channel): MonoLogger
+    public function init(): void
     {
-        return self::$logger->channel($channel);
+        (new CoreAction())->setupHooks();
+        (new WalletAction())->setupHooks();
+        (new Shortcode())->setupHooks();
     }
 
-    public function option(string $key)
+    public function isReady(): bool
     {
-        return $this->admin->getOption($key);
-    }
+        $projectIds = $this->option('blockfrost_project_id');
+        $projectIds = array_filter($projectIds);
 
-    public function template(string $name, array $variables = []): void
-    {
-        $name .= '.php';
-        $file = locate_template($this->templates->getPath() . $name);
-
-        if (! $file) {
-            $file = $this->templates->getPath(true) . $name;
-        }
-
-        if (file_exists($file)) {
-            extract($variables, EXTR_OVERWRITE);
-            include $file;
-        }
+        return ! empty($projectIds);
     }
 
     public function userProfile(): Profile
@@ -109,14 +93,6 @@ class Application
         $data = $paymentAddresses[$this->getNetwork()] ?? '';
 
         return $data;
-    }
-
-    public function isReady(): bool
-    {
-        $projectIds = $this->option('blockfrost_project_id');
-        $projectIds = array_filter($projectIds);
-
-        return ! empty($projectIds);
     }
 
     public function getNetwork(): string

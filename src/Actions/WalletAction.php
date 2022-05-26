@@ -7,14 +7,22 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
-use PBWebDev\CardanoPress\Admin;
+use CardanoPress\Interfaces\HookInterface;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
+use PBWebDev\CardanoPress\Manifest;
 use PBWebDev\CardanoPress\Profile;
 
-class WalletAction
+class WalletAction implements HookInterface
 {
+    protected Application $application;
+
     public function __construct()
+    {
+        $this->application = Application::getInstance();
+    }
+
+    public function setupHooks(): void
     {
         add_action('wp_ajax_nopriv_cardanopress_user_account', [$this, 'initializeUserAccount']);
         add_action('wp_ajax_cardanopress_user_account', [$this, 'connectUserWallet']);
@@ -45,7 +53,7 @@ class WalletAction
             $newAccount = true;
 
             if (is_wp_error($userId)) {
-                Application::logger('actions')->error($userId->get_error_message());
+                $this->application->logger('actions')->error($userId->get_error_message());
                 wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
             }
         }
@@ -75,7 +83,7 @@ class WalletAction
     {
         $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
 
-        $userProfile = Application::instance()->userProfile();
+        $userProfile = $this->application->userProfile();
 
         $userProfile->saveNetwork($_POST['query_network']);
         $userProfile->saveWallet($_POST['wallet_address']);
@@ -91,7 +99,7 @@ class WalletAction
     {
         $this->maybeInvalid();
 
-        $userProfile = Application::instance()->userProfile();
+        $userProfile = $this->application->userProfile();
         $stored = $userProfile->storedAssets();
 
         do_action('wp_login', $userProfile->getData('user_login'), $userProfile->getData());
@@ -106,7 +114,7 @@ class WalletAction
     {
         $this->maybeInvalid(['query_network', 'wallet_address']);
 
-        $userProfile = Application::instance()->userProfile();
+        $userProfile = $this->application->userProfile();
         $shouldReload = false;
 
         if (
@@ -191,7 +199,7 @@ class WalletAction
     {
         $this->maybeInvalid();
 
-        $poolData = Application::instance()->delegationPool();
+        $poolData = $this->application->delegationPool();
         $response = $poolData['hex'] ?? '';
 
         if (empty($response)) {
@@ -205,7 +213,7 @@ class WalletAction
     {
         $this->maybeInvalid(['query_network', 'transaction_action', 'transaction_hash']);
 
-        $userProfile = Application::instance()->userProfile();
+        $userProfile = $this->application->userProfile();
         $success = $userProfile->saveTransaction(
             $_POST['query_network'],
             $_POST['transaction_action'],
@@ -226,7 +234,7 @@ class WalletAction
     {
         $this->maybeInvalid();
 
-        $response = Application::instance()->paymentAddress();
+        $response = $this->application->paymentAddress();
 
         if (empty($response)) {
             wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
@@ -238,9 +246,9 @@ class WalletAction
     private function maybeInvalid(array $postVars = array()): void
     {
         if (is_user_logged_in()) {
-            check_ajax_referer(Admin::OPTION_KEY . '-actions');
+            check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
         } elseif (! is_allowed_http_origin()) {
-            Application::logger('actions')->error(get_http_origin());
+            $this->application->logger('actions')->error(get_http_origin());
             wp_send_json_error(CoreAction::getAjaxMessage('notPermitted'));
         }
 

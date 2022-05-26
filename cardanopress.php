@@ -36,11 +36,17 @@ require_once plugin_dir_path(CARDANOPRESS_FILE) . 'vendor/autoload.php';
 // Instantiate the updater
 EUM_Handler::run(CARDANOPRESS_FILE, 'https://raw.githubusercontent.com/pbwebdev/cardanopress/main/update-data.json');
 
-// Instantiate
-Application::instance();
-register_activation_hook(CARDANOPRESS_FILE, [Installer::instance(), 'activate']);
-
 function cardanoPress(): Application
 {
-    return Application::instance();
+    static $application;
+
+    if (null === $application) {
+        $application = new Application(CARDANOPRESS_FILE);
+    }
+
+    return $application;
 }
+
+// Instantiate
+cardanoPress()->setupHooks();
+(new Installer(cardanoPress()))->setupHooks();

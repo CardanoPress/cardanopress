@@ -24,7 +24,7 @@ class Collection
 
     public static function wantedPolicyIds(array $custom = array()): array
     {
-        $policyIds = Application::instance()->option('policy_ids');
+        $policyIds = Application::getInstance()->option('policy_ids');
 
         return array_merge(
             array_values(self::ADA_HANDLE),

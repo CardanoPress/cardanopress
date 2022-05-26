@@ -9,9 +9,7 @@
  * @since   0.1.0
  */
 
-use ThemePlate\Enqueue;
-
-Enqueue::asset('script', 'cardanopress-delegation');
+cardanoPress()->enqueue('script', 'cardanopress-delegation');
 
 get_header();
 

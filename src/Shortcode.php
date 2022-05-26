@@ -7,9 +7,18 @@
 
 namespace PBWebDev\CardanoPress;
 
-class Shortcode
+use CardanoPress\Interfaces\HookInterface;
+
+class Shortcode implements HookInterface
 {
+    protected Application $application;
+
     public function __construct()
+    {
+        $this->application = Application::getInstance();
+    }
+
+    public function setupHooks(): void
     {
         add_shortcode('cardanopress_option', [$this, 'doOption']);
         add_shortcode('cardanopress_template', [$this, 'doTemplate']);
@@ -28,8 +37,7 @@ class Shortcode
             return '';
         }
 
-        $app = Application::instance();
-        $value = $app->option($args['key']);
+        $value = $this->application->option($args['key']);
 
         return $this->printOutput($value, $args['sub']);
     }
@@ -50,10 +58,8 @@ class Shortcode
             parse_str(str_replace('&amp;', '&', $args['variables']), $args['variables']);
         }
 
-        $app = Application::instance();
-
         ob_start();
-        $app->template($args['name'], $args['variables']);
+        $this->application->template($args['name'], $args['variables']);
 
         $html = ob_get_clean();
 
@@ -75,9 +81,8 @@ class Shortcode
             return '';
         }
 
-        $app = Application::instance();
         $method = $args['method'];
-        $value = $app->userProfile()->$method();
+        $value = $this->application->userProfile()->$method();
 
         return $this->printOutput($value, $args['sub']);
     }
@@ -92,8 +97,7 @@ class Shortcode
             return '';
         }
 
-        $app = Application::instance();
-        $value = $app->delegationPool();
+        $value = $this->application->delegationPool();
         $value = $value[$args['key']] ?? '';
 
         return $this->printOutput($value);
