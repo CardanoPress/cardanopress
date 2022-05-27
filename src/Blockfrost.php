@@ -66,10 +66,7 @@ class Blockfrost
             'minUtxo' => $parameters['min_utxo'],
             'poolDeposit' => $parameters['pool_deposit'],
             'keyDeposit' => $parameters['key_deposit'],
-            'coinsPerUtxoWord' => $parameters['coins_per_utxo_word'],
             'maxValSize' => $parameters['max_val_size'],
-            'priceMem' => $parameters['price_mem'],
-            'priceStep' => $parameters['price_step'],
             'maxTxSize' => $parameters['max_tx_size'],
             'slot' => $block['slot'],
         ];
