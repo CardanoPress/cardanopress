@@ -13,6 +13,7 @@ use WP_User;
 abstract class AbstractProfile extends SharedBase
 {
     protected WP_User $user;
+    private string $prefix = 'cardanopress_';
 
     public function __construct(WP_User $user)
     {
@@ -73,5 +74,91 @@ abstract class AbstractProfile extends SharedBase
     protected function updateMeta(string $key, $value, $previous = '')
     {
         return update_user_meta($this->getData('ID'), $key, $value, $previous);
+    }
+
+    public function isConnected(): bool
+    {
+        return $this->connectedNetwork() && $this->connectedWallet() && $this->connectedStake();
+    }
+
+    public function connectedNetwork(): string
+    {
+        $saved = $this->getMeta($this->prefix . 'connected_network', true);
+
+        return $saved ?? '';
+    }
+
+    public function saveNetwork(string $query_network): bool
+    {
+        $isUpdated = false;
+
+        if ($query_network !== $this->connectedNetwork()) {
+            $isUpdated = $this->updateMeta($this->prefix . 'connected_network', $query_network);
+        }
+
+        return (bool)$isUpdated;
+    }
+
+    public function connectedWallet(): string
+    {
+        $saved = $this->getMeta($this->prefix . 'connected_wallet', true);
+
+        return $saved ?? '';
+    }
+
+    public function saveWallet(string $walletAddress): bool
+    {
+        $isUpdated = false;
+
+        if ($walletAddress !== $this->connectedWallet()) {
+            $isUpdated = $this->updateMeta($this->prefix . 'connected_wallet', $walletAddress);
+        }
+
+        return (bool)$isUpdated;
+    }
+
+    public function connectedStake(): string
+    {
+        $saved = $this->getMeta($this->prefix . 'connected_stake', true);
+
+        return $saved ?? '';
+    }
+
+    public function saveStake(string $stakeAddress): bool
+    {
+        $isUpdated = false;
+
+        if ($stakeAddress !== $this->connectedStake()) {
+            $isUpdated = $this->updateMeta($this->prefix . 'connected_stake', $stakeAddress);
+        }
+
+        return (bool)$isUpdated;
+    }
+
+    public function storedAssets(): array
+    {
+        $saved = $this->getMeta($this->prefix . 'stored_assets', true);
+
+        return array_filter((array)$saved);
+    }
+
+    public function saveAssets(array $data): bool
+    {
+        return $this->updateMeta($this->prefix . 'stored_assets', $data);
+    }
+
+    public function allTransactions(): array
+    {
+        $saved = $this->getMeta($this->prefix . 'transaction');
+
+        return array_filter((array)$saved);
+    }
+
+    public function saveTransaction(string $network, string $action, string $hash): bool
+    {
+        $data = compact('network', 'action', 'hash');
+        $isSaved = $this->addMeta($this->prefix . 'transaction', $data);
+
+        return (bool)$isSaved;
     }
 }

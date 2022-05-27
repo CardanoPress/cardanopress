@@ -24,12 +24,12 @@
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable": true,
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*",
-    "cardanopress/framework": "dev-main",
+    "cardanopress/framework": "^1.0",
     "kermage/external-update-manager": "^2.2"
   },
   "require-dev": {
