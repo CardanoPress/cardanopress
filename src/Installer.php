@@ -56,7 +56,7 @@ class Installer extends AbstractInstaller
         echo ob_get_clean();
     }
 
-    protected function doUpgrade(string $currentVersion): void
+    public function doUpgrade(string $currentVersion, string $appVersion): void
     {
         if ('' === $currentVersion) {
             $path = plugin_dir_path($this->application->getPluginFile());
