@@ -161,10 +161,12 @@ class CoreAction implements HookInterface
 
             do_action('cardanopress_account_history', $stakeAddress, $response, $page);
 
-            foreach ($response as $history) {
-                if ($history['pool_id'] === $poolIds[$queryNetwork]) {
-                    $wanted = $history;
-                    break;
+            if (empty($wanted)) {
+                foreach ($response as $history) {
+                    if ($history['pool_id'] === $poolIds[$queryNetwork]) {
+                        $wanted = $history;
+                        break;
+                    }
                 }
             }
 
