@@ -9,7 +9,9 @@
  * @since   0.1.0
  */
 
-$pool = cardanoPress()->delegationPool();
+if (empty($pool)) {
+    $pool = cardanoPress()->delegationPool();
+}
 
 if (empty($pool)) {
     return;
