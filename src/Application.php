@@ -105,4 +105,23 @@ class Application extends AbstractApplication
 
         return $network;
     }
+
+    public function getPages(): array
+    {
+        $list = [];
+
+        foreach (Admin::PAGES as $page) {
+            $pageId = cardanoPress()->option('member_' . $page);
+
+            if (! $pageId) {
+                continue;
+            }
+
+            $list[get_the_title($pageId)] = get_permalink($pageId);
+        }
+
+        $list['Disconnect'] = wp_logout_url(get_permalink());
+
+        return $list;
+    }
 }
