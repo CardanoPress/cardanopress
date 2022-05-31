@@ -299,6 +299,10 @@ class Admin extends AbstractAdmin
 
         $newValue['delegation_pool_data'] = $oldValue['delegation_pool_data'] ?? [];
 
+        if (empty($newValue['delegation_pool_id'])) {
+            return $newValue;
+        }
+
         foreach ($newValue['delegation_pool_id'] as $network => $poolId) {
             if (! Blockfrost::isReady($network)) {
                 continue;
