@@ -12,6 +12,13 @@ use CardanoPress\Foundation\AbstractAdmin;
 class Admin extends AbstractAdmin
 {
     public const OPTION_KEY = 'cardanopress';
+    public const PAGES = [
+        'dashboard',
+        'collection',
+        'payment',
+        'delegation',
+        'split',
+    ];
 
     protected function initialize(): void
     {
@@ -200,28 +207,15 @@ class Admin extends AbstractAdmin
             'id' => 'member',
             'title' => __('Member Pages', 'cardanopress'),
             'context' => 'side',
-            'fields' => [
-                'dashboard' => [
-                    'type' => 'page',
-                    'title' => __('Dashboard', 'cardanopress'),
-                ],
-                'collection' => [
-                    'type' => 'page',
-                    'title' => __('Collection', 'cardanopress'),
-                ],
-                'payment' => [
-                    'type' => 'page',
-                    'title' => __('Payment', 'cardanopress'),
-                ],
-                'delegation' => [
-                    'type' => 'page',
-                    'title' => __('Delegation', 'cardanopress'),
-                ],
-                'split' => [
-                    'type' => 'page',
-                    'title' => __('Split', 'cardanopress'),
-                ],
-            ],
+            'fields' => array_combine(
+                self::PAGES,
+                array_map(function ($page) {
+                    return [
+                        'type' => 'page',
+                        'title' => $page,
+                    ];
+                }, self::PAGES),
+            ),
         ]);
     }
 
