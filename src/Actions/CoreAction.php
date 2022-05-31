@@ -118,6 +118,9 @@ class CoreAction implements HookInterface
                 }
 
                 $data = $blockfrost->specificAsset($asset['unit']);
+
+                do_action('cardanopress_associated_asset', $stakeAddress, $data, $asset);
+
                 $collection = new Collection($data);
                 $assets[] = $collection->filteredAsset();
                 $handles[] = $collection->grabHandle();
