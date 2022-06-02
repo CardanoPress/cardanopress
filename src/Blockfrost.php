@@ -44,6 +44,20 @@ class Blockfrost
         return $this->lastResponse[$key] ?? null;
     }
 
+    public function blocksLatest(): array
+    {
+        $response = $this->request('blocks/latest');
+
+        return 200 === $response['status_code'] ? $response['data'] : [];
+    }
+
+    public function epochParameters(string $number): array
+    {
+        $response = $this->request('epochs/' . $number . '/parameters');
+
+        return 200 === $response['status_code'] ? $response['data'] : [];
+    }
+
     public function protocolParameters(): array
     {
         $block = $this->blocksLatest();
@@ -139,19 +153,5 @@ class Blockfrost
     public static function isReady(string $network): bool
     {
         return '' !== self::getProjectId($network);
-    }
-
-    private function blocksLatest(): array
-    {
-        $response = $this->request('blocks/latest');
-
-        return 200 === $response['status_code'] ? $response['data'] : [];
-    }
-
-    private function epochParameters(string $number): array
-    {
-        $response = $this->request('epochs/' . $number . '/parameters');
-
-        return 200 === $response['status_code'] ? $response['data'] : [];
     }
 }
