@@ -30,7 +30,7 @@ Install the plugin as you would any other WordPress plugin.
 
 The Emurgo Serialization lib will only work with if the file type is enabled on your server. For Apache based servers, please add this MIME Type to your config or htaccess file:
 
-AddType application/wasm .wasm
+`AddType application/wasm .wasm`
 
 That will allow for the .wasm files to load on your server.
 
