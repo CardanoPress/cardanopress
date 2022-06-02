@@ -2,10 +2,10 @@
 
 /**
  * Plugin Name: CardanoPress
- * Plugin URI:  https://github.com/pbwebdev/cardanopress
- * Author:      Gene Alyson Fortunado Torcende
- * Author URI:  https://pbwebdev.com
- * Description: A ThemePlate project for Cardano integration to WordPress
+ * Plugin URI:  https://github.com/cardanopress/cardanopress
+ * Author:      CardanoPress
+ * Author URI:  https://cardanopress.io
+ * Description: Core plugin for the suite of CardanoPress plugins
  * Version:     0.32.0
  * License:     GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
