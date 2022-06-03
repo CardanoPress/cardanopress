@@ -139,6 +139,10 @@ class CoreAction implements HookInterface
         $assets = array_filter($assets);
         $handles = array_filter($handles);
 
+        if (! in_array($userProfile->getFavoriteHandle(), $handles, true)) {
+            $userProfile->saveFavoriteHandle('');
+        }
+
         $userProfile->saveAssets($assets);
         $userProfile->saveHandles($handles);
     }
