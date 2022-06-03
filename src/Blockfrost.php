@@ -114,6 +114,13 @@ class Blockfrost
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
 
+    public function getPoolInfo(string $id): array
+    {
+        $response = $this->request('pools/' . $id);
+
+        return 200 === $response['status_code'] ? $response['data'] : [];
+    }
+
     public function getPoolDetails(string $id): array
     {
         $response = $this->request('pools/' . $id . '/metadata');
