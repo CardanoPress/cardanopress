@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name: CardanoPress
- * Plugin URI:  https://github.com/cardanopress/cardanopress
+ * Plugin URI:  https://github.com/CardanoPress/cardanopress
  * Author:      CardanoPress
  * Author URI:  https://cardanopress.io
  * Description: Core plugin for the suite of CardanoPress plugins
- * Version:     0.32.0
+ * Version:     0.33.0
  * License:     GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
@@ -34,7 +34,7 @@ if (! defined('CARDANOPRESS_FILE')) {
 require_once plugin_dir_path(CARDANOPRESS_FILE) . 'vendor/autoload.php';
 
 // Instantiate the updater
-EUM_Handler::run(CARDANOPRESS_FILE, 'https://raw.githubusercontent.com/pbwebdev/cardanopress/main/update-data.json');
+EUM_Handler::run(CARDANOPRESS_FILE, 'https://raw.githubusercontent.com/CardanoPress/cardanopress/main/update-data.json');
 
 function cardanoPress(): Application
 {
