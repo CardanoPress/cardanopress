@@ -1,9 +1,8 @@
 /* global grecaptcha */
 
-import { cardanoPressMessages, getConnectedExtension } from './api/config'
-import { addNotice, getConnectedWallet, removeNotice } from './api/util'
+import { cardanoPressMessages } from './api/config'
+import { addNotice, removeNotice } from './api/util'
 import { handlePayment } from './actions'
-import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 
 window.addEventListener('alpine:init', () => {
     const Alpine = window.Alpine || {}
