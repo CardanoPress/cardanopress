@@ -1,7 +1,7 @@
 /* global grecaptcha */
 
 import { cardanoPressMessages, getConnectedExtension } from './api/config'
-import { addNotice, getConnectedWallet, removeNotice, waitElement } from './api/util'
+import { addNotice, getConnectedWallet, removeNotice, waitElement, windowLoader } from './api/util'
 import { getPaymentAddress, handlePayment } from './actions'
 import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 
@@ -34,7 +34,7 @@ window.addEventListener('alpine:init', () => {
                 }
             }
 
-            window.addEventListener('load', async () => {
+            windowLoader(async () => {
                 if (getConnectedExtension()) {
                     try {
                         const Wallet = await getConnectedWallet()
