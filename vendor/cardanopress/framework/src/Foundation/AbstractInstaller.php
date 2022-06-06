@@ -69,4 +69,31 @@ abstract class AbstractInstaller extends SharedBase implements InstallerInterfac
             update_option(static::DATA_PREFIX . 'version', $appVersion);
         }
     }
+
+    public function noticeNeedingCorePlugin(): void
+    {
+        if ($this->application->isReady()) {
+            return;
+        }
+
+        $plugin  = sprintf(
+            '<a href="%1$s" target="_blank">core plugin</a>',
+            'https://github.com/CardanoPress/cardanopress'
+        );
+        $message = sprintf(
+            '<strong>%1$s</strong> requires the %2$s for its full functionality.',
+            $this->application->getData('Name'),
+            $plugin
+        );
+
+        ob_start();
+
+        ?>
+        <div class="notice notice-info">
+            <p><?php echo $message; ?></p>
+        </div>
+        <?php
+
+        echo ob_get_clean();
+    }
 }
