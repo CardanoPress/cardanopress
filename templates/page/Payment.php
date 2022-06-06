@@ -10,7 +10,13 @@
  */
 
 cardanoPress()->enqueue('script', 'cardanopress-payment');
-cardanoPress()->enqueue('script', 'cardanopress-recaptcha');
+
+$recaptchaKeys = cardanoPress()->option('recaptcha_key');
+$recaptchaKey = $recaptchaKeys['site'] ?? '';
+
+if (! empty($recaptchaKey)) {
+    cardanoPress()->enqueue('script', 'cardanopress-recaptcha');
+}
 
 get_header();
 
@@ -20,7 +26,7 @@ get_header();
     <div class="py-6">
         <h1>Payment</h1>
 
-        <?php cardanoPress()->template('payment-form'); ?>
+        <?php cardanoPress()->template('payment-form', compact('recaptchaKey')); ?>
     </div>
 </main>
 

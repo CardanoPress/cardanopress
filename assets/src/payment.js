@@ -18,9 +18,21 @@ window.addEventListener('alpine:init', () => {
         transactionHash: '',
         showAddress: false,
         paymentAddress: '',
+        recaptchaKey: '',
 
         async init() {
             this.payAmount = parseFloat(this.$root.dataset.amount)
+            this.recaptchaKey = this.$root.dataset.recaptcha
+
+            if ('' === this.recaptchaKey) {
+                this.isVerified = true
+
+                const response = await getPaymentAddress()
+
+                if (response.success) {
+                    this.paymentAddress = response.data
+                }
+            }
 
             window.addEventListener('load', async () => {
                 if (getConnectedExtension()) {
