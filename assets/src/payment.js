@@ -29,9 +29,7 @@ window.addEventListener('alpine:init', () => {
 
                 const response = await getPaymentAddress()
 
-                if (response.success) {
-                    this.paymentAddress = response.data
-                }
+                this.paymentAddress = response.data
             }
 
             windowLoader(async () => {
@@ -52,9 +50,7 @@ window.addEventListener('alpine:init', () => {
                 if (this.isVerified && !this.paymentAddress) {
                     const response = await getPaymentAddress()
 
-                    if (response.success) {
-                        this.paymentAddress = response.data
-                    }
+                    this.paymentAddress = response.data
                 }
             }, { once: true })
         },
