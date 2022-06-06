@@ -87,7 +87,14 @@ Alpine.data('cardanoPress', () => ({
     },
 
     clipboardValue(target) {
-        window.navigator.clipboard.writeText(target)
+        removeNotice('clipboardValue')
+        window.navigator.clipboard.writeText(target).then(() => {
+            addNotice({
+                id: 'clipboardValue',
+                type: 'info',
+                text: cardanoPressMessages.clipboardCopy,
+            })
+        })
     },
 
     async walletConnect(type) {
