@@ -86,6 +86,10 @@ Alpine.data('cardanoPress', () => ({
         }
     },
 
+    clipboardValue(target) {
+        window.navigator.clipboard.writeText(target)
+    },
+
     async walletConnect(type) {
         if (this.isConnected) {
             await this.handleReconnect(type)
