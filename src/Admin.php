@@ -46,6 +46,7 @@ class Admin extends AbstractAdmin
         $this->optionFields([
             'id' => 'blockfrost',
             'title' => __('Blockfrost Project ID', 'cardanopress'),
+            'description' => __('This is required to be able to connect to the Cardano blockchain', 'cardanopress'),
             'context' => 'side',
             'fields' => [
                 'project_id' => [
@@ -75,6 +76,7 @@ class Admin extends AbstractAdmin
         $this->optionFields([
             'id' => 'recaptcha',
             'title' => __('Recaptcha Keys', 'cardanopress'),
+            'description' => __('Required for NFT payment page to reveal payment address.', 'cardanopress'),
             'context' => 'side',
             'fields' => [
                 'key' => [
@@ -103,6 +105,7 @@ class Admin extends AbstractAdmin
         $this->optionFields([
             'id' => 'delegation',
             'title' => __('Delegation: Pool ID', 'cardanopress'),
+            'description' => __('Enter to Pool ID of the stake pool your delegation page will delegate to.', 'cardanopress'),
             'fields' => [
                 'pool_id' => [
                     'type' => 'group',
@@ -130,9 +133,11 @@ class Admin extends AbstractAdmin
         $this->optionFields([
             'id' => 'payment',
             'title' => __('Payment Settings', 'cardanopress'),
+            'description' => __('Settings for the payment page.', 'cardanopress'),
             'fields' => [
                 'amount' => [
                     'title' => __('Amount in ADA', 'cardanopress'),
+                    'description' => __('Price for one NFT or item for sale.', 'cardanopress'),
                     'type' => 'number',
                     'default' => 1,
                     'options' => [
@@ -142,6 +147,7 @@ class Admin extends AbstractAdmin
                 ],
                 'address' => [
                     'title' => __('Wallet Address', 'cardanopress'),
+                    'description' => __('Address to send funds to. E.g Minting address.', 'cardanopress'),
                     'type' => 'group',
                     'default' => [
                         'mainnet' => '',
@@ -159,9 +165,10 @@ class Admin extends AbstractAdmin
                     ],
                 ],
                 'split' => [
-                    'title' => __('Split Fee in ADA', 'cardanopress'),
+                    'title' => __('Stake pool fix fee in ADA for distribution to payment address.', 'cardanopress'),
+                    'description' => __('Use for distribution of funds from a stake pool.', 'cardanopress'),
                     'type' => 'number',
-                    'default' => 1,
+                    'default' => 340,
                     'options' => [
                         'min' => 0.1,
                         'step' => 0.1,
@@ -176,6 +183,7 @@ class Admin extends AbstractAdmin
         $this->optionFields([
             'id' => 'policy',
             'title' => __('Policy IDs', 'cardanopress'),
+            'description' => __('Used for the NFT collection builder.', 'cardanopress'),
             'fields' => [
                 'ids' => [
                     'type' => 'group',
@@ -189,10 +197,12 @@ class Admin extends AbstractAdmin
                     'fields' => [
                         'label' => [
                             'type' => 'text',
+                            'description' => __('Description of policy ID.', 'cardanopress'),
                             'title' => __('Label', 'cardanopress'),
                         ],
                         'value' => [
                             'title' => __('Value', 'cardanopress'),
+                            'description' => __('Policy ID value.', 'cardanopress'),
                             'type' => 'text',
                         ],
                     ],
@@ -223,12 +233,14 @@ class Admin extends AbstractAdmin
     {
         $this->optionFields([
             'id' => 'ua',
-            'title' => __('User Access', 'cardanopress'),
+            'title' => __('Delegation User Access', 'cardanopress'),
+            'description' => __('Assigning a user role based on stake pool delegation settings.', 'cardanopress'),
             'context' => 'side',
             'fields' => [
                 'required_epoch' => [
                     'type' => 'number',
                     'title' => __('Required Epoch', 'cardanopress'),
+                    'description' => __('Minimum number of epochs required delegation.', 'cardanopress'),
                     'default' => 1,
                     'options' => [
                         'min' => 1,
@@ -238,6 +250,7 @@ class Admin extends AbstractAdmin
                 'additional_role' => [
                     'type' => 'select',
                     'title' => __('Additional Role', 'cardanopress'),
+                    'description' => __('Role that is assigned for meeting required delegation.', 'cardanopress'),
                     'options' => wp_roles()->role_names,
                 ],
             ],
@@ -249,6 +262,7 @@ class Admin extends AbstractAdmin
         $this->optionFields([
             'id' => 'asset',
             'title' => __('Asset Access', 'cardanopress'),
+            'description' => __('Assigning a user role based on NFTs in wallet.', 'cardanopress'),
             'fields' => [
                 'access' => [
                     'type' => 'group',
@@ -263,14 +277,17 @@ class Admin extends AbstractAdmin
                     'fields' => [
                         'name' => [
                             'type' => 'text',
+                            'description' => __('Name of the token.', 'cardanopress'),
                             'title' => __('Asset Name', 'cardanopress'),
                         ],
                         'id' => [
                             'type' => 'text',
+                            'description' => __('Policy ID of the token.', 'cardanopress'),
                             'title' => __('Policy ID', 'cardanopress'),
                         ],
                         'role' => [
                             'type' => 'select',
+                            'description' => __('Role to assign a user based token access.', 'cardanopress'),
                             'title' => __('Additional Role', 'cardanopress'),
                             'options' => wp_roles()->role_names,
                         ],
