@@ -31,6 +31,7 @@ export const cardanoPressMessages = window.cardanoPressMessages || {
     handleSaving: '',
     delegating: '',
     paying: '',
+    clipboardCopy: '',
 }
 
 export const toPropertyName = (string, prefix = '', suffix = '') => prefix + string.charAt(0).toUpperCase() + string.slice(1) + suffix

@@ -9,8 +9,6 @@
  * @since   0.1.0
  */
 
-$recaptchaKeys = cardanoPress()->option('recaptcha_key');
-
 ?>
 
-<div id="cardanopress-recaptcha" data-sitekey="<?php echo $recaptchaKeys['site']; ?>"></div>
+<div id="cardanopress-recaptcha" x-bind:data-sitekey="recaptchaKey"></div>

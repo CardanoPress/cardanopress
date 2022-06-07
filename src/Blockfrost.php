@@ -7,41 +7,13 @@
 
 namespace PBWebDev\CardanoPress;
 
-use CardanoPress\Clients\BlockfrostClient;
+use CardanoPress\Foundation\AbstractBlockfrost;
 
-class Blockfrost
+class Blockfrost extends AbstractBlockfrost
 {
-    protected BlockfrostClient $client;
-    protected array $lastResponse = [];
-
-    public function __construct(string $query_network)
+    protected function initialize(): void
     {
-        $this->client = $this->getClient($query_network);
-    }
-
-    public function request(string $endpoint, array $query = []): array
-    {
-        $response = $this->client->request($endpoint, $query);
-        $this->lastResponse = $response;
-
-        if (200 !== $response['status_code'] || ! empty($response['error'])) {
-            $app = Application::getInstance();
-
-            $app->logger('blockfrost')->info($endpoint);
-            $app->logger('blockfrost')->info(print_r($query, true));
-            $app->logger('blockfrost')->info(print_r($response, true));
-        }
-
-        return $response;
-    }
-
-    public function getResponse(string $key = null)
-    {
-        if (null === $key) {
-            return $this->lastResponse;
-        }
-
-        return $this->lastResponse[$key] ?? null;
+        $this->setLogger(Application::getInstance()->logger('blockfrost'));
     }
 
     public function blocksLatest(): array
@@ -114,6 +86,13 @@ class Blockfrost
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
 
+    public function getPoolInfo(string $id): array
+    {
+        $response = $this->request('pools/' . $id);
+
+        return 200 === $response['status_code'] ? $response['data'] : [];
+    }
+
     public function getPoolDetails(string $id): array
     {
         $response = $this->request('pools/' . $id . '/metadata');
@@ -135,17 +114,9 @@ class Blockfrost
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
 
-    private function getClient(string $query_network): BlockfrostClient
-    {
-        $projectId = self::getProjectId($query_network);
-
-        return new BlockfrostClient($projectId, $query_network);
-    }
-
     public static function getProjectId(string $network): string
     {
-        $app = Application::getInstance();
-        $project_ids = $app->option('blockfrost_project_id');
+        $project_ids = Application::getInstance()->option('blockfrost_project_id');
 
         return $project_ids[$network] ?? '';
     }

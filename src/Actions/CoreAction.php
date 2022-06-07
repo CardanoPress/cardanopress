@@ -44,6 +44,7 @@ class CoreAction implements HookInterface
                 'handleSaving' => __('Saving...', 'cardanopress'),
                 'delegating' => __('Processing...', 'cardanopress'),
                 'paying' => __('Processing...', 'cardanopress'),
+                'clipboardCopy' => __('Successfully copied', 'cardanopress'),
             ],
             'ajax' => [
                 'welcome' => __('Welcome %s', 'cardanopress'),
@@ -138,6 +139,10 @@ class CoreAction implements HookInterface
 
         $assets = array_filter($assets);
         $handles = array_filter($handles);
+
+        if (! in_array($userProfile->getFavoriteHandle(), $handles, true)) {
+            $userProfile->saveFavoriteHandle('');
+        }
 
         $userProfile->saveAssets($assets);
         $userProfile->saveHandles($handles);

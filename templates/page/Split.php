@@ -11,9 +11,14 @@
 
 cardanoPress()->enqueue('script', 'cardanopress-split');
 cardanoPress()->enqueue('script', 'cardanopress-payment');
-cardanoPress()->enqueue('script', 'cardanopress-recaptcha');
 
 $fixedFee = cardanoPress()->option('payment_split');
+$recaptchaKeys = cardanoPress()->option('recaptcha_key');
+$recaptchaKey = $recaptchaKeys['site'] ?? '';
+
+if (! empty($recaptchaKey)) {
+    cardanoPress()->enqueue('script', 'cardanopress-recaptcha');
+}
 
 get_header();
 
@@ -23,7 +28,11 @@ get_header();
     <div class="py-6">
         <h1>Split Payments</h1>
 
-        <form x-data='paymentForm' data-amount="<?php echo $fixedFee; ?>">
+        <form
+            x-data="paymentForm"
+            data-amount="<?php echo $fixedFee; ?>"
+            data-recaptcha="<?php echo $recaptchaKey; ?>"
+        >
             <div class='py-6'>
                 <h2>Fixed Fee: <span><?php echo $fixedFee; ?></span> ADA</h2>
 

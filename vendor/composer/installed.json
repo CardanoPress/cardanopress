@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "cardanopress/framework",
-            "version": "v1.0.0",
-            "version_normalized": "1.0.0.0",
+            "version": "v1.1.0",
+            "version_normalized": "1.1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kermage/cardanopress-framework.git",
-                "reference": "095a020579f02a591e9b98303abe2a4ce284951d"
+                "url": "https://github.com/CardanoPress/framework.git",
+                "reference": "dc6ec5f427da94928a57f79a57df913fc92ddb33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kermage/cardanopress-framework/zipball/095a020579f02a591e9b98303abe2a4ce284951d",
-                "reference": "095a020579f02a591e9b98303abe2a4ce284951d",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/dc6ec5f427da94928a57f79a57df913fc92ddb33",
+                "reference": "dc6ec5f427da94928a57f79a57df913fc92ddb33",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,7 @@
                 "themeplate/page": "^1.1",
                 "themeplate/settings": "^1.2"
             },
-            "time": "2022-05-27T03:39:57+00:00",
+            "time": "2022-06-06T06:27:23+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -53,8 +53,8 @@
                 "wordpress"
             ],
             "support": {
-                "issues": "https://github.com/kermage/cardanopress-framework/issues",
-                "source": "https://github.com/kermage/cardanopress-framework/tree/v1.0.0"
+                "issues": "https://github.com/CardanoPress/framework/issues",
+                "source": "https://github.com/CardanoPress/framework/tree/v1.1.0"
             },
             "install-path": "../cardanopress/framework"
         },

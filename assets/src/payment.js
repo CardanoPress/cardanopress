@@ -1,7 +1,7 @@
 /* global grecaptcha */
 
 import { cardanoPressMessages, getConnectedExtension } from './api/config'
-import { addNotice, getConnectedWallet, removeNotice, waitElement } from './api/util'
+import { addNotice, getConnectedWallet, removeNotice, waitElement, windowLoader } from './api/util'
 import { getPaymentAddress, handlePayment } from './actions'
 import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 
@@ -18,11 +18,21 @@ window.addEventListener('alpine:init', () => {
         transactionHash: '',
         showAddress: false,
         paymentAddress: '',
+        recaptchaKey: '',
 
         async init() {
             this.payAmount = parseFloat(this.$root.dataset.amount)
+            this.recaptchaKey = this.$root.dataset.recaptcha
 
-            window.addEventListener('load', async () => {
+            if ('' === this.recaptchaKey) {
+                this.isVerified = true
+
+                const response = await getPaymentAddress()
+
+                this.paymentAddress = response.data
+            }
+
+            windowLoader(async () => {
                 if (getConnectedExtension()) {
                     try {
                         const Wallet = await getConnectedWallet()
@@ -40,9 +50,7 @@ window.addEventListener('alpine:init', () => {
                 if (this.isVerified && !this.paymentAddress) {
                     const response = await getPaymentAddress()
 
-                    if (response.success) {
-                        this.paymentAddress = response.data
-                    }
+                    this.paymentAddress = response.data
                 }
             }, { once: true })
         },
@@ -65,10 +73,6 @@ window.addEventListener('alpine:init', () => {
             const amount = this.payAmount * this.quantity
 
             return inAdaValue ? amount : adaToLovelace(amount)
-        },
-
-        clipboardValue(target) {
-            window.navigator.clipboard.writeText(target)
         },
 
         async handlePayment() {

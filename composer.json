@@ -1,5 +1,5 @@
 {
-  "name": "pbwebdev/cardanopress",
+  "name": "cardanopress/cardanopress",
   "description": "A ThemePlate project for Cardano WordPress integration",
   "type": "wordpress-plugin",
   "keywords": [
