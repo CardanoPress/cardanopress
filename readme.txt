@@ -1,6 +1,6 @@
 === CardanoPress - Cardano Blockchain Integration for WordPress ===
 Contributors: pbwebdev
-Donate link: https://www.paypal.com/donate/?hosted_button_id=ZNEH34AN2TLUS
+Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, metamask, nami, eternl, ada
 Requires at least: 4.9
 Tested up to: 6.0.0
@@ -25,6 +25,8 @@ We are supporting various wallets including:
 * GeoWallet
 * Flint
 * Yoroi (to a point)
+
+The plugin is created by the team at [PB Web Development](https://pbwebdev.com).
 
 === Example Use Cases ===
 
