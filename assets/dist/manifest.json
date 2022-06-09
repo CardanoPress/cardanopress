@@ -1,10 +1,10 @@
 {
-  "script.js": "script-82edf12302294bb7cc16.js",
-  "style.css": "style-82edf12302294bb7cc16.css",
-  "style.js": "style-82edf12302294bb7cc16.js",
-  "notification.js": "notification-82edf12302294bb7cc16.js",
-  "delegation.js": "delegation-82edf12302294bb7cc16.js",
-  "payment.js": "payment-82edf12302294bb7cc16.js",
-  "split.js": "split-82edf12302294bb7cc16.js",
+  "script.js": "script-126b09a9f9faa0f495b5.js",
+  "style.css": "style-126b09a9f9faa0f495b5.css",
+  "style.js": "style-126b09a9f9faa0f495b5.js",
+  "notification.js": "notification-126b09a9f9faa0f495b5.js",
+  "delegation.js": "delegation-126b09a9f9faa0f495b5.js",
+  "payment.js": "payment-126b09a9f9faa0f495b5.js",
+  "split.js": "split-126b09a9f9faa0f495b5.js",
   "module.wasm": "5c57d6c5a395066637ae.module.wasm"
 }

@@ -113,17 +113,19 @@ window.addEventListener('alpine:init', () => {
 window.cardanoPressRecaptchaCallback = () => {
     const sendVerified = (status) => window.dispatchEvent(new CustomEvent('cardanoPress:recaptcha', { 'detail': status }))
 
-    waitElement('#cardanopress-recaptcha').then((element) => {
-        grecaptcha.render(element, {
-            'callback': () => {
-                sendVerified(true)
-            },
-            'expired-callback': () => {
-                sendVerified(false)
-            },
-            'error-callback': () => {
-                sendVerified(false)
-            },
+    window.addEventListener('alpine:init', () => {
+        waitElement('#cardanopress-recaptcha').then((element) => {
+            grecaptcha.render(element, {
+                'callback': () => {
+                    sendVerified(true)
+                },
+                'expired-callback': () => {
+                    sendVerified(false)
+                },
+                'error-callback': () => {
+                    sendVerified(false)
+                },
+            })
         })
     })
 }
