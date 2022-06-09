@@ -51,12 +51,12 @@ class Manifest extends AbstractManifest
         wp_localize_script(self::HANDLE_PREFIX . 'script', 'cardanoPress', $data);
     }
 
-    public function injectDataProvider(): void
+    public static function injectDataProvider(): void
     {
         $handle = '';
 
         if (is_user_logged_in()) {
-            $handle = $this->application->userProfile()->getFavoriteHandle();
+            $handle = Application::getInstance()->userProfile()->getFavoriteHandle();
         }
 
         echo '<div x-data="cardanoPress" @keydown.escape="showModal = false" data-handle="' . $handle . '">';
@@ -72,8 +72,8 @@ class Manifest extends AbstractManifest
         $this->application->template('notices-handler');
     }
 
-    public function closeDataProviderTag(): void
+    public static function closeDataProviderTag(): void
     {
-        echo '</div>';
+        echo '</div><!-- x-data="cardanoPress" -->';
     }
 }

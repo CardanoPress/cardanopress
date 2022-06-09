@@ -24,6 +24,10 @@ class Shortcode implements HookInterface
         add_shortcode('cardanopress_template', [$this, 'doTemplate']);
         add_shortcode('cardanopress_userprofile', [$this, 'doUserProfile']);
         add_shortcode('cardanopress_delegationpool', [$this, 'doDelegationPool']);
+        add_shortcode('cardanopress_component_cardanopress', [$this, 'doComponentCardanoPress']);
+        add_shortcode('cardanopress_component_pooldelegation', [$this, 'doComponentPoolDelegation']);
+        add_shortcode('cardanopress_component_paymentform', [$this, 'doComponentPaymentForm']);
+        add_shortcode('cardanopress_component_splitform', [$this, 'doComponentSplitForm']);
     }
 
     public function doOption(array $attributes): string
@@ -68,6 +72,55 @@ class Shortcode implements HookInterface
         }
 
         return '<template x-if="' . $args['if'] . '">' . $html . '</template>';
+    }
+
+    public function doComponentCardanoPress($attributes, ?string $content = null): string
+    {
+        ob_start();
+        Manifest::injectDataProvider();
+
+        $html = ob_get_clean();
+        $html .= apply_filters('the_content', $content);
+
+        ob_start();
+        Manifest::closeDataProviderTag();
+
+        $html .= ob_get_clean();
+
+        return $html;
+    }
+
+    public function doComponentPoolDelegation($attributes, ?string $content = null): string
+    {
+        $html = '<div x-data="poolDelegation">';
+        $html .= apply_filters('the_content', $content);
+        $html .= '</div>';
+
+        return trim($html);
+    }
+
+    public function doComponentPaymentForm($attributes, ?string $content = null): string
+    {
+        $paymentAmount = $this->application->option('payment_amount') ?? 1;
+        $recaptchaKeys = $this->application->option('recaptcha_key');
+        $recaptchaKey = $recaptchaKeys['site'] ?? '';
+
+        $html = '<form x-data="paymentForm" data-amount="' . $paymentAmount . '" data-recaptcha="' . $recaptchaKey . '">';
+        $html .= apply_filters('the_content', $content);
+        $html .= '</form>';
+
+        return trim($html);
+    }
+
+    public function doComponentSplitForm($attributes, ?string $content = null): string
+    {
+        $fixedFee = $this->application->option('payment_split');
+
+        $html = '<form x-data="splitForm" data-fee="' . $fixedFee . '">';
+        $html .= apply_filters('the_content', $content);
+        $html .= '</form>';
+
+        return trim($html);
     }
 
     public function doUserProfile(array $attributes): string
