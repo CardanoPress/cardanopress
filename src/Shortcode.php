@@ -96,6 +96,8 @@ class Shortcode implements HookInterface
         $html .= apply_filters('the_content', $content);
         $html .= '</div>';
 
+        wp_enqueue_script('cardanopress-delegation');
+
         return trim($html);
     }
 
@@ -109,6 +111,12 @@ class Shortcode implements HookInterface
         $html .= apply_filters('the_content', $content);
         $html .= '</form>';
 
+        wp_enqueue_script('cardanopress-payment');
+
+        if ('' !== $recaptchaKey) {
+            wp_enqueue_script('cardanopress-recaptcha');
+        }
+
         return trim($html);
     }
 
@@ -119,6 +127,8 @@ class Shortcode implements HookInterface
         $html = '<form x-data="splitForm" data-fee="' . $fixedFee . '">';
         $html .= apply_filters('the_content', $content);
         $html .= '</form>';
+
+        wp_enqueue_script('cardanopress-split');
 
         return trim($html);
     }
