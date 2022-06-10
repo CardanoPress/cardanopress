@@ -22,7 +22,7 @@
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/guzzle": "^7.4",
+                "guzzlehttp/guzzle": "^7.4.4",
                 "php": "^7.4|^8.0",
                 "themeplate/core": "^1.7",
                 "themeplate/enqueue": "^v1.1",
