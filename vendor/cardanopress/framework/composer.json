@@ -20,11 +20,11 @@
     "php": "^7.4|^8.0",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.4",
-    "themeplate/core": "^1.7",
-    "themeplate/enqueue": "^v1.1",
+    "themeplate/core": "^2.0",
+    "themeplate/enqueue": "^2.1",
     "themeplate/logger": "^1.3",
-    "themeplate/page": "^1.1",
-    "themeplate/settings": "^1.2"
+    "themeplate/page": "^2.0",
+    "themeplate/settings": "^2.0"
   },
   "autoload": {
     "psr-4": {

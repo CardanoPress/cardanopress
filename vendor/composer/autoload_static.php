@@ -7,17 +7,21 @@ namespace Composer\Autoload;
 class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
 {
     public static $files = array (
-        'af4b52693518d6f741d0dab964786a35' => __DIR__ . '/..' . '/themeplate/core/functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        'af4b52693518d6f741d0dab964786a35' => __DIR__ . '/..' . '/themeplate/core/functions.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        'cffb582bbe3444c214b7b73b61493f7d' => __DIR__ . '/..' . '/themeplate/enqueue/Enqueue.php',
         'e2fb8214a7589690aae8ec82f7aa8973' => __DIR__ . '/..' . '/kermage/external-update-manager/class-external-update-manager.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'T' => 
         array (
+            'ThemePlate\\Settings\\' => 20,
+            'ThemePlate\\Page\\' => 16,
+            'ThemePlate\\Enqueue\\' => 19,
             'ThemePlate\\Core\\' => 16,
             'ThemePlate\\' => 11,
         ),
@@ -45,16 +49,25 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
     );
 
     public static $prefixDirsPsr4 = array (
+        'ThemePlate\\Settings\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/themeplate/settings/src',
+        ),
+        'ThemePlate\\Page\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/themeplate/page/src',
+        ),
+        'ThemePlate\\Enqueue\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/themeplate/enqueue/src',
+        ),
         'ThemePlate\\Core\\' => 
         array (
-            0 => __DIR__ . '/..' . '/themeplate/core',
+            0 => __DIR__ . '/..' . '/themeplate/core/src',
         ),
         'ThemePlate\\' => 
         array (
-            0 => __DIR__ . '/..' . '/themeplate/enqueue',
-            1 => __DIR__ . '/..' . '/themeplate/logger/src',
-            2 => __DIR__ . '/..' . '/themeplate/page',
-            3 => __DIR__ . '/..' . '/themeplate/settings',
+            0 => __DIR__ . '/..' . '/themeplate/logger/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -360,30 +373,39 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
-        'ThemePlate\\Core\\Data' => __DIR__ . '/..' . '/themeplate/core/Data.php',
-        'ThemePlate\\Core\\Field\\Checkbox' => __DIR__ . '/..' . '/themeplate/core/Field/Checkbox.php',
-        'ThemePlate\\Core\\Field\\Color' => __DIR__ . '/..' . '/themeplate/core/Field/Color.php',
-        'ThemePlate\\Core\\Field\\Date' => __DIR__ . '/..' . '/themeplate/core/Field/Date.php',
-        'ThemePlate\\Core\\Field\\Editor' => __DIR__ . '/..' . '/themeplate/core/Field/Editor.php',
-        'ThemePlate\\Core\\Field\\File' => __DIR__ . '/..' . '/themeplate/core/Field/File.php',
-        'ThemePlate\\Core\\Field\\Html' => __DIR__ . '/..' . '/themeplate/core/Field/Html.php',
-        'ThemePlate\\Core\\Field\\Input' => __DIR__ . '/..' . '/themeplate/core/Field/Input.php',
-        'ThemePlate\\Core\\Field\\Link' => __DIR__ . '/..' . '/themeplate/core/Field/Link.php',
-        'ThemePlate\\Core\\Field\\Number' => __DIR__ . '/..' . '/themeplate/core/Field/Number.php',
-        'ThemePlate\\Core\\Field\\Radio' => __DIR__ . '/..' . '/themeplate/core/Field/Radio.php',
-        'ThemePlate\\Core\\Field\\Select' => __DIR__ . '/..' . '/themeplate/core/Field/Select.php',
-        'ThemePlate\\Core\\Field\\Textarea' => __DIR__ . '/..' . '/themeplate/core/Field/Textarea.php',
-        'ThemePlate\\Core\\Field\\Type' => __DIR__ . '/..' . '/themeplate/core/Field/Type.php',
-        'ThemePlate\\Core\\Fields' => __DIR__ . '/..' . '/themeplate/core/Fields.php',
-        'ThemePlate\\Core\\Form' => __DIR__ . '/..' . '/themeplate/core/Form.php',
-        'ThemePlate\\Core\\Helper\\Box' => __DIR__ . '/..' . '/themeplate/core/Helper/Box.php',
-        'ThemePlate\\Core\\Helper\\Field' => __DIR__ . '/..' . '/themeplate/core/Helper/Field.php',
-        'ThemePlate\\Core\\Helper\\Main' => __DIR__ . '/..' . '/themeplate/core/Helper/Main.php',
-        'ThemePlate\\Core\\Helper\\Meta' => __DIR__ . '/..' . '/themeplate/core/Helper/Meta.php',
-        'ThemePlate\\Enqueue' => __DIR__ . '/..' . '/themeplate/enqueue/Enqueue.php',
+        'ThemePlate\\Core\\Config' => __DIR__ . '/..' . '/themeplate/core/src/Config.php',
+        'ThemePlate\\Core\\Field' => __DIR__ . '/..' . '/themeplate/core/src/Field.php',
+        'ThemePlate\\Core\\Field\\CheckboxField' => __DIR__ . '/..' . '/themeplate/core/src/Field/CheckboxField.php',
+        'ThemePlate\\Core\\Field\\ColorField' => __DIR__ . '/..' . '/themeplate/core/src/Field/ColorField.php',
+        'ThemePlate\\Core\\Field\\DateField' => __DIR__ . '/..' . '/themeplate/core/src/Field/DateField.php',
+        'ThemePlate\\Core\\Field\\EditorField' => __DIR__ . '/..' . '/themeplate/core/src/Field/EditorField.php',
+        'ThemePlate\\Core\\Field\\FileField' => __DIR__ . '/..' . '/themeplate/core/src/Field/FileField.php',
+        'ThemePlate\\Core\\Field\\GroupField' => __DIR__ . '/..' . '/themeplate/core/src/Field/GroupField.php',
+        'ThemePlate\\Core\\Field\\HtmlField' => __DIR__ . '/..' . '/themeplate/core/src/Field/HtmlField.php',
+        'ThemePlate\\Core\\Field\\InputField' => __DIR__ . '/..' . '/themeplate/core/src/Field/InputField.php',
+        'ThemePlate\\Core\\Field\\LinkField' => __DIR__ . '/..' . '/themeplate/core/src/Field/LinkField.php',
+        'ThemePlate\\Core\\Field\\NumberField' => __DIR__ . '/..' . '/themeplate/core/src/Field/NumberField.php',
+        'ThemePlate\\Core\\Field\\RadioField' => __DIR__ . '/..' . '/themeplate/core/src/Field/RadioField.php',
+        'ThemePlate\\Core\\Field\\SelectField' => __DIR__ . '/..' . '/themeplate/core/src/Field/SelectField.php',
+        'ThemePlate\\Core\\Field\\TextareaField' => __DIR__ . '/..' . '/themeplate/core/src/Field/TextareaField.php',
+        'ThemePlate\\Core\\Field\\TypeField' => __DIR__ . '/..' . '/themeplate/core/src/Field/TypeField.php',
+        'ThemePlate\\Core\\Fields' => __DIR__ . '/..' . '/themeplate/core/src/Fields.php',
+        'ThemePlate\\Core\\Form' => __DIR__ . '/..' . '/themeplate/core/src/Form.php',
+        'ThemePlate\\Core\\Handler' => __DIR__ . '/..' . '/themeplate/core/src/Handler.php',
+        'ThemePlate\\Core\\Helper\\BoxHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/BoxHelper.php',
+        'ThemePlate\\Core\\Helper\\FormHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/FormHelper.php',
+        'ThemePlate\\Core\\Helper\\MainHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/MainHelper.php',
+        'ThemePlate\\Core\\Helper\\MetaHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/MetaHelper.php',
+        'ThemePlate\\Core\\Repository' => __DIR__ . '/..' . '/themeplate/core/src/Repository.php',
+        'ThemePlate\\Enqueue\\CustomData' => __DIR__ . '/..' . '/themeplate/enqueue/src/CustomData.php',
+        'ThemePlate\\Enqueue\\Dynamic' => __DIR__ . '/..' . '/themeplate/enqueue/src/Dynamic.php',
         'ThemePlate\\Logger' => __DIR__ . '/..' . '/themeplate/logger/src/Logger.php',
-        'ThemePlate\\Page' => __DIR__ . '/..' . '/themeplate/page/Page.php',
-        'ThemePlate\\Settings' => __DIR__ . '/..' . '/themeplate/settings/Settings.php',
+        'ThemePlate\\Page\\BasePage' => __DIR__ . '/..' . '/themeplate/page/src/BasePage.php',
+        'ThemePlate\\Page\\CommonInterface' => __DIR__ . '/..' . '/themeplate/page/src/CommonInterface.php',
+        'ThemePlate\\Page\\MenuPage' => __DIR__ . '/..' . '/themeplate/page/src/MenuPage.php',
+        'ThemePlate\\Page\\SubMenuPage' => __DIR__ . '/..' . '/themeplate/page/src/SubMenuPage.php',
+        'ThemePlate\\Settings\\OptionBox' => __DIR__ . '/..' . '/themeplate/settings/src/OptionBox.php',
+        'ThemePlate\\Settings\\OptionHandler' => __DIR__ . '/..' . '/themeplate/settings/src/OptionHandler.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

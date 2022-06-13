@@ -24,12 +24,26 @@ function theme_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'theme_scripts' );
 
-Enqueue::init();
+add_action( 'init', array( Enqueue::class, 'init' ) );
 
-Enqueue::asset( 'script', 'slick-carousel' );
-Enqueue::asset( 'style', 'slick-carousel' );
+// Set to the wanted insert position; default is 10
+Enqueue::$priority = 20;
+
+// In templates before calling the get_header()
+Enqueue::script( 'slick-carousel' );
+Enqueue::style( 'slick-carousel' );
+Enqueue::script(
+	'popper',
+	'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js',
+	array(
+		'integrity' => 'sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN',
+		'crossorigin' => 'anonymous',
+	)
+);
 ```
 
-### Enqueue::asset( $type, $handle )
-- **$type** *(string)(Required)* Type of asset
-- **$handle** *(string)(Required)* Registered handle
+### Enqueue::script( $handle, $src, $data )
+### Enqueue::style( $handle, $src, $data )
+- **$handle** *(string)(Required)* Registered handle or unique name if *$src* is provided
+- **$src** *(string)(Optional)* Full URL or path relative to the WordPress root directory
+- **$data** *(array)(Optional)* Custom metadata to be added to the registered asset

@@ -8,20 +8,16 @@
  */
 
 
-if ( function_exists( 'add_action' ) && ! function_exists( 'themeplate_ajax_actions' ) ) {
-	function themeplate_ajax_actions() {
-		add_action( 'wp_ajax_tp_posts', array( ThemePlate\Core\Field\Type::class, 'get_posts' ) );
-		add_action( 'wp_ajax_tp_users', array( ThemePlate\Core\Field\Type::class, 'get_users' ) );
-		add_action( 'wp_ajax_tp_terms', array( ThemePlate\Core\Field\Type::class, 'get_terms' ) );
+if ( function_exists( 'add_action' ) && ! function_exists( 'themeplate_core_ajax_actions' ) ) {
+	function themeplate_core_ajax_actions() {
+		add_action( 'wp_ajax_themeplate_type_posts', array( ThemePlate\Core\Field\TypeField::class, 'get_posts' ) );
+		add_action( 'wp_ajax_themeplate_type_users', array( ThemePlate\Core\Field\TypeField::class, 'get_users' ) );
+		add_action( 'wp_ajax_themeplate_type_terms', array( ThemePlate\Core\Field\TypeField::class, 'get_terms' ) );
 	}
 
-	themeplate_ajax_actions();
+	themeplate_core_ajax_actions();
 }
 
 if ( ! defined( 'TP_CORE_VERSION' ) ) {
-	define( 'TP_CORE_VERSION', '1.0.0' );
-}
-
-if ( ! defined( 'TP_CORE_PATH' ) ) {
-	define( 'TP_CORE_PATH', __DIR__ );
+	define( 'TP_CORE_VERSION', '2.0.0' );
 }

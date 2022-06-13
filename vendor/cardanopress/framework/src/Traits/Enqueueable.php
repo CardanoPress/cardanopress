@@ -15,6 +15,12 @@ trait Enqueueable
 
     public function enqueue(string $type, string $handle): void
     {
-        $this->manifest->enqueueAsset($type, $handle);
+        if (! in_array(strtolower($type), array('script', 'style'), true)) {
+            return;
+        }
+
+        $methodName = 'enqueue' . ucfirst($type);
+
+        $this->manifest->$methodName($handle);
     }
 }

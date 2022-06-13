@@ -74,9 +74,14 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
         }
     }
 
-    public function enqueueAsset(string $type, string $handle): void
+    public function enqueueScript(string $handle): void
     {
-        Enqueue::asset($type, $handle);
+        Enqueue::script($handle);
+    }
+
+    public function enqueueStyle(string $handle): void
+    {
+        Enqueue::style($handle);
     }
 
     public function getPath(): string

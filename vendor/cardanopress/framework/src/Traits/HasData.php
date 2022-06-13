@@ -7,29 +7,30 @@
 
 namespace CardanoPress\Traits;
 
-use ThemePlate\Core\Data;
+use ThemePlate\Core\Repository;
+use ThemePlate\Core\Config;
 
 trait HasData
 {
-    protected ?Data $data = null;
+    protected ?Repository $data = null;
 
-    protected function setData(Data $data): void
+    protected function setData(Repository $data): void
     {
         $this->data = $data;
     }
 
-    protected function getData(): Data
+    protected function getData(): Repository
     {
         return $this->data;
     }
 
-    protected function storeConfig(array $config): void
+    protected function storeConfig(Config $config): void
     {
         $this->getData()->store($config);
     }
 
-    protected function getDefault(string $key, string $id)
+    protected function retrieveValue(string $key, string $id)
     {
-        return $this->getData()->get_default($key, $id);
+        return $this->getData()->retrieve($key, $id);
     }
 }

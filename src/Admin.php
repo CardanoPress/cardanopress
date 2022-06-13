@@ -43,9 +43,8 @@ class Admin extends AbstractAdmin
 
     private function blockfrostFields(): void
     {
-        $this->optionFields([
-            'id' => 'blockfrost',
-            'title' => __('Blockfrost Project ID', 'cardanopress'),
+        $this->optionFields(__('Blockfrost Project ID', 'cardanopress'), [
+            'data_prefix' => 'blockfrost_',
             'description' => __('This is required to be able to connect to the Cardano blockchain', 'cardanopress'),
             'context' => 'side',
             'fields' => [
@@ -73,9 +72,8 @@ class Admin extends AbstractAdmin
 
     private function googleRecaptchaFields(): void
     {
-        $this->optionFields([
-            'id' => 'recaptcha',
-            'title' => __('Recaptcha Keys', 'cardanopress'),
+        $this->optionFields(__('Recaptcha Keys', 'cardanopress'), [
+            'data_prefix' => 'recaptcha_',
             'description' => __('Required for NFT payment page to reveal payment address.', 'cardanopress'),
             'context' => 'side',
             'fields' => [
@@ -102,9 +100,8 @@ class Admin extends AbstractAdmin
 
     private function poolDelegationFields(): void
     {
-        $this->optionFields([
-            'id' => 'delegation',
-            'title' => __('Delegation: Pool ID', 'cardanopress'),
+        $this->optionFields(__('Delegation: Pool ID', 'cardanopress'), [
+            'data_prefix' => 'delegation_',
             'description' => __('Enter to Pool ID of the stake pool your delegation page will delegate to.', 'cardanopress'),
             'fields' => [
                 'pool_id' => [
@@ -130,9 +127,8 @@ class Admin extends AbstractAdmin
 
     private function paymentAddressFields(): void
     {
-        $this->optionFields([
-            'id' => 'payment',
-            'title' => __('Payment Settings', 'cardanopress'),
+        $this->optionFields(__('Payment Settings', 'cardanopress'), [
+            'data_prefix' => 'payment_',
             'description' => __('Settings for the payment page.', 'cardanopress'),
             'fields' => [
                 'amount' => [
@@ -180,9 +176,8 @@ class Admin extends AbstractAdmin
 
     private function assetsPolicyFields(): void
     {
-        $this->optionFields([
-            'id' => 'policy',
-            'title' => __('Policy IDs', 'cardanopress'),
+        $this->optionFields(__('Policy IDs', 'cardanopress'), [
+            'data_prefix' => 'policy_',
             'description' => __('Used for the NFT collection builder.', 'cardanopress'),
             'fields' => [
                 'ids' => [
@@ -213,16 +208,15 @@ class Admin extends AbstractAdmin
 
     private function memberPagesFields(): void
     {
-        $this->optionFields([
-            'id' => 'member',
-            'title' => __('Member Pages', 'cardanopress'),
+        $this->optionFields(__('Member Pages', 'cardanopress'), [
+            'data_prefix' => 'member_',
             'context' => 'side',
             'fields' => array_combine(
                 self::PAGES,
                 array_map(function ($page) {
                     return [
                         'type' => 'page',
-                        'title' => $page,
+                        'title' => ucfirst($page),
                     ];
                 }, self::PAGES),
             ),
@@ -231,9 +225,8 @@ class Admin extends AbstractAdmin
 
     private function userAccessFields(): void
     {
-        $this->optionFields([
-            'id' => 'ua',
-            'title' => __('Delegation User Access', 'cardanopress'),
+        $this->optionFields(__('Delegation User Access', 'cardanopress'), [
+            'data_prefix' => 'ua_',
             'description' => __('Assigning a user role based on stake pool delegation settings.', 'cardanopress'),
             'context' => 'side',
             'fields' => [
@@ -259,9 +252,8 @@ class Admin extends AbstractAdmin
 
     private function assetAccessFields(): void
     {
-        $this->optionFields([
-            'id' => 'asset',
-            'title' => __('Asset Access', 'cardanopress'),
+        $this->optionFields(__('Asset Access', 'cardanopress'), [
+            'data_prefix' => 'asset_',
             'description' => __('Assigning a user role based on NFTs in wallet.', 'cardanopress'),
             'fields' => [
                 'access' => [

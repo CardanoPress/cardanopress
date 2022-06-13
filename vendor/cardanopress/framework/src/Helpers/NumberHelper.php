@@ -8,12 +8,12 @@ namespace CardanoPress\Helpers;
 
 class NumberHelper
 {
-    public static function lovelaceToAda(int $number): int
+    public static function lovelaceToAda(int $number): float
     {
         return $number / 1000000;
     }
 
-    public static function adaPrecision(int $number): string
+    public static function adaPrecision(float $number): string
     {
         return number_format($number, 6);
     }

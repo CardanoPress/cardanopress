@@ -12,11 +12,12 @@ use CardanoPress\Interfaces\HookInterface;
 use CardanoPress\SharedBase;
 use CardanoPress\Traits\HasData;
 use CardanoPress\Traits\Loggable;
-use Exception;
 use Psr\Log\LoggerInterface;
-use ThemePlate\Core\Data;
-use ThemePlate\Page;
-use ThemePlate\Settings;
+use ThemePlate\Core\Repository;
+use ThemePlate\Page\MenuPage;
+use ThemePlate\Page\SubMenuPage;
+use ThemePlate\Settings\OptionBox;
+use ThemePlate\Settings\OptionHandler;
 
 abstract class AbstractAdmin extends SharedBase implements AdminInterface, HookInterface
 {
@@ -27,43 +28,59 @@ abstract class AbstractAdmin extends SharedBase implements AdminInterface, HookI
 
     public function __construct(LoggerInterface $logger)
     {
-        $this->setData(new Data());
+        $repository = new Repository(new OptionHandler());
+
+        $this->setData($repository);
         $this->setLogger($logger);
         $this->initialize();
     }
 
-    protected function settingsPage(string $title, array $config = []): void
+    /**
+     * @return MenuPage|SubMenuPage
+     */
+    protected function settingsPage(string $title, array $config = [])
     {
-        try {
-            new Page(array_merge($config, [
-                'id' => static::OPTION_KEY,
-                'title' => $title,
-            ]));
-        } catch (Exception $exception) {
-            $this->log($exception->getMessage(), 'error');
+        $parent = $config['parent'] ?? '';
+        $config = array_merge($config, [
+            'menu_slug' => static::OPTION_KEY,
+        ]);
+
+        if ('' !== $parent) {
+            unset($config['parent']);
+
+            $page = new SubMenuPage($title, $parent, $config);
+        } else {
+            $page = new MenuPage($title, $config);
         }
+
+        $page->setup();
+
+        return $page;
     }
 
-    protected function optionFields(array $config): void
+    protected function optionFields(string $title, array $config): OptionBox
     {
-        try {
-            $settings = new Settings(array_merge($config, ['page' => static::OPTION_KEY]));
+        $fields = $config['fields'] ?? null;
 
-            $this->storeConfig($settings->get_config());
-        } catch (Exception $exception) {
-            $this->log($exception->getMessage(), 'error');
+        if (null !== $fields) {
+            unset($config['fields']);
         }
+
+        $settings = new OptionBox($title, $config);
+
+        if (null !== $fields) {
+            $settings->fields($fields);
+        }
+
+        $settings->location(static::OPTION_KEY)->create();
+
+        $this->storeConfig($settings->get_config());
+
+        return $settings;
     }
 
     public function getOption(string $key)
     {
-        $options = get_option(static::OPTION_KEY, []);
-        $value = $options[$key] ?? '';
-
-        if ($value) {
-            return $value;
-        }
-
-        return $this->getDefault(static::OPTION_KEY, $key);
+        return $this->retrieveValue($key, static::OPTION_KEY);
     }
 }

@@ -2,30 +2,30 @@
     "packages": [
         {
             "name": "cardanopress/framework",
-            "version": "v1.1.0",
-            "version_normalized": "1.1.0.0",
+            "version": "v1.2.0",
+            "version_normalized": "1.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "dc6ec5f427da94928a57f79a57df913fc92ddb33"
+                "reference": "9bd81cee49a9d579fd44e69ba41416ff96af37ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/dc6ec5f427da94928a57f79a57df913fc92ddb33",
-                "reference": "dc6ec5f427da94928a57f79a57df913fc92ddb33",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/9bd81cee49a9d579fd44e69ba41416ff96af37ba",
+                "reference": "9bd81cee49a9d579fd44e69ba41416ff96af37ba",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^7.4",
                 "php": "^7.4|^8.0",
-                "themeplate/core": "^1.7",
-                "themeplate/enqueue": "^v1.1",
+                "themeplate/core": "^2.0",
+                "themeplate/enqueue": "^2.1",
                 "themeplate/logger": "^1.3",
-                "themeplate/page": "^1.1",
-                "themeplate/settings": "^1.2"
+                "themeplate/page": "^2.0",
+                "themeplate/settings": "^2.0"
             },
-            "time": "2022-06-06T06:27:23+00:00",
+            "time": "2022-06-13T03:34:15+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -54,23 +54,23 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v1.1.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v1.2.0"
             },
             "install-path": "../cardanopress/framework"
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.4.3",
-            "version_normalized": "7.4.3.0",
+            "version": "7.4.4",
+            "version_normalized": "7.4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "74a8602c6faec9ef74b7a9391ac82c5e65b1cdab"
+                "reference": "e3ff079b22820c2029d4c2a87796b6a0b8716ad8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/74a8602c6faec9ef74b7a9391ac82c5e65b1cdab",
-                "reference": "74a8602c6faec9ef74b7a9391ac82c5e65b1cdab",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/e3ff079b22820c2029d4c2a87796b6a0b8716ad8",
+                "reference": "e3ff079b22820c2029d4c2a87796b6a0b8716ad8",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +96,7 @@
                 "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
-            "time": "2022-05-25T13:24:33+00:00",
+            "time": "2022-06-09T21:39:15+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -167,7 +167,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.4.3"
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.4"
             },
             "funding": [
                 {
@@ -274,17 +274,17 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.2.1",
-            "version_normalized": "2.2.1.0",
+            "version": "2.3.0",
+            "version_normalized": "2.3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "c94a94f120803a18554c1805ef2e539f8285f9a2"
+                "reference": "83260bb50b8fc753c72d14dc1621a2dac31877ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/c94a94f120803a18554c1805ef2e539f8285f9a2",
-                "reference": "c94a94f120803a18554c1805ef2e539f8285f9a2",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/83260bb50b8fc753c72d14dc1621a2dac31877ee",
+                "reference": "83260bb50b8fc753c72d14dc1621a2dac31877ee",
                 "shasum": ""
             },
             "require": {
@@ -305,11 +305,11 @@
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "time": "2022-03-20T21:55:58+00:00",
+            "time": "2022-06-09T08:26:02+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "installation-source": "dist",
@@ -372,7 +372,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.2.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.3.0"
             },
             "funding": [
                 {
@@ -446,17 +446,17 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.6.0",
-            "version_normalized": "2.6.0.0",
+            "version": "2.7.0",
+            "version_normalized": "2.7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "247918972acd74356b0a91dfaa5adcaec069b6c0"
+                "reference": "5579edf28aee1190a798bfa5be8bc16c563bd524"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/247918972acd74356b0a91dfaa5adcaec069b6c0",
-                "reference": "247918972acd74356b0a91dfaa5adcaec069b6c0",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/5579edf28aee1190a798bfa5be8bc16c563bd524",
+                "reference": "5579edf28aee1190a798bfa5be8bc16c563bd524",
                 "shasum": ""
             },
             "require": {
@@ -504,7 +504,7 @@
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
                 "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
-            "time": "2022-05-10T09:36:00+00:00",
+            "time": "2022-06-09T08:59:12+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -537,7 +537,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.6.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.7.0"
             },
             "funding": [
                 {
@@ -892,36 +892,40 @@
         },
         {
             "name": "themeplate/core",
-            "version": "v1.7.0",
-            "version_normalized": "1.7.0.0",
+            "version": "v2.0.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Core.git",
-                "reference": "b87e25b8f0aa41e52cb6b3fa875daf9a6485c78c"
+                "reference": "81b1113885f4d37c03310d3294d0de1305fa4a6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Core/zipball/b87e25b8f0aa41e52cb6b3fa875daf9a6485c78c",
-                "reference": "b87e25b8f0aa41e52cb6b3fa875daf9a6485c78c",
+                "url": "https://api.github.com/repos/ThemePlate/Core/zipball/81b1113885f4d37c03310d3294d0de1305fa4a6d",
+                "reference": "81b1113885f4d37c03310d3294d0de1305fa4a6d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0"
+                "ext-json": "*",
+                "php": "^7.4|^8.0"
             },
-            "time": "2021-11-07T04:08:38+00:00",
+            "require-dev": {
+                "themeplate/tester": "^2.0"
+            },
+            "time": "2022-06-09T13:26:17+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
-                "psr-4": {
-                    "ThemePlate\\Core\\": ""
-                },
                 "files": [
                     "functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "ThemePlate\\Core\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-3.0"
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -932,39 +936,45 @@
             "description": "ThemePlate core functions and helpers",
             "support": {
                 "issues": "https://github.com/ThemePlate/Core/issues",
-                "source": "https://github.com/ThemePlate/Core/tree/v1.7.0"
+                "source": "https://github.com/ThemePlate/Core/tree/v2.0.0"
             },
             "install-path": "../themeplate/core"
         },
         {
             "name": "themeplate/enqueue",
-            "version": "v1.1.1",
-            "version_normalized": "1.1.1.0",
+            "version": "v2.1.0",
+            "version_normalized": "2.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Enqueue.git",
-                "reference": "40b7b8e76dba55a7a00434f4adf00762ac41ab50"
+                "reference": "8d08cc505546466124308a911683a76a3712d37a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/40b7b8e76dba55a7a00434f4adf00762ac41ab50",
-                "reference": "40b7b8e76dba55a7a00434f4adf00762ac41ab50",
+                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/8d08cc505546466124308a911683a76a3712d37a",
+                "reference": "8d08cc505546466124308a911683a76a3712d37a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2|^8.0"
+                "php": "^7.4|^8.0"
             },
-            "time": "2021-10-23T12:11:56+00:00",
+            "require-dev": {
+                "themeplate/tester": "^1.3"
+            },
+            "time": "2022-05-21T14:35:09+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
+                "files": [
+                    "Enqueue.php"
+                ],
                 "psr-4": {
-                    "ThemePlate\\": ""
+                    "ThemePlate\\Enqueue\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-3.0"
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -975,7 +985,7 @@
             "description": "Helper for registered dependencies",
             "support": {
                 "issues": "https://github.com/ThemePlate/Enqueue/issues",
-                "source": "https://github.com/ThemePlate/Enqueue/tree/v1.1.1"
+                "source": "https://github.com/ThemePlate/Enqueue/tree/v2.1.0"
             },
             "install-path": "../themeplate/enqueue"
         },
@@ -1029,34 +1039,36 @@
         },
         {
             "name": "themeplate/page",
-            "version": "v1.1.0",
-            "version_normalized": "1.1.0.0",
+            "version": "v2.0.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Page.git",
-                "reference": "e0a7770a1cbb3fadfc8dbc815ff911786d3f2a1a"
+                "reference": "15e4beb78b4a4fab18ba278095ad7915946e48be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Page/zipball/e0a7770a1cbb3fadfc8dbc815ff911786d3f2a1a",
-                "reference": "e0a7770a1cbb3fadfc8dbc815ff911786d3f2a1a",
+                "url": "https://api.github.com/repos/ThemePlate/Page/zipball/15e4beb78b4a4fab18ba278095ad7915946e48be",
+                "reference": "15e4beb78b4a4fab18ba278095ad7915946e48be",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0",
-                "themeplate/core": "*"
+                "php": "^7.4|^8.0"
             },
-            "time": "2020-02-23T12:48:30+00:00",
+            "require-dev": {
+                "themeplate/tester": "^1.3"
+            },
+            "time": "2022-06-05T03:28:15+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ThemePlate\\": ""
+                    "ThemePlate\\Page\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-3.0"
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -1067,40 +1079,43 @@
             "description": "ThemePlate custom options pages",
             "support": {
                 "issues": "https://github.com/ThemePlate/Page/issues",
-                "source": "https://github.com/ThemePlate/Page/tree/master"
+                "source": "https://github.com/ThemePlate/Page/tree/v2.0.0"
             },
             "install-path": "../themeplate/page"
         },
         {
             "name": "themeplate/settings",
-            "version": "v1.2.0",
-            "version_normalized": "1.2.0.0",
+            "version": "v2.0.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Settings.git",
-                "reference": "d79eb18cd864993aa7bfcbec2f639e7ca46bac53"
+                "reference": "544d61a6d51b46b7e8015004ae14035dfded0dd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Settings/zipball/d79eb18cd864993aa7bfcbec2f639e7ca46bac53",
-                "reference": "d79eb18cd864993aa7bfcbec2f639e7ca46bac53",
+                "url": "https://api.github.com/repos/ThemePlate/Settings/zipball/544d61a6d51b46b7e8015004ae14035dfded0dd0",
+                "reference": "544d61a6d51b46b7e8015004ae14035dfded0dd0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0",
-                "themeplate/core": "*"
+                "php": "^7.4|^8.0",
+                "themeplate/core": "^2.0"
             },
-            "time": "2021-11-06T09:46:19+00:00",
+            "require-dev": {
+                "themeplate/tester": "^2.0"
+            },
+            "time": "2022-06-09T13:39:04+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "ThemePlate\\": ""
+                    "ThemePlate\\Settings\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-3.0"
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -1108,10 +1123,10 @@
                     "email": "genealyson.torcende@gmail.com"
                 }
             ],
-            "description": "ThemePlate custom settings forms",
+            "description": "ThemePlate custom option boxes",
             "support": {
                 "issues": "https://github.com/ThemePlate/Settings/issues",
-                "source": "https://github.com/ThemePlate/Settings/tree/v1.2.0"
+                "source": "https://github.com/ThemePlate/Settings/tree/v2.0.0"
             },
             "install-path": "../themeplate/settings"
         }

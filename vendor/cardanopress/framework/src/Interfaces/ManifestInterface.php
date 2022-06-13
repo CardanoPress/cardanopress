@@ -13,7 +13,9 @@ interface ManifestInterface
 
     public function enqueueAssets(): void;
 
-    public function enqueueAsset(string $type, string $handle): void;
+    public function enqueueScript(string $handle): void;
+
+    public function enqueueStyle(string $handle): void;
 
     public function getPath(): string;
 
