@@ -62,7 +62,7 @@ window.addEventListener('alpine:init', () => {
         balanceValue(type, inAda = true) {
             const amount = this[type + 'Balance']
 
-            return amount / (inAda ? 1000000 : 1)
+            return parseFloat(amount) / (inAda ? 1000000 : 1)
         },
 
         lovelaceValue() {
@@ -70,7 +70,7 @@ window.addEventListener('alpine:init', () => {
         },
 
         totalAmount(inAdaValue = true) {
-            const amount = this.payAmount * this.quantity
+            const amount = ((this.payAmount * 100) * (this.quantity * 100)) / (100 * 100)
 
             return inAdaValue ? amount : adaToLovelace(amount)
         },
