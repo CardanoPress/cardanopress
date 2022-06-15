@@ -19,6 +19,7 @@ window.addEventListener('alpine:init', () => {
         showAddress: false,
         paymentAddress: '',
         recaptchaKey: '',
+        syncedBalance: false,
 
         async init() {
             this.payAmount = parseFloat(this.$root.dataset.amount)
@@ -31,18 +32,6 @@ window.addEventListener('alpine:init', () => {
 
                 this.paymentAddress = response.data
             }
-
-            windowLoader(async () => {
-                if (getConnectedExtension()) {
-                    try {
-                        const Wallet = await getConnectedWallet()
-                        this.currentBalance = parseInt(await Wallet.getBalance())
-                        this.remainingBalance = this.currentBalance - parseInt(this.lovelaceValue())
-                    } catch (error) {
-                        addNotice({ type: 'error', text: error })
-                    }
-                }
-            })
 
             window.addEventListener('cardanoPress:recaptcha', async (event) => {
                 this.isVerified = event.detail
@@ -73,6 +62,29 @@ window.addEventListener('alpine:init', () => {
             const amount = ((this.payAmount * 100) * (this.quantity * 100)) / (100 * 100)
 
             return inAdaValue ? amount : adaToLovelace(amount)
+        },
+
+        async syncBalance() {
+            addNotice({
+                id: 'balance',
+                type: 'info',
+                text: cardanoPressMessages.walletSyncing,
+            })
+
+            this.isProcessing = true
+
+            try {
+                const Wallet = await getConnectedWallet()
+                this.currentBalance = parseInt(await Wallet.getBalance())
+                this.remainingBalance = this.currentBalance - parseInt(this.lovelaceValue())
+                this.syncedBalance = true
+            } catch (error) {
+                addNotice({ type: 'error', text: error })
+            }
+
+            removeNotice('balance')
+
+            this.isProcessing = false
         },
 
         async handlePayment() {
