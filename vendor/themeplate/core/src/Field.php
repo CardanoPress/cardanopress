@@ -37,6 +37,10 @@ abstract class Field {
 		$this->data_key = $data_key;
 		$this->config   = $this->check( $config );
 
+		if ( method_exists( $this, 'initialize' ) ) {
+			$this->initialize();
+		}
+
 	}
 
 
@@ -64,7 +68,31 @@ abstract class Field {
 			$config['minimum'] = 1;
 		}
 
+		if (
+			'group' !== $config['type'] &&
+			! $config['repeatable'] &&
+			(
+				! $this->can_have_multiple_value() ||
+				! $config['multiple']
+			)
+		) {
+			return $config;
+		}
+
+		$result = json_decode( $config['default'], true );
+
+		if ( JSON_ERROR_NONE === json_last_error() ) {
+			$config['default'] = $result;
+		}
+
 		return $config;
+
+	}
+
+
+	protected function can_have_multiple_value(): bool {
+
+		return false;
 
 	}
 
@@ -76,25 +104,28 @@ abstract class Field {
 	}
 
 
+	/**
+	 * @return array|mixed|null
+	 */
 	public function get_config( string $key = '' ) {
 
 		if ( '' === $key ) {
 			return $this->config;
 		}
 
-		return $this->config[ $key ] ?? '';
+		return $this->config[ $key ] ?? null;
 
 	}
 
 
-	public function set_id( string $value ) {
+	public function set_id( string $value ): void {
 
 		$this->config['id'] = $value;
 
 	}
 
 
-	public function set_name( string $value ) {
+	public function set_name( string $value ): void {
 
 		$this->config['name'] = $value;
 
@@ -105,7 +136,7 @@ abstract class Field {
 
 		$classes = array(
 			'type-' . $this->get_config( 'type' ),
-			$this->get_config( 'style' ),
+			trim( $this->get_config( 'style' ) ),
 		);
 
 		return esc_attr( implode( ' ', array_filter( $classes ) ) );
@@ -113,16 +144,39 @@ abstract class Field {
 	}
 
 
+	public function clone_value(): string {
+
+		if ( is_array( $this->get_config( 'default' ) ) ) {
+			return self::DEFAULTS['default'];
+		}
+
+		return $this->get_config( 'default' );
+
+	}
+
+
 	public function maybe_adjust( &$value ): void {
 
-		$current = count( (array) $value );
+		if ( ! $this->get_config( 'repeatable' ) ) {
+			return;
+		}
+
+		if ( ! is_array( $value ) ) {
+			$value = (array) $value;
+		}
+
+		$current = count( $value );
 
 		if ( $current < $this->get_config( 'minimum' ) ) {
 			$balance = $this->get_config( 'minimum' ) - $current;
-			$value   = array_merge( (array) $value, array_fill( $current, $balance, null ) );
-
-			$this->config['count'] = count( (array) $value );
+			$value   = array_merge( $value, array_fill( $current, $balance, $this->clone_value() ) );
 		}
+
+		if ( $this->get_config( 'maximum' ) && ( $current > $this->get_config( 'maximum' ) ) ) {
+			$value = array_slice( $value, 0, $this->get_config( 'maximum' ) );
+		}
+
+		$this->config['count'] = count( $value );
 
 	}
 

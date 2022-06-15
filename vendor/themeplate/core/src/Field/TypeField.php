@@ -17,6 +17,51 @@ use WP_User_Query;
 
 class TypeField extends Field {
 
+	public const ACTION_PREFIX = 'themeplate_type_';
+
+
+	protected function get_correct_type( string $type ): string {
+
+		$type = strtolower( $type );
+
+		if ( ! in_array( $type, array( 'post', 'user', 'term' ), true ) ) {
+			$type = 'post';
+		}
+
+		return $type . 's';
+	}
+
+
+	protected function get_action_name( string $type ): string {
+
+		return self::ACTION_PREFIX . $this->get_correct_type( $type );
+
+	}
+
+
+	protected function get_callback( string $type ): callable {
+
+		return array( self::class, 'get_' . $this->get_correct_type( $type ) );
+
+	}
+
+
+	protected function initialize(): void {
+
+		$hook_name = 'wp_ajax_' . $this->get_action_name( $this->get_config( 'type' ) );
+
+		add_action( $hook_name, $this->get_callback( $this->get_config( 'type' ) ) );
+
+	}
+
+
+	protected function can_have_multiple_value(): bool {
+
+		return true;
+
+	}
+
+
 	public function render( $value ): void {
 
 		$config_options = $this->get_config( 'options' );
@@ -24,7 +69,6 @@ class TypeField extends Field {
 		switch ( $this->get_config( 'type' ) ) {
 			default:
 			case 'post':
-				$action   = 'themeplate_type_posts';
 				$defaults = array( 'post_type' => $this->get_config( 'type' ) );
 
 				if ( MainHelper::is_sequential( $config_options ) ) {
@@ -33,7 +77,6 @@ class TypeField extends Field {
 
 				break;
 			case 'user':
-				$action   = 'themeplate_type_users';
 				$defaults = array( 'role' => '' );
 
 				if ( MainHelper::is_sequential( $config_options ) ) {
@@ -42,7 +85,6 @@ class TypeField extends Field {
 
 				break;
 			case 'term':
-				$action   = 'themeplate_type_terms';
 				$defaults = array( 'taxonomy' => null );
 
 				if ( MainHelper::is_sequential( $config_options ) ) {
@@ -71,7 +113,7 @@ class TypeField extends Field {
 
 		echo '</select>';
 		echo '<div class="select2-options"
-				data-action="' . esc_attr( $action ) . '"
+				data-action="' . esc_attr( $this->get_action_name( $this->get_config( 'type' ) ) ) . '"
 				data-options="' . esc_attr( wp_json_encode( $args, JSON_NUMERIC_CHECK ) ) . '"
 				data-value="' . esc_attr( wp_json_encode( $value, JSON_NUMERIC_CHECK ) ) . '"
 				></div>';

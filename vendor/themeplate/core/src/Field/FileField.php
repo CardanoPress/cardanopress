@@ -13,6 +13,13 @@ use ThemePlate\Core\Field;
 
 class FileField extends Field {
 
+	protected function can_have_multiple_value(): bool {
+
+		return true;
+
+	}
+
+
 	public function render( $value ): void {
 
 		$options = wp_json_encode( $this->get_config( 'options' ) );

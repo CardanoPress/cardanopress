@@ -9,6 +9,7 @@
 
 namespace ThemePlate\Core;
 
+use ThemePlate\Core\Helper\AssetsHelper;
 use ThemePlate\Core\Helper\MainHelper;
 use ThemePlate\Core\Helper\MetaHelper;
 
@@ -64,6 +65,7 @@ abstract class Form {
 		$config['form_id'] = sanitize_title( $this->title );
 
 		$this->initialize( $config );
+		AssetsHelper::setup_loader();
 
 		return $config;
 
@@ -79,6 +81,7 @@ abstract class Form {
 	}
 
 
+	/** @noinspection PhpUnused */
 	public function layout_postbox( string $current_id ): void {
 
 		global $wp_version;

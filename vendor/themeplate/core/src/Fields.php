@@ -28,8 +28,6 @@ class Fields {
 
 
 	/**
-	 * @param array $fields
-	 *
 	 * @return Field[]
 	 */
 	protected function filter( array $fields ): array {
@@ -89,7 +87,7 @@ class Fields {
 					$base_id   = $field->get_config( 'id' );
 					$base_name = $field->get_config( 'name' );
 
-					foreach ( (array) $value as $i => $val ) {
+					foreach ( $value as $i => $val ) {
 						$field->set_id( $base_id . '_' . $i );
 						$field->set_name( $base_name . '[' . $i . ']' );
 						$this->cloner( $field, $val );
@@ -97,7 +95,7 @@ class Fields {
 
 					$field->set_id( $base_id . '_i-x' );
 					$field->set_name( $base_name . '[i-x]' );
-					$this->cloner( $field, $field->get_config( 'default' ), true );
+					$this->cloner( $field, $field->clone_value(), true );
 				}
 
 				echo ! empty( $field->get_config( 'information' ) ) ? '<p class="description">' . $field->get_config( 'information' ) . '</p>' : ''; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped

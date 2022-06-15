@@ -9,6 +9,9 @@ namespace ThemePlate\Core;
 class Repository {
 
 	protected Handler $handler;
+	/**
+	 * @var Field[] $items
+	 */
 	protected array $items = array();
 
 
@@ -33,6 +36,9 @@ class Repository {
 	}
 
 
+	/**
+	 * @return mixed
+	 */
 	public function retrieve( string $key, string $current_id ) {
 
 		$field = $this->search( $key );
@@ -42,7 +48,7 @@ class Repository {
 	}
 
 
-	protected function field( $key ): Field {
+	protected function field( string $key ): Field {
 
 		return new class( $key ) extends Field {
 			public function render( $value ): void {}
@@ -51,6 +57,9 @@ class Repository {
 	}
 
 
+	/**
+	 * @return Field[]
+	 */
 	public function dump(): array {
 
 		return $this->items;

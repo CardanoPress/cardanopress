@@ -45,10 +45,8 @@ class Blockfrost extends AbstractBlockfrost
         }
 
         return [
-            'linearFee' => [
-                'minFeeA' => $parameters['min_fee_a'],
-                'minFeeB' => $parameters['min_fee_b'],
-            ],
+            'minFeeA' => $parameters['min_fee_a'],
+            'minFeeB' => $parameters['min_fee_b'],
             'minUtxo' => $parameters['min_utxo'],
             'poolDeposit' => $parameters['pool_deposit'],
             'keyDeposit' => $parameters['key_deposit'],

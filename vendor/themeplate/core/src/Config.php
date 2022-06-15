@@ -35,6 +35,9 @@ class Config {
 	}
 
 
+	/**
+	 * @return Field[]
+	 */
 	public function get_fields(): array {
 
 		return $this->fields->get_collection();

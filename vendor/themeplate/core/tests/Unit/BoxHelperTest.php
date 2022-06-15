@@ -48,6 +48,7 @@ class BoxHelperTest extends TestCase {
 					'test3' => array(
 						'test4' => 'test0',
 						'test5' => $empty_like_values,
+						'i-x'   => 'important!',
 					),
 				),
 				array(
@@ -68,6 +69,7 @@ class BoxHelperTest extends TestCase {
 						'test6' => array(
 							'test7' => 'test8',
 							'test9' => $empty_like_values,
+							'i-x'   => 'important!',
 						),
 					),
 				),

@@ -14,7 +14,7 @@ use ThemePlate\Core\Field;
 class InputField extends Field {
 
 	/**
-	 * @param $value string
+	 * @param string $value
 	 */
 	public function render( $value ): void {
 

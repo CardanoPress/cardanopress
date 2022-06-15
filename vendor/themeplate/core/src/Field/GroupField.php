@@ -15,12 +15,12 @@ use ThemePlate\Core\Fields;
 class GroupField extends Field {
 
 	/**
-	 * @param $value array
+	 * @param array $value
 	 */
 	public function render( $value ): void {
 
 		/**
-		 * @var $fields Fields
+		 * @var Fields $fields
 		 */
 		$fields = $this->get_config( 'fields' );
 

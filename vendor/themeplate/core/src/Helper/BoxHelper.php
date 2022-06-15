@@ -35,7 +35,7 @@ class BoxHelper {
 				$data[ $key ] = self::filter( $value );
 			}
 
-			if ( empty( $value ) ) {
+			if ( empty( $value ) || 'i-x' === $key ) {
 				unset( $data[ $key ] );
 			}
 		}

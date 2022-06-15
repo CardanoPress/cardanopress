@@ -28,10 +28,7 @@
 	"autoload": {
 		"psr-4": {
 			"ThemePlate\\Core\\": "src"
-		},
-		"files": [
-			"functions.php"
-		]
+		}
 	},
 	"autoload-dev": {
 		"psr-4": {

@@ -289,6 +289,7 @@ return array(
     'ThemePlate\\Core\\Fields' => $vendorDir . '/themeplate/core/src/Fields.php',
     'ThemePlate\\Core\\Form' => $vendorDir . '/themeplate/core/src/Form.php',
     'ThemePlate\\Core\\Handler' => $vendorDir . '/themeplate/core/src/Handler.php',
+    'ThemePlate\\Core\\Helper\\AssetsHelper' => $vendorDir . '/themeplate/core/src/Helper/AssetsHelper.php',
     'ThemePlate\\Core\\Helper\\BoxHelper' => $vendorDir . '/themeplate/core/src/Helper/BoxHelper.php',
     'ThemePlate\\Core\\Helper\\FormHelper' => $vendorDir . '/themeplate/core/src/Helper/FormHelper.php',
     'ThemePlate\\Core\\Helper\\MainHelper' => $vendorDir . '/themeplate/core/src/Helper/MainHelper.php',

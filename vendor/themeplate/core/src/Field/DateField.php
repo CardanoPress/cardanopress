@@ -13,6 +13,13 @@ use ThemePlate\Core\Field;
 
 class DateField extends Field {
 
+	protected function can_have_multiple_value(): bool {
+
+		return true;
+
+	}
+
+
 	public function render( $value ): void {
 
 		echo '<div class="wrapper">';

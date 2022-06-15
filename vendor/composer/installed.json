@@ -892,17 +892,17 @@
         },
         {
             "name": "themeplate/core",
-            "version": "v2.0.0",
-            "version_normalized": "2.0.0.0",
+            "version": "v2.1.0",
+            "version_normalized": "2.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Core.git",
-                "reference": "81b1113885f4d37c03310d3294d0de1305fa4a6d"
+                "reference": "0b074eba045f032a2038211bf64c26287a1edb86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Core/zipball/81b1113885f4d37c03310d3294d0de1305fa4a6d",
-                "reference": "81b1113885f4d37c03310d3294d0de1305fa4a6d",
+                "url": "https://api.github.com/repos/ThemePlate/Core/zipball/0b074eba045f032a2038211bf64c26287a1edb86",
+                "reference": "0b074eba045f032a2038211bf64c26287a1edb86",
                 "shasum": ""
             },
             "require": {
@@ -912,13 +912,10 @@
             "require-dev": {
                 "themeplate/tester": "^2.0"
             },
-            "time": "2022-06-09T13:26:17+00:00",
+            "time": "2022-06-14T00:58:39+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
-                "files": [
-                    "functions.php"
-                ],
                 "psr-4": {
                     "ThemePlate\\Core\\": "src"
                 }
@@ -936,7 +933,7 @@
             "description": "ThemePlate core functions and helpers",
             "support": {
                 "issues": "https://github.com/ThemePlate/Core/issues",
-                "source": "https://github.com/ThemePlate/Core/tree/v2.0.0"
+                "source": "https://github.com/ThemePlate/Core/tree/v2.1.0"
             },
             "install-path": "../themeplate/core"
         },
