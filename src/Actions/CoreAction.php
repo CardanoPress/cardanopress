@@ -98,9 +98,18 @@ class CoreAction implements HookInterface
         $this->checkDelegationStatus($stakeAddress, $queryNetwork, $userProfile, $blockfrost);
     }
 
-    public function checkWalletAssets(string $stakeAddress, Profile $userProfile, Blockfrost $blockfrost): void
+    protected function getAssetAccess(): array
     {
         $assetAccess = $this->application->option('asset_access');
+
+        return array_filter($assetAccess, function ($access) {
+            return ! empty($access['id']) && ! empty($access['role']);
+        });
+    }
+
+    public function checkWalletAssets(string $stakeAddress, Profile $userProfile, Blockfrost $blockfrost): void
+    {
+        $assetAccess = $this->getAssetAccess();
         $assetAccessPolicyIds = array_column($assetAccess, 'id');
         $wantedPolicyIds = Collection::wantedPolicyIds($assetAccessPolicyIds);
         $wantedPolicyIdsRegExPattern = '/^' . implode('|', $wantedPolicyIds) . '/';
