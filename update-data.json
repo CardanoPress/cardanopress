@@ -1,8 +1,8 @@
 {
-  "new_version"    : "0.36.0",
+  "new_version"    : "0.36.1",
   "homepage"       : "https://github.com/CardanoPress/cardanopress",
-  "download_link"  : "https://github.com/CardanoPress/cardanopress/archive/refs/tags/v0.36.0.zip",
-  "last_updated"   : "2022-06-15",
+  "download_link"  : "https://github.com/CardanoPress/cardanopress/archive/refs/tags/v0.36.1.zip",
+  "last_updated"   : "2022-07-06",
   "author"         : "Gene Alyson Fortunado Torcende",
   "author_profile" : "https://cardanopress.io",
   "requires"       : "5.8.0",
