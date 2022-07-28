@@ -33,7 +33,7 @@ class Collection
         );
     }
 
-    public function filteredAsset(): array
+    public function filteredAsset(int $quantity = 0): array
     {
         $data = $this->data;
 
@@ -41,6 +41,7 @@ class Collection
             return [];
         }
 
+        $data['_quantity'] = $quantity;
         $data['packed_name'] = pack("H*", $data['asset_name']);
         $data['parsed_image'] = '';
 

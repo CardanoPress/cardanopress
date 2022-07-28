@@ -132,7 +132,7 @@ class CoreAction implements HookInterface
                 do_action('cardanopress_associated_asset', $stakeAddress, $data, $asset);
 
                 $collection = new Collection($data);
-                $assets[] = $collection->filteredAsset();
+                $assets[] = $collection->filteredAsset($asset['quantity']);
                 $handles[] = $collection->grabHandle();
                 $index = array_search($data['policy_id'], $assetAccessPolicyIds, true);
 
