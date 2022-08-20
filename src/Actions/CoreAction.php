@@ -136,7 +136,11 @@ class CoreAction implements HookInterface
                 $handles[] = $collection->grabHandle();
                 $index = array_search($data['policy_id'], $assetAccessPolicyIds, true);
 
-                if (false === $index || $userProfile->hasRole($assetAccess[$index]['role'])) {
+                if (
+                    (false === $index) ||
+                    $userProfile->hasRole($assetAccess[$index]['role']) ||
+                    ! $this->isConditionMet($data, $assetAccess[$index]['condition'])
+                ) {
                     continue;
                 }
 
@@ -155,6 +159,25 @@ class CoreAction implements HookInterface
 
         $userProfile->saveAssets($assets);
         $userProfile->saveHandles($handles);
+    }
+
+    private function isConditionMet(array $asset, array $condition): bool
+    {
+        if (empty($condition['key']) || empty($condition['value'])) {
+            return true;
+        }
+
+        $data = $asset[$condition['location']];
+
+        foreach (explode('>', $condition['key']) as $key) {
+            if (empty($data[$key])) {
+                return false;
+            }
+
+            $data = $data[$key];
+        }
+
+        return $data === $condition['value'];
     }
 
     public function checkDelegationStatus(

@@ -283,6 +283,37 @@ class Admin extends AbstractAdmin
                             'title' => __('Additional Role', 'cardanopress'),
                             'options' => wp_roles()->role_names,
                         ],
+                        'condition' => [
+                            'title' => __('Attribute Condition', 'cardanopress'),
+                            'description' => __('Optional to check before assigning the role.', 'cardanopress'),
+                            'type' => 'group',
+                            'default' => [
+                                [
+                                    'location' => 'onchain_metadata',
+                                    'key' => '',
+                                    'value' => '',
+                                ],
+                            ],
+                            'fields' => [
+                                'location' => [
+                                    'type' => 'radio',
+                                    'title' => __('Location', 'cardanopress'),
+                                    'options' => [
+                                        'onchain_metadata' => 'onchain_metadata',
+                                        'metadata' => 'metadata',
+                                    ],
+                                    'default' => 'onchain_metadata',
+                                ],
+                                'key' => [
+                                    'type' => 'text',
+                                    'title' => __('Key', 'cardanopress'),
+                                ],
+                                'value' => [
+                                    'type' => 'text',
+                                    'title' => __('Value', 'cardanopress'),
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
