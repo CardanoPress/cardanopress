@@ -134,17 +134,18 @@ class CoreAction implements HookInterface
                 $collection = new Collection($data);
                 $assets[] = $collection->filteredAsset($asset['quantity']);
                 $handles[] = $collection->grabHandle();
-                $index = array_search($data['policy_id'], $assetAccessPolicyIds, true);
+                $indexes = array_keys($assetAccessPolicyIds, $data['policy_id'], true);
 
-                if (
-                    (false === $index) ||
-                    $userProfile->hasRole($assetAccess[$index]['role']) ||
-                    ! $this->isConditionMet($data, $assetAccess[$index]['condition'])
-                ) {
-                    continue;
+                foreach ($indexes as $index) {
+                    if (
+                        $userProfile->hasRole($assetAccess[$index]['role']) ||
+                        ! $this->isConditionMet($data, $assetAccess[$index]['condition'])
+                    ) {
+                        continue;
+                    }
+
+                    $userProfile->addRole($assetAccess[$index]['role']);
                 }
-
-                $userProfile->addRole($assetAccess[$index]['role']);
             }
 
             $page++;
