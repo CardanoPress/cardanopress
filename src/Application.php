@@ -22,6 +22,10 @@ class Application extends AbstractApplication
     use Instantiable;
     use Templatable;
 
+    /**
+     * Initializes the plugin by setting the instance, creating a new
+     * admin, manifest, and templates object.
+     */
     protected function initialize(): void
     {
         $this->setInstance($this);
@@ -32,6 +36,9 @@ class Application extends AbstractApplication
         $this->templates = new Templates($path . 'templates');
     }
 
+    /**
+     * Sets up hooks for the admin, manifest, and templates classes.
+     */
     public function setupHooks(): void
     {
         $this->admin->setupHooks();
@@ -41,6 +48,10 @@ class Application extends AbstractApplication
         add_action('cardanopress_loaded', [$this, 'init']);
     }
 
+    /**
+     * Creates a new instance of the class CoreAction, WalletAction, and
+     * Shortcode, and then calls the setupHooks() method on each of them
+     */
     public function init(): void
     {
         (new CoreAction())->setupHooks();
@@ -48,6 +59,11 @@ class Application extends AbstractApplication
         (new Shortcode())->setupHooks();
     }
 
+    /**
+     * Return a boolean value of the application readiness status
+     *
+     * @return bool The application readiness status.
+     */
     public function isReady(): bool
     {
         $projectIds = $this->option('blockfrost_project_id');
@@ -56,17 +72,27 @@ class Application extends AbstractApplication
         return ! empty($projectIds);
     }
 
+    /**
+     * Return an instance of the Profile class with the current user's data
+     *
+     * @return Profile An instance of the Profile class.
+     */
     public function userProfile(): Profile
     {
         static $user;
 
         if (null === $user) {
-            $user =  new Profile(wp_get_current_user());
+            $user = new Profile(wp_get_current_user());
         }
 
         return $user;
     }
 
+    /**
+     * Return an array of data from the `delegation_pool_data` option
+     *
+     * @return array The data from the delegation pool.
+     */
     public function delegationPool(): array
     {
         static $data;
@@ -81,6 +107,11 @@ class Application extends AbstractApplication
         return $data;
     }
 
+    /**
+     * Return the payment address for the network that the user is currently on
+     *
+     * @return string The payment address for the network.
+     */
     public function paymentAddress(): string
     {
         static $data;
@@ -95,6 +126,12 @@ class Application extends AbstractApplication
         return $data;
     }
 
+    /**
+     * > If the user has a connected network, return it. Otherwise, return
+     * 'mainnet'
+     *
+     * @return string The network that the user is connected to.
+     */
     public function getNetwork(): string
     {
         $network = $this->userProfile()->connectedNetwork();
@@ -106,6 +143,11 @@ class Application extends AbstractApplication
         return $network;
     }
 
+    /**
+     * Return an array of pages that are available to the user
+     *
+     * @return array An array of pages.
+     */
     public function getPages(): array
     {
         $list = [];

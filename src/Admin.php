@@ -285,7 +285,8 @@ class Admin extends AbstractAdmin
                         ],
                         'condition' => [
                             'title' => __('Attribute Condition', 'cardanopress'),
-                            'description' => __('Optional to check before assigning the role.', 'cardanopress'),
+                            'description' => __('Optional to check before assigning the role.<br>
+                            Leave "Key" and "Value" fields blank to disable.', 'cardanopress'),
                             'type' => 'group',
                             'default' => [
                                 [
