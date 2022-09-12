@@ -107,11 +107,22 @@ class CoreAction implements HookInterface
         });
     }
 
+    protected function getTokenAccess(): array
+    {
+        $tokenAccess = $this->application->option('token_access');
+
+        return array_filter($tokenAccess, function ($token) {
+            return ! empty($token['id']);
+        });
+    }
+
     public function checkWalletAssets(string $stakeAddress, Profile $userProfile, Blockfrost $blockfrost): void
     {
         $assetAccess = $this->getAssetAccess();
+        $tokenAccess = $this->getTokenAccess();
         $assetAccessPolicyIds = array_column($assetAccess, 'id');
-        $wantedPolicyIds = Collection::wantedPolicyIds($assetAccessPolicyIds);
+        $tokenAccessPolicyIds = array_column($tokenAccess, 'id');
+        $wantedPolicyIds = Collection::wantedPolicyIds(array_merge($assetAccessPolicyIds, $tokenAccessPolicyIds));
         $wantedPolicyIdsRegExPattern = '/^' . implode('|', $wantedPolicyIds) . '/';
         $assets = [];
         $handles = [];
@@ -136,11 +147,21 @@ class CoreAction implements HookInterface
                 $handles[] = $collection->grabHandle();
                 $index = array_search($data['policy_id'], $assetAccessPolicyIds, true);
 
-                if (false === $index || $userProfile->hasRole($assetAccess[$index]['role'])) {
+                if (false !== $index && ! $userProfile->hasRole($assetAccess[$index]['role'])) {
+                    $userProfile->addRole($assetAccess[$index]['role']);
+                }
+
+                $index = array_search($data['policy_id'], $tokenAccessPolicyIds, true);
+
+                if (false === $index) {
                     continue;
                 }
 
-                $userProfile->addRole($assetAccess[$index]['role']);
+                foreach ($tokenAccess[$index]['conditions'] as $condition) {
+                    if ($data['fingerprint'] === $condition['id'] && ($asset['quantity'] >= $condition['count'])) {
+                        $userProfile->addRole($condition['role']);
+                    }
+                }
             }
 
             $page++;

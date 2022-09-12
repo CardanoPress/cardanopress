@@ -37,6 +37,7 @@ class Admin extends AbstractAdmin
             $this->memberPagesFields();
             $this->userAccessFields();
             $this->assetAccessFields();
+            $this->tokenAccessFields();
         });
         add_filter('pre_update_option_' . self::OPTION_KEY, [$this, 'getPoolDetails'], 10, 2);
     }
@@ -282,6 +283,68 @@ class Admin extends AbstractAdmin
                             'description' => __('Role to assign a user based token access.', 'cardanopress'),
                             'title' => __('Additional Role', 'cardanopress'),
                             'options' => wp_roles()->role_names,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    private function tokenAccessFields(): void
+    {
+        $this->optionFields(__('Token Access', 'cardanopress'), [
+            'data_prefix' => 'token_',
+            'description' => __('Assigning a user role based on number of tokens in wallet.', 'cardanopress'),
+            'fields' => [
+                'access' => [
+                    'type' => 'group',
+                    'default' => [
+                        [
+                            'name' => '',
+                            'id' => '',
+                            'role' => '',
+                            'conditions' => [],
+                        ],
+                    ],
+                    'repeatable' => true,
+                    'fields' => [
+                        'name' => [
+                            'type' => 'text',
+                            'description' => __('Name of the token.', 'cardanopress'),
+                            'title' => __('Asset Name', 'cardanopress'),
+                        ],
+                        'id' => [
+                            'type' => 'text',
+                            'description' => __('Policy ID of the token.', 'cardanopress'),
+                            'title' => __('Policy ID', 'cardanopress'),
+                        ],
+                        'conditions' => [
+                            'title' => __('Conditions', 'cardanopress'),
+                            'type' => 'group',
+                            'default' => [
+                                [
+                                    'count' => 1,
+                                    'role' => '',
+                                ],
+                            ],
+                            'repeatable' => true,
+                            'fields' => [
+                                'id' => [
+                                    'type' => 'text',
+                                    'title' => __('Asset Fingerprint', 'cardanopress'),
+                                ],
+                                'count' => [
+                                    'type' => 'number',
+                                    'title' => __('Count', 'cardanopress'),
+                                    'default' => 1,
+                                ],
+                                'role' => [
+                                    'type' => 'select',
+                                    'description' => __('Role to assign a user based token access.', 'cardanopress'),
+                                    'title' => __('Additional Role', 'cardanopress'),
+                                    'options' => wp_roles()->role_names,
+                                ],
+                            ],
                         ],
                     ],
                 ],
