@@ -22,12 +22,14 @@ class Admin extends AbstractAdmin
 
     protected function initialize(): void
     {
+        require_once plugin_dir_path(CARDANOPRESS_FILE) . 'class-tgm-plugin-activation.php';
     }
 
     public function setupHooks(): void
     {
         $this->settingsPage('CardanoPress');
 
+        add_action('tgmpa_register', [$this, 'recommendPlugins']);
         add_action('init', function () {
             $this->blockfrostFields();
             $this->googleRecaptchaFields();
@@ -102,7 +104,10 @@ class Admin extends AbstractAdmin
     {
         $this->optionFields(__('Delegation: Pool ID', 'cardanopress'), [
             'data_prefix' => 'delegation_',
-            'description' => __('Enter to Pool ID of the stake pool your delegation page will delegate to.', 'cardanopress'),
+            'description' => __(
+                'Enter to Pool ID of the stake pool your delegation page will delegate to.',
+                'cardanopress'
+            ),
             'fields' => [
                 'pool_id' => [
                     'type' => 'group',
@@ -316,5 +321,29 @@ class Admin extends AbstractAdmin
         }
 
         return $newValue;
+    }
+
+    public function recommendPlugins()
+    {
+        $plugins = [
+            [
+                'name' => 'User Role Editor',
+                'slug' => 'user-role-editor',
+            ],
+            [
+                'name' => 'User Access Manager',
+                'slug' => 'user-access-manager',
+            ],
+        ];
+
+        $config = [
+            'id' => 'cardanopress-tgmpa',
+            'menu' => 'cardanopress-plugins',
+            'parent_slug' => 'cardanopress',
+            'dismissable' => false,
+            'is_automatic' => true,
+        ];
+
+        tgmpa($plugins, $config);
     }
 }
