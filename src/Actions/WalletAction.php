@@ -16,10 +16,12 @@ use PBWebDev\CardanoPress\Profile;
 class WalletAction implements HookInterface
 {
     protected Application $application;
+    protected Sanitization $sanitization;
 
     public function __construct()
     {
         $this->application = Application::getInstance();
+        $this->sanitization = new Sanitization();
     }
 
     public function setupHooks(): void
@@ -42,14 +44,17 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
 
-        $address = $_POST['stake_address'];
-        $username = md5($address);
+        $queryNetwork = $this->sanitization->query_network();
+        $walletAddress = $this->sanitization->wallet_address();
+        $stakeAddress = $this->sanitization->stake_address();
+
+        $username = md5($stakeAddress);
         $userId = username_exists($username);
         $shouldReload = false;
         $newAccount = false;
 
         if (! $userId) {
-            $userId = wp_create_user($username, wp_hash_password($address));
+            $userId = wp_create_user($username, wp_hash_password($stakeAddress));
             $newAccount = true;
 
             if (is_wp_error($userId)) {
@@ -62,9 +67,9 @@ class WalletAction implements HookInterface
         $userProfile = new Profile($user);
 
         if ($newAccount || ! $userProfile->isConnected()) {
-            $userProfile->saveNetwork($_POST['query_network']);
-            $userProfile->saveWallet($_POST['wallet_address']);
-            $userProfile->saveStake($_POST['stake_address']);
+            $userProfile->saveNetwork($queryNetwork);
+            $userProfile->saveWallet($walletAddress);
+            $userProfile->saveStake($stakeAddress);
         }
 
         if ($userId !== get_current_user_id()) {
@@ -83,11 +88,14 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
 
+        $queryNetwork = $this->sanitization->query_network();
+        $walletAddress = $this->sanitization->wallet_address();
+        $stakeAddress = $this->sanitization->stake_address();
         $userProfile = $this->application->userProfile();
 
-        $userProfile->saveNetwork($_POST['query_network']);
-        $userProfile->saveWallet($_POST['wallet_address']);
-        $userProfile->saveStake($_POST['stake_address']);
+        $userProfile->saveNetwork($queryNetwork);
+        $userProfile->saveWallet($walletAddress);
+        $userProfile->saveStake($stakeAddress);
 
         wp_send_json_success([
             'message' => CoreAction::getAjaxMessage('connected'),
@@ -114,12 +122,14 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'wallet_address']);
 
+        $queryNetwork = $this->sanitization->query_network();
+        $walletAddress = $this->sanitization->wallet_address();
         $userProfile = $this->application->userProfile();
         $shouldReload = false;
 
         if (
-            $_POST['query_network'] !== $userProfile->connectedNetwork() ||
-            $_POST['wallet_address'] !== $userProfile->connectedWallet()
+            $queryNetwork !== $userProfile->connectedNetwork() ||
+            $walletAddress !== $userProfile->connectedWallet()
         ) {
             $shouldReload = true;
 
@@ -138,14 +148,13 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network']);
 
-        $network = $_POST['query_network'];
+        $queryNetwork = $this->sanitization->query_network();
 
-        if (! Blockfrost::isReady($network)) {
-            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $network));
+        if (! Blockfrost::isReady($queryNetwork)) {
+            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
         }
 
-        $blockfrost = new Blockfrost($network);
-
+        $blockfrost = new Blockfrost($queryNetwork);
         $response = $blockfrost->protocolParameters();
 
         if (empty($response)) {
@@ -159,14 +168,15 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'reward_address']);
 
-        $network = $_POST['query_network'];
+        $queryNetwork = $this->sanitization->query_network();
+        $rewardAddress = $this->sanitization->reward_address();
 
-        if (! Blockfrost::isReady($network)) {
-            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $network));
+        if (! Blockfrost::isReady($queryNetwork)) {
+            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
         }
 
-        $blockfrost = new Blockfrost($network);
-        $response = $blockfrost->getAccountDetails($_POST['reward_address']);
+        $blockfrost = new Blockfrost($queryNetwork);
+        $response = $blockfrost->getAccountDetails($rewardAddress);
 
         if (empty($response)) {
             wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
@@ -179,14 +189,15 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'pool_id']);
 
-        $network = $_POST['query_network'];
+        $queryNetwork = $this->sanitization->query_network();
+        $poolId = $this->sanitization->pool_id();
 
-        if (! Blockfrost::isReady($network)) {
-            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $network));
+        if (! Blockfrost::isReady($queryNetwork)) {
+            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
         }
 
-        $blockfrost = new Blockfrost($network);
-        $response = $blockfrost->getPoolDetails($_POST['pool_id']);
+        $blockfrost = new Blockfrost($queryNetwork);
+        $response = $blockfrost->getPoolDetails($poolId);
 
         if (empty($response)) {
             wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
@@ -213,11 +224,15 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'transaction_action', 'transaction_hash']);
 
+        $queryNetwork = $this->sanitization->query_network();
+        $transactionAction = $this->sanitization->transaction_action();
+        $transactionHash = $this->sanitization->transaction_hash();
+
         $userProfile = $this->application->userProfile();
         $success = $userProfile->saveTransaction(
-            $_POST['query_network'],
-            $_POST['transaction_action'],
-            $_POST['transaction_hash']
+            $queryNetwork,
+            $transactionAction,
+            $transactionHash
         );
 
         if (! $success) {
@@ -225,8 +240,8 @@ class WalletAction implements HookInterface
         }
 
         wp_send_json_success([
-            'message' => sprintf(CoreAction::getAjaxMessage('successfulTransaction'), $_POST['transaction_action']),
-            'hash' => $_POST['transaction_hash'],
+            'message' => sprintf(CoreAction::getAjaxMessage('successfulTransaction'), $transactionAction),
+            'hash' => $transactionHash,
         ]);
     }
 
@@ -252,7 +267,7 @@ class WalletAction implements HookInterface
             wp_send_json_error(CoreAction::getAjaxMessage('notPermitted'));
         }
 
-        if (empty($postVars) || empty(array_diff($postVars, array_keys($_POST)))) {
+        if (empty($postVars) || (! empty($_POST) && empty(array_diff($postVars, array_keys($_POST))))) {
             return;
         }
 

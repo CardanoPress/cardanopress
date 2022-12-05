@@ -232,13 +232,10 @@ class CoreAction implements HookInterface
     {
         check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
 
-        if (empty($_POST['ada_handle'])) {
-            wp_send_json_error($this->getAjaxMessage('somethingWrong'));
-        }
-
+        $adaHandle = (new Sanitization())->ada_handle();
         $userProfile = $this->application->userProfile();
 
-        $userProfile->saveFavoriteHandle($_POST['ada_handle']);
+        $userProfile->saveFavoriteHandle($adaHandle);
         wp_send_json_success($this->getAjaxMessage('handleSaved'));
     }
 }
