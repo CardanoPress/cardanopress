@@ -42,18 +42,19 @@ class Installer extends AbstractInstaller
             return;
         }
 
-        ob_start();
-
         ?>
         <div class="notice notice-info">
             <p>
                 <strong>CardanoPress</strong> requires Blockfrost API Token.
-                <?php echo $this->getSettingsLink(__('Please set here', 'cardanopress'), '_blank'); ?>
+                <?php echo wp_kses($this->getSettingsLink(__('Please set here', 'cardanopress'), '_blank'), [
+                    'a' => [
+                        'href' => [],
+                        'target' => [],
+                    ],
+                ]); ?>
             </p>
         </div>
         <?php
-
-        echo ob_get_clean();
     }
 
     public function doUpgrade(string $currentVersion, string $appVersion): void
