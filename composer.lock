@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "274dc169f38d5d31422d28b3f8ab60cf",
+    "content-hash": "355ddc5deba1f8211fa2da1ded2bc906",
     "packages": [
         {
             "name": "cardanopress/framework",
@@ -4213,7 +4213,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.4|^8.0",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-ctype": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

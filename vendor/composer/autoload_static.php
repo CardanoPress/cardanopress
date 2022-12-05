@@ -335,6 +335,7 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         'Monolog\\Test\\TestCase' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Test/TestCase.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
         'PBWebDev\\CardanoPress\\Actions\\CoreAction' => __DIR__ . '/../..' . '/src/Actions/CoreAction.php',
+        'PBWebDev\\CardanoPress\\Actions\\Sanitization' => __DIR__ . '/../..' . '/src/Actions/Sanitization.php',
         'PBWebDev\\CardanoPress\\Actions\\WalletAction' => __DIR__ . '/../..' . '/src/Actions/WalletAction.php',
         'PBWebDev\\CardanoPress\\Admin' => __DIR__ . '/../..' . '/src/Admin.php',
         'PBWebDev\\CardanoPress\\Application' => __DIR__ . '/../..' . '/src/Application.php',

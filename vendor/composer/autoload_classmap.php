@@ -233,6 +233,7 @@ return array(
     'Monolog\\Test\\TestCase' => $vendorDir . '/monolog/monolog/src/Monolog/Test/TestCase.php',
     'Monolog\\Utils' => $vendorDir . '/monolog/monolog/src/Monolog/Utils.php',
     'PBWebDev\\CardanoPress\\Actions\\CoreAction' => $baseDir . '/src/Actions/CoreAction.php',
+    'PBWebDev\\CardanoPress\\Actions\\Sanitization' => $baseDir . '/src/Actions/Sanitization.php',
     'PBWebDev\\CardanoPress\\Actions\\WalletAction' => $baseDir . '/src/Actions/WalletAction.php',
     'PBWebDev\\CardanoPress\\Admin' => $baseDir . '/src/Admin.php',
     'PBWebDev\\CardanoPress\\Application' => $baseDir . '/src/Application.php',
