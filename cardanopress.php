@@ -33,9 +33,6 @@ if (! defined('CARDANOPRESS_FILE')) {
 // Load the main plugin class
 require_once plugin_dir_path(CARDANOPRESS_FILE) . 'vendor/autoload.php';
 
-// Instantiate the updater
-EUM_Handler::run(CARDANOPRESS_FILE, 'https://raw.githubusercontent.com/CardanoPress/cardanopress/main/update-data.json');
-
 function cardanoPress(): Application
 {
     static $application;

@@ -30,8 +30,7 @@
     "php": "^7.4|^8.0",
     "ext-json": "*",
     "ext-ctype": "*",
-    "cardanopress/framework": "^1.0",
-    "kermage/external-update-manager": "^2.2"
+    "cardanopress/framework": "^1.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",

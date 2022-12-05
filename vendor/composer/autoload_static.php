@@ -12,7 +12,6 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'cffb582bbe3444c214b7b73b61493f7d' => __DIR__ . '/..' . '/themeplate/enqueue/Enqueue.php',
-        'e2fb8214a7589690aae8ec82f7aa8973' => __DIR__ . '/..' . '/kermage/external-update-manager/class-external-update-manager.php',
     );
 
     public static $prefixLengthsPsr4 = array (

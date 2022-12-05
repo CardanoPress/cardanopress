@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'cardanopress/cardanopress',
-        'pretty_version' => 'dev-develop',
-        'version' => 'dev-develop',
-        'reference' => '93c7f45dbc0c22d8b6e3e7f09e4f84205924b5e8',
+        'pretty_version' => 'dev-trunk',
+        'version' => 'dev-trunk',
+        'reference' => 'c20ed6d2347ba11d30f62f3dddc042b6749e7e21',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'cardanopress/cardanopress' => array(
-            'pretty_version' => 'dev-develop',
-            'version' => 'dev-develop',
-            'reference' => '93c7f45dbc0c22d8b6e3e7f09e4f84205924b5e8',
+            'pretty_version' => 'dev-trunk',
+            'version' => 'dev-trunk',
+            'reference' => 'c20ed6d2347ba11d30f62f3dddc042b6749e7e21',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -52,15 +52,6 @@
             'reference' => '13388f00956b1503577598873fffb5ae994b5737',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'kermage/external-update-manager' => array(
-            'pretty_version' => 'v2.2.0',
-            'version' => '2.2.0.0',
-            'reference' => '00506d4e76047026d0c19f39223a8f2051593686',
-            'type' => 'wordpress-dropin',
-            'install_path' => __DIR__ . '/../kermage/external-update-manager',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
