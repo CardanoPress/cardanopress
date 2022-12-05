@@ -19,8 +19,8 @@ if (empty($pool)) {
     <div class="absolute inset-0">
         <?php if ('mainnet' === cardanoPress()->userProfile()->connectedNetwork()) : ?>
             <img
-                src="https://static.adapools.org/pool_logo/<?php echo $pool['hex']; ?>.png"
-                alt="<?php echo $pool['name']; ?>"
+                src="https://static.adapools.org/pool_logo/<?php echo esc_attr($pool['hex']); ?>.png"
+                alt="<?php echo esc_attr($pool['name']); ?>"
                 class="w-full"
             >
         <?php else : ?>
@@ -29,9 +29,9 @@ if (empty($pool)) {
                     <div
                         role="image"
                         class="text-3xl font-medium uppercase"
-                        aria-label="<?php echo $pool['name']; ?>"
+                        aria-label="<?php echo esc_attr($pool['name']); ?>"
                     >
-                        <?php echo $pool['name'][0]; ?>
+                        <?php echo esc_html($pool['name'][0]); ?>
                     </div>
                 </div>
             </div>

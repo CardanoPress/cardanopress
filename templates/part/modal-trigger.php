@@ -15,4 +15,4 @@ if (empty($text)) {
 
 ?>
 
-<button type='button' @click='showModal = true'><?php echo $text; ?></button>
+<button type='button' @click='showModal = true'><?php echo esc_html($text); ?></button>

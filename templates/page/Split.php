@@ -30,11 +30,11 @@ get_header();
 
         <form
             x-data="paymentForm"
-            data-amount="<?php echo $fixedFee; ?>"
-            data-recaptcha="<?php echo $recaptchaKey; ?>"
+            data-amount="<?php echo esc_attr($fixedFee); ?>"
+            data-recaptcha="<?php echo esc_attr($recaptchaKey); ?>"
         >
             <div class='py-6'>
-                <h2>Fixed Fee: <span><?php echo $fixedFee; ?></span> ADA</h2>
+                <h2>Fixed Fee: <span><?php echo esc_html($fixedFee); ?></span> ADA</h2>
 
                 <p class='text-sm italic'>
                     <?php cardanoPress()->template('part/payment-lovelace'); ?> Lovelace
@@ -68,7 +68,7 @@ get_header();
 
                 <tbody>
                     <?php for ($i = 1; $i <= 5; $i++) : ?>
-                        <tr x-data="splitForm" data-fee="<?php echo $fixedFee; ?>">
+                        <tr x-data="splitForm" data-fee="<?php echo esc_attr($fixedFee); ?>">
                             <td class="w-1/5">
                                 <input x-model="percentage" type="number" min='0' max='100' class="w-full">
                             </td>

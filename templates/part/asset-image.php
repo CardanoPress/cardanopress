@@ -27,8 +27,8 @@ if (! $source && ! $label) {
     <div class="absolute inset-0">
         <?php if ($source) : ?>
             <img
-                src="<?php echo $source; ?>"
-                alt="<?php echo $label; ?>"
+                src="<?php echo esc_attr($source); ?>"
+                alt="<?php echo esc_attr($label); ?>"
                 class="w-full"
             >
         <?php else : ?>
@@ -37,9 +37,9 @@ if (! $source && ! $label) {
                     <div
                         role="image"
                         class="text-9xl font-medium uppercase"
-                        aria-label="<?php echo $label; ?>"
+                        aria-label="<?php echo esc_attr($label); ?>"
                     >
-                        <?php echo $label[0]; ?>
+                        <?php echo esc_html($label[0]); ?>
                     </div>
                 </div>
             </div>

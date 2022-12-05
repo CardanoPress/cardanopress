@@ -19,5 +19,5 @@ if (empty($text)) {
 ?>
 
 <button @click="openDropdown = !openDropdown">
-    <span x-text="getWalletHandle('<?php echo $text; ?>')"><?php echo $text; ?></span>
+    <span x-text="getWalletHandle('<?php echo esc_js($text); ?>')"><?php echo esc_html($text); ?></span>
 </button>

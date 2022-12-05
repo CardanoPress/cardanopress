@@ -24,5 +24,5 @@ if (empty($textConnected)) {
 </template>
 
 <template x-if='isConnected'>
-    <button type='button' disabled='true'><?php echo $textConnected; ?></button>
+    <button type='button' disabled='true'><?php echo esc_html($textConnected); ?></button>
 </template>

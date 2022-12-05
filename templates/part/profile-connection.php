@@ -34,17 +34,17 @@ $userProfile = cardanoPress()->userProfile();
 
         <tr>
             <th>Network</th>
-            <td><?php echo $userProfile->connectedNetwork(); ?></td>
+            <td><?php echo esc_html($userProfile->connectedNetwork()); ?></td>
         </tr>
 
         <tr>
             <th>Wallet</th>
-            <td><?php echo $userProfile->connectedWallet(); ?></td>
+            <td><?php echo esc_html($userProfile->connectedWallet()); ?></td>
         </tr>
 
         <tr>
             <th>Stake</th>
-            <td><?php echo $userProfile->connectedStake(); ?></td>
+            <td><?php echo esc_html($userProfile->connectedStake()); ?></td>
         </tr>
     </tbody>
 </table>

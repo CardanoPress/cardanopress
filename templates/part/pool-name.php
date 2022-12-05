@@ -15,4 +15,4 @@ if (empty($pool)) {
 
 ?>
 
-<?php echo $pool['ticker']; ?> &mdash; <?php echo $pool['name']; ?>
+<?php echo esc_html($pool['ticker']); ?> &mdash; <?php echo esc_html($pool['name']); ?>

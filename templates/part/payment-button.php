@@ -28,7 +28,7 @@ if (empty($textNotConnected)) {
         x-on:click.prevent='handlePayment()'
         x-bind:disabled='!isReady()'
     >
-        <?php echo $text; ?>
+        <?php echo esc_html($text); ?>
 
         <span class='block italic text-sm' x-text="'(Connected to ' + connectedExtension + ')'"></span>
     </button>

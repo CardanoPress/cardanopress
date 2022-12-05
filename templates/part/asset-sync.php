@@ -15,4 +15,4 @@ if (empty($text)) {
 
 ?>
 
-<button x-on:click.prevent='handleSync()' x-bind:disabled="isDisabled()"><?php echo $text; ?></button>
+<button x-on:click.prevent='handleSync()' x-bind:disabled="isDisabled()"><?php echo esc_html($text); ?></button>
