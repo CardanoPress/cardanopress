@@ -13,6 +13,7 @@ use ThemePlate\Core\Config;
 use ThemePlate\Core\Form;
 use ThemePlate\Core\Handler;
 use ThemePlate\Core\Helper\BoxHelper;
+use ThemePlate\Core\Helper\FieldsHelper;
 use ThemePlate\Core\Helper\FormHelper;
 
 class OptionBox extends Form {
@@ -53,11 +54,16 @@ class OptionBox extends Form {
 		foreach ( $this->menu_pages as $menu_page ) {
 			$section = $menu_page . '_' . $this->config['context'];
 
-			register_setting( $menu_page, $menu_page );
-			add_filter( 'default_option_' . $menu_page, '__return_empty_array' );
 			add_filter( 'sanitize_option_' . $menu_page, array( $this, 'sanitize_option' ) );
 			add_action( 'themeplate_page_' . $menu_page . '_load', array( FormHelper::class, 'enqueue_assets' ) );
 			add_action( 'themeplate_settings_' . $section, array( $this, 'layout_postbox' ), $priority );
+			add_filter( 'themeplate_setting_' . $menu_page . '_schema', array( $this, 'build_schema' ), $priority );
+		}
+
+		if ( did_action( 'init' ) ) {
+			$this->register_setting();
+		} else {
+			add_action( 'init', array( $this, 'register_setting' ) ); // @codeCoverageIgnore
 		}
 
 	}
@@ -86,6 +92,52 @@ class OptionBox extends Form {
 	public function get_config(): Config {
 
 		return new Config( $this->config['data_prefix'], $this->fields );
+
+	}
+
+
+	public function build_schema( array $data ): array {
+
+		if ( null === $this->fields ) {
+			return $data;
+		}
+
+		$schema = FieldsHelper::build_schema( $this->fields, $this->config['data_prefix'] );
+
+		return array_merge(
+			$data,
+			$schema,
+		);
+
+	}
+
+
+	public function register_setting(): void {
+
+		foreach ( $this->menu_pages as $menu_page ) {
+			$schema = apply_filters( 'themeplate_setting_' . $menu_page . '_schema', array() );
+			$args   = array(
+				'default'      => array(),
+				'type'         => 'object',
+				'show_in_rest' => array(
+					'schema' => array(
+						'type'       => 'object',
+						'properties' => $schema,
+					),
+				),
+			);
+
+			if ( ! empty( $schema ) ) {
+				$args['default'] = array_map(
+					function( $field ) {
+						return $field['default'];
+					},
+					$schema
+				);
+			}
+
+			register_setting( $menu_page, $menu_page, $args );
+		}
 
 	}
 

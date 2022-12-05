@@ -70,6 +70,7 @@ abstract class Field {
 
 		if (
 			'group' !== $config['type'] &&
+			'link' !== $config['type'] &&
 			! $config['repeatable'] &&
 			(
 				! $this->can_have_multiple_value() ||

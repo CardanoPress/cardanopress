@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "cardanopress/framework",
-            "version": "v1.2.0",
-            "version_normalized": "1.2.0.0",
+            "version": "v1.2.1",
+            "version_normalized": "1.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "9bd81cee49a9d579fd44e69ba41416ff96af37ba"
+                "reference": "70c0e800ff833683eb5d71e058d8dd681b84fdf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/9bd81cee49a9d579fd44e69ba41416ff96af37ba",
-                "reference": "9bd81cee49a9d579fd44e69ba41416ff96af37ba",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/70c0e800ff833683eb5d71e058d8dd681b84fdf1",
+                "reference": "70c0e800ff833683eb5d71e058d8dd681b84fdf1",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,7 @@
                 "themeplate/page": "^2.0",
                 "themeplate/settings": "^2.0"
             },
-            "time": "2022-06-13T03:34:15+00:00",
+            "time": "2022-12-05T06:16:49+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -54,7 +54,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v1.2.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v1.2.1"
             },
             "install-path": "../cardanopress/framework"
         },
@@ -892,17 +892,17 @@
         },
         {
             "name": "themeplate/core",
-            "version": "v2.1.0",
-            "version_normalized": "2.1.0.0",
+            "version": "v2.2.2",
+            "version_normalized": "2.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Core.git",
-                "reference": "0b074eba045f032a2038211bf64c26287a1edb86"
+                "reference": "c00e67bc1d85696b6ea06a9f136a371fb2be9d31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Core/zipball/0b074eba045f032a2038211bf64c26287a1edb86",
-                "reference": "0b074eba045f032a2038211bf64c26287a1edb86",
+                "url": "https://api.github.com/repos/ThemePlate/Core/zipball/c00e67bc1d85696b6ea06a9f136a371fb2be9d31",
+                "reference": "c00e67bc1d85696b6ea06a9f136a371fb2be9d31",
                 "shasum": ""
             },
             "require": {
@@ -912,7 +912,7 @@
             "require-dev": {
                 "themeplate/tester": "^2.0"
             },
-            "time": "2022-06-14T00:58:39+00:00",
+            "time": "2022-06-30T13:59:01+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -933,7 +933,7 @@
             "description": "ThemePlate core functions and helpers",
             "support": {
                 "issues": "https://github.com/ThemePlate/Core/issues",
-                "source": "https://github.com/ThemePlate/Core/tree/v2.1.0"
+                "source": "https://github.com/ThemePlate/Core/tree/v2.2.2"
             },
             "install-path": "../themeplate/core"
         },
@@ -1082,17 +1082,17 @@
         },
         {
             "name": "themeplate/settings",
-            "version": "v2.0.0",
-            "version_normalized": "2.0.0.0",
+            "version": "v2.1.1",
+            "version_normalized": "2.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Settings.git",
-                "reference": "544d61a6d51b46b7e8015004ae14035dfded0dd0"
+                "reference": "4e9d7e9ca327a61411352872fc6152eb6747b2c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Settings/zipball/544d61a6d51b46b7e8015004ae14035dfded0dd0",
-                "reference": "544d61a6d51b46b7e8015004ae14035dfded0dd0",
+                "url": "https://api.github.com/repos/ThemePlate/Settings/zipball/4e9d7e9ca327a61411352872fc6152eb6747b2c6",
+                "reference": "4e9d7e9ca327a61411352872fc6152eb6747b2c6",
                 "shasum": ""
             },
             "require": {
@@ -1102,7 +1102,7 @@
             "require-dev": {
                 "themeplate/tester": "^2.0"
             },
-            "time": "2022-06-09T13:39:04+00:00",
+            "time": "2022-07-02T02:40:52+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1123,7 +1123,7 @@
             "description": "ThemePlate custom option boxes",
             "support": {
                 "issues": "https://github.com/ThemePlate/Settings/issues",
-                "source": "https://github.com/ThemePlate/Settings/tree/v2.0.0"
+                "source": "https://github.com/ThemePlate/Settings/tree/v2.1.1"
             },
             "install-path": "../themeplate/settings"
         }

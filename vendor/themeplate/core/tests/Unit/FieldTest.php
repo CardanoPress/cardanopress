@@ -69,6 +69,7 @@ class FieldTest extends TestCase {
 			$this->assertIsString( $field->get_config( 'default' ) );
 		}
 	}
+
 	public function for_maybe_adjust_value(): array {
 		// phpcs:disable WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned
 		return array(

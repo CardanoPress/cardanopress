@@ -38,6 +38,22 @@
 		quicktags( qtSettings );
 	});
 
+	$( window ).on( 'load', function() {
+		if ( ! ( window.wp && wp.data && wp.data.select && wp.data.select( 'core/editor' ) ) ) {
+			return;
+		}
+
+		$( '.themeplate-wysiwyg' ).each( function() {
+			var fieldID = $( this ).attr( 'id' );
+			var editor = tinymce.get( fieldID );
+
+			window.setTimeout( function() {
+				editor.destroy();
+				tinymce.init( tinyMCEPreInit.mceInit[ fieldID ] );
+			}, 100 );
+		});
+	});
+
 	$( '.meta-box-sortables' ).on( 'sortstop', function( event, ui ) {
 		var $field = $( ui.item ).find( '.themeplate-wysiwyg' );
 

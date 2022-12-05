@@ -12,7 +12,7 @@ namespace ThemePlate\Core\Helper;
 class AssetsHelper {
 
 	public const LOADER_ACTION  = 'themeplate_assets_loader';
-	public const LOADER_VERSION = '2.1.0';
+	public const LOADER_VERSION = '2.2.2';
 
 
 	public static function setup_loader(): void {

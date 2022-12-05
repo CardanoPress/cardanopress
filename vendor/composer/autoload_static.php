@@ -395,6 +395,7 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         'ThemePlate\\Core\\Handler' => __DIR__ . '/..' . '/themeplate/core/src/Handler.php',
         'ThemePlate\\Core\\Helper\\AssetsHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/AssetsHelper.php',
         'ThemePlate\\Core\\Helper\\BoxHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/BoxHelper.php',
+        'ThemePlate\\Core\\Helper\\FieldsHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/FieldsHelper.php',
         'ThemePlate\\Core\\Helper\\FormHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/FormHelper.php',
         'ThemePlate\\Core\\Helper\\MainHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/MainHelper.php',
         'ThemePlate\\Core\\Helper\\MetaHelper' => __DIR__ . '/..' . '/themeplate/core/src/Helper/MetaHelper.php',

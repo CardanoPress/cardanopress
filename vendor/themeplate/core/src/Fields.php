@@ -9,6 +9,7 @@
 
 namespace ThemePlate\Core;
 
+use ThemePlate\Core\Helper\FieldsHelper;
 use ThemePlate\Core\Helper\FormHelper;
 use ThemePlate\Core\Helper\MetaHelper;
 
@@ -47,8 +48,7 @@ class Fields {
 
 			if ( 'group' === $field['type'] ) {
 				if ( array_key_exists( 'fields', $field ) && ! empty( $field['fields'] ) ) {
-					$group_fields    = $field['fields'];
-					$field['fields'] = $group_fields instanceof Fields ? $group_fields : new Fields( $group_fields );
+					$field['fields'] = FieldsHelper::group_fields( $field['fields'] );
 				} else {
 					continue;
 				}

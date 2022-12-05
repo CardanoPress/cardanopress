@@ -293,6 +293,7 @@ return array(
     'ThemePlate\\Core\\Handler' => $vendorDir . '/themeplate/core/src/Handler.php',
     'ThemePlate\\Core\\Helper\\AssetsHelper' => $vendorDir . '/themeplate/core/src/Helper/AssetsHelper.php',
     'ThemePlate\\Core\\Helper\\BoxHelper' => $vendorDir . '/themeplate/core/src/Helper/BoxHelper.php',
+    'ThemePlate\\Core\\Helper\\FieldsHelper' => $vendorDir . '/themeplate/core/src/Helper/FieldsHelper.php',
     'ThemePlate\\Core\\Helper\\FormHelper' => $vendorDir . '/themeplate/core/src/Helper/FormHelper.php',
     'ThemePlate\\Core\\Helper\\MainHelper' => $vendorDir . '/themeplate/core/src/Helper/MainHelper.php',
     'ThemePlate\\Core\\Helper\\MetaHelper' => $vendorDir . '/themeplate/core/src/Helper/MetaHelper.php',
