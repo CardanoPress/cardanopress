@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
+class ComposerStaticInit43abd444dc269d7b877cd24ee814e6ca
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -73,8 +73,8 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -229,6 +229,7 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
         'Monolog\\Formatter\\FluentdFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/FluentdFormatter.php',
         'Monolog\\Formatter\\FormatterInterface' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/FormatterInterface.php',
         'Monolog\\Formatter\\GelfMessageFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/GelfMessageFormatter.php',
+        'Monolog\\Formatter\\GoogleCloudLoggingFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/GoogleCloudLoggingFormatter.php',
         'Monolog\\Formatter\\HtmlFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/HtmlFormatter.php',
         'Monolog\\Formatter\\JsonFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/JsonFormatter.php',
         'Monolog\\Formatter\\LineFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/LineFormatter.php',
@@ -413,9 +414,9 @@ class ComposerStaticInit759a8162999066fda3fecf46fc0c902a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit759a8162999066fda3fecf46fc0c902a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit759a8162999066fda3fecf46fc0c902a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit759a8162999066fda3fecf46fc0c902a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit43abd444dc269d7b877cd24ee814e6ca::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit43abd444dc269d7b877cd24ee814e6ca::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit43abd444dc269d7b877cd24ee814e6ca::$classMap;
 
         }, null, ClassLoader::class);
     }

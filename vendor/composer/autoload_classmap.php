@@ -128,6 +128,7 @@ return array(
     'Monolog\\Formatter\\FluentdFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/FluentdFormatter.php',
     'Monolog\\Formatter\\FormatterInterface' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/FormatterInterface.php',
     'Monolog\\Formatter\\GelfMessageFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/GelfMessageFormatter.php',
+    'Monolog\\Formatter\\GoogleCloudLoggingFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/GoogleCloudLoggingFormatter.php',
     'Monolog\\Formatter\\HtmlFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/HtmlFormatter.php',
     'Monolog\\Formatter\\JsonFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/JsonFormatter.php',
     'Monolog\\Formatter\\LineFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/LineFormatter.php',
