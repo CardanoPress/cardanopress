@@ -2,18 +2,18 @@
 Contributors: pbwebdev
 Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, metamask, nami, eternl, ada
-Requires at least: 4.9
-Tested up to: 6.0.0
-Stable tag: 0.34.0
-Requires PHP: 7.2
-License: GPLv3
-License URI: https://www.gnu.org/licenses/licenses.html
+Requires at least: 5.8.0
+Tested up to: 6.1.1
+Stable tag: 1.0.0
+Requires PHP: 7.4
+License: GPL-2.0-only
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Integrate the Cardano blockchain with your WordPress website. Merging Web2 and Web3.
 
 == Description ==
 
-CardanoPress does the heavy lifting and integration to the Cardnao blockchain using the Blockfrost API, allowing you to interact with the blockchain via your favourite Web3 wallet.
+CardanoPress does the heavy lifting and integration to the Cardano blockchain using the Blockfrost API, allowing you to interact with the blockchain via your favourite Web3 wallet.
 
 We've done all the technical and hard work so you as a builder can integrate Cardano quickly and easily. Use our Bootstrap starter and child theme or use your favourite page builder such as Divi, WPBakery or Elementor with shortcodes.
 
@@ -113,7 +113,7 @@ This plugin does not collect or process any personal user data unless you expres
 
 You can follow our GitHub commits for full details on updates to the plugins.
 
-### 0.34.0 ###
+### 1.0.0 ###
 
 First official release with full support of 6 popular Cardano wallets and extensive testing with various projects using CardanoPress to build their websites.
 
