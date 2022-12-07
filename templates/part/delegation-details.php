@@ -20,7 +20,7 @@ if (empty($pool)) {
 ?>
 
 <h2>
-    <a href="<?php echo esc_attr($pool['homepage']); ?>" target="_blank" class="inline-flex items-center">
+    <a href="<?php echo esc_url($pool['homepage']); ?>" target="_blank" class="inline-flex items-center">
         <?php cardanoPress()->template('part/pool-image', compact('pool')); ?>
 
         <?php cardanoPress()->template('part/pool-name', compact('pool')); ?>
