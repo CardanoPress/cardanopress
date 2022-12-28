@@ -61,7 +61,7 @@ window.addEventListener('alpine:init', () => {
         totalAmount(inAdaValue = true) {
             const amount = ((this.payAmount * 100) * (this.quantity * 100)) / (100 * 100)
 
-            return inAdaValue ? amount : adaToLovelace(amount)
+            return inAdaValue ? amount.toFixed(1) : adaToLovelace(amount)
         },
 
         async syncBalance() {
@@ -105,7 +105,7 @@ window.addEventListener('alpine:init', () => {
             }
 
             this.isProcessing = true
-            const response = await handlePayment(this.lovelaceValue(), this.paymentAddress)
+            const response = await handlePayment(this.totalAmount(false), this.paymentAddress)
 
             removeNotice('payment')
 
