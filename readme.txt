@@ -3,7 +3,7 @@ Contributors: pbwebdev
 Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, metamask, nami, eternl, ada
 Requires at least: 4.9
-Tested up to: 6.0.0
+Tested up to: 6.1.1
 Stable tag: 0.34.0
 Requires PHP: 7.2
 License: GPLv3
@@ -22,20 +22,23 @@ We are supporting various wallets including:
 * Nami
 * Eternl
 * Typhon
-* GeoWallet
+* GeroWallet
 * Flint
 * Yoroi (to a point)
+* NuFi
+* Cardwallet
 
 The plugin is created by the team at [PB Web Development](https://pbwebdev.com).
 
 === Example Use Cases ===
 
-There are many  use cases that we have covered for projects that may wish to use the plugin from small DApp developers, NFT projects, stake pool operators and Initial Stake Pool Offering projects.
+There are many  use cases that we have covered for projects that may wish to use the plugin from small DApp developers, NFT projects, stake pool operators and Initial Stake Pool Offering (ISPO) projects.
 
-* Projects looking to provide access control to walled content based on delegation of a wallet, or NFTs that are within a users wallet. E.g, if user has a NFT with policy ID x, then assign the user permissions to access private content.
+* Members only content. Projects looking to provide access control to pay walled content based on delegation of a wallet, tokens or NFTs that are within a users wallet. E.g, if user has an NFT from a collection with policy ID x, then assign the user permissions to access private content.
 * Stake pool operators that want to build a quick and simple way to delegate to their stake pools.
 * Initial Stake Pool Offerings needing a delegation point and dashboard for rewards.
 * NFT projects looking for a spam controlled minting page.
+* Single sign on with using a wallet instead of using a username and password across WordPress websites
 
 
 == Video: Installation and first steps ==
@@ -58,21 +61,33 @@ View all of our documentation and resources on our [website](https://cardanopres
 
 This plugin requires your own standalone WordPress installation and access to the web server to add a line of code to your htaccess file.
 
-1. Find the plugin in the list at the backend and click to install it. Or, upload the ZIP file through the admin backend. Or, upload the unzipped tag-groups folder to the /wp-content/plugins/ directory.
+1. Installing the plugin
 
-2. Activate the plugin through the ‘Plugins’ menu in WordPress.
+Find the plugin in the list at the backend and click to install it. Or, upload the ZIP file through the admin backend. Or, upload the unzipped tag-groups folder to the /wp-content/plugins/ directory.
+
+2. Activate the plugin 
+
+Navigate to Plugins from the WordPress admin area and activate the CardanoPress plugin.
 
 The plugin will create the base pages for all that you need.
 
-For it to work, you will need to supply your [Blockfrost API](https://blockfrost.io/) key which can be obtained for free on their website for small projects.
+3. Sign up for a Blockfrost 
+
+CardanoPress is dependent on the Blockfrost API to communicate to the Cardano blockchain. You can get an API key for free at [Blockfrost API](https://blockfrost.io/).
+
+Obtain your key and paste it into the configuration screen of CardanoPress.
+
+4. Allow WASM file type to be executed from your server
 
 You will also need to allow for the WASM MIME type to be loaded on your server. This is the file that will load the integration between the wallets and the website. Without this file access enabled, the 'connect to wallet' and other blockchain interactions will not work.
 
-Open your htaccess file from your server and add this line of code to the top of the file.
+Open your .htaccess file from your server and add this line of code to the top of the file.
 
 > AddType application/wasm .wasm
 
 This will add the MIME type WASM and allow the loading of the Cardano Serialisation Library on your website.
+
+This may vary from server to server as not all use htaccess files or allow modifications to it.
 
 Once you've done this, you will be able to connect your WordPress website to the Cardano blockchain.
 
@@ -111,11 +126,103 @@ This plugin does not collect or process any personal user data unless you expres
 
 == Changelog ==
 
-You can follow our GitHub commits for full details on updates to the plugins.
+You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
 
-### 0.34.0 ###
+=== 0.40.1 ===
+Fix payment amount
 
-First official release with full support of 6 popular Cardano wallets and extensive testing with various projects using CardanoPress to build their websites.
+=== 0.40.0 ===
+Correctly escape all variables
+Update all dependencies
+
+=== 0.39.0 ===
+Sanitize $_POST variables
+Escape template outputs
+
+=== 0.38.0 ===
+Recommend plugins to install:
+User Role Editor
+User Access Manager
+
+=== 0.37.0 ===
+Correct counted asset unit quantity
+Bump version for the GuzzleHTTP
+
+=== 0.36.1 ===
+Handle edge cases where the user sets a Policy ID but misses to select an Additional Role to assign under the Asset Access settings box
+
+=== 0.36.0 ===
+Support for Cardwallet and NuFi
+Fix the display of calculated payment total
+Showing the wallet balance is now an opt-in action
+
+=== 0.35.1 ===
+Security update patch for guzzle 7.4.4
+GHSA-f2wf-25xc-69c9
+
+=== 0.35.0 ===
+Helpful field descriptions in the Settings
+Handy component-level shortcodes
+cardanopress_component_cardanopress
+cardanopress_component_pooldelegation
+cardanopress_component_paymentform
+cardanopress_component_splitform
+
+=== 0.34.0 ===
+Fully optional reCaptcha in the payments
+Copy value to clipboard notification
+Serve production built assets
+
+=== 0.33.0 ===
+Expose Blockfrost API endpoint for getting pool information
+Clear off the favorited handle if no longer in the wallet
+
+=== 0.32.0 ===
+Dynamically list the pages under the menu dropdown with their custom titles
+One more hook for the currently read asset cardanopress_associated_asset
+Minor code fixes and optimizations
+
+=== 0.31.0 ===
+General code improvements
+
+=== 0.30.0 ===
+Customizable notification messages and translation ready; via filter hooks
+-- cardanopress_ajax_messages
+-- cardanopress_script_messages
+
+=== 0.29.0 ===
+Optimize asset checks; less Blockfrost request
+Secure WP accounts creation from wallets; hashed passwords
+Provide action hooks during login
+-- cardanopress_wallet_status_checks
+-- cardanopress_associated_assets
+-- cardanopress_account_history
+
+=== 0.28.0 ===
+Nag a notice for missing Blockfrost API Token
+Support ADA Handle https://adahandle.com/
+
+=== 0.27.0 ===
+Tie WP user to stake address
+Load back the extra scripts normally
+Skip nonce check for non-authenticated actions
+Move shared logs to <WP_CONTENT_DIR>/cardanopress-logs
+
+=== 0.26.0 ===
+Update scripts loading order
+Handle an array image metadata field
+Add the settings link in the plugin action row
+
+=== 0.25.0 ===
+Better error handling; mainly due to incomplete plugin setup
+Blockfrost API key: The connect action not working properly
+Payment address: The payment page does not fully load
+Default network to mainnet; API key field now required to set
+Pretty print notices instead of random JS error strings
+
+=== 0.24.0 ===
+Bug fixes and improvements (also testing discord integration).
+
 
 
 == Upgrade Notice ==
