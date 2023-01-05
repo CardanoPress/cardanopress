@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: CardanoPress
+ * Plugin Name: CardanoPress-CHANGE-ME
  * Plugin URI:  https://github.com/CardanoPress/cardanopress
  * Author:      CardanoPress
  * Author URI:  https://cardanopress.io
