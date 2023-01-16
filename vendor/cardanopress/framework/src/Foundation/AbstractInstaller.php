@@ -78,7 +78,7 @@ abstract class AbstractInstaller extends SharedBase implements InstallerInterfac
 
         $plugin  = sprintf(
             '<a href="%1$s" target="_blank">core plugin</a>',
-            'https://github.com/CardanoPress/cardanopress'
+            'https://wordpress.org/plugins/cardanopress'
         );
         $message = sprintf(
             '<strong>%1$s</strong> requires the %2$s for its full functionality.',

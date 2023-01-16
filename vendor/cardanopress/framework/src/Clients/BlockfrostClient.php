@@ -27,13 +27,17 @@ class BlockfrostClient
     public const ENDPOINT = [
         'mainnet' => 'https://cardano-mainnet.blockfrost.io/api/v0/',
         'testnet' => 'https://cardano-testnet.blockfrost.io/api/v0/',
+        'preprod' => 'https://cardano-preprod.blockfrost.io/api/v0/',
+        'preview' => 'https://cardano-preview.blockfrost.io/api/v0/',
     ];
 
     /**
      * Create a new BlockfrostClient instance
      */
-    public function __construct(string $project_id, string $network = 'mainnet')
+    public function __construct(string $project_id)
     {
+        $network = substr($project_id, 0, 7);
+
         if (! array_key_exists($network, self::ENDPOINT)) {
             $network = 'mainnet';
         }

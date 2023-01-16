@@ -21,6 +21,10 @@ abstract class AbstractApplication extends SharedBase implements ApplicationInte
 
     public function __construct(string $pluginFile)
     {
+        if (! function_exists('get_plugin_data')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
         $this->pluginFile = $pluginFile;
         $this->data = get_plugin_data($pluginFile);
         $this->logger = new Logger('cardanopress-logs');

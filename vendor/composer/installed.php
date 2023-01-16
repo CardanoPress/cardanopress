@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'cardanopress/cardanopress',
-        'pretty_version' => 'dev-trunk',
-        'version' => 'dev-trunk',
-        'reference' => '3f1c02af131cefceebc7b26b3f5aaa5d9fbd2757',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '1b0105b0f9a79c968c9de3828b5950bb32068891',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,18 +11,18 @@
     ),
     'versions' => array(
         'cardanopress/cardanopress' => array(
-            'pretty_version' => 'dev-trunk',
-            'version' => 'dev-trunk',
-            'reference' => '3f1c02af131cefceebc7b26b3f5aaa5d9fbd2757',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '1b0105b0f9a79c968c9de3828b5950bb32068891',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'cardanopress/framework' => array(
-            'pretty_version' => 'v1.2.1',
-            'version' => '1.2.1.0',
-            'reference' => '70c0e800ff833683eb5d71e058d8dd681b84fdf1',
+            'pretty_version' => 'v1.3.0',
+            'version' => '1.3.0.0',
+            'reference' => 'd8ccc9c77e9ad2e8cfd9956cc97e1ed8ecacbef6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../cardanopress/framework',
             'aliases' => array(),

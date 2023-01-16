@@ -64,6 +64,7 @@ class Admin extends AbstractAdmin
                         ],
                         'testnet' => [
                             'title' => __('Testnet', 'cardanopress'),
+                            'description' => __('For networks preview and preprod', 'cardanopress'),
                             'type' => 'text',
                         ],
                     ],
@@ -122,6 +123,7 @@ class Admin extends AbstractAdmin
                         ],
                         'testnet' => [
                             'title' => __('Testnet', 'cardanopress'),
+                            'description' => __('For networks preview and preprod', 'cardanopress'),
                             'type' => 'text',
                         ],
                     ],
@@ -161,6 +163,7 @@ class Admin extends AbstractAdmin
                         ],
                         'testnet' => [
                             'title' => __('Testnet', 'cardanopress'),
+                            'description' => __('For networks preview and preprod', 'cardanopress'),
                             'type' => 'text',
                         ],
                     ],

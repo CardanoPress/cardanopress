@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "cardanopress/framework",
-            "version": "v1.2.1",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "70c0e800ff833683eb5d71e058d8dd681b84fdf1"
+                "reference": "d8ccc9c77e9ad2e8cfd9956cc97e1ed8ecacbef6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/70c0e800ff833683eb5d71e058d8dd681b84fdf1",
-                "reference": "70c0e800ff833683eb5d71e058d8dd681b84fdf1",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/d8ccc9c77e9ad2e8cfd9956cc97e1ed8ecacbef6",
+                "reference": "d8ccc9c77e9ad2e8cfd9956cc97e1ed8ecacbef6",
                 "shasum": ""
             },
             "require": {
@@ -57,9 +57,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v1.2.1"
+                "source": "https://github.com/CardanoPress/framework/tree/v1.3.0"
             },
-            "time": "2022-12-05T06:16:49+00:00"
+            "time": "2023-01-16T08:08:25+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
