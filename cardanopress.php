@@ -10,6 +10,8 @@
  * License:     GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
+ * Text Domain: cardanopress
+ *
  * @package ThemePlate
  * @since   0.1.0
  */
