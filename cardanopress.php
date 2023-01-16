@@ -40,10 +40,6 @@ function cardanoPress(): Application
     static $application;
 
     if (null === $application) {
-        if (! function_exists('get_plugins')) {
-            require_once ABSPATH . 'wp-admin/includes/plugin.php';
-        }
-
         $application = new Application(CARDANOPRESS_FILE);
     }
 
