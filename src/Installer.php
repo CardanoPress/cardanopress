@@ -27,6 +27,7 @@ class Installer extends AbstractInstaller
 
         add_action('plugins_loaded', [$this, 'loaded'], -1);
         add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
+        add_action('admin_notices', [$this, 'noticePluginReview']);
         add_action(self::DATA_PREFIX . 'upgrading', [$this, 'doUpgrade'], 10, 2);
         add_filter('plugin_action_links_' . $this->pluginBaseName, [$this, 'mergeSettingsLink']);
     }
@@ -52,6 +53,45 @@ class Installer extends AbstractInstaller
                         'target' => [],
                     ],
                 ]); ?>
+            </p>
+        </div>
+        <?php
+    }
+
+    public function noticePluginReview(): void
+    {
+        ?>
+        <div class="notice notice-info">
+            <p>
+                Are you enjoying using <strong>CardanoPress</strong>?
+                <?php echo wp_kses(
+                    sprintf(
+                        '<a href="%1$s" target="_blank">%2$s</a>',
+                        'https://wordpress.org/support/plugin/cardanopress/reviews/',
+                        __('Please leave a rating and review', 'cardanopress'),
+                    ),
+                    [
+                        'a' => [
+                            'href' => [],
+                            'target' => [],
+                        ],
+                    ]
+                ); ?>
+                or
+                <?php echo wp_kses(
+                    sprintf(
+                        '<a href="%1$s" target="_blank">%2$s</a>',
+                        'https://cardanopress.io/community/',
+                        __('comment on the forums to let us know how we can improve', 'cardanopress'),
+                    ),
+                    [
+                        'a' => [
+                            'href' => [],
+                            'target' => [],
+                        ],
+                    ]
+                ); ?>
+                .
             </p>
         </div>
         <?php
