@@ -28,6 +28,8 @@ class Installer extends AbstractInstaller
         add_action('plugins_loaded', [$this, 'loaded'], -1);
         add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
         add_action('admin_notices', [$this, 'noticePluginReview']);
+        add_action('admin_footer', [$this, 'dismissNoticeReviewScript']);
+        add_action('wp_ajax_cardanopress_dismiss_review', [$this, 'dismissNoticeReviewAction']);
         add_action(self::DATA_PREFIX . 'upgrading', [$this, 'doUpgrade'], 10, 2);
         add_filter('plugin_action_links_' . $this->pluginBaseName, [$this, 'mergeSettingsLink']);
     }
@@ -60,8 +62,12 @@ class Installer extends AbstractInstaller
 
     public function noticePluginReview(): void
     {
+        if (! empty($_COOKIE['cardanopress_dismiss_review'])) {
+            return;
+        }
+
         ?>
-        <div class="notice notice-info">
+        <div class="notice notice-info is-dismissible" id="cardanopress_notice_review">
             <p>
                 Are you enjoying using <strong>CardanoPress</strong>?
                 <?php echo wp_kses(
@@ -95,6 +101,43 @@ class Installer extends AbstractInstaller
             </p>
         </div>
         <?php
+    }
+
+    public function dismissNoticeReviewScript()
+    {
+        if (wp_cache_get('cardanopress_dismiss_review')) {
+            return;
+        }
+
+        ob_start();
+        ?>
+
+        <script id="cardanopress-notice-js" type="text/javascript">
+            jQuery(document).on('click', '#cardanopress_notice_review .notice-dismiss', function() {
+                jQuery.ajax({
+                    type: 'POST',
+                    url: ajaxurl,
+                    data: {
+                        action: 'cardanopress_dismiss_review',
+                    }
+                })
+            })
+        </script>
+
+        <?php
+        echo ob_get_clean();
+
+        wp_cache_set('cardanopress_dismiss_review', true);
+    }
+
+    public function dismissNoticeReviewAction()
+    {
+        $expire = time() + HOUR_IN_SECONDS;
+        $secure = is_ssl();
+
+        setcookie('cardanopress_dismiss_review', true, $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
+
+        wp_die();
     }
 
     public function doUpgrade(string $currentVersion, string $appVersion): void
