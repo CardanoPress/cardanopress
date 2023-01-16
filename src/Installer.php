@@ -48,7 +48,13 @@ class Installer extends AbstractInstaller
         ?>
         <div class="notice notice-info">
             <p>
-                <strong>CardanoPress</strong> requires Blockfrost API Token.
+                <?php echo wp_kses(
+                    sprintf(
+                        __( '%1$s requires Blockfrost API Token.', 'cardanopress' ),
+                        '<strong>' . $this->application->getData('Name') . '</strong>',
+                    ),
+                    'strong'
+                ); ?>
                 <?php echo wp_kses($this->getSettingsLink(__('Please set here', 'cardanopress'), '_blank'), [
                     'a' => [
                         'href' => [],
@@ -69,26 +75,23 @@ class Installer extends AbstractInstaller
         ?>
         <div class="notice notice-info is-dismissible" id="cardanopress_notice_review">
             <p>
-                Are you enjoying using <strong>CardanoPress</strong>?
                 <?php echo wp_kses(
                     sprintf(
-                        '<a href="%1$s" target="_blank">%2$s</a>',
+                        __( 'Are you enjoying using %1$s?', 'cardanopress' ),
+                        '<strong>' . $this->application->getData('Name') . '</strong>',
+                    ),
+                    'strong'
+                ); ?>
+                <?php echo wp_kses(
+                    sprintf(
+                        sprintf(
+                            __('Please %1$s or %1$s to let us know how we can improve.', 'cardanopress'),
+                            '<a href="%s" target="_blank">%s</a>',
+                        ),
                         'https://wordpress.org/support/plugin/cardanopress/reviews/',
-                        __('Please leave a rating and review', 'cardanopress'),
-                    ),
-                    [
-                        'a' => [
-                            'href' => [],
-                            'target' => [],
-                        ],
-                    ]
-                ); ?>
-                or
-                <?php echo wp_kses(
-                    sprintf(
-                        '<a href="%1$s" target="_blank">%2$s</a>',
+                        __('leave a rating and review', 'cardanopress'),
                         'https://cardanopress.io/community/',
-                        __('comment on the forums to let us know how we can improve', 'cardanopress'),
+                        __('comment on the forums', 'cardanopress'),
                     ),
                     [
                         'a' => [
@@ -97,7 +100,6 @@ class Installer extends AbstractInstaller
                         ],
                     ]
                 ); ?>
-                .
             </p>
         </div>
         <?php
@@ -145,7 +147,7 @@ class Installer extends AbstractInstaller
         if ('' === $currentVersion) {
             $path = plugin_dir_path($this->application->getPluginFile());
 
-            $this->log('Creating initial pages');
+            $this->log(__('Creating initial pages', 'cardanopress'));
             (new Templates($path . 'templates'))->createPages();
         } elseif (version_compare($currentVersion, '0.29.0', '<')) {
             $this->updateOldPasswords();
@@ -154,14 +156,14 @@ class Installer extends AbstractInstaller
 
     public function updateOldPasswords()
     {
-        $this->log('Checking for old user passwords');
+        $this->log(__('Checking for old user passwords', 'cardanopress'));
 
         foreach (get_users() as $user) {
             $userProfile = new Profile($user);
             $userId = $userProfile->getData('ID');
 
             if (! $userProfile->isConnected()) {
-                $this->log('Skipped user ' . $userId);
+                $this->log(sprintf(__('Skipped user %s', 'cardanopress'), $userId));
                 continue;
             }
 
@@ -173,9 +175,9 @@ class Installer extends AbstractInstaller
                 wp_check_password($stakeAddress, $currentPassword)
             ) {
                 wp_set_password(wp_hash_password($stakeAddress), $userId);
-                $this->log('Updated user ' . $userId);
+                $this->log(sprintf(__('Updated user %s', 'cardanopress'), $userId));
             } else {
-                $this->log('Checked user ' . $userId);
+                $this->log(sprintf(__('Checked user %s', 'cardanopress'), $userId));
             }
         }
     }
