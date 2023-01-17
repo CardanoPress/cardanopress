@@ -13,7 +13,7 @@ Integrate the Cardano blockchain with your WordPress website. Merging Web2 and W
 
 == Description ==
 
-CardanoPress does the heavy lifting and integration to the Cardnao blockchain using the Blockfrost API, allowing you to interact with the blockchain via your favourite Web3 wallet.
+CardanoPress does the heavy lifting and integration to the Cardano blockchain using the Blockfrost API, allowing you to interact with the blockchain via your favourite Web3 wallet.
 
 We've done all the technical and hard work so you as a builder can integrate Cardano quickly and easily. Use our Bootstrap starter and child theme or use your favourite page builder such as Divi, WPBakery or Elementor with shortcodes.
 
@@ -132,6 +132,14 @@ This plugin does not collect or process any personal user data unless you expres
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.1.0 =
+Update for new testnet; preview and preprod
+Hint as a translation-ready plugin
+Add info notice for a review
+
+= 1.0.0 =
+First stable release (exact same version as 0.40.1)
 
 = 0.40.1 =
 Fix payment amount
