@@ -50,7 +50,8 @@ class Installer extends AbstractInstaller
             <p>
                 <?php echo wp_kses(
                     sprintf(
-                        __( '%1$s requires Blockfrost API Token.', 'cardanopress' ),
+                        /* translators: %s: plugin name */
+                        __('%s requires Blockfrost API Token.', 'cardanopress'),
                         '<strong>' . $this->application->getData('Name') . '</strong>',
                     ),
                     'strong'
@@ -77,7 +78,8 @@ class Installer extends AbstractInstaller
             <p>
                 <?php echo wp_kses(
                     sprintf(
-                        __( 'Are you enjoying using %1$s?', 'cardanopress' ),
+                        /* translators: %s: plugin name */
+                        __('Are you enjoying using %s?', 'cardanopress'),
                         '<strong>' . $this->application->getData('Name') . '</strong>',
                     ),
                     'strong'
@@ -85,6 +87,7 @@ class Installer extends AbstractInstaller
                 <?php echo wp_kses(
                     sprintf(
                         sprintf(
+                            /* translators: %s: action message */
                             __('Please %1$s or %1$s to let us know how we can improve.', 'cardanopress'),
                             '<a href="%s" target="_blank">%s</a>',
                         ),
@@ -120,7 +123,7 @@ class Installer extends AbstractInstaller
                     type: 'POST',
                     url: ajaxurl,
                     data: {
-                        action: 'cardanopress_dismiss_review',
+                        action: 'cardanopress_dismiss_review'
                     }
                 })
             })
@@ -163,6 +166,7 @@ class Installer extends AbstractInstaller
             $userId = $userProfile->getData('ID');
 
             if (! $userProfile->isConnected()) {
+                /* translators: %s: ID */
                 $this->log(sprintf(__('Skipped user %s', 'cardanopress'), $userId));
                 continue;
             }
@@ -175,8 +179,10 @@ class Installer extends AbstractInstaller
                 wp_check_password($stakeAddress, $currentPassword)
             ) {
                 wp_set_password(wp_hash_password($stakeAddress), $userId);
+                /* translators: %s: ID */
                 $this->log(sprintf(__('Updated user %s', 'cardanopress'), $userId));
             } else {
+                /* translators: %s: ID */
                 $this->log(sprintf(__('Checked user %s', 'cardanopress'), $userId));
             }
         }

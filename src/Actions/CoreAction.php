@@ -47,12 +47,15 @@ class CoreAction implements HookInterface
                 'clipboardCopy' => __('Successfully copied', 'cardanopress'),
             ],
             'ajax' => [
+                /* translators: %s: connected username */
                 'welcome' => __('Welcome %s', 'cardanopress'),
                 'connected' => __('Successfully connected', 'cardanopress'),
                 'walletSynced' => __('Successfully synced', 'cardanopress'),
                 'handleSaved' => __('Successfully saved', 'cardanopress'),
+                /* translators: %s: transaction action */
                 'successfulTransaction' => __('Successful %s', 'cardanopress'),
                 'somethingWrong' => __('Something is wrong. Please try again', 'cardanopress'),
+                /* translators: %s: cardano environment */
                 'unsupportedNetwork' => __('Unsupported network %s', 'cardanopress'),
                 'blockfrostError' => __('Blockfrost API Error. Please try again', 'cardanopress'),
                 'notPermitted' => __('You don\'t have permission to do this.', 'cardanopress'),

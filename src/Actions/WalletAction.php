@@ -136,10 +136,11 @@ class WalletAction implements HookInterface
             $userProfile->unsetUserAuth();
         }
 
-        $message = $shouldReload ? 'Bye' : 'Hello';
+        $message = $shouldReload ? __('Bye', 'cardanopress') : __('Hello', 'cardanopress');
 
         wp_send_json_success([
-            'message' => sprintf(__('%s %s', 'cardanopress'), $message, $userProfile->getData('user_login')),
+            /* translators: %s: message %s: username */
+            'message' => sprintf(__('%1$s %2$s', 'cardanopress'), $message, $userProfile->getData('user_login')),
             'reload' => $shouldReload,
         ]);
     }
