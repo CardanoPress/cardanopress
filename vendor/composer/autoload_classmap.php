@@ -6,6 +6,11 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Automattic\\Jetpack\\Autoloader\\AutoloadFileWriter' => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadFileWriter.php',
+    'Automattic\\Jetpack\\Autoloader\\AutoloadGenerator' => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadGenerator.php',
+    'Automattic\\Jetpack\\Autoloader\\AutoloadProcessor' => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadProcessor.php',
+    'Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin' => $vendorDir . '/automattic/jetpack-autoloader/src/CustomAutoloaderPlugin.php',
+    'Automattic\\Jetpack\\Autoloader\\ManifestGenerator' => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php',
     'CardanoPress\\Clients\\BlockfrostClient' => $vendorDir . '/cardanopress/framework/src/Clients/BlockfrostClient.php',
     'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizer' => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/BodySummarizer.php',
     'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizerInterface' => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/BodySummarizerInterface.php',

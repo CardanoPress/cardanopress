@@ -20,6 +20,10 @@ class ComposerStaticInit6fc5616a9192b0ebd5fceaf8503e8031
             'CardanoPress\\Dependencies\\' => 26,
             'CardanoPress\\' => 13,
         ),
+        'A' => 
+        array (
+            'Automattic\\Jetpack\\Autoloader\\' => 30,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -35,9 +39,18 @@ class ComposerStaticInit6fc5616a9192b0ebd5fceaf8503e8031
         array (
             0 => __DIR__ . '/..' . '/cardanopress/framework/src',
         ),
+        'Automattic\\Jetpack\\Autoloader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src',
+        ),
     );
 
     public static $classMap = array (
+        'Automattic\\Jetpack\\Autoloader\\AutoloadFileWriter' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/AutoloadFileWriter.php',
+        'Automattic\\Jetpack\\Autoloader\\AutoloadGenerator' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/AutoloadGenerator.php',
+        'Automattic\\Jetpack\\Autoloader\\AutoloadProcessor' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/AutoloadProcessor.php',
+        'Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/CustomAutoloaderPlugin.php',
+        'Automattic\\Jetpack\\Autoloader\\ManifestGenerator' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/ManifestGenerator.php',
         'CardanoPress\\Clients\\BlockfrostClient' => __DIR__ . '/..' . '/cardanopress/framework/src/Clients/BlockfrostClient.php',
         'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizer' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/GuzzleHttp/BodySummarizer.php',
         'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizerInterface' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/GuzzleHttp/BodySummarizerInterface.php',

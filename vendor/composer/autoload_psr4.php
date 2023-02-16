@@ -9,4 +9,5 @@ return array(
     'PBWebDev\\CardanoPress\\' => array($baseDir . '/src'),
     'CardanoPress\\Dependencies\\' => array($vendorDir . '/cardanopress/framework/dependencies'),
     'CardanoPress\\' => array($vendorDir . '/cardanopress/framework/src'),
+    'Automattic\\Jetpack\\Autoloader\\' => array($vendorDir . '/automattic/jetpack-autoloader/src'),
 );

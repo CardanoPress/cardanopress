@@ -1,6 +1,60 @@
 {
     "packages": [
         {
+            "name": "automattic/jetpack-autoloader",
+            "version": "v2.11.15",
+            "version_normalized": "2.11.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Automattic/jetpack-autoloader.git",
+                "reference": "10819bc78006a701e7d1af1ce7b36bd699b942f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/10819bc78006a701e7d1af1ce7b36bd699b942f2",
+                "reference": "10819bc78006a701e7d1af1ce7b36bd699b942f2",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1 || ^2.0"
+            },
+            "require-dev": {
+                "automattic/jetpack-changelogger": "^3.3.1",
+                "yoast/phpunit-polyfills": "1.0.4"
+            },
+            "time": "2023-01-11T16:00:24+00:00",
+            "type": "composer-plugin",
+            "extra": {
+                "autotagger": true,
+                "class": "Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin",
+                "mirror-repo": "Automattic/jetpack-autoloader",
+                "changelogger": {
+                    "link-template": "https://github.com/Automattic/jetpack-autoloader/compare/v${old}...v${new}"
+                },
+                "branch-alias": {
+                    "dev-trunk": "2.11.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Automattic\\Jetpack\\Autoloader\\": "src"
+                },
+                "classmap": [
+                    "src/AutoloadGenerator.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Creates a custom autoloader for a plugin or theme.",
+            "support": {
+                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v2.11.15"
+            },
+            "install-path": "../automattic/jetpack-autoloader"
+        },
+        {
             "name": "cardanopress/framework",
             "version": "dev-edge",
             "version_normalized": "dev-edge",

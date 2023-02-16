@@ -33,7 +33,7 @@ if (! defined('CARDANOPRESS_FILE')) {
 }
 
 // Load the main plugin class
-require_once plugin_dir_path(CARDANOPRESS_FILE) . 'vendor/autoload.php';
+require_once plugin_dir_path(CARDANOPRESS_FILE) . 'vendor/autoload_packages.php';
 
 function cardanoPress(): Application
 {

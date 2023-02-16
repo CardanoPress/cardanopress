@@ -21,7 +21,8 @@
   "config": {
     "optimize-autoloader": true,
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "automattic/jetpack-autoloader": true
     }
   },
   "minimum-stability": "stable",
@@ -30,6 +31,7 @@
     "php": "^7.4|^8.0",
     "ext-json": "*",
     "ext-ctype": "*",
+    "automattic/jetpack-autoloader": "^2.11",
     "cardanopress/framework": "dev-edge"
   },
   "autoload": {
