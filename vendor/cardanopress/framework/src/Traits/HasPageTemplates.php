@@ -64,7 +64,7 @@ trait HasPageTemplates
     protected function getLoaderFile(): string
     {
         if (is_page_template()) {
-            return get_page_template_slug();
+            return get_page_template();
         }
 
         return '';

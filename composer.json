@@ -30,26 +30,11 @@
     "php": "^7.4|^8.0",
     "ext-json": "*",
     "ext-ctype": "*",
-    "cardanopress/framework": "^1.0"
-  },
-  "require-dev": {
-    "roave/security-advisories": "dev-latest",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-    "wp-coding-standards/wpcs": "^2.2",
-    "squizlabs/php_codesniffer": "^3.5",
-    "phpcompatibility/phpcompatibility-wp": "^2.1",
-    "phpunit/phpunit": "^9.5",
-    "phpstan/phpstan": "^1.0",
-    "szepeviktor/phpstan-wordpress": "^1.0"
+    "cardanopress/framework": "dev-edge"
   },
   "autoload": {
     "psr-4": {
       "PBWebDev\\CardanoPress\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests/"
     }
   },
   "scripts": {

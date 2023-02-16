@@ -28,4 +28,9 @@ class NumberHelper
 
         return round($number, 2) . $units[$i];
     }
+
+    public static function toUnixTimestamp(int $epoch): int
+    {
+        return $epoch * 432000 + 1506203091;
+    }
 }

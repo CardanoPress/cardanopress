@@ -7,8 +7,8 @@
 
 namespace CardanoPress\Traits;
 
-use ThemePlate\Core\Repository;
-use ThemePlate\Core\Config;
+use CardanoPress\Dependencies\ThemePlate\Core\Repository;
+use CardanoPress\Dependencies\ThemePlate\Core\Config;
 
 trait HasData
 {

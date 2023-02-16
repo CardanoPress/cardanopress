@@ -17,4 +17,20 @@ class WalletHelper
     {
         return 0 === strpos($address, 'stake1') ? 'mainnet' : 'testnet';
     }
+
+    public static function getCardanoscanLink(string $network, string $endpoint): string
+    {
+        $base = [
+            'mainnet' => 'https://cardanoscan.io/',
+            'testnet' => 'https://testnet.cardanoscan.io/',
+        ];
+
+        $network = strtolower($network);
+
+        if (! in_array($network, array_keys($base), true)) {
+            $network = 'mainnet';
+        }
+
+        return $base[$network] . $endpoint;
+    }
 }

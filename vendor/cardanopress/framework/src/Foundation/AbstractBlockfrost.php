@@ -20,7 +20,7 @@ abstract class AbstractBlockfrost extends SharedBase
     public function __construct(string $queryNetwork)
     {
         $projectId = $this->getProjectId($queryNetwork);
-        $this->client = new BlockfrostClient($projectId, $queryNetwork);
+        $this->client = new BlockfrostClient($projectId);
 
         $this->initialize(); // Set logger here
     }

@@ -7,15 +7,18 @@
 
 namespace CardanoPress\Foundation;
 
+use CardanoPress\Dependencies\ThemePlate\Enqueue\CustomData;
+use CardanoPress\Dependencies\ThemePlate\Enqueue\Dynamic;
 use CardanoPress\Interfaces\HookInterface;
 use CardanoPress\Interfaces\ManifestInterface;
 use CardanoPress\SharedBase;
-use ThemePlate\Enqueue;
 
 abstract class AbstractManifest extends SharedBase implements ManifestInterface, HookInterface
 {
     protected string $path;
     protected string $version;
+    protected CustomData $data;
+    protected Dynamic $dynamic;
 
     public const HANDLE_PREFIX = '';
 
@@ -23,6 +26,8 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
     {
         $this->path = trailingslashit($path);
         $this->version = $version;
+        $this->data = new CustomData();
+        $this->dynamic = new Dynamic();
 
         $this->initialize();
     }
@@ -50,7 +55,7 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
 
     public function setupHooks(): void
     {
-        Enqueue::init();
+        add_action('wp_enqueue_scripts', [$this->data, 'action'], PHP_INT_MAX);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
     }
 
@@ -72,16 +77,18 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
 
             $func(static::HANDLE_PREFIX . $parts[0], $base . $asset, $deps, $this->version, $arg);
         }
+
+        $this->dynamic->action();
     }
 
     public function enqueueScript(string $handle): void
     {
-        Enqueue::script($handle);
+        $this->dynamic->script($handle);
     }
 
     public function enqueueStyle(string $handle): void
     {
-        Enqueue::style($handle);
+        $this->dynamic->style($handle);
     }
 
     public function getPath(): string

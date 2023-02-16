@@ -7,11 +7,11 @@
 
 namespace CardanoPress\Foundation;
 
+use CardanoPress\Dependencies\ThemePlate\Logger;
 use CardanoPress\Interfaces\ApplicationInterface;
 use CardanoPress\Interfaces\HookInterface;
 use CardanoPress\SharedBase;
-use Monolog\Logger as MonoLogger;
-use ThemePlate\Logger;
+use Psr\Log\LoggerInterface;
 
 abstract class AbstractApplication extends SharedBase implements ApplicationInterface, HookInterface
 {
@@ -42,7 +42,7 @@ abstract class AbstractApplication extends SharedBase implements ApplicationInte
         return $this->pluginFile;
     }
 
-    public function logger(string $channel): MonoLogger
+    public function logger(string $channel): LoggerInterface
     {
         return $this->logger->channel($channel);
     }

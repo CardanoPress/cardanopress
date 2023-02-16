@@ -7,15 +7,15 @@
 
 namespace CardanoPress\Clients;
 
+use CardanoPress\Dependencies\GuzzleHttp\Client;
+use CardanoPress\Dependencies\GuzzleHttp\Exception\ConnectException;
+use CardanoPress\Dependencies\GuzzleHttp\Exception\GuzzleException;
+use CardanoPress\Dependencies\GuzzleHttp\Exception\RequestException;
+use CardanoPress\Dependencies\GuzzleHttp\HandlerStack;
+use CardanoPress\Dependencies\GuzzleHttp\Middleware;
+use CardanoPress\Dependencies\GuzzleHttp\Psr7\Request;
+use CardanoPress\Dependencies\GuzzleHttp\Psr7\Response;
 use Closure;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use JsonException;
 
 class BlockfrostClient
@@ -111,6 +111,13 @@ class BlockfrostClient
 
             $value['status_code'] = $response->getStatusCode();
             $value['data'] = json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+
+            if (isset($value['data']['status_code'], $value['data']['error'], $value['data']['message'])) {
+                $value['status_code'] = $value['data']['status_code'];
+
+                $value['error'] = $value['data'];
+                $value['data']  = [];
+            }
         } catch (RequestException $error) {
             $response = $error->getResponse();
 
