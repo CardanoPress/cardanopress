@@ -7,17 +7,20 @@
 
 namespace PBWebDev\CardanoPress;
 
+use CardanoPress\Dependencies\ThemePlate\Enqueue\CustomData;
 use CardanoPress\Foundation\AbstractManifest;
 
 class Manifest extends AbstractManifest
 {
     protected Application $application;
+    private bool $legacy_loaded;
 
     public const HANDLE_PREFIX = 'cardanopress-';
 
     public function initialize(): void
     {
         $this->application = Application::getInstance();
+        $this->legacy_loaded = ! (isset($this->data) && $this->data instanceof CustomData);
     }
 
     public function setupHooks(): void
@@ -34,13 +37,19 @@ class Manifest extends AbstractManifest
     {
         wp_enqueue_style(self::HANDLE_PREFIX . 'style');
         wp_enqueue_script(self::HANDLE_PREFIX . 'script');
-        wp_script_add_data(self::HANDLE_PREFIX . 'script', 'defer', true);
         wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
         wp_register_script(
             self::HANDLE_PREFIX . 'recaptcha',
             'https://www.google.com/recaptcha/api.js?onload=cardanoPressRecaptchaCallback'
         );
-        wp_script_add_data(self::HANDLE_PREFIX . 'recaptcha', 'defer', true);
+
+        if ($this->legacy_loaded) {
+            wp_script_add_data(self::HANDLE_PREFIX . 'script', 'defer', true);
+            wp_script_add_data(self::HANDLE_PREFIX . 'recaptcha', 'defer', true);
+        } else {
+            $this->data->add('script', self::HANDLE_PREFIX . 'script', array('defer' => true));
+            $this->data->add('script', self::HANDLE_PREFIX . 'recaptcha', array('defer' => true));
+        }
 
         $data = [
             'ajaxUrl' => admin_url('admin-ajax.php'),
