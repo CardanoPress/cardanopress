@@ -14,6 +14,7 @@ namespace CardanoPress\Dependencies\Monolog\Handler;
 use CardanoPress\Dependencies\Monolog\Formatter\FormatterInterface;
 use CardanoPress\Dependencies\Monolog\Formatter\LineFormatter;
 use CardanoPress\Dependencies\Monolog\Utils;
+use CardanoPress\Dependencies\Monolog\Logger;
 
 use function count;
 use function headers_list;
@@ -177,7 +178,7 @@ class BrowserConsoleHandler extends AbstractProcessingHandler
             $extra = static::dump('Extra', $record['extra']);
 
             if (empty($context) && empty($extra)) {
-                $script[] = static::call_array('log', static::handleStyles($record['formatted']));
+                $script[] = static::call_array(static::getConsoleMethodForLevel($record['level']), static::handleStyles($record['formatted']));
             } else {
                 $script = array_merge(
                     $script,
@@ -190,6 +191,20 @@ class BrowserConsoleHandler extends AbstractProcessingHandler
         }
 
         return "(function (c) {if (c && c.groupCollapsed) {\n" . implode("\n", $script) . "\n}})(console);";
+    }
+
+    private static function getConsoleMethodForLevel(int $level): string
+    {
+        return [
+            Logger::DEBUG => 'debug',
+            Logger::INFO => 'info',
+            Logger::NOTICE => 'info',
+            Logger::WARNING => 'warn',
+            Logger::ERROR => 'error',
+            Logger::CRITICAL => 'error',
+            Logger::ALERT => 'error',
+            Logger::EMERGENCY => 'error',
+        ][$level] ?? 'log';
     }
 
     /**

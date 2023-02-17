@@ -56,24 +56,24 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "dev-edge",
-            "version_normalized": "dev-edge",
+            "version": "v2.0.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "fe1883f2745a3fbde941353a0cbb21a6a45d23a3"
+                "reference": "fdf0f75ba39267048bcbd2396616f1338339c909"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/fe1883f2745a3fbde941353a0cbb21a6a45d23a3",
-                "reference": "fe1883f2745a3fbde941353a0cbb21a6a45d23a3",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/fdf0f75ba39267048bcbd2396616f1338339c909",
+                "reference": "fdf0f75ba39267048bcbd2396616f1338339c909",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": "^7.4|^8.0"
             },
-            "time": "2023-02-15T09:10:53+00:00",
+            "time": "2023-02-16T09:58:23+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -106,7 +106,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/edge"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.0.0"
             },
             "install-path": "../cardanopress/framework"
         }

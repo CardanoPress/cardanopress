@@ -15,7 +15,7 @@ class HtmlField extends Field {
 
 	public function render( $value ): void {
 
-		echo $this->get_config( 'default' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo wp_kses_post( $this->get_config( 'default' ) );
 
 	}
 

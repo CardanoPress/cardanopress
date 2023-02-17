@@ -46,6 +46,10 @@ class Fields {
 				continue;
 			}
 
+			if ( empty( $field['type'] ) ) {
+				$field['type'] = Field::DEFAULTS['type'];
+			}
+
 			if ( 'group' === $field['type'] ) {
 				if ( array_key_exists( 'fields', $field ) && ! empty( $field['fields'] ) ) {
 					$field['fields'] = FieldsHelper::group_fields( $field['fields'] );

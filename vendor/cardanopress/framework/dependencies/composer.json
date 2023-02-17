@@ -14,6 +14,7 @@
   },
   "extra": {
     "mozart": {
+      "delete_vendor_directories": false,
       "dep_namespace": "CardanoPress\\Dependencies\\",
       "dep_directory": "/",
       "classmap_directory": "/classes/",
@@ -22,14 +23,12 @@
   },
   "scripts": {
     "post-install-cmd": [
-      "mv vendor/themeplate/core/assets .",
       "mozart compose",
-      "mv assets ThemePlate"
+      "cp -r vendor/themeplate/core/assets ThemePlate"
     ],
     "post-update-cmd": [
-      "mv vendor/themeplate/core/assets .",
       "mozart compose",
-      "mv assets ThemePlate"
+      "cp -r vendor/themeplate/core/assets ThemePlate"
     ]
   }
 }

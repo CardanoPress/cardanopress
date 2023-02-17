@@ -117,7 +117,7 @@ class FormHelper {
 
 	public static function make_field( string $data_key, array $config ): Field {
 
-		$type = self::get_field_class( $config['type'] );
+		$type = self::get_field_class( $config['type'] ?? '' );
 
 		return new $type( $data_key, $config );
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a08e95cbffde4294f5617e93450098bc",
+    "content-hash": "c6a705ac55c60b8843a3d89e3b6b318d",
     "packages": [
         {
             "name": "automattic/jetpack-autoloader",
@@ -59,16 +59,16 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "dev-edge",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "fe1883f2745a3fbde941353a0cbb21a6a45d23a3"
+                "reference": "fdf0f75ba39267048bcbd2396616f1338339c909"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/fe1883f2745a3fbde941353a0cbb21a6a45d23a3",
-                "reference": "fe1883f2745a3fbde941353a0cbb21a6a45d23a3",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/fdf0f75ba39267048bcbd2396616f1338339c909",
+                "reference": "fdf0f75ba39267048bcbd2396616f1338339c909",
                 "shasum": ""
             },
             "require": {
@@ -106,17 +106,15 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/edge"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.0.0"
             },
-            "time": "2023-02-15T09:10:53+00:00"
+            "time": "2023-02-16T09:58:23+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "cardanopress/framework": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
