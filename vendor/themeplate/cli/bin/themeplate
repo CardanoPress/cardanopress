@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\CommandLoader\FactoryCommandLoader;
+use ThemePlate\CLI\CommandRegistry;
+
+require_once getcwd() . '/vendor/autoload.php';
+
+$commandLoader = new FactoryCommandLoader( CommandRegistry::dump() );
+$application   = new Application( 'ThemePlate', '0.1.0' );
+
+$application->setCommandLoader( $commandLoader );
+$application->run();

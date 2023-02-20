@@ -34,9 +34,17 @@
     "automattic/jetpack-autoloader": "^2.11",
     "cardanopress/framework": "^2.0"
   },
+  "require-dev": {
+    "themeplate/tester": "^2.1"
+  },
   "autoload": {
     "psr-4": {
       "PBWebDev\\CardanoPress\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests"
     }
   },
   "scripts": {

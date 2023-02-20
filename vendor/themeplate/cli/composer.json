@@ -1,0 +1,41 @@
+{
+	"name": "themeplate/cli",
+	"description": "The command-line interface for ThemePlate",
+	"license": "GPL-3.0-only",
+	"authors": [
+		{
+			"name": "Gene Alyson Fortunado Torcende",
+			"email": "genealyson.torcende@gmail.com"
+		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"bin": [
+		"bin/themeplate"
+	],
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"optimize-autoloader": true,
+		"preferred-install": "dist",
+		"sort-packages": true
+	},
+	"require": {
+		"php": "^7.4|^8.0",
+		"symfony/console": "^5.4"
+	},
+	"require-dev": {
+		"themeplate/tester": "^2.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"ThemePlate\\CLI\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests"
+		}
+	}
+}

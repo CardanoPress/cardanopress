@@ -1,0 +1,5 @@
+parameters:
+  level: 5
+  scanDirectories:
+    - %currentWorkingDirectory%/.cache/wordpress
+    - %currentWorkingDirectory%/.cache/wordpress-tests-lib
