@@ -48,9 +48,11 @@
     }
   },
   "scripts": {
-    "analyse": "phpstan analyse --memory-limit=512M",
-    "lint": "phpcs --colors -p -s -v",
-    "fix": "phpcbf -p -v",
-    "test": "phpunit --colors=always"
+    "analyse": "themeplate analyse",
+    "lint": "themeplate lint",
+    "fix": "themeplate fix",
+    "test": "themeplate test",
+    "test:unit": "themeplate test --type unit",
+    "test:integration": "themeplate test --type integration"
   }
 }

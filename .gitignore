@@ -2,3 +2,4 @@
 .vscode/
 logs/
 node_modules/
+.cache/

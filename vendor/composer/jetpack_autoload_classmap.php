@@ -6270,6 +6270,10 @@ return array(
 		'version' => '1.27.0.0',
 		'path'    => $vendorDir . '/symfony/polyfill-php80/PhpToken.php'
 	),
+	'Tests\\Integration\\SanitizationTest' => array(
+		'version' => 'dev-main',
+		'path'    => $baseDir . '/tests/Integration/SanitizationTest.php'
+	),
 	'TheSeer\\Tokenizer\\Exception' => array(
 		'version' => '1.2.1.0',
 		'path'    => $vendorDir . '/theseer/tokenizer/src/Exception.php'

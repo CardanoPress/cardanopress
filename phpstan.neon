@@ -4,5 +4,8 @@ parameters:
     - vendor
   scanFiles:
     - cardanopress.php
+  scanDirectories:
+    - %currentWorkingDirectory%/.cache/wordpress
+    - %currentWorkingDirectory%/.cache/wordpress-tests-lib
   dynamicConstantNames:
     - CARDANOPRESS_FILE
