@@ -138,7 +138,7 @@ class Installer extends AbstractInstaller
 
     public function dismissNoticeReviewAction()
     {
-        $expire = time() + HOUR_IN_SECONDS;
+        $expire = time() + DAY_IN_SECONDS;
         $secure = is_ssl();
 
         setcookie('cardanopress_dismiss_review', true, $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
