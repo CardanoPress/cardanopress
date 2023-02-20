@@ -10,6 +10,7 @@ namespace PBWebDev\CardanoPress;
 use CardanoPress\Foundation\AbstractInstaller;
 use CardanoPress\Traits\HasSettingsLink;
 
+/** @property Application $application */
 class Installer extends AbstractInstaller
 {
     use HasSettingsLink;
@@ -69,7 +70,7 @@ class Installer extends AbstractInstaller
 
     public function noticePluginReview(): void
     {
-        if (! empty($_COOKIE['cardanopress_dismiss_review'])) {
+        if (! $this->shouldNoticeReview()) {
             return;
         }
 
@@ -141,8 +142,19 @@ class Installer extends AbstractInstaller
         $secure = is_ssl();
 
         setcookie('cardanopress_dismiss_review', true, $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
-
+        $this->application->userProfile()->dismissNoticeReview();
         wp_die();
+    }
+
+    protected function shouldNoticeReview(): bool
+    {
+        $screen = get_current_screen();
+
+        if (Admin::OPTION_KEY === $screen->parent_base) {
+            return empty($_COOKIE['cardanopress_dismiss_review']);
+        }
+
+        return !$this->application->userProfile()->isDismissedNoticeReview();
     }
 
     public function doUpgrade(string $currentVersion, string $appVersion): void

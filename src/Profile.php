@@ -47,4 +47,14 @@ class Profile extends AbstractProfile
     {
         return $this->updateMeta($this->prefix . 'favorite_handle', $handle);
     }
+
+    public function dismissNoticeReview(): bool
+    {
+        return $this->updateMeta($this->prefix . 'dismissed_review', true);
+    }
+
+    public function isDismissedNoticeReview(): bool
+    {
+        return (bool)$this->getMeta($this->prefix . 'dismissed_review', true);
+    }
 }
