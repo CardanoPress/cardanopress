@@ -8,6 +8,7 @@ namespace Tests\Integration;
 
 use PBWebDev\CardanoPress\Actions\Sanitization;
 use WP_Ajax_UnitTestCase;
+use WPAjaxDieContinueException;
 
 class SanitizationTest extends WP_Ajax_UnitTestCase
 {
@@ -137,11 +138,40 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $_POST[$method] = $value;
 
         if ($is_known) {
-            $this->assertSame($value, $this->sanitization->$method());
+            $this->assertSame($value, $this->sanitization->sanitizePost($method));
         } else {
-            add_action('wp_ajax_nopriv_test', [$this->sanitization, $method]);
-            $this->_handleAjax('test');
-            $this->assertSame('', $this->_last_response);
+            add_action('wp_ajax_test', function () use ($method) {
+                $this->sanitization->sanitizePost($method);
+            });
+
+            try {
+                $this->_handleAjax('test');
+            } catch (WPAjaxDieContinueException $exception) {
+            }
+
+            $output = json_decode($this->_last_response, true);
+
+            $this->assertSame(['success' => false, 'data' => $this->sanitization->getMessage($method)], $output);
         }
+
+        $actual = $this->sanitization->$method($value);
+        $expected = $is_known ? $value : '';
+
+        $this->assertSame($expected, $actual);
+    }
+
+    public function test_customized_messages(): void
+    {
+        $expected = 'I am custom invalid message';
+
+        add_filter('cardanopress_sanitization_messages', function ($messages) use ($expected) {
+            $messages['query_network'] = $expected;
+            $messages['ada_handle'] = $expected;
+
+            return $messages;
+        });
+
+        $this->assertSame($expected, $this->sanitization->getMessage('query_network'));
+        $this->assertSame($expected, $this->sanitization->getMessage('ada_handle'));
     }
 }

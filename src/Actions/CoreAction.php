@@ -235,7 +235,7 @@ class CoreAction implements HookInterface
     {
         check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
 
-        $adaHandle = (new Sanitization())->ada_handle();
+        $adaHandle = (new Sanitization())->sanitizePost('ada_handle');
         $userProfile = $this->application->userProfile();
 
         $userProfile->saveFavoriteHandle($adaHandle);

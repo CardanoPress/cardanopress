@@ -33,89 +33,106 @@ class Sanitization
         return $messages[$type] ?? '';
     }
 
-    public function query_network(): string
+    /**
+     * Sends a JSON response back to an Ajax request if $_POST data fails
+     *
+     * @param string $key
+     * @return string
+     */
+    public function sanitizePost(string $key): string
     {
-        $value = sanitize_key($_POST['query_network']);
+        $value = $this->$key($_POST[$key]);
+
+        if ('' === $value) {
+            wp_send_json_error($this->getMessage($key));
+        }
+
+        return $value;
+    }
+
+    public function query_network($value): string
+    {
+        $value = sanitize_key($value);
 
         if (! array_key_exists($value, BlockfrostClient::ENDPOINT)) {
-            wp_send_json_error($this->getMessage('query_network'));
+            return '';
         }
 
         return $value;
     }
 
-    public function wallet_address(): string
+    public function wallet_address($value): string
     {
-        $value = sanitize_text_field($_POST['wallet_address']);
+        $value = sanitize_text_field($value);
 
         if ('' === $value || (0 !== strpos($value, 'addr1') && 0 !== strpos($value, 'addr_test1'))) {
-            wp_send_json_error($this->getMessage('wallet_address'));
+            return '';
         }
 
         return $value;
     }
 
-    public function stake_address(): string
+    public function stake_address($value): string
     {
-        $value = sanitize_text_field($_POST['stake_address']);
+        $value = sanitize_text_field($value);
 
         if ('' === $value || (0 !== strpos($value, 'stake1') && 0 !== strpos($value, 'stake_test1'))) {
-            wp_send_json_error($this->getMessage('stake_address'));
+            return '';
         }
 
         return $value;
     }
 
-    public function reward_address(): string
+    public function reward_address($value): string
     {
-        $value = sanitize_text_field($_POST['reward_address']);
+        $value = sanitize_text_field($value);
 
         if ('' === $value || (0 !== strpos($value, 'stake1') && 0 !== strpos($value, 'stake_test1'))) {
-            wp_send_json_error($this->getMessage('reward_address'));
+            return '';
         }
 
         return $value;
     }
 
-    public function pool_id(): string
+    public function pool_id($value): string
     {
-        $value = sanitize_text_field($_POST['pool_id']);
+        $value = sanitize_text_field($value);
 
         if ('' === $value || 0 !== strpos($value, 'pool1')) {
-            wp_send_json_error($this->getMessage('pool_id'));
+            return '';
         }
 
         return $value;
     }
 
-    public function transaction_action(): string
+    public function transaction_action($value): string
     {
-        $value = sanitize_key($_POST['transaction_action']);
+        $value = sanitize_key($value);
 
         if (! in_array($value, ['payment', 'delegation'], true)) {
-            wp_send_json_error($this->getMessage('transaction_action'));
+            return '';
         }
 
         return $value;
     }
 
-    public function transaction_hash(): string
+    public function transaction_hash($value): string
     {
-        $value = sanitize_key($_POST['transaction_hash']);
+        $value = sanitize_key($value);
 
         if (! ctype_xdigit($value) || 64 !== strlen($value)) {
-            wp_send_json_error($this->getMessage('transaction_hash'));
+            return '';
         }
 
         return $value;
     }
 
-    public function ada_handle(): string
+    public function ada_handle($value): string
     {
-        $value = sanitize_text_field($_POST['ada_handle']);
+        $value = sanitize_text_field($value);
 
         if (empty($value)) {
-            wp_send_json_error($this->getMessage('ada_handle'));
+            return '';
         }
 
         return $value;

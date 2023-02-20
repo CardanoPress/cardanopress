@@ -44,9 +44,9 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
 
-        $queryNetwork = $this->sanitization->query_network();
-        $walletAddress = $this->sanitization->wallet_address();
-        $stakeAddress = $this->sanitization->stake_address();
+        $queryNetwork = $this->sanitization->sanitizePost('query_network');
+        $walletAddress = $this->sanitization->sanitizePost('wallet_address');
+        $stakeAddress = $this->sanitization->sanitizePost('stake_address');
 
         $username = md5($stakeAddress);
         $userId = username_exists($username);
@@ -88,9 +88,9 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
 
-        $queryNetwork = $this->sanitization->query_network();
-        $walletAddress = $this->sanitization->wallet_address();
-        $stakeAddress = $this->sanitization->stake_address();
+        $queryNetwork = $this->sanitization->sanitizePost('query_network');
+        $walletAddress = $this->sanitization->sanitizePost('wallet_address');
+        $stakeAddress = $this->sanitization->sanitizePost('stake_address');
         $userProfile = $this->application->userProfile();
 
         $userProfile->saveNetwork($queryNetwork);
@@ -122,8 +122,8 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'wallet_address']);
 
-        $queryNetwork = $this->sanitization->query_network();
-        $walletAddress = $this->sanitization->wallet_address();
+        $queryNetwork = $this->sanitization->sanitizePost('query_network');
+        $walletAddress = $this->sanitization->sanitizePost('wallet_address');
         $userProfile = $this->application->userProfile();
         $shouldReload = false;
 
@@ -149,7 +149,7 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network']);
 
-        $queryNetwork = $this->sanitization->query_network();
+        $queryNetwork = $this->sanitization->sanitizePost('query_network');
 
         if (! Blockfrost::isReady($queryNetwork)) {
             wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
@@ -169,8 +169,8 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'reward_address']);
 
-        $queryNetwork = $this->sanitization->query_network();
-        $rewardAddress = $this->sanitization->reward_address();
+        $queryNetwork = $this->sanitization->sanitizePost('query_network');
+        $rewardAddress = $this->sanitization->sanitizePost('reward_address');
 
         if (! Blockfrost::isReady($queryNetwork)) {
             wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
@@ -190,8 +190,8 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'pool_id']);
 
-        $queryNetwork = $this->sanitization->query_network();
-        $poolId = $this->sanitization->pool_id();
+        $queryNetwork = $this->sanitization->sanitizePost('query_network');
+        $poolId = $this->sanitization->sanitizePost('pool_id');
 
         if (! Blockfrost::isReady($queryNetwork)) {
             wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
@@ -225,9 +225,9 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalid(['query_network', 'transaction_action', 'transaction_hash']);
 
-        $queryNetwork = $this->sanitization->query_network();
-        $transactionAction = $this->sanitization->transaction_action();
-        $transactionHash = $this->sanitization->transaction_hash();
+        $queryNetwork = $this->sanitization->sanitizePost('query_network');
+        $transactionAction = $this->sanitization->sanitizePost('transaction_action');
+        $transactionHash = $this->sanitization->sanitizePost('transaction_hash');
 
         $userProfile = $this->application->userProfile();
         $success = $userProfile->saveTransaction(
