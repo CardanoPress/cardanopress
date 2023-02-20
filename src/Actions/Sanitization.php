@@ -17,7 +17,7 @@ class Sanitization
         $value = sanitize_key($_POST['query_network']);
 
         if (! array_key_exists($value, BlockfrostClient::ENDPOINT)) {
-            wp_send_json_error(__('Invalid query network'));
+            wp_send_json_error(__('Invalid query network', 'cardanopress'));
         }
 
         return $value;
@@ -28,7 +28,7 @@ class Sanitization
         $value = sanitize_text_field($_POST['wallet_address']);
 
         if ('' === $value || (0 !== strpos($value, 'addr1') && 0 !== strpos($value, 'addr_test1'))) {
-            wp_send_json_error(__('Invalid wallet address'));
+            wp_send_json_error(__('Invalid wallet address', 'cardanopress'));
         }
 
         return $value;
@@ -39,7 +39,7 @@ class Sanitization
         $value = sanitize_text_field($_POST['stake_address']);
 
         if ('' === $value || (0 !== strpos($value, 'stake1') && 0 !== strpos($value, 'stake_test1'))) {
-            wp_send_json_error(__('Invalid stake address'));
+            wp_send_json_error(__('Invalid stake address', 'cardanopress'));
         }
 
         return $value;
@@ -50,7 +50,7 @@ class Sanitization
         $value = sanitize_text_field($_POST['reward_address']);
 
         if ('' === $value || (0 !== strpos($value, 'stake1') && 0 !== strpos($value, 'stake_test1'))) {
-            wp_send_json_error(__('Invalid reward address'));
+            wp_send_json_error(__('Invalid reward address', 'cardanopress'));
         }
 
         return $value;
@@ -61,7 +61,7 @@ class Sanitization
         $value = sanitize_text_field($_POST['pool_id']);
 
         if ('' === $value || 0 !== strpos($value, 'pool1')) {
-            wp_send_json_error(__('Invalid pool id'));
+            wp_send_json_error(__('Invalid pool id', 'cardanopress'));
         }
 
         return $value;
@@ -72,7 +72,7 @@ class Sanitization
         $value = sanitize_key($_POST['transaction_action']);
 
         if (! in_array($value, ['payment', 'delegation'], true)) {
-            wp_send_json_error(__('Invalid transaction action'));
+            wp_send_json_error(__('Invalid transaction action', 'cardanopress'));
         }
 
         return $value;
@@ -83,7 +83,7 @@ class Sanitization
         $value = sanitize_key($_POST['transaction_hash']);
 
         if (! ctype_xdigit($value) || 64 !== strlen($value)) {
-            wp_send_json_error(__('Invalid transaction hash'));
+            wp_send_json_error(__('Invalid transaction hash', 'cardanopress'));
         }
 
         return $value;
@@ -94,7 +94,7 @@ class Sanitization
         $value = sanitize_text_field($_POST['ada_handle']);
 
         if (empty($value)) {
-            wp_send_json_error(__('Invalid ada handle'));
+            wp_send_json_error(__('Invalid ada handle', 'cardanopress'));
         }
 
         return $value;
