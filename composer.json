@@ -21,20 +21,16 @@
   "config": {
     "optimize-autoloader": true,
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true,
-      "automattic/jetpack-autoloader": true
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   },
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require": {
-    "php": "^7.4|^8.0",
-    "ext-json": "*",
-    "ext-ctype": "*",
-    "automattic/jetpack-autoloader": "^2.11",
-    "cardanopress/framework": "^2.0"
+    "php": "^7.4|^8.0"
   },
   "require-dev": {
+    "coenjacobs/mozart": "^0.7.1",
     "themeplate/tester": "^2.1"
   },
   "autoload": {

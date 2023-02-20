@@ -1,0 +1,116 @@
+{
+    "packages": [
+        {
+            "name": "automattic/jetpack-autoloader",
+            "version": "v2.11.15",
+            "version_normalized": "2.11.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Automattic/jetpack-autoloader.git",
+                "reference": "10819bc78006a701e7d1af1ce7b36bd699b942f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/10819bc78006a701e7d1af1ce7b36bd699b942f2",
+                "reference": "10819bc78006a701e7d1af1ce7b36bd699b942f2",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1 || ^2.0"
+            },
+            "require-dev": {
+                "automattic/jetpack-changelogger": "^3.3.1",
+                "yoast/phpunit-polyfills": "1.0.4"
+            },
+            "time": "2023-01-11T16:00:24+00:00",
+            "type": "composer-plugin",
+            "extra": {
+                "autotagger": true,
+                "class": "Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin",
+                "mirror-repo": "Automattic/jetpack-autoloader",
+                "changelogger": {
+                    "link-template": "https://github.com/Automattic/jetpack-autoloader/compare/v${old}...v${new}"
+                },
+                "branch-alias": {
+                    "dev-trunk": "2.11.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Automattic\\Jetpack\\Autoloader\\": "src"
+                },
+                "classmap": [
+                    "src/AutoloadGenerator.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Creates a custom autoloader for a plugin or theme.",
+            "support": {
+                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v2.11.15"
+            },
+            "install-path": "../automattic/jetpack-autoloader"
+        },
+        {
+            "name": "cardanopress/framework",
+            "version": "v2.0.0",
+            "version_normalized": "2.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CardanoPress/framework.git",
+                "reference": "fdf0f75ba39267048bcbd2396616f1338339c909"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/fdf0f75ba39267048bcbd2396616f1338339c909",
+                "reference": "fdf0f75ba39267048bcbd2396616f1338339c909",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.4|^8.0"
+            },
+            "time": "2023-02-16T09:58:23+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "dependencies/compatibility.php"
+                ],
+                "psr-4": {
+                    "CardanoPress\\": "src/",
+                    "CardanoPress\\Dependencies\\": "dependencies/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Gene Alyson Fortunado Torcende",
+                    "email": "mail@pbwebdev.com",
+                    "homepage": "https://pbwebdev.com"
+                }
+            ],
+            "description": "A ThemePlate project for Cardano WordPress integration",
+            "keywords": [
+                "cardano",
+                "cardanopress",
+                "generator-themeplate",
+                "themeplate",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/CardanoPress/framework/issues",
+                "source": "https://github.com/CardanoPress/framework/tree/v2.0.0"
+            },
+            "install-path": "../cardanopress/framework"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

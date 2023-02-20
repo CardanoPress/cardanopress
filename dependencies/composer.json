@@ -1,0 +1,44 @@
+{
+  "config": {
+    "allow-plugins": {
+      "automattic/jetpack-autoloader": true
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-json": "*",
+    "ext-ctype": "*",
+    "automattic/jetpack-autoloader": "^2.11",
+    "cardanopress/framework": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "PBWebDev\\CardanoPress\\": "../src/",
+      "CardanoPress\\Dependencies\\": "."
+    }
+  },
+  "extra": {
+    "mozart": {
+      "dep_namespace": "CardanoPress\\Dependencies\\",
+      "dep_directory": "/",
+      "classmap_directory": "/classes/",
+      "classmap_prefix": "CardanoPress_Dependency_",
+      "excluded_packages": [
+        "automattic/jetpack-autoloader",
+        "cardanopress/framework"
+      ]
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "../vendor/bin/mozart compose",
+      "composer dump-autoload --classmap-authoritative"
+    ],
+    "post-update-cmd": [
+      "../vendor/bin/mozart compose",
+      "composer dump-autoload --classmap-authoritative"
+    ]
+  }
+}
