@@ -7,16 +7,20 @@
 namespace Tests\Integration;
 
 use PBWebDev\CardanoPress\Actions\Sanitization;
+use Tests\LoadDependencies;
 use WP_Ajax_UnitTestCase;
 use WPAjaxDieContinueException;
 
 class SanitizationTest extends WP_Ajax_UnitTestCase
 {
+    use LoadDependencies;
+
     protected Sanitization $sanitization;
 
     public function setUp(): void
     {
         parent::setUp();
+        $this->loadDependencies();
 
         $this->sanitization = new Sanitization();
     }
