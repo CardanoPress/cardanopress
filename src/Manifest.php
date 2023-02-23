@@ -47,8 +47,8 @@ class Manifest extends AbstractManifest
             wp_script_add_data(self::HANDLE_PREFIX . 'script', 'defer', true);
             wp_script_add_data(self::HANDLE_PREFIX . 'recaptcha', 'defer', true);
         } else {
-            $this->data->add('script', self::HANDLE_PREFIX . 'script', array('defer' => true));
-            $this->data->add('script', self::HANDLE_PREFIX . 'recaptcha', array('defer' => true));
+            $this->data->script(self::HANDLE_PREFIX . 'script', array('defer' => true));
+            $this->data->script(self::HANDLE_PREFIX . 'recaptcha', array('defer' => true));
         }
 
         $data = [
