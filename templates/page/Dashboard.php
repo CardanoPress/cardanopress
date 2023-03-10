@@ -23,6 +23,7 @@ get_header();
     <template x-if="isConnected">
         <div class="py-6">
             <?php cardanoPress()->template('welcome-banner'); ?>
+            <?php the_content(); ?>
 
             <?php cardanoPress()->template('part/profile-connection'); ?>
             <?php cardanoPress()->template('part/profile-adahandles'); ?>

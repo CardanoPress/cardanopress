@@ -27,6 +27,7 @@ get_header();
 <main class="container">
     <div class="py-6">
         <h1>Split Payments</h1>
+        <?php the_content(); ?>
 
         <form
             x-data="paymentForm"

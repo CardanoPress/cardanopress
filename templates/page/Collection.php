@@ -18,6 +18,7 @@ get_header();
         <?php cardanoPress()->template('welcome-banner'); ?>
 
         <h1>Assets:</h1>
+        <?php the_content(); ?>
 
         <?php cardanoPress()->template('collection-list'); ?>
     </div>

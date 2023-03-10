@@ -343,7 +343,7 @@ class Admin extends AbstractAdmin
             'id' => 'cardanopress-tgmpa',
             'menu' => 'cardanopress-plugins',
             'parent_slug' => 'cardanopress',
-            'dismissable' => false,
+            'dismissable' => true,
             'is_automatic' => true,
         ];
 
