@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, metamask, nami, eternl, ada
 Requires at least: 4.9
 Tested up to: 6.1.1
-Stable tag: 1.0.0
+Stable tag: 1.2.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
