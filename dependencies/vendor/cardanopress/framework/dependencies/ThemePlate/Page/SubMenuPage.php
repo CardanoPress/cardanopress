@@ -9,13 +9,28 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Page;
 
-class SubMenuPage extends BasePage {
+use CardanoPress\Dependencies\ThemePlate\Page\Interfaces\SubMenuPageInterface;
+
+class SubMenuPage extends BasePage implements SubMenuPageInterface {
 
 	public function __construct( string $title, string $parent_slug, array $config = array() ) {
+
+		if ( '' !== $parent_slug ) {
+			_deprecated_argument( __METHOD__, '2.1.0', 'Use the new ' . esc_html( self::class . '::parent()' ) . ' instead.' );
+		}
 
 		$config['parent_slug'] = $parent_slug;
 
 		$this->initialize( $title, $config );
+
+	}
+
+
+	public function parent( string $parent ): self {
+
+		$this->config['parent_slug'] = $parent;
+
+		return $this;
 
 	}
 

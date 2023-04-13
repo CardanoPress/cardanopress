@@ -13,6 +13,16 @@ trait Templatable
 {
     protected TemplatesInterface $templates;
 
+    protected function setTemplates(TemplatesInterface $templates): void
+    {
+        $this->templates = $templates;
+    }
+
+    protected function getTemplates(): TemplatesInterface
+    {
+        return $this->templates;
+    }
+
     public function template(string $name, array $variables = []): void
     {
         $name .= '.php';

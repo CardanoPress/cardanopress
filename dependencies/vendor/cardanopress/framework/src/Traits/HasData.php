@@ -26,11 +26,19 @@ trait HasData
 
     protected function storeConfig(Config $config): void
     {
+        if (null === $this->data) {
+            return;
+        }
+
         $this->getData()->store($config);
     }
 
     protected function retrieveValue(string $key, string $id)
     {
+        if (null === $this->data) {
+            return '';
+        }
+
         return $this->getData()->retrieve($key, $id);
     }
 }

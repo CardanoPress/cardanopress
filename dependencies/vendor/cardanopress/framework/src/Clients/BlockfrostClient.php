@@ -34,7 +34,7 @@ class BlockfrostClient
     /**
      * Create a new BlockfrostClient instance
      */
-    public function __construct(string $project_id)
+    public function __construct(string $project_id, HandlerStack $handler = null)
     {
         $network = substr($project_id, 0, 7);
 
@@ -47,7 +47,7 @@ class BlockfrostClient
             'base_uri' => self::ENDPOINT[$network],
             'timeout' => 10,
             'connect_timeout' => 10,
-            'handler' => $this->createHandlerStack(),
+            'handler' => null === $handler ? $this->createHandlerStack() : $handler,
             'headers' => compact('Accept', 'project_id'),
         ]);
     }

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit450b00259fe4ee013fa8328ef8dc5520
+class ComposerStaticInit16dbcee941def423702216d725fc975d
 {
     public static $files = array (
         '1adb4ff695388b04d573ca23d2979f89' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/compatibility.php',
@@ -314,8 +314,18 @@ class ComposerStaticInit450b00259fe4ee013fa8328ef8dc5520
         'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\ScriptsTag' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/ScriptsTag.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\StylesTag' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/StylesTag.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Logger' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Logger.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Meta\\BaseMeta' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Meta/BaseMeta.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Meta\\MenuMeta' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Meta/MenuMeta.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Meta\\MetaHandler' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Meta/MetaHandler.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Meta\\PostMeta' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Meta/PostMeta.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Meta\\TermMeta' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Meta/TermMeta.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Meta\\Traits\\HasLocation' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Meta/Traits/HasLocation.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Meta\\UserMeta' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Meta/UserMeta.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Page\\BasePage' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Page/BasePage.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Page\\CommonInterface' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Page/CommonInterface.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Page\\Interfaces\\MenuPageInterface' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Page/Interfaces/MenuPageInterface.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Page\\Interfaces\\PageInterface' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Page/Interfaces/PageInterface.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Page\\Interfaces\\SubMenuPageInterface' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Page/Interfaces/SubMenuPageInterface.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Page\\MenuPage' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Page/MenuPage.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Page\\SubMenuPage' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Page/SubMenuPage.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Settings\\OptionBox' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Settings/OptionBox.php',
@@ -326,6 +336,7 @@ class ComposerStaticInit450b00259fe4ee013fa8328ef8dc5520
         'CardanoPress\\Foundation\\AbstractInstaller' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractInstaller.php',
         'CardanoPress\\Foundation\\AbstractManifest' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractManifest.php',
         'CardanoPress\\Foundation\\AbstractProfile' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractProfile.php',
+        'CardanoPress\\Foundation\\AbstractShortcode' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractShortcode.php',
         'CardanoPress\\Foundation\\AbstractTemplates' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractTemplates.php',
         'CardanoPress\\Helpers\\NumberHelper' => __DIR__ . '/..' . '/cardanopress/framework/src/Helpers/NumberHelper.php',
         'CardanoPress\\Helpers\\WalletHelper' => __DIR__ . '/..' . '/cardanopress/framework/src/Helpers/WalletHelper.php',
@@ -362,9 +373,9 @@ class ComposerStaticInit450b00259fe4ee013fa8328ef8dc5520
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit450b00259fe4ee013fa8328ef8dc5520::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit450b00259fe4ee013fa8328ef8dc5520::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit450b00259fe4ee013fa8328ef8dc5520::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit16dbcee941def423702216d725fc975d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit16dbcee941def423702216d725fc975d::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit16dbcee941def423702216d725fc975d::$classMap;
 
         }, null, ClassLoader::class);
     }

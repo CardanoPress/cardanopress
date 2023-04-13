@@ -1,4 +1,9 @@
 {
+  "config": {
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*",
@@ -6,6 +11,7 @@
     "themeplate/core": "^2.0",
     "themeplate/enqueue": "^2.1",
     "themeplate/logger": "^1.3",
+    "themeplate/meta": "^2.2",
     "themeplate/page": "^2.0",
     "themeplate/settings": "^2.0"
   },
@@ -14,7 +20,6 @@
   },
   "extra": {
     "mozart": {
-      "delete_vendor_directories": false,
       "dep_namespace": "CardanoPress\\Dependencies\\",
       "dep_directory": "/",
       "classmap_directory": "/classes/",
@@ -23,12 +28,16 @@
   },
   "scripts": {
     "post-install-cmd": [
+      "rm -rf assets ThemePlate/assets",
+      "mv vendor/themeplate/core/assets .",
       "mozart compose",
-      "cp -r vendor/themeplate/core/assets ThemePlate"
+      "mv assets ThemePlate"
     ],
     "post-update-cmd": [
+      "rm -rf assets ThemePlate/assets",
+      "mv vendor/themeplate/core/assets .",
       "mozart compose",
-      "cp -r vendor/themeplate/core/assets ThemePlate"
+      "mv assets ThemePlate"
     ]
   }
 }

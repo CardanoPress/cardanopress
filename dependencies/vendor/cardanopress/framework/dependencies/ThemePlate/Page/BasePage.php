@@ -9,7 +9,9 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Page;
 
-abstract class BasePage implements CommonInterface {
+use CardanoPress\Dependencies\ThemePlate\Page\Interfaces\PageInterface;
+
+abstract class BasePage implements CommonInterface, PageInterface {
 
 	protected array $defaults = array(
 		'capability' => 'manage_options',
@@ -37,6 +39,24 @@ abstract class BasePage implements CommonInterface {
 		$config['menu_slug'] = sanitize_title( $config['menu_slug'] );
 
 		$this->config = array_merge( $this->defaults, $config );
+
+	}
+
+
+	public function capability( string $capability ): self {
+
+		$this->config['capability'] = $capability;
+
+		return $this;
+
+	}
+
+
+	public function position( int $position ): self {
+
+		$this->config['position'] = $position;
+
+		return $this;
 
 	}
 

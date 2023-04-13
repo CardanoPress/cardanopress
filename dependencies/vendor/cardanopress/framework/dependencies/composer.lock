@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e463e88addc3a179122fa628267ddef0",
+    "content-hash": "155e681e2b0bf1b18b075e8201d91f3e",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -896,17 +896,61 @@
             "time": "2022-05-18T14:10:49+00:00"
         },
         {
-            "name": "themeplate/page",
-            "version": "v2.0.0",
+            "name": "themeplate/meta",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ThemePlate/Page.git",
-                "reference": "15e4beb78b4a4fab18ba278095ad7915946e48be"
+                "url": "https://github.com/ThemePlate/Meta.git",
+                "reference": "0b82d271fbf1d8a805a5fb90f28b089541cc85c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Page/zipball/15e4beb78b4a4fab18ba278095ad7915946e48be",
-                "reference": "15e4beb78b4a4fab18ba278095ad7915946e48be",
+                "url": "https://api.github.com/repos/ThemePlate/Meta/zipball/0b82d271fbf1d8a805a5fb90f28b089541cc85c8",
+                "reference": "0b82d271fbf1d8a805a5fb90f28b089541cc85c8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0",
+                "themeplate/core": "^2.0"
+            },
+            "require-dev": {
+                "themeplate/tester": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ThemePlate\\Meta\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Gene Alyson Fortunado Torcende",
+                    "email": "genealyson.torcende@gmail.com"
+                }
+            ],
+            "description": "ThemePlate custom meta boxes",
+            "support": {
+                "issues": "https://github.com/ThemePlate/Meta/issues",
+                "source": "https://github.com/ThemePlate/Meta/tree/v2.2.0"
+            },
+            "time": "2022-06-25T03:38:14+00:00"
+        },
+        {
+            "name": "themeplate/page",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ThemePlate/Page.git",
+                "reference": "4e72630d326a7c24533d4949b88e915b798af2a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ThemePlate/Page/zipball/4e72630d326a7c24533d4949b88e915b798af2a6",
+                "reference": "4e72630d326a7c24533d4949b88e915b798af2a6",
                 "shasum": ""
             },
             "require": {
@@ -934,9 +978,9 @@
             "description": "ThemePlate custom options pages",
             "support": {
                 "issues": "https://github.com/ThemePlate/Page/issues",
-                "source": "https://github.com/ThemePlate/Page/tree/v2.0.0"
+                "source": "https://github.com/ThemePlate/Page/tree/v2.1.0"
             },
-            "time": "2022-06-05T03:28:15+00:00"
+            "time": "2023-03-05T13:16:52+00:00"
         },
         {
             "name": "themeplate/settings",
@@ -2065,9 +2109,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.4|^8.0",

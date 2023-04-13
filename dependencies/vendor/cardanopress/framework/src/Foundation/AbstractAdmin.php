@@ -8,6 +8,7 @@
 namespace CardanoPress\Foundation;
 
 use CardanoPress\Dependencies\ThemePlate\Core\Repository;
+use CardanoPress\Dependencies\ThemePlate\Page\BasePage;
 use CardanoPress\Dependencies\ThemePlate\Page\MenuPage;
 use CardanoPress\Dependencies\ThemePlate\Page\SubMenuPage;
 use CardanoPress\Dependencies\ThemePlate\Settings\OptionBox;
@@ -35,10 +36,7 @@ abstract class AbstractAdmin extends SharedBase implements AdminInterface, HookI
         $this->initialize();
     }
 
-    /**
-     * @return MenuPage|SubMenuPage
-     */
-    protected function settingsPage(string $title, array $config = [])
+    protected function settingsPage(string $title, array $config = []): BasePage
     {
         $parent = $config['parent'] ?? '';
         $config = array_merge($config, [
@@ -48,7 +46,9 @@ abstract class AbstractAdmin extends SharedBase implements AdminInterface, HookI
         if ('' !== $parent) {
             unset($config['parent']);
 
-            $page = new SubMenuPage($title, $parent, $config);
+            $page = new SubMenuPage($title, '', $config);
+
+            $page->parent($parent);
         } else {
             $page = new MenuPage($title, $config);
         }

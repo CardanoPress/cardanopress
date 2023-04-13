@@ -2,27 +2,27 @@
     "packages": [
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "v2.11.15",
-            "version_normalized": "2.11.15.0",
+            "version": "v2.11.18",
+            "version_normalized": "2.11.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/jetpack-autoloader.git",
-                "reference": "10819bc78006a701e7d1af1ce7b36bd699b942f2"
+                "reference": "53cbf0528fa6931c4fa6465bccd37514f9eda720"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/10819bc78006a701e7d1af1ce7b36bd699b942f2",
-                "reference": "10819bc78006a701e7d1af1ce7b36bd699b942f2",
+                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/53cbf0528fa6931c4fa6465bccd37514f9eda720",
+                "reference": "53cbf0528fa6931c4fa6465bccd37514f9eda720",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2.0"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^3.3.1",
+                "automattic/jetpack-changelogger": "^3.3.2",
                 "yoast/phpunit-polyfills": "1.0.4"
             },
-            "time": "2023-01-11T16:00:24+00:00",
+            "time": "2023-03-29T12:51:59+00:00",
             "type": "composer-plugin",
             "extra": {
                 "autotagger": true,
@@ -50,30 +50,30 @@
             ],
             "description": "Creates a custom autoloader for a plugin or theme.",
             "support": {
-                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v2.11.15"
+                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v2.11.18"
             },
             "install-path": "../automattic/jetpack-autoloader"
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.0.0",
-            "version_normalized": "2.0.0.0",
+            "version": "v2.1.0",
+            "version_normalized": "2.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "fdf0f75ba39267048bcbd2396616f1338339c909"
+                "reference": "e9a51159237227bcc2904360586a4b4c9a2d7b65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/fdf0f75ba39267048bcbd2396616f1338339c909",
-                "reference": "fdf0f75ba39267048bcbd2396616f1338339c909",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/e9a51159237227bcc2904360586a4b4c9a2d7b65",
+                "reference": "e9a51159237227bcc2904360586a4b4c9a2d7b65",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": "^7.4|^8.0"
             },
-            "time": "2023-02-16T09:58:23+00:00",
+            "time": "2023-04-12T07:37:07+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -106,7 +106,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.0.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.1.0"
             },
             "install-path": "../cardanopress/framework"
         }

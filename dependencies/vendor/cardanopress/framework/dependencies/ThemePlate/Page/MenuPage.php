@@ -9,13 +9,24 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Page;
 
-class MenuPage extends BasePage {
+use CardanoPress\Dependencies\ThemePlate\Page\Interfaces\MenuPageInterface;
+
+class MenuPage extends BasePage implements MenuPageInterface {
 
 	public function __construct( string $title, array $config = array() ) {
 
 		$this->defaults['icon_url'] = '';
 
 		$this->initialize( $title, $config );
+
+	}
+
+
+	public function icon( string $icon ): self {
+
+		$this->config['icon_url'] = $icon;
+
+		return $this;
 
 	}
 
