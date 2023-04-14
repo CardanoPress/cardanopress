@@ -28,9 +28,7 @@ class Manifest extends AbstractManifest
         parent::setupHooks();
         add_action('wp_enqueue_scripts', [$this, 'autoEnqueues']);
         add_action('wp_body_open', [$this, 'injectDataProvider']);
-        add_action('wp_footer', [$this, 'injectModalConnect']);
-        add_action('wp_footer', [$this, 'injectNoticesHandler']);
-        add_action('wp_footer', [$this, 'closeDataProviderTag']);
+        add_action('wp_body_open', [$this, 'completeInjections']);
     }
 
     public function autoEnqueues(): void
@@ -69,6 +67,13 @@ class Manifest extends AbstractManifest
         }
 
         echo '<div x-data="cardanoPress" @keydown.escape="showModal = false" data-handle="' . esc_attr($handle) . '">';
+    }
+
+    public function completeInjections(): void
+    {
+        add_action('wp_footer', [$this, 'injectModalConnect']);
+        add_action('wp_footer', [$this, 'injectNoticesHandler']);
+        add_action('wp_footer', [$this, 'closeDataProviderTag']);
     }
 
     public function injectModalConnect(): void
