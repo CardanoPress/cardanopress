@@ -19,7 +19,6 @@ class Manifest extends AbstractManifest
 
     public function initialize(): void
     {
-        $this->application = Application::getInstance();
         $this->legacy_loaded = ! (isset($this->data) && $this->data instanceof CustomData);
     }
 
@@ -27,7 +26,6 @@ class Manifest extends AbstractManifest
     {
         parent::setupHooks();
         add_action('wp_enqueue_scripts', [$this, 'autoEnqueues']);
-        add_action('wp_body_open', [$this, 'injectDataProvider']);
         add_action('wp_body_open', [$this, 'completeInjections']);
         add_action('wp_footer', [$this, 'completeInjections']);
     }
@@ -73,7 +71,7 @@ class Manifest extends AbstractManifest
     public function completeInjections(): void
     {
         if (! doing_action('wp_body_open')) {
-            $log = $this->application->logger('manifest');
+            $log = Application::getInstance()->logger('manifest');
             $message = [
                 __('CardanoPress component incomplete injections.', 'cardanopress'),
                 __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
@@ -88,24 +86,17 @@ class Manifest extends AbstractManifest
             return;
         }
 
+        self::injectDataProvider();
+
         remove_action('wp_footer', [$this, 'completeInjections']);
-        add_action('wp_footer', [$this, 'injectModalConnect']);
-        add_action('wp_footer', [$this, 'injectNoticesHandler']);
         add_action('wp_footer', [$this, 'closeDataProviderTag']);
-    }
-
-    public function injectModalConnect(): void
-    {
-        $this->application->template('modal-connect');
-    }
-
-    public function injectNoticesHandler(): void
-    {
-        $this->application->template('notices-handler');
     }
 
     public static function closeDataProviderTag(): void
     {
+        Application::getInstance()->template('modal-connect');
+        Application::getInstance()->template('notices-handler');
+
         echo '</div><!-- x-data="cardanoPress" -->';
     }
 }
