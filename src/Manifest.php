@@ -29,6 +29,7 @@ class Manifest extends AbstractManifest
         add_action('wp_enqueue_scripts', [$this, 'autoEnqueues']);
         add_action('wp_body_open', [$this, 'injectDataProvider']);
         add_action('wp_body_open', [$this, 'completeInjections']);
+        add_action('wp_footer', [$this, 'completeInjections']);
     }
 
     public function autoEnqueues(): void
@@ -71,6 +72,23 @@ class Manifest extends AbstractManifest
 
     public function completeInjections(): void
     {
+        if (! doing_action('wp_body_open')) {
+            $log = $this->application->logger('manifest');
+            $message = [
+                __('CardanoPress component incomplete injections.', 'cardanopress'),
+                __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
+            ];
+
+            $log->error(implode(' ', $message));
+            wp_add_inline_script(
+                self::HANDLE_PREFIX . 'script',
+                'console.error("' . implode(' ', $message) . '")'
+            );
+
+            return;
+        }
+
+        remove_action('wp_footer', [$this, 'completeInjections']);
         add_action('wp_footer', [$this, 'injectModalConnect']);
         add_action('wp_footer', [$this, 'injectNoticesHandler']);
         add_action('wp_footer', [$this, 'closeDataProviderTag']);
