@@ -32,6 +32,7 @@ class Installer extends AbstractInstaller
         add_action('admin_notices', [$this, 'noticeThemeIssue']);
         add_action('admin_footer', [$this, 'dismissNoticeReviewScript']);
         add_action('wp_ajax_cardanopress_dismiss_review', [$this, 'dismissNoticeReviewAction']);
+        add_action('after_switch_theme', [$this, 'doActivate']);
         add_action(self::DATA_PREFIX . 'activating', [$this, 'doActivate']);
         add_action(self::DATA_PREFIX . 'upgrading', [$this, 'doUpgrade'], 10, 2);
         add_filter('plugin_action_links_' . $this->pluginBaseName, [$this, 'mergeSettingsLink']);
@@ -55,10 +56,16 @@ class Installer extends AbstractInstaller
 
             wp_cache_delete(static::DATA_PREFIX . 'status', 'options');
 
+            $status = get_option(static::DATA_PREFIX . 'status');
+
             if (is_wp_error($response)) {
                 update_option(static::DATA_PREFIX . 'status', 'activated');
-            } elseif ('checking' === get_option(static::DATA_PREFIX . 'status')) {
+            } elseif ('checking' === $status) {
                 update_option(static::DATA_PREFIX . 'status', 'normal');
+            }
+
+            if (! is_admin() || 'issue' !== $status) {
+                return;
             }
 
             exit(wp_redirect(admin_url('admin.php?page=' . Admin::OPTION_KEY)));
