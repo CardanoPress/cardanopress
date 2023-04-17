@@ -39,7 +39,7 @@ class Installer extends AbstractInstaller
 
     public function loaded(): void
     {
-        do_action('cardanopress_loaded');
+        do_action(static::DATA_PREFIX . 'loaded');
 
         if ('activated' === get_option(static::DATA_PREFIX . 'status')) {
             update_option(static::DATA_PREFIX . 'status', 'checking');
@@ -53,11 +53,15 @@ class Installer extends AbstractInstaller
                 ]
             );
 
+            wp_cache_delete(static::DATA_PREFIX . 'status', 'options');
+
             if (is_wp_error($response)) {
                 update_option(static::DATA_PREFIX . 'status', 'activated');
             } elseif ('checking' === get_option(static::DATA_PREFIX . 'status')) {
                 update_option(static::DATA_PREFIX . 'status', 'normal');
             }
+
+            exit(wp_redirect(admin_url('admin.php?page=' . Admin::OPTION_KEY)));
         }
     }
 
