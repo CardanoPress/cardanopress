@@ -3,11 +3,11 @@ import { handleReconnect, handleSave, handleSync, logMeIn, logMeOut } from './ac
 import {
     cardanoPress,
     cardanoPressMessages,
-    toPropertyName,
     getConnectedExtension,
     isNotified,
     setConnectedExtension,
     setNotified,
+    toPropertyName,
 } from './api/config'
 import {
     NETWORK,
@@ -17,12 +17,11 @@ import { hexToBech32 } from '@pbwebdev/cardano-wallet-browser-extensions-interfa
 import { addNotice, getConnectedWallet, removeNotice, windowLoader } from './api/util'
 import { delegation as delegationTx } from './api/delegation'
 import { payment as paymentTx } from './api/payment'
-import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
+import Extensions, { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 import * as actions from './api/actions'
 import * as util from './api/util'
 import * as utils from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 import * as wallet from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
-import { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 
 window.Alpine = Alpine
 
@@ -52,15 +51,17 @@ Alpine.data('cardanoPress', () => ({
         return this.selectedHandle || $default
     },
 
-    async init() {
+    refreshWallets() {
         supportedWallets.forEach(wallet => {
             this[toPropertyName(wallet, 'has')] = Extensions.hasWallet(wallet)
         })
+    },
+
+    async init() {
+        this.refreshWallets()
 
         this.$watch('showModal', () => {
-            supportedWallets.forEach(wallet => {
-                this[toPropertyName(wallet, 'has')] = Extensions.hasWallet(wallet)
-            })
+            this.refreshWallets()
         })
 
         if (cardanoPress.logged) {
