@@ -54,7 +54,7 @@ Alpine.data('cardanoPress', () => ({
 
     async init() {
         supportedWallets.forEach(wallet => {
-            this[toPropertyName(wallet, 'has')] = false
+            this[toPropertyName(wallet, 'has')] = Extensions.hasWallet(wallet)
         })
 
         this.$watch('showModal', () => {
