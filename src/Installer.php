@@ -29,6 +29,7 @@ class Installer extends AbstractInstaller
         add_action('plugins_loaded', [$this, 'loaded'], -1);
         add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
         add_action('admin_notices', [$this, 'noticePluginReview']);
+        add_action('admin_notices', [$this, 'noticeThemeIssue']);
         add_action('admin_footer', [$this, 'dismissNoticeReviewScript']);
         add_action('wp_ajax_cardanopress_dismiss_review', [$this, 'dismissNoticeReviewAction']);
         add_action(self::DATA_PREFIX . 'activating', [$this, 'doActivate']);
@@ -124,6 +125,31 @@ class Installer extends AbstractInstaller
                         ],
                     ]
                 ); ?>
+            </p>
+        </div>
+        <?php
+    }
+
+    public function noticeThemeIssue(): void
+    {
+        if ('issue' !== get_option(static::DATA_PREFIX . 'status')) {
+            return;
+        }
+
+        $message = get_option(static::DATA_PREFIX . 'issue');
+
+        ?>
+        <div class="notice notice-error">
+            <p>
+                <?php echo wp_kses(
+                    sprintf(
+                    /* translators: %s: plugin name */
+                        __('%s issue detected.', 'cardanopress'),
+                        '<strong>' . $this->application->getData('Name') . '</strong>',
+                    ),
+                    'strong'
+                ); ?>
+                <?php echo esc_html(str_replace($this->application->getData('Name'), 'Getting', $message)); ?>
             </p>
         </div>
         <?php
