@@ -74,8 +74,13 @@ class Manifest extends AbstractManifest
             $log = Application::getInstance()->logger('manifest');
             $message = [
                 __('CardanoPress component incomplete injections.', 'cardanopress'),
-                __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
             ];
+
+            if (wp_is_block_theme()) {
+                $message[] = __('Block theme rendered fallback templates from `theme-compat`.', 'cardanopress');
+            } else {
+                $message[] = __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress');
+            }
 
             $log->error(implode(' ', $message));
             wp_add_inline_script(
