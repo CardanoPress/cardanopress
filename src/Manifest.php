@@ -88,6 +88,11 @@ class Manifest extends AbstractManifest
                 'console.error("' . implode(' ', $message) . '")'
             );
 
+            if ('checking' === get_option(Installer::DATA_PREFIX . 'status')) {
+                update_option(Installer::DATA_PREFIX . 'status', 'issue');
+                update_option(Installer::DATA_PREFIX . 'issue', implode(' ', $message));
+            }
+
             return;
         }
 

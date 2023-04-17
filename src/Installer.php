@@ -31,6 +31,7 @@ class Installer extends AbstractInstaller
         add_action('admin_notices', [$this, 'noticePluginReview']);
         add_action('admin_footer', [$this, 'dismissNoticeReviewScript']);
         add_action('wp_ajax_cardanopress_dismiss_review', [$this, 'dismissNoticeReviewAction']);
+        add_action(self::DATA_PREFIX . 'activating', [$this, 'doActivate']);
         add_action(self::DATA_PREFIX . 'upgrading', [$this, 'doUpgrade'], 10, 2);
         add_filter('plugin_action_links_' . $this->pluginBaseName, [$this, 'mergeSettingsLink']);
     }
@@ -38,6 +39,25 @@ class Installer extends AbstractInstaller
     public function loaded(): void
     {
         do_action('cardanopress_loaded');
+
+        if ('activated' === get_option(static::DATA_PREFIX . 'status')) {
+            update_option(static::DATA_PREFIX . 'status', 'checking');
+
+            $url = home_url();
+            $response = wp_remote_get(
+                $url,
+                [
+                    'timeout' => apply_filters('http_request_timeout', 10, $url),
+                    'sslverify' => apply_filters('https_local_ssl_verify', false)
+                ]
+            );
+
+            if (is_wp_error($response)) {
+                update_option(static::DATA_PREFIX . 'status', 'activated');
+            } elseif ('checking' === get_option(static::DATA_PREFIX . 'status')) {
+                update_option(static::DATA_PREFIX . 'status', 'normal');
+            }
+        }
     }
 
     public function noticeApplicationNotReady(): void
@@ -155,6 +175,11 @@ class Installer extends AbstractInstaller
         }
 
         return !$this->application->userProfile()->isDismissedNoticeReview();
+    }
+
+    public function doActivate(): void
+    {
+        update_option(static::DATA_PREFIX . 'status', 'activated');
     }
 
     public function doUpgrade(string $currentVersion, string $appVersion): void
