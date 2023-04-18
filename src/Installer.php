@@ -45,6 +45,13 @@ class Installer extends AbstractInstaller
         if ('activated' === get_option(static::DATA_PREFIX . 'status')) {
             update_option(static::DATA_PREFIX . 'status', 'checking');
 
+            if ('application/wasm' !== mime_content_type(__DIR__ . '/test.wasm')) {
+                $message = __('WebAssembly MIME type is not supported by the server.', 'cardanopress');
+
+                $this->log($message);
+                update_option(static::DATA_PREFIX . 'issues', array($message));
+            }
+
             $url = home_url();
             $response = wp_remote_get(
                 $url,
