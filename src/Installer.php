@@ -15,10 +15,14 @@ class Installer extends AbstractInstaller
 {
     use HasSettingsLink;
 
+    protected Compatibility $compatibility;
+
     public const DATA_PREFIX = 'cardanopress_';
 
     protected function initialize(): void
     {
+        $this->compatibility = new Compatibility($this->application->logger('compatibility'));
+
         $this->setSettingsLinkUrl(admin_url('admin.php?page=' . Admin::OPTION_KEY));
     }
 
@@ -42,36 +46,31 @@ class Installer extends AbstractInstaller
     {
         do_action(static::DATA_PREFIX . 'loaded');
 
-        if ('activated' === get_option(static::DATA_PREFIX . 'status')) {
-            update_option(static::DATA_PREFIX . 'status', 'checking');
+        if ('activated' === $this->compatibility->getStatus()) {
+            $this->compatibility->setStatus('checking');
 
-            if ('application/wasm' !== mime_content_type(__DIR__ . '/test.wasm')) {
-                $message = __('WebAssembly MIME type is not supported by the server.', 'cardanopress');
-
-                $this->log($message);
-                update_option(static::DATA_PREFIX . 'issues', array($message));
+            if (! $this->compatibility->server()) {
+                $this->compatibility->addIssue('server');
             }
 
-            $url = home_url();
-            $response = wp_remote_get(
-                $url,
-                [
-                    'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
-                    'sslverify' => apply_filters('https_local_ssl_verify', false)
-                ]
-            );
-
-            if (is_wp_error($response)) {
-                update_option(static::DATA_PREFIX . 'status', 'activated');
+            if (! $this->compatibility->theme()) {
+                $this->compatibility->setStatus('activated');
 
                 return;
             }
 
-            wp_cache_delete(static::DATA_PREFIX . 'issues', 'options');
+            foreach ($this->compatibility->getIssues(true) as $issue) {
+                $this->compatibility->addIssue($issue);
+            }
 
-            $issues = get_option(static::DATA_PREFIX . 'issues');
+            $issues = $this->compatibility->getIssues();
 
-            update_option(static::DATA_PREFIX . 'status', empty($issues) ? 'normal' : 'issue');
+            foreach ($issues as $issue) {
+                $this->compatibility->dump($issue);
+            }
+
+            $this->compatibility->saveIssues();
+            $this->compatibility->setStatus(empty($issues) ? 'normal' : 'issue');
 
             if (! is_admin() || empty($issues)) {
                 return;
@@ -152,11 +151,15 @@ class Installer extends AbstractInstaller
 
     public function noticePossibleIssues(): void
     {
-        if ('issue' !== get_option(static::DATA_PREFIX . 'status')) {
+        if ('issue' !== $this->compatibility->getStatus()) {
             return;
         }
 
-        $issues = get_option(static::DATA_PREFIX . 'issues');
+        $issues = $this->compatibility->getIssues();
+
+        if (empty($issues)) {
+            return;
+        }
 
         ?>
         <div class="notice notice-error">
@@ -230,8 +233,8 @@ class Installer extends AbstractInstaller
 
     public function doActivate(): void
     {
-        update_option(static::DATA_PREFIX . 'status', 'activated');
-        update_option(static::DATA_PREFIX . 'issues', [], false);
+        $this->compatibility->setStatus('activated');
+        $this->compatibility->saveIssues(true);
     }
 
     public function doUpgrade(string $currentVersion, string $appVersion): void

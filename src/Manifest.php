@@ -70,33 +70,18 @@ class Manifest extends AbstractManifest
     public function completeInjections(): void
     {
         if (! doing_action('wp_body_open')) {
-            $log = Application::getInstance()->logger('manifest');
-            $message = [
-                __('Incomplete template injections in front-end.', 'cardanopress'),
-            ];
+            $compatibility = Compatibility::getInstance();
 
-            if (wp_is_block_theme()) {
-                $message[] = __('Block theme rendered fallback templates from `theme-compat`.', 'cardanopress');
-            } else {
-                $message[] = __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress');
-            }
-
-            foreach ($message as $issue) {
-                $log->error($issue);
-            }
-
-            $message = array_merge(
-                get_option(Installer::DATA_PREFIX . 'issues'),
-                $message
-            );
+            $compatibility->addIssue('theme');
+            $compatibility->addIssue(wp_is_block_theme() ? 'block' : 'classic');
 
             wp_add_inline_script(
                 self::HANDLE_PREFIX . 'script',
-                'console.error(' . json_encode($message) . ')'
+                'console.error(' . json_encode($compatibility->getIssues()) . ')'
             );
 
-            if ('checking' === get_option(Installer::DATA_PREFIX . 'status')) {
-                update_option(Installer::DATA_PREFIX . 'issues', $message);
+            if ('checking' === $compatibility->getStatus()) {
+                $compatibility->saveIssues();
             }
 
             return;
