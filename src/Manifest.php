@@ -82,10 +82,13 @@ class Manifest extends AbstractManifest
                 $message[] = __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress');
             }
 
-            $log->error(implode(' ', $message));
+            foreach ($message as $issue) {
+                $log->error($issue);
+            }
+
             wp_add_inline_script(
                 self::HANDLE_PREFIX . 'script',
-                'console.error("' . implode(' ', $message) . '")'
+                'console.error(' . json_encode($message) . ')'
             );
 
             if ('checking' === get_option(Installer::DATA_PREFIX . 'status')) {
