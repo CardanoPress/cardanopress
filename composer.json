@@ -27,7 +27,10 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require": {
-    "php": "^7.4|^8.0"
+    "php": "^7.4|^8.0",
+    "ext-json": "*",
+    "ext-fileinfo": "*",
+    "ext-ctype": "*"
   },
   "require-dev": {
     "coenjacobs/mozart": "^0.7.1",

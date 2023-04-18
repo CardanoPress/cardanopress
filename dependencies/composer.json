@@ -10,6 +10,7 @@
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*",
+    "ext-fileinfo": "*",
     "ext-ctype": "*",
     "automattic/jetpack-autoloader": "^2.11",
     "cardanopress/framework": "^2.1"

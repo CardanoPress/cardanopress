@@ -322,6 +322,7 @@ return array(
     'PBWebDev\\CardanoPress\\Application' => $baseDir . '/../src/Application.php',
     'PBWebDev\\CardanoPress\\Blockfrost' => $baseDir . '/../src/Blockfrost.php',
     'PBWebDev\\CardanoPress\\Collection' => $baseDir . '/../src/Collection.php',
+    'PBWebDev\\CardanoPress\\Compatibility' => $baseDir . '/../src/Compatibility.php',
     'PBWebDev\\CardanoPress\\Installer' => $baseDir . '/../src/Installer.php',
     'PBWebDev\\CardanoPress\\Manifest' => $baseDir . '/../src/Manifest.php',
     'PBWebDev\\CardanoPress\\Profile' => $baseDir . '/../src/Profile.php',
