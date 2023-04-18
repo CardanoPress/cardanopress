@@ -67,7 +67,10 @@ class Installer extends AbstractInstaller
                 return;
             }
 
+            wp_cache_delete(static::DATA_PREFIX . 'issues', 'options');
+
             $issues = get_option(static::DATA_PREFIX . 'issues');
+
             update_option(static::DATA_PREFIX . 'status', empty($issues) ? 'normal' : 'issue');
 
             if (! is_admin() || empty($issues)) {
@@ -228,7 +231,7 @@ class Installer extends AbstractInstaller
     public function doActivate(): void
     {
         update_option(static::DATA_PREFIX . 'status', 'activated');
-        update_option(static::DATA_PREFIX . 'issues', []);
+        update_option(static::DATA_PREFIX . 'issues', [], false);
     }
 
     public function doUpgrade(string $currentVersion, string $appVersion): void
