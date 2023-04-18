@@ -29,7 +29,7 @@ class Installer extends AbstractInstaller
         add_action('plugins_loaded', [$this, 'loaded'], -1);
         add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
         add_action('admin_notices', [$this, 'noticePluginReview']);
-        add_action('admin_notices', [$this, 'noticeThemeIssue']);
+        add_action('admin_notices', [$this, 'noticePossibleIssues']);
         add_action('admin_footer', [$this, 'dismissNoticeReviewScript']);
         add_action('wp_ajax_cardanopress_dismiss_review', [$this, 'dismissNoticeReviewAction']);
         add_action('after_switch_theme', [$this, 'doActivate']);
@@ -56,22 +56,21 @@ class Installer extends AbstractInstaller
             $response = wp_remote_get(
                 $url,
                 [
-                    'timeout' => apply_filters('http_request_timeout', 10, $url),
+                    'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
                     'sslverify' => apply_filters('https_local_ssl_verify', false)
                 ]
             );
 
-            wp_cache_delete(static::DATA_PREFIX . 'status', 'options');
-
-            $status = get_option(static::DATA_PREFIX . 'status');
-
             if (is_wp_error($response)) {
                 update_option(static::DATA_PREFIX . 'status', 'activated');
-            } elseif ('checking' === $status) {
-                update_option(static::DATA_PREFIX . 'status', 'normal');
+
+                return;
             }
 
-            if (! is_admin() || 'issue' !== $status) {
+            $issues = get_option(static::DATA_PREFIX . 'issues');
+            update_option(static::DATA_PREFIX . 'status', empty($issues) ? 'normal' : 'issue');
+
+            if (! is_admin() || empty($issues)) {
                 return;
             }
 
@@ -148,7 +147,7 @@ class Installer extends AbstractInstaller
         <?php
     }
 
-    public function noticeThemeIssue(): void
+    public function noticePossibleIssues(): void
     {
         if ('issue' !== get_option(static::DATA_PREFIX . 'status')) {
             return;
@@ -229,7 +228,7 @@ class Installer extends AbstractInstaller
     public function doActivate(): void
     {
         update_option(static::DATA_PREFIX . 'status', 'activated');
-        delete_option(static::DATA_PREFIX . 'issues');
+        update_option(static::DATA_PREFIX . 'issues', []);
     }
 
     public function doUpgrade(string $currentVersion, string $appVersion): void

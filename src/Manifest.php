@@ -12,7 +12,6 @@ use CardanoPress\Foundation\AbstractManifest;
 
 class Manifest extends AbstractManifest
 {
-    protected Application $application;
     private bool $legacy_loaded;
 
     public const HANDLE_PREFIX = 'cardanopress-';
@@ -86,13 +85,17 @@ class Manifest extends AbstractManifest
                 $log->error($issue);
             }
 
+            $message = array_merge(
+                get_option(Installer::DATA_PREFIX . 'issues'),
+                $message
+            );
+
             wp_add_inline_script(
                 self::HANDLE_PREFIX . 'script',
                 'console.error(' . json_encode($message) . ')'
             );
 
             if ('checking' === get_option(Installer::DATA_PREFIX . 'status')) {
-                update_option(Installer::DATA_PREFIX . 'status', 'issue');
                 update_option(Installer::DATA_PREFIX . 'issues', $message);
             }
 
