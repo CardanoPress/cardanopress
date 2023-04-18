@@ -90,7 +90,7 @@ class Manifest extends AbstractManifest
 
             if ('checking' === get_option(Installer::DATA_PREFIX . 'status')) {
                 update_option(Installer::DATA_PREFIX . 'status', 'issue');
-                update_option(Installer::DATA_PREFIX . 'issue', implode(' ', $message));
+                update_option(Installer::DATA_PREFIX . 'issues', $message);
             }
 
             return;

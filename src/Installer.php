@@ -147,7 +147,8 @@ class Installer extends AbstractInstaller
             return;
         }
 
-        $message = get_option(static::DATA_PREFIX . 'issue');
+        $message = get_option(static::DATA_PREFIX . 'issues');
+        $message = implode(' ', $message);
 
         ?>
         <div class="notice notice-error">
@@ -217,6 +218,7 @@ class Installer extends AbstractInstaller
     public function doActivate(): void
     {
         update_option(static::DATA_PREFIX . 'status', 'activated');
+        delete_option(static::DATA_PREFIX . 'issues');
     }
 
     public function doUpgrade(string $currentVersion, string $appVersion): void
