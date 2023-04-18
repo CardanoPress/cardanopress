@@ -147,8 +147,7 @@ class Installer extends AbstractInstaller
             return;
         }
 
-        $message = get_option(static::DATA_PREFIX . 'issues');
-        $message = implode(' ', $message);
+        $issues = get_option(static::DATA_PREFIX . 'issues');
 
         ?>
         <div class="notice notice-error">
@@ -156,13 +155,18 @@ class Installer extends AbstractInstaller
                 <?php echo wp_kses(
                     sprintf(
                     /* translators: %s: plugin name */
-                        __('%s issue detected.', 'cardanopress'),
+                        __('%s issues detected.', 'cardanopress'),
                         '<strong>' . $this->application->getData('Name') . '</strong>',
                     ),
                     'strong'
                 ); ?>
-                <?php echo esc_html(str_replace($this->application->getData('Name'), 'Getting', $message)); ?>
             </p>
+
+            <ul style='list-style-type: decimal; padding: 1rem;'>
+                <?php foreach ($issues as $issue) : ?>
+                    <li><?php echo esc_html($issue); ?></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
         <?php
     }

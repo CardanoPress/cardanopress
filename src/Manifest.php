@@ -73,7 +73,7 @@ class Manifest extends AbstractManifest
         if (! doing_action('wp_body_open')) {
             $log = Application::getInstance()->logger('manifest');
             $message = [
-                __('CardanoPress component incomplete injections.', 'cardanopress'),
+                __('Incomplete template injections in front-end.', 'cardanopress'),
             ];
 
             if (wp_is_block_theme()) {
