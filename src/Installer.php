@@ -53,6 +53,11 @@ class Installer extends AbstractInstaller
                 $this->compatibility->addIssue('server');
             }
 
+            if (wp_is_block_theme()) {
+                $this->compatibility->addIssue('block');
+                $this->compatibility->addIssue('blank');
+            }
+
             if (! $this->compatibility->theme()) {
                 $this->compatibility->setStatus('activated');
 

@@ -72,7 +72,8 @@ class Compatibility
             'server' => __('WebAssembly MIME type is not supported by the server.', 'cardanopress'),
             'theme' => __('Incomplete template injections in front-end.', 'cardanopress'),
             'classic' => __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
-            'block' => __('Block theme rendered fallback templates from `theme-compat`.', 'cardanopress'),
+            'block' => __('Block theme detected and will render templates from `theme-compat`.', 'cardanopress'),
+            'blank' => __('Shipped pages will be loaded now as per activated theme\'s `page.html` spec.', 'cardanopress'),
         ];
 
         if (in_array($type, $messages, true)) {

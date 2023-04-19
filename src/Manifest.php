@@ -73,7 +73,7 @@ class Manifest extends AbstractManifest
             $compatibility = Compatibility::getInstance();
 
             $compatibility->addIssue('theme');
-            $compatibility->addIssue(wp_is_block_theme() ? 'block' : 'classic');
+            $compatibility->addIssue('classic');
 
             wp_add_inline_script(
                 self::HANDLE_PREFIX . 'script',
