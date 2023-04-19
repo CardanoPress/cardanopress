@@ -71,7 +71,7 @@ class Installer extends AbstractInstaller
             $issues = $this->compatibility->getIssues();
 
             foreach ($issues as $issue) {
-                $this->compatibility->dump($issue);
+                $this->compatibility->dump($this->compatibility->message($issue));
             }
 
             $this->compatibility->saveIssues();
@@ -175,7 +175,7 @@ class Installer extends AbstractInstaller
 
             <ul style='list-style-type: decimal; padding: 1rem;'>
                 <?php foreach ($issues as $issue) : ?>
-                    <li><?php echo esc_html($issue); ?></li>
+                    <li><?php echo esc_html($this->compatibility->message($issue)); ?></li>
                 <?php endforeach; ?>
             </ul>
         </div>

@@ -16,6 +16,7 @@ class Compatibility
     use Instantiable;
     use Loggable;
 
+    protected array $messages = [];
     protected array $issues = [];
 
     public const DATA_PREFIX = 'cardanopress_';
@@ -23,6 +24,13 @@ class Compatibility
     public function __construct(LoggerInterface $logger)
     {
         $this->issues = $this->getIssues(true);
+        $this->messages = [
+            'server' => __('WebAssembly MIME type is not supported by the server.', 'cardanopress'),
+            'theme' => __('Incomplete template injections in front-end.', 'cardanopress'),
+            'classic' => __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
+            'block' => __('Block theme detected and will render templates from `theme-compat`.', 'cardanopress'),
+            'blank' => __('Shipped pages will be loaded now as per activated theme\'s `page.html` spec.', 'cardanopress'),
+        ];
 
         $this->setLogger($logger);
         $this->setInstance($this);
@@ -68,24 +76,18 @@ class Compatibility
 
     public function message(string $type): string
     {
-        $messages = [
-            'server' => __('WebAssembly MIME type is not supported by the server.', 'cardanopress'),
-            'theme' => __('Incomplete template injections in front-end.', 'cardanopress'),
-            'classic' => __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
-            'block' => __('Block theme detected and will render templates from `theme-compat`.', 'cardanopress'),
-            'blank' => __('Shipped pages will be loaded now as per activated theme\'s `page.html` spec.', 'cardanopress'),
-        ];
-
-        if (in_array($type, $messages, true)) {
-            return $type;
-        }
-
-        return $messages[$type] ?? '';
+        return $this->messages[$type] ?? '';
     }
 
-    public function addIssue(string $type): void
+    public function addIssue(string $type): bool
     {
-        $this->issues[] = $this->message($type);
+        if (! in_array($type, array_keys($this->messages), true)) {
+            return false;
+        }
+
+        $this->issues[] = $type;
+
+        return true;
     }
 
     public function getIssues(bool $in_cache = false): array

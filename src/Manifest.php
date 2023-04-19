@@ -77,7 +77,10 @@ class Manifest extends AbstractManifest
 
             wp_add_inline_script(
                 self::HANDLE_PREFIX . 'script',
-                'console.error(' . json_encode($compatibility->getIssues()) . ')'
+                sprintf(
+                    'console.error(%s)',
+                    json_encode(array_map([$compatibility, 'message'], $compatibility->getIssues()))
+                )
             );
 
             if ('checking' === $compatibility->getStatus()) {
