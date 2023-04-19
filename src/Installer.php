@@ -21,7 +21,7 @@ class Installer extends AbstractInstaller
 
     protected function initialize(): void
     {
-        $this->compatibility = new Compatibility($this->application->logger('compatibility'));
+        $this->compatibility = new Compatibility($this->getLogger());
 
         $this->setSettingsLinkUrl(admin_url('admin.php?page=' . Admin::OPTION_KEY));
     }
@@ -71,12 +71,6 @@ class Installer extends AbstractInstaller
 
             $this->compatibility->saveIssues();
             $this->compatibility->setStatus(empty($issues) ? 'normal' : 'issue');
-
-            if (! is_admin() || empty($issues)) {
-                return;
-            }
-
-            exit(wp_redirect(admin_url('admin.php?page=' . Admin::OPTION_KEY)));
         }
     }
 

@@ -105,7 +105,7 @@ class Compatibility
         return update_option(static::DATA_PREFIX . 'issues', $issues, false);
     }
 
-    public function dump(string $message, string $level = 'info'): void
+    public function dump(string $message, string $level = 'warning'): void
     {
         $this->log($message, $level);
     }
