@@ -103,7 +103,12 @@ class Compatibility
 
     public function saveIssues(bool $reset = false): bool
     {
-        $issues = $reset ? [] : $this->getIssues();
+        $issues = $this->getIssues();
+
+        if ($reset) {
+            $issues = [];
+            $this->issues = [];
+        }
 
         return update_option(static::DATA_PREFIX . 'issues', $issues, false);
     }
@@ -111,5 +116,38 @@ class Compatibility
     public function dump(string $message, string $level = 'warning'): void
     {
         $this->log($message, $level);
+    }
+
+    public function run(): void
+    {
+        $this->setStatus('checking');
+
+        if (! $this->server()) {
+            $this->addIssue('server');
+        }
+
+        if (wp_is_block_theme()) {
+            $this->addIssue('block');
+            $this->addIssue('blank');
+        }
+
+        if (! $this->theme()) {
+            $this->setStatus('activated');
+
+            return;
+        }
+
+        foreach ($this->getIssues(true) as $issue) {
+            $this->addIssue($issue);
+        }
+
+        $issues = $this->getIssues();
+
+        foreach ($issues as $issue) {
+            $this->dump($this->message($issue));
+        }
+
+        $this->saveIssues();
+        $this->setStatus(empty($issues) ? 'normal' : 'issue');
     }
 }

@@ -47,35 +47,7 @@ class Installer extends AbstractInstaller
         do_action(static::DATA_PREFIX . 'loaded');
 
         if ('activated' === $this->compatibility->getStatus()) {
-            $this->compatibility->setStatus('checking');
-
-            if (! $this->compatibility->server()) {
-                $this->compatibility->addIssue('server');
-            }
-
-            if (wp_is_block_theme()) {
-                $this->compatibility->addIssue('block');
-                $this->compatibility->addIssue('blank');
-            }
-
-            if (! $this->compatibility->theme()) {
-                $this->compatibility->setStatus('activated');
-
-                return;
-            }
-
-            foreach ($this->compatibility->getIssues(true) as $issue) {
-                $this->compatibility->addIssue($issue);
-            }
-
-            $issues = $this->compatibility->getIssues();
-
-            foreach ($issues as $issue) {
-                $this->compatibility->dump($this->compatibility->message($issue));
-            }
-
-            $this->compatibility->saveIssues();
-            $this->compatibility->setStatus(empty($issues) ? 'normal' : 'issue');
+            $this->compatibility->run();
         }
     }
 
@@ -232,8 +204,17 @@ class Installer extends AbstractInstaller
 
     public function doActivate(): void
     {
+        if ('after_switch_theme' === current_filter() && ! isset($_GET['activated'])) {
+            return;
+        }
+
         $this->compatibility->setStatus('activated');
         $this->compatibility->saveIssues(true);
+
+        if ('after_switch_theme' === current_filter()) {
+            $this->log('Theming ' . $this->pluginNameAndVersion);
+            $this->compatibility->run();
+        }
     }
 
     public function doUpgrade(string $currentVersion, string $appVersion): void
