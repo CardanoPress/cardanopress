@@ -46,7 +46,7 @@ class Compatibility
         return update_option(static::DATA_PREFIX . 'status', $state, false);
     }
 
-    public function theme(): bool
+    protected function theme(): bool
     {
         $url = home_url();
         $args = [
@@ -57,7 +57,7 @@ class Compatibility
         return !is_wp_error(wp_remote_get($url, $args));
     }
 
-    public function server(): bool
+    protected function server(): bool
     {
         $url = plugin_dir_url(Application::getInstance()->getPluginFile());
         $args = [
@@ -113,11 +113,6 @@ class Compatibility
         return update_option(static::DATA_PREFIX . 'issues', $issues, false);
     }
 
-    public function dump(string $message, string $level = 'warning'): void
-    {
-        $this->log($message, $level);
-    }
-
     public function run(): void
     {
         $this->setStatus('checking');
@@ -144,7 +139,7 @@ class Compatibility
         $issues = $this->getIssues();
 
         foreach ($issues as $issue) {
-            $this->dump($this->message($issue));
+            $this->log($this->message($issue), 'warning');
         }
 
         $this->saveIssues();

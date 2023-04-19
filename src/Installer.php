@@ -145,7 +145,7 @@ class Installer extends AbstractInstaller
                 ); ?>
             </p>
 
-            <ul style='list-style-type: decimal; padding: 1rem;'>
+            <ul style='list-style-type: decimal; padding: 0 1rem;'>
                 <?php foreach ($issues as $issue) : ?>
                     <li><?php echo esc_html($this->compatibility->message($issue)); ?></li>
                 <?php endforeach; ?>
@@ -199,7 +199,7 @@ class Installer extends AbstractInstaller
             return empty($_COOKIE['cardanopress_dismiss_review']);
         }
 
-        return !$this->application->userProfile()->isDismissedNoticeReview();
+        return ! $this->application->userProfile()->isDismissedNoticeReview();
     }
 
     public function doActivate(): void

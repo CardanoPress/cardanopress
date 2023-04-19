@@ -63,7 +63,7 @@ class Application extends AbstractApplication
         static $user;
 
         if (null === $user) {
-            $user =  new Profile(wp_get_current_user());
+            $user = new Profile(wp_get_current_user());
         }
 
         return $user;
