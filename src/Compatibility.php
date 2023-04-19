@@ -51,7 +51,19 @@ class Compatibility
 
     public function server(): bool
     {
-        return ('application/wasm' === mime_content_type(__DIR__ . '/test.wasm'));
+        $url = plugin_dir_url(Application::getInstance()->getPluginFile());
+        $args = [
+            'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
+            'sslverify' => apply_filters('https_local_ssl_verify', false)
+        ];
+
+        $response = wp_remote_head($url . 'src/test.wasm', $args);
+
+        if (is_wp_error($response)) {
+            return $this->server();
+        }
+
+        return ('application/wasm' === wp_remote_retrieve_header($response, 'content-type'));
     }
 
     public function message(string $type): string
