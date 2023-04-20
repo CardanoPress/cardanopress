@@ -146,11 +146,20 @@ class Installer extends AbstractInstaller
                 ); ?>
             </p>
 
-            <ul style='list-style-type: decimal; padding: 0 1rem;'>
+            <ol style="list-style-type: decimal; padding-left: 1rem;">
                 <?php foreach ($issues as $issue) : ?>
-                    <li><?php echo esc_html($this->compatibility->message($issue)); ?></li>
+                    <li>
+                        <?php echo esc_html($this->compatibility->message($issue)); ?>
+                        <?php if ('block' === $issue) : ?>
+                            <ul style="list-style-type: disc; padding: 0.5rem 0 0 1rem;">
+                                <?php foreach (['default', 'content', 'ignore'] as $block) : ?>
+                                    <li><?php echo esc_html($this->compatibility->message($block)); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </li>
                 <?php endforeach; ?>
-            </ul>
+            </ol>
 
             <p>
                 <button id="cardanopress_compatibility_check">

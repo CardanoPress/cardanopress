@@ -28,8 +28,10 @@ class Compatibility
             'server' => __('WebAssembly MIME type is not supported by the server.', 'cardanopress'),
             'theme' => __('Incomplete template injections in front-end.', 'cardanopress'),
             'classic' => __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
-            'block' => __('Block theme detected and will render templates from `theme-compat`.', 'cardanopress'),
-            'blank' => __('Shipped pages will be loaded now as per activated theme\'s `page.html` spec.', 'cardanopress'),
+            'block' => __('Block theme does not fully work with the provided page templates.', 'cardanopress'),
+            'default' => __('By default, each pages will be loaded as per theme\'s `page.html` specification.', 'cardanopress'),
+            'content' => __('The shortcodes to layout the page needs to be manually added in the content editor.', 'cardanopress'),
+            'ignore' => __('Please ignore if custom templates are already implemented, else they will be rendered blank.', 'cardanopress'),
         ];
 
         $this->setLogger($logger);
