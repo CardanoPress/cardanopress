@@ -161,6 +161,7 @@ class Installer extends AbstractInstaller
                 <?php endforeach; ?>
             </ol>
 
+            <?php if (1 < count($issues) || 'block' !== $issues[0]) : ?>
             <p>
                 <button id="cardanopress_compatibility_check">
                     <?php echo __('Re-check issues', 'cardanopress'); ?>
@@ -170,9 +171,9 @@ class Installer extends AbstractInstaller
 
             <script id="cardanopress-compatibility-js" type="text/javascript">
                 jQuery(document).on('click', '#cardanopress_compatibility_check', function(e) {
-                    e.preventDefault();
+                    e.preventDefault()
 
-                    var $this = jQuery(this);
+                    var $this = jQuery(this)
 
                     jQuery.ajax({
                         type: 'POST',
@@ -181,13 +182,14 @@ class Installer extends AbstractInstaller
                             action: 'cardanopress_compatibility_check'
                         },
                         beforeSend: function() {
-                            $this.siblings('.spinner').addClass('is-active');
+                            $this.siblings('.spinner').addClass('is-active')
                         }
                     }).done(function() {
-                        location.reload();
+                        location.reload()
                     })
                 })
             </script>
+            <?php endif; ?>
         </div>
         <?php
     }
@@ -208,7 +210,7 @@ class Installer extends AbstractInstaller
                     url: ajaxurl,
                     data: {
                         action: 'cardanopress_dismiss_notice',
-                        name: jQuery(this).parent().attr('id'),
+                        name: jQuery(this).parent().attr('id')
                     }
                 })
             })
