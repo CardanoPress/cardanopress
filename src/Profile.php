@@ -48,9 +48,9 @@ class Profile extends AbstractProfile
         return $this->updateMeta($this->prefix . 'favorite_handle', $handle);
     }
 
-    public function dismissNotice(string $type): bool
+    public function dismissNotice(string $type, bool $reset = false): bool
     {
-        return $this->updateMeta($this->prefix . 'dismissed_' . $type, true);
+        return $this->updateMeta($this->prefix . 'dismissed_' . $type, ! $reset);
     }
 
     public function isDismissedNotice(string $type): bool

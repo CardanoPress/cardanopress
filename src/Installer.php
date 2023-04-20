@@ -270,6 +270,7 @@ class Installer extends AbstractInstaller
 
         $this->compatibility->setStatus('activated');
         $this->compatibility->saveIssues(true);
+        $this->application->userProfile()->dismissNotice('issues', true);
 
         if ('after_switch_theme' === current_filter()) {
             $this->log('Theming ' . $this->pluginNameAndVersion);
