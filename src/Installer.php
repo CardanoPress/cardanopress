@@ -133,20 +133,28 @@ class Installer extends AbstractInstaller
             return;
         }
 
+        /* translators: %s: plugin name */
+        $count = count($issues);
+        $message = _n('%s issue detected:', '%s issues detected:', $count, 'cardanopress');
+
+        if (1 === $count && 'block' === $issues[0]) {
+            /* translators: %s: plugin name */
+            $message = __('%s possible issue:', 'cardanopress');
+        }
+
         ?>
         <div class="notice notice-error is-dismissible cardanopress-notice" id="cardanopress_notice_issues">
             <p>
                 <?php echo wp_kses(
                     sprintf(
-                    /* translators: %s: plugin name */
-                        __('%s issues detected.', 'cardanopress'),
+                        $message,
                         '<strong>' . $this->application->getData('Name') . '</strong>',
                     ),
                     'strong'
                 ); ?>
             </p>
 
-            <ol style="list-style-type: decimal; padding-left: 1rem;">
+            <ol>
                 <?php foreach ($issues as $issue) : ?>
                     <li>
                         <?php echo esc_html($this->compatibility->message($issue)); ?>
@@ -161,10 +169,10 @@ class Installer extends AbstractInstaller
                 <?php endforeach; ?>
             </ol>
 
-            <?php if (1 < count($issues) || 'block' !== $issues[0]) : ?>
+            <?php if (1 < $count || 'block' !== $issues[0]) : ?>
             <p>
                 <button id="cardanopress_compatibility_check">
-                    <?php echo __('Re-check issues', 'cardanopress'); ?>
+                    <?php echo _n('Re-check issue', 'Re-check issues', $count, 'cardanopress'); ?>
                 </button>
                 <span class="spinner" style="margin-top: -4px; float: none;"></span>
             </p>
