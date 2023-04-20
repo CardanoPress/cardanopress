@@ -34,8 +34,8 @@ class Installer extends AbstractInstaller
         add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
         add_action('admin_notices', [$this, 'noticePluginReview']);
         add_action('admin_notices', [$this, 'noticePossibleIssues']);
-        add_action('admin_footer', [$this, 'dismissNoticeReviewScript']);
-        add_action('wp_ajax_cardanopress_dismiss_review', [$this, 'dismissNoticeReviewAction']);
+        add_action('admin_footer', [$this, 'dismissNoticeScript']);
+        add_action('wp_ajax_cardanopress_dismiss_notice', [$this, 'dismissNoticeAction']);
         add_action('after_switch_theme', [$this, 'doActivate']);
         add_action(self::DATA_PREFIX . 'activating', [$this, 'doActivate']);
         add_action(self::DATA_PREFIX . 'upgrading', [$this, 'doUpgrade'], 10, 2);
@@ -81,12 +81,12 @@ class Installer extends AbstractInstaller
 
     public function noticePluginReview(): void
     {
-        if (! $this->shouldNoticeReview()) {
+        if (! $this->shouldNotice('review')) {
             return;
         }
 
         ?>
-        <div class="notice notice-info is-dismissible" id="cardanopress_notice_review">
+        <div class="notice notice-info is-dismissible cardanopress-notice" id="cardanopress_notice_review">
             <p>
                 <?php echo wp_kses(
                     sprintf(
@@ -122,7 +122,7 @@ class Installer extends AbstractInstaller
 
     public function noticePossibleIssues(): void
     {
-        if ('issue' !== $this->compatibility->getStatus()) {
+        if (! $this->shouldNotice('issues') || 'issue' !== $this->compatibility->getStatus()) {
             return;
         }
 
@@ -133,7 +133,7 @@ class Installer extends AbstractInstaller
         }
 
         ?>
-        <div class="notice notice-error">
+        <div class="notice notice-error is-dismissible cardanopress-notice" id="cardanopress_notice_issues">
             <p>
                 <?php echo wp_kses(
                     sprintf(
@@ -154,9 +154,9 @@ class Installer extends AbstractInstaller
         <?php
     }
 
-    public function dismissNoticeReviewScript()
+    public function dismissNoticeScript()
     {
-        if (wp_cache_get('cardanopress_dismiss_review')) {
+        if (wp_cache_get('cardanopress_dismiss_notice')) {
             return;
         }
 
@@ -164,12 +164,13 @@ class Installer extends AbstractInstaller
         ?>
 
         <script id="cardanopress-notice-js" type="text/javascript">
-            jQuery(document).on('click', '#cardanopress_notice_review .notice-dismiss', function() {
+            jQuery(document).on('click', '.cardanopress-notice .notice-dismiss', function() {
                 jQuery.ajax({
                     type: 'POST',
                     url: ajaxurl,
                     data: {
-                        action: 'cardanopress_dismiss_review'
+                        action: 'cardanopress_dismiss_notice',
+                        name: jQuery(this).parent().attr('id'),
                     }
                 })
             })
@@ -178,28 +179,31 @@ class Installer extends AbstractInstaller
         <?php
         echo ob_get_clean();
 
-        wp_cache_set('cardanopress_dismiss_review', true);
+        wp_cache_set('cardanopress_dismiss_notice', true);
     }
 
-    public function dismissNoticeReviewAction()
+    public function dismissNoticeAction()
     {
+        $name   = sanitize_text_field($_POST['name']);
         $expire = time() + DAY_IN_SECONDS;
         $secure = is_ssl();
 
-        setcookie('cardanopress_dismiss_review', true, $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
-        $this->application->userProfile()->dismissNoticeReview();
+        setcookie($name, true, $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
+
+        $this->application->userProfile()->dismissNotice(str_replace('cardanopress_notice_', '', $name));
+
         wp_die();
     }
 
-    protected function shouldNoticeReview(): bool
+    protected function shouldNotice(string $type): bool
     {
         $screen = get_current_screen();
 
         if (Admin::OPTION_KEY === $screen->parent_base) {
-            return empty($_COOKIE['cardanopress_dismiss_review']);
+            return empty($_COOKIE['cardanopress_notice_' . $type]);
         }
 
-        return ! $this->application->userProfile()->isDismissedNoticeReview();
+        return ! $this->application->userProfile()->isDismissedNotice($type);
     }
 
     public function doActivate(): void
