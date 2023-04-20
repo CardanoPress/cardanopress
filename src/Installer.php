@@ -36,6 +36,7 @@ class Installer extends AbstractInstaller
         add_action('admin_notices', [$this, 'noticePossibleIssues']);
         add_action('admin_footer', [$this, 'dismissNoticeScript']);
         add_action('wp_ajax_cardanopress_dismiss_notice', [$this, 'dismissNoticeAction']);
+        add_action('wp_ajax_cardanopress_compatibility_check', [$this, 'compatibilityCheckAction']);
         add_action('after_switch_theme', [$this, 'doActivate']);
         add_action(self::DATA_PREFIX . 'activating', [$this, 'doActivate']);
         add_action(self::DATA_PREFIX . 'upgrading', [$this, 'doUpgrade'], 10, 2);
@@ -150,6 +151,34 @@ class Installer extends AbstractInstaller
                     <li><?php echo esc_html($this->compatibility->message($issue)); ?></li>
                 <?php endforeach; ?>
             </ul>
+
+            <p>
+                <button id="cardanopress_compatibility_check">
+                    <?php echo __('Re-check issues', 'cardanopress'); ?>
+                </button>
+                <span class="spinner" style="margin-top: -4px; float: none;"></span>
+            </p>
+
+            <script id="cardanopress-compatibility-js" type="text/javascript">
+                jQuery(document).on('click', '#cardanopress_compatibility_check', function(e) {
+                    e.preventDefault();
+
+                    var $this = jQuery(this);
+
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: ajaxurl,
+                        data: {
+                            action: 'cardanopress_compatibility_check'
+                        },
+                        beforeSend: function() {
+                            $this.siblings('.spinner').addClass('is-active');
+                        }
+                    }).done(function() {
+                        location.reload();
+                    })
+                })
+            </script>
         </div>
         <?php
     }
@@ -182,9 +211,17 @@ class Installer extends AbstractInstaller
         wp_cache_set('cardanopress_dismiss_notice', true);
     }
 
+    public function compatibilityCheckAction()
+    {
+        $this->doActivate();
+        $this->log('Checking ' . $this->pluginNameAndVersion);
+
+        wp_die();
+    }
+
     public function dismissNoticeAction()
     {
-        $name   = sanitize_text_field($_POST['name']);
+        $name = sanitize_text_field($_POST['name']);
         $expire = time() + DAY_IN_SECONDS;
         $secure = is_ssl();
 
