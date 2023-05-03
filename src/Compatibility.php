@@ -125,7 +125,6 @@ class Compatibility
 
         if (wp_is_block_theme()) {
             $this->addIssue('block');
-            $this->addIssue('blank');
         }
 
         if (! $this->theme()) {
