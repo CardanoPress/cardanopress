@@ -159,6 +159,7 @@ class WalletAction implements HookInterface
         $response = $blockfrost->protocolParameters();
 
         if (empty($response)) {
+            $this->application->logger('actions')->error(CoreAction::getErrorMessage('blockfrost'));
             wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
         }
 
@@ -180,6 +181,7 @@ class WalletAction implements HookInterface
         $response = $blockfrost->getAccountDetails($rewardAddress);
 
         if (empty($response)) {
+            $this->application->logger('actions')->error(CoreAction::getErrorMessage('blockfrost'));
             wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
         }
 
@@ -201,6 +203,7 @@ class WalletAction implements HookInterface
         $response = $blockfrost->getPoolDetails($poolId);
 
         if (empty($response)) {
+            $this->application->logger('actions')->error(CoreAction::getErrorMessage('blockfrost'));
             wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
         }
 
@@ -215,6 +218,7 @@ class WalletAction implements HookInterface
         $response = $poolData['hex'] ?? '';
 
         if (empty($response)) {
+            $this->application->logger('actions')->error(CoreAction::getErrorMessage('delegation'));
             wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
         }
 
@@ -237,6 +241,7 @@ class WalletAction implements HookInterface
         );
 
         if (! $success) {
+            $this->application->logger('actions')->error(CoreAction::getErrorMessage('transaction'));
             wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
         }
 
@@ -253,6 +258,7 @@ class WalletAction implements HookInterface
         $response = $this->application->paymentAddress();
 
         if (empty($response)) {
+            $this->application->logger('actions')->error(CoreAction::getErrorMessage('payment'));
             wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
         }
 
@@ -272,6 +278,7 @@ class WalletAction implements HookInterface
             return;
         }
 
+        $this->application->logger('actions')->error(CoreAction::getErrorMessage('incomplete'));
         wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
     }
 }

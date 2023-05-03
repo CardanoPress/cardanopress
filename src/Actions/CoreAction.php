@@ -60,6 +60,13 @@ class CoreAction implements HookInterface
                 'blockfrostError' => __('Blockfrost API Error. Please try again', 'cardanopress'),
                 'notPermitted' => __('You don\'t have permission to do this.', 'cardanopress'),
             ],
+            'error' => [
+                'incomplete' => __('Bad AJAX request. Received missing required field/s data.', 'cardanopress'),
+                'delegation' => __('Incomplete delegation settings. Empty pool details.', 'cardanopress'),
+                'transaction' => __('Unable to save transaction details to user meta.', 'cardanopress'),
+                'payment' => __('Incomplete payment settings. Empty wallet address to send funds.', 'cardanopress'),
+                'blockfrost' => __('Bad blockfrost response. Actual data received in separate log.', 'cardanopress'),
+            ],
         ];
 
         return $data[$type];
@@ -68,6 +75,13 @@ class CoreAction implements HookInterface
     public static function getAjaxMessage(string $type): string
     {
         $messages = apply_filters('cardanopress_ajax_messages', self::customizableMessages('ajax'));
+
+        return $messages[$type] ?? '';
+    }
+
+    public static function getErrorMessage(string $type): string
+    {
+        $messages = apply_filters('cardanopress_error_messages', self::customizableMessages('error'));
 
         return $messages[$type] ?? '';
     }
