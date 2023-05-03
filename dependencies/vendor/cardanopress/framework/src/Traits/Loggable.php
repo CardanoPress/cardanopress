@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 
 trait Loggable
 {
-    private ?LoggerInterface $logger = null;
+    protected ?LoggerInterface $logger = null;
 
     protected function setLogger(LoggerInterface $logger): void
     {

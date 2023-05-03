@@ -7,10 +7,11 @@
 
 namespace CardanoPress\Foundation;
 
+use CardanoPress\Interfaces\ProfileInterface;
 use CardanoPress\SharedBase;
 use WP_User;
 
-abstract class AbstractProfile extends SharedBase
+abstract class AbstractProfile extends SharedBase implements ProfileInterface
 {
     protected WP_User $user;
     private string $prefix = 'cardanopress_';
@@ -160,5 +161,15 @@ abstract class AbstractProfile extends SharedBase
         $isSaved = $this->addMeta($this->prefix . 'transaction', $data);
 
         return (bool)$isSaved;
+    }
+
+    public function dismissNotice(string $type, bool $reset = false): bool
+    {
+        return $this->updateMeta($this->prefix . 'dismissed_' . $type, ! $reset);
+    }
+
+    public function isDismissedNotice(string $type): bool
+    {
+        return (bool)$this->getMeta($this->prefix . 'dismissed_' . $type, true);
     }
 }

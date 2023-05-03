@@ -20,6 +20,17 @@ abstract class BaseMeta extends Form {
 	protected int $current_id = 0;
 
 
+	protected function register(): void {
+
+		if ( did_action( 'init' ) ) {
+			$this->register_meta();
+		} else {
+			add_action( 'init', array( $this, 'register_meta' ) ); // @codeCoverageIgnore
+		}
+
+	}
+
+
 	protected function get_handler(): Handler {
 
 		return new MetaHandler( $this->config['object_type'] );

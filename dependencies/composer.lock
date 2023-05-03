@@ -59,16 +59,16 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "e9a51159237227bcc2904360586a4b4c9a2d7b65"
+                "reference": "f1f006417fc618685210bff60b93794f03cdcdc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/e9a51159237227bcc2904360586a4b4c9a2d7b65",
-                "reference": "e9a51159237227bcc2904360586a4b4c9a2d7b65",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/f1f006417fc618685210bff60b93794f03cdcdc5",
+                "reference": "f1f006417fc618685210bff60b93794f03cdcdc5",
                 "shasum": ""
             },
             "require": {
@@ -106,9 +106,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.1.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.2.0"
             },
-            "time": "2023-04-12T07:37:07+00:00"
+            "time": "2023-05-02T08:49:50+00:00"
         }
     ],
     "packages-dev": [],
