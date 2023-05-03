@@ -42,7 +42,7 @@ class Admin extends AbstractAdmin
 
             $keys = $this->getOption('blockfrost_project_id');
 
-            Blockfrost::useProjectIds($keys['mainnet'], $keys['testnet']);
+            Blockfrost::useProjectIds($keys['mainnet'] ?? '', $keys['testnet'] ?? '');
         });
         add_filter('pre_update_option_' . self::OPTION_KEY, [$this, 'savePoolDetails'], 10, 2);
         add_action('themeplate_page_' . self::OPTION_KEY . '_load', [$this, 'checkPoolDetails']);
@@ -302,22 +302,21 @@ class Admin extends AbstractAdmin
         ]);
     }
 
-    public function savePoolDetails($newValue, $oldValue) // this method is triggered on settings save
+    public function savePoolDetails($newValue, $oldValue)
     {
         if (
-            // already have data and either
             ! empty($newValue['delegation_pool_data']) && ! empty($oldValue['delegation_pool_data']) && (
-                $newValue['delegation_pool_id'] === $oldValue['delegation_pool_id'] ||  // pool id is the same or
-                empty(array_filter($newValue['blockfrost_project_id']))                 // blockfrost api key is empty
+                $newValue['delegation_pool_id'] === $oldValue['delegation_pool_id'] ||
+                empty(array_filter($newValue['blockfrost_project_id']))
             )
         ) {
-            return $newValue;                                                 // bail early; no need to call blockfrost
+            return $newValue;
         }
 
-        $newValue['delegation_pool_data'] = $oldValue['delegation_pool_data'] ?? [];  // initialize from old or empty
+        $newValue['delegation_pool_data'] = $oldValue['delegation_pool_data'] ?? [];
 
-        if (empty($newValue['delegation_pool_id'])) { // no pool id provided in save
-            return $newValue; // bail early; no need to call blockfrost
+        if (empty($newValue['delegation_pool_id'])) {
+            return $newValue;
         }
 
         $newValue['delegation_pool_data'] = $this->getPoolDetails($newValue['delegation_pool_id']);
@@ -328,16 +327,19 @@ class Admin extends AbstractAdmin
     public function checkPoolDetails(): void
     {
         $optionsValue = get_option(self::OPTION_KEY, []);
+        $poolData = $optionsValue['delegation_pool_data'] ?? [];
+        $poolIds = $optionsValue['delegation_pool_id'] ?? [];
 
         if (
-            ! empty($optionsValue['delegation_pool_data']) &&
+            ! empty($poolData) &&
+            ! empty($poolIds) &&
             ! empty($optionsValue['blockfrost_project_id']) &&
-            count(array_filter($optionsValue['delegation_pool_data'])) === count(array_filter($optionsValue['delegation_pool_id']))
+            count(array_filter($poolData)) === count(array_filter($poolIds))
         ) {
             return;
         }
 
-        $optionsValue['delegation_pool_data'] = $this->getPoolDetails($optionsValue['delegation_pool_id']);
+        $optionsValue['delegation_pool_data'] = $this->getPoolDetails($poolIds);
 
         update_option(self::OPTION_KEY, $optionsValue);
     }
