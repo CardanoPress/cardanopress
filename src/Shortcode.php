@@ -22,6 +22,7 @@ class Shortcode extends AbstractShortcode
     {
         add_shortcode('cardanopress_option', [$this, 'doOption']);
         add_shortcode('cardanopress_template', [$this, 'doTemplate']);
+        add_shortcode('cardanopress_template_if', [$this, 'doTemplateIf']);
         add_shortcode('cardanopress_userprofile', [$this, 'doUserProfile']);
         add_shortcode('cardanopress_delegationpool', [$this, 'doDelegationPool']);
         add_shortcode('cardanopress_component_cardanopress', [$this, 'doComponentCardanoPress']);
@@ -72,6 +73,21 @@ class Shortcode extends AbstractShortcode
         }
 
         return '<template x-if="' . $args['if'] . '">' . $html . '</template>';
+    }
+
+    public function doTemplateIf(array $attributes, ?string $content = null): string
+    {
+        $args = shortcode_atts([
+            'condition' => '',
+        ], $attributes);
+
+        $html = apply_filters('the_content', $content);
+
+        if (empty($args['condition'])) {
+            return $html;
+        }
+
+        return '<template x-if="' . $args['condition'] . '">' . $html . '</template>';
     }
 
     public function doComponentCardanoPress($attributes, ?string $content = null): string
