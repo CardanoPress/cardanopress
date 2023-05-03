@@ -44,7 +44,8 @@ class Admin extends AbstractAdmin
 
             Blockfrost::useProjectIds($keys['mainnet'], $keys['testnet']);
         });
-        add_filter('pre_update_option_' . self::OPTION_KEY, [$this, 'getPoolDetails'], 10, 2);
+        add_filter('pre_update_option_' . self::OPTION_KEY, [$this, 'savePoolDetails'], 10, 2);
+        add_action('themeplate_page_' . self::OPTION_KEY . '_load', [$this, 'checkPoolDetails']);
     }
 
     private function blockfrostFields(): void
@@ -67,25 +68,6 @@ class Admin extends AbstractAdmin
                             'required' => true,
                         ],
                         'testnet' => [
-                            'title' => __('Testnet', 'cardanopress'),
-                            'description' => __('For networks preview and preprod', 'cardanopress'),
-                            'type' => 'text',
-                        ],
-                    ],
-                ],
-                'project_ids' => [
-                    'type' => 'group',
-                    'default' => [
-                        'mainnets' => '',
-                        'testnets' => '',
-                    ],
-                    'fields' => [
-                        'mainnets' => [
-                            'title' => __('Mainnet', 'cardanopress'),
-                            'type' => 'text',
-                            'required' => true,
-                        ],
-                        'testnets' => [
                             'title' => __('Testnet', 'cardanopress'),
                             'description' => __('For networks preview and preprod', 'cardanopress'),
                             'type' => 'text',
@@ -320,10 +302,11 @@ class Admin extends AbstractAdmin
         ]);
     }
 
-    public function getPoolDetails($newValue, $oldValue) // this method is triggered on settings save
+    public function savePoolDetails($newValue, $oldValue) // this method is triggered on settings save
     {
         if (
-            ! empty($oldValue['delegation_pool_data']) && (                             // already have data and either
+            // already have data and either
+            ! empty($newValue['delegation_pool_data']) && ! empty($oldValue['delegation_pool_data']) && (
                 $newValue['delegation_pool_id'] === $oldValue['delegation_pool_id'] ||  // pool id is the same or
                 empty(array_filter($newValue['blockfrost_project_id']))                 // blockfrost api key is empty
             )
@@ -337,16 +320,42 @@ class Admin extends AbstractAdmin
             return $newValue; // bail early; no need to call blockfrost
         }
 
-        foreach ($newValue['delegation_pool_id'] as $network => $poolId) { // loop through networks testnet and mainnet
-            if (! Blockfrost::isReady($network)) { // if network api key not provided
-                continue; // skip
+        $newValue['delegation_pool_data'] = $this->getPoolDetails($newValue['delegation_pool_id']);
+
+        return $newValue;
+    }
+
+    public function checkPoolDetails(): void
+    {
+        $optionsValue = get_option(self::OPTION_KEY, []);
+
+        if (
+            ! empty($optionsValue['delegation_pool_data']) &&
+            ! empty($optionsValue['blockfrost_project_id']) &&
+            count(array_filter($optionsValue['delegation_pool_data'])) === count(array_filter($optionsValue['delegation_pool_id']))
+        ) {
+            return;
+        }
+
+        $optionsValue['delegation_pool_data'] = $this->getPoolDetails($optionsValue['delegation_pool_id']);
+
+        update_option(self::OPTION_KEY, $optionsValue);
+    }
+
+    protected function getPoolDetails(array $poolIds): array
+    {
+        $poolDetails = [];
+
+        foreach ($poolIds as $network => $poolId) {
+            if (! Blockfrost::isReady($network)) {
+                continue;
             }
 
             $blockfrost = new Blockfrost($network);
-            $newValue['delegation_pool_data'][$network] = $blockfrost->getPoolDetails($poolId); // save pool details
+            $poolDetails[$network] = $blockfrost->getPoolDetails($poolId);
         }
 
-        return $newValue;
+        return $poolDetails;
     }
 
     public function recommendPlugins()
