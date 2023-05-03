@@ -13,6 +13,10 @@ class Blockfrost extends AbstractBlockfrost
 {
     protected function initialize(): void
     {
+        if (null !== $this->logger) {
+            return;
+        }
+
         $this->setLogger(Application::getInstance()->logger('blockfrost'));
     }
 
@@ -110,17 +114,5 @@ class Blockfrost extends AbstractBlockfrost
         $response = $this->request('assets/' . $key);
 
         return 200 === $response['status_code'] ? $response['data'] : [];
-    }
-
-    public static function getProjectId(string $network): string
-    {
-        $project_ids = Application::getInstance()->option('blockfrost_project_id');
-
-        return $project_ids[$network] ?? '';
-    }
-
-    public static function isReady(string $network): bool
-    {
-        return '' !== self::getProjectId($network);
     }
 }
