@@ -375,6 +375,7 @@ class ComposerStaticInitf31970b948b5ad3e97af7bd2c43f3a5a
         'CardanoPress\\Traits\\Noticeable' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/Noticeable.php',
         'CardanoPress\\Traits\\Templatable' => __DIR__ . '/..' . '/cardanopress/framework/src/Traits/Templatable.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'PBWebDev\\CardanoPress\\Actions\\AdminAction' => __DIR__ . '/../..' . '/../src/Actions/AdminAction.php',
         'PBWebDev\\CardanoPress\\Actions\\CoreAction' => __DIR__ . '/../..' . '/../src/Actions/CoreAction.php',
         'PBWebDev\\CardanoPress\\Actions\\Sanitization' => __DIR__ . '/../..' . '/../src/Actions/Sanitization.php',
         'PBWebDev\\CardanoPress\\Actions\\WalletAction' => __DIR__ . '/../..' . '/../src/Actions/WalletAction.php',

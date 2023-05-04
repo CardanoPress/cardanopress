@@ -1414,6 +1414,10 @@ return array(
 		'version' => '2.11.18.0',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-manifest-reader.php'
 	),
+	'PBWebDev\\CardanoPress\\Actions\\AdminAction' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/../src/Actions/AdminAction.php'
+	),
 	'PBWebDev\\CardanoPress\\Actions\\CoreAction' => array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Actions/CoreAction.php'

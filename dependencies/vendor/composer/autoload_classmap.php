@@ -334,6 +334,7 @@ return array(
     'CardanoPress\\Traits\\Noticeable' => $vendorDir . '/cardanopress/framework/src/Traits/Noticeable.php',
     'CardanoPress\\Traits\\Templatable' => $vendorDir . '/cardanopress/framework/src/Traits/Templatable.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'PBWebDev\\CardanoPress\\Actions\\AdminAction' => $baseDir . '/../src/Actions/AdminAction.php',
     'PBWebDev\\CardanoPress\\Actions\\CoreAction' => $baseDir . '/../src/Actions/CoreAction.php',
     'PBWebDev\\CardanoPress\\Actions\\Sanitization' => $baseDir . '/../src/Actions/Sanitization.php',
     'PBWebDev\\CardanoPress\\Actions\\WalletAction' => $baseDir . '/../src/Actions/WalletAction.php',
