@@ -355,9 +355,43 @@ class Admin extends AbstractAdmin
 
             $blockfrost = new Blockfrost($network);
             $poolDetails[$network] = $blockfrost->getPoolDetails($poolId);
+
+            if (! empty($poolDetails[$network])) {
+                $this->addPoolExtended($poolDetails[$network]);
+            }
         }
 
         return $poolDetails;
+    }
+
+    protected function addPoolExtended(array &$data): void
+    {
+        if (empty($data)) {
+            return;
+        }
+
+        $extended = $this->checkPoolJson($data, 'url');
+
+        if (! empty($extended)) {
+            $data['extended'] = $extended;
+        }
+    }
+
+    protected function checkPoolJson(array $data, string $key): array
+    {
+        if (empty($data)) {
+            return [];
+        }
+
+        $response = wp_remote_retrieve_body(wp_remote_get($data[$key]));
+
+        if ('' === $response) {
+            return [];
+        }
+
+        $data = json_decode($response, true);
+
+        return isset($data['extended']) ? $this->checkPoolJson($data, 'extended') : $data;
     }
 
     public function recommendPlugins()
