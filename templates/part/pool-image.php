@@ -13,13 +13,19 @@ if (empty($pool)) {
     return;
 }
 
+$image_icon = '';
+
+if (isset($pool['extended']['info']['url_png_icon_64x64'])) {
+    $image_icon = $pool['extended']['info']['url_png_icon_64x64'];
+}
+
 ?>
 
 <div class="relative w-16 h-16 inline-block m-2">
     <div class="absolute inset-0">
-        <?php if ('mainnet' === cardanoPress()->userProfile()->connectedNetwork()) : ?>
+        <?php if ($image_icon) : ?>
             <img
-                src="https://static.adapools.org/pool_logo/<?php echo esc_attr($pool['hex']); ?>.png"
+                src="<?php echo esc_attr($image_icon); ?>"
                 alt="<?php echo esc_attr($pool['name']); ?>"
                 class="w-full"
             >
@@ -27,7 +33,7 @@ if (empty($pool)) {
             <div class="h-full">
                 <div class="w-full h-full inline-flex justify-center items-center rounded-full bg-gray-500">
                     <div
-                        role="image"
+                        role="img"
                         class="text-3xl font-medium uppercase"
                         aria-label="<?php echo esc_attr($pool['name']); ?>"
                     >
