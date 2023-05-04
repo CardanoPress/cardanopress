@@ -128,4 +128,21 @@ class Application extends AbstractApplication
 
         return $list;
     }
+
+    public function isUserDelegated(): bool
+    {
+        $account = $this->userProfile()->getAccountInfo();
+
+        if (! ($account['active'] ?? false)) {
+            return false;
+        }
+
+        $delegation = $this->delegationPool();
+
+        if ('' === ($delegation['pool_id'] ?? '')) {
+            return false;
+        }
+
+        return $account['pool_id'] === $delegation['pool_id'];
+    }
 }

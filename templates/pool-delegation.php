@@ -9,9 +9,6 @@
  * @since   0.1.0
  */
 
-$accountInfo = cardanoPress()->userProfile()->getAccountInfo();
-$delegationPool = cardanoPress()->delegationPool();
-
 ?>
 
 <div x-data="poolDelegation">
@@ -23,7 +20,7 @@ $delegationPool = cardanoPress()->delegationPool();
         <?php cardanoPress()->template('part/delegation-connect'); ?>
     </div>
 
-    <?php if ($accountInfo['active'] && $accountInfo['pool_id'] === $delegationPool['pool_id']) : ?>
+    <?php if (cardanoPress()->isUserDelegated()) : ?>
         <div class="py-6">
             <button type='button' disabled='true'>Delegated</button>
         </div>
