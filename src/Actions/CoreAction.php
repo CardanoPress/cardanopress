@@ -181,6 +181,8 @@ class CoreAction implements HookInterface
         Blockfrost $blockfrost
     ): void
     {
+        $userProfile->saveAccountInfo($blockfrost->getAccountDetails($stakeAddress));
+
         $customRole = $this->application->option('ua_additional_role');
 
         if ($userProfile->hasRole($customRole)) {

@@ -48,13 +48,15 @@ class Profile extends AbstractProfile
         return $this->updateMeta($this->prefix . 'favorite_handle', $handle);
     }
 
-    public function dismissNotice(string $type, bool $reset = false): bool
+    public function getAccountInfo(): array
     {
-        return $this->updateMeta($this->prefix . 'dismissed_' . $type, ! $reset);
+        $saved = $this->getMeta($this->prefix . 'account_info', true);
+
+        return (array)$saved ?? [];
     }
 
-    public function isDismissedNotice(string $type): bool
+    public function saveAccountInfo(array $data): bool
     {
-        return (bool)$this->getMeta($this->prefix . 'dismissed_' . $type, true);
+        return $this->updateMeta($this->prefix . 'account_info', $data);
     }
 }
