@@ -179,7 +179,8 @@ class CoreAction implements HookInterface
         string $queryNetwork,
         Profile $userProfile,
         Blockfrost $blockfrost
-    ): void {
+    ): void
+    {
         $customRole = $this->application->option('ua_additional_role');
 
         if ($userProfile->hasRole($customRole)) {

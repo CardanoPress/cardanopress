@@ -22,7 +22,7 @@ class Collection
         $this->data = $data;
     }
 
-    public static function wantedPolicyIds(array $custom = array()): array
+    public static function wantedPolicyIds(array $custom = []): array
     {
         $policyIds = Application::getInstance()->option('policy_ids');
 

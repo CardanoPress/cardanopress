@@ -265,7 +265,7 @@ class WalletAction implements HookInterface
         wp_send_json_success($response);
     }
 
-    private function maybeInvalid(array $postVars = array()): void
+    private function maybeInvalid(array $postVars = []): void
     {
         if (is_user_logged_in()) {
             check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
