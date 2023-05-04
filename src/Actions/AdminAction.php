@@ -101,7 +101,13 @@ class AdminAction implements HookInterface
             return [];
         }
 
-        $response = wp_remote_retrieve_body(wp_remote_get($data[$key]));
+        $url = $data[$key];
+        $args = [
+            'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
+            'sslverify' => apply_filters('https_local_ssl_verify', false),
+        ];
+
+        $response = wp_remote_retrieve_body(wp_remote_get($url, $args));
 
         if ('' === $response) {
             return [];

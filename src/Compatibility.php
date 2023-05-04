@@ -53,10 +53,10 @@ class Compatibility
         $url = home_url();
         $args = [
             'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
-            'sslverify' => apply_filters('https_local_ssl_verify', false)
+            'sslverify' => apply_filters('https_local_ssl_verify', false),
         ];
 
-        return !is_wp_error(wp_remote_get($url, $args));
+        return ! is_wp_error(wp_remote_get($url, $args));
     }
 
     protected function server(): bool
@@ -64,7 +64,7 @@ class Compatibility
         $url = plugin_dir_url(Application::getInstance()->getPluginFile());
         $args = [
             'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
-            'sslverify' => apply_filters('https_local_ssl_verify', false)
+            'sslverify' => apply_filters('https_local_ssl_verify', false),
         ];
 
         $response = wp_remote_head($url . 'src/test.wasm', $args);
