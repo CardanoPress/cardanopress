@@ -42,6 +42,7 @@ class Sanitization
     public function sanitizePost(string $key): string
     {
         $value = $this->$key($_POST[$key]);
+        $value = apply_filters('cardanopress_sanitization_' . $key, $value, $_POST[$key]);
 
         if ('' === $value) {
             wp_send_json_error($this->getMessage($key));

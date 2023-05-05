@@ -7,17 +7,25 @@
 
 namespace PBWebDev\CardanoPress;
 
+use CardanoPress\Dependencies\Psr\Log\LoggerInterface;
 use CardanoPress\Foundation\AbstractBlockfrost;
 
 class Blockfrost extends AbstractBlockfrost
 {
     protected function initialize(): void
     {
+        do_action('cardanopress_blockfrost_init', $this);
+
         if (null !== $this->logger) {
             return;
         }
 
         $this->setLogger(Application::getInstance()->logger('blockfrost'));
+    }
+
+    public function useLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
     }
 
     public function blocksLatest(): array
