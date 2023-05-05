@@ -7,11 +7,17 @@
 
 namespace PBWebDev\CardanoPress;
 
+use CardanoPress\Clients\BlockfrostClient;
 use CardanoPress\Dependencies\Psr\Log\LoggerInterface;
 use CardanoPress\Foundation\AbstractBlockfrost;
 
 class Blockfrost extends AbstractBlockfrost
 {
+    protected static array $projectIds = array(
+        'mainnet' => '',
+        'testnet' => '',
+    );
+
     protected function initialize(): void
     {
         do_action('cardanopress_blockfrost_init', $this);
@@ -26,6 +32,32 @@ class Blockfrost extends AbstractBlockfrost
     public function useLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
+    }
+
+    public static function useProjectIds(string $mainnet, string $testnet): void
+    {
+        self::$projectIds['mainnet'] = $mainnet;
+        self::$projectIds['testnet'] = $testnet;
+    }
+
+    public static function getProjectId(string $network): string
+    {
+        return self::$projectIds[$network] ?? '';
+    }
+
+    public static function isReady(string $network): bool
+    {
+        return '' !== self::getProjectId($network);
+    }
+
+    public function setClient(BlockfrostClient $client): void
+    {
+        $this->client = $client;
+    }
+
+    public function getClient(): BlockfrostClient
+    {
+        return $this->client;
     }
 
     public function blocksLatest(): array

@@ -59,4 +59,14 @@ class Profile extends AbstractProfile
     {
         return $this->updateMeta($this->prefix . 'account_info', $data);
     }
+
+    public function dismissNotice(string $type, bool $reset = false): bool
+    {
+        return $this->updateMeta($this->prefix . 'dismissed_' . $type, ! $reset);
+    }
+
+    public function isDismissedNotice(string $type): bool
+    {
+        return (bool)$this->getMeta($this->prefix . 'dismissed_' . $type, true);
+    }
 }
