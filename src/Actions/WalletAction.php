@@ -269,8 +269,12 @@ class WalletAction implements HookInterface
     {
         if (is_user_logged_in()) {
             check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
-        } elseif (! is_allowed_http_origin()) {
-            $this->application->logger('actions')->error(get_http_origin());
+        }
+
+        if (! is_allowed_http_origin()) {
+            $message = sprintf(CoreAction::getErrorMessage('unauthorized'), get_http_origin());
+
+            $this->application->logger('actions')->error($message);
             wp_send_json_error(CoreAction::getAjaxMessage('notPermitted'));
         }
 

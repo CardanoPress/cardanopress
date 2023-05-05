@@ -61,6 +61,8 @@ class CoreAction implements HookInterface
                 'notPermitted' => __('You don\'t have permission to do this.', 'cardanopress'),
             ],
             'error' => [
+                /* translators: %s: http origin */
+                'unauthorized' => __('Bad AJAX request. Unauthorized HTTP origin %s', 'cardanopress'),
                 'incomplete' => __('Bad AJAX request. Received missing required field/s data.', 'cardanopress'),
                 'delegation' => __('Incomplete delegation settings. Empty pool details.', 'cardanopress'),
                 'transaction' => __('Unable to save transaction details to user meta.', 'cardanopress'),
