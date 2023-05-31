@@ -22,7 +22,7 @@ class Blockfrost extends AbstractBlockfrost
     {
         do_action('cardanopress_blockfrost_init', $this);
 
-        if (null !== $this->logger) {
+        if (isset($this->logger)) {
             return;
         }
 
