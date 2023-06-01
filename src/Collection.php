@@ -43,6 +43,8 @@ class Collection
 
         $data['_quantity'] = $quantity;
         $data['packed_name'] = pack("H*", $data['asset_name']);
+        $data['packed_name'] = trim($data['packed_name']);
+        $data['packed_name'] = mb_convert_encoding($data['packed_name'], 'UTF-8');
         $data['parsed_image'] = '';
 
         if (isset($data['onchain_metadata']['image'])) {
