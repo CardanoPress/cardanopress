@@ -244,7 +244,7 @@ class CoreAction implements HookInterface
         $dashboardLink = get_permalink($dashboardPage);
         $collectionLink = get_permalink($collectionPage);
 
-        if ($currentLink === $collectionLink) {
+        if ($currentLink === $collectionLink && $currentLink !== $dashboardLink) {
             wp_safe_redirect($dashboardLink);
             exit;
         }
