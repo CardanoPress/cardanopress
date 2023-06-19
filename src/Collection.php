@@ -59,7 +59,7 @@ class Collection
             $data['parsed_image'] = $this->getImageSrc($data['metadata']['logo'], true);
         }
 
-        return $data;
+        return apply_filters('cardanopress_collection_asset', $data, $quantity);
     }
 
     public function grabHandle(): string
