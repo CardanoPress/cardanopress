@@ -23,9 +23,10 @@ window.addEventListener('alpine:init', () => {
 
         async init() {
             this.payAmount = parseFloat(this.$root.dataset.amount)
+            this.paymentAddress = this.$root.dataset.address || ''
             this.recaptchaKey = this.$root.dataset.recaptcha
 
-            if ('' === this.recaptchaKey) {
+            if ('' === this.recaptchaKey && '' === this.paymentAddress) {
                 this.isVerified = true
 
                 const response = await getPaymentAddress()

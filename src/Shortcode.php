@@ -119,17 +119,25 @@ class Shortcode extends AbstractShortcode
 
     public function doComponentPaymentForm($attributes, ?string $content = null): string
     {
-        $paymentAmount = $this->application->option('payment_amount') ?? 1;
         $recaptchaKeys = $this->application->option('recaptcha_key');
-        $recaptchaKey = $recaptchaKeys['site'] ?? '';
+        $dataAttributes = '';
+        $args = shortcode_atts([
+            'amount' => $this->application->option('payment_amount') ?? 1,
+            'recaptcha' => $recaptchaKeys['site'] ?? '',
+            'address' => '',
+        ], $attributes);
 
-        $html = '<form x-data="paymentForm" data-amount="' . $paymentAmount . '" data-recaptcha="' . $recaptchaKey . '">';
+        foreach ($args as $key => $value) {
+            $dataAttributes .= ' data-' . $key . '="' . $value . '"';
+        }
+
+        $html = '<form x-data="paymentForm"' . $dataAttributes . '>';
         $html .= apply_filters('the_content', $content);
         $html .= '</form>';
 
         wp_enqueue_script('cardanopress-payment');
 
-        if ('' !== $recaptchaKey) {
+        if ('' !== $args['recaptcha']) {
             wp_enqueue_script('cardanopress-recaptcha');
         }
 
