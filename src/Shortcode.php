@@ -8,6 +8,8 @@
 namespace PBWebDev\CardanoPress;
 
 use CardanoPress\Foundation\AbstractShortcode;
+use CardanoPress\Helpers\NumberHelper;
+use CardanoPress\Helpers\WalletHelper;
 
 class Shortcode extends AbstractShortcode
 {
@@ -25,6 +27,7 @@ class Shortcode extends AbstractShortcode
         add_shortcode('cardanopress_template_if', [$this, 'doTemplateIf']);
         add_shortcode('cardanopress_userprofile', [$this, 'doUserProfile']);
         add_shortcode('cardanopress_delegationpool', [$this, 'doDelegationPool']);
+        add_shortcode('cardanopress_wallet_balance', [$this, 'doWalletBalance']);
         add_shortcode('cardanopress_component_cardanopress', [$this, 'doComponentCardanoPress']);
         add_shortcode('cardanopress_component_pooldelegation', [$this, 'doComponentPoolDelegation']);
         add_shortcode('cardanopress_component_paymentform', [$this, 'doComponentPaymentForm']);
@@ -188,5 +191,45 @@ class Shortcode extends AbstractShortcode
         $value = $value[$args['key']] ?? '';
 
         return $this->printOutput($value);
+    }
+
+    public function doWalletBalance(array $attributes): string
+    {
+        $args = shortcode_atts([
+            'address' => '',
+            'unit' => 'lovelace',
+        ], $attributes);
+
+        if (
+            empty($args['address']) ||
+            (
+                false === strpos($args['address'], 'addr1') &&
+                false === strpos($args['address'], 'addr_test1')
+            )
+        ) {
+            return '';
+        }
+
+        $queryNetwork = WalletHelper::getNetworkFromAddress($args['address']);
+
+        if (! Blockfrost::isReady($queryNetwork)) {
+            return '';
+        }
+
+        $blockfrost = new Blockfrost($queryNetwork);
+        $addressDetails = $blockfrost->getAddressDetails($args['address']);
+        $index = array_search('lovelace', array_column($addressDetails['amount'], 'unit'), true);
+
+        if (false === $index) {
+            return '';
+        }
+
+        $value = $addressDetails['amount'][$index]['quantity'];
+
+        if ('ada' === $args['unit']) {
+            return NumberHelper::lovelaceToAda($value);
+        }
+
+        return $value;
     }
 }
