@@ -216,15 +216,22 @@ class Shortcode extends AbstractShortcode
             return '';
         }
 
-        $blockfrost = new Blockfrost($queryNetwork);
-        $addressDetails = $blockfrost->getAddressDetails($args['address']);
-        $index = array_search('lovelace', array_column($addressDetails['amount'], 'unit'), true);
+        $cacheKey = 'wallet_balance_' . $args['address'];
+        $value = wp_cache_get($cacheKey, Admin::OPTION_KEY);
 
-        if (false === $index) {
-            return '';
+        if (false === $value) {
+            $blockfrost = new Blockfrost($queryNetwork);
+            $addressDetails = $blockfrost->getAddressDetails($args['address']);
+            $index = array_search('lovelace', array_column($addressDetails['amount'], 'unit'), true);
+
+            if (false === $index) {
+                return '';
+            }
+
+            $value = $addressDetails['amount'][$index]['quantity'];
+
+            wp_cache_set($cacheKey, $value, Admin::OPTION_KEY);
         }
-
-        $value = $addressDetails['amount'][$index]['quantity'];
 
         if ('ada' === $args['unit']) {
             return strval(NumberHelper::lovelaceToAda($value));
