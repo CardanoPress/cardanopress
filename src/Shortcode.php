@@ -227,7 +227,7 @@ class Shortcode extends AbstractShortcode
         $value = $addressDetails['amount'][$index]['quantity'];
 
         if ('ada' === $args['unit']) {
-            return NumberHelper::lovelaceToAda($value);
+            return strval(NumberHelper::lovelaceToAda($value));
         }
 
         return $value;
