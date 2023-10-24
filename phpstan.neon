@@ -7,5 +7,6 @@ parameters:
   scanDirectories:
     - %currentWorkingDirectory%/.cache/wordpress
     - %currentWorkingDirectory%/.cache/wordpress-tests-lib
+    - %currentWorkingDirectory%/dependencies
   dynamicConstantNames:
     - CARDANOPRESS_FILE
