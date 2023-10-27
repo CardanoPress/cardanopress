@@ -52,7 +52,7 @@ class Profile extends AbstractProfile
     {
         $saved = $this->getMeta($this->prefix . 'account_info', true);
 
-        return (array)$saved ?? [];
+        return (array)$saved ?: [];
     }
 
     public function saveAccountInfo(array $data): bool
