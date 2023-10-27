@@ -55,7 +55,7 @@ class Application extends AbstractApplication
     public function isReady(): bool
     {
         $projectIds = $this->option('blockfrost_project_id');
-        $projectIds = array_filter($projectIds);
+        $projectIds = array_filter((array)$projectIds);
 
         return ! empty($projectIds);
     }
