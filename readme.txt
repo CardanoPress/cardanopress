@@ -1,10 +1,10 @@
 === CardanoPress - Cardano Blockchain Integration for WordPress ===
 Contributors: pbwebdev
 Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
-Tags: cardano, blockchain, web3, metamask, nami, eternl, ada
-Requires at least: 4.9
-Tested up to: 6.1.1
-Stable tag: 1.2.0
+Tags: cardano, blockchain, web3, metamask, nami, eternl, ada, token gating
+Requires at least: 5.8
+Tested up to: 6.4
+Stable tag: 1.6.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -132,6 +132,48 @@ This plugin does not collect or process any personal user data unless you expres
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.7.0 =
+- Adjusted payment component shortcode to support custom address
+- Add shortcode for showing a wallet balance `cardanopress_wallet_balance`
+- Minor code fixes to return types and values (explicitly defined and filtered)
+
+= 1.6.0 =
+- Fix PHP warning introduced in 2fceb32
+- Handle CIP68 asset packed name
+- Prevent infinite loop on misconfigured pages
+- New filter for asset collection cardanopress_collection_asset
+
+= 1.5.0 =
+- add a template if shortcode cardanopress_template_if
+- log helpful wallet action errors during AJAX requests customizable and translate-ready cardanopress_error_messages
+- improve getting pool details on settings save with fallback on the first settings page load
+- include the extended pool metadata in saved details
+- helper method to check already delegated account
+- always check the request origin; even if logged in
+
+
+= 1.4.0 =
+- Better handling of classic themes that do not support the wp_body_open hook
+- Temporarily render blank the shipped templates on block themes
+- Check the server for wasm mime type support
+- Warn on the incompatible themes and server setup stated
+  - Print readable notice on the admin dashboard
+  - Dump issue message on console and logs
+- Expose a JS method to force refresh the status of all supported wallets
+
+= 1.3.0 =
+- fixed compatibility issue with some plugins Psr\Log\LoggerInterface
+- Added Lace Wallet support
+
+= 1.2.1 =
+- Hot fix for 1.2.0 deploy
+
+= 1.2.0 =
+- An updated framework with prefixed dependencies
+- Persist notice review dismissal; also increased timeout
+- Customizable sanitization messages and made translatable
+- Added "the_content" function to the default page templates
 
 = 1.1.0 =
 Update for new testnet; preview and preprod
