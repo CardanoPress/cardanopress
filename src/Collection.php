@@ -26,11 +26,11 @@ class Collection
     {
         $policyIds = Application::getInstance()->option('policy_ids');
 
-        return array_merge(
+        return array_filter(array_merge(
             array_values(self::ADA_HANDLE),
             array_column($policyIds, 'value'),
             array_filter($custom)
-        );
+        ));
     }
 
     public function filteredAsset(int $quantity = 0): array
