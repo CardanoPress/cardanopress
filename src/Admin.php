@@ -39,6 +39,7 @@ class Admin extends AbstractAdmin
             $this->memberPagesFields();
             $this->userAccessFields();
             $this->assetAccessFields();
+            $this->managedRoleFields();
 
             $keys = $this->getOption('blockfrost_project_id');
 
@@ -295,6 +296,22 @@ class Admin extends AbstractAdmin
                             'options' => wp_roles()->role_names,
                         ],
                     ],
+                ],
+            ],
+        ]);
+    }
+
+    private function managedRoleFields(): void
+    {
+        $this->optionFields(__('Managed Roles', 'cardanopress'), [
+            'data_prefix' => 'managed_',
+            'description' => __('Select roles to be removed every wallet connect.', 'cardanopress'),
+            'context' => 'side',
+            'fields' => [
+                'roles' => [
+                    'type' => 'select',
+                    'options' => wp_roles()->role_names,
+                    'multiple' => true,
                 ],
             ],
         ]);
