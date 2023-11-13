@@ -97,11 +97,20 @@ class CoreAction implements HookInterface
 
     public function doWalletStatusChecks($username, $user): void
     {
+        $userProfile = new Profile($user);
+
+        foreach ($this->application->option('managed_roles') as $role) {
+            if (! $userProfile->hasRole($role)) {
+                continue;
+            }
+
+            $userProfile->removeRole($role);
+        }
+
         if (! $this->application->isReady()) {
             return;
         }
 
-        $userProfile = new Profile($user);
         $queryNetwork = $userProfile->connectedNetwork();
         $stakeAddress = $userProfile->connectedStake();
 

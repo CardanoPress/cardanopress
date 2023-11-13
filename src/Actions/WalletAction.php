@@ -66,16 +66,6 @@ class WalletAction implements HookInterface
         $user = get_user_by('id', $userId);
         $userProfile = new Profile($user);
 
-        if (! $newAccount && $userProfile->isConnected()) {
-            foreach ($this->application->option('managed_roles') as $role) {
-                if (! $userProfile->hasRole($role)) {
-                    continue;
-                }
-
-                $userProfile->removeRole($role);
-            }
-        }
-
         if ($newAccount || ! $userProfile->isConnected()) {
             $userProfile->saveNetwork($queryNetwork);
             $userProfile->saveWallet($walletAddress);
