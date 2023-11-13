@@ -97,6 +97,8 @@ class WalletAction implements HookInterface
         $userProfile->saveWallet($walletAddress);
         $userProfile->saveStake($stakeAddress);
 
+        do_action('wp_login', $userProfile->getData('user_login'), $userProfile->getData());
+
         wp_send_json_success([
             'message' => CoreAction::getAjaxMessage('connected'),
             'reload' => false,

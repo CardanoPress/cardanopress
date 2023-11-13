@@ -99,13 +99,7 @@ class CoreAction implements HookInterface
     {
         $userProfile = new Profile($user);
 
-        foreach ($this->application->option('managed_roles') as $role) {
-            if (! $userProfile->hasRole($role)) {
-                continue;
-            }
-
-            $userProfile->removeRole($role);
-        }
+        $this->checkManagedRoles($userProfile);
 
         if (! $this->application->isReady()) {
             return;
@@ -124,6 +118,17 @@ class CoreAction implements HookInterface
 
         $this->checkWalletAssets($stakeAddress, $userProfile, $blockfrost);
         $this->checkDelegationStatus($stakeAddress, $queryNetwork, $userProfile, $blockfrost);
+    }
+
+    public function checkManagedRoles(Profile $userProfile): void
+    {
+        foreach ($this->application->option('managed_roles') as $role) {
+            if (!$userProfile->hasRole($role)) {
+                continue;
+            }
+
+            $userProfile->removeRole($role);
+        }
     }
 
     protected function getAssetAccess(): array
