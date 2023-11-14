@@ -122,6 +122,14 @@ class CoreAction implements HookInterface
 
     public function checkManagedRoles(Profile $userProfile): void
     {
+        if (
+            ! $userProfile->connectedNetwork() ||
+            ! $userProfile->connectedWallet() ||
+            ! $userProfile->connectedStake()
+        ) {
+            return;
+        }
+
         foreach ($this->application->option('managed_roles') as $role) {
             if (!$userProfile->hasRole($role)) {
                 continue;
