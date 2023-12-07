@@ -11,6 +11,8 @@ use CardanoPress\Foundation\AbstractAdmin;
 
 class Admin extends AbstractAdmin
 {
+    protected array $roles = array();
+
     public const OPTION_KEY = 'cardanopress';
     public const PAGES = [
         'dashboard',
@@ -27,6 +29,9 @@ class Admin extends AbstractAdmin
 
     public function setupHooks(): void
     {
+        $this->roles = wp_roles()->role_names;
+
+        unset($this->roles['administrator']);
         $this->settingsPage('CardanoPress');
 
         add_action('tgmpa_register', [$this, 'recommendPlugins']);
@@ -256,7 +261,7 @@ class Admin extends AbstractAdmin
                     'type' => 'select',
                     'title' => __('Additional Role', 'cardanopress'),
                     'description' => __('Role that is assigned for meeting required delegation.', 'cardanopress'),
-                    'options' => wp_roles()->role_names,
+                    'options' => $this->roles,
                 ],
             ],
         ]);
@@ -293,7 +298,7 @@ class Admin extends AbstractAdmin
                             'type' => 'select',
                             'description' => __('Role to assign a user based token access.', 'cardanopress'),
                             'title' => __('Additional Role', 'cardanopress'),
-                            'options' => wp_roles()->role_names,
+                            'options' => $this->roles,
                         ],
                     ],
                 ],
@@ -310,7 +315,7 @@ class Admin extends AbstractAdmin
             'fields' => [
                 'roles' => [
                     'type' => 'select',
-                    'options' => wp_roles()->role_names,
+                    'options' => $this->roles,
                     'multiple' => true,
                 ],
             ],
