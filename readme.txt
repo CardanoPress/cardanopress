@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, metamask, nami, eternl, ada, token gating
 Requires at least: 5.8
 Tested up to: 6.4.99
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -132,6 +132,11 @@ This plugin does not collect or process any personal user data unless you expres
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.8.1 =
+- Update selectable roles
+- - exclude the `administrator` in every list
+- - customizable via filter `cardanopress_selectable_roles`
 
 = 1.8.0 =
 - Add a new field for managed roles (selected roles will be removed every wallet connect)
