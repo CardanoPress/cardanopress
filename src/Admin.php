@@ -29,9 +29,12 @@ class Admin extends AbstractAdmin
 
     public function setupHooks(): void
     {
-        $this->roles = wp_roles()->role_names;
+        $roles = wp_roles()->role_names;
 
-        unset($this->roles['administrator']);
+        unset($roles['administrator']);
+
+        $this->roles = apply_filters('cardanopress_selectable_roles', $roles);
+
         $this->settingsPage('CardanoPress');
 
         add_action('tgmpa_register', [$this, 'recommendPlugins']);
