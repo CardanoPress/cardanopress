@@ -36,9 +36,9 @@ class Manifest extends AbstractManifest
         wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
         wp_enqueue_script(
             self::HANDLE_PREFIX . 'alpinejs',
-            plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
+            'https://unpkg.com/alpinejs',
             [],
-            '3.13.5',
+            'latest',
             true
         );
         wp_register_script(
