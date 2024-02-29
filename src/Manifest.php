@@ -34,16 +34,23 @@ class Manifest extends AbstractManifest
         wp_enqueue_style(self::HANDLE_PREFIX . 'style');
         wp_enqueue_script(self::HANDLE_PREFIX . 'script');
         wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
+        wp_enqueue_script(
+            self::HANDLE_PREFIX . 'alpinejs',
+            plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
+            [],
+            '3.13.5',
+            true
+        );
         wp_register_script(
             self::HANDLE_PREFIX . 'recaptcha',
             'https://www.google.com/recaptcha/api.js?onload=cardanoPressRecaptchaCallback'
         );
 
         if ($this->legacy_loaded) {
-            wp_script_add_data(self::HANDLE_PREFIX . 'script', 'defer', true);
+            wp_script_add_data(self::HANDLE_PREFIX . 'alpinejs', 'defer', true);
             wp_script_add_data(self::HANDLE_PREFIX . 'recaptcha', 'defer', true);
         } else {
-            $this->data->script(self::HANDLE_PREFIX . 'script', ['defer' => true]);
+            $this->data->script(self::HANDLE_PREFIX . 'alpinejs', ['defer' => true]);
             $this->data->script(self::HANDLE_PREFIX . 'recaptcha', ['defer' => true]);
         }
 

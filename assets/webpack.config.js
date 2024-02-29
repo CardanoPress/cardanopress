@@ -8,6 +8,9 @@ module.exports = {
     experiments: {
         asyncWebAssembly: true,
     },
+    externals: {
+        alpinejs: 'Alpine',
+    },
     entry: {
         script: './src/main.js',
         style: './src/main.css',

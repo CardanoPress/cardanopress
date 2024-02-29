@@ -3,8 +3,6 @@ import { handleDelegation } from './actions'
 import { cardanoPressMessages } from './api/config'
 
 window.addEventListener('alpine:init', () => {
-    const Alpine = window.Alpine || {}
-
     Alpine.data('poolDelegation', () => ({
         isProcessing: false,
         transactionHash: '',

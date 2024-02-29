@@ -1,4 +1,3 @@
-import Alpine from 'alpinejs'
 import { handleReconnect, handleSave, handleSync, logMeIn, logMeOut } from './actions'
 import {
     cardanoPress,
@@ -23,238 +22,238 @@ import * as util from './api/util'
 import * as utils from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 import * as wallet from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
 
-window.Alpine = Alpine
+window.addEventListener('alpine:init', () => {
+    Alpine.data('cardanoPress', () => ({
+        isAvailable: undefined !== window.cardano && undefined !== window.cardanoPress,
+        isConnected: false,
+        isProcessing: false,
+        showModal: false,
+        openDropdown: false,
+        connectedExtension: '',
+        selectedHandle: '',
+        supportedWallets,
 
-Alpine.data('cardanoPress', () => ({
-    isAvailable: undefined !== window.cardano && undefined !== window.cardanoPress,
-    isConnected: false,
-    isProcessing: false,
-    showModal: false,
-    openDropdown: false,
-    connectedExtension: '',
-    selectedHandle: '',
-    supportedWallets,
+        has(wallet) {
+            return this[toPropertyName(wallet, 'has')]
+        },
 
-    has(wallet) {
-        return this[toPropertyName(wallet, 'has')]
-    },
+        isDisabled(wallet = null) {
+            return !!(!this.isAvailable || this.isProcessing || (null !== wallet && !this.has(wallet)))
+        },
 
-    isDisabled(wallet = null) {
-        return !!(!this.isAvailable || this.isProcessing || (null !== wallet && !this.has(wallet)))
-    },
+        walletAvailable(type) {
+            return this.isAvailable && this.has(type)
+        },
 
-    walletAvailable(type) {
-        return this.isAvailable && this.has(type)
-    },
+        getWalletHandle($default) {
+            return this.selectedHandle || $default
+        },
 
-    getWalletHandle($default) {
-        return this.selectedHandle || $default
-    },
+        refreshWallets() {
+            supportedWallets.forEach(wallet => {
+                this[toPropertyName(wallet, 'has')] = Extensions.hasWallet(wallet)
+            })
+        },
 
-    refreshWallets() {
-        supportedWallets.forEach(wallet => {
-            this[toPropertyName(wallet, 'has')] = Extensions.hasWallet(wallet)
-        })
-    },
-
-    async init() {
-        this.refreshWallets()
-
-        this.$watch('showModal', () => {
+        async init() {
             this.refreshWallets()
-        })
 
-        if (cardanoPress.logged) {
-            this.connectedExtension = getConnectedExtension()
-            this.selectedHandle = this.$root.dataset.handle;
-            this.isConnected = !!this.connectedExtension
-            window.cardanoPress.extension = this.connectedExtension
-
-            if (this.isConnected && !isNotified()) {
-                addNotice({ type: 'success', text: cardanoPressMessages.connected })
-                setNotified(true)
-            }
-        } else {
-            isNotified() && setNotified(false)
-            getConnectedExtension() && setConnectedExtension('')
-        }
-
-        if (this.isAvailable && 'Nami' === this.connectedExtension) {
-            const wallet = await getConnectedWallet()
-
-            wallet.cardano.experimental.on('networkChange', (networkId) => this.handleLogout(networkId, 0))
-            wallet.cardano.experimental.on('accountChange', (addresses) => this.handleLogout(-1, addresses))
-        }
-    },
-
-    clipboardValue(target) {
-        removeNotice('clipboardValue')
-        window.navigator.clipboard.writeText(target).then(() => {
-            addNotice({
-                id: 'clipboardValue',
-                type: 'info',
-                text: cardanoPressMessages.clipboardCopy,
+            this.$watch('showModal', () => {
+                this.refreshWallets()
             })
-        })
-    },
 
-    async walletConnect(type) {
-        if (this.isConnected) {
-            await this.handleReconnect(type)
-        } else {
-            await this.handleConnect(type)
-        }
-    },
+            if (cardanoPress.logged) {
+                this.connectedExtension = getConnectedExtension()
+                this.selectedHandle = this.$root.dataset.handle;
+                this.isConnected = !!this.connectedExtension
+                window.cardanoPress.extension = this.connectedExtension
 
-    async handleConnect(type) {
-        this.isProcessing = true
-
-        try {
-            const wallet = await Extensions.getWallet(type)
-
-            addNotice({
-                id: 'loginConnect',
-                type: 'info',
-                text: cardanoPressMessages.connecting,
-            })
-            await this.handleLogin(wallet)
-        } catch (error) {
-            addNotice({ type: 'error', text: error })
-        }
-
-        this.isProcessing = false
-    },
-
-    async handleLogin(wallet) {
-        const response = await logMeIn(wallet)
-
-        if (response.success) {
-            removeNotice('loginConnect')
-            addNotice({ type: 'success', text: response.data.message })
-            setConnectedExtension(wallet.type)
-
-            if (response.data.reload) {
-                return setTimeout(() => {
-                    window.location.reload()
-                }, 500)
+                if (this.isConnected && !isNotified()) {
+                    addNotice({ type: 'success', text: cardanoPressMessages.connected })
+                    setNotified(true)
+                }
+            } else {
+                isNotified() && setNotified(false)
+                getConnectedExtension() && setConnectedExtension('')
             }
 
-            setNotified(true)
+            if (this.isAvailable && 'Nami' === this.connectedExtension) {
+                const wallet = await getConnectedWallet()
 
-            this.showModal = false
-            this.isConnected = true
-            cardanoPress.logged = true
-            this.connectedExtension = wallet.type
-            window.cardanoPress.extension = this.connectedExtension
-        } else {
-            addNotice({ type: 'error', text: response.data })
-        }
-    },
+                wallet.cardano.experimental.on('networkChange', (networkId) => this.handleLogout(networkId, 0))
+                wallet.cardano.experimental.on('accountChange', (addresses) => this.handleLogout(-1, addresses))
+            }
+        },
 
-    async handleLogout(id, addresses) {
-        if (!this.isConnected) {
-            return
-        }
+        clipboardValue(target) {
+            removeNotice('clipboardValue')
+            window.navigator.clipboard.writeText(target).then(() => {
+                addNotice({
+                    id: 'clipboardValue',
+                    type: 'info',
+                    text: cardanoPressMessages.clipboardCopy,
+                })
+            })
+        },
 
-        try {
-            const Wallet = await getConnectedWallet()
-            const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
-            const address = 0 !== addresses ? hexToBech32(addresses[0]) : await Wallet.getChangeAddress()
-            const response = await logMeOut(network, address)
+        async walletConnect(type) {
+            if (this.isConnected) {
+                await this.handleReconnect(type)
+            } else {
+                await this.handleConnect(type)
+            }
+        },
+
+        async handleConnect(type) {
+            this.isProcessing = true
+
+            try {
+                const wallet = await Extensions.getWallet(type)
+
+                addNotice({
+                    id: 'loginConnect',
+                    type: 'info',
+                    text: cardanoPressMessages.connecting,
+                })
+                await this.handleLogin(wallet)
+            } catch (error) {
+                addNotice({ type: 'error', text: error })
+            }
+
+            this.isProcessing = false
+        },
+
+        async handleLogin(wallet) {
+            const response = await logMeIn(wallet)
 
             if (response.success) {
+                removeNotice('loginConnect')
                 addNotice({ type: 'success', text: response.data.message })
+                setConnectedExtension(wallet.type)
 
                 if (response.data.reload) {
-                    setNotified(false)
-                    setConnectedExtension('')
-
                     return setTimeout(() => {
                         window.location.reload()
                     }, 500)
                 }
-            } else {
-                addNotice({ type: 'error', text: response.data.message })
-            }
-        } catch (error) {
-            addNotice({ type: 'error', text: error })
-        }
-    },
 
-    async handleReconnect(type) {
-        this.isProcessing = true
+                setNotified(true)
 
-        try {
-            const wallet = await Extensions.getWallet(type)
-
-            addNotice({
-                id: 'reconnect',
-                type: 'info',
-                text: cardanoPressMessages.reconnecting,
-            })
-
-            const response = await handleReconnect(wallet)
-
-            removeNotice('reconnect')
-
-            if (response.success) {
-                addNotice({ type: 'success', text: cardanoPressMessages.reconnected })
-                setConnectedExtension(wallet.type)
-
-                return setTimeout(() => {
-                    window.location.reload()
-                }, 500)
+                this.showModal = false
+                this.isConnected = true
+                cardanoPress.logged = true
+                this.connectedExtension = wallet.type
+                window.cardanoPress.extension = this.connectedExtension
             } else {
                 addNotice({ type: 'error', text: response.data })
             }
-        } catch (error) {
-            addNotice({ type: 'error', text: error })
-        }
+        },
 
-        this.isProcessing = false
-    },
-
-    async handleSync() {
-        addNotice({
-            id: 'sync',
-            type: 'info',
-            text: cardanoPressMessages.walletSyncing,
-        })
-
-        this.isProcessing = true
-        const response = await handleSync()
-
-        removeNotice('sync')
-
-        if (response.success) {
-            addNotice({ type: 'success', text: response.data.message })
-
-            if (response.data.updated) {
-                addNotice({ type: 'info', text: cardanoPressMessages.newAssetsPulled })
+        async handleLogout(id, addresses) {
+            if (!this.isConnected) {
+                return
             }
-        } else {
-            addNotice({ type: 'error', text: response.data })
-        }
 
-        this.isProcessing = false
-    },
+            try {
+                const Wallet = await getConnectedWallet()
+                const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
+                const address = 0 !== addresses ? hexToBech32(addresses[0]) : await Wallet.getChangeAddress()
+                const response = await logMeOut(network, address)
 
-    async handleSave() {
-        addNotice({
-            id: 'save',
-            type: 'info',
-            text: cardanoPressMessages.handleSaving,
-        })
+                if (response.success) {
+                    addNotice({ type: 'success', text: response.data.message })
 
-        this.isProcessing = true
-        const response = await handleSave(this.selectedHandle)
+                    if (response.data.reload) {
+                        setNotified(false)
+                        setConnectedExtension('')
 
-        removeNotice('save')
-        addNotice({ type: response.success ? 'success' : 'error', text: response.data })
+                        return setTimeout(() => {
+                            window.location.reload()
+                        }, 500)
+                    }
+                } else {
+                    addNotice({ type: 'error', text: response.data.message })
+                }
+            } catch (error) {
+                addNotice({ type: 'error', text: error })
+            }
+        },
 
-        this.isProcessing = false
-    },
-}))
+        async handleReconnect(type) {
+            this.isProcessing = true
+
+            try {
+                const wallet = await Extensions.getWallet(type)
+
+                addNotice({
+                    id: 'reconnect',
+                    type: 'info',
+                    text: cardanoPressMessages.reconnecting,
+                })
+
+                const response = await handleReconnect(wallet)
+
+                removeNotice('reconnect')
+
+                if (response.success) {
+                    addNotice({ type: 'success', text: cardanoPressMessages.reconnected })
+                    setConnectedExtension(wallet.type)
+
+                    return setTimeout(() => {
+                        window.location.reload()
+                    }, 500)
+                } else {
+                    addNotice({ type: 'error', text: response.data })
+                }
+            } catch (error) {
+                addNotice({ type: 'error', text: error })
+            }
+
+            this.isProcessing = false
+        },
+
+        async handleSync() {
+            addNotice({
+                id: 'sync',
+                type: 'info',
+                text: cardanoPressMessages.walletSyncing,
+            })
+
+            this.isProcessing = true
+            const response = await handleSync()
+
+            removeNotice('sync')
+
+            if (response.success) {
+                addNotice({ type: 'success', text: response.data.message })
+
+                if (response.data.updated) {
+                    addNotice({ type: 'info', text: cardanoPressMessages.newAssetsPulled })
+                }
+            } else {
+                addNotice({ type: 'error', text: response.data })
+            }
+
+            this.isProcessing = false
+        },
+
+        async handleSave() {
+            addNotice({
+                id: 'save',
+                type: 'info',
+                text: cardanoPressMessages.handleSaving,
+            })
+
+            this.isProcessing = true
+            const response = await handleSave(this.selectedHandle)
+
+            removeNotice('save')
+            addNotice({ type: response.success ? 'success' : 'error', text : response.data })
+
+            this.isProcessing = false
+        },
+    }))
+});
 
 window.cardanoPress = {
     ...cardanoPress,
@@ -281,5 +280,3 @@ window.cardanoPress = {
         ...wallet
     },
 }
-
-windowLoader(() => Alpine.start())

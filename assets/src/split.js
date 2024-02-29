@@ -5,8 +5,6 @@ import { addNotice, removeNotice } from './api/util'
 import { handlePayment } from './actions'
 
 window.addEventListener('alpine:init', () => {
-    const Alpine = window.Alpine || {}
-
     Alpine.data('splitForm', () => ({
         isProcessing: false,
         percentage: 0,
