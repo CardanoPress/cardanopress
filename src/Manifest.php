@@ -32,15 +32,6 @@ class Manifest extends AbstractManifest
     public function autoEnqueues(): void
     {
         wp_enqueue_style(self::HANDLE_PREFIX . 'style');
-        wp_enqueue_script(self::HANDLE_PREFIX . 'script');
-        wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
-        wp_enqueue_script(
-            self::HANDLE_PREFIX . 'alpinejs',
-            'https://unpkg.com/alpinejs',
-            [],
-            'latest',
-            true
-        );
         wp_register_script(
             self::HANDLE_PREFIX . 'recaptcha',
             'https://www.google.com/recaptcha/api.js?onload=cardanoPressRecaptchaCallback'
@@ -76,9 +67,9 @@ class Manifest extends AbstractManifest
 
     public function completeInjections(): void
     {
-        if (! doing_action('wp_body_open')) {
-            $compatibility = Compatibility::getInstance();
+        $compatibility = Compatibility::getInstance();
 
+        if (! doing_action('wp_body_open')) {
             $compatibility->addIssue('theme');
             $compatibility->addIssue('classic');
 
@@ -97,6 +88,18 @@ class Manifest extends AbstractManifest
             }
 
             return;
+        }
+
+        if (! $compatibility->hasIssue('server')) {
+            wp_enqueue_script(self::HANDLE_PREFIX . 'script');
+            wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
+            wp_enqueue_script(
+                self::HANDLE_PREFIX . 'alpinejs',
+                'https://unpkg.com/alpinejs',
+                [],
+                'latest',
+                true
+            );
         }
 
         self::injectDataProvider();

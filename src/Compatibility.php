@@ -92,6 +92,15 @@ class Compatibility
         return true;
     }
 
+    public function hasIssue(string $type): bool
+    {
+        if (! in_array($type, array_keys($this->messages), true)) {
+            return false;
+        }
+
+        return in_array($type, $this->issues, true);
+    }
+
     public function getIssues(bool $in_cache = false): array
     {
         if ($in_cache) {
