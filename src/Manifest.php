@@ -60,6 +60,7 @@ class Manifest extends AbstractManifest
             return;
         }
 
+        wp_deregister_script(self::HANDLE_PREFIX . 'script');
         wp_enqueue_script(self::HANDLE_PREFIX . 'compatibility');
         wp_add_inline_script(
             self::HANDLE_PREFIX . 'compatibility',
@@ -104,7 +105,7 @@ class Manifest extends AbstractManifest
             wp_enqueue_script(
                 self::HANDLE_PREFIX . 'alpinejs',
                 'https://unpkg.com/alpinejs',
-                [],
+                [self::HANDLE_PREFIX . 'script'],
                 'latest',
                 true
             );
