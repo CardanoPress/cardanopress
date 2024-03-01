@@ -4,3 +4,4 @@ logs/
 node_modules/
 .cache/
 vendor/
+.DS_Store
