@@ -52,6 +52,24 @@ class Manifest extends AbstractManifest
         ];
 
         wp_localize_script(self::HANDLE_PREFIX . 'script', 'cardanoPress', $data);
+        wp_register_script(self::HANDLE_PREFIX . 'compatibility', '');
+
+        $compatibility = Compatibility::getInstance();
+
+        if ('issue' !== $compatibility->getStatus()) {
+            return;
+        }
+
+        wp_enqueue_script(self::HANDLE_PREFIX . 'compatibility');
+        wp_add_inline_script(
+            self::HANDLE_PREFIX . 'compatibility',
+            sprintf(
+                'console.error("%s v%s", %s)',
+                Application::getInstance()->getData('Name'),
+                Application::getInstance()->getData('Version'),
+                json_encode(array_map([$compatibility, 'message'], $compatibility->getIssues()))
+            )
+        );
     }
 
     public static function injectDataProvider(): void
@@ -72,16 +90,6 @@ class Manifest extends AbstractManifest
         if (! doing_action('wp_body_open')) {
             $compatibility->addIssue('theme');
             $compatibility->addIssue('classic');
-
-            wp_add_inline_script(
-                self::HANDLE_PREFIX . 'script',
-                sprintf(
-                    'console.error("%s v%s", %s)',
-                    Application::getInstance()->getData('Name'),
-                    Application::getInstance()->getData('Version'),
-                    json_encode(array_map([$compatibility, 'message'], $compatibility->getIssues()))
-                )
-            );
 
             if ('checking' === $compatibility->getStatus()) {
                 $compatibility->saveIssues();
