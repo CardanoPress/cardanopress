@@ -55,12 +55,16 @@ class Manifest extends AbstractManifest
         wp_register_script(self::HANDLE_PREFIX . 'compatibility', '');
 
         $compatibility = Compatibility::getInstance();
+        $issues = $compatibility->getIssues();
 
-        if ('issue' !== $compatibility->getStatus()) {
+        if (empty($issues) || (1 === count($issues) && 'block' === $issues[0])) {
             return;
         }
 
-        wp_deregister_script(self::HANDLE_PREFIX . 'script');
+        if ($compatibility->hasIssue('server')) {
+            wp_deregister_script(self::HANDLE_PREFIX . 'script');
+        }
+
         wp_enqueue_script(self::HANDLE_PREFIX . 'compatibility');
         wp_add_inline_script(
             self::HANDLE_PREFIX . 'compatibility',
