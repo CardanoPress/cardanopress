@@ -12,15 +12,17 @@ import {
     NETWORK,
     supportedWallets,
 } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
-import { hexToBech32 } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
-import { addNotice, getConnectedWallet, removeNotice, windowLoader } from './api/util'
+import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 import { delegation as delegationTx } from './api/delegation'
 import { payment as paymentTx } from './api/payment'
-import Extensions, { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
+import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 import * as actions from './api/actions'
 import * as util from './api/util'
 import * as utils from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 import * as wallet from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
+import { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface/csl'
+
+const { hexToBech32 } = utils;
 
 window.addEventListener('alpine:init', () => {
     Alpine.data('cardanoPress', () => ({

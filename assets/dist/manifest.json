@@ -1,10 +1,14 @@
 {
-  "script.js": "script-73b539a4d030ad8e730b.js",
-  "style.css": "style-73b539a4d030ad8e730b.css",
-  "style.js": "style-73b539a4d030ad8e730b.js",
-  "notification.js": "notification-73b539a4d030ad8e730b.js",
-  "delegation.js": "delegation-73b539a4d030ad8e730b.js",
-  "payment.js": "payment-73b539a4d030ad8e730b.js",
-  "split.js": "split-73b539a4d030ad8e730b.js",
-  "module.wasm": "5188d84c31b8e8dd43bc.module.wasm"
+  "script.js": "script-1e5cb858657cc51ae775.js",
+  "style.css": "style-1e5cb858657cc51ae775.css",
+  "style.js": "style-1e5cb858657cc51ae775.js",
+  "notification.js": "notification-1e5cb858657cc51ae775.js",
+  "delegation.js": "delegation-1e5cb858657cc51ae775.js",
+  "payment.js": "payment-1e5cb858657cc51ae775.js",
+  "split.js": "split-1e5cb858657cc51ae775.js",
+  "968-js": "968-1e5cb858657cc51ae775.js",
+  "881-js": "881-1e5cb858657cc51ae775.js",
+  "872-js": "872-1e5cb858657cc51ae775.js",
+  "6-js": "6-1e5cb858657cc51ae775.js",
+  "module.wasm": "341bbd0e3c95c35570d0.module.wasm"
 }

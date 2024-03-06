@@ -1,7 +1,7 @@
 /* global grecaptcha */
 
-import { cardanoPressMessages, getConnectedExtension } from './api/config'
-import { addNotice, getConnectedWallet, removeNotice, waitElement, windowLoader } from './api/util'
+import { cardanoPressMessages } from './api/config'
+import { addNotice, getConnectedWallet, removeNotice, waitElement } from './api/util'
 import { getPaymentAddress, handlePayment } from './actions'
 import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 
