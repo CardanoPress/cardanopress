@@ -72,6 +72,7 @@ class BlockfrostClient
                 return false;
             }
 
+            // @phpstan-ignore-next-line
             if ($exception instanceof ConnectException) {
                 return true;
             }

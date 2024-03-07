@@ -18,10 +18,10 @@ abstract class AbstractBlockfrost extends SharedBase implements BlockfrostInterf
 
     protected BlockfrostClient $client;
     protected array $lastResponse = [];
-    protected static array $projectIds = array(
+    protected static array $projectIds = [
         'mainnet' => '',
         'testnet' => '',
-    );
+    ];
 
     public function __construct(string $queryNetwork, LoggerInterface $logger = null)
     {

@@ -16,9 +16,21 @@
       "homepage": "https://pbwebdev.com"
     }
   ],
+  "config": {
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*"
+  },
+  "require-dev": {
+    "themeplate/tester": "^2.1"
   },
   "autoload": {
     "files": [

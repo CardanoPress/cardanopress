@@ -66,6 +66,11 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
 
         foreach ($this->readAssetsManifest($manifest) as $file => $asset) {
             $parts = explode('.', $file);
+
+            if (1 === count($parts) || ! in_array($parts[1], ['js', 'css'])) {
+                continue;
+            }
+
             $type = 'js' === $parts[1] ? 'script' : 'style';
             $arg = 'js' === $parts[1] ? true : 'all';
             $func = 'wp_register_' . $type;

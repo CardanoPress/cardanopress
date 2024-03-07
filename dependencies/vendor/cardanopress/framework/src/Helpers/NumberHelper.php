@@ -13,12 +13,12 @@ class NumberHelper
         return $number / 1000000;
     }
 
-    public static function adaPrecision(float $number): string
+    public static function adaPrecision(float $number, int $decimals = 6): string
     {
-        return number_format($number, 6);
+        return number_format($number, $decimals);
     }
 
-    public static function shortRounded(int $number): string
+    public static function shortRounded(float $number, int $precision = 2): string
     {
         $units = ['', 'K', 'M', 'B', 'T'];
 
@@ -26,7 +26,7 @@ class NumberHelper
             $number /= 1000;
         }
 
-        return round($number, 2) . $units[$i];
+        return round($number, $precision) . $units[$i];
     }
 
     public static function toUnixTimestamp(int $epoch): int

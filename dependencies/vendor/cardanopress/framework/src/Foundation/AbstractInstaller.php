@@ -42,12 +42,24 @@ abstract class AbstractInstaller extends SharedBase implements InstallerInterfac
     public function activate(): void
     {
         if ('yes' === get_transient(static::DATA_PREFIX . 'activating')) {
-            $this->log('Is already activating ' . $this->pluginNameAndVersion);
+            $this->log(
+                sprintf(
+                    /* translators: %s: plugin name and version */
+                    __('Is already activating %s', 'cardanopress'),
+                    $this->pluginNameAndVersion
+                )
+            );
 
             return;
         }
 
-        $this->log('Activating ' . $this->pluginNameAndVersion);
+        $this->log(
+            sprintf(
+                /* translators: %s: plugin name and version */
+                __('Activating %s', 'cardanopress'),
+                $this->pluginNameAndVersion
+            )
+        );
         set_transient(static::DATA_PREFIX . 'activating', 'yes', MINUTE_IN_SECONDS * 2);
         do_action(static::DATA_PREFIX . 'activating');
         $this->maybeDoUpgrades(true);
@@ -66,7 +78,7 @@ abstract class AbstractInstaller extends SharedBase implements InstallerInterfac
             }
 
             do_action(static::DATA_PREFIX . 'upgrading', $currentVersion, $appVersion);
-            update_option(static::DATA_PREFIX . 'version', $appVersion);
+            update_option(static::DATA_PREFIX . 'version', $appVersion, false);
         }
     }
 
@@ -77,12 +89,13 @@ abstract class AbstractInstaller extends SharedBase implements InstallerInterfac
         }
 
         $plugin  = sprintf(
-            '<a href="%1$s" target="_blank">core plugin</a>',
-            'https://wordpress.org/plugins/cardanopress'
+            '<a href="%1$s" target="_blank">%2$s</a>',
+            'https://wordpress.org/plugins/cardanopress',
+            __('core plugin', 'cardanopress')
         );
         $message = sprintf(
-            '<strong>%1$s</strong> requires the %2$s for its full functionality.',
-            $this->application->getData('Name'),
+            __('%1$s requires the %2$s for its full functionality.', 'cardanopress'),
+            '<strong>' . $this->application->getData('Name') . '</strong>',
             $plugin
         );
 

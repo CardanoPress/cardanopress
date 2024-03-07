@@ -10,7 +10,7 @@ namespace CardanoPress\Traits;
 trait HasPageTemplates
 {
     protected string $pageTitlePrefix = '';
-    protected array $pageTemplates = array();
+    protected array $pageTemplates = [];
 
     protected function setPageTitlePrefix(string $pageTitlePrefix): void
     {
