@@ -6,11 +6,14 @@
  * Author:      CardanoPress
  * Author URI:  https://cardanopress.io
  * Description: Core plugin for the suite of CardanoPress plugins
- * Version:     1.8.1
+ * Version:     1.9.0
  * License:     GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
  * Text Domain: cardanopress
+ *
+ * Requires at least: 5.9
+ * Requires PHP:      7.4
  *
  * @package ThemePlate
  * @since   0.1.0

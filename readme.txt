@@ -2,9 +2,9 @@
 Contributors: pbwebdev
 Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, metamask, nami, eternl, ada, token gating
-Requires at least: 5.8
+Requires at least: 5.9
 Tested up to: 6.4.99
-Stable tag: 1.8.1
+Stable tag: 1.9.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -132,6 +132,13 @@ This plugin does not collect or process any personal user data unless you expres
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.9.0 =
+- Made AlpineJS script as external requirement (CDN)
+- - registered with handle `cardanopress-alpinejs`
+- Adjusted dependency loading to skip on no wasm
+- Print all possible issues in browser console
+- A much lighter build; lazy-loaded modules
 
 = 1.8.1 =
 - Update selectable roles
