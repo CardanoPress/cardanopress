@@ -3,8 +3,8 @@ Contributors: pbwebdev
 Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, metamask, nami, eternl, ada, token gating
 Requires at least: 5.9
-Tested up to: 6.4.99
-Stable tag: 1.9.0
+Tested up to: 6.5.99
+Stable tag: 1.9.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
