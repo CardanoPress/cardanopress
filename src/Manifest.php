@@ -106,13 +106,24 @@ class Manifest extends AbstractManifest
         if (! $compatibility->hasIssue('server')) {
             wp_enqueue_script(self::HANDLE_PREFIX . 'script');
             wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
-            wp_enqueue_script(
-                self::HANDLE_PREFIX . 'alpinejs',
-                'https://unpkg.com/alpinejs',
-                [self::HANDLE_PREFIX . 'script'],
-                'latest',
-                true
-            );
+
+            if (apply_filters('cardanopress_alpinejs_cdn', false)) {
+                wp_enqueue_script(
+                    self::HANDLE_PREFIX . 'alpinejs',
+                    'https://unpkg.com/alpinejs',
+                    [self::HANDLE_PREFIX . 'script'],
+                    'latest',
+                    true
+                );
+            } else {
+                wp_enqueue_script(
+                    self::HANDLE_PREFIX . 'alpinejs',
+                    plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
+                    [self::HANDLE_PREFIX . 'script'],
+                    '3.13.8',
+                    true
+                );
+            }
         }
 
         self::injectDataProvider();
