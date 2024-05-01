@@ -1,8 +1,8 @@
 /* global grecaptcha */
 
+import { handlePayment } from './actions'
 import { cardanoPressMessages } from './api/config'
 import { addNotice, removeNotice } from './api/util'
-import { handlePayment } from './actions'
 
 window.addEventListener('alpine:init', () => {
     Alpine.data('splitForm', () => ({
@@ -16,7 +16,7 @@ window.addEventListener('alpine:init', () => {
         },
 
         paymentAmount() {
-            return (this.remainingBalance * this.percentage / 100).toFixed();
+            return ((this.remainingBalance * this.percentage) / 100).toFixed()
         },
 
         async handleSend() {

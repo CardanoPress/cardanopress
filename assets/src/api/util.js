@@ -1,31 +1,31 @@
-import { getConnectedExtension } from './config'
 import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
+import { getConnectedExtension } from './config'
 
 export const waitElement = (selector) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         if (document.querySelector(selector)) {
-            return resolve(document.querySelector(selector));
+            return resolve(document.querySelector(selector))
         }
 
         const observer = new MutationObserver(() => {
             if (document.querySelector(selector)) {
-                resolve(document.querySelector(selector));
-                observer.disconnect();
+                resolve(document.querySelector(selector))
+                observer.disconnect()
             }
-        });
+        })
 
         observer.observe(document.body, {
             childList: true,
-            subtree: true
-        });
-    });
+            subtree: true,
+        })
+    })
 }
 
 export const windowLoader = (callback) => {
     if ('complete' === document.readyState) {
-        callback();
+        callback()
     } else {
-        window.addEventListener('load', callback);
+        window.addEventListener('load', callback)
     }
 }
 

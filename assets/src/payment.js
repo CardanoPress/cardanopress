@@ -1,9 +1,9 @@
 /* global grecaptcha */
 
+import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
+import { getPaymentAddress, handlePayment } from './actions'
 import { cardanoPressMessages } from './api/config'
 import { addNotice, getConnectedWallet, removeNotice, waitElement } from './api/util'
-import { getPaymentAddress, handlePayment } from './actions'
-import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 
 window.addEventListener('alpine:init', () => {
     Alpine.data('paymentForm', () => ({
@@ -32,15 +32,19 @@ window.addEventListener('alpine:init', () => {
                 this.paymentAddress = response.data
             }
 
-            window.addEventListener('cardanoPress:recaptcha', async (event) => {
-                this.isVerified = event.detail
+            window.addEventListener(
+                'cardanoPress:recaptcha',
+                async (event) => {
+                    this.isVerified = event.detail
 
-                if (this.isVerified && !this.paymentAddress) {
-                    const response = await getPaymentAddress()
+                    if (this.isVerified && !this.paymentAddress) {
+                        const response = await getPaymentAddress()
 
-                    this.paymentAddress = response.data
-                }
-            }, { once: true })
+                        this.paymentAddress = response.data
+                    }
+                },
+                { once: true }
+            )
         },
 
         isReady(type = 'extension') {
@@ -58,7 +62,7 @@ window.addEventListener('alpine:init', () => {
         },
 
         totalAmount(inAdaValue = true) {
-            const amount = ((this.payAmount * 100) * (this.quantity * 100)) / (100 * 100)
+            const amount = (this.payAmount * 100 * (this.quantity * 100)) / (100 * 100)
 
             return inAdaValue ? amount.toFixed(1) : adaToLovelace(amount)
         },
@@ -122,12 +126,12 @@ window.addEventListener('alpine:init', () => {
 })
 
 window.cardanoPressRecaptchaCallback = () => {
-    const sendVerified = (status) => window.dispatchEvent(new CustomEvent('cardanoPress:recaptcha', { 'detail': status }))
+    const sendVerified = (status) => window.dispatchEvent(new CustomEvent('cardanoPress:recaptcha', { detail: status }))
 
     window.addEventListener('alpine:init', () => {
         waitElement('#cardanopress-recaptcha').then((element) => {
             grecaptcha.render(element, {
-                'callback': () => {
+                callback: () => {
                     sendVerified(true)
                 },
                 'expired-callback': () => {

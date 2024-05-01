@@ -31,7 +31,7 @@ window.addEventListener('alpine:init', () => {
         },
 
         remove(id) {
-            [this.visible, this.list].forEach(container => {
+            ;[this.visible, this.list].forEach((container) => {
                 const notice = container.find((notice) => notice.id === id)
                 const index = container.indexOf(notice)
 

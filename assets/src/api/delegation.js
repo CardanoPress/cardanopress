@@ -1,5 +1,5 @@
+import { getAccount, getProtocol } from './actions'
 import { getConnectedWallet } from './util'
-import { getProtocol, getAccount } from './actions'
 
 export const delegation = async (poolId) => {
     let Wallet

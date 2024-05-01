@@ -8,21 +8,20 @@ import {
     setNotified,
     toPropertyName,
 } from './api/config'
-import {
-    NETWORK,
-    supportedWallets,
-} from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
-import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 import { delegation as delegationTx } from './api/delegation'
 import { payment as paymentTx } from './api/payment'
+import { addNotice, getConnectedWallet, removeNotice } from './api/util'
+
 import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
-import * as actions from './api/actions'
-import * as util from './api/util'
-import * as utils from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
-import * as wallet from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
+import { NETWORK, supportedWallets } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
 import { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface/csl'
 
-const { hexToBech32 } = utils;
+import * as utils from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
+import * as wallet from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
+import * as actions from './api/actions'
+import * as util from './api/util'
+
+const { hexToBech32 } = utils
 
 window.addEventListener('alpine:init', () => {
     Alpine.data('cardanoPress', () => ({
@@ -52,7 +51,7 @@ window.addEventListener('alpine:init', () => {
         },
 
         refreshWallets() {
-            supportedWallets.forEach(wallet => {
+            supportedWallets.forEach((wallet) => {
                 this[toPropertyName(wallet, 'has')] = Extensions.hasWallet(wallet)
             })
         },
@@ -66,7 +65,7 @@ window.addEventListener('alpine:init', () => {
 
             if (cardanoPress.logged) {
                 this.connectedExtension = getConnectedExtension()
-                this.selectedHandle = this.$root.dataset.handle;
+                this.selectedHandle = this.$root.dataset.handle
                 this.isConnected = !!this.connectedExtension
                 window.cardanoPress.extension = this.connectedExtension
 
@@ -250,12 +249,12 @@ window.addEventListener('alpine:init', () => {
             const response = await handleSave(this.selectedHandle)
 
             removeNotice('save')
-            addNotice({ type: response.success ? 'success' : 'error', text : response.data })
+            addNotice({ type: response.success ? 'success' : 'error', text: response.data })
 
             this.isProcessing = false
         },
     }))
-});
+})
 
 window.cardanoPress = {
     ...cardanoPress,
@@ -267,18 +266,21 @@ window.cardanoPress = {
     browser: {
         Extensions,
         supports: supportedWallets,
-        isSupported: type => Extensions.isSupported(type),
-        ...supportedWallets.reduce((a, v) => ({
-            ...a,
-            [toPropertyName(v, 'has')]: async () => await Extensions.hasWallet(v),
-            [toPropertyName(v, 'get')]: async () => await Extensions.getWallet(v),
-        }), {})
+        isSupported: (type) => Extensions.isSupported(type),
+        ...supportedWallets.reduce(
+            (a, v) => ({
+                ...a,
+                [toPropertyName(v, 'has')]: async () => await Extensions.hasWallet(v),
+                [toPropertyName(v, 'get')]: async () => await Extensions.getWallet(v),
+            }),
+            {}
+        ),
     },
     csl,
     extension: '',
     wallet: {
         delegationTx,
         paymentTx,
-        ...wallet
+        ...wallet,
     },
 }
