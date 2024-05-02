@@ -1,15 +1,16 @@
 === CardanoPress - Cardano Blockchain Integration for WordPress ===
-Contributors: pbwebdev
+Contributors: pbwebdev, gaft
 Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
-Tags: cardano, blockchain, web3, metamask, nami, eternl, ada, token gating
+Tags: cardano, blockchain, web3, ada, token gating
 Requires at least: 5.9
 Tested up to: 6.5.99
-Stable tag: 1.9.1
+Stable tag: 1.10.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
 
 Integrate the Cardano blockchain with your WordPress website. Merging Web2 and Web3.
+
 
 == Description ==
 
@@ -62,6 +63,7 @@ Follow us on [Twitter](https://twitter.com/cardanopress)
 View all of our repos on [GitHub](https://github.com/CardanoPress/)
 View all of our documentation and resources on our [website](https://cardanopress.io)
 
+
 == Installation ==
 
 This plugin requires your own standalone WordPress installation and access to the web server to add a line of code to your htaccess file.
@@ -98,6 +100,7 @@ Once you've done this, you will be able to connect your WordPress website to the
 
 For more detailed documentation and tutorials on how to use the plugin, please visit the [CardanoPress documentation website](https://cardanopress.io).
 
+
 == Get Support ==
 
 We have community support available on our website under the [CardanoPress forums](https://cardanopress.io/community/). We also have an online chat support via our [Discord server](https://discord.gg/CEX4aSfkXF). We encourage you to use the forums first though as it will help others that read through the forums for support.
@@ -124,14 +127,25 @@ Yes, we've built the plugin and sub plugins with hooks and template layouts that
 We've also taking into account page builders and created short codes for all the template parts of the theme. This will allow builders such as Divi, Elementor, WPBakery to be used with CardanoPress.
 
 
-
 == Privacy ==
 
 This plugin does not collect or process any personal user data unless you expressively opt-in.
 
+
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.10.0 =
+- Grab the latest packages and dependencies
+- - much slimmer assets and optimized loading
+- Stop using shorthand syntax: `@`prefixed attributes
+- - prevents HTML parsers from breaking JS actions
+
+= 1.9.1 =
+- Serve AlpineJS locally by default, instead from CDN
+- - cardanopress_alpinejs_cdn filter to revert
+- Bump plugin headers for WP version 6.5
 
 = 1.9.0 =
 - Made AlpineJS script as external requirement (CDN)
@@ -167,7 +181,6 @@ You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress
 - helper method to check already delegated account
 - always check the request origin; even if logged in
 
-
 = 1.4.0 =
 - Better handling of classic themes that do not support the wp_body_open hook
 - Temporarily render blank the shipped templates on block themes
@@ -197,102 +210,6 @@ Add info notice for a review
 
 = 1.0.0 =
 First stable release (exact same version as 0.40.1)
-
-= 0.40.1 =
-Fix payment amount
-
-= 0.40.0 =
-Correctly escape all variables
-Update all dependencies
-
-= 0.39.0 =
-Sanitize $_POST variables
-Escape template outputs
-
-= 0.38.0 =
-Recommend plugins to install:
-User Role Editor
-User Access Manager
-
-= 0.37.0 =
-Correct counted asset unit quantity
-Bump version for the GuzzleHTTP
-
-= 0.36.1 =
-Handle edge cases where the user sets a Policy ID but misses to select an Additional Role to assign under the Asset Access settings box
-
-= 0.36.0 =
-Support for Cardwallet and NuFi
-Fix the display of calculated payment total
-Showing the wallet balance is now an opt-in action
-
-= 0.35.1 =
-Security update patch for guzzle 7.4.4
-GHSA-f2wf-25xc-69c9
-
-= 0.35.0 =
-Helpful field descriptions in the Settings
-Handy component-level shortcodes
-cardanopress_component_cardanopress
-cardanopress_component_pooldelegation
-cardanopress_component_paymentform
-cardanopress_component_splitform
-
-= 0.34.0 =
-Fully optional reCaptcha in the payments
-Copy value to clipboard notification
-Serve production built assets
-
-= 0.33.0 =
-Expose Blockfrost API endpoint for getting pool information
-Clear off the favorited handle if no longer in the wallet
-
-= 0.32.0 =
-Dynamically list the pages under the menu dropdown with their custom titles
-One more hook for the currently read asset cardanopress_associated_asset
-Minor code fixes and optimizations
-
-= 0.31.0 =
-General code improvements
-
-= 0.30.0 =
-Customizable notification messages and translation ready; via filter hooks
--- cardanopress_ajax_messages
--- cardanopress_script_messages
-
-= 0.29.0 =
-Optimize asset checks; less Blockfrost request
-Secure WP accounts creation from wallets; hashed passwords
-Provide action hooks during login
--- cardanopress_wallet_status_checks
--- cardanopress_associated_assets
--- cardanopress_account_history
-
-= 0.28.0 =
-Nag a notice for missing Blockfrost API Token
-Support ADA Handle https://adahandle.com/
-
-= 0.27.0 =
-Tie WP user to stake address
-Load back the extra scripts normally
-Skip nonce check for non-authenticated actions
-Move shared logs to <WP_CONTENT_DIR>/cardanopress-logs
-
-= 0.26.0 =
-Update scripts loading order
-Handle an array image metadata field
-Add the settings link in the plugin action row
-
-= 0.25.0 =
-Better error handling; mainly due to incomplete plugin setup
-Blockfrost API key: The connect action not working properly
-Payment address: The payment page does not fully load
-Default network to mainnet; API key field now required to set
-Pretty print notices instead of random JS error strings
-
-= 0.24.0 =
-Bug fixes and improvements (also testing discord integration).
-
 
 
 == Upgrade Notice ==
