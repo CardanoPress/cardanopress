@@ -19,6 +19,7 @@
   "config": {
     "optimize-autoloader": true,
     "allow-plugins": {
+      "automattic/jetpack-autoloader": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "phpstan/extension-installer": true
     }
@@ -30,6 +31,7 @@
     "ext-json": "*"
   },
   "require-dev": {
+    "automattic/jetpack-autoloader": "^2.12",
     "themeplate/tester": "^2.1"
   },
   "autoload": {

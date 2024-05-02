@@ -2,27 +2,27 @@
     "packages": [
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "v2.11.18",
-            "version_normalized": "2.11.18.0",
+            "version": "v2.12.0",
+            "version_normalized": "2.12.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/jetpack-autoloader.git",
-                "reference": "53cbf0528fa6931c4fa6465bccd37514f9eda720"
+                "reference": "632b69cfc73ed5505f2b03165e7f68d414d0da12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/53cbf0528fa6931c4fa6465bccd37514f9eda720",
-                "reference": "53cbf0528fa6931c4fa6465bccd37514f9eda720",
+                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/632b69cfc73ed5505f2b03165e7f68d414d0da12",
+                "reference": "632b69cfc73ed5505f2b03165e7f68d414d0da12",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2.0"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^3.3.2",
-                "yoast/phpunit-polyfills": "1.0.4"
+                "automattic/jetpack-changelogger": "^3.3.11",
+                "yoast/phpunit-polyfills": "1.1.0"
             },
-            "time": "2023-03-29T12:51:59+00:00",
+            "time": "2023-09-28T18:33:34+00:00",
             "type": "composer-plugin",
             "extra": {
                 "autotagger": true,
@@ -31,8 +31,11 @@
                 "changelogger": {
                     "link-template": "https://github.com/Automattic/jetpack-autoloader/compare/v${old}...v${new}"
                 },
+                "version-constants": {
+                    "::VERSION": "src/AutoloadGenerator.php"
+                },
                 "branch-alias": {
-                    "dev-trunk": "2.11.x-dev"
+                    "dev-trunk": "2.12.x-dev"
                 }
             },
             "installation-source": "dist",
@@ -49,24 +52,32 @@
                 "GPL-2.0-or-later"
             ],
             "description": "Creates a custom autoloader for a plugin or theme.",
+            "keywords": [
+                "autoload",
+                "autoloader",
+                "composer",
+                "jetpack",
+                "plugin",
+                "wordpress"
+            ],
             "support": {
-                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v2.11.18"
+                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v2.12.0"
             },
             "install-path": "../automattic/jetpack-autoloader"
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.3.1",
-            "version_normalized": "2.3.1.0",
+            "version": "v2.4.0",
+            "version_normalized": "2.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "e160b780bdd43e07603c739f727cf43433936524"
+                "reference": "abf7ccb68833539b3a7f649b98aad1f1f49a5c9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/e160b780bdd43e07603c739f727cf43433936524",
-                "reference": "e160b780bdd43e07603c739f727cf43433936524",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/abf7ccb68833539b3a7f649b98aad1f1f49a5c9a",
+                "reference": "abf7ccb68833539b3a7f649b98aad1f1f49a5c9a",
                 "shasum": ""
             },
             "require": {
@@ -74,9 +85,10 @@
                 "php": "^7.4|^8.0"
             },
             "require-dev": {
+                "automattic/jetpack-autoloader": "^2.12",
                 "themeplate/tester": "^2.1"
             },
-            "time": "2024-03-07T05:32:42+00:00",
+            "time": "2024-05-02T02:46:06+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -109,7 +121,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.3.1"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.4.0"
             },
             "install-path": "../cardanopress/framework"
         }
