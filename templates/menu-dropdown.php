@@ -22,7 +22,7 @@
         x-transition:leave="transition ease-in duration-75 origin-top"
         x-transition:leave-start="transform opacity-100"
         x-transition:leave-end="transform opacity-0 scale-y-0"
-        @click.away="openDropdown = false"
+        x-on:click.away="openDropdown = false"
     >
         <?php cardanoPress()->template('part/menu-items'); ?>
     </ul>

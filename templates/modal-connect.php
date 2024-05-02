@@ -25,7 +25,7 @@
         x-transition:leave="transition ease-in duration-75"
         x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-75"
-        @click.away="showModal = false"
+        x-on:click.away="showModal = false"
     >
         <?php cardanoPress()->template('part/modal-header'); ?>
         <?php cardanoPress()->template('part/modal-content'); ?>

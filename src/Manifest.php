@@ -85,7 +85,7 @@ class Manifest extends AbstractManifest
             $handle = Application::getInstance()->userProfile()->getFavoriteHandle();
         }
 
-        echo '<div x-data="cardanoPress" @keydown.escape="showModal = false" data-handle="' . esc_attr($handle) . '">';
+        echo '<div x-data="cardanoPress" x-on:keydown.escape="showModal = false" data-handle="' . esc_attr($handle) . '">';
     }
 
     public function completeInjections(): void

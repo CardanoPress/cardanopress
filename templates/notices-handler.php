@@ -22,7 +22,7 @@
                 x-transition:leave="transition ease-out duration-500"
                 x-transition:leave-start="transform translate-x-0 opacity-100"
                 x-transition:leave-end="transform translate-x-full opacity-0"
-                @click="$store.toastNotification.remove(notice.id)" class="z-10"
+                x-on:click="$store.toastNotification.remove(notice.id)" class="z-10"
             >
                 <?php cardanoPress()->template('part/notice-item'); ?>
             </div>

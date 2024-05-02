@@ -18,7 +18,7 @@
         Wallet
     </h2>
 
-    <button type="button" class="z-50 cursor-pointer p-0" @click="showModal = false">
+    <button type="button" class="z-50 cursor-pointer p-0" x-on:click="showModal = false">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
