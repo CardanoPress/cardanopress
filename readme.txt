@@ -1,10 +1,10 @@
 === CardanoPress - Cardano Blockchain Integration for WordPress ===
 Contributors: pbwebdev, gaft
 Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
-Tags: cardano, blockchain, web3, ada, token gating
+Tags: cardano, blockchain, web3, ada, token-gating
 Requires at least: 5.9
 Tested up to: 6.5.99
-Stable tag: 1.10.0
+Stable tag: 1.11.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -136,28 +136,32 @@ This plugin does not collect or process any personal user data unless you expres
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
 
+= 1.11.0 =
+- Correctly render provided templates in block themes
+- Handle non-existent pool metadata json file
+
 = 1.10.0 =
 - Grab the latest packages and dependencies
-- - much slimmer assets and optimized loading
+  - much slimmer assets and optimized loading
 - Stop using shorthand syntax: `@`prefixed attributes
-- - prevents HTML parsers from breaking JS actions
+  - prevents HTML parsers from breaking JS actions
 
 = 1.9.1 =
 - Serve AlpineJS locally by default, instead from CDN
-- - cardanopress_alpinejs_cdn filter to revert
+  - cardanopress_alpinejs_cdn filter to revert
 - Bump plugin headers for WP version 6.5
 
 = 1.9.0 =
 - Made AlpineJS script as external requirement (CDN)
-- - registered with handle `cardanopress-alpinejs`
+  - registered with handle `cardanopress-alpinejs`
 - Adjusted dependency loading to skip on no wasm
 - Print all possible issues in browser console
 - A much lighter build; lazy-loaded modules
 
 = 1.8.1 =
 - Update selectable roles
-- - exclude the `administrator` in every list
-- - customizable via filter `cardanopress_selectable_roles`
+  - exclude the `administrator` in every list
+  - customizable via filter `cardanopress_selectable_roles`
 
 = 1.8.0 =
 - Add a new field for managed roles (selected roles will be removed every wallet connect)
