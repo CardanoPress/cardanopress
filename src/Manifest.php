@@ -57,10 +57,6 @@ class Manifest extends AbstractManifest
         $compatibility = Compatibility::getInstance();
         $issues = $compatibility->getIssues();
 
-        if (empty($issues) || (1 === count($issues) && 'block' === $issues[0])) {
-            return;
-        }
-
         if ($compatibility->hasIssue('server')) {
             wp_deregister_script(self::HANDLE_PREFIX . 'script');
         }

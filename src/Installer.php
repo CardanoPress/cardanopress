@@ -137,11 +137,6 @@ class Installer extends AbstractInstaller
         $count = count($issues);
         $message = _n('%s issue detected:', '%s issues detected:', $count, 'cardanopress');
 
-        if (1 === $count && 'block' === $issues[0]) {
-            /* translators: %s: plugin name */
-            $message = __('%s possible issue:', 'cardanopress');
-        }
-
         ?>
         <div class="notice notice-error is-dismissible cardanopress-notice" id="cardanopress_notice_issues">
             <p>
@@ -158,18 +153,11 @@ class Installer extends AbstractInstaller
                 <?php foreach ($issues as $issue) : ?>
                     <li>
                         <?php echo esc_html($this->compatibility->message($issue)); ?>
-                        <?php if ('block' === $issue) : ?>
-                            <ul style="list-style-type: disc; padding: 0.5rem 0 0 1rem;">
-                                <?php foreach (['default', 'content', 'ignore'] as $block) : ?>
-                                    <li><?php echo esc_html($this->compatibility->message($block)); ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
             </ol>
 
-            <?php if (1 < $count || 'block' !== $issues[0]) : ?>
+            <?php if (1 < $count) : ?>
             <p>
                 <button id="cardanopress_compatibility_check">
                     <?php echo _n('Re-check issue', 'Re-check issues', $count, 'cardanopress'); ?>
