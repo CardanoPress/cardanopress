@@ -20,7 +20,7 @@ if (! empty($recaptchaKey)) {
     cardanoPress()->enqueue('script', 'cardanopress-recaptcha');
 }
 
-get_header();
+cardanoPress()->compatibleHeader();
 
 ?>
 
@@ -118,4 +118,4 @@ get_header();
 
 <?php
 
-get_footer();
+cardanoPress()->compatibleFooter();

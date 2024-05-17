@@ -10,8 +10,7 @@
  */
 
 cardanoPress()->enqueue('script', 'cardanopress-delegation');
-
-get_header();
+cardanoPress()->compatibleHeader();
 
 ?>
 
@@ -26,4 +25,4 @@ get_header();
 
 <?php
 
-get_footer();
+cardanoPress()->compatibleFooter();
