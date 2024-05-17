@@ -24,10 +24,6 @@ class Templates extends AbstractTemplates
 
     public function setupHooks(): void
     {
-        if (wp_is_block_theme()) {
-            return;
-        }
-
         parent::setupHooks();
 
         add_filter('theme_page_templates', [$this, 'mergePageTemplates']);
