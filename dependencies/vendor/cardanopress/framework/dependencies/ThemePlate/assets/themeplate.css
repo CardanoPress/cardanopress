@@ -84,6 +84,7 @@
 }
 
 .field-label .label {
+	display: block;
 	color: #23282d;
 	font-size: 14px;
 	font-weight: 600;

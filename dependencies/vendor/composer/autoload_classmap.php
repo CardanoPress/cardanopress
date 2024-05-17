@@ -314,6 +314,7 @@ return array(
     'CardanoPress\\Foundation\\AbstractShortcode' => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractShortcode.php',
     'CardanoPress\\Foundation\\AbstractTemplates' => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractTemplates.php',
     'CardanoPress\\Helpers\\NumberHelper' => $vendorDir . '/cardanopress/framework/src/Helpers/NumberHelper.php',
+    'CardanoPress\\Helpers\\ThemeHelper' => $vendorDir . '/cardanopress/framework/src/Helpers/ThemeHelper.php',
     'CardanoPress\\Helpers\\WalletHelper' => $vendorDir . '/cardanopress/framework/src/Helpers/WalletHelper.php',
     'CardanoPress\\Interfaces\\AdminInterface' => $vendorDir . '/cardanopress/framework/src/Interfaces/AdminInterface.php',
     'CardanoPress\\Interfaces\\ApplicationInterface' => $vendorDir . '/cardanopress/framework/src/Interfaces/ApplicationInterface.php',

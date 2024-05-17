@@ -10,16 +10,48 @@
 namespace CardanoPress\Dependencies\ThemePlate\Core\Field;
 
 use CardanoPress\Dependencies\ThemePlate\Core\Field;
+use CardanoPress\Dependencies\ThemePlate\Core\Helper\MainHelper;
 
 class LinkField extends Field {
+
+	public const DEFAULT_VALUE = array(
+		'url'    => '',
+		'text'   => '',
+		'target' => '',
+	);
+
+
+	protected function initialize(): void {
+
+		$this->config['default'] = $this->values_structure( $this->config['default'] );
+
+	}
+
+
+	private function values_structure( array $default ): array {
+
+		if ( MainHelper::is_sequential( $default ) ) {
+			return array_map( array( $this, 'values_structure' ), $default );
+		}
+
+		return array_intersect_key(
+			MainHelper::fool_proof(
+				static::DEFAULT_VALUE,
+				$default
+			),
+			static::DEFAULT_VALUE
+		);
+
+	}
+
 
 	public function render( $value ): void {
 
 		echo '<div id="' . esc_attr( $this->get_config( 'id' ) ) . '" class="themeplate-link">';
 		echo '<input type="button" class="button link-select" value="Select" />';
-		echo '<input type="button" class="button link-remove' . ( empty( $value ) ? ' hidden' : '' ) . '" value="Remove" />';
+		echo '<input type="button" class="button link-remove' . ( empty( array_filter( (array) $value ) ) ? ' hidden' : '' ) . '" value="Remove" />';
 
-		foreach ( array( 'url', 'text', 'target' ) as $attr_key ) {
+		foreach ( array_keys( self::DEFAULT_VALUE ) as $attr_key ) {
 			$attr_value = $value[ $attr_key ] ?? '';
 
 			echo '<input

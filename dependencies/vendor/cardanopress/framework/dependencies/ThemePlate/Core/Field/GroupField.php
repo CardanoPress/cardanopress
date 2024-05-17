@@ -11,8 +11,24 @@ namespace CardanoPress\Dependencies\ThemePlate\Core\Field;
 
 use CardanoPress\Dependencies\ThemePlate\Core\Field;
 use CardanoPress\Dependencies\ThemePlate\Core\Fields;
+use CardanoPress\Dependencies\ThemePlate\Core\Helper\FieldsHelper;
 
 class GroupField extends Field {
+
+	public const DEFAULT_VALUE = array();
+
+
+	protected function initialize(): void {
+
+		$clone = clone $this;
+		$clone->config['repeatable'] = false;
+
+		$default = FieldsHelper::get_default_value( $clone );
+
+		$this->config['default'] = $default;
+		$this->config['fields']  = FieldsHelper::group_fields( $this->config['fields'] ?? array() );
+
+	}
 
 	/**
 	 * @param array $value

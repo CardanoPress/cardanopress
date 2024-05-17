@@ -17,6 +17,8 @@ use WP_User_Query;
 
 class TypeField extends Field {
 
+	public const MULTIPLE_ABLE = true;
+
 	public const ACTION_PREFIX = 'themeplate_type_';
 
 
@@ -51,13 +53,6 @@ class TypeField extends Field {
 		$hook_name = 'wp_ajax_' . $this->get_action_name( $this->get_config( 'type' ) );
 
 		add_action( $hook_name, $this->get_callback( $this->get_config( 'type' ) ) );
-
-	}
-
-
-	protected function can_have_multiple_value(): bool {
-
-		return true;
 
 	}
 
@@ -105,8 +100,10 @@ class TypeField extends Field {
 				( $this->get_config( 'required' ) ? ' required="required"' : '' ) .
 				'>';
 
-		if ( $value ) {
-			foreach ( (array) $value as $item ) {
+		$value = array_filter( (array) $value );
+
+		if ( ! empty( $value ) ) {
+			foreach ( $value as $item ) {
 				echo '<option value="' . esc_attr( $item ) . '" selected="selected">' . esc_html( $item ) . '</option>';
 			}
 		}
@@ -115,7 +112,7 @@ class TypeField extends Field {
 		echo '<div class="select2-options"
 				data-action="' . esc_attr( $this->get_action_name( $this->get_config( 'type' ) ) ) . '"
 				data-options="' . esc_attr( wp_json_encode( $args, JSON_NUMERIC_CHECK ) ) . '"
-				data-value="' . esc_attr( wp_json_encode( $value, JSON_NUMERIC_CHECK ) ) . '"
+				data-value="' . esc_attr( wp_json_encode( empty( $value ) ? '' : $value, JSON_NUMERIC_CHECK ) ) . '"
 				></div>';
 
 	}
@@ -146,9 +143,9 @@ class TypeField extends Field {
 			);
 		}
 
-		$query = new WP_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
+		$query = new WP_Query( array_merge( $defaults, $_GET['options'], $_GET['_page'] ) );
 
-		if ( $_GET['page']['paged'] < $query->max_num_pages ) {
+		if ( $_GET['_page']['paged'] < $query->max_num_pages ) {
 			$return['pagination']['more'] = true;
 		}
 
@@ -200,9 +197,9 @@ class TypeField extends Field {
 			'number'  => isset( $_GET['ids__in'] ) ? -1 : self::$count,
 			'include' => $_GET['ids__in'] ?? '',
 		);
-		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
+		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'], $_GET['_page'] ) );
 
-		if ( $_GET['page']['paged'] < ceil( $query->get_total() / self::$count ) ) {
+		if ( $_GET['_page']['paged'] < ceil( $query->get_total() / self::$count ) ) {
 			$return['pagination']['more'] = true;
 		}
 
@@ -228,7 +225,7 @@ class TypeField extends Field {
 				'more' => false,
 			),
 		);
-		$offset   = ( $_GET['page']['paged'] > 0 ) ? self::$count * ( $_GET['page']['paged'] - 1 ) : 1;
+		$offset   = ( $_GET['_page']['paged'] > 0 ) ? self::$count * ( $_GET['_page']['paged'] - 1 ) : 1;
 		$defaults = array(
 			'search'  => $_GET['search'] ?? '',
 			'fields'  => 'id=>name',
@@ -239,7 +236,7 @@ class TypeField extends Field {
 		$total    = wp_count_terms( $_GET['options']['taxonomy'] );
 		$query    = new WP_Term_Query( array_merge( $defaults, $_GET['options'] ) );
 
-		if ( ! is_wp_error( $total ) && $_GET['page']['paged'] < ceil( $total / self::$count ) ) {
+		if ( ! is_wp_error( $total ) && $_GET['_page']['paged'] < ceil( $total / self::$count ) ) {
 			$return['pagination']['more'] = true;
 		}
 

@@ -140,7 +140,10 @@ abstract class Form {
 				$field->set_id( $this->fields_group_key() . '_' . $field->data_key( $prefix ) );
 				$field->set_name( $this->fields_group_key() . '[' . $field->data_key( $prefix ) . ']' );
 
-				$this->fields->layout( $field, $this->handler->get_value( $field, $prefix, $current_id ) );
+				$value = $this->handler->get_value( $field, $prefix, $current_id );
+
+				MainHelper::maybe_adjust( $field,$value );
+				$this->fields->layout( $field, $value );
 			}
 		}
 

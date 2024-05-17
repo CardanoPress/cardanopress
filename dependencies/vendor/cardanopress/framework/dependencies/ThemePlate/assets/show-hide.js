@@ -288,7 +288,7 @@ window.ThemePlate = window.ThemePlate || {};
 	};
 
 
-	$( document ).ready( function() {
+	wp.domReady( function() {
 		$( '.themeplate-options' ).each( function() {
 			var $this = $( this );
 			var $container = TP.getContainer( $this );

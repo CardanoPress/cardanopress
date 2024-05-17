@@ -37,7 +37,15 @@ abstract class LoaderTag {
 
 		if ( array_key_exists( $handle, $this->dependencies ) ) {
 			$property   = static::MAIN_PROPERTY;
-			$attributes = $this->stringify( $this->dependencies[ $handle ] );
+			$attributes = $this->dependencies[ $handle ];
+
+			if ( in_array( 'noscript', array_keys( $attributes ), true ) ) {
+				unset( $attributes['noscript'] );
+
+				$tag = '<noscript>' . $tag . '</noscript>';
+			}
+
+			$attributes = $this->stringify( $attributes );
 
 			return str_replace( " $property=", "$attributes $property=", $tag );
 		}

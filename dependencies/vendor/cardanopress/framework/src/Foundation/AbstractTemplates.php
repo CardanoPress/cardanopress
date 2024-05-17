@@ -7,6 +7,7 @@
 
 namespace CardanoPress\Foundation;
 
+use CardanoPress\Helpers\ThemeHelper;
 use CardanoPress\Interfaces\HookInterface;
 use CardanoPress\Interfaces\TemplatesInterface;
 use CardanoPress\SharedBase;
@@ -42,13 +43,13 @@ abstract class AbstractTemplates extends SharedBase implements TemplatesInterfac
         $theme = wp_get_theme();
 
         if ($default === $theme->get_file_path($loaderFile)) {
-            return $default;
+            return ThemeHelper::correctTemplate($default);
         }
 
         $template_file = $this->path . str_replace(static::OVERRIDES_PREFIX, '', $loaderFile);
 
         if (file_exists($template_file)) {
-            return $template_file;
+            return ThemeHelper::correctTemplate($template_file);
         }
 
         return $default;

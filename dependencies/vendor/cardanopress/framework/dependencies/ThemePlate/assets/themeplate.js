@@ -264,7 +264,7 @@
 
 						return {
 							search: params.term,
-							page: { paged: params.page || 1 },
+							_page: { paged: params.page || 1 },
 							action: s2data.action,
 							options: s2data.options,
 						};
@@ -294,7 +294,7 @@
 					dataType: 'json',
 					data: {
 						search: '',
-						page: { paged: 1 },
+						_page: { paged: 1 },
 						action: s2data.action,
 						options: s2data.options,
 						ids__in: s2data.value,
@@ -339,7 +339,11 @@
 		});
 	}
 
-	$( window ).on( 'load', handleFields );
+	wp.domReady( function() {
+		console.log( 'ThemePlate!' );
+
+		handleFields();
+	});
 	$( document ).on( 'clone', handleFields );
 
 }( jQuery ));

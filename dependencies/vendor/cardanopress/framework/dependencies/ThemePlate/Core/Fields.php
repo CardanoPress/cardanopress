@@ -50,12 +50,8 @@ class Fields {
 				$field['type'] = Field::DEFAULTS['type'];
 			}
 
-			if ( 'group' === $field['type'] ) {
-				if ( array_key_exists( 'fields', $field ) && ! empty( $field['fields'] ) ) {
-					$field['fields'] = FieldsHelper::group_fields( $field['fields'] );
-				} else {
-					continue;
-				}
+			if ( 'group' === $field['type'] && empty( $field['fields'] ) ) {
+				continue;
 			}
 
 			$processed[ $id ] = FormHelper::make_field( $id, $field );

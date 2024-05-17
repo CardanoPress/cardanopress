@@ -22,14 +22,29 @@ class Logger {
 
 	public function __construct( string $folder_name = 'logs', string $base_path = WP_CONTENT_DIR ) {
 
-		$this->path = trailingslashit( $base_path ) . trim( $folder_name, '/\\' );
+		$this->path = $this->prepare_pathname( $base_path, false ) . $this->prepare_pathname( $folder_name );
+
+	}
+
+
+	protected function prepare_pathname( string $value, bool $both_sides = true ): string {
+
+		static $characters = '/\\ ';
+
+		$value = rtrim( $value, $characters );
+
+		if ( $both_sides ) {
+			$value = ltrim( $value, $characters );
+		}
+
+		return $value . DIRECTORY_SEPARATOR;
 
 	}
 
 
 	public function get_path(): string {
 
-		return $this->path;
+		return rtrim( $this->path, DIRECTORY_SEPARATOR );
 
 	}
 
@@ -51,7 +66,7 @@ class Logger {
 
 	protected function handler( string $channel ): RotatingFileHandler {
 
-		$filename = trailingslashit( $this->path ) . $channel . '.log';
+		$filename = $this->path . $channel . '.log';
 		$handler  = new RotatingFileHandler(
 			$filename,
 			0,
@@ -80,7 +95,7 @@ class Logger {
 
 	protected function processor( bool $context ): callable {
 
-		return static function( $record ) use ( $context ) {
+		return static function ( $record ) use ( $context ) {
 
 			$forced = array_key_exists( 'wp', $record['context'] ) ? 'wp' : array_search( 'wp', $record['context'], true );
 

@@ -19,25 +19,53 @@ class FieldsHelper {
 		$schema = array();
 
 		foreach ( $fields->get_collection() as $field ) {
-			$schema[ $field->data_key( $data_prefix ) ] = array(
-				'type'    => static::get_schema_type( $field ),
-				'default' => self::get_default_value( $field ),
-			);
+			$schema[ $field->data_key( $data_prefix ) ] = static::get_schema( $field );
 
-			if ( 'group' === $field->get_config( 'type' ) ) {
-				$schema[ $field->data_key( $data_prefix ) ]['properties'] = self::build_schema( $field->get_config( 'fields' ) );
-			} elseif ( 'link' === $field->get_config( 'type' ) ) {
-				$properties = array();
+			if ( $field->get_config( 'repeatable' ) ) {
+				$base = $schema[ $field->data_key( $data_prefix ) ];
 
-				foreach ( array( 'url', 'text', 'target' ) as $key ) {
-					$properties[ $key ] = array(
-						'type'    => 'string',
-						'default' => $schema[ $field->data_key( $data_prefix ) ]['default'][ $key ] ?? '',
-					);
-				};
+				unset( $base['default'] );
+				unset( $schema[ $field->data_key( $data_prefix ) ]['properties'] );
 
-				$schema[ $field->data_key( $data_prefix ) ]['properties'] = $properties;
+				$schema[ $field->data_key( $data_prefix ) ]['type']  = 'array';
+				$schema[ $field->data_key( $data_prefix ) ]['items'] = $base;
 			}
+		}
+
+		return $schema;
+
+	}
+
+
+	public static function get_schema( Field $field ): array {
+
+		$schema = array(
+			'type'    => static::get_schema_type( $field ),
+			'default' => static::get_default_value( $field ),
+		);
+
+		if ( 'group' === $field->get_config( 'type' ) ) {
+			$schema['properties'] = static::build_schema( $field->get_config( 'fields' ) );
+		} elseif ( 'link' === $field->get_config( 'type' ) ) {
+			$properties = array();
+
+			foreach ( $schema['default'] as $key => $value ) {
+				$properties[ $key ] = array(
+					'type'    => 'string',
+					'default' => $value,
+				);
+			};
+
+			$schema['properties'] = $properties;
+		}
+
+		if ( $field::MULTIPLE_ABLE && !! $field->get_config( 'multiple' ) ) {
+			$base = $schema;
+
+			unset( $base['default'] );
+
+			$schema['type']  = 'array';
+			$schema['items'] = $base;
 		}
 
 		return $schema;
@@ -48,12 +76,12 @@ class FieldsHelper {
 	public static function get_schema_type( Field $field ): string {
 
 		switch ( $field->get_config( 'type' ) ) {
-			default:
-				return 'string';
-
 			case 'link':
 			case 'group':
 				return 'object';
+
+			default:
+				return 'string';
 		}
 
 	}
@@ -67,26 +95,28 @@ class FieldsHelper {
 		$default = $field->get_config( 'default' );
 
 		if ( 'group' === $field->get_config( 'type' ) ) {
-			if ( empty( $field->get_config( 'fields' ) ) ) {
-				return $default;
+			if ( ! is_array( $default ) ) {
+				$default = array();
 			}
 
-			$fields = self::group_fields( $field->get_config( 'fields' ) );
+			$fields = static::group_fields( $field->get_config( 'fields' ) );
 
 			foreach ( $fields->get_collection() as $sub_field ) {
 				if ( isset( $default[ $sub_field->data_key() ] ) ) {
 					continue;
 				}
 
-				if ( ! is_array( $default ) ) {
-					$default = array();
-				}
-
-				$default[ $sub_field->data_key() ] = self::get_default_value( $sub_field );
+				$default[ $sub_field->data_key() ] = static::get_default_value( $sub_field );
 			}
 		}
 
-		return $default;
+		if ( is_array( $field::DEFAULT_VALUE ) && $field->get_config( 'repeatable' ) ) {
+			$default = array( $default );
+		}
+
+		MainHelper::maybe_adjust( $field, $default );
+
+		return is_array( $default ) ? MainHelper::values_to_string( $default ) : (string) $default;
 
 	}
 

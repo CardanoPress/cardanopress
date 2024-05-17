@@ -87,7 +87,9 @@
 		});
 	}
 
-
-	$( window ).on( 'load', listenDataChanges );
+	wp.domReady( function() {
+		setTimeout( applyCurrentChanges, 100 );
+		listenDataChanges();
+	});
 
 }( jQuery, window.ThemePlate ));

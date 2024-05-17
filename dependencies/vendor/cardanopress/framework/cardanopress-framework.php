@@ -6,7 +6,7 @@
  * Author:      Gene Alyson Fortunado Torcende
  * Author URI:  https://cardanopress.io
  * Description: A ThemePlate project for Cardano WordPress integration
- * Version:     2.4.0
+ * Version:     DEV-LATEST
  * License:     GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *

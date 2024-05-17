@@ -26,6 +26,10 @@ abstract class AbstractHandler implements HandlerInterface {
 
 	protected function forced_refresh( string $key ): bool {
 
+		if ( ! is_user_logged_in() ) {
+			return false;
+		}
+
 		// phpcs:ignore WordPress.Security.NonceVerification
 		if ( empty( $_REQUEST[ StorageInterface::PREFIX . 'refresh' ] ) ) {
 			return false;

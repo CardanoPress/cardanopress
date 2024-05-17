@@ -15,7 +15,7 @@ class HtmlField extends Field {
 
 	public function render( $value ): void {
 
-		echo wp_kses_post( $this->get_config( 'default' ) );
+		echo wp_kses_post( $value );
 
 	}
 

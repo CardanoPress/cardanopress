@@ -13,11 +13,7 @@ use CardanoPress\Dependencies\ThemePlate\Core\Field;
 
 class FileField extends Field {
 
-	protected function can_have_multiple_value(): bool {
-
-		return true;
-
-	}
+	public const MULTIPLE_ABLE = true;
 
 
 	public function render( $value ): void {
@@ -31,14 +27,16 @@ class FileField extends Field {
 				data-options="' . esc_attr( $options ) . '">';
 		echo '<div class="preview-holder">';
 
+		$value = array_filter( (array) $value );
+
 		if ( ! $this->get_config( 'multiple' ) ) {
 			echo '<div class="attachment placeholder">';
-			echo '<input type="button" class="button attachment-add' . ( $value ? ' hidden' : '' ) . '" value="Select" />';
+			echo '<input type="button" class="button attachment-add' . ( empty( $value ) ? ' hidden' : '' ) . '" value="Select" />';
 			echo '</div>';
 		}
 
-		if ( $value ) {
-			foreach ( (array) $value as $file ) {
+		if ( ! empty( $value ) ) {
+			foreach ( $value as $file ) {
 				$name    = basename( get_attached_file( $file ) );
 				$info    = wp_check_filetype( $name );
 				$type    = wp_ext2type( $info['ext'] );
@@ -61,7 +59,7 @@ class FileField extends Field {
 
 		if ( $this->get_config( 'multiple' ) ) {
 			echo '<input type="button" class="button attachment-add" value="Add" />';
-			echo '<input type="button" class="button attachments-clear' . ( ! $value ? ' hidden' : '' ) . '" value="Clear" />';
+			echo '<input type="button" class="button attachments-clear' . ( empty( $value ) ? '' : ' hidden' ) . '" value="Clear" />';
 		}
 
 		echo '</div>';

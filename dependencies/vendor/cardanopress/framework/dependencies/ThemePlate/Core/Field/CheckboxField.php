@@ -14,6 +14,28 @@ use CardanoPress\Dependencies\ThemePlate\Core\Helper\MainHelper;
 
 class CheckboxField extends Field {
 
+	public const MULTIPLE_ABLE = true;
+
+
+	protected function initialize(): void {
+
+		if ( ! empty( $this->get_config( 'options' ) ) ) {
+			if ( ! is_array( $this->config['default'] ) ) {
+				$result = json_decode( $this->config['default'], true );
+
+				if ( JSON_ERROR_NONE === json_last_error() ) {
+					$this->user_passed_default = $result;
+					$this->config['default']   = $result;
+				}
+			}
+
+			$this->config['multiple'] = true;
+			$this->config['default']  = MainHelper::values_to_string( (array) $this->config['default'] );
+		}
+
+	}
+
+
 	public function render( $value ): void {
 
 		$seq = MainHelper::is_sequential( $this->get_config( 'options' ) );
@@ -30,7 +52,7 @@ class CheckboxField extends Field {
 				echo '<' . esc_attr( $tag ) . '>';
 				echo '<label><input type="checkbox" name="' . esc_attr( $this->get_config( 'name' ) ) . '[]" value="' . esc_attr( $option_value ) . '"';
 
-				if ( in_array( (string) $option_value, (array) $value, true ) ) {
+				if ( in_array( (string) $option_value, MainHelper::values_to_string( (array) $value ), true ) ) {
 					echo ' checked="checked"';
 				}
 

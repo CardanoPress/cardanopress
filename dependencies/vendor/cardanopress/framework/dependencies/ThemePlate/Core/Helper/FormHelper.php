@@ -9,6 +9,7 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Core\Helper;
 
+use _WP_Editors;
 use CardanoPress\Dependencies\ThemePlate\Core\Field;
 
 class FormHelper {
@@ -34,14 +35,18 @@ class FormHelper {
 		wp_enqueue_script( 'themeplate-datepicker-script', AssetsHelper::get_url( 'datepicker.min.js' ), array(), '1.9.0', true );
 		wp_add_inline_script( 'themeplate-datepicker-script', 'if ( ! jQuery.fn.bootstrapDP && jQuery.fn.datepicker && jQuery.fn.datepicker.noConflict ) jQuery.fn.bootstrapDP = jQuery.fn.datepicker.noConflict();' );
 		wp_enqueue_style( 'themeplate-style', AssetsHelper::get_url( 'themeplate.css' ), array(), $version );
-		wp_enqueue_script( 'themeplate-script', AssetsHelper::get_url( 'themeplate.js' ), array(), $version, true );
-		wp_enqueue_script( 'themeplate-wysiwyg', AssetsHelper::get_url( 'wysiwyg.js' ), array(), $version, true );
+		wp_enqueue_script( 'themeplate-script', AssetsHelper::get_url( 'themeplate.js' ), array( 'wp-dom-ready' ), $version, true );
+		wp_enqueue_script( 'themeplate-wysiwyg', AssetsHelper::get_url( 'wysiwyg.js' ), array( 'editor' ), $version, true );
 		wp_enqueue_script( 'themeplate-show-hide', AssetsHelper::get_url( 'show-hide.js' ), array(), $version, true );
 		wp_enqueue_script( 'themeplate-repeater', AssetsHelper::get_url( 'repeater.js' ), array(), $version, true );
 
 		wp_localize_script( 'themeplate-script', 'ThemePlate', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
 		if ( 'post.php' !== $hook_suffix ) {
+			require_once ABSPATH . 'wp-includes/class-wp-editor.php';
+
+			_WP_Editors::wp_link_dialog();
+
 			return;
 		}
 

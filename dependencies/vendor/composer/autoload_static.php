@@ -355,6 +355,7 @@ class ComposerStaticInitf31970b948b5ad3e97af7bd2c43f3a5a
         'CardanoPress\\Foundation\\AbstractShortcode' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractShortcode.php',
         'CardanoPress\\Foundation\\AbstractTemplates' => __DIR__ . '/..' . '/cardanopress/framework/src/Foundation/AbstractTemplates.php',
         'CardanoPress\\Helpers\\NumberHelper' => __DIR__ . '/..' . '/cardanopress/framework/src/Helpers/NumberHelper.php',
+        'CardanoPress\\Helpers\\ThemeHelper' => __DIR__ . '/..' . '/cardanopress/framework/src/Helpers/ThemeHelper.php',
         'CardanoPress\\Helpers\\WalletHelper' => __DIR__ . '/..' . '/cardanopress/framework/src/Helpers/WalletHelper.php',
         'CardanoPress\\Interfaces\\AdminInterface' => __DIR__ . '/..' . '/cardanopress/framework/src/Interfaces/AdminInterface.php',
         'CardanoPress\\Interfaces\\ApplicationInterface' => __DIR__ . '/..' . '/cardanopress/framework/src/Interfaces/ApplicationInterface.php',

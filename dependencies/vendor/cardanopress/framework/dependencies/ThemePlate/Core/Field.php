@@ -16,7 +16,6 @@ abstract class Field {
 		'options'    => array(),
 		'multiple'   => false,
 		'none'       => false,
-		'default'    => '',
 		'style'      => '',
 		'repeatable' => false,
 		'required'   => false,
@@ -27,9 +26,13 @@ abstract class Field {
 		'count'      => 1,
 	);
 
+	public const DEFAULT_VALUE = '';
+	public const MULTIPLE_ABLE = false;
+
 
 	protected array $config;
 	protected string $data_key;
+	protected $user_passed_default = '';
 
 
 	public function __construct( string $data_key, array $config = array() ) {
@@ -49,7 +52,13 @@ abstract class Field {
 
 	protected function check( array $config ): array {
 
-		$config = MainHelper::fool_proof( self::DEFAULTS, $config );
+		$config = MainHelper::fool_proof(
+			array_merge(
+				self::DEFAULTS,
+				array( 'default' => static::DEFAULT_VALUE ),
+			),
+			$config
+		);
 		$config = MetaHelper::normalize_options( $config );
 
 		if ( $config['minimum'] < 0 ) {
@@ -68,15 +77,13 @@ abstract class Field {
 			$config['minimum'] = 1;
 		}
 
-		if (
-			'group' !== $config['type'] &&
-			'link' !== $config['type'] &&
-			! $config['repeatable'] &&
-			(
-				! $this->can_have_multiple_value() ||
-				! $config['multiple']
-			)
-		) {
+		$this->user_passed_default = $config['default'];
+
+		if ( is_array( static::DEFAULT_VALUE ) ) {
+			return $config;
+		}
+
+		if ( ! $this->can_have_multiple_value( $config ) ) {
 			return $config;
 		}
 
@@ -86,14 +93,45 @@ abstract class Field {
 			$config['default'] = $result;
 		}
 
+		$this->user_passed_default = $config['default'];
+
+		if (
+			(
+				empty( $config['default'] ) ||
+				! is_array( $config['default'] )
+			) &&
+			static::MULTIPLE_ABLE
+		) {
+			$config['default'] = (array) $config['default'];
+		}
+
+		if (
+			$config['repeatable'] &&
+			(
+				! is_array( $config['default'] ) ||
+				(
+					static::MULTIPLE_ABLE && $config['multiple'] &&
+					(
+						! is_array( $config['default'][0] )
+					)
+				)
+			)
+		) {
+			$config['default'] = array( $config['default'] );
+		}
+
 		return $config;
 
 	}
 
 
-	protected function can_have_multiple_value(): bool {
+	public function can_have_multiple_value( array $config = null ): bool {
 
-		return false;
+		if ( null === $config ) {
+			$config = $this->get_config();
+		}
+
+		return ( static::MULTIPLE_ABLE && !! $config['multiple'] ) || !! $config['repeatable'];
 
 	}
 
@@ -145,13 +183,26 @@ abstract class Field {
 	}
 
 
-	public function clone_value(): string {
+	/**
+	 * @return string|array
+	 */
+	public function clone_value() {
 
-		if ( is_array( $this->get_config( 'default' ) ) ) {
-			return self::DEFAULTS['default'];
+		$value = $this->user_passed_default;
+
+		if ( is_array( static::DEFAULT_VALUE ) ) {
+			return MainHelper::is_sequential( $value ) ? array() : $value;
 		}
 
-		return $this->get_config( 'default' );
+		if ( static::MULTIPLE_ABLE && $this->get_config( 'multiple' ) ) {
+			if ( MainHelper::for_repeatable( $value ) ) {
+				return array();
+			}
+
+			return $value;
+		}
+
+		return is_array( $value ) ? '' : $value;
 
 	}
 
@@ -164,6 +215,10 @@ abstract class Field {
 
 		if ( ! is_array( $value ) ) {
 			$value = (array) $value;
+		}
+
+		if ( is_array( static::DEFAULT_VALUE ) && ! MainHelper::is_sequential( $value ) ) {
+			$value = array( $value );
 		}
 
 		$current = count( $value );
