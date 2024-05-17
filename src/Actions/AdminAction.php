@@ -115,6 +115,10 @@ class AdminAction implements HookInterface
 
         $data = json_decode($response, true);
 
+        if (empty($data)) {
+            return [];
+        }
+
         return isset($data['extended']) ? $this->checkPoolJson($data, 'extended') : $data;
     }
 }
