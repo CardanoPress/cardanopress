@@ -1,8 +1,6 @@
-module.exports = {
-    content: [
-        "./src/**/*.js",
-        "../templates/**/*.php"
-    ],
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: ['./src/**/*.js', '../templates/**/*.php'],
     theme: {
         extend: {},
     },
@@ -10,4 +8,4 @@ module.exports = {
         preflight: false,
     },
     plugins: [],
-};
+}
