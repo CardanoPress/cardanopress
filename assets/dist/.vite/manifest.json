@@ -1,0 +1,99 @@
+{
+  "_actions-BRqe8OAI.js": {
+    "file": "actions-BRqe8OAI.js",
+    "name": "actions",
+    "imports": [
+      "_util-CfqN00QO.js"
+    ]
+  },
+  "_index-DwswyeBN.js": {
+    "file": "index-DwswyeBN.js",
+    "name": "index",
+    "isDynamicEntry": true
+  },
+  "_util-CfqN00QO.js": {
+    "file": "util-CfqN00QO.js",
+    "name": "util",
+    "dynamicImports": [
+      "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
+      "_index-DwswyeBN.js",
+      "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.0.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js"
+    ]
+  },
+  "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js": {
+    "file": "cardano_serialization_lib-DZgxyT4u.js",
+    "name": "cardano_serialization_lib",
+    "src": "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
+    "isDynamicEntry": true,
+    "assets": [
+      "cardano_serialization_lib_bg-BIH9BbI5.wasm"
+    ]
+  },
+  "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib_bg.wasm": {
+    "file": "cardano_serialization_lib_bg-BIH9BbI5.wasm",
+    "src": "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib_bg.wasm"
+  },
+  "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.0.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js": {
+    "file": "coinSelection-BK9MdsDt.js",
+    "name": "coinSelection",
+    "src": "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.0.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js"
+    ]
+  },
+  "src/delegation.js": {
+    "file": "delegation-Dw7z82-R.js",
+    "name": "delegation",
+    "src": "src/delegation.js",
+    "isEntry": true,
+    "imports": [
+      "_actions-BRqe8OAI.js",
+      "_util-CfqN00QO.js"
+    ]
+  },
+  "src/main.css": {
+    "file": "style-B9QmXiE-.css",
+    "src": "src/main.css",
+    "isEntry": true
+  },
+  "src/main.js": {
+    "file": "script-Dnc21cBb.js",
+    "name": "script",
+    "src": "src/main.js",
+    "isEntry": true,
+    "imports": [
+      "_actions-BRqe8OAI.js",
+      "_util-CfqN00QO.js"
+    ]
+  },
+  "src/notification.js": {
+    "file": "notification-0XMUttcl.js",
+    "name": "notification",
+    "src": "src/notification.js",
+    "isEntry": true,
+    "imports": [
+      "_util-CfqN00QO.js"
+    ]
+  },
+  "src/payment.js": {
+    "file": "payment-O0ra0t32.js",
+    "name": "payment",
+    "src": "src/payment.js",
+    "isEntry": true,
+    "imports": [
+      "_util-CfqN00QO.js",
+      "_actions-BRqe8OAI.js"
+    ]
+  },
+  "src/split.js": {
+    "file": "split-DNVwBxr5.js",
+    "name": "split",
+    "src": "src/split.js",
+    "isEntry": true,
+    "imports": [
+      "_actions-BRqe8OAI.js",
+      "_util-CfqN00QO.js"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "outDir": "dist",
+  "isBuild": true,
+  "urls": {
+    "local": [],
+    "network": []
+  },
+  "entryNames": {
+    "script": "src/main.js",
+    "style": "src/main.css",
+    "notification": "src/notification.js",
+    "delegation": "src/delegation.js",
+    "payment": "src/payment.js",
+    "split": "src/split.js"
+  },
+  "entries": [
+    "src/main.js",
+    "src/main.css",
+    "src/notification.js",
+    "src/delegation.js",
+    "src/payment.js",
+    "src/split.js"
+  ]
+}
