@@ -8,17 +8,20 @@
 namespace PBWebDev\CardanoPress;
 
 use CardanoPress\Dependencies\ThemePlate\Enqueue\CustomData;
+use CardanoPress\Dependencies\ThemePlate\Vite;
 use CardanoPress\Foundation\AbstractManifest;
 
 class Manifest extends AbstractManifest
 {
     private bool $legacy_loaded;
+    private Vite $vite;
 
     public const HANDLE_PREFIX = 'cardanopress-';
 
     public function initialize(): void
     {
         $this->legacy_loaded = ! (isset($this->data) && $this->data instanceof CustomData);
+        $this->vite = new Vite(plugin_dir_path($this->path), plugin_dir_url($this->path));
     }
 
     public function setupHooks(): void
@@ -27,6 +30,31 @@ class Manifest extends AbstractManifest
         add_action('wp_enqueue_scripts', [$this, 'autoEnqueues']);
         add_action('wp_body_open', [$this, 'completeInjections']);
         add_action('wp_footer', [$this, 'completeInjections']);
+    }
+
+    public function enqueueAssets(): void
+    {
+        $manifest = plugin_dir_path($this->path) . Vite::CONFIG;
+        $manifest = $this->readAssetsManifest($manifest);
+
+        $this->vite->prefix(self::HANDLE_PREFIX);
+
+        foreach ($manifest['entryNames'] ?? [] as $entry => $file) {
+            $parts = explode('.', $file);
+
+            if (1 === count($parts) || ! in_array($parts[1], ['js', 'css'])) {
+                continue;
+            }
+
+            $type = 'js' === $parts[1] ? 'script' : 'style';
+            $func = 'wp_dequeue_' . $type;
+            $handle = $this->vite->$type($entry);
+
+            $func($handle);
+        }
+
+        $this->dynamic->action();
+        $this->vite->action();
     }
 
     public function autoEnqueues(): void

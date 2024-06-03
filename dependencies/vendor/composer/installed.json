@@ -124,6 +124,153 @@
                 "source": "https://github.com/CardanoPress/framework/tree/v2.5.0"
             },
             "install-path": "../cardanopress/framework"
+        },
+        {
+            "name": "themeplate/enqueue",
+            "version": "v2.5.0",
+            "version_normalized": "2.5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ThemePlate/Enqueue.git",
+                "reference": "705fa541126aaea486d54dab5eead57b70bca961"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/705fa541126aaea486d54dab5eead57b70bca961",
+                "reference": "705fa541126aaea486d54dab5eead57b70bca961",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "themeplate/tester": "^2.0"
+            },
+            "time": "2024-02-03T13:49:52+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "Enqueue.php"
+                ],
+                "psr-4": {
+                    "ThemePlate\\Enqueue\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Gene Alyson Fortunado Torcende",
+                    "email": "genealyson.torcende@gmail.com"
+                }
+            ],
+            "description": "Helper for registered dependencies",
+            "support": {
+                "issues": "https://github.com/ThemePlate/Enqueue/issues",
+                "source": "https://github.com/ThemePlate/Enqueue/tree/v2.5.0"
+            },
+            "install-path": "../themeplate/enqueue"
+        },
+        {
+            "name": "themeplate/resource",
+            "version": "v2.3.1",
+            "version_normalized": "2.3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ThemePlate/Resource.git",
+                "reference": "52781602ea6a92fe58180e70ebc88d101e41e08b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ThemePlate/Resource/zipball/52781602ea6a92fe58180e70ebc88d101e41e08b",
+                "reference": "52781602ea6a92fe58180e70ebc88d101e41e08b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "themeplate/tester": "^2.0"
+            },
+            "time": "2024-02-03T16:08:17+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "Resource.php"
+                ],
+                "psr-4": {
+                    "ThemePlate\\Resource\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Gene Alyson Fortunado Torcende",
+                    "email": "genealyson.torcende@gmail.com"
+                }
+            ],
+            "description": "ThemePlate resource hinting",
+            "support": {
+                "issues": "https://github.com/ThemePlate/Resource/issues",
+                "source": "https://github.com/ThemePlate/Resource/tree/v2.3.1"
+            },
+            "install-path": "../themeplate/resource"
+        },
+        {
+            "name": "themeplate/vite",
+            "version": "v1.6.0",
+            "version_normalized": "1.6.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ThemePlate/Vite.git",
+                "reference": "5b2567f2bf1c494895ecfc0ae464085a442b82be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ThemePlate/Vite/zipball/5b2567f2bf1c494895ecfc0ae464085a442b82be",
+                "reference": "5b2567f2bf1c494895ecfc0ae464085a442b82be",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.4|^8.0",
+                "themeplate/enqueue": "^2.4",
+                "themeplate/resource": "^2.3"
+            },
+            "require-dev": {
+                "themeplate/tester": "^2.0"
+            },
+            "time": "2024-05-29T10:59:13+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ThemePlate\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Gene Alyson Fortunado Torcende",
+                    "email": "genealyson.torcende@gmail.com"
+                }
+            ],
+            "description": "Straight-forward Vite integration for WordPress",
+            "support": {
+                "issues": "https://github.com/ThemePlate/Vite/issues",
+                "source": "https://github.com/ThemePlate/Vite/tree/v1.6.0"
+            },
+            "install-path": "../themeplate/vite"
         }
     ],
     "dev": true,

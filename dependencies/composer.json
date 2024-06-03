@@ -13,7 +13,8 @@
     "ext-fileinfo": "*",
     "ext-ctype": "*",
     "automattic/jetpack-autoloader": "^2.11",
-    "cardanopress/framework": "^2.1"
+    "cardanopress/framework": "^2.1",
+    "themeplate/vite": "^1.6"
   },
   "autoload": {
     "psr-4": {

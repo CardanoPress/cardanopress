@@ -1262,6 +1262,18 @@ return array(
 		'version' => '2.5.0.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Process/Tasks.php'
 	),
+	'CardanoPress\\Dependencies\\ThemePlate\\Resource\\Handler' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/ThemePlate/Resource/Handler.php'
+	),
+	'CardanoPress\\Dependencies\\ThemePlate\\Resource\\Helper' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/ThemePlate/Resource/Helper.php'
+	),
+	'CardanoPress\\Dependencies\\ThemePlate\\Resource\\Item' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/ThemePlate/Resource/Item.php'
+	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Settings\\OptionBox' => array(
 		'version' => '2.5.0.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Settings/OptionBox.php'
@@ -1269,6 +1281,10 @@ return array(
 	'CardanoPress\\Dependencies\\ThemePlate\\Settings\\OptionHandler' => array(
 		'version' => '2.5.0.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Settings/OptionHandler.php'
+	),
+	'CardanoPress\\Dependencies\\ThemePlate\\Vite' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/ThemePlate/Vite.php'
 	),
 	'CardanoPress\\Foundation\\AbstractAdmin' => array(
 		'version' => '2.5.0.0',
