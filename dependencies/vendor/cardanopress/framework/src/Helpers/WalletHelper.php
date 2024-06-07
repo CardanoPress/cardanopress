@@ -23,6 +23,8 @@ class WalletHelper
         $base = [
             'mainnet' => 'https://cardanoscan.io/',
             'testnet' => 'https://testnet.cardanoscan.io/',
+            'preprod' => 'https://preprod.cardanoscan.io/',
+            'preview' => 'https://preview.cardanoscan.io/',
         ];
 
         $network = strtolower($network);

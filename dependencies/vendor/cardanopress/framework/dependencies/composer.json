@@ -9,14 +9,15 @@
     "php": "^7.4|^8.0",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.5",
+    "themeplate/cache": "^2.6",
     "themeplate/core": "^2.2.4",
+    "themeplate/cpt": "^2.2",
     "themeplate/enqueue": "^2.4",
     "themeplate/logger": "^1.3",
     "themeplate/meta": "^2.2",
     "themeplate/page": "^2.1",
-    "themeplate/settings": "^2.1.1",
-    "themeplate/cache": "^2.6",
-    "themeplate/process": "^2.6"
+    "themeplate/process": "^2.6",
+    "themeplate/settings": "^2.1.1"
   },
   "require-dev": {
     "coenjacobs/mozart": "^0.7.1"

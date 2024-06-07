@@ -26,7 +26,7 @@ abstract class AbstractHandler implements HandlerInterface {
 
 	protected function forced_refresh( string $key ): bool {
 
-		if ( ! is_user_logged_in() ) {
+		if ( function_exists( 'is_user_logged_in' ) && ! is_user_logged_in() ) {
 			return false;
 		}
 

@@ -67,17 +67,17 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.5.0",
-            "version_normalized": "2.5.0.0",
+            "version": "v2.6.0",
+            "version_normalized": "2.6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "4b815373dd127cd6523e9a88dc8a778903c32abd"
+                "reference": "d7c7f4a1550a4e090eff5de53bdb9b3536d3589c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/4b815373dd127cd6523e9a88dc8a778903c32abd",
-                "reference": "4b815373dd127cd6523e9a88dc8a778903c32abd",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/d7c7f4a1550a4e090eff5de53bdb9b3536d3589c",
+                "reference": "d7c7f4a1550a4e090eff5de53bdb9b3536d3589c",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "automattic/jetpack-autoloader": "^2.12",
                 "themeplate/tester": "^2.1"
             },
-            "time": "2024-05-17T03:25:25+00:00",
+            "time": "2024-06-04T03:06:29+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -121,7 +121,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.5.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.6.0"
             },
             "install-path": "../cardanopress/framework"
         },
