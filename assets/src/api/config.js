@@ -1,20 +1,3 @@
-export const cardano = window.cardano || {
-    enable: async () => null,
-    getBalance: async () => '',
-    isEnabled: async () => false,
-    getUtxos: async () => [],
-    getChangeAddress: async () => '',
-    getRewardAddress: async () => '',
-    getRewardAddresses: async () => [],
-    getUnusedAddresses: async () => [],
-    getUsedAddresses: async () => [],
-    getNetworkId: async () => 0,
-    signTx: async (tx) => '',
-    submitTx: async (tx) => '',
-    onNetworkChange: (networkId) => null,
-    onAccountChange: (addresses) => null,
-}
-
 export const cardanoPress = window.cardanoPress || {
     ajaxUrl: '',
     _nonce: '',

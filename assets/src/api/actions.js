@@ -23,18 +23,6 @@ export const getAccount = async (network, rewardAddress) => {
     }).then((response) => response.json())
 }
 
-export const getPool = async (network, poolId) => {
-    return await fetch(cardanoPress.ajaxUrl, {
-        method: 'POST',
-        body: new URLSearchParams({
-            _wpnonce: cardanoPress._nonce,
-            action: 'cardanopress_pool_details',
-            query_network: network,
-            reward_address: poolId,
-        }),
-    }).then((response) => response.json())
-}
-
 export const saveWalletTx = async (network, txAction, txHash) => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',

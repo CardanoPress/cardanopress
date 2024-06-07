@@ -33,7 +33,6 @@ class WalletAction implements HookInterface
         add_action('wp_ajax_cardanopress_user_change', [$this, 'logoutCurrentUser']);
         add_action('wp_ajax_cardanopress_protocol_parameters', [$this, 'getProtocolParameters']);
         add_action('wp_ajax_cardanopress_account_details', [$this, 'getAccountDetails']);
-        add_action('wp_ajax_cardanopress_pool_details', [$this, 'getPoolDetails']);
         add_action('wp_ajax_cardanopress_delegation_data', [$this, 'getDelegationData']);
         add_action('wp_ajax_cardanopress_wallet_transaction', [$this, 'saveWalletTransaction']);
         add_action('wp_ajax_nopriv_cardanopress_payment_address', [$this, 'getPaymentAddress']);
@@ -181,28 +180,6 @@ class WalletAction implements HookInterface
 
         $blockfrost = new Blockfrost($queryNetwork);
         $response = $blockfrost->getAccountDetails($rewardAddress);
-
-        if (empty($response)) {
-            $this->application->logger('actions')->error(CoreAction::getErrorMessage('blockfrost'));
-            wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
-        }
-
-        wp_send_json_success($response);
-    }
-
-    public function getPoolDetails(): void
-    {
-        $this->maybeInvalid(['query_network', 'pool_id']);
-
-        $queryNetwork = $this->sanitization->sanitizePost('query_network');
-        $poolId = $this->sanitization->sanitizePost('pool_id');
-
-        if (! Blockfrost::isReady($queryNetwork)) {
-            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
-        }
-
-        $blockfrost = new Blockfrost($queryNetwork);
-        $response = $blockfrost->getPoolDetails($poolId);
 
         if (empty($response)) {
             $this->application->logger('actions')->error(CoreAction::getErrorMessage('blockfrost'));
