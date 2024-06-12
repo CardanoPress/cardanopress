@@ -9,6 +9,7 @@ import {
     toPropertyName,
 } from './api/config'
 import { delegation as delegationTx } from './api/delegation'
+import { multisend as multisendTx } from './api/multisend'
 import { payment as paymentTx } from './api/payment'
 import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 
@@ -281,6 +282,7 @@ window.cardanoPress = {
     wallet: {
         delegationTx,
         paymentTx,
+        multisendTx,
         ...wallet,
     },
 }

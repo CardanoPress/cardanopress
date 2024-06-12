@@ -1,6 +1,7 @@
 import { saveWalletTx } from './api/actions'
 import { cardanoPress } from './api/config'
 import { delegation } from './api/delegation'
+import { multisend } from './api/multisend'
 import { payment } from './api/payment'
 
 export const handleReconnect = async (Wallet) => {
@@ -110,6 +111,16 @@ export const handleDelegation = async () => {
 
     if (result.success) {
         return await saveWalletTx(result.data.network, 'delegation', result.data.transaction)
+    }
+
+    return result
+}
+
+export const handleMultisend = async (outputs) => {
+    const result = await multisend(outputs)
+
+    if (result.success) {
+        return await saveWalletTx(result.data.network, 'payment', result.data.transaction)
     }
 
     return result
