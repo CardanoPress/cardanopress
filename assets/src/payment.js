@@ -48,7 +48,7 @@ window.addEventListener('alpine:init', () => {
         },
 
         isReady(type = 'extension') {
-            return !!(('extension' !== type ? this.isVerified : true) && !this.isProcessing)
+            return !!(('extension' !== type ? this.isVerified : !this.transactionHash) && !this.isProcessing)
         },
 
         balanceValue(type, inAda = true) {

@@ -13,7 +13,7 @@ window.addEventListener('alpine:init', () => {
         outputs: [],
 
         isReady(type = '') {
-            if (!(this.syncedBalance && !this.isProcessing)) {
+            if (!(this.syncedBalance && !this.isProcessing && !this.transactionHash)) {
                 return false
             }
 
