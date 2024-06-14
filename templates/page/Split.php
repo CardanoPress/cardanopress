@@ -34,30 +34,30 @@ cardanoPress()->compatibleHeader();
             data-amount="<?php echo esc_attr($fixedFee); ?>"
             data-recaptcha="<?php echo esc_attr($recaptchaKey); ?>"
         >
-            <div class='py-6'>
+            <div class="py-6">
                 <h2>Fixed Fee: <span><?php echo esc_html($fixedFee); ?></span> ADA</h2>
 
-                <p class='text-sm italic'>
+                <p class="text-sm italic">
                     <?php cardanoPress()->template('part/payment-lovelace'); ?> Lovelace
                 </p>
 
                 <h2>Current Balance: <?php cardanoPress()->template('part/payment-balance'); ?> ADA</h2>
-                <p class='text-sm italic'>
+                <p class="text-sm italic">
                     <?php cardanoPress()->template('part/payment-balance', ['format' => 'lovelace']); ?> Lovelace
                 </p>
 
-                <template x-if='!syncedBalance'>
+                <template x-if="!syncedBalance">
                     <?php cardanoPress()->template('part/balance-sync'); ?>
                 </template>
             </div>
 
-            <template x-if='!isVerified'>
+            <template x-if="!isVerified">
                 <div class="py-6">
                     <?php cardanoPress()->template('part/payment-recaptcha'); ?>
                 </div>
             </template>
 
-            <table class="w-full">
+            <table class="w-full" x-data="splitForm" data-fee="<?php echo esc_attr($fixedFee); ?>">
                 <thead>
                     <tr>
                         <th>Percentage</th>
@@ -68,46 +68,76 @@ cardanoPress()->compatibleHeader();
                 </thead>
 
                 <tbody>
-                    <?php for ($i = 1; $i <= 5; $i++) : ?>
-                        <tr x-data="splitForm" data-fee="<?php echo esc_attr($fixedFee); ?>">
+                    <template x-for="(output, index) in outputs" :key="index">
+                        <tr>
                             <td class="w-1/5">
-                                <input x-model="percentage" type="number" min='0' max='100' class="w-full">
+                                <input x-bind:value="output.percentage" type="number" disabled readonly class="w-full">
                             </td>
                             <td class="w-1/2">
-                                <input x-model="address" type="text" class="w-full">
+                                <input x-bind:value="output.address" type="text" disabled readonly class="w-full">
                             </td>
                             <td class="w-1/3">
-                                <input x-bind:value='paymentAmount' type="text" class="w-full" readonly disabled>
+                                <input x-bind:value="output.amount" type="text" disabled readonly class="w-full">
                             </td>
                             <td class="w-1/5">
                                 <button
-                                    x-on:click.prevent='handleSend()'
-                                    x-bind:disabled='!isConnected || !isReady()'
+                                    x-on:click.prevent="removeOutput(index)"
                                 >
-                                    Send
+                                    Remove
                                 </button>
-
-                                <span x-text='transactionHash'></span>
                             </td>
                         </tr>
-                    <?php endfor; ?>
+                    </template>
+
+                    <tr>
+                        <td class="w-1/5">
+                            <input x-model="percentage" type="number" min="0" max="100" class="w-full">
+                        </td>
+                        <td class="w-1/2">
+                            <input x-model="address" type="text" class="w-full">
+                        </td>
+                        <td class="w-1/3">
+                            <input x-bind:value="paymentAmount" type="text" class="w-full" readonly disabled>
+                        </td>
+                        <td class="w-1/5">
+                            <button
+                                x-on:click.prevent="addOutput()"
+                                x-bind:disabled="!isReady()"
+                            >
+                                Add
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
 
                 <tfoot>
                     <tr>
-                        <td colspan='4'>
-                            <h2>
+                        <td colspan="4">
+                            <h3 class="mt-2">
                                 Remaining Balance: <?php cardanoPress()->template(
                                     'part/payment-balance',
                                     ['type' => 'remaining']
                                 ); ?> ADA
-                            </h2>
-                            <p class='text-sm italic'>
+                            </h3>
+                            <p class="text-sm italic">
                                 <?php cardanoPress()->template(
                                     'part/payment-balance',
                                     ['type' => 'remaining', 'format' => 'lovelace']
                                 ); ?> Lovelace
                             </p>
+                            <p>
+                                <button
+                                    x-on:click.prevent="handleSend('all')"
+                                    x-bind:disabled="!isReady('all')"
+                                >
+                                    Send All
+                                </button>
+                            </p>
+                            <template x-if='transactionHash'>
+                                <div class="py-6">
+                                    <?php cardanoPress()->template('part/payment-output'); ?>
+                                </div>
+                            </template>
                         </td>
                     </tr>
                 </tfoot>

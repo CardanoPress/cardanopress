@@ -1,6 +1,6 @@
 /* global grecaptcha */
 
-import { handlePayment } from './actions'
+import { handleMultisend, handlePayment } from './actions'
 import { cardanoPressMessages } from './api/config'
 import { addNotice, removeNotice } from './api/util'
 
@@ -10,16 +10,36 @@ window.addEventListener('alpine:init', () => {
         percentage: 0,
         address: '',
         transactionHash: '',
+        outputs: [],
 
-        isReady() {
-            return !!(this.isVerified && !this.isProcessing && this.percentage && this.address)
+        isReady(type = '') {
+            if (!(this.syncedBalance && !this.isProcessing)) {
+                return false
+            }
+
+            if ('all' === type) {
+                return this.isVerified && this.outputs.length
+            }
+
+            return this.remainingBalance && this.percentage && this.address
         },
 
         paymentAmount() {
-            return ((this.remainingBalance * this.percentage) / 100).toFixed()
+            return (((this.currentBalance - parseInt(this.lovelaceValue())) * this.percentage) / 100).toFixed()
         },
 
-        async handleSend() {
+        addOutput() {
+            this.outputs.push({ address: this.address, amount: this.paymentAmount(), percentage: this.percentage })
+            this.remainingBalance -= this.paymentAmount()
+            this.address = ''
+            this.percentage = 0
+        },
+
+        removeOutput(index) {
+            this.outputs.splice(index, 1)
+        },
+
+        async handleSend(type = '') {
             this.transactionHash = ''
 
             addNotice({
@@ -29,7 +49,14 @@ window.addEventListener('alpine:init', () => {
             })
 
             this.isProcessing = true
-            const response = await handlePayment(this.paymentAmount(), this.address)
+
+            let response
+
+            if ('all' === type) {
+                response = await handleMultisend(this.outputs)
+            } else {
+                response = await handlePayment(this.paymentAmount(), this.address)
+            }
 
             removeNotice('payment')
 
