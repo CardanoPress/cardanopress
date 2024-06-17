@@ -232,7 +232,7 @@ class Installer extends AbstractInstaller
         $expire = time() + DAY_IN_SECONDS;
         $secure = is_ssl();
 
-        setcookie($name, true, $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
+        setcookie($name, 'dismissed', $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
 
         $this->application->userProfile()->dismissNotice(str_replace('cardanopress_notice_', '', $name));
 

@@ -206,8 +206,7 @@ class CoreAction implements HookInterface
         string $queryNetwork,
         Profile $userProfile,
         Blockfrost $blockfrost
-    ): void
-    {
+    ): void {
         $userProfile->saveAccountInfo($blockfrost->getAccountDetails($stakeAddress));
 
         $customRole = $this->application->option('ua_additional_role');
