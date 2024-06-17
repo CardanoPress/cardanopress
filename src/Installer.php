@@ -157,7 +157,6 @@ class Installer extends AbstractInstaller
                 <?php endforeach; ?>
             </ol>
 
-            <?php if (1 < $count) : ?>
             <p>
                 <button id="cardanopress_compatibility_check">
                     <?php echo _n('Re-check issue', 'Re-check issues', $count, 'cardanopress'); ?>
@@ -185,7 +184,6 @@ class Installer extends AbstractInstaller
                     })
                 })
             </script>
-            <?php endif; ?>
         </div>
         <?php
     }
