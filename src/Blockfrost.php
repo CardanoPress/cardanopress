@@ -96,6 +96,11 @@ class Blockfrost extends AbstractBlockfrost
             'keyDeposit' => $parameters['key_deposit'],
             'maxValSize' => $parameters['max_val_size'],
             'maxTxSize' => $parameters['max_tx_size'],
+            'coinsPerUtxoSize' => $parameters['coins_per_utxo_size'],
+            'priceMem' => $parameters['price_mem'],
+            'priceStep' => $parameters['price_step'],
+            'collateralPercentage' => $parameters['collateral_percent'],
+            'maxCollateralInputs' => $parameters['max_collateral_inputs'],
             'slot' => $block['slot'],
         ];
     }
