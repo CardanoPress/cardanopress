@@ -68,7 +68,6 @@ window.addEventListener('alpine:init', () => {
                 this.connectedExtension = getConnectedExtension()
                 this.selectedHandle = this.$root.dataset.handle
                 this.isConnected = !!this.connectedExtension
-                window.cardanoPress.extension = this.connectedExtension
 
                 if (this.isConnected && !isNotified()) {
                     addNotice({ type: 'success', text: cardanoPressMessages.connected })
@@ -145,7 +144,6 @@ window.addEventListener('alpine:init', () => {
                 this.isConnected = true
                 cardanoPress.logged = true
                 this.connectedExtension = wallet.type
-                window.cardanoPress.extension = this.connectedExtension
             } else {
                 addNotice({ type: 'error', text: response.data })
             }
@@ -267,18 +265,8 @@ window.cardanoPress = {
     browser: {
         Extensions,
         supports: supportedWallets,
-        isSupported: (type) => Extensions.isSupported(type),
-        ...supportedWallets.reduce(
-            (a, v) => ({
-                ...a,
-                [toPropertyName(v, 'has')]: async () => await Extensions.hasWallet(v),
-                [toPropertyName(v, 'get')]: async () => await Extensions.getWallet(v),
-            }),
-            {}
-        ),
     },
     csl,
-    extension: '',
     wallet: {
         delegationTx,
         paymentTx,
