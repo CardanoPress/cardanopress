@@ -30,6 +30,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.24.7",
-    "@pbwebdev/cardano-wallet-browser-extensions-interface": "^1.1.0"
+    "@pbwebdev/cardano-wallet-browser-extensions-interface": "^1.2.0"
   }
 }

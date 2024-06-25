@@ -1,9 +1,9 @@
 {
-  "_actions-it1j4PIX.js": {
-    "file": "actions-it1j4PIX.js",
+  "_actions-BJSqZSip.js": {
+    "file": "actions-BJSqZSip.js",
     "name": "actions",
     "imports": [
-      "_util-BHYpzux6.js"
+      "_util-CwdYpeMB.js"
     ]
   },
   "_index-DwswyeBN.js": {
@@ -11,13 +11,13 @@
     "name": "index",
     "isDynamicEntry": true
   },
-  "_util-BHYpzux6.js": {
-    "file": "util-BHYpzux6.js",
+  "_util-CwdYpeMB.js": {
+    "file": "util-CwdYpeMB.js",
     "name": "util",
     "dynamicImports": [
       "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
       "_index-DwswyeBN.js",
-      "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.1.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js"
+      "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.2.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js"
     ]
   },
   "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js": {
@@ -33,23 +33,23 @@
     "file": "cardano_serialization_lib_bg-BIH9BbI5.wasm",
     "src": "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib_bg.wasm"
   },
-  "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.1.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js": {
+  "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.2.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js": {
     "file": "coinSelection-BK9MdsDt.js",
     "name": "coinSelection",
-    "src": "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.1.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js",
+    "src": "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.2.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js"
     ]
   },
   "src/delegation.js": {
-    "file": "delegation-BP5g0src.js",
+    "file": "delegation-ChKpnAqR.js",
     "name": "delegation",
     "src": "src/delegation.js",
     "isEntry": true,
     "imports": [
-      "_actions-it1j4PIX.js",
-      "_util-BHYpzux6.js"
+      "_actions-BJSqZSip.js",
+      "_util-CwdYpeMB.js"
     ]
   },
   "src/main.css": {
@@ -58,42 +58,42 @@
     "isEntry": true
   },
   "src/main.js": {
-    "file": "script-CameIgHM.js",
+    "file": "script-iQah4KoX.js",
     "name": "script",
     "src": "src/main.js",
     "isEntry": true,
     "imports": [
-      "_actions-it1j4PIX.js",
-      "_util-BHYpzux6.js"
+      "_actions-BJSqZSip.js",
+      "_util-CwdYpeMB.js"
     ]
   },
   "src/notification.js": {
-    "file": "notification-C7gycU3o.js",
+    "file": "notification-Z6RvVub3.js",
     "name": "notification",
     "src": "src/notification.js",
     "isEntry": true,
     "imports": [
-      "_util-BHYpzux6.js"
+      "_util-CwdYpeMB.js"
     ]
   },
   "src/payment.js": {
-    "file": "payment-bBTIb39G.js",
+    "file": "payment-BsPquzED.js",
     "name": "payment",
     "src": "src/payment.js",
     "isEntry": true,
     "imports": [
-      "_util-BHYpzux6.js",
-      "_actions-it1j4PIX.js"
+      "_util-CwdYpeMB.js",
+      "_actions-BJSqZSip.js"
     ]
   },
   "src/split.js": {
-    "file": "split-DL8_h3Y0.js",
+    "file": "split-Bjk8H5O_.js",
     "name": "split",
     "src": "src/split.js",
     "isEntry": true,
     "imports": [
-      "_actions-it1j4PIX.js",
-      "_util-BHYpzux6.js"
+      "_actions-BJSqZSip.js",
+      "_util-CwdYpeMB.js"
     ]
   }
 }
