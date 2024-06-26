@@ -113,7 +113,15 @@ class Manifest extends AbstractManifest
             $handle = Application::getInstance()->userProfile()->getFavoriteHandle();
         }
 
-        echo '<div x-data="cardanoPress" x-on:keydown.escape="showModal = false" data-handle="' . esc_attr($handle) . '">';
+        $wallets = json_encode(Application::getInstance()->getWallets());
+        $attributes = [
+            'x-data="cardanoPress"',
+            'x-on:keydown.escape="showModal = false"',
+            'data-handle="' . esc_attr($handle) . '"',
+            'data-wallets="' . esc_attr($wallets) . '"',
+        ];
+
+        echo '<div ' . implode(' ', $attributes) . '>';
     }
 
     public function completeInjections(): void

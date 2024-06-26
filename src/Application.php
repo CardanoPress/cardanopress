@@ -145,4 +145,19 @@ class Application extends AbstractApplication
 
         return $account['pool_id'] === $delegation['pool_id'];
     }
+
+    public function getWallets(): array
+    {
+        return apply_filters('cardanopress_supported_wallets', [
+            'Nami',
+            'Eternl',
+            'Yoroi',
+            'Flint',
+            'Typhon',
+            'GeroWallet',
+            'NuFi',
+            'Lace',
+            'Begin',
+        ]);
+    }
 }

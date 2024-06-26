@@ -70,6 +70,8 @@ window.addEventListener('alpine:init', () => {
                 this.refreshWallets()
             })
 
+            this.supportedWallets = supportedWallets.filter((wallet) => this.$root.dataset.wallets.includes(wallet))
+
             if (cardanoPress.logged) {
                 this.connectedExtension = getConnectedExtension()
                 this.selectedHandle = this.$root.dataset.handle
