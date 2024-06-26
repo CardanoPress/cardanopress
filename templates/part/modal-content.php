@@ -13,16 +13,6 @@
 
 <div class="px-6 py-4">
     <template x-for="(type, index) in supportedWallets" :key="index">
-        <button x-on:click.prevent="walletConnect(type)" x-bind:disabled="isDisabled(type)">
-            <span x-text="type"></span>
-
-            <template x-if="!walletAvailable(type)">
-                <span class="block italic text-sm">(Not available)</span>
-            </template>
-
-            <template x-if="!!fromVespr(type)">
-                <span class="block italic text-sm">(VESPR Compat)</span>
-            </template>
-        </button>
+        <?php cardanoPress()->template('part/connect-wallet'); ?>
     </template>
 </div>
