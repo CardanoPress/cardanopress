@@ -19,6 +19,10 @@
             <template x-if="!walletAvailable(type)">
                 <span class="block italic text-sm">(Not available)</span>
             </template>
+
+            <template x-if="!!fromVespr(type)">
+                <span class="block italic text-sm">(VESPR Compat)</span>
+            </template>
         </button>
     </template>
 </div>

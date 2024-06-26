@@ -13,7 +13,7 @@ import { multisend as multisendTx } from './api/multisend'
 import { payment as paymentTx } from './api/payment'
 import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 
-import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
+import Extensions, { fromVespr } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 import { NETWORK, supportedWallets } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
 import { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface/csl'
 
@@ -45,6 +45,10 @@ window.addEventListener('alpine:init', () => {
 
         walletAvailable(type) {
             return this.isAvailable && this.has(type)
+        },
+
+        fromVespr(wallet) {
+            return this.has(wallet) && fromVespr(wallet)
         },
 
         getWalletHandle($default) {
