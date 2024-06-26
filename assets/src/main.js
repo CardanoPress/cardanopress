@@ -5,8 +5,7 @@ import {
     getConnectedExtension,
     isNotified,
     setConnectedExtension,
-    setNotified,
-    toPropertyName,
+    setNotified
 } from './api/config'
 import { delegation as delegationTx } from './api/delegation'
 import { multisend as multisendTx } from './api/multisend'
@@ -33,10 +32,11 @@ window.addEventListener('alpine:init', () => {
         openDropdown: false,
         connectedExtension: '',
         selectedHandle: '',
+        availableWallets: [],
         supportedWallets,
 
         has(wallet) {
-            return this[toPropertyName(wallet, 'has')]
+            return this.availableWallets.includes(wallet)
         },
 
         isDisabled(wallet = null) {
@@ -57,7 +57,9 @@ window.addEventListener('alpine:init', () => {
 
         refreshWallets() {
             supportedWallets.forEach((wallet) => {
-                this[toPropertyName(wallet, 'has')] = Extensions.hasWallet(wallet)
+                if (Extensions.hasWallet(wallet)) {
+                    this.availableWallets.push(wallet)
+                }
             })
         },
 
