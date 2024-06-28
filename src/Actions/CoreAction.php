@@ -210,11 +210,6 @@ class CoreAction implements HookInterface
         $userProfile->saveAccountInfo($blockfrost->getAccountDetails($stakeAddress));
 
         $customRole = $this->application->option('ua_additional_role');
-
-        if ($userProfile->hasRole($customRole)) {
-            return;
-        }
-
         $poolIds = $this->application->option('delegation_pool_id');
         $wanted = [];
         $page = 1;
@@ -235,6 +230,10 @@ class CoreAction implements HookInterface
 
             $page++;
         } while (100 === count($response));
+
+        if ($userProfile->hasRole($customRole)) {
+            return;
+        }
 
         if (! empty($wanted)) {
             $latest = $blockfrost->getEpochsLatest();
