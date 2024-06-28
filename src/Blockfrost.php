@@ -119,9 +119,9 @@ class Blockfrost extends AbstractBlockfrost
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
 
-    public function getAccountHistory(string $address, int $page = 1): array
+    public function getAccountHistory(string $address, int $page = 1, string $order = 'asc'): array
     {
-        $response = $this->request('accounts/' . $address . '/history', compact('page'));
+        $response = $this->request('accounts/' . $address . '/history', compact('page', 'order'));
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
