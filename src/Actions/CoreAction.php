@@ -215,17 +215,14 @@ class CoreAction implements HookInterface
         $page = 1;
 
         do {
-            $response = $blockfrost->getAccountHistory($stakeAddress, $page);
+            $response = $blockfrost->getAccountHistory($stakeAddress, $page, 'desc');
 
             do_action('cardanopress_account_history', $stakeAddress, $response, $page);
 
             if (empty($wanted)) {
-                foreach ($response as $history) {
-                    if ($history['pool_id'] === $poolIds[$queryNetwork]) {
-                        $wanted = $history;
-                        break;
-                    }
-                }
+                $wanted = array_filter($response, function ($history) use ($poolIds, $queryNetwork) {
+                    return $history['pool_id'] === $poolIds[$queryNetwork];
+                });
             }
 
             $page++;
@@ -238,12 +235,12 @@ class CoreAction implements HookInterface
         if (! empty($wanted)) {
             $latest = $blockfrost->getEpochsLatest();
 
-            if (! empty($latest)) {
-                $active = $latest['epoch'] - $wanted['active_epoch'];
-
-                if ($active >= $this->application->option('ua_required_epoch')) {
-                    $userProfile->addRole($customRole);
-                }
+            if (
+                ! empty($latest) &&
+                count($wanted) >= $this->application->option('ua_required_epoch') &&
+                $latest['epoch'] <= $wanted[array_key_first($wanted)]['active_epoch']
+            ) {
+                $userProfile->addRole($customRole);
             }
         }
     }
