@@ -260,6 +260,16 @@ class Admin extends AbstractAdmin
                         'step' => 1,
                     ],
                 ],
+                'required_amount' => [
+                    'type' => 'number',
+                    'title' => __('Required Amount', 'cardanopress'),
+                    'description' => __('Minimum delegation amount in ADA required.', 'cardanopress'),
+                    'default' => 1,
+                    'options' => [
+                        'min' => 0.1,
+                        'step' => 0.1,
+                    ],
+                ],
                 'additional_role' => [
                     'type' => 'select',
                     'title' => __('Additional Role', 'cardanopress'),

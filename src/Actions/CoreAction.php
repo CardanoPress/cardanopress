@@ -7,6 +7,7 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
+use CardanoPress\Helpers\NumberHelper;
 use CardanoPress\Interfaces\HookInterface;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
@@ -221,7 +222,10 @@ class CoreAction implements HookInterface
 
             if (empty($wanted)) {
                 $wanted = array_filter($response, function ($history) use ($poolIds, $queryNetwork) {
-                    return $history['pool_id'] === $poolIds[$queryNetwork];
+                    return (
+                        $history['pool_id'] === $poolIds[$queryNetwork] &&
+                        NumberHelper::lovelaceToAda($history['amount']) >= $this->application->option('amount')
+                    );
                 });
             }
 
