@@ -5,7 +5,7 @@ import {
     getConnectedExtension,
     isNotified,
     setConnectedExtension,
-    setNotified
+    setNotified,
 } from './api/config'
 import { delegation as delegationTx } from './api/delegation'
 import { multisend as multisendTx } from './api/multisend'
@@ -56,11 +56,7 @@ window.addEventListener('alpine:init', () => {
         },
 
         refreshWallets() {
-            supportedWallets.forEach((wallet) => {
-                if (Extensions.hasWallet(wallet)) {
-                    this.availableWallets.push(wallet)
-                }
-            })
+            this.availableWallets = supportedWallets.filter((wallet) => Extensions.hasWallet(wallet))
         },
 
         async init() {
