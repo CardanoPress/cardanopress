@@ -77,6 +77,7 @@ class Manifest extends AbstractManifest
             'ajaxUrl' => admin_url('admin-ajax.php'),
             '_nonce' => wp_create_nonce(self::HANDLE_PREFIX . 'actions'),
             'logged' => is_user_logged_in(),
+            'version' => Application::getInstance()->getData('Version'),
         ];
 
         wp_localize_script(self::HANDLE_PREFIX . 'script', 'cardanoPress', $data);

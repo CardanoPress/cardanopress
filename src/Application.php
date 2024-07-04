@@ -115,7 +115,7 @@ class Application extends AbstractApplication
         $list = [];
 
         foreach (Admin::PAGES as $page) {
-            $pageId = cardanoPress()->option('member_' . $page);
+            $pageId = $this->option('member_' . $page);
 
             if (! $pageId) {
                 continue;
