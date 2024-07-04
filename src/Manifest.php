@@ -157,7 +157,7 @@ class Manifest extends AbstractManifest
                     self::HANDLE_PREFIX . 'alpinejs',
                     plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
                     [self::HANDLE_PREFIX . 'script'],
-                    '3.13.8',
+                    '3.14.1',
                     true
                 );
             }
