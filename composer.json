@@ -7,8 +7,7 @@
     "themeplate",
     "wordpress",
     "plugin",
-    "cardano",
-    "nami"
+    "cardano"
   ],
   "license": "GPL-2.0-only",
   "authors": [
