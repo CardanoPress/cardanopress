@@ -5,3 +5,4 @@ node_modules/
 .cache/
 vendor/
 .DS_Store
+cardano_serialization_lib_bg*.wasm
