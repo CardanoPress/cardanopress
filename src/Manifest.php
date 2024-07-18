@@ -14,6 +14,7 @@ use CardanoPress\Foundation\AbstractManifest;
 class Manifest extends AbstractManifest
 {
     private bool $legacy_loaded;
+    private array $wasm_module;
     private Vite $vite;
 
     public const HANDLE_PREFIX = 'cardanopress-';
@@ -21,7 +22,26 @@ class Manifest extends AbstractManifest
     public function initialize(): void
     {
         $this->legacy_loaded = ! (isset($this->data) && $this->data instanceof CustomData);
+        $this->wasm_module = $this->getWasmModuleLinks();
         $this->vite = new Vite(plugin_dir_path($this->path), plugin_dir_url($this->path));
+    }
+
+    private function getWasmModuleLinks(): array
+    {
+        $manifest = $this->path . '.vite/manifest.json';
+        $assets = array_column($this->readAssetsManifest($manifest), 'file');
+        $wasm = array_filter($assets, function ($item) {
+            return str_ends_with($item, '.wasm') && str_starts_with($item, 'cardano_serialization_lib_bg');
+        });
+
+        if (empty($wasm)) {
+            return [];
+        }
+
+        return [
+            'local' => plugin_dir_url($this->path . '/wasm') . array_pop($wasm),
+            'remote' => 'https://unpkg.com/@emurgo/cardano-serialization-lib-browser@9.1.4/cardano_serialization_lib_bg.wasm'
+        ];
     }
 
     public function setupHooks(): void
@@ -30,6 +50,17 @@ class Manifest extends AbstractManifest
         add_action('wp_enqueue_scripts', [$this, 'autoEnqueues']);
         add_action('wp_body_open', [$this, 'completeInjections']);
         add_action('wp_footer', [$this, 'completeInjections']);
+
+        if (empty($this->wasm_module)) {
+            return;
+        }
+
+        add_action('plugins_loaded', function () {
+            if ($_SERVER['REQUEST_URI'] === wp_make_link_relative($this->wasm_module['local'])) {
+                wp_redirect($this->wasm_module['remote']);
+                die;
+            }
+        });
     }
 
     public function enqueueAssets(): void
