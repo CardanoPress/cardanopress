@@ -30,17 +30,20 @@
       "classmap_prefix": "CardanoPress_Dependency_",
       "excluded_packages": [
         "automattic/jetpack-autoloader",
-        "cardanopress/framework"
+        "cardanopress/framework",
+        "themeplate/enqueue"
       ]
     }
   },
   "scripts": {
     "post-install-cmd": [
       "../vendor/bin/mozart compose",
+      "rm -rf vendor/themeplate/enqueue",
       "composer dump-autoload --classmap-authoritative"
     ],
     "post-update-cmd": [
       "../vendor/bin/mozart compose",
+      "rm -rf vendor/themeplate/enqueue",
       "composer dump-autoload --classmap-authoritative"
     ]
   }

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf31970b948b5ad3e97af7bd2c43f3a5a
+class ComposerStaticInit937bcf7f5993a482c5bb7997711e5546
 {
     public static $files = array (
         '1adb4ff695388b04d573ca23d2979f89' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/compatibility.php',
@@ -325,11 +325,11 @@ class ComposerStaticInitf31970b948b5ad3e97af7bd2c43f3a5a
         'CardanoPress\\Dependencies\\ThemePlate\\Core\\Helper\\MainHelper' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Core/Helper/MainHelper.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Core\\Helper\\MetaHelper' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Core/Helper/MetaHelper.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Core\\Repository' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Core/Repository.php',
-        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\CustomData' => __DIR__ . '/../..' . '/ThemePlate/Enqueue/CustomData.php',
-        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\Dynamic' => __DIR__ . '/../..' . '/ThemePlate/Enqueue/Dynamic.php',
-        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\LoaderTag' => __DIR__ . '/../..' . '/ThemePlate/Enqueue/LoaderTag.php',
-        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\ScriptsTag' => __DIR__ . '/../..' . '/ThemePlate/Enqueue/ScriptsTag.php',
-        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\StylesTag' => __DIR__ . '/../..' . '/ThemePlate/Enqueue/StylesTag.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\CustomData' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/CustomData.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\Dynamic' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/Dynamic.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\LoaderTag' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/LoaderTag.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\ScriptsTag' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/ScriptsTag.php',
+        'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\StylesTag' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/StylesTag.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Logger' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Logger.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Meta\\BaseMeta' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Meta/BaseMeta.php',
         'CardanoPress\\Dependencies\\ThemePlate\\Meta\\MenuMeta' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/ThemePlate/Meta/MenuMeta.php',
@@ -403,9 +403,9 @@ class ComposerStaticInitf31970b948b5ad3e97af7bd2c43f3a5a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf31970b948b5ad3e97af7bd2c43f3a5a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf31970b948b5ad3e97af7bd2c43f3a5a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitf31970b948b5ad3e97af7bd2c43f3a5a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit937bcf7f5993a482c5bb7997711e5546::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit937bcf7f5993a482c5bb7997711e5546::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit937bcf7f5993a482c5bb7997711e5546::$classMap;
 
         }, null, ClassLoader::class);
     }
