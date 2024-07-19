@@ -121,10 +121,6 @@ class Manifest extends AbstractManifest
             return;
         }
 
-        if ($compatibility->hasIssue('server')) {
-            wp_deregister_script(self::HANDLE_PREFIX . 'script');
-        }
-
         wp_enqueue_script(self::HANDLE_PREFIX . 'compatibility');
         wp_add_inline_script(
             self::HANDLE_PREFIX . 'compatibility',
@@ -171,27 +167,25 @@ class Manifest extends AbstractManifest
             return;
         }
 
-        if (! $compatibility->hasIssue('server')) {
-            wp_enqueue_script(self::HANDLE_PREFIX . 'script');
-            wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
+        wp_enqueue_script(self::HANDLE_PREFIX . 'script');
+        wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
 
-            if (apply_filters('cardanopress_alpinejs_cdn', false)) {
-                wp_enqueue_script(
-                    self::HANDLE_PREFIX . 'alpinejs',
-                    'https://unpkg.com/alpinejs',
-                    [self::HANDLE_PREFIX . 'script'],
-                    'latest',
-                    true
-                );
-            } else {
-                wp_enqueue_script(
-                    self::HANDLE_PREFIX . 'alpinejs',
-                    plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
-                    [self::HANDLE_PREFIX . 'script'],
-                    '3.14.1',
-                    true
-                );
-            }
+        if (apply_filters('cardanopress_alpinejs_cdn', false)) {
+            wp_enqueue_script(
+                self::HANDLE_PREFIX . 'alpinejs',
+                'https://unpkg.com/alpinejs',
+                [self::HANDLE_PREFIX . 'script'],
+                'latest',
+                true
+            );
+        } else {
+            wp_enqueue_script(
+                self::HANDLE_PREFIX . 'alpinejs',
+                plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
+                [self::HANDLE_PREFIX . 'script'],
+                '3.14.1',
+                true
+            );
         }
 
         self::injectDataProvider();
