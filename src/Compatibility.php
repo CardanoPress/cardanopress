@@ -25,7 +25,6 @@ class Compatibility
     {
         $this->issues = $this->getIssues(true);
         $this->messages = [
-            'server' => __('WebAssembly MIME type is not supported by the server.', 'cardanopress'),
             'theme' => __('Incomplete template injections in front-end.', 'cardanopress'),
             'classic' => __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
         ];
@@ -53,23 +52,6 @@ class Compatibility
         ];
 
         return ! is_wp_error(wp_remote_get($url, $args));
-    }
-
-    protected function server(): bool
-    {
-        $url = plugin_dir_url(Application::getInstance()->getPluginFile());
-        $args = [
-            'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
-            'sslverify' => apply_filters('https_local_ssl_verify', false),
-        ];
-
-        $response = wp_remote_head($url . 'src/test.wasm', $args);
-
-        if (is_wp_error($response)) {
-            return $this->server();
-        }
-
-        return ('application/wasm' === wp_remote_retrieve_header($response, 'content-type'));
     }
 
     public function message(string $type): string
@@ -123,10 +105,6 @@ class Compatibility
     public function run(): void
     {
         $this->setStatus('checking');
-
-        if (! $this->server()) {
-            $this->addIssue('server');
-        }
 
         if (! $this->theme()) {
             $this->setStatus('activated');
