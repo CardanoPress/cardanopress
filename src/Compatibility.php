@@ -122,15 +122,9 @@ class Compatibility
 
         foreach ($this->getIssues(true) as $issue) {
             $this->addIssue($issue);
-        }
-
-        $issues = $this->getIssues();
-
-        foreach ($issues as $issue) {
             $this->log($this->message($issue), 'warning');
         }
 
-        $this->saveIssues();
-        $this->setStatus(empty($issues) ? 'normal' : 'issue');
+        $this->setStatus(empty($this->getIssues()) ? 'normal' : 'issue');
     }
 }

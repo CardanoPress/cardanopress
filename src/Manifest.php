@@ -128,7 +128,7 @@ class Manifest extends AbstractManifest
                 'console.error("%s v%s", %s)',
                 Application::getInstance()->getData('Name'),
                 Application::getInstance()->getData('Version'),
-                json_encode(array_map([$compatibility, 'message'], $compatibility->getIssues()))
+                json_encode(array_map([$compatibility, 'message'], $issues))
             )
         );
     }
@@ -156,18 +156,21 @@ class Manifest extends AbstractManifest
     {
         $compatibility = Compatibility::getInstance();
 
-        if (! $compatibility->html5()) {
-            $compatibility->addIssue('html5');
+        if ('checking' === $compatibility->getStatus()) {
+            if (! doing_action('wp_body_open')) {
+                $compatibility->addIssue('theme');
+                $compatibility->addIssue('classic');
+            }
+
+            if (! $compatibility->html5()) {
+                $compatibility->addIssue('html5');
+            }
+
             $compatibility->saveIssues();
         }
 
-        if (! doing_action('wp_body_open')) {
-            $compatibility->addIssue('theme');
-            $compatibility->addIssue('classic');
-
-            if ('checking' === $compatibility->getStatus()) {
-                $compatibility->saveIssues();
-            }
+        if (! empty($compatibility->getIssues())) {
+            remove_action('wp_footer', [$this, 'completeInjections']);
 
             return;
         }
