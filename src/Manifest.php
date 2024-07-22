@@ -156,6 +156,11 @@ class Manifest extends AbstractManifest
     {
         $compatibility = Compatibility::getInstance();
 
+        if (! $compatibility->html5()) {
+            $compatibility->addIssue('html5');
+            $compatibility->saveIssues();
+        }
+
         if (! doing_action('wp_body_open')) {
             $compatibility->addIssue('theme');
             $compatibility->addIssue('classic');

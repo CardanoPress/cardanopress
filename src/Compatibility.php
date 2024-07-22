@@ -27,6 +27,7 @@ class Compatibility
         $this->messages = [
             'theme' => __('Incomplete template injections in front-end.', 'cardanopress'),
             'classic' => __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
+            'html5' => __('Activated theme does not support HTML5 markup. `script` value required.', 'cardanopress'),
         ];
 
         $this->setLogger($logger);
@@ -52,6 +53,13 @@ class Compatibility
         ];
 
         return ! is_wp_error(wp_remote_get($url, $args));
+    }
+
+    public function html5(): bool
+    {
+        $support = get_theme_support('html5');
+
+        return !empty($support) && in_array('script', $support[0], true);
     }
 
     public function message(string $type): string
