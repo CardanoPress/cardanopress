@@ -92,11 +92,11 @@ class Collection
 
     private function getImageSrc(string $link, bool $base64 = false): string
     {
-        if ($this->startsWith("https://", $link)) {
+        if (str_starts_with($link, "https://")) {
             return $link;
         }
 
-        if ($this->startsWith("ipfs://", $link)) {
+        if (str_starts_with($link, "ipfs://")) {
             return str_replace(
                 'ipfs:/',
                 self::ASSETS_URL,
@@ -105,8 +105,8 @@ class Collection
         }
 
         if (
-            ($this->startsWith("Qm", $link) && 46 === strlen($link)) ||
-            ($this->startsWith("baf", $link) && 59 === strlen($link))
+            (str_starts_with($link, "Qm") && 46 === strlen($link)) ||
+            (str_starts_with($link, "baf") && 59 === strlen($link))
         ) {
             return self::ASSETS_URL . $link;
         }
@@ -115,15 +115,10 @@ class Collection
             return "data:image/png;base64," . $link;
         }
 
-        if ($this->startsWith("data:image", $link)) {
+        if (str_starts_with($link, "data:image")) {
             return $link;
         }
 
         return '';
-    }
-
-    private function startsWith(string $query, string $string): bool
-    {
-        return 0 === strpos($string, $query);
     }
 }
