@@ -123,7 +123,7 @@ class Installer extends AbstractInstaller
 
     public function noticePossibleIssues(): void
     {
-        if (! $this->shouldNotice('issues') || 'issue' !== $this->compatibility->getStatus()) {
+        if (! $this->shouldNotice('issues')) {
             return;
         }
 
@@ -254,8 +254,8 @@ class Installer extends AbstractInstaller
             return;
         }
 
-        $this->compatibility->setStatus('activated');
         $this->compatibility->saveIssues(true);
+        $this->compatibility->setStatus('activated');
         $this->application->userProfile()->dismissNotice('issues', true);
 
         if ('after_switch_theme' === current_filter()) {

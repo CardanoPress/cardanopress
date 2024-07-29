@@ -46,7 +46,7 @@ class Compatibility
 
     protected function theme(): bool
     {
-        $url = home_url();
+        $url = add_query_arg(['cardanopress' => time()], home_url());
         $args = [
             'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
             'sslverify' => apply_filters('https_local_ssl_verify', false),
@@ -107,6 +107,8 @@ class Compatibility
             $this->issues = [];
         }
 
+        $this->setStatus(empty($issues) ? 'normal' : 'issue');
+
         return update_option(static::DATA_PREFIX . 'issues', $issues, false);
     }
 
@@ -124,7 +126,5 @@ class Compatibility
             $this->addIssue($issue);
             $this->log($this->message($issue), 'warning');
         }
-
-        $this->setStatus(empty($this->getIssues()) ? 'normal' : 'issue');
     }
 }
