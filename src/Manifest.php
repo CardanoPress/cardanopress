@@ -79,9 +79,31 @@ class Manifest extends AbstractManifest
 
             $type = 'js' === $parts[1] ? 'script' : 'style';
             $func = 'wp_dequeue_' . $type;
-            $handle = $this->vite->$type($entry);
+            $handle = $this->vite->$type(
+                $entry,
+                ('script' === $type && 'script' !== $entry) ? [static::HANDLE_PREFIX . 'script'] : [],
+                'js' === $parts[1] ? ['in_footer' => true] : ['media' => 'all']
+            );
 
             $func($handle);
+        }
+
+        if (apply_filters('cardanopress_alpinejs_cdn', false)) {
+            wp_register_script(
+                self::HANDLE_PREFIX . 'alpinejs',
+                'https://unpkg.com/alpinejs',
+                [self::HANDLE_PREFIX . 'script', self::HANDLE_PREFIX . 'notification'],
+                'latest',
+                true
+            );
+        } else {
+            wp_register_script(
+                self::HANDLE_PREFIX . 'alpinejs',
+                plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
+                [self::HANDLE_PREFIX . 'script', self::HANDLE_PREFIX . 'notification'],
+                '3.14.1',
+                true
+            );
         }
 
         $this->dynamic->action();
@@ -177,24 +199,7 @@ class Manifest extends AbstractManifest
 
         wp_enqueue_script(self::HANDLE_PREFIX . 'script');
         wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
-
-        if (apply_filters('cardanopress_alpinejs_cdn', false)) {
-            wp_enqueue_script(
-                self::HANDLE_PREFIX . 'alpinejs',
-                'https://unpkg.com/alpinejs',
-                [self::HANDLE_PREFIX . 'script'],
-                'latest',
-                true
-            );
-        } else {
-            wp_enqueue_script(
-                self::HANDLE_PREFIX . 'alpinejs',
-                plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
-                [self::HANDLE_PREFIX . 'script'],
-                '3.14.1',
-                true
-            );
-        }
+        wp_enqueue_script(self::HANDLE_PREFIX . 'alpinejs');
 
         self::injectDataProvider();
 
