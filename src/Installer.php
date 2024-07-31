@@ -127,6 +127,10 @@ class Installer extends AbstractInstaller
             return;
         }
 
+        if ('activated' === $this->compatibility->getStatus()) {
+            $this->compatibility->addIssue('missed');
+        }
+
         $issues = $this->compatibility->getIssues();
 
         if (empty($issues)) {

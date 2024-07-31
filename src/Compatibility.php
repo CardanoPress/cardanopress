@@ -25,6 +25,7 @@ class Compatibility
     {
         $this->issues = $this->getIssues(true);
         $this->messages = [
+            'missed' => __('Unable to complete the compatibility check run.', 'cardanopress'),
             'theme' => __('Incomplete template injections in front-end.', 'cardanopress'),
             'classic' => __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
             'html5' => __('Activated theme does not support HTML5 markup. `script` value required.', 'cardanopress'),
