@@ -66,8 +66,11 @@ class Shortcode extends AbstractShortcode
             parse_str(str_replace('&amp;', '&', $args['variables']), $args['variables']);
         }
 
+        $name = pathinfo($args['name'], PATHINFO_DIRNAME) . '/';
+        $name .= sanitize_file_name(pathinfo($args['name'], PATHINFO_BASENAME));
+
         ob_start();
-        $this->application->template($args['name'], $args['variables']);
+        $this->application->template(ltrim($name, './'), $args['variables']);
 
         $html = ob_get_clean();
 
