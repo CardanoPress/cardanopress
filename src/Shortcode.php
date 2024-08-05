@@ -75,7 +75,7 @@ class Shortcode extends AbstractShortcode
             return $html;
         }
 
-        return '<template x-if="' . $args['if'] . '">' . $html . '</template>';
+        return '<template x-if="' . esc_attr($args['if']) . '">' . $html . '</template>';
     }
 
     public function doTemplateIf(array $attributes, ?string $content = null): string
@@ -90,7 +90,7 @@ class Shortcode extends AbstractShortcode
             return $html;
         }
 
-        return '<template x-if="' . $args['condition'] . '">' . $html . '</template>';
+        return '<template x-if="' . esc_attr($args['condition']) . '">' . $html . '</template>';
     }
 
     public function doComponentCardanoPress($attributes, ?string $content = null): string
@@ -131,7 +131,7 @@ class Shortcode extends AbstractShortcode
         ], $attributes);
 
         foreach ($args as $key => $value) {
-            $dataAttributes .= ' data-' . $key . '="' . $value . '"';
+            $dataAttributes .= ' data-' . $key . '="' . esc_attr($value) . '"';
         }
 
         $html = '<form x-data="paymentForm"' . $dataAttributes . '>';
@@ -151,7 +151,7 @@ class Shortcode extends AbstractShortcode
     {
         $fixedFee = $this->application->option('payment_split');
 
-        $html = '<form x-data="splitForm" data-fee="' . $fixedFee . '">';
+        $html = '<form x-data="splitForm" data-fee="' . esc_attr($fixedFee) . '">';
         $html .= apply_filters('the_content', $content);
         $html .= '</form>';
 
