@@ -21,6 +21,7 @@ class GroupField extends Field {
 	protected function initialize(): void {
 
 		$clone = clone $this;
+
 		$clone->config['repeatable'] = false;
 
 		$default = FieldsHelper::get_default_value( $clone );

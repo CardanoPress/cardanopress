@@ -28,16 +28,16 @@ class LinkField extends Field {
 	}
 
 
-	private function values_structure( array $default ): array {
+	private function values_structure( array $default_value ): array {
 
-		if ( MainHelper::is_sequential( $default ) ) {
-			return array_map( array( $this, 'values_structure' ), $default );
+		if ( MainHelper::is_sequential( $default_value ) ) {
+			return array_map( array( $this, 'values_structure' ), $default_value );
 		}
 
 		return array_intersect_key(
 			MainHelper::fool_proof(
 				static::DEFAULT_VALUE,
-				$default
+				$default_value
 			),
 			static::DEFAULT_VALUE
 		);

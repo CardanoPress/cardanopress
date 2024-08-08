@@ -20,6 +20,11 @@ class ScriptsTag extends LoaderTag {
 		'nomodule',
 		'nonce',
 		'src',
+		'type',
+
+		// deprecated
+		'charset',
+		'language',
 	);
 
 }

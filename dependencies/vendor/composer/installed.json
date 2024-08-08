@@ -67,17 +67,17 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.6.0",
-            "version_normalized": "2.6.0.0",
+            "version": "v2.7.0",
+            "version_normalized": "2.7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "d7c7f4a1550a4e090eff5de53bdb9b3536d3589c"
+                "reference": "813d2c5fbb71353845df3a063e30cd031d9a1212"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/d7c7f4a1550a4e090eff5de53bdb9b3536d3589c",
-                "reference": "d7c7f4a1550a4e090eff5de53bdb9b3536d3589c",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/813d2c5fbb71353845df3a063e30cd031d9a1212",
+                "reference": "813d2c5fbb71353845df3a063e30cd031d9a1212",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "automattic/jetpack-autoloader": "^2.12",
                 "themeplate/tester": "^2.1"
             },
-            "time": "2024-06-04T03:06:29+00:00",
+            "time": "2024-08-08T03:27:53+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -121,23 +121,23 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.6.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.7.0"
             },
             "install-path": "../cardanopress/framework"
         },
         {
             "name": "themeplate/enqueue",
-            "version": "v2.5.0",
-            "version_normalized": "2.5.0.0",
+            "version": "v2.6.0",
+            "version_normalized": "2.6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Enqueue.git",
-                "reference": "705fa541126aaea486d54dab5eead57b70bca961"
+                "reference": "d63a4cb2a758a1e6b342901b831db1d895b5cf6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/705fa541126aaea486d54dab5eead57b70bca961",
-                "reference": "705fa541126aaea486d54dab5eead57b70bca961",
+                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/d63a4cb2a758a1e6b342901b831db1d895b5cf6b",
+                "reference": "d63a4cb2a758a1e6b342901b831db1d895b5cf6b",
                 "shasum": ""
             },
             "require": {
@@ -146,7 +146,7 @@
             "require-dev": {
                 "themeplate/tester": "^2.0"
             },
-            "time": "2024-02-03T13:49:52+00:00",
+            "time": "2024-07-19T13:02:11+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -170,7 +170,7 @@
             "description": "Helper for registered dependencies",
             "support": {
                 "issues": "https://github.com/ThemePlate/Enqueue/issues",
-                "source": "https://github.com/ThemePlate/Enqueue/tree/v2.5.0"
+                "source": "https://github.com/ThemePlate/Enqueue/tree/v2.6.0"
             },
             "install-path": "../themeplate/enqueue"
         },

@@ -263,6 +263,7 @@
 						$this = $( this ).siblings( '.select2-options' );
 
 						return {
+						    _wpnonce: ThemePlate.nonce,
 							search: params.term,
 							_page: { paged: params.page || 1 },
 							action: s2data.action,
@@ -293,6 +294,7 @@
 					url: ThemePlate.ajax_url,
 					dataType: 'json',
 					data: {
+						_wpnonce: ThemePlate.nonce,
 						search: '',
 						_page: { paged: 1 },
 						action: s2data.action,

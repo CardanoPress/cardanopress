@@ -12,7 +12,7 @@ namespace CardanoPress\Dependencies\ThemePlate\Core\Helper;
 class AssetsHelper {
 
 	public const LOADER_ACTION  = 'themeplate_assets_loader';
-	public const LOADER_VERSION = '2.6.1';
+	public const LOADER_VERSION = '2.7.0';
 
 
 	public static function setup_loader(): void {
@@ -44,7 +44,9 @@ class AssetsHelper {
 			wp_die();
 		}
 
-		$filename = dirname( __DIR__, 2 ) . '/assets/' . $_GET['filename'];
+		$filename = sanitize_file_name( $_GET['filename'] );
+		$filename = str_replace( '_.', '.', $filename );
+		$filename = dirname( __DIR__, 2 ) . '/assets/' . $filename;
 
 		if ( ! file_exists( $filename ) ) {
 			wp_die();

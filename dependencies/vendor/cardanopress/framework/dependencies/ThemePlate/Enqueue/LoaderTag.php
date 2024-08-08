@@ -20,7 +20,6 @@ abstract class LoaderTag {
 		'crossorigin',
 		'integrity',
 		'referrerpolicy',
-		'type',
 	);
 
 	/**
@@ -44,6 +43,8 @@ abstract class LoaderTag {
 
 				$tag = '<noscript>' . $tag . '</noscript>';
 			}
+
+			$this->clean( $tag, $attributes, $property );
 
 			$attributes = $this->stringify( $attributes );
 
@@ -69,6 +70,23 @@ abstract class LoaderTag {
 		);
 
 		return array_merge( $intersected, $custom );
+
+	}
+
+
+	private function clean( string &$tag, array &$attributes, string $property ): void {
+
+		$pattern     = array();
+		$replacement = array();
+
+		foreach ( $attributes as $key => $value ) {
+			$pattern[]     = "/ $key=['\"][^'\"]*['\"]/";
+			$replacement[] = $property === $key ? " $property='$value'" : '';
+		}
+
+		unset( $attributes[ $property ] );
+
+		$tag = preg_replace( $pattern, $replacement, $tag );
 
 	}
 

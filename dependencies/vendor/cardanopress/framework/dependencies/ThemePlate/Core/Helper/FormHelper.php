@@ -40,7 +40,14 @@ class FormHelper {
 		wp_enqueue_script( 'themeplate-show-hide', AssetsHelper::get_url( 'show-hide.js' ), array(), $version, true );
 		wp_enqueue_script( 'themeplate-repeater', AssetsHelper::get_url( 'repeater.js' ), array(), $version, true );
 
-		wp_localize_script( 'themeplate-script', 'ThemePlate', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+		wp_localize_script(
+			'themeplate-script',
+			'ThemePlate',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( AssetsHelper::LOADER_ACTION ),
+			)
+		);
 
 		if ( 'post.php' !== $hook_suffix ) {
 			require_once ABSPATH . 'wp-includes/class-wp-editor.php';

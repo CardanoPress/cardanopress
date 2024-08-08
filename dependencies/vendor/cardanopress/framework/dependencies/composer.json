@@ -31,17 +31,14 @@
     }
   },
   "scripts": {
-    "post-install-cmd": [
+    "action-prefix": [
       "rm -rf assets ThemePlate/assets",
       "mv vendor/themeplate/core/assets .",
       "mozart compose",
-      "mv assets ThemePlate"
+      "mv assets ThemePlate",
+      "find . -type d -not \\( -path ./vendor -prune \\) -exec cp -f ./index.php {} \\;"
     ],
-    "post-update-cmd": [
-      "rm -rf assets ThemePlate/assets",
-      "mv vendor/themeplate/core/assets .",
-      "mozart compose",
-      "mv assets ThemePlate"
-    ]
+    "post-install-cmd": "@action-prefix",
+    "post-update-cmd": "@action-prefix"
   }
 }

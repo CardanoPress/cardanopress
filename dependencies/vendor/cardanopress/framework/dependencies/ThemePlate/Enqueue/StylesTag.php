@@ -23,7 +23,12 @@ class StylesTag extends LoaderTag {
 		'media',
 		'rel',
 		'title',
-		'noscript', // custom
+
+		// deprecated
+		'type',
+
+		// custom
+		'noscript',
 	);
 
 }

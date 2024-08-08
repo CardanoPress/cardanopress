@@ -10,6 +10,7 @@
 namespace CardanoPress\Dependencies\ThemePlate\Core\Field;
 
 use CardanoPress\Dependencies\ThemePlate\Core\Field;
+use CardanoPress\Dependencies\ThemePlate\Core\Helper\AssetsHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MainHelper;
 use WP_Query;
 use WP_Term_Query;
@@ -22,7 +23,7 @@ class TypeField extends Field {
 	public const ACTION_PREFIX = 'themeplate_type_';
 
 
-	protected function get_correct_type( string $type ): string {
+	protected static function get_correct_type( string $type ): string {
 
 		$type = strtolower( $type );
 
@@ -34,16 +35,16 @@ class TypeField extends Field {
 	}
 
 
-	protected function get_action_name( string $type ): string {
+	protected static function get_action_name( string $type ): string {
 
-		return self::ACTION_PREFIX . $this->get_correct_type( $type );
+		return self::ACTION_PREFIX . self::get_correct_type( $type );
 
 	}
 
 
-	protected function get_callback( string $type ): callable {
+	protected static function get_callback( string $type ): callable {
 
-		return array( self::class, 'get_' . $this->get_correct_type( $type ) );
+		return array( self::class, 'get_' . self::get_correct_type( $type ) );
 
 	}
 
@@ -53,6 +54,19 @@ class TypeField extends Field {
 		$hook_name = 'wp_ajax_' . $this->get_action_name( $this->get_config( 'type' ) );
 
 		add_action( $hook_name, $this->get_callback( $this->get_config( 'type' ) ) );
+
+	}
+
+
+	protected static function maybe_invalid( string $action ): void {
+
+		check_ajax_referer( AssetsHelper::LOADER_ACTION );
+
+		$hook_name = self::ACTION_PREFIX . 'field_capability_' . $action;
+
+		if ( ! current_user_can( apply_filters( $hook_name, 'edit_posts' ) ) ) {
+			wp_die();
+		}
 
 	}
 
@@ -121,8 +135,31 @@ class TypeField extends Field {
 	private static int $count      = 10;
 	private static array $prefixes = array();
 
+
+	private static function get_prefix( int $id, array $options ): string {
+
+		$prefix = '';
+
+		if ( is_array( $options['post_type'] ) && 1 < count( $options['post_type'] ) ) {
+			$type = get_post_type( $id );
+
+			if ( ! array_key_exists( $type, self::$prefixes ) ) {
+				$object                  = get_post_type_object( $type );
+				self::$prefixes[ $type ] = $object->labels->singular_name;
+			}
+
+			$prefix = self::$prefixes[ $type ] . ' | ';
+		}
+
+		return $prefix;
+
+	}
+
+
 	// phpcs:disable WordPress.Security.NonceVerification
 	public static function get_posts(): void {
+
+		self::maybe_invalid( __FUNCTION__ );
 
 		$return   = array(
 			'results'    => array(),
@@ -163,27 +200,9 @@ class TypeField extends Field {
 	}
 
 
-	private static function get_prefix( int $id, array $options ): string {
-
-		$prefix = '';
-
-		if ( is_array( $options['post_type'] ) && 1 < count( $options['post_type'] ) ) {
-			$type = get_post_type( $id );
-
-			if ( ! array_key_exists( $type, self::$prefixes ) ) {
-				$object                  = get_post_type_object( $type );
-				self::$prefixes[ $type ] = $object->labels->singular_name;
-			}
-
-			$prefix = self::$prefixes[ $type ] . ' | ';
-		}
-
-		return $prefix;
-
-	}
-
-
 	public static function get_users(): void {
+
+		self::maybe_invalid( __FUNCTION__ );
 
 		$return   = array(
 			'results'    => array(),
@@ -219,6 +238,8 @@ class TypeField extends Field {
 
 	public static function get_terms(): void {
 
+		self::maybe_invalid( __FUNCTION__ );
+
 		$return   = array(
 			'results'    => array(),
 			'pagination' => array(
@@ -236,7 +257,7 @@ class TypeField extends Field {
 		$total    = wp_count_terms( $_GET['options']['taxonomy'] );
 		$query    = new WP_Term_Query( array_merge( $defaults, $_GET['options'] ) );
 
-		if ( ! is_wp_error( $total ) && $_GET['_page']['paged'] < ceil( $total / self::$count ) ) {
+		if ( ! is_wp_error( $total ) && $_GET['_page']['paged'] < ceil( (int) $total / self::$count ) ) {
 			$return['pagination']['more'] = true;
 		}
 

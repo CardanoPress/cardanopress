@@ -32,6 +32,9 @@ abstract class Field {
 
 	protected array $config;
 	protected string $data_key;
+	/**
+	 * @var string|array
+	 */
 	protected $user_passed_default = '';
 
 
@@ -131,7 +134,7 @@ abstract class Field {
 			$config = $this->get_config();
 		}
 
-		return ( static::MULTIPLE_ABLE && !! $config['multiple'] ) || !! $config['repeatable'];
+		return ( static::MULTIPLE_ABLE && (bool) $config['multiple'] ) || (bool) $config['repeatable'];
 
 	}
 

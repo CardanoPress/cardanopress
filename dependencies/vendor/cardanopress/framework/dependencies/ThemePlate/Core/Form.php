@@ -72,9 +72,9 @@ abstract class Form {
 	}
 
 
-	public function fields( array $list ): self {
+	public function fields( array $collection ): self {
 
-		$this->fields = new Fields( $list );
+		$this->fields = new Fields( $collection );
 
 		return $this;
 
@@ -126,7 +126,7 @@ abstract class Form {
 		MetaHelper::render_options( $this->config );
 
 		if ( ! empty( $this->config['description'] ) ) {
-			echo '<p class="description">' . $this->config['description'] . '</p>'; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+			echo '<p class="description">' . $this->config['description'] . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		echo '<div class="fields-container ' . esc_attr( $this->config['style'] ) . '">';
@@ -142,7 +142,7 @@ abstract class Form {
 
 				$value = $this->handler->get_value( $field, $prefix, $current_id );
 
-				MainHelper::maybe_adjust( $field,$value );
+				MainHelper::maybe_adjust( $field, $value );
 				$this->fields->layout( $field, $value );
 			}
 		}
