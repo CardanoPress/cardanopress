@@ -36,15 +36,13 @@
     }
   },
   "scripts": {
-    "post-install-cmd": [
+    "action-prefix": [
       "../vendor/bin/mozart compose",
       "rm -rf vendor/themeplate/enqueue",
-      "composer dump-autoload --classmap-authoritative"
+      "composer dump-autoload --classmap-authoritative",
+      "find . -type d -not \\( -path ./vendor -prune \\) -exec cp -f ./index.php {} \\;"
     ],
-    "post-update-cmd": [
-      "../vendor/bin/mozart compose",
-      "rm -rf vendor/themeplate/enqueue",
-      "composer dump-autoload --classmap-authoritative"
-    ]
+    "post-install-cmd": "@action-prefix",
+    "post-update-cmd": "@action-prefix"
   }
 }

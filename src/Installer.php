@@ -277,6 +277,8 @@ class Installer extends AbstractInstaller
             (new Templates($path . 'templates'))->createPages();
         } elseif (version_compare($currentVersion, '0.29.0', '<')) {
             $this->updateOldPasswords();
+        } elseif (version_compare($currentVersion, '1.20.0', '<')) {
+            $this->protectLogs();
         }
     }
 
