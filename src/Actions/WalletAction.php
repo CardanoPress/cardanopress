@@ -39,6 +39,29 @@ class WalletAction implements HookInterface
         add_action('wp_ajax_cardanopress_payment_address', [$this, 'getPaymentAddress']);
     }
 
+    private function verifyDataSignature(array $data, string $walletAddress): bool
+    {
+        if (count($data) !== 2) {
+            return false;
+        }
+
+        $message = 'CardanoPress!';
+        $hexMessage = bin2hex($message);
+        $index = strpos($data[0], $hexMessage);
+
+        if (false === $index) {
+            return false;
+        }
+
+        $last = substr($data[0], $index);
+
+        if (strlen($last) !== strlen($hexMessage) + 132) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function initializeUserAccount(): void
     {
         $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
@@ -47,6 +70,10 @@ class WalletAction implements HookInterface
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
         $stakeAddress = $this->sanitization->sanitizePost('stake_address');
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
+
+        if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress)) {
+            wp_send_json_error(CoreAction::getAjaxMessage('incorrectSignature'));
+        }
 
         $username = md5($stakeAddress);
         $userId = username_exists($username);

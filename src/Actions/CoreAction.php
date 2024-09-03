@@ -60,6 +60,7 @@ class CoreAction implements HookInterface
                 'unsupportedNetwork' => __('Unsupported network %s', 'cardanopress'),
                 'blockfrostError' => __('Blockfrost API Error. Please try again', 'cardanopress'),
                 'notPermitted' => __('You don\'t have permission to do this.', 'cardanopress'),
+                'incorrectSignature' => __('Provided data signature is incorrect.', 'cardanopress'),
             ],
             'error' => [
                 /* translators: %s: http origin */
