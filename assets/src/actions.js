@@ -8,11 +8,13 @@ export const handleReconnect = async (Wallet) => {
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
+    const dataSignature = await Wallet.signData('CardanoPress!')
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
             _wpnonce: cardanoPress._nonce,
             action: 'cardanopress_reconnect_account',
+            data_signature: JSON.stringify(dataSignature),
             stake_address: rewardAddress,
             wallet_address: changeAddress,
             query_network: network,
@@ -24,11 +26,13 @@ export const logMeIn = async (Wallet) => {
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
+    const dataSignature = await Wallet.signData('CardanoPress!')
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
             _wpnonce: cardanoPress._nonce,
             action: 'cardanopress_user_account',
+            data_signature: JSON.stringify(dataSignature),
             stake_address: rewardAddress,
             wallet_address: changeAddress,
             query_network: network,

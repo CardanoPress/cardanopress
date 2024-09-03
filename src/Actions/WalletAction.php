@@ -46,6 +46,7 @@ class WalletAction implements HookInterface
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
         $stakeAddress = $this->sanitization->sanitizePost('stake_address');
+        $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
         $username = md5($stakeAddress);
         $userId = username_exists($username);

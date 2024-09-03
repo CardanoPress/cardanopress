@@ -23,6 +23,7 @@ class Sanitization
             'transaction_action' => __('Invalid transaction action', 'cardanopress'),
             'transaction_hash' => __('Invalid transaction hash', 'cardanopress'),
             'ada_handle' => __('Invalid ada handle', 'cardanopress'),
+            'data_signature' => __('Invalid data signature', 'cardanopress'),
         ];
     }
 
@@ -137,5 +138,22 @@ class Sanitization
         }
 
         return $value;
+    }
+
+    public function data_signature($value): string
+    {
+        $value = sanitize_text_field($value);
+
+        if (empty($value)) {
+            return '';
+        }
+
+        $value = json_decode(stripslashes_deep($value), true);
+
+        if (! is_array($value) || ! isset($value['signature'], $value['key'])) {
+            return '';
+        }
+
+        return join('|', $value);
     }
 }
