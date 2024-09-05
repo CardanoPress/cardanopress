@@ -32,6 +32,14 @@ class CoreAction implements HookInterface
         add_action('wp_enqueue_scripts', [$this, 'localizeMessages'], 20);
     }
 
+    protected static function dataMessage(): string
+    {
+        return apply_filters(
+            'cardanopress_data_message',
+            sprintf(__('Login to %s', 'cardanopress'), get_bloginfo('name'))
+        );
+    }
+
     protected static function customizableMessages(string $type): array
     {
         $data = [
@@ -46,7 +54,6 @@ class CoreAction implements HookInterface
                 'delegating' => __('Processing...', 'cardanopress'),
                 'paying' => __('Processing...', 'cardanopress'),
                 'clipboardCopy' => __('Successfully copied', 'cardanopress'),
-                'dataMessage' => get_bloginfo('name'),
             ],
             'ajax' => [
                 /* translators: %s: connected username */
@@ -80,6 +87,7 @@ class CoreAction implements HookInterface
     public static function getAjaxMessage(string $type): string
     {
         $messages = apply_filters('cardanopress_ajax_messages', self::customizableMessages('ajax'));
+        $messages['dataMessage'] = self::dataMessage();
 
         return $messages[$type] ?? '';
     }
@@ -94,6 +102,7 @@ class CoreAction implements HookInterface
     public function localizeMessages()
     {
         $messages = apply_filters('cardanopress_script_messages', $this->customizableMessages('script'));
+        $messages['dataMessage'] = $this->dataMessage();
 
         wp_localize_script(Manifest::HANDLE_PREFIX . 'script', 'cardanoPressMessages', $messages);
     }

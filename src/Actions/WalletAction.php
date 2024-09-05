@@ -45,14 +45,14 @@ class WalletAction implements HookInterface
             return false;
         }
 
-        $message = get_bloginfo('name');
+        $message = CoreAction::getAjaxMessage('dataMessage');
         $output = null;
         $retval = null;
         $command = [
             './verifier',
             $data[0],
             $data[1],
-            $message,
+            sprintf('"%s"', $message),
             $walletAddress,
         ];
 
