@@ -45,7 +45,7 @@ class WalletAction implements HookInterface
             return false;
         }
 
-        $message = 'CardanoPress!';
+        $message = get_bloginfo('name');
         $output = null;
         $retval = null;
         $command = [

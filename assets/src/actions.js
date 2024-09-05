@@ -8,7 +8,7 @@ export const handleReconnect = async (Wallet) => {
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
-    const dataSignature = await Wallet.signData('CardanoPress!')
+    const dataSignature = await Wallet.signData(cardanoPressMessages.dataMessage)
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -26,7 +26,7 @@ export const logMeIn = async (Wallet) => {
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
-    const dataSignature = await Wallet.signData('CardanoPress!')
+    const dataSignature = await Wallet.signData(cardanoPressMessages.dataMessage)
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({

@@ -46,6 +46,7 @@ class CoreAction implements HookInterface
                 'delegating' => __('Processing...', 'cardanopress'),
                 'paying' => __('Processing...', 'cardanopress'),
                 'clipboardCopy' => __('Successfully copied', 'cardanopress'),
+                'dataMessage' => get_bloginfo('name'),
             ],
             'ajax' => [
                 /* translators: %s: connected username */

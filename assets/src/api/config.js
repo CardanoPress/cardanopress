@@ -1,4 +1,4 @@
-import { fromVespr } from "@pbwebdev/cardano-wallet-browser-extensions-interface"
+import { fromVespr } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 
 export const cardanoPress = window.cardanoPress || {
     ajaxUrl: '',
@@ -17,6 +17,7 @@ export const cardanoPressMessages = window.cardanoPressMessages || {
     delegating: '',
     paying: '',
     clipboardCopy: '',
+    dataMessage: '',
 }
 
 export const toPropertyName = (string, prefix = '', suffix = '') =>
