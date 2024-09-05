@@ -46,20 +46,21 @@ class WalletAction implements HookInterface
         }
 
         $message = 'CardanoPress!';
-        $hexMessage = bin2hex($message);
-        $index = strpos($data[0], $hexMessage);
+        $output = null;
+        $retval = null;
+        $command = [
+            './verifier',
+            $data[0],
+            $data[1],
+            $message,
+            $walletAddress,
+        ];
 
-        if (false === $index) {
-            return false;
-        }
+        chdir(realpath(__DIR__ . '/../../bin'));
+        chmod($command[0], 0777);
+        exec(join(' ', $command), $output, $retval);
 
-        $last = substr($data[0], $index);
-
-        if (strlen($last) !== strlen($hexMessage) + 132) {
-            return false;
-        }
-
-        return true;
+        return $retval === 0;
     }
 
     public function initializeUserAccount(): void
