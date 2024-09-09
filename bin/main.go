@@ -9,26 +9,21 @@ import (
 )
 
 func main() {
-    registry := new(require.Registry)
+    const SCRIPT = `
+    const module = require('./index.js');
+    function main(args) {
+        return module.main(args);
+    }
+    `
+
     vm := goja.New()
 
-    registry.Enable(vm)
-
-    raw, err := os.ReadFile("./index.js")
-
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    _, err = vm.RunString(string(raw))
-
-    if err != nil {
-        log.Fatal(err)
-    }
+    new(require.Registry).Enable(vm)
+    vm.RunProgram(goja.MustCompile("index.js", SCRIPT, true))
 
     var main func([]string) bool
 
-    err = vm.ExportTo(vm.Get("main"), &main)
+    err := vm.ExportTo(vm.Get("main"), &main)
 
     if err != nil {
         log.Fatal(err)

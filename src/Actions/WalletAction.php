@@ -46,10 +46,18 @@ class WalletAction implements HookInterface
         }
 
         $message = CoreAction::getAjaxMessage('dataMessage');
+        $system = php_uname('s');
+        $binary = sprintf(
+            './verifier_%2$s_%3$s%4$s',
+            __DIR__,
+            $system,
+            php_uname('m'),
+            'Windows' === $system ? '.exe' : ''
+        );
         $output = null;
         $retval = null;
         $command = [
-            './verifier',
+            $binary,
             $data[0],
             $data[1],
             sprintf('"%s"', $message),
