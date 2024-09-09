@@ -41,34 +41,13 @@ class WalletAction implements HookInterface
 
     private function verifyDataSignature(array $data, string $walletAddress): bool
     {
-        if (count($data) !== 2) {
-            return false;
+        $verification = new Verification($data, CoreAction::getAjaxMessage('dataMessage'));
+
+        if (apply_filters('cardanopress_fully_verify_data_signature', false)) {
+            return $verification->full($walletAddress);
         }
 
-        $message = CoreAction::getAjaxMessage('dataMessage');
-        $system = php_uname('s');
-        $binary = sprintf(
-            './verifier_%2$s_%3$s%4$s',
-            __DIR__,
-            $system,
-            php_uname('m'),
-            'Windows' === $system ? '.exe' : ''
-        );
-        $output = null;
-        $retval = null;
-        $command = [
-            $binary,
-            $data[0],
-            $data[1],
-            sprintf('"%s"', $message),
-            $walletAddress,
-        ];
-
-        chdir(realpath(__DIR__ . '/../../bin'));
-        chmod($command[0], 0777);
-        exec(join(' ', $command), $output, $retval);
-
-        return $retval === 0;
+        return $verification->basic();
     }
 
     public function initializeUserAccount(): void

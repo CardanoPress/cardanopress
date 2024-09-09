@@ -1462,6 +1462,10 @@ return array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Actions/Sanitization.php'
 	),
+	'PBWebDev\\CardanoPress\\Actions\\Verification' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/../src/Actions/Verification.php'
+	),
 	'PBWebDev\\CardanoPress\\Actions\\WalletAction' => array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Actions/WalletAction.php'
