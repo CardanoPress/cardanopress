@@ -9,11 +9,13 @@ namespace PBWebDev\CardanoPress;
 
 use CardanoPress\Foundation\AbstractInstaller;
 use CardanoPress\Traits\HasSettingsLink;
+use CardanoPress\Traits\Noticeable;
 
 /** @property Application $application */
 class Installer extends AbstractInstaller
 {
     use HasSettingsLink;
+    use Noticeable;
 
     protected Compatibility $compatibility;
 
@@ -24,18 +26,18 @@ class Installer extends AbstractInstaller
         $this->compatibility = new Compatibility($this->getLogger());
 
         $this->setSettingsLinkUrl(admin_url('admin.php?page=' . Admin::OPTION_KEY));
+        $this->setProfile($this->application->userProfile());
     }
 
     public function setupHooks(): void
     {
         parent::setupHooks();
+        $this->setupNotices();
 
         add_action('plugins_loaded', [$this, 'loaded'], -1);
         add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
         add_action('admin_notices', [$this, 'noticePluginReview']);
         add_action('admin_notices', [$this, 'noticePossibleIssues']);
-        add_action('admin_footer', [$this, 'dismissNoticeScript']);
-        add_action('wp_ajax_cardanopress_dismiss_notice', [$this, 'dismissNoticeAction']);
         add_action('wp_ajax_cardanopress_compatibility_check', [$this, 'compatibilityCheckAction']);
         add_action('after_switch_theme', [$this, 'doActivate']);
         add_action(self::DATA_PREFIX . 'activating', [$this, 'doActivate']);
@@ -178,6 +180,7 @@ class Installer extends AbstractInstaller
                         type: 'POST',
                         url: ajaxurl,
                         data: {
+                            _wpnonce: '<?php echo wp_create_nonce('cardanopress_compatibility_check'); ?>',
                             action: 'cardanopress_compatibility_check'
                         },
                         beforeSend: function() {
@@ -192,64 +195,13 @@ class Installer extends AbstractInstaller
         <?php
     }
 
-    public function dismissNoticeScript()
-    {
-        if (wp_cache_get('cardanopress_dismiss_notice')) {
-            return;
-        }
-
-        ob_start();
-        ?>
-
-        <script id="cardanopress-notice-js" type="text/javascript">
-            jQuery(document).on('click', '.cardanopress-notice .notice-dismiss', function() {
-                jQuery.ajax({
-                    type: 'POST',
-                    url: ajaxurl,
-                    data: {
-                        action: 'cardanopress_dismiss_notice',
-                        name: jQuery(this).parent().attr('id')
-                    }
-                })
-            })
-        </script>
-
-        <?php
-        echo ob_get_clean();
-
-        wp_cache_set('cardanopress_dismiss_notice', true);
-    }
-
     public function compatibilityCheckAction()
     {
+        check_ajax_referer('cardanopress_compatibility_check');
         $this->doActivate();
         $this->log('Checking ' . $this->pluginNameAndVersion);
 
         wp_die();
-    }
-
-    public function dismissNoticeAction()
-    {
-        $name = sanitize_text_field($_POST['name']);
-        $expire = time() + DAY_IN_SECONDS;
-        $secure = is_ssl();
-
-        setcookie($name, 'dismissed', $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
-
-        $this->application->userProfile()->dismissNotice(str_replace('cardanopress_notice_', '', $name));
-
-        wp_die();
-    }
-
-    protected function shouldNotice(string $type): bool
-    {
-        $screen = get_current_screen();
-
-        if (Admin::OPTION_KEY === $screen->parent_base) {
-            return empty($_COOKIE['cardanopress_notice_' . $type]);
-        }
-
-        return ! $this->application->userProfile()->isDismissedNotice($type);
     }
 
     public function doActivate(): void
