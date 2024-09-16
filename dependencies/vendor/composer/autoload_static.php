@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit937bcf7f5993a482c5bb7997711e5546
+class ComposerStaticInitde7fb72f78c3e14dee982fd04a0f969a
 {
     public static $files = array (
         '1adb4ff695388b04d573ca23d2979f89' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/compatibility.php',
@@ -53,6 +53,22 @@ class ComposerStaticInit937bcf7f5993a482c5bb7997711e5546
         'Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/CustomAutoloaderPlugin.php',
         'Automattic\\Jetpack\\Autoloader\\ManifestGenerator' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/ManifestGenerator.php',
         'CardanoPress\\Clients\\BlockfrostClient' => __DIR__ . '/..' . '/cardanopress/framework/src/Clients/BlockfrostClient.php',
+        'CardanoPress\\Dependencies\\CBOR\\CBOREncoder' => __DIR__ . '/../..' . '/CBOR/CBOREncoder.php',
+        'CardanoPress\\Dependencies\\CBOR\\CBORIncorrectAdditionalInfoException' => __DIR__ . '/../..' . '/CBOR/CBORIncorrectAdditionalInfoException.php',
+        'CardanoPress\\Dependencies\\CBOR\\Types\\CBORByteString' => __DIR__ . '/../..' . '/CBOR/Types/CBORByteString.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\AbstractAddress' => __DIR__ . '/../..' . '/CardanoPHP/Addresses/AbstractAddress.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\EnterpriseAddress' => __DIR__ . '/../..' . '/CardanoPHP/Addresses/EnterpriseAddress.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\RewardAddress' => __DIR__ . '/../..' . '/CardanoPHP/Addresses/RewardAddress.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\ShelleyAddress' => __DIR__ . '/../..' . '/CardanoPHP/Addresses/ShelleyAddress.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\HashType\\Address' => __DIR__ . '/../..' . '/CardanoPHP/HashType/Address.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\HashType\\Script' => __DIR__ . '/../..' . '/CardanoPHP/HashType/Script.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Network\\Mainnet' => __DIR__ . '/../..' . '/CardanoPHP/Network/Mainnet.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Network\\Testnet' => __DIR__ . '/../..' . '/CardanoPHP/Network/Testnet.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\Bech32' => __DIR__ . '/../..' . '/CardanoPHP/Utilities/Bech32.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\Credential' => __DIR__ . '/../..' . '/CardanoPHP/Utilities/Credential.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\HashType' => __DIR__ . '/../..' . '/CardanoPHP/Utilities/HashType.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\Network' => __DIR__ . '/../..' . '/CardanoPHP/Utilities/Network.php',
+        'CardanoPress\\Dependencies\\CardanoPHP\\Verifier' => __DIR__ . '/../..' . '/CardanoPHP/Verifier.php',
         'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizer' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/GuzzleHttp/BodySummarizer.php',
         'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizerInterface' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/GuzzleHttp/BodySummarizerInterface.php',
         'CardanoPress\\Dependencies\\GuzzleHttp\\Client' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/GuzzleHttp/Client.php',
@@ -404,9 +420,9 @@ class ComposerStaticInit937bcf7f5993a482c5bb7997711e5546
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit937bcf7f5993a482c5bb7997711e5546::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit937bcf7f5993a482c5bb7997711e5546::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit937bcf7f5993a482c5bb7997711e5546::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitde7fb72f78c3e14dee982fd04a0f969a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitde7fb72f78c3e14dee982fd04a0f969a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitde7fb72f78c3e14dee982fd04a0f969a::$classMap;
 
         }, null, ClassLoader::class);
     }

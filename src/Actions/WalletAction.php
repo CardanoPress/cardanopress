@@ -7,6 +7,7 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
+use CardanoPress\Dependencies\CardanoPHP\Verifier;
 use CardanoPress\Interfaces\HookInterface;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
@@ -41,13 +42,10 @@ class WalletAction implements HookInterface
 
     private function verifyDataSignature(array $data, string $walletAddress): bool
     {
-        $verification = new Verification($data, CoreAction::getAjaxMessage('dataMessage'));
+        list($signature, $key) = $data;
+        $message = CoreAction::getAjaxMessage('dataMessage');
 
-        if (apply_filters('cardanopress_fully_verify_data_signature', false)) {
-            return $verification->full($walletAddress);
-        }
-
-        return $verification->basic();
+        return Verifier::verify($signature, $key, $message, $walletAddress);
     }
 
     public function initializeUserAccount(): void

@@ -38,65 +38,129 @@ return array(
 		'version' => '2.12.0',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Autoloader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Autoloader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Autoloader_Handler' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Autoloader_Handler' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader-handler.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Autoloader_Locator' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Autoloader_Locator' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader-locator.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Container' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Container' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-container.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Hook_Manager' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Hook_Manager' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-hook-manager.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Latest_Autoloader_Guard' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Latest_Autoloader_Guard' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-latest-autoloader-guard.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Manifest_Reader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Manifest_Reader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-manifest-reader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\PHP_Autoloader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\PHP_Autoloader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-php-autoloader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Path_Processor' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Path_Processor' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-path-processor.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Plugin_Locator' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Plugin_Locator' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-plugin-locator.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Plugins_Handler' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Plugins_Handler' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-plugins-handler.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Shutdown_Handler' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Shutdown_Handler' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-shutdown-handler.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Version_Loader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Version_Loader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-version-loader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jp937bcf7f5993a482c5bb7997711e5546\\al2_12_0\\Version_Selector' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Version_Selector' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-version-selector.php'
 	),
 	'CardanoPress\\Clients\\BlockfrostClient' => array(
 		'version' => '2.7.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Clients/BlockfrostClient.php'
+	),
+	'CardanoPress\\Dependencies\\CBOR\\CBOREncoder' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CBOR/CBOREncoder.php'
+	),
+	'CardanoPress\\Dependencies\\CBOR\\CBORIncorrectAdditionalInfoException' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CBOR/CBORIncorrectAdditionalInfoException.php'
+	),
+	'CardanoPress\\Dependencies\\CBOR\\Types\\CBORByteString' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CBOR/Types/CBORByteString.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\AbstractAddress' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Addresses/AbstractAddress.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\EnterpriseAddress' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Addresses/EnterpriseAddress.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\RewardAddress' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Addresses/RewardAddress.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\ShelleyAddress' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Addresses/ShelleyAddress.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\HashType\\Address' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/HashType/Address.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\HashType\\Script' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/HashType/Script.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Network\\Mainnet' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Network/Mainnet.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Network\\Testnet' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Network/Testnet.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\Bech32' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Utilities/Bech32.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\Credential' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Utilities/Credential.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\HashType' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Utilities/HashType.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\Network' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Utilities/Network.php'
+	),
+	'CardanoPress\\Dependencies\\CardanoPHP\\Verifier' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/CardanoPHP/Verifier.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizer' => array(
 		'version' => '2.7.1.0',
@@ -1418,7 +1482,7 @@ return array(
 		'version' => '2.7.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/Templatable.php'
 	),
-	'ComposerAutoloaderInit937bcf7f5993a482c5bb7997711e5546' => array(
+	'ComposerAutoloaderInitde7fb72f78c3e14dee982fd04a0f969a' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/autoload_real.php'
 	),
@@ -1426,7 +1490,7 @@ return array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/ClassLoader.php'
 	),
-	'Composer\\Autoload\\ComposerStaticInit937bcf7f5993a482c5bb7997711e5546' => array(
+	'Composer\\Autoload\\ComposerStaticInitde7fb72f78c3e14dee982fd04a0f969a' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/autoload_static.php'
 	),

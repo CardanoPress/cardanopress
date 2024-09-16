@@ -1,6 +1,54 @@
 {
     "packages": [
         {
+            "name": "2tvenom/cborencode",
+            "version": "1.0.2",
+            "version_normalized": "1.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2tvenom/CBOREncode.git",
+                "reference": "42aedccb861d01fc0554782348cc08f8ebf22332"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2tvenom/CBOREncode/zipball/42aedccb861d01fc0554782348cc08f8ebf22332",
+                "reference": "42aedccb861d01fc0554782348cc08f8ebf22332",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "time": "2020-10-27T07:22:41+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "CBOR": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "PHP"
+            ],
+            "authors": [
+                {
+                    "name": "Pavel <Ven> Gulbin",
+                    "email": "2tvenom@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CBOR encoder for PHP",
+            "homepage": "https://github.com/2tvenom/CBOREncode",
+            "keywords": [
+                "cbor"
+            ],
+            "support": {
+                "issues": "https://github.com/2tvenom/CBOREncode/issues",
+                "source": "https://github.com/2tvenom/CBOREncode/tree/1.0.2"
+            },
+            "install-path": "../2tvenom/cborencode"
+        },
+        {
             "name": "automattic/jetpack-autoloader",
             "version": "v2.12.0",
             "version_normalized": "2.12.0.0",
@@ -124,6 +172,53 @@
                 "source": "https://github.com/CardanoPress/framework/tree/v2.7.1"
             },
             "install-path": "../cardanopress/framework"
+        },
+        {
+            "name": "kermage/cardanophp",
+            "version": "v0.2.0",
+            "version_normalized": "0.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kermage/CardanoPHP.git",
+                "reference": "f20e5ad843861a521af63e3c8412c2baab84203f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kermage/CardanoPHP/zipball/f20e5ad843861a521af63e3c8412c2baab84203f",
+                "reference": "f20e5ad843861a521af63e3c8412c2baab84203f",
+                "shasum": ""
+            },
+            "require": {
+                "2tvenom/cborencode": "^1.0",
+                "ext-sodium": "*",
+                "php": "^7.4|^8.2"
+            },
+            "require-dev": {
+                "themeplate/tester": "^2.2"
+            },
+            "time": "2024-09-16T15:29:09+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "CardanoPHP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Gene Alyson Fortunado Torcende",
+                    "email": "genealyson.torcende@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/kermage/CardanoPHP/issues",
+                "source": "https://github.com/kermage/CardanoPHP/tree/v0.2.0"
+            },
+            "install-path": "../kermage/cardanophp"
         },
         {
             "name": "themeplate/enqueue",
