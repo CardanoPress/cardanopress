@@ -83,6 +83,10 @@ trait Noticeable
     {
         check_ajax_referer('cardanopress_dismiss_notice');
 
+        if (empty($_POST['name'])) {
+            wp_die();
+        }
+
         $name = sanitize_text_field($_POST['name']);
         $expire = time() + DAY_IN_SECONDS;
         $secure = is_ssl();

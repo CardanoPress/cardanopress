@@ -64,7 +64,7 @@ class TypeField extends Field {
 
 		$hook_name = self::ACTION_PREFIX . 'field_capability_' . $action;
 
-		if ( ! current_user_can( apply_filters( $hook_name, 'edit_posts' ) ) ) {
+		if ( ! current_user_can( apply_filters( $hook_name, 'publish_posts' ) ) ) {
 			wp_die();
 		}
 
@@ -168,6 +168,7 @@ class TypeField extends Field {
 			),
 		);
 		$defaults = array(
+			'post_status'    => 'publish',
 			's'              => $_GET['search'] ?? '',
 			'fields'         => 'ids',
 			'posts_per_page' => isset( $_GET['ids__in'] ) ? -1 : self::$count,

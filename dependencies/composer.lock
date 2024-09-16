@@ -70,16 +70,16 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "813d2c5fbb71353845df3a063e30cd031d9a1212"
+                "reference": "56fc0feda5c1a07a33e3321b55b661cd694082c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/813d2c5fbb71353845df3a063e30cd031d9a1212",
-                "reference": "813d2c5fbb71353845df3a063e30cd031d9a1212",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/56fc0feda5c1a07a33e3321b55b661cd694082c2",
+                "reference": "56fc0feda5c1a07a33e3321b55b661cd694082c2",
                 "shasum": ""
             },
             "require": {
@@ -121,9 +121,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.7.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.7.1"
             },
-            "time": "2024-08-08T03:27:53+00:00"
+            "time": "2024-09-16T06:13:36+00:00"
         },
         {
             "name": "themeplate/enqueue",
