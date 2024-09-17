@@ -403,7 +403,6 @@ class ComposerStaticInitde7fb72f78c3e14dee982fd04a0f969a
         'PBWebDev\\CardanoPress\\Actions\\AdminAction' => __DIR__ . '/../..' . '/../src/Actions/AdminAction.php',
         'PBWebDev\\CardanoPress\\Actions\\CoreAction' => __DIR__ . '/../..' . '/../src/Actions/CoreAction.php',
         'PBWebDev\\CardanoPress\\Actions\\Sanitization' => __DIR__ . '/../..' . '/../src/Actions/Sanitization.php',
-        'PBWebDev\\CardanoPress\\Actions\\Verification' => __DIR__ . '/../..' . '/../src/Actions/Verification.php',
         'PBWebDev\\CardanoPress\\Actions\\WalletAction' => __DIR__ . '/../..' . '/../src/Actions/WalletAction.php',
         'PBWebDev\\CardanoPress\\Admin' => __DIR__ . '/../..' . '/../src/Admin.php',
         'PBWebDev\\CardanoPress\\Application' => __DIR__ . '/../..' . '/../src/Application.php',
