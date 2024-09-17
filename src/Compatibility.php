@@ -29,6 +29,7 @@ class Compatibility
             'theme' => __('Incomplete template injections in front-end.', 'cardanopress'),
             'classic' => __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
             'html5' => __('Activated theme does not support HTML5 markup. `script` value required.', 'cardanopress'),
+            'sodium' => __('Sodium extension is not loaded. Required in datasignature verification.', 'cardanopress'),
         ];
 
         $this->setLogger($logger);
@@ -126,6 +127,12 @@ class Compatibility
         foreach ($this->getIssues(true) as $issue) {
             $this->addIssue($issue);
             $this->log($this->message($issue), 'warning');
+        }
+
+        if (! extension_loaded('sodium')) {
+            $this->addIssue('sodium');
+            $this->log($this->message('sodium'), 'warning');
+            $this->saveIssues();
         }
     }
 }
