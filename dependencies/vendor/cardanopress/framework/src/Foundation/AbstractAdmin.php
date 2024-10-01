@@ -7,6 +7,7 @@
 
 namespace CardanoPress\Foundation;
 
+use CardanoPress\Dependencies\Psr\Log\LoggerInterface;
 use CardanoPress\Dependencies\ThemePlate\Core\Repository;
 use CardanoPress\Dependencies\ThemePlate\Page\BasePage;
 use CardanoPress\Dependencies\ThemePlate\Page\MenuPage;
@@ -18,7 +19,6 @@ use CardanoPress\Interfaces\HookInterface;
 use CardanoPress\Traits\HasData;
 use CardanoPress\Traits\Loggable;
 use CardanoPress\SharedBase;
-use Psr\Log\LoggerInterface;
 
 abstract class AbstractAdmin extends SharedBase implements AdminInterface, HookInterface
 {

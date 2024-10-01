@@ -7,7 +7,7 @@
 namespace CardanoPress\Interfaces;
 
 use CardanoPress\Clients\BlockfrostClient;
-use Psr\Log\LoggerInterface;
+use CardanoPress\Dependencies\Psr\Log\LoggerInterface;
 
 interface BlockfrostInterface
 {

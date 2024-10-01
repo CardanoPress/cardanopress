@@ -7,11 +7,11 @@
 
 namespace CardanoPress\Foundation;
 
+use CardanoPress\Dependencies\Psr\Log\LoggerInterface;
 use CardanoPress\Dependencies\ThemePlate\Logger;
 use CardanoPress\Interfaces\ApplicationInterface;
 use CardanoPress\Interfaces\HookInterface;
 use CardanoPress\SharedBase;
-use Psr\Log\LoggerInterface;
 
 abstract class AbstractApplication extends SharedBase implements ApplicationInterface, HookInterface
 {
@@ -50,9 +50,10 @@ abstract class AbstractApplication extends SharedBase implements ApplicationInte
             require_once ABSPATH . 'wp-includes/pluggable.php';
         }
 
-        $suffix = wp_hash($channel . '_' . gmdate('Y-m-d'));
-        $suffix = substr($suffix, 0, 6) . substr($suffix, -6);
+        $salt = wp_salt('secure_auth');
+        $data = $channel . '_' . gmdate('Y-m-d');
+        $name = hash_hmac('sha256', $data, $salt);
 
-        return $this->logger->channel($channel . '-' . $suffix);
+        return $this->logger->channel($name);
     }
 }
