@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, ada, token-gating
 Requires at least: 5.9
 Tested up to: 6.6.99
-Stable tag: 1.21.0
+Stable tag: 1.22.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -135,6 +135,10 @@ This plugin does not collect or process any personal user data unless you expres
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.22.0 =
+- Fix data/message for certain wallets
+- Use the prefixed PSR/Log dependency
 
 = 1.21.0 =
 - Data/message signing for wallet authentication
