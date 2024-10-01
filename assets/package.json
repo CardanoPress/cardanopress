@@ -17,6 +17,6 @@
     "vite-plugin-wasm": "^3.3.0"
   },
   "dependencies": {
-    "@pbwebdev/cardano-wallet-browser-extensions-interface": "^1.3.0"
+    "@pbwebdev/cardano-wallet-browser-extensions-interface": "^1.4.0"
   }
 }
