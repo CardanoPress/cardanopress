@@ -39,59 +39,59 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Autoloader' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Autoloader_Handler' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader-handler.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Autoloader_Locator' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader-locator.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Container' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-container.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Hook_Manager' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-hook-manager.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Latest_Autoloader_Guard' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-latest-autoloader-guard.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Manifest_Reader' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-manifest-reader.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\PHP_Autoloader' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-php-autoloader.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Path_Processor' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-path-processor.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Plugin_Locator' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-plugin-locator.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Plugins_Handler' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-plugins-handler.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Shutdown_Handler' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-shutdown-handler.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Version_Loader' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-version-loader.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\jpde7fb72f78c3e14dee982fd04a0f969a\\al2_12_0\\Version_Selector' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-version-selector.php'
 	),
 	'CardanoPress\\Clients\\BlockfrostClient' => array(
@@ -99,67 +99,67 @@ return array(
 		'path'    => $vendorDir . '/cardanopress/framework/src/Clients/BlockfrostClient.php'
 	),
 	'CardanoPress\\Dependencies\\CBOR\\CBOREncoder' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CBOR/CBOREncoder.php'
 	),
 	'CardanoPress\\Dependencies\\CBOR\\CBORIncorrectAdditionalInfoException' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CBOR/CBORIncorrectAdditionalInfoException.php'
 	),
 	'CardanoPress\\Dependencies\\CBOR\\Types\\CBORByteString' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CBOR/Types/CBORByteString.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\AbstractAddress' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Addresses/AbstractAddress.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\EnterpriseAddress' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Addresses/EnterpriseAddress.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\RewardAddress' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Addresses/RewardAddress.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Addresses\\ShelleyAddress' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Addresses/ShelleyAddress.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\HashType\\Address' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/HashType/Address.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\HashType\\Script' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/HashType/Script.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Network\\Mainnet' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Network/Mainnet.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Network\\Testnet' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Network/Testnet.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\Bech32' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Utilities/Bech32.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\Credential' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Utilities/Credential.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\HashType' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Utilities/HashType.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Utilities\\Network' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Utilities/Network.php'
 	),
 	'CardanoPress\\Dependencies\\CardanoPHP\\Verifier' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/CardanoPHP/Verifier.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizer' => array(
@@ -1343,15 +1343,15 @@ return array(
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Process/Tasks.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Resource\\Handler' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/ThemePlate/Resource/Handler.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Resource\\Helper' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/ThemePlate/Resource/Helper.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Resource\\Item' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/ThemePlate/Resource/Item.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Settings\\OptionBox' => array(
@@ -1363,7 +1363,7 @@ return array(
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Settings/OptionHandler.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Vite' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/ThemePlate/Vite.php'
 	),
 	'CardanoPress\\Foundation\\AbstractAdmin' => array(
@@ -1483,19 +1483,19 @@ return array(
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/Templatable.php'
 	),
 	'ComposerAutoloaderInitde7fb72f78c3e14dee982fd04a0f969a' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/autoload_real.php'
 	),
 	'Composer\\Autoload\\ClassLoader' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/ClassLoader.php'
 	),
 	'Composer\\Autoload\\ComposerStaticInitde7fb72f78c3e14dee982fd04a0f969a' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/autoload_static.php'
 	),
 	'Composer\\InstalledVersions' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/InstalledVersions.php'
 	),
 	'Container' => array(
@@ -1515,59 +1515,59 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-manifest-reader.php'
 	),
 	'PBWebDev\\CardanoPress\\Actions\\AdminAction' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Actions/AdminAction.php'
 	),
 	'PBWebDev\\CardanoPress\\Actions\\CoreAction' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Actions/CoreAction.php'
 	),
 	'PBWebDev\\CardanoPress\\Actions\\Sanitization' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Actions/Sanitization.php'
 	),
 	'PBWebDev\\CardanoPress\\Actions\\WalletAction' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Actions/WalletAction.php'
 	),
 	'PBWebDev\\CardanoPress\\Admin' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Admin.php'
 	),
 	'PBWebDev\\CardanoPress\\Application' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Application.php'
 	),
 	'PBWebDev\\CardanoPress\\Blockfrost' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Blockfrost.php'
 	),
 	'PBWebDev\\CardanoPress\\Collection' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Collection.php'
 	),
 	'PBWebDev\\CardanoPress\\Compatibility' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Compatibility.php'
 	),
 	'PBWebDev\\CardanoPress\\Installer' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Installer.php'
 	),
 	'PBWebDev\\CardanoPress\\Manifest' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Manifest.php'
 	),
 	'PBWebDev\\CardanoPress\\Profile' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Profile.php'
 	),
 	'PBWebDev\\CardanoPress\\Shortcode' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Shortcode.php'
 	),
 	'PBWebDev\\CardanoPress\\Templates' => array(
-		'version' => 'dev-main',
+		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Templates.php'
 	),
 	'PHP_Autoloader' => array(

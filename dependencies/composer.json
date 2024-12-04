@@ -15,7 +15,7 @@
     "automattic/jetpack-autoloader": "^2.11",
     "cardanopress/framework": "^2.1",
     "themeplate/vite": "^1.6",
-    "kermage/cardanophp": "^0.2.0"
+    "kermage/cardanophp": "^0.3.0"
   },
   "autoload": {
     "psr-4": {

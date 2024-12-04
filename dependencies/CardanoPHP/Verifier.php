@@ -65,7 +65,7 @@ class Verifier
             return false;
         }
 
-        if (84 !== strlen($this->key)) {
+        if (84 > strlen($this->key)) {
             return false;
         }
 
@@ -202,7 +202,7 @@ class Verifier
 
     protected function handledHeader($value): bool
     {
-        if (! is_array($value) || 2 !== count($value)) {
+        if (! is_array($value) || 2 > count($value)) {
             return false;
         }
 
@@ -223,7 +223,7 @@ class Verifier
 
     protected function validKeyPair($data): bool
     {
-        if (! is_array($data) || 4 !== count($data)) {
+        if (! is_array($data) || 4 > count($data)) {
             return false;
         }
 

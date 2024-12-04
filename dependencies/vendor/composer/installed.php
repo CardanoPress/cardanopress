@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => 'e38a13b6114d5a268e4e55fbeb7cd30ae014b05d',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '24a8c39ce45f085f21f33d5c2ed0c6ed07b8ea7a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         '__root__' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'e38a13b6114d5a268e4e55fbeb7cd30ae014b05d',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '24a8c39ce45f085f21f33d5c2ed0c6ed07b8ea7a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -47,9 +47,9 @@
             'dev_requirement' => false,
         ),
         'kermage/cardanophp' => array(
-            'pretty_version' => 'v0.2.0',
-            'version' => '0.2.0.0',
-            'reference' => 'f20e5ad843861a521af63e3c8412c2baab84203f',
+            'pretty_version' => 'v0.3.0',
+            'version' => '0.3.0.0',
+            'reference' => '2cea0e1a11f11bc8ac677951757eee52fe82f0ba',
             'type' => 'library',
             'install_path' => __DIR__ . '/../kermage/cardanophp',
             'aliases' => array(),
