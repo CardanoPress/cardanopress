@@ -154,6 +154,6 @@ class Sanitization
             return '';
         }
 
-        return join('|', $value);
+        return join('|', [$value['signature'], $value['key']]);
     }
 }
