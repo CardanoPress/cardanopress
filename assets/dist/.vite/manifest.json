@@ -1,9 +1,9 @@
 {
-  "_actions-BYNXU6i0.js": {
-    "file": "actions-BYNXU6i0.js",
+  "_actions-AvagY9U-.js": {
+    "file": "actions-AvagY9U-.js",
     "name": "actions",
     "imports": [
-      "_util-DPiG9n92.js"
+      "_util-BRbWzvM7.js"
     ]
   },
   "_index-BTZikr4I.js": {
@@ -11,8 +11,8 @@
     "name": "index",
     "isDynamicEntry": true
   },
-  "_util-DPiG9n92.js": {
-    "file": "util-DPiG9n92.js",
+  "_util-BRbWzvM7.js": {
+    "file": "util-BRbWzvM7.js",
     "name": "util",
     "dynamicImports": [
       "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
@@ -21,7 +21,7 @@
     ]
   },
   "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js": {
-    "file": "cardano_serialization_lib-B7uolA9r.js",
+    "file": "cardano_serialization_lib-Cz45fKuP.js",
     "name": "cardano_serialization_lib",
     "src": "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
     "isDynamicEntry": true,
@@ -30,7 +30,7 @@
     ]
   },
   "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.4.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js": {
-    "file": "coinSelection-CKpZlyUX.js",
+    "file": "coinSelection-ZTPJQMGb.js",
     "name": "coinSelection",
     "src": "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.4.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js",
     "isDynamicEntry": true,
@@ -39,13 +39,13 @@
     ]
   },
   "src/delegation.js": {
-    "file": "delegation-DKvI0jd6.js",
+    "file": "delegation-Ct0ysDTp.js",
     "name": "delegation",
     "src": "src/delegation.js",
     "isEntry": true,
     "imports": [
-      "_actions-BYNXU6i0.js",
-      "_util-DPiG9n92.js"
+      "_actions-AvagY9U-.js",
+      "_util-BRbWzvM7.js"
     ]
   },
   "src/main.css": {
@@ -54,42 +54,42 @@
     "isEntry": true
   },
   "src/main.js": {
-    "file": "script-CTmBYuBk.js",
+    "file": "script-DcT8T8DQ.js",
     "name": "script",
     "src": "src/main.js",
     "isEntry": true,
     "imports": [
-      "_actions-BYNXU6i0.js",
-      "_util-DPiG9n92.js"
+      "_actions-AvagY9U-.js",
+      "_util-BRbWzvM7.js"
     ]
   },
   "src/notification.js": {
-    "file": "notification-C7KHM-VW.js",
+    "file": "notification-CW9iilvo.js",
     "name": "notification",
     "src": "src/notification.js",
     "isEntry": true,
     "imports": [
-      "_util-DPiG9n92.js"
+      "_util-BRbWzvM7.js"
     ]
   },
   "src/payment.js": {
-    "file": "payment-CyIdQ0RR.js",
+    "file": "payment-DwigUgf9.js",
     "name": "payment",
     "src": "src/payment.js",
     "isEntry": true,
     "imports": [
-      "_util-DPiG9n92.js",
-      "_actions-BYNXU6i0.js"
+      "_util-BRbWzvM7.js",
+      "_actions-AvagY9U-.js"
     ]
   },
   "src/split.js": {
-    "file": "split-B-g9bIFm.js",
+    "file": "split-Com6l462.js",
     "name": "split",
     "src": "src/split.js",
     "isEntry": true,
     "imports": [
-      "_actions-BYNXU6i0.js",
-      "_util-DPiG9n92.js"
+      "_actions-AvagY9U-.js",
+      "_util-BRbWzvM7.js"
     ]
   }
 }
