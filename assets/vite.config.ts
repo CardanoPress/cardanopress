@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import offloadWasm from 'vite-plugin-offload-wasm'
 import themeplate from 'vite-plugin-themeplate'
 import topLevelAwait from 'vite-plugin-top-level-await'
 import wasm from 'vite-plugin-wasm'
@@ -24,5 +25,13 @@ export default defineConfig({
             external: ['alpinejs'],
         },
     },
-    plugins: [themeplate(), wasm(), topLevelAwait()],
+    plugins: [
+        themeplate(),
+        wasm(),
+        topLevelAwait(),
+        offloadWasm({
+            'cardano_serialization_lib_bg.wasm':
+                'https://unpkg.com/@emurgo/cardano-serialization-lib-browser@9.1.4/cardano_serialization_lib_bg.wasm',
+        }),
+    ],
 })

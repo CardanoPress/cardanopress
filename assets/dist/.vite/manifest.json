@@ -1,9 +1,9 @@
 {
-  "_actions-BibYINJW.js": {
-    "file": "actions-BibYINJW.js",
+  "_actions-BYNXU6i0.js": {
+    "file": "actions-BYNXU6i0.js",
     "name": "actions",
     "imports": [
-      "_util-WIVeI6f2.js"
+      "_util-DPiG9n92.js"
     ]
   },
   "_index-BTZikr4I.js": {
@@ -11,8 +11,8 @@
     "name": "index",
     "isDynamicEntry": true
   },
-  "_util-WIVeI6f2.js": {
-    "file": "util-WIVeI6f2.js",
+  "_util-DPiG9n92.js": {
+    "file": "util-DPiG9n92.js",
     "name": "util",
     "dynamicImports": [
       "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
@@ -21,7 +21,7 @@
     ]
   },
   "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js": {
-    "file": "cardano_serialization_lib-DZgxyT4u.js",
+    "file": "cardano_serialization_lib-B7uolA9r.js",
     "name": "cardano_serialization_lib",
     "src": "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
     "isDynamicEntry": true,
@@ -29,12 +29,8 @@
       "cardano_serialization_lib_bg-BIH9BbI5.wasm"
     ]
   },
-  "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib_bg.wasm": {
-    "file": "cardano_serialization_lib_bg-BIH9BbI5.wasm",
-    "src": "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib_bg.wasm"
-  },
   "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.4.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js": {
-    "file": "coinSelection-BK9MdsDt.js",
+    "file": "coinSelection-CKpZlyUX.js",
     "name": "coinSelection",
     "src": "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.4.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js",
     "isDynamicEntry": true,
@@ -43,13 +39,13 @@
     ]
   },
   "src/delegation.js": {
-    "file": "delegation-Dq7eiB_A.js",
+    "file": "delegation-DKvI0jd6.js",
     "name": "delegation",
     "src": "src/delegation.js",
     "isEntry": true,
     "imports": [
-      "_actions-BibYINJW.js",
-      "_util-WIVeI6f2.js"
+      "_actions-BYNXU6i0.js",
+      "_util-DPiG9n92.js"
     ]
   },
   "src/main.css": {
@@ -58,42 +54,42 @@
     "isEntry": true
   },
   "src/main.js": {
-    "file": "script-PtNlOw8P.js",
+    "file": "script-CTmBYuBk.js",
     "name": "script",
     "src": "src/main.js",
     "isEntry": true,
     "imports": [
-      "_actions-BibYINJW.js",
-      "_util-WIVeI6f2.js"
+      "_actions-BYNXU6i0.js",
+      "_util-DPiG9n92.js"
     ]
   },
   "src/notification.js": {
-    "file": "notification-BHrRxRLx.js",
+    "file": "notification-C7KHM-VW.js",
     "name": "notification",
     "src": "src/notification.js",
     "isEntry": true,
     "imports": [
-      "_util-WIVeI6f2.js"
+      "_util-DPiG9n92.js"
     ]
   },
   "src/payment.js": {
-    "file": "payment-Cslb_ZlF.js",
+    "file": "payment-CyIdQ0RR.js",
     "name": "payment",
     "src": "src/payment.js",
     "isEntry": true,
     "imports": [
-      "_util-WIVeI6f2.js",
-      "_actions-BibYINJW.js"
+      "_util-DPiG9n92.js",
+      "_actions-BYNXU6i0.js"
     ]
   },
   "src/split.js": {
-    "file": "split-CgnlZAx9.js",
+    "file": "split-B-g9bIFm.js",
     "name": "split",
     "src": "src/split.js",
     "isEntry": true,
     "imports": [
-      "_actions-BibYINJW.js",
-      "_util-WIVeI6f2.js"
+      "_actions-BYNXU6i0.js",
+      "_util-DPiG9n92.js"
     ]
   }
 }
