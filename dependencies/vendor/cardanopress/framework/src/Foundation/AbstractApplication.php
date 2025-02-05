@@ -28,7 +28,7 @@ abstract class AbstractApplication extends SharedBase implements ApplicationInte
         }
 
         $this->pluginFile = $pluginFile;
-        $this->data = get_plugin_data($pluginFile);
+        $this->data = get_plugin_data($pluginFile, false, false);
         $this->logger = new Logger(self::LOG_DIR);
 
         $this->initialize();

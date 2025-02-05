@@ -49,6 +49,16 @@ class HtmlField extends Field {
 
 	public function render( $value ): void {
 
+		if ( $this->get_config( 'required' ) ) {
+			$config = array(
+				'type' => 'hidden',
+				'id'   => $this->get_config( 'id' ),
+				'name' => $this->get_config( 'name' ),
+			);
+
+			( new InputField( '', $config ) )->render( $value );
+		}
+
 		echo wp_kses_post( $this->handle( $value ) );
 
 	}

@@ -25,7 +25,7 @@ trait Enqueueable
 
     public function enqueue(string $type, string $handle): void
     {
-        if ( ! in_array(strtolower($type), ['script', 'style'], true)) {
+        if (! in_array(strtolower($type), ['script', 'style'], true)) {
             return;
         }
 

@@ -74,17 +74,17 @@
             },
             "type": "composer-plugin",
             "extra": {
-                "autotagger": true,
                 "class": "Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin",
+                "autotagger": true,
                 "mirror-repo": "Automattic/jetpack-autoloader",
+                "branch-alias": {
+                    "dev-trunk": "2.12.x-dev"
+                },
                 "changelogger": {
                     "link-template": "https://github.com/Automattic/jetpack-autoloader/compare/v${old}...v${new}"
                 },
                 "version-constants": {
                     "::VERSION": "src/AutoloadGenerator.php"
-                },
-                "branch-alias": {
-                    "dev-trunk": "2.12.x-dev"
                 }
             },
             "autoload": {
@@ -115,16 +115,16 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.8.0",
+            "version": "v2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "ec85910d34692d4294139f45ae54f81eb18d2372"
+                "reference": "0c6972819ef4265b311179f845bc1f6c41b2dc06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/ec85910d34692d4294139f45ae54f81eb18d2372",
-                "reference": "ec85910d34692d4294139f45ae54f81eb18d2372",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/0c6972819ef4265b311179f845bc1f6c41b2dc06",
+                "reference": "0c6972819ef4265b311179f845bc1f6c41b2dc06",
                 "shasum": ""
             },
             "require": {
@@ -166,9 +166,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.8.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.9.0"
             },
-            "time": "2024-10-01T08:48:08+00:00"
+            "time": "2025-01-28T06:10:53+00:00"
         },
         {
             "name": "kermage/cardanophp",
@@ -356,7 +356,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -365,6 +365,6 @@
         "ext-fileinfo": "*",
         "ext-ctype": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

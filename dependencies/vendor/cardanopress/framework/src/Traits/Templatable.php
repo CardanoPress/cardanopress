@@ -50,7 +50,7 @@ trait Templatable
 
     public function compatibleFooter(): void
     {
-        if ( ! wp_is_block_theme()) {
+        if (! wp_is_block_theme()) {
             get_footer();
         } else {
             echo wp_kses_post('<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->');

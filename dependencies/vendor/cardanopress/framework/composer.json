@@ -42,5 +42,10 @@
       "CardanoPress\\Dependencies\\": "dependencies/",
       "CardanoPress\\": "src/"
     }
+  },
+  "scripts": {
+    "analyse": "themeplate analyse",
+    "lint": "themeplate lint",
+    "fix": "themeplate fix"
   }
 }

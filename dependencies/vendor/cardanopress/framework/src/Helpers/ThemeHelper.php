@@ -35,7 +35,7 @@ class ThemeHelper
 
     protected static function compatHandler(): object
     {
-        return new class() {
+        return new class () {
             protected static array $wantedTemplates = ['header.php', 'footer.php'];
             protected static array $wantedActions = ['wp_head', 'wp_body_open', 'wp_footer'];
             protected array $temporaryActionHolder = [];
