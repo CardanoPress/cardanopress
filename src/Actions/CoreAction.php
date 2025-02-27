@@ -46,6 +46,7 @@ class CoreAction implements HookInterface
             'script' => [
                 'connected' => __('Successfully connected', 'cardanopress'),
                 'connecting' => __('Connecting...', 'cardanopress'),
+                'verifying' => __('Verifying...', 'cardanopress'),
                 'reconnected' => __('Wallet reconnected', 'cardanopress'),
                 'reconnecting' => __('Reconnecting...', 'cardanopress'),
                 'walletSyncing' => __('Syncing...', 'cardanopress'),

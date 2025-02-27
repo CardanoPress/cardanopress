@@ -3,6 +3,7 @@ import { cardanoPress } from './api/config'
 import { delegation } from './api/delegation'
 import { multisend } from './api/multisend'
 import { payment } from './api/payment'
+import { addNotice, removeNotice } from './api/util'
 
 export const handleReconnect = async (Wallet) => {
     const network = await Wallet.getNetwork()
@@ -27,6 +28,13 @@ export const logMeIn = async (Wallet) => {
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
     const dataSignature = await Wallet.signData(cardanoPressMessages.dataMessage)
+
+    addNotice({
+        id: 'loginVerify',
+        type: 'info',
+        text: cardanoPressMessages.verifying,
+    })
+
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -37,7 +45,11 @@ export const logMeIn = async (Wallet) => {
             wallet_address: changeAddress,
             query_network: network,
         }),
-    }).then((response) => response.json())
+    }).then((response) => {
+        removeNotice('loginVerify')
+
+        return response.json()
+    })
 }
 
 export const logMeOut = async (network, address) => {

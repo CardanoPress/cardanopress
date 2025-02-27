@@ -113,13 +113,14 @@ window.addEventListener('alpine:init', () => {
             this.isProcessing = true
 
             try {
-                const wallet = await Extensions.getWallet(type)
-
                 addNotice({
                     id: 'loginConnect',
                     type: 'info',
                     text: cardanoPressMessages.connecting,
                 })
+
+                const wallet = await Extensions.getWallet(type)
+
                 await this.handleLogin(wallet)
             } catch (error) {
                 addNotice({ type: 'error', text: error })
@@ -131,8 +132,9 @@ window.addEventListener('alpine:init', () => {
         async handleLogin(wallet) {
             const response = await logMeIn(wallet)
 
+            removeNotice('loginConnect')
+
             if (response.success) {
-                removeNotice('loginConnect')
                 addNotice({ type: 'success', text: response.data.message })
                 setConnectedExtension(wallet.type)
 

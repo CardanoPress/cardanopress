@@ -9,6 +9,7 @@ export const cardanoPress = window.cardanoPress || {
 export const cardanoPressMessages = window.cardanoPressMessages || {
     connected: '',
     connecting: '',
+    verifying: '',
     reconnected: '',
     reconnecting: '',
     walletSyncing: '',
