@@ -1,9 +1,9 @@
 {
-  "_actions-AvagY9U-.js": {
-    "file": "actions-AvagY9U-.js",
+  "_actions-DYQ4p0Ny.js": {
+    "file": "actions-DYQ4p0Ny.js",
     "name": "actions",
     "imports": [
-      "_util-BRbWzvM7.js"
+      "_util-Dq8hOjFY.js"
     ]
   },
   "_index-BTZikr4I.js": {
@@ -11,41 +11,31 @@
     "name": "index",
     "isDynamicEntry": true
   },
-  "_util-BRbWzvM7.js": {
-    "file": "util-BRbWzvM7.js",
+  "_util-Dq8hOjFY.js": {
+    "file": "util-Dq8hOjFY.js",
     "name": "util",
     "dynamicImports": [
-      "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
-      "_index-BTZikr4I.js",
-      "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.4.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js"
+      "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@14.1.1/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
+      "_index-BTZikr4I.js"
     ]
   },
-  "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js": {
-    "file": "cardano_serialization_lib-Cz45fKuP.js",
+  "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@14.1.1/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js": {
+    "file": "cardano_serialization_lib-pHqu9iRB.js",
     "name": "cardano_serialization_lib",
-    "src": "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
+    "src": "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@14.1.1/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js",
     "isDynamicEntry": true,
     "assets": [
-      "cardano_serialization_lib_bg-BIH9BbI5.wasm"
-    ]
-  },
-  "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.4.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js": {
-    "file": "coinSelection-ZTPJQMGb.js",
-    "name": "coinSelection",
-    "src": "node_modules/.pnpm/@pbwebdev+cardano-wallet-browser-extensions-interface@1.4.0/node_modules/@pbwebdev/cardano-wallet-browser-extensions-interface/dist/lib/coinSelection.js",
-    "isDynamicEntry": true,
-    "imports": [
-      "node_modules/.pnpm/@emurgo+cardano-serialization-lib-browser@9.1.4/node_modules/@emurgo/cardano-serialization-lib-browser/cardano_serialization_lib.js"
+      "cardano_serialization_lib_bg-C7H9sjZR.wasm"
     ]
   },
   "src/delegation.js": {
-    "file": "delegation-Ct0ysDTp.js",
+    "file": "delegation-zQJAOwlV.js",
     "name": "delegation",
     "src": "src/delegation.js",
     "isEntry": true,
     "imports": [
-      "_actions-AvagY9U-.js",
-      "_util-BRbWzvM7.js"
+      "_actions-DYQ4p0Ny.js",
+      "_util-Dq8hOjFY.js"
     ]
   },
   "src/main.css": {
@@ -54,42 +44,42 @@
     "isEntry": true
   },
   "src/main.js": {
-    "file": "script-DcT8T8DQ.js",
+    "file": "script-C5qqL9yM.js",
     "name": "script",
     "src": "src/main.js",
     "isEntry": true,
     "imports": [
-      "_actions-AvagY9U-.js",
-      "_util-BRbWzvM7.js"
+      "_actions-DYQ4p0Ny.js",
+      "_util-Dq8hOjFY.js"
     ]
   },
   "src/notification.js": {
-    "file": "notification-CW9iilvo.js",
+    "file": "notification-CdqkHGm7.js",
     "name": "notification",
     "src": "src/notification.js",
     "isEntry": true,
     "imports": [
-      "_util-BRbWzvM7.js"
+      "_util-Dq8hOjFY.js"
     ]
   },
   "src/payment.js": {
-    "file": "payment-DwigUgf9.js",
+    "file": "payment-p9qi4P1f.js",
     "name": "payment",
     "src": "src/payment.js",
     "isEntry": true,
     "imports": [
-      "_util-BRbWzvM7.js",
-      "_actions-AvagY9U-.js"
+      "_util-Dq8hOjFY.js",
+      "_actions-DYQ4p0Ny.js"
     ]
   },
   "src/split.js": {
-    "file": "split-Com6l462.js",
+    "file": "split-CueoP54I.js",
     "name": "split",
     "src": "src/split.js",
     "isEntry": true,
     "imports": [
-      "_actions-AvagY9U-.js",
-      "_util-BRbWzvM7.js"
+      "_actions-DYQ4p0Ny.js",
+      "_util-Dq8hOjFY.js"
     ]
   }
 }
