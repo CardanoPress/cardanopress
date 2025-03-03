@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import offloadWasm from 'vite-plugin-offload-wasm'
 import themeplate from 'vite-plugin-themeplate'
@@ -26,6 +27,7 @@ export default defineConfig({
         },
     },
     plugins: [
+        tailwindcss(),
         themeplate(),
         wasm(),
         topLevelAwait(),
