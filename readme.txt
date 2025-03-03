@@ -136,6 +136,11 @@ This plugin does not collect or process any personal user data unless you expres
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
 
+= 1.24.0 =
+- Use latest CSL; version 14
+- Break all long texts in templates
+- Show notification while verifying wallet
+
 = 1.23.1 =
 - Updated dependencies fixing translations loaded too early
 
