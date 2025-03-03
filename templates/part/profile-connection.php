@@ -39,12 +39,12 @@ $userProfile = cardanoPress()->userProfile();
 
         <tr>
             <th>Wallet</th>
-            <td><?php echo esc_html($userProfile->connectedWallet()); ?></td>
+            <td class="break-all"><?php echo esc_html($userProfile->connectedWallet()); ?></td>
         </tr>
 
         <tr>
             <th>Stake</th>
-            <td><?php echo esc_html($userProfile->connectedStake()); ?></td>
+            <td class="break-all"><?php echo esc_html($userProfile->connectedStake()); ?></td>
         </tr>
     </tbody>
 </table>
