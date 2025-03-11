@@ -16,17 +16,13 @@ export const payment = async (address, amount) => {
     const network = await Wallet.getNetwork()
 
     try {
-        let protocolParameters = null
+        const response = await getProtocol(network)
 
-        if ('Typhon' !== Wallet.type) {
-            const response = await getProtocol(network)
-
-            if (!response.success) {
-                return response
-            }
-
-            protocolParameters = response.data
+        if (!response.success) {
+            return response
         }
+
+        const protocolParameters = response.data
 
         return {
             success: true,

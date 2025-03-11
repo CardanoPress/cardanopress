@@ -16,27 +16,22 @@ export const delegation = async (poolId) => {
     const network = await Wallet.getNetwork()
 
     try {
-        let protocolParameters = null
-        let accountInformation = null
+        const responseProtocol = await getProtocol(network)
 
-        if ('Typhon' !== Wallet.type) {
-            const responseProtocol = await getProtocol(network)
-
-            if (!responseProtocol.success) {
-                return responseProtocol
-            }
-
-            protocolParameters = responseProtocol.data
-
-            const rewardAddress = await Wallet.getRewardAddress()
-            const responseAccount = await getAccount(network, rewardAddress)
-
-            if (!responseAccount.success) {
-                return responseAccount
-            }
-
-            accountInformation = responseAccount.data
+        if (!responseProtocol.success) {
+            return responseProtocol
         }
+
+        const protocolParameters = responseProtocol.data
+
+        const rewardAddress = await Wallet.getRewardAddress()
+        const responseAccount = await getAccount(network, rewardAddress)
+
+        if (!responseAccount.success) {
+            return responseAccount
+        }
+
+        const accountInformation = responseAccount.data
 
         return {
             success: true,
