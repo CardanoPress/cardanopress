@@ -13,6 +13,7 @@ import { payment as paymentTx } from './api/payment'
 import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 
 import Extensions, { fromVespr } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
+import { Buffer as buffer } from '@pbwebdev/cardano-wallet-browser-extensions-interface/buffer'
 import { NETWORK, supportedWallets } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
 import { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface/csl'
 
@@ -272,6 +273,7 @@ window.cardanoPress = {
         Extensions,
         supports: supportedWallets,
     },
+    buffer,
     csl,
     wallet: {
         delegationTx,
