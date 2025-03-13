@@ -14,13 +14,13 @@ if (empty($text)) {
 }
 
 if (empty($textNotConnected)) {
-    $textNotConnected = '(Not connected)';
+    $textNotConnected = 'Connect Wallet';
 }
 
 ?>
 
 <template x-if='!isConnected'>
-    <?php cardanoPress()->template('part/modal-trigger', ['text' => 'Connect Wallet']); ?>
+    <?php cardanoPress()->template('part/modal-trigger', ['text' => $textNotConnected]); ?>
 </template>
 
 <template x-if='isConnected'>
