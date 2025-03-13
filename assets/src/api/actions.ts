@@ -1,6 +1,29 @@
+import type { ProtocolParameters } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
 import { cardanoPress } from './config'
 
-export const getProtocol = async (network) => {
+type ServerResponse<T> =
+    | {
+          success: true
+          data: T
+      }
+    | {
+          success: false
+          data: []
+      }
+
+export const getProtocol = async (
+    network: string
+): Promise<
+    ServerResponse<
+        ProtocolParameters & {
+            minUtxo: string
+            priceMem: number
+            priceStep: number
+            collateralPercentage: number
+            maxCollateralInputs: number
+        }
+    >
+> => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -11,7 +34,14 @@ export const getProtocol = async (network) => {
     }).then((response) => response.json())
 }
 
-export const getAccount = async (network, rewardAddress) => {
+export const getAccount = async (
+    network: string,
+    rewardAddress: string
+): Promise<
+    ServerResponse<{
+        active: boolean
+    }>
+> => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -23,7 +53,16 @@ export const getAccount = async (network, rewardAddress) => {
     }).then((response) => response.json())
 }
 
-export const saveWalletTx = async (network, txAction, txHash) => {
+export const saveWalletTx = async (
+    network: string,
+    txAction: string,
+    txHash: string
+): Promise<
+    ServerResponse<{
+        message: string
+        hash: string
+    }>
+> => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({

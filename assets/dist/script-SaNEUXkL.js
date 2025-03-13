@@ -1,6 +1,6 @@
-import { h as x, a as m, b as C, l as b, c as v, m as P, p as W, d as E, e as T } from "./actions-CJB7nn4J.js";
-import { s as c, a as s, c as a, r as i, E as d, b as l, g as u, N as A, u as g, d as r, e as h, f as p, i as w, h as N, w as L, C as S, j as M } from "./util-CjQW_pXR.js";
-const { hexToBech32: H } = g;
+import { h as x, a as m, b as C, l as b, c as v, m as P, p as W, d as E, e as T } from "./actions-De4EaUEq.js";
+import { s as c, a as s, c as a, r as i, E as d, b as l, g as u, N as A, u as w, d as r, e as h, f as p, i as f, h as N, w as L, C as S, B as M, j as H } from "./util-CHNbL_kJ.js";
+const { hexToBech32: V } = w;
 window.addEventListener("alpine:init", () => {
   Alpine.data("cardanoPress", () => ({ isAvailable: window.cardano !== void 0 && window.cardanoPress !== void 0, isConnected: false, isProcessing: false, showModal: false, openDropdown: false, connectedExtension: "", selectedHandle: "", availableWallets: [], supportedWallets: c, has(e) {
     return this.availableWallets.includes(e);
@@ -17,7 +17,7 @@ window.addEventListener("alpine:init", () => {
   }, async init() {
     if (this.refreshWallets(), this.$watch("showModal", () => {
       this.refreshWallets();
-    }), this.supportedWallets = c.filter((e) => this.$root.dataset.wallets.includes(e)), h.logged ? (this.connectedExtension = p(), this.selectedHandle = this.$root.dataset.handle, this.isConnected = !!this.connectedExtension, this.isConnected && !w() && (s({ type: "success", text: a.connected }), r(true))) : (w() && r(false), p() && l("")), this.isAvailable && this.connectedExtension === "Nami") {
+    }), this.supportedWallets = c.filter((e) => this.$root.dataset.wallets.includes(e)), h.logged ? (this.connectedExtension = p(), this.selectedHandle = this.$root.dataset.handle, this.isConnected = !!this.connectedExtension, this.isConnected && !f() && (s({ type: "success", text: a.connected }), r(true))) : (f() && r(false), p() && l("")), this.isAvailable && this.connectedExtension === "Nami") {
       const e = await u();
       e.cardano.experimental.on("networkChange", (t) => this.handleLogout(t, 0)), e.cardano.experimental.on("accountChange", (t) => this.handleLogout(-1, t));
     }
@@ -47,7 +47,7 @@ window.addEventListener("alpine:init", () => {
     } else s({ type: "error", text: t.data });
   }, async handleLogout(e, t) {
     if (this.isConnected) try {
-      const n = await u(), f = 0 <= e ? A[e] : await n.getNetwork(), y = t !== 0 ? H(t[0]) : await n.getChangeAddress(), o = await b(f, y);
+      const n = await u(), g = 0 <= e ? A[e] : await n.getNetwork(), y = t !== 0 ? V(t[0]) : await n.getChangeAddress(), o = await b(g, y);
       if (o.success) {
         if (s({ type: "success", text: o.data.message }), o.data.reload) return r(false), l(""), setTimeout(() => {
           window.location.reload();
@@ -80,4 +80,4 @@ window.addEventListener("alpine:init", () => {
     i("save"), s({ type: e.success ? "success" : "error", text: e.data }), this.isProcessing = false;
   } }));
 });
-window.cardanoPress = { ...h, api: { ...T, ...M, ...g }, browser: { Extensions: d, supports: c }, csl: S, wallet: { delegationTx: E, paymentTx: W, multisendTx: P, ...L } };
+window.cardanoPress = { ...h, api: { ...T, ...H, ...w }, browser: { Extensions: d, supports: c }, buffer: M, csl: S, wallet: { delegationTx: E, paymentTx: W, multisendTx: P, ...L } };

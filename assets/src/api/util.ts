@@ -1,8 +1,9 @@
 import Extensions from '@pbwebdev/cardano-wallet-browser-extensions-interface'
+import type Extension from '@pbwebdev/cardano-wallet-browser-extensions-interface/extension'
 import { getConnectedExtension } from './config'
 
-export const waitElement = (selector) => {
-    return new Promise((resolve) => {
+export const waitElement = (selector: string) => {
+    return new Promise<Element | null>((resolve) => {
         if (document.querySelector(selector)) {
             return resolve(document.querySelector(selector))
         }
@@ -32,15 +33,21 @@ export const generateUuid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4()
 }
 
-export const addNotice = (detail) => {
+export type NoticeDetail = {
+    id?: string
+    type: string
+    text: string
+}
+
+export const addNotice = (detail: NoticeDetail) => {
     window.dispatchEvent(new CustomEvent('cardanoPress:addNotice', { detail }))
 }
 
-export const removeNotice = (detail) => {
+export const removeNotice = (detail: string) => {
     window.dispatchEvent(new CustomEvent('cardanoPress:removeNotice', { detail }))
 }
 
-export const getConnectedWallet = async () => {
+export const getConnectedWallet = async (): Promise<Extension> => {
     const connectedExtension = getConnectedExtension()
 
     if (!connectedExtension) {

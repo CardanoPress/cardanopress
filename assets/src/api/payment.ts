@@ -1,15 +1,16 @@
+import type Extension from '@pbwebdev/cardano-wallet-browser-extensions-interface/extension'
 import { getProtocol } from './actions'
 import { getConnectedWallet } from './util'
 
-export const multisend = async (outputs) => {
-    let Wallet
+export const payment = async (address: string, amount: string) => {
+    let Wallet: Extension
 
     try {
         Wallet = await getConnectedWallet()
     } catch (error) {
         return {
             success: false,
-            data: error,
+            data: error as string,
         }
     }
 
@@ -28,13 +29,13 @@ export const multisend = async (outputs) => {
             success: true,
             data: {
                 network,
-                transaction: await Wallet.multiSend(outputs, protocolParameters),
+                transaction: await Wallet.payTo(address, amount, protocolParameters),
             },
         }
     } catch (error) {
         return {
             success: false,
-            data: error,
+            data: error as string,
         }
     }
 }

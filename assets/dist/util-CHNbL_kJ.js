@@ -1,9 +1,9 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-let l, O, A, P, D, I, K, V, k, z, x, $, q, U, v, L, j, g, R, W;
+let w, l, O, A, P, D, I, K, V, k, z, x, $, q, U, v, L, j, g, R, W;
 let __tla = (async () => {
-  var _a, _b;
+  var _a, _b, _c;
   let y, M, T, p, b;
   A = {
     0: "testnet",
@@ -62,18 +62,16 @@ let __tla = (async () => {
       }), [])), l.Module;
     }
   }, __publicField(_a, "Module"), _a);
-  const _w = class _w {
+  w = (_b = class {
     static async load() {
-      return _w.Module === void 0 && (_w.Module = (await b(async () => {
+      return w.Module === void 0 && (w.Module = (await b(async () => {
         const { Buffer: t } = await import("./index-CVsC6eDr.js").then((n) => n.i);
         return {
           Buffer: t
         };
-      }, [])).Buffer), _w.Module;
+      }, [])).Buffer), w.Module;
     }
-  };
-  __publicField(_w, "Module");
-  let w = _w;
+  }, __publicField(_b, "Module"), _b);
   let m, S, _, f;
   v = (e) => (parseFloat(e || "1") * 1e6).toFixed();
   m = async (e) => {
@@ -115,7 +113,7 @@ let __tla = (async () => {
   }, Symbol.toStringTag, {
     value: "Module"
   }));
-  class N {
+  class B {
     constructor(t, n) {
       __publicField(this, "type");
       __publicField(this, "cardano");
@@ -140,9 +138,9 @@ let __tla = (async () => {
         return t.map((o) => n.TransactionUnspentOutput.from_bytes(s.from(o, "hex")));
       });
       __publicField(this, "getStakeKeyHash", async () => {
-        var _a2, _b2, _c;
+        var _a2, _b2, _c2;
         const t = await this.getRewardAddress(), n = await l.load();
-        return (_c = (_b2 = (_a2 = n.RewardAddress.from_address(n.Address.from_bech32(t))) == null ? void 0 : _a2.payment_cred()) == null ? void 0 : _b2.to_keyhash()) == null ? void 0 : _c.to_bytes();
+        return (_c2 = (_b2 = (_a2 = n.RewardAddress.from_address(n.Address.from_bech32(t))) == null ? void 0 : _a2.payment_cred()) == null ? void 0 : _b2.to_keyhash()) == null ? void 0 : _c2.to_bytes();
       });
       __publicField(this, "signData", async (t) => {
         const n = S(t), s = this.cardano;
@@ -190,13 +188,13 @@ let __tla = (async () => {
       this.type = t, this.cardano = n;
     }
   }
-  let B;
-  B = async (e) => (e === "typhon" && (e = "typhoncip30"), await window.cardano[e].enable());
+  let N;
+  N = async (e) => (e === "typhon" && (e = "typhoncip30"), await window.cardano[e].enable());
   x = (e) => {
     var _a2, _b2;
     return ((_b2 = (_a2 = window.cardano[e.toLowerCase()]) == null ? void 0 : _a2.experimental) == null ? void 0 : _b2.vespr_compat) || false;
   };
-  O = (_b = class {
+  O = (_c = class {
     static isSupported(t) {
       return t === "VESPR" ? true : g.includes(t);
     }
@@ -215,13 +213,13 @@ let __tla = (async () => {
       if (!this.hasWallet(t)) throw `Not available wallet "${t}"`;
       const n = t.toLowerCase(), s = `${n}Object`;
       if (this[s] === void 0 || !await this.isEnabled(t)) try {
-        this[s] = new N(t, await B(n));
+        this[s] = new B(t, await N(n));
       } catch (o) {
         throw typeof o == "string" ? o : o.info || o.message || "user abort connection";
       }
       return Object.freeze(this[s]);
     }
-  }, __publicField(_b, "supported", g), _b);
+  }, __publicField(_c, "supported", g), _c);
   V = window.cardanoPress || {
     ajaxUrl: "",
     _nonce: "",
@@ -289,6 +287,7 @@ let __tla = (async () => {
   }));
 })();
 export {
+  w as B,
   l as C,
   O as E,
   A as N,

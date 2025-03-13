@@ -1,15 +1,16 @@
+import type Extension from '@pbwebdev/cardano-wallet-browser-extensions-interface/extension'
 import { getAccount, getProtocol } from './actions'
 import { getConnectedWallet } from './util'
 
-export const delegation = async (poolId) => {
-    let Wallet
+export const delegation = async (poolId: string) => {
+    let Wallet: Extension
 
     try {
         Wallet = await getConnectedWallet()
     } catch (error) {
         return {
             success: false,
-            data: error,
+            data: error as string,
         }
     }
 
@@ -43,7 +44,7 @@ export const delegation = async (poolId) => {
     } catch (error) {
         return {
             success: false,
-            data: error,
+            data: error as string,
         }
     }
 }
