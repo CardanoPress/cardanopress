@@ -1,8 +1,10 @@
 import type Extension from '@pbwebdev/cardano-wallet-browser-extensions-interface/extension'
-import { getProtocol } from './actions'
+import { getProtocol, type ServerResponse } from './actions'
 import { getConnectedWallet } from './util'
 
-export const multisend = async (outputs: { address: string; amount: string }[]) => {
+export const multisend = async (
+    outputs: { address: string; amount: string }[]
+): Promise<ServerResponse<{ network: string; transaction: string }>> => {
     let Wallet: Extension
 
     try {

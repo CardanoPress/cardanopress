@@ -1,14 +1,14 @@
 import type { ProtocolParameters } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
 import { cardanoPress } from './config'
 
-type ServerResponse<T> =
+export type ServerResponse<T> =
     | {
           success: true
           data: T
       }
     | {
           success: false
-          data: []
+          data: string
       }
 
 export const getProtocol = async (

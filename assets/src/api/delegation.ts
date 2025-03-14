@@ -1,8 +1,8 @@
 import type Extension from '@pbwebdev/cardano-wallet-browser-extensions-interface/extension'
-import { getAccount, getProtocol } from './actions'
+import { getAccount, getProtocol, type ServerResponse } from './actions'
 import { getConnectedWallet } from './util'
 
-export const delegation = async (poolId: string) => {
+export const delegation = async (poolId: string): Promise<ServerResponse<{ network: string; transaction: string }>> => {
     let Wallet: Extension
 
     try {
