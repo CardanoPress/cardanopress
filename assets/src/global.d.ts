@@ -1,4 +1,3 @@
-// @ts-ignore
 import type ReCaptchaV2 from '@types/grecaptcha'
 import type { Alpine as AlpineType } from 'alpinejs'
 

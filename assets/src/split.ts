@@ -1,8 +1,14 @@
-/* global grecaptcha */
-
 import { handleMultisend, handlePayment } from './actions'
 import { cardanoPressMessages } from './api/config'
 import { addNotice, removeNotice } from './api/util'
+
+interface PaymentData {
+    syncedBalance: boolean
+    currentBalance: number
+    remainingBalance: number
+    isVerified: boolean
+    lovelaceValue: () => string
+}
 
 window.addEventListener('alpine:init', () => {
     window.Alpine.data('splitForm', () => ({
@@ -10,27 +16,34 @@ window.addEventListener('alpine:init', () => {
         percentage: 0,
         address: '',
         transactionHash: '',
-        outputs: [],
+        outputs: [] as { address: string; amount: string; percentage: number }[],
+
+        get parent(): PaymentData {
+            return this as unknown as PaymentData
+        },
 
         isReady(type = ''): boolean {
-            if (!(this.syncedBalance && !this.isProcessing && !this.transactionHash)) {
+            if (!(this.parent.syncedBalance && !this.isProcessing && !this.transactionHash)) {
                 return false
             }
 
             if ('all' === type) {
-                return this.isVerified && this.outputs.length
+                return this.parent.isVerified && !!this.outputs.length
             }
 
-            return this.remainingBalance && this.percentage && this.address
+            return !!this.parent.remainingBalance && !!this.percentage && !!this.address
         },
 
         paymentAmount() {
-            return (((this.currentBalance - parseInt(this.lovelaceValue())) * this.percentage) / 100).toFixed()
+            return (
+                ((this.parent.currentBalance - parseInt(this.parent.lovelaceValue())) * this.percentage) /
+                100
+            ).toFixed()
         },
 
         addOutput() {
             this.outputs.push({ address: this.address, amount: this.paymentAmount(), percentage: this.percentage })
-            this.remainingBalance -= this.paymentAmount()
+            this.parent.remainingBalance -= parseInt(this.paymentAmount())
             this.address = ''
             this.percentage = 0
         },

@@ -1,5 +1,3 @@
-/* global grecaptcha */
-
 import { adaToLovelace } from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 import { getPaymentAddress, handlePayment } from './actions'
 import { cardanoPressMessages } from './api/config'
@@ -20,9 +18,9 @@ window.addEventListener('alpine:init', () => {
         syncedBalance: false,
 
         async init() {
-            this.payAmount = parseFloat(this.$root.dataset.amount)
+            this.payAmount = parseFloat(this.$root.dataset.amount || '')
             this.paymentAddress = this.$root.dataset.address || ''
-            this.recaptchaKey = this.$root.dataset.recaptcha
+            this.recaptchaKey = this.$root.dataset.recaptcha || ''
 
             if ('' === this.recaptchaKey && '' === this.paymentAddress) {
                 this.isVerified = true
@@ -35,6 +33,10 @@ window.addEventListener('alpine:init', () => {
             window.addEventListener(
                 'cardanoPress:recaptcha',
                 async (event: CustomEventInit<boolean>) => {
+                    if (!event.detail) {
+                        return
+                    }
+
                     this.isVerified = event.detail
 
                     if (this.isVerified && !this.paymentAddress) {
@@ -52,13 +54,14 @@ window.addEventListener('alpine:init', () => {
         },
 
         balanceValue(type: string, inAda = true) {
-            const amount = this[type + 'Balance']
+            // @ts-ignore
+            const amount = this[type + 'Balance'] || 0
 
             return parseFloat(amount) / (inAda ? 1000000 : 1)
         },
 
         lovelaceValue() {
-            return adaToLovelace(this.payAmount)
+            return adaToLovelace(this.payAmount.toString())
         },
 
         totalAmount(inAdaValue = true) {
@@ -82,7 +85,7 @@ window.addEventListener('alpine:init', () => {
                 this.remainingBalance = this.currentBalance - parseInt(this.lovelaceValue())
                 this.syncedBalance = true
             } catch (error) {
-                addNotice({ type: 'error', text: error })
+                addNotice({ type: 'error', text: error as string })
             }
 
             removeNotice('balance')
@@ -126,7 +129,8 @@ window.addEventListener('alpine:init', () => {
 })
 
 window.cardanoPressRecaptchaCallback = () => {
-    const sendVerified = (status) => window.dispatchEvent(new CustomEvent('cardanoPress:recaptcha', { detail: status }))
+    const sendVerified = (status: boolean) =>
+        window.dispatchEvent(new CustomEvent('cardanoPress:recaptcha', { detail: status }))
 
     window.addEventListener('alpine:init', () => {
         waitElement('#cardanopress-recaptcha').then((element) => {

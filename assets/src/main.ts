@@ -14,7 +14,7 @@ import { addNotice, getConnectedWallet, removeNotice } from './api/util'
 
 import Extensions, { fromVespr } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 import { Buffer as buffer } from '@pbwebdev/cardano-wallet-browser-extensions-interface/buffer'
-import { NETWORK, supportedWallets } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
+import { supportedWallets } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
 import { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface/csl'
 import type Extension from '@pbwebdev/cardano-wallet-browser-extensions-interface/extension'
 
@@ -22,8 +22,6 @@ import * as utils from '@pbwebdev/cardano-wallet-browser-extensions-interface/ut
 import * as wallet from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
 import * as actions from './api/actions'
 import * as util from './api/util'
-
-const { hexToBech32 } = utils
 
 window.addEventListener('alpine:init', () => {
     window.Alpine.data('cardanoPress', () => ({
@@ -34,8 +32,8 @@ window.addEventListener('alpine:init', () => {
         openDropdown: false,
         connectedExtension: '',
         selectedHandle: '',
-        availableWallets: [],
-        supportedWallets,
+        availableWallets: [] as string[],
+        supportedWallets: [] as string[],
 
         has(wallet: string): boolean {
             return this.availableWallets.includes(wallet)
@@ -68,11 +66,11 @@ window.addEventListener('alpine:init', () => {
                 this.refreshWallets()
             })
 
-            this.supportedWallets = supportedWallets.filter((wallet) => this.$root.dataset.wallets.includes(wallet))
+            this.supportedWallets = supportedWallets.filter((wallet) => this.$root.dataset.wallets?.includes(wallet))
 
             if (cardanoPress.logged) {
                 this.connectedExtension = getConnectedExtension()
-                this.selectedHandle = this.$root.dataset.handle
+                this.selectedHandle = this.$root.dataset.handle || ''
                 this.isConnected = !!this.connectedExtension
 
                 if (this.isConnected && !isNotified()) {
@@ -118,7 +116,7 @@ window.addEventListener('alpine:init', () => {
 
                 await this.handleLogin(wallet)
             } catch (error) {
-                addNotice({ type: 'error', text: error })
+                addNotice({ type: 'error', text: error as string })
             }
 
             this.isProcessing = false
@@ -150,14 +148,14 @@ window.addEventListener('alpine:init', () => {
             }
         },
 
-        async handleLogout(id: number) {
+        async handleLogout() {
             if (!this.isConnected) {
                 return
             }
 
             try {
                 const Wallet = await getConnectedWallet()
-                const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
+                const network = await Wallet.getNetwork()
                 const address = await Wallet.getChangeAddress()
                 const response = await logMeOut(network, address)
 
@@ -176,7 +174,7 @@ window.addEventListener('alpine:init', () => {
                     addNotice({ type: 'error', text: response.data })
                 }
             } catch (error) {
-                addNotice({ type: 'error', text: error })
+                addNotice({ type: 'error', text: error as string })
             }
         },
 
@@ -207,7 +205,7 @@ window.addEventListener('alpine:init', () => {
                     addNotice({ type: 'error', text: response.data })
                 }
             } catch (error) {
-                addNotice({ type: 'error', text: error })
+                addNotice({ type: 'error', text: error as string })
             }
 
             this.isProcessing = false

@@ -1,14 +1,14 @@
-import { a as t, c as i, r, g as o, l as c, m as d } from "./util-CHNbL_kJ.js";
-import { g as n, i as l } from "./actions-o4M7JdP1.js";
+import { a as t, c as i, r, g as o, l as c, m as d } from "./util-DUvjK3JZ.js";
+import { g as n, i as l } from "./actions-Dz05HOjn.js";
 window.addEventListener("alpine:init", () => {
   window.Alpine.data("paymentForm", () => ({ isVerified: false, isProcessing: false, payAmount: 1, quantity: 1, currentBalance: 0, remainingBalance: 0, transactionHash: "", showAddress: false, paymentAddress: "", recaptchaKey: "", syncedBalance: false, async init() {
-    if (this.payAmount = parseFloat(this.$root.dataset.amount), this.paymentAddress = this.$root.dataset.address || "", this.recaptchaKey = this.$root.dataset.recaptcha, this.recaptchaKey === "" && this.paymentAddress === "") {
+    if (this.payAmount = parseFloat(this.$root.dataset.amount || ""), this.paymentAddress = this.$root.dataset.address || "", this.recaptchaKey = this.$root.dataset.recaptcha || "", this.recaptchaKey === "" && this.paymentAddress === "") {
       this.isVerified = true;
       const a = await n();
       this.paymentAddress = a.data;
     }
     window.addEventListener("cardanoPress:recaptcha", async (a) => {
-      if (this.isVerified = a.detail, this.isVerified && !this.paymentAddress) {
+      if (a.detail && (this.isVerified = a.detail, this.isVerified && !this.paymentAddress)) {
         const e = await n();
         this.paymentAddress = e.data;
       }
@@ -16,10 +16,10 @@ window.addEventListener("alpine:init", () => {
   }, isReady(a = "extension") {
     return !!((a !== "extension" ? this.isVerified : !this.transactionHash) && !this.isProcessing);
   }, balanceValue(a, e = true) {
-    const s = this[a + "Balance"];
+    const s = this[a + "Balance"] || 0;
     return parseFloat(s) / (e ? 1e6 : 1);
   }, lovelaceValue() {
-    return c(this.payAmount);
+    return c(this.payAmount.toString());
   }, totalAmount(a = true) {
     const e = this.payAmount * 100 * (this.quantity * 100) / 1e4;
     return a ? e.toFixed(1) : c(e.toString());
