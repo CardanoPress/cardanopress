@@ -5,14 +5,14 @@ import { cardanoPressMessages } from './api/config'
 import { addNotice, removeNotice } from './api/util'
 
 window.addEventListener('alpine:init', () => {
-    Alpine.data('splitForm', () => ({
+    window.Alpine.data('splitForm', () => ({
         isProcessing: false,
         percentage: 0,
         address: '',
         transactionHash: '',
         outputs: [],
 
-        isReady(type = '') {
+        isReady(type = ''): boolean {
             if (!(this.syncedBalance && !this.isProcessing && !this.transactionHash)) {
                 return false
             }
@@ -35,7 +35,7 @@ window.addEventListener('alpine:init', () => {
             this.percentage = 0
         },
 
-        removeOutput(index) {
+        removeOutput(index: number) {
             this.outputs.splice(index, 1)
         },
 

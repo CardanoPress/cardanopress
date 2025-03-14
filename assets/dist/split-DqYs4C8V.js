@@ -1,7 +1,7 @@
-import { j as a, i } from "./actions-De4EaUEq.js";
+import { j as a, i } from "./actions-o4M7JdP1.js";
 import { a as e, c as n, r } from "./util-CHNbL_kJ.js";
 window.addEventListener("alpine:init", () => {
-  Alpine.data("splitForm", () => ({ isProcessing: false, percentage: 0, address: "", transactionHash: "", outputs: [], isReady(s = "") {
+  window.Alpine.data("splitForm", () => ({ isProcessing: false, percentage: 0, address: "", transactionHash: "", outputs: [], isReady(s = "") {
     return this.syncedBalance && !this.isProcessing && !this.transactionHash ? s === "all" ? this.isVerified && this.outputs.length : this.remainingBalance && this.percentage && this.address : false;
   }, paymentAmount() {
     return ((this.currentBalance - parseInt(this.lovelaceValue())) * this.percentage / 100).toFixed();

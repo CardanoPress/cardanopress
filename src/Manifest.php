@@ -42,16 +42,16 @@ class Manifest extends AbstractManifest
         foreach ($manifest['entryNames'] ?? [] as $entry => $file) {
             $parts = explode('.', $file);
 
-            if (1 === count($parts) || ! in_array($parts[1], ['js', 'css'])) {
+            if (1 === count($parts) || ! in_array($parts[1], ['ts', 'css'])) {
                 continue;
             }
 
-            $type = 'js' === $parts[1] ? 'script' : 'style';
+            $type = 'ts' === $parts[1] ? 'script' : 'style';
             $func = 'wp_dequeue_' . $type;
             $handle = $this->vite->$type(
                 $entry,
                 ('script' === $type && 'script' !== $entry) ? [static::HANDLE_PREFIX . 'script'] : [],
-                'js' === $parts[1] ? ['in_footer' => true] : ['media' => 'all']
+                'ts' === $parts[1] ? ['in_footer' => true] : ['media' => 'all']
             );
 
             $func($handle);

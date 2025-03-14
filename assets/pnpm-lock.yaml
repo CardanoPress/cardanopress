@@ -15,6 +15,12 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.12
         version: 4.0.12(vite@6.2.1(@types/node@20.14.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.1)(yaml@2.7.0))
+      '@types/alpinejs':
+        specifier: ^3.13.11
+        version: 3.13.11
+      '@types/grecaptcha':
+        specifier: ^3.0.9
+        version: 3.0.9
       alpinejs:
         specifier: ^3.14.8
         version: 3.14.8
@@ -480,8 +486,14 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6
 
+  '@types/alpinejs@3.13.11':
+    resolution: {integrity: sha512-3KhGkDixCPiLdL3Z/ok1GxHwLxEWqQOKJccgaQL01wc0EVM2tCTaqlC3NIedmxAXkVzt/V6VTM8qPgnOHKJ1MA==}
+
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
+
+  '@types/grecaptcha@3.0.9':
+    resolution: {integrity: sha512-fFxMtjAvXXMYTzDFK5NpcVB7WHnrHVLl00QzEGpuFxSAC789io6M+vjcn+g5FTEamIJtJr/IHkCDsqvJxeWDyw==}
 
   '@types/node@20.14.2':
     resolution: {integrity: sha512-xyu6WAMVwv6AKFLB+e/7ySZVr/0zLCzOa7rSpq6jNwpqOrUbcACDWC+53d4n2QHOnDou0fbIsg8wZu/sxrnI4Q==}
@@ -1051,7 +1063,11 @@ snapshots:
       tailwindcss: 4.0.12
       vite: 6.2.1(@types/node@20.14.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.1)(yaml@2.7.0)
 
+  '@types/alpinejs@3.13.11': {}
+
   '@types/estree@1.0.6': {}
+
+  '@types/grecaptcha@3.0.9': {}
 
   '@types/node@20.14.2':
     dependencies:

@@ -1,18 +1,22 @@
-import { generateUuid } from './api/util'
+import { generateUuid, NoticeDetail } from './api/util'
 
 window.addEventListener('alpine:init', () => {
-    Alpine.store('toastNotification', {
+    window.Alpine.store('toastNotification', {
         list: [],
         visible: [],
 
         init() {
-            window.addEventListener('cardanoPress:addNotice', (event) => this.add(event.detail))
-            window.addEventListener('cardanoPress:removeNotice', (event) => this.remove(event.detail))
+            window.addEventListener('cardanoPress:addNotice', (event: CustomEventInit<NoticeDetail>) =>
+                this.add(event.detail)
+            )
+            window.addEventListener('cardanoPress:removeNotice', (event: CustomEventInit<string>) =>
+                this.remove(event.detail)
+            )
         },
 
-        add(data) {
+        add(data: NoticeDetail & { unique?: boolean }) {
             if (!data?.id) {
-                data.id = generateUuid
+                data.id = generateUuid()
                 data.unique = true
             }
 
@@ -30,7 +34,7 @@ window.addEventListener('alpine:init', () => {
             }
         },
 
-        remove(id) {
+        remove(id: string) {
             ;[this.visible, this.list].forEach((container) => {
                 const notice = container.find((notice) => notice.id === id)
                 const index = container.indexOf(notice)

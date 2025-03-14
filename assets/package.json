@@ -8,6 +8,8 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.12",
+    "@types/alpinejs": "^3.13.11",
+    "@types/grecaptcha": "^3.0.9",
     "alpinejs": "^3.14.8",
     "autoprefixer": "^10.4.21",
     "tailwindcss": "^4.0.12",

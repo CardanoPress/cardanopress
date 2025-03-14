@@ -11,12 +11,12 @@ export default defineConfig({
         assetsDir: '',
         rollupOptions: {
             input: {
-                script: './src/main.js',
+                script: './src/main.ts',
                 style: './src/main.css',
-                notification: './src/notification.js',
-                delegation: './src/delegation.js',
-                payment: './src/payment.js',
-                split: './src/split.js',
+                notification: './src/notification.ts',
+                delegation: './src/delegation.ts',
+                payment: './src/payment.ts',
+                split: './src/split.ts',
             },
             output: {
                 globals: {

@@ -6,19 +6,19 @@
     "network": []
   },
   "entryNames": {
-    "script": "src/main.js",
+    "script": "src/main.ts",
     "style": "src/main.css",
-    "notification": "src/notification.js",
-    "delegation": "src/delegation.js",
-    "payment": "src/payment.js",
-    "split": "src/split.js"
+    "notification": "src/notification.ts",
+    "delegation": "src/delegation.ts",
+    "payment": "src/payment.ts",
+    "split": "src/split.ts"
   },
   "entries": [
-    "src/main.js",
+    "src/main.ts",
     "src/main.css",
-    "src/notification.js",
-    "src/delegation.js",
-    "src/payment.js",
-    "src/split.js"
+    "src/notification.ts",
+    "src/delegation.ts",
+    "src/payment.ts",
+    "src/split.ts"
   ]
 }

@@ -16,6 +16,7 @@ import Extensions, { fromVespr } from '@pbwebdev/cardano-wallet-browser-extensio
 import { Buffer as buffer } from '@pbwebdev/cardano-wallet-browser-extensions-interface/buffer'
 import { NETWORK, supportedWallets } from '@pbwebdev/cardano-wallet-browser-extensions-interface/config'
 import { CSL as csl } from '@pbwebdev/cardano-wallet-browser-extensions-interface/csl'
+import type Extension from '@pbwebdev/cardano-wallet-browser-extensions-interface/extension'
 
 import * as utils from '@pbwebdev/cardano-wallet-browser-extensions-interface/utils'
 import * as wallet from '@pbwebdev/cardano-wallet-browser-extensions-interface/wallet'
@@ -25,7 +26,7 @@ import * as util from './api/util'
 const { hexToBech32 } = utils
 
 window.addEventListener('alpine:init', () => {
-    Alpine.data('cardanoPress', () => ({
+    window.Alpine.data('cardanoPress', () => ({
         isAvailable: undefined !== window.cardano && undefined !== window.cardanoPress,
         isConnected: false,
         isProcessing: false,
@@ -36,7 +37,7 @@ window.addEventListener('alpine:init', () => {
         availableWallets: [],
         supportedWallets,
 
-        has(wallet) {
+        has(wallet: string): boolean {
             return this.availableWallets.includes(wallet)
         },
 
@@ -44,15 +45,15 @@ window.addEventListener('alpine:init', () => {
             return !!(!this.isAvailable || this.isProcessing || (null !== wallet && !this.has(wallet)))
         },
 
-        walletAvailable(type) {
+        walletAvailable(type: string): boolean {
             return this.isAvailable && this.has(type)
         },
 
-        fromVespr(wallet) {
+        fromVespr(wallet: string): boolean {
             return this.has(wallet) && fromVespr(wallet)
         },
 
-        getWalletHandle($default) {
+        getWalletHandle($default: string): string {
             return this.selectedHandle || $default
         },
 
@@ -76,15 +77,15 @@ window.addEventListener('alpine:init', () => {
 
                 if (this.isConnected && !isNotified()) {
                     addNotice({ type: 'success', text: cardanoPressMessages.connected })
-                    setNotified(true)
+                    setNotified('true')
                 }
             } else {
-                isNotified() && setNotified(false)
+                isNotified() && setNotified('false')
                 getConnectedExtension() && setConnectedExtension('')
             }
         },
 
-        clipboardValue(target) {
+        clipboardValue(target: string) {
             removeNotice('clipboardValue')
             window.navigator.clipboard.writeText(target).then(() => {
                 addNotice({
@@ -95,7 +96,7 @@ window.addEventListener('alpine:init', () => {
             })
         },
 
-        async walletConnect(type) {
+        async walletConnect(type: string) {
             if (this.isConnected) {
                 await this.handleReconnect(type)
             } else {
@@ -103,7 +104,7 @@ window.addEventListener('alpine:init', () => {
             }
         },
 
-        async handleConnect(type) {
+        async handleConnect(type: string) {
             this.isProcessing = true
 
             try {
@@ -123,7 +124,7 @@ window.addEventListener('alpine:init', () => {
             this.isProcessing = false
         },
 
-        async handleLogin(wallet) {
+        async handleLogin(wallet: Extension) {
             const response = await logMeIn(wallet)
 
             removeNotice('loginConnect')
@@ -138,18 +139,18 @@ window.addEventListener('alpine:init', () => {
                     }, 500)
                 }
 
-                setNotified(true)
+                setNotified('true')
 
                 this.showModal = false
                 this.isConnected = true
-                cardanoPress.logged = true
+                cardanoPress.logged = 'true'
                 this.connectedExtension = wallet.type
             } else {
                 addNotice({ type: 'error', text: response.data })
             }
         },
 
-        async handleLogout(id) {
+        async handleLogout(id: number) {
             if (!this.isConnected) {
                 return
             }
@@ -164,7 +165,7 @@ window.addEventListener('alpine:init', () => {
                     addNotice({ type: 'success', text: response.data.message })
 
                     if (response.data.reload) {
-                        setNotified(false)
+                        setNotified('false')
                         setConnectedExtension('')
 
                         return setTimeout(() => {
@@ -172,14 +173,14 @@ window.addEventListener('alpine:init', () => {
                         }, 500)
                     }
                 } else {
-                    addNotice({ type: 'error', text: response.data.message })
+                    addNotice({ type: 'error', text: response.data })
                 }
             } catch (error) {
                 addNotice({ type: 'error', text: error })
             }
         },
 
-        async handleReconnect(type) {
+        async handleReconnect(type: string) {
             this.isProcessing = true
 
             try {

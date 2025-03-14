@@ -6,7 +6,7 @@ import { cardanoPressMessages } from './api/config'
 import { addNotice, getConnectedWallet, removeNotice, waitElement } from './api/util'
 
 window.addEventListener('alpine:init', () => {
-    Alpine.data('paymentForm', () => ({
+    window.Alpine.data('paymentForm', () => ({
         isVerified: false,
         isProcessing: false,
         payAmount: 1,
@@ -34,7 +34,7 @@ window.addEventListener('alpine:init', () => {
 
             window.addEventListener(
                 'cardanoPress:recaptcha',
-                async (event) => {
+                async (event: CustomEventInit<boolean>) => {
                     this.isVerified = event.detail
 
                     if (this.isVerified && !this.paymentAddress) {
@@ -51,7 +51,7 @@ window.addEventListener('alpine:init', () => {
             return !!(('extension' !== type ? this.isVerified : !this.transactionHash) && !this.isProcessing)
         },
 
-        balanceValue(type, inAda = true) {
+        balanceValue(type: string, inAda = true) {
             const amount = this[type + 'Balance']
 
             return parseFloat(amount) / (inAda ? 1000000 : 1)
@@ -64,7 +64,7 @@ window.addEventListener('alpine:init', () => {
         totalAmount(inAdaValue = true) {
             const amount = (this.payAmount * 100 * (this.quantity * 100)) / (100 * 100)
 
-            return inAdaValue ? amount.toFixed(1) : adaToLovelace(amount)
+            return inAdaValue ? amount.toFixed(1) : adaToLovelace(amount.toString())
         },
 
         async syncBalance() {

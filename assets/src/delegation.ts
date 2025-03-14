@@ -3,7 +3,7 @@ import { cardanoPressMessages } from './api/config'
 import { addNotice, removeNotice } from './api/util'
 
 window.addEventListener('alpine:init', () => {
-    Alpine.data('poolDelegation', () => ({
+    window.Alpine.data('poolDelegation', () => ({
         isProcessing: false,
         transactionHash: '',
 

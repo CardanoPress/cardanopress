@@ -1,6 +1,6 @@
 {
-  "_actions-De4EaUEq.js": {
-    "file": "actions-De4EaUEq.js",
+  "_actions-o4M7JdP1.js": {
+    "file": "actions-o4M7JdP1.js",
     "name": "actions",
     "imports": [
       "_util-CHNbL_kJ.js"
@@ -28,13 +28,13 @@
       "cardano_serialization_lib_bg-C7H9sjZR.wasm"
     ]
   },
-  "src/delegation.js": {
-    "file": "delegation-CI70t-_Y.js",
+  "src/delegation.ts": {
+    "file": "delegation-BnaipfaQ.js",
     "name": "delegation",
-    "src": "src/delegation.js",
+    "src": "src/delegation.ts",
     "isEntry": true,
     "imports": [
-      "_actions-De4EaUEq.js",
+      "_actions-o4M7JdP1.js",
       "_util-CHNbL_kJ.js"
     ]
   },
@@ -43,42 +43,42 @@
     "src": "src/main.css",
     "isEntry": true
   },
-  "src/main.js": {
-    "file": "script-SaNEUXkL.js",
+  "src/main.ts": {
+    "file": "script-bi5WjuxI.js",
     "name": "script",
-    "src": "src/main.js",
+    "src": "src/main.ts",
     "isEntry": true,
     "imports": [
-      "_actions-De4EaUEq.js",
+      "_actions-o4M7JdP1.js",
       "_util-CHNbL_kJ.js"
     ]
   },
-  "src/notification.js": {
-    "file": "notification-Rgoez1X_.js",
+  "src/notification.ts": {
+    "file": "notification-JsdEQhvd.js",
     "name": "notification",
-    "src": "src/notification.js",
+    "src": "src/notification.ts",
     "isEntry": true,
     "imports": [
       "_util-CHNbL_kJ.js"
     ]
   },
-  "src/payment.js": {
-    "file": "payment-BZZC79a6.js",
+  "src/payment.ts": {
+    "file": "payment-6P6i7lGB.js",
     "name": "payment",
-    "src": "src/payment.js",
+    "src": "src/payment.ts",
     "isEntry": true,
     "imports": [
       "_util-CHNbL_kJ.js",
-      "_actions-De4EaUEq.js"
+      "_actions-o4M7JdP1.js"
     ]
   },
-  "src/split.js": {
-    "file": "split-qER0tSOd.js",
+  "src/split.ts": {
+    "file": "split-DqYs4C8V.js",
     "name": "split",
-    "src": "src/split.js",
+    "src": "src/split.ts",
     "isEntry": true,
     "imports": [
-      "_actions-De4EaUEq.js",
+      "_actions-o4M7JdP1.js",
       "_util-CHNbL_kJ.js"
     ]
   }

@@ -3,14 +3,14 @@ import type Extension from '@pbwebdev/cardano-wallet-browser-extensions-interfac
 import { getConnectedExtension } from './config'
 
 export const waitElement = (selector: string) => {
-    return new Promise<Element | null>((resolve) => {
+    return new Promise<HTMLElement>((resolve) => {
         if (document.querySelector(selector)) {
-            return resolve(document.querySelector(selector))
+            return resolve(document.querySelector(selector) as HTMLElement)
         }
 
         const observer = new MutationObserver(() => {
             if (document.querySelector(selector)) {
-                resolve(document.querySelector(selector))
+                resolve(document.querySelector(selector) as HTMLElement)
                 observer.disconnect()
             }
         })

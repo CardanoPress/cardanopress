@@ -1,11 +1,19 @@
-import { saveWalletTx } from './api/actions'
-import { cardanoPress } from './api/config'
+import type Extension from '@pbwebdev/cardano-wallet-browser-extensions-interface/extension'
+import { saveWalletTx, type ServerResponse } from './api/actions'
+import { cardanoPress, cardanoPressMessages } from './api/config'
 import { delegation } from './api/delegation'
 import { multisend } from './api/multisend'
 import { payment } from './api/payment'
 import { addNotice, removeNotice } from './api/util'
 
-export const handleReconnect = async (Wallet) => {
+export const handleReconnect = async (
+    Wallet: Extension
+): Promise<
+    ServerResponse<{
+        message: string
+        reload: boolean
+    }>
+> => {
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
@@ -23,7 +31,7 @@ export const handleReconnect = async (Wallet) => {
     }).then((response) => response.json())
 }
 
-export const logMeIn = async (Wallet) => {
+export const logMeIn = async (Wallet: Extension): Promise<ServerResponse<{ message: string; reload: boolean }>> => {
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
@@ -52,7 +60,10 @@ export const logMeIn = async (Wallet) => {
     })
 }
 
-export const logMeOut = async (network, address) => {
+export const logMeOut = async (
+    network: string,
+    address: string
+): Promise<ServerResponse<{ message: string; reload: boolean }>> => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -64,7 +75,7 @@ export const logMeOut = async (network, address) => {
     }).then((response) => response.json())
 }
 
-export const handleSync = async () => {
+export const handleSync = async (): Promise<ServerResponse<{ message: string; updated: boolean }>> => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -74,7 +85,7 @@ export const handleSync = async () => {
     }).then((response) => response.json())
 }
 
-export const handleSave = async ($handle) => {
+export const handleSave = async ($handle: string): Promise<ServerResponse<string>> => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -85,7 +96,7 @@ export const handleSave = async ($handle) => {
     }).then((response) => response.json())
 }
 
-export const getPaymentAddress = async () => {
+export const getPaymentAddress = async (): Promise<ServerResponse<string>> => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -95,7 +106,7 @@ export const getPaymentAddress = async () => {
     }).then((response) => response.json())
 }
 
-export const handlePayment = async (lovelaceValue, payee) => {
+export const handlePayment = async (lovelaceValue: string, payee: string) => {
     const result = await payment(payee, lovelaceValue)
 
     if (result.success) {
@@ -105,7 +116,7 @@ export const handlePayment = async (lovelaceValue, payee) => {
     return result
 }
 
-const getDelegation = async () => {
+const getDelegation = async (): Promise<ServerResponse<string>> => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -132,7 +143,7 @@ export const handleDelegation = async () => {
     return result
 }
 
-export const handleMultisend = async (outputs) => {
+export const handleMultisend = async (outputs: { address: string; amount: string }[]) => {
     const result = await multisend(outputs)
 
     if (result.success) {
