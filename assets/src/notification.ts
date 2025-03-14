@@ -1,9 +1,16 @@
 import { generateUuid, NoticeDetail } from './api/util'
 
+interface ToastStore {
+    list: NoticeDetail[]
+    visible: NoticeDetail[]
+    add: (data: NoticeDetail & { unique?: boolean }) => void
+    remove: (id: string) => void
+}
+
 window.addEventListener('alpine:init', () => {
-    window.Alpine.store('toastNotification', () => ({
-        list: [] as NoticeDetail[],
-        visible: [] as NoticeDetail[],
+    window.Alpine.store('toastNotification', {
+        list: [],
+        visible: [],
 
         init() {
             window.addEventListener(
@@ -51,5 +58,5 @@ window.addEventListener('alpine:init', () => {
                 }
             })
         },
-    }))
+    } as ToastStore)
 })
