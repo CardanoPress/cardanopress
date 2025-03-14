@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, ada, token-gating
 Requires at least: 5.9
 Tested up to: 6.7.99
-Stable tag: 1.23.1
+Stable tag: 1.25.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -20,14 +20,13 @@ We've done all the technical and hard work so you as a builder can integrate Car
 
 We are supporting various wallets including:
 
-* Nami
 * Eternl
+* Yoroi
 * Typhon
 * GeroWallet
-* Flint
-* Yoroi (to a point)
 * NuFi
-* Cardwallet
+* Lace
+* Begin
 
 The plugin is created by the team at [PB Web Development](https://pbwebdev.com).
 
@@ -84,18 +83,6 @@ CardanoPress is dependent on the Blockfrost API to communicate to the Cardano bl
 
 Obtain your key and paste it into the configuration screen of CardanoPress.
 
-4. Allow WASM file type to be executed from your server
-
-You will also need to allow for the WASM MIME type to be loaded on your server. This is the file that will load the integration between the wallets and the website. Without this file access enabled, the 'connect to wallet' and other blockchain interactions will not work.
-
-Open your .htaccess file from your server and add this line of code to the top of the file.
-
-> AddType application/wasm .wasm
-
-This will add the MIME type WASM and allow the loading of the Cardano Serialisation Library on your website.
-
-This may vary from server to server as not all use htaccess files or allow modifications to it.
-
 Once you've done this, you will be able to connect your WordPress website to the Cardano blockchain.
 
 For more detailed documentation and tutorials on how to use the plugin, please visit the [CardanoPress documentation website](https://cardanopress.io).
@@ -107,10 +94,6 @@ We have community support available on our website under the [CardanoPress forum
 
 
 == Frequently Asked Questions ==
-
-= Can I Run This on My WordPress.com Website? =
-
-No you can not. You need full access to your web server to be able to allow for the WASM file type to load. Without this access you will not be able to run the plugin.
 
 = Can I Get Paid Support? =
 
@@ -135,6 +118,11 @@ This plugin does not collect or process any personal user data unless you expres
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.25.0 =
+- Used CIP30 Typhon namespace
+- Exposed Buffer for extensions
+- Cleanup assets and fully-typed
 
 = 1.24.0 =
 - Use latest CSL; version 14
