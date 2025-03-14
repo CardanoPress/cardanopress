@@ -82,13 +82,6 @@ window.addEventListener('alpine:init', () => {
                 isNotified() && setNotified(false)
                 getConnectedExtension() && setConnectedExtension('')
             }
-
-            if (this.isAvailable && 'Nami' === this.connectedExtension) {
-                const wallet = await getConnectedWallet()
-
-                wallet.cardano.experimental.on('networkChange', (networkId) => this.handleLogout(networkId, 0))
-                wallet.cardano.experimental.on('accountChange', (addresses) => this.handleLogout(-1, addresses))
-            }
         },
 
         clipboardValue(target) {
@@ -156,7 +149,7 @@ window.addEventListener('alpine:init', () => {
             }
         },
 
-        async handleLogout(id, addresses) {
+        async handleLogout(id) {
             if (!this.isConnected) {
                 return
             }
@@ -164,7 +157,7 @@ window.addEventListener('alpine:init', () => {
             try {
                 const Wallet = await getConnectedWallet()
                 const network = 0 <= id ? NETWORK[id] : await Wallet.getNetwork()
-                const address = 0 !== addresses ? hexToBech32(addresses[0]) : await Wallet.getChangeAddress()
+                const address = await Wallet.getChangeAddress()
                 const response = await logMeOut(network, address)
 
                 if (response.success) {
