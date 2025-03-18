@@ -1,0 +1,10 @@
+phpfiles=$(git diff --cached --name-only --diff-filter=ACM | { grep '.php$' || true; })
+[ -z "$phpfiles" ] && exit 0
+
+unformatted=$(./vendor/bin/phpcs --basepath=$(pwd) $phpfiles | grep -E 'FILE:' | cut -d' ' -f2 | tr '\n' ' ')
+[ -z "$unformatted" ] && exit 0
+
+echo >&2 "Files incorrectly formatted. Try running:"
+echo >&2 "  composer run fix $unformatted"
+
+exit 1
