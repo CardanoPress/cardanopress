@@ -9,7 +9,7 @@ namespace PBWebDev\CardanoPress;
 
 use CardanoPress\Traits\Instantiable;
 use CardanoPress\Traits\Loggable;
-use Psr\Log\LoggerInterface;
+use CardanoPress\Dependencies\Psr\Log\LoggerInterface;
 
 class Compatibility
 {

@@ -2,7 +2,7 @@ import { a as t, c as i, r, g as o, l as c, m as d } from "./util-DUvjK3JZ.js";
 import { g as n, i as l } from "./actions-Dz05HOjn.js";
 window.addEventListener("alpine:init", () => {
   window.Alpine.data("paymentForm", () => ({ isVerified: false, isProcessing: false, payAmount: 1, quantity: 1, currentBalance: 0, remainingBalance: 0, transactionHash: "", showAddress: false, paymentAddress: "", recaptchaKey: "", syncedBalance: false, async init() {
-    if (this.payAmount = parseFloat(this.$root.dataset.amount || ""), this.paymentAddress = this.$root.dataset.address || "", this.recaptchaKey = this.$root.dataset.recaptcha || "", this.recaptchaKey === "" && this.paymentAddress === "") {
+    if (this.payAmount = parseFloat(this.$root.dataset.amount || "1.0"), this.paymentAddress = this.$root.dataset.address || "", this.recaptchaKey = this.$root.dataset.recaptcha || "", this.recaptchaKey === "" && this.paymentAddress === "") {
       this.isVerified = true;
       const a = await n();
       this.paymentAddress = a.data;

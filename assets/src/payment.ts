@@ -7,7 +7,7 @@ window.addEventListener('alpine:init', () => {
     window.Alpine.data('paymentForm', () => ({
         isVerified: false,
         isProcessing: false,
-        payAmount: 1,
+        payAmount: 1.0,
         quantity: 1,
         currentBalance: 0,
         remainingBalance: 0,
@@ -18,7 +18,7 @@ window.addEventListener('alpine:init', () => {
         syncedBalance: false,
 
         async init() {
-            this.payAmount = parseFloat(this.$root.dataset.amount || '')
+            this.payAmount = parseFloat(this.$root.dataset.amount || '1.0')
             this.paymentAddress = this.$root.dataset.address || ''
             this.recaptchaKey = this.$root.dataset.recaptcha || ''
 
