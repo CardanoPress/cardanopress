@@ -409,6 +409,7 @@ class ComposerStaticInitdb368335731274e0956d8862c3e94f05
         'PBWebDev\\CardanoPress\\Blockfrost' => __DIR__ . '/../..' . '/../src/Blockfrost.php',
         'PBWebDev\\CardanoPress\\Collection' => __DIR__ . '/../..' . '/../src/Collection.php',
         'PBWebDev\\CardanoPress\\Compatibility' => __DIR__ . '/../..' . '/../src/Compatibility.php',
+        'PBWebDev\\CardanoPress\\Component' => __DIR__ . '/../..' . '/../src/Component.php',
         'PBWebDev\\CardanoPress\\Installer' => __DIR__ . '/../..' . '/../src/Installer.php',
         'PBWebDev\\CardanoPress\\Manifest' => __DIR__ . '/../..' . '/../src/Manifest.php',
         'PBWebDev\\CardanoPress\\Profile' => __DIR__ . '/../..' . '/../src/Profile.php',

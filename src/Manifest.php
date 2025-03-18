@@ -126,21 +126,7 @@ class Manifest extends AbstractManifest
 
     public static function injectDataProvider(): void
     {
-        $handle = '';
-
-        if (is_user_logged_in()) {
-            $handle = Application::getInstance()->userProfile()->getFavoriteHandle();
-        }
-
-        $wallets = json_encode(Application::getInstance()->getWallets());
-        $attributes = [
-            'x-data="cardanoPress"',
-            'x-on:keydown.escape="showModal = false"',
-            'data-handle="' . esc_attr($handle) . '"',
-            'data-wallets="' . esc_attr($wallets) . '"',
-        ];
-
-        echo '<div ' . implode(' ', $attributes) . '>';
+        echo '<div ' . Application::getInstance()->component(false)->cardanoPress() . '>';
     }
 
     public function completeInjections(): void

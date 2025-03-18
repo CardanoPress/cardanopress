@@ -13,12 +13,6 @@ cardanoPress()->enqueue('script', 'cardanopress-split');
 cardanoPress()->enqueue('script', 'cardanopress-payment');
 
 $fixedFee = cardanoPress()->option('payment_split');
-$recaptchaKeys = cardanoPress()->option('recaptcha_key');
-$recaptchaKey = $recaptchaKeys['site'] ?? '';
-
-if (! empty($recaptchaKey)) {
-    cardanoPress()->enqueue('script', 'cardanopress-recaptcha');
-}
 
 cardanoPress()->compatibleHeader();
 
@@ -29,11 +23,7 @@ cardanoPress()->compatibleHeader();
         <h1>Split Payments</h1>
         <?php the_content(); ?>
 
-        <form
-            x-data="paymentForm"
-            data-amount="<?php echo esc_attr($fixedFee); ?>"
-            data-recaptcha="<?php echo esc_attr($recaptchaKey); ?>"
-        >
+        <form <?php cardanoPress()->component()->paymentForm($fixedFee); ?>>
             <div class="py-6">
                 <h2>Fixed Fee: <span><?php echo esc_html($fixedFee); ?></span> ADA</h2>
 
@@ -57,7 +47,7 @@ cardanoPress()->compatibleHeader();
                 </div>
             </template>
 
-            <table class="w-full" x-data="splitForm" data-fee="<?php echo esc_attr($fixedFee); ?>">
+            <table class="w-full" <?php cardanoPress()->component()->splitForm(); ?>>
                 <thead>
                     <tr>
                         <th>Percentage</th>

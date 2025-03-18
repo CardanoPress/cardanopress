@@ -11,19 +11,9 @@
 
 $paymentAmount = cardanoPress()->option('payment_amount');
 
-if (empty($recaptchaKey)) {
-    $recaptchaKeys = cardanoPress()->option('recaptcha_key');
-    $recaptchaKey = $recaptchaKeys['site'] ?? '';
-}
-
-
 ?>
 
-<form
-    x-data="paymentForm"
-    data-amount="<?php echo esc_attr($paymentAmount); ?>"
-    data-recaptcha="<?php echo esc_attr($recaptchaKey); ?>"
->
+<form <?php cardanoPress()->component()->paymentForm(); ?>>
     <div class='py-6'>
         <h2>Amount: <span><?php echo esc_html($paymentAmount); ?></span> ADA</h2>
 

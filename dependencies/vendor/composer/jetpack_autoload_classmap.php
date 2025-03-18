@@ -1550,6 +1550,10 @@ return array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Compatibility.php'
 	),
+	'PBWebDev\\CardanoPress\\Component' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/../src/Component.php'
+	),
 	'PBWebDev\\CardanoPress\\Installer' => array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Installer.php'

@@ -160,4 +160,9 @@ class Application extends AbstractApplication
             'Begin',
         ]);
     }
+
+    public function component(bool $echo = true): Component
+    {
+        return new Component($echo);
+    }
 }

@@ -11,7 +11,7 @@
 
 ?>
 
-<div x-data="poolDelegation">
+<div <?php cardanoPress()->component()->poolDelegation(); ?>>
     <div class="py-6">
         <?php cardanoPress()->template('part/delegation-details'); ?>
     </div>
