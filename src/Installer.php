@@ -36,6 +36,7 @@ class Installer extends AbstractInstaller
 
         add_action('plugins_loaded', [$this, 'loaded'], -1);
         add_action('admin_notices', [$this, 'noticeApplicationNotReady']);
+        add_action('admin_notices', [$this, 'noticeServerSetup']);
         add_action('admin_notices', [$this, 'noticePluginReview']);
         add_action('admin_notices', [$this, 'noticePossibleIssues']);
         add_action('wp_ajax_cardanopress_compatibility_check', [$this, 'compatibilityCheckAction']);
@@ -77,6 +78,64 @@ class Installer extends AbstractInstaller
                         'target' => [],
                     ],
                 ]); ?>
+            </p>
+        </div>
+        <?php
+    }
+
+    public function noticeServerSetup(): void
+    {
+        if (! $this->shouldNotice('server')) {
+            return;
+        }
+
+        $required_php = '8.2';
+
+        if (0 < version_compare(PHP_VERSION, $required_php)) {
+            return;
+        }
+
+        ?>
+        <div class="notice notice-info is-dismissible cardanopress-notice" id="cardanopress_notice_server">
+            <p>
+                <?php echo wp_kses(
+                    sprintf(
+                        /* translators: 1: plugin name, 2: PHP version */
+                        __('Future versions of %1$s will require PHP v%2$s or higher.', 'cardanopress'),
+                        '<strong>' . $this->application->getData('Name') . '</strong>',
+                        $required_php,
+                    ),
+                    'strong'
+                ); ?>
+                <?php echo wp_kses(
+                    sprintf(
+                        /* translators: %s: site health info link */
+                        __('Please consider updating your current %s as soon as possible.', 'cardanopress'),
+                        sprintf(
+                            '<a href="%s" target="_blank">%s</a>',
+                            admin_url('site-health.php?tab=debug'),
+                            __('server setup', 'cardanopress'),
+                        ),
+                    ),
+                    [
+                        'a' => [
+                            'href' => [],
+                            'target' => [],
+                        ],
+                    ]
+                ); ?>
+                <?php echo wp_kses(
+                    sprintf(
+                        '<a href="https://wordpress.org/support/update-php/" target="_blank">%s</a>',
+                        __('Need help?', 'cardanopress'),
+                    ),
+                    [
+                        'a' => [
+                            'href' => [],
+                            'target' => [],
+                        ],
+                    ]
+                ); ?>
             </p>
         </div>
         <?php
