@@ -9,9 +9,6 @@
  * @since   0.1.0
  */
 
-cardanoPress()->enqueue('script', 'cardanopress-split');
-cardanoPress()->enqueue('script', 'cardanopress-payment');
-
 $fixedFee = cardanoPress()->option('payment_split');
 
 cardanoPress()->compatibleHeader();
@@ -25,7 +22,7 @@ cardanoPress()->compatibleHeader();
 
         <form <?php cardanoPress()->component()->paymentForm($fixedFee); ?>>
             <div class="py-6">
-                <h2>Fixed Fee: <span><?php echo esc_html($fixedFee); ?></span> ADA</h2>
+                <h2>Fixed Fee: <span x-text="payAmount"></span> ADA</h2>
 
                 <p class="text-sm italic">
                     <?php cardanoPress()->template('part/payment-lovelace'); ?> Lovelace

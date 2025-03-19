@@ -9,7 +9,6 @@
  * @since   0.1.0
  */
 
-cardanoPress()->enqueue('script', 'cardanopress-delegation');
 cardanoPress()->compatibleHeader();
 
 ?>

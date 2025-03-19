@@ -14,10 +14,12 @@ use CardanoPress\Helpers\WalletHelper;
 class Shortcode extends AbstractShortcode
 {
     protected Application $application;
+    protected Component $component;
 
     public function __construct()
     {
         $this->application = Application::getInstance();
+        $this->component = new Component(false);
     }
 
     public function setupHooks(): void
@@ -114,51 +116,38 @@ class Shortcode extends AbstractShortcode
 
     public function doComponentPoolDelegation($attributes, ?string $content = null): string
     {
-        $html = '<div x-data="poolDelegation">';
+        $html = '<div ' . $this->component->poolDelegation() . '>';
         $html .= apply_filters('the_content', $content);
         $html .= '</div>';
-
-        wp_enqueue_script('cardanopress-delegation');
 
         return trim($html);
     }
 
     public function doComponentPaymentForm($attributes, ?string $content = null): string
     {
-        $recaptchaKeys = $this->application->option('recaptcha_key');
-        $dataAttributes = '';
         $args = shortcode_atts([
-            'amount' => $this->application->option('payment_amount') ?? 1,
-            'recaptcha' => $recaptchaKeys['site'] ?? '',
-            'address' => '',
+            'amount' => null,
+            'address' => null,
         ], $attributes);
 
-        foreach ($args as $key => $value) {
-            $dataAttributes .= ' data-' . $key . '="' . esc_attr($value) . '"';
+        $args['amount'] = (float) $args['amount'];
+
+        if (! $args['amount']) {
+            $args['amount'] = null;
         }
 
-        $html = '<form x-data="paymentForm"' . $dataAttributes . '>';
+        $html = '<form ' . $this->component->paymentForm($args['amount'], $args['address']) . '>';
         $html .= apply_filters('the_content', $content);
         $html .= '</form>';
-
-        wp_enqueue_script('cardanopress-payment');
-
-        if ('' !== $args['recaptcha']) {
-            wp_enqueue_script('cardanopress-recaptcha');
-        }
 
         return trim($html);
     }
 
     public function doComponentSplitForm($attributes, ?string $content = null): string
     {
-        $fixedFee = $this->application->option('payment_split');
-
-        $html = '<form x-data="splitForm" data-fee="' . esc_attr($fixedFee) . '">';
+        $html = '<form ' . $this->component->splitForm() . '>';
         $html .= apply_filters('the_content', $content);
         $html .= '</form>';
-
-        wp_enqueue_script('cardanopress-split');
 
         return trim($html);
     }

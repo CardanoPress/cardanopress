@@ -9,13 +9,11 @@
  * @since   0.1.0
  */
 
-$paymentAmount = cardanoPress()->option('payment_amount');
-
 ?>
 
 <form <?php cardanoPress()->component()->paymentForm(); ?>>
     <div class='py-6'>
-        <h2>Amount: <span><?php echo esc_html($paymentAmount); ?></span> ADA</h2>
+        <h2>Amount: <span x-text="payAmount"></span> ADA</h2>
 
         <p class='text-sm italic'>
             <?php cardanoPress()->template('part/payment-lovelace'); ?> Lovelace

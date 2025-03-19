@@ -38,6 +38,8 @@ class Component
 
     public function paymentForm(float $amount = null, string $address = null): string
     {
+        $this->application->enqueue('script', 'cardanopress-payment');
+
         if (null === $amount) {
             $amount = $this->application->option('payment_amount');
         }
@@ -59,31 +61,27 @@ class Component
 
     public function poolDelegation(): string
     {
+        $this->application->enqueue('script', 'cardanopress-delegation');
+
         return $this->attributes([
             'x-data' => 'poolDelegation',
         ]);
     }
 
-    public function splitForm(int $fee = null): string
+    public function splitForm(): string
     {
-        if (null === $fee) {
-            $fee = $this->application->option('payment_split');
-        }
+        $this->application->enqueue('script', 'cardanopress-split');
 
         return $this->attributes([
             'x-data' => 'splitForm',
-            'data-fee' => $fee,
         ]);
     }
 
     protected function attributes(array $data): string
     {
         $attr = [];
-        $data = array_filter($data, function ($value) {
-            return null !== $value;
-        });
 
-        foreach ($data as $key => $value) {
+        foreach (array_filter($data) as $key => $value) {
             $attr[] = sprintf('%s="%s"', $key, esc_attr($value));
         }
 
