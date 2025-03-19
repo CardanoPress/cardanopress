@@ -1,0 +1,10 @@
+phpfiles=$(git diff --cached --name-only --diff-filter=ACM | { grep '.php$' || true; })
+[ -z "$phpfiles" ] && exit 0
+
+failed=$(./vendor/bin/phpunit tests | grep -E 'Test.php:' | sed -e "s|$(pwd)/||" -e 's/:[0-9]*$//' | sort -u)
+[ -z "$failed" ] && exit 0
+
+echo >&2 "Unsuccessful \`composer run test\` files:"
+echo >&2 "$(echo "$failed" | sed 's/^/  /')"
+
+exit 1

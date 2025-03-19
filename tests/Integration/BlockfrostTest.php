@@ -53,6 +53,11 @@ class BlockfrostTest extends TestCase
             'keyDeposit' => 2000000,
             'maxValSize' => 5000,
             'maxTxSize' => 16384,
+            'coinsPerUtxoSize' => 34482,
+            'priceMem' => 0.0577,
+            'priceStep' => 0.0000721,
+            'collateralPercentage' => 150,
+            'maxCollateralInputs' => 3,
             'slot' => 412162133,
         ];
 
@@ -69,6 +74,11 @@ class BlockfrostTest extends TestCase
                 'key_deposit' => $expected['keyDeposit'],
                 'max_val_size' => $expected['maxValSize'],
                 'max_tx_size' => $expected['maxTxSize'],
+                'coins_per_utxo_size' => $expected['coinsPerUtxoSize'],
+                'price_mem' => $expected['priceMem'],
+                'price_step' => $expected['priceStep'],
+                'collateral_percent' => $expected['collateralPercentage'],
+                'max_collateral_inputs' => $expected['maxCollateralInputs'],
             ]),
         ]);
 
