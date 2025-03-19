@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: CardanoPress Framework
+ * Plugin Name: CardanoPress - 0 - Framework
  * Plugin URI:  https://github.com/CardanoPress/framework
  * Author:      Gene Alyson Fortunado Torcende
  * Author URI:  https://cardanopress.io

@@ -11,8 +11,6 @@ use CardanoPress\Dependencies\Psr\Log\LoggerInterface;
 
 interface ApplicationInterface
 {
-    public const LOG_DIR = '';
-
     public function __construct(string $pluginFile);
 
     public function isReady(): bool;

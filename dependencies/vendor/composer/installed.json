@@ -115,17 +115,17 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.9.0",
-            "version_normalized": "2.9.0.0",
+            "version": "v2.10.1",
+            "version_normalized": "2.10.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "0c6972819ef4265b311179f845bc1f6c41b2dc06"
+                "reference": "6cb344e4835e484fab360dff2ddad03c577120df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/0c6972819ef4265b311179f845bc1f6c41b2dc06",
-                "reference": "0c6972819ef4265b311179f845bc1f6c41b2dc06",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/6cb344e4835e484fab360dff2ddad03c577120df",
+                "reference": "6cb344e4835e484fab360dff2ddad03c577120df",
                 "shasum": ""
             },
             "require": {
@@ -136,7 +136,7 @@
                 "automattic/jetpack-autoloader": "^2.12",
                 "themeplate/tester": "^2.1"
             },
-            "time": "2025-01-28T06:10:53+00:00",
+            "time": "2025-03-18T03:27:48+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -169,7 +169,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.9.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.10.1"
             },
             "install-path": "../cardanopress/framework"
         },
@@ -222,26 +222,26 @@
         },
         {
             "name": "themeplate/enqueue",
-            "version": "v2.6.0",
-            "version_normalized": "2.6.0.0",
+            "version": "v2.7.0",
+            "version_normalized": "2.7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Enqueue.git",
-                "reference": "d63a4cb2a758a1e6b342901b831db1d895b5cf6b"
+                "reference": "3232110de87a76ed8af64accf8661de5c162f530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/d63a4cb2a758a1e6b342901b831db1d895b5cf6b",
-                "reference": "d63a4cb2a758a1e6b342901b831db1d895b5cf6b",
+                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/3232110de87a76ed8af64accf8661de5c162f530",
+                "reference": "3232110de87a76ed8af64accf8661de5c162f530",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4|^8.0"
+                "php": "^7.4|^8.2"
             },
             "require-dev": {
                 "themeplate/tester": "^2.0"
             },
-            "time": "2024-07-19T13:02:11+00:00",
+            "time": "2025-03-02T05:18:26+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -265,32 +265,32 @@
             "description": "Helper for registered dependencies",
             "support": {
                 "issues": "https://github.com/ThemePlate/Enqueue/issues",
-                "source": "https://github.com/ThemePlate/Enqueue/tree/v2.6.0"
+                "source": "https://github.com/ThemePlate/Enqueue/tree/v2.7.0"
             },
             "install-path": "../themeplate/enqueue"
         },
         {
             "name": "themeplate/resource",
-            "version": "v2.3.1",
-            "version_normalized": "2.3.1.0",
+            "version": "v2.4.0",
+            "version_normalized": "2.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Resource.git",
-                "reference": "52781602ea6a92fe58180e70ebc88d101e41e08b"
+                "reference": "8830aa6c684ead8e626c33f0059d1a5b1cf49a65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Resource/zipball/52781602ea6a92fe58180e70ebc88d101e41e08b",
-                "reference": "52781602ea6a92fe58180e70ebc88d101e41e08b",
+                "url": "https://api.github.com/repos/ThemePlate/Resource/zipball/8830aa6c684ead8e626c33f0059d1a5b1cf49a65",
+                "reference": "8830aa6c684ead8e626c33f0059d1a5b1cf49a65",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4|^8.0"
+                "php": "^7.4|^8.2"
             },
             "require-dev": {
                 "themeplate/tester": "^2.0"
             },
-            "time": "2024-02-03T16:08:17+00:00",
+            "time": "2025-03-01T05:34:09+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -314,23 +314,23 @@
             "description": "ThemePlate resource hinting",
             "support": {
                 "issues": "https://github.com/ThemePlate/Resource/issues",
-                "source": "https://github.com/ThemePlate/Resource/tree/v2.3.1"
+                "source": "https://github.com/ThemePlate/Resource/tree/v2.4.0"
             },
             "install-path": "../themeplate/resource"
         },
         {
             "name": "themeplate/vite",
-            "version": "v1.6.0",
-            "version_normalized": "1.6.0.0",
+            "version": "v1.7.0",
+            "version_normalized": "1.7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Vite.git",
-                "reference": "5b2567f2bf1c494895ecfc0ae464085a442b82be"
+                "reference": "5f4a18d5707cb91bb3846b423ae1b8a0de37202b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Vite/zipball/5b2567f2bf1c494895ecfc0ae464085a442b82be",
-                "reference": "5b2567f2bf1c494895ecfc0ae464085a442b82be",
+                "url": "https://api.github.com/repos/ThemePlate/Vite/zipball/5f4a18d5707cb91bb3846b423ae1b8a0de37202b",
+                "reference": "5f4a18d5707cb91bb3846b423ae1b8a0de37202b",
                 "shasum": ""
             },
             "require": {
@@ -342,7 +342,7 @@
             "require-dev": {
                 "themeplate/tester": "^2.0"
             },
-            "time": "2024-05-29T10:59:13+00:00",
+            "time": "2025-03-15T05:48:03+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -363,7 +363,7 @@
             "description": "Straight-forward Vite integration for WordPress",
             "support": {
                 "issues": "https://github.com/ThemePlate/Vite/issues",
-                "source": "https://github.com/ThemePlate/Vite/tree/v1.6.0"
+                "source": "https://github.com/ThemePlate/Vite/tree/v1.7.0"
             },
             "install-path": "../themeplate/vite"
         }

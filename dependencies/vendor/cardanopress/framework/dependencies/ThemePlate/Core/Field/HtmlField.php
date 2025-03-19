@@ -31,7 +31,7 @@ class HtmlField extends Field {
 	private function handle( $value ): string {
 
 		if ( is_callable( $this->get_config( 'options' ) ) ) {
-			return call_user_func( $this->get_config( 'options' ), $value );
+			return call_user_func( $this->get_config( 'options' ), $value, $this->get_config() );
 		}
 
 		if ( is_string( $value ) ) {

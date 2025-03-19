@@ -53,7 +53,7 @@ class PostMeta extends BaseMeta {
 		add_meta_box(
 			$this->fields_group_key() . '_' . $config['form_id'],
 			$this->title,
-			function( WP_Post $post ) {
+			function ( WP_Post $post ) {
 				$this->layout_inside( (string) $post->ID );
 			},
 			null,

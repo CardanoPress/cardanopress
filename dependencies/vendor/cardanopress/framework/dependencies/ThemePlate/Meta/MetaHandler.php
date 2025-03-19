@@ -31,7 +31,7 @@ class MetaHandler extends Handler {
 
 		$stored = get_metadata( $this->data_type, (int) $current_id, $meta_key, ! $repeatable ) ?? '';
 
-		// phpcs:ignore WordPress.PHP.DisallowShortTernary.Found
+		// phpcs:ignore Universal.Operators.DisallowShortTernary.Found
 		return $stored ?: $field->get_config( 'default' );
 
 	}

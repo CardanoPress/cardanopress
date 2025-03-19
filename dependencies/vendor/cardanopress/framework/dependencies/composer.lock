@@ -805,16 +805,16 @@
         },
         {
             "name": "themeplate/core",
-            "version": "v2.7.2",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Core.git",
-                "reference": "2500319590cb4ae66936049dfae2956b0611edc1"
+                "reference": "e0f6eb311285117ca7fe4d3bc6ac295617e67a0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Core/zipball/2500319590cb4ae66936049dfae2956b0611edc1",
-                "reference": "2500319590cb4ae66936049dfae2956b0611edc1",
+                "url": "https://api.github.com/repos/ThemePlate/Core/zipball/e0f6eb311285117ca7fe4d3bc6ac295617e67a0d",
+                "reference": "e0f6eb311285117ca7fe4d3bc6ac295617e67a0d",
                 "shasum": ""
             },
             "require": {
@@ -843,9 +843,9 @@
             "description": "ThemePlate core functions and helpers",
             "support": {
                 "issues": "https://github.com/ThemePlate/Core/issues",
-                "source": "https://github.com/ThemePlate/Core/tree/v2.7.2"
+                "source": "https://github.com/ThemePlate/Core/tree/v2.8.0"
             },
-            "time": "2025-01-23T10:57:03+00:00"
+            "time": "2025-02-11T16:16:16+00:00"
         },
         {
             "name": "themeplate/cpt",
@@ -983,16 +983,16 @@
         },
         {
             "name": "themeplate/meta",
-            "version": "v2.2.1",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Meta.git",
-                "reference": "9c6e1601b062b4571c23e2f964fdf63915f07b94"
+                "reference": "c7c08f67588d5184f2383f7d0228462c5fcd4e68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Meta/zipball/9c6e1601b062b4571c23e2f964fdf63915f07b94",
-                "reference": "9c6e1601b062b4571c23e2f964fdf63915f07b94",
+                "url": "https://api.github.com/repos/ThemePlate/Meta/zipball/c7c08f67588d5184f2383f7d0228462c5fcd4e68",
+                "reference": "c7c08f67588d5184f2383f7d0228462c5fcd4e68",
                 "shasum": ""
             },
             "require": {
@@ -1021,9 +1021,9 @@
             "description": "ThemePlate custom meta boxes",
             "support": {
                 "issues": "https://github.com/ThemePlate/Meta/issues",
-                "source": "https://github.com/ThemePlate/Meta/tree/v2.2.1"
+                "source": "https://github.com/ThemePlate/Meta/tree/v2.3.0"
             },
-            "time": "2023-04-25T04:47:48+00:00"
+            "time": "2025-02-11T11:59:40+00:00"
         },
         {
             "name": "themeplate/page",
@@ -1113,16 +1113,16 @@
         },
         {
             "name": "themeplate/settings",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Settings.git",
-                "reference": "448854956bf9df841b111c78feffc21b806b6196"
+                "reference": "8ca58d963db13c9c6b22fe872ffef03a4623622e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Settings/zipball/448854956bf9df841b111c78feffc21b806b6196",
-                "reference": "448854956bf9df841b111c78feffc21b806b6196",
+                "url": "https://api.github.com/repos/ThemePlate/Settings/zipball/8ca58d963db13c9c6b22fe872ffef03a4623622e",
+                "reference": "8ca58d963db13c9c6b22fe872ffef03a4623622e",
                 "shasum": ""
             },
             "require": {
@@ -1151,9 +1151,9 @@
             "description": "ThemePlate custom option boxes",
             "support": {
                 "issues": "https://github.com/ThemePlate/Settings/issues",
-                "source": "https://github.com/ThemePlate/Settings/tree/v2.2.0"
+                "source": "https://github.com/ThemePlate/Settings/tree/v2.3.0"
             },
-            "time": "2023-04-25T05:39:08+00:00"
+            "time": "2025-02-10T14:58:01+00:00"
         }
     ],
     "packages-dev": [

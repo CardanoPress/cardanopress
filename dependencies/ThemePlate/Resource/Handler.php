@@ -54,12 +54,14 @@ class Handler {
 
 				if ( $source ) {
 					( new Item( $source, $attributes['directive'] ) )
-						->extra( array_merge(
-							$attributes['extra'],
-							array(
-								'as' => in_array( $attributes['directive'], array( 'preload', 'prefetch' ), true ) ? $type : '',
-							),
-						) )
+						->extra(
+							array_merge(
+								$attributes['extra'],
+								array(
+									'as' => in_array( $attributes['directive'], array( 'preload', 'prefetch' ), true ) ? $type : '',
+								),
+							)
+						)
 						->tag();
 				}
 			}

@@ -10,6 +10,7 @@
 namespace CardanoPress\Dependencies\ThemePlate\Core\Helper;
 
 use CardanoPress\Dependencies\ThemePlate\Core\Field;
+use CardanoPress\Dependencies\ThemePlate\Core\Field\LinkField;
 use CardanoPress\Dependencies\ThemePlate\Core\Fields;
 
 class FieldsHelper {
@@ -46,17 +47,35 @@ class FieldsHelper {
 
 		if ( 'group' === $field->get_config( 'type' ) ) {
 			$schema['properties'] = static::build_schema( $field->get_config( 'fields' ) );
-		} elseif ( 'link' === $field->get_config( 'type' ) ) {
-			$properties = array();
 
-			foreach ( $schema['default'] as $key => $value ) {
-				$properties[ $key ] = array(
-					'type'    => 'string',
-					'default' => $value,
-				);
+			$default = $schema['default'];
+
+			if ( ! MainHelper::for_repeatable( $default ) ) {
+				$default = array( $default );
 			}
 
-			$schema['properties'] = $properties;
+			foreach ( $schema['properties'] as $key => &$value ) {
+				if ( ! empty( $value['default'] ) ) {
+					continue;
+				}
+
+				$value['default'] = $default[0][ $key ];
+			}
+		} elseif ( 'link' === $field->get_config( 'type' ) ) {
+			$schema['properties'] = LinkField::DEFAULT_VALUE;
+
+			$default = $schema['default'];
+
+			if ( MainHelper::for_repeatable( $default ) ) {
+				$default = $default[0];
+			}
+
+			foreach ( $schema['properties'] as $key => &$value ) {
+				$value = array(
+					'type'    => 'string',
+					'default' => $default[ $key ],
+				);
+			}
 		}
 
 		if ( $field::MULTIPLE_ABLE && (bool) $field->get_config( 'multiple' ) ) {
@@ -95,22 +114,32 @@ class FieldsHelper {
 		$default = $field->get_config( 'default' );
 
 		if ( 'group' === $field->get_config( 'type' ) ) {
-			if ( ! is_array( $default ) ) {
-				$default = array();
+			$default = (array) $default;
+
+			if ( ! MainHelper::for_repeatable( $default ) ) {
+				$default = array( $default );
 			}
 
-			$fields = static::group_fields( $field->get_config( 'fields' ) );
+			foreach ( $default as &$def ) {
+				$fields = static::group_fields( $field->get_config( 'fields' ) );
 
-			foreach ( $fields->get_collection() as $sub_field ) {
-				if ( isset( $default[ $sub_field->data_key() ] ) ) {
-					continue;
+				foreach ( $fields->get_collection() as $sub_field ) {
+					if ( isset( $def[ $sub_field->data_key() ] ) ) {
+						continue;
+					}
+
+					$def[ $sub_field->data_key() ] = static::get_default_value( $sub_field );
 				}
-
-				$default[ $sub_field->data_key() ] = static::get_default_value( $sub_field );
 			}
+
+			if ( ! $field->get_config( 'repeatable' ) ) {
+				$default = $default[0];
+			}
+
+			return MainHelper::values_to_string( $default );
 		}
 
-		if ( is_array( $field::DEFAULT_VALUE ) && $field->get_config( 'repeatable' ) ) {
+		if ( $field->get_config( 'repeatable' ) && ! MainHelper::for_repeatable( $default ) ) {
 			$default = array( $default );
 		}
 

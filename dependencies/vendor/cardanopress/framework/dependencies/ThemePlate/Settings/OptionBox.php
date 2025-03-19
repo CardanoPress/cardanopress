@@ -54,7 +54,7 @@ class OptionBox extends Form {
 		foreach ( $this->menu_pages as $menu_page ) {
 			$section = $menu_page . '_' . $this->config['context'];
 
-			add_filter( 'sanitize_option_' . $menu_page, array( $this, 'sanitize_option' ) );
+			add_filter( 'sanitize_option_' . $menu_page, array( OptionHelpers::class, 'sanitize' ), 10, 2 );
 			add_action( 'themeplate_page_' . $menu_page . '_load', array( FormHelper::class, 'enqueue_assets' ) );
 			add_action( 'themeplate_settings_' . $section, array( $this, 'layout_postbox' ), $priority );
 			add_filter( 'themeplate_setting_' . $menu_page . '_schema', array( $this, 'build_schema' ), $priority );
@@ -74,17 +74,6 @@ class OptionBox extends Form {
 		$this->menu_pages[] = $page;
 
 		return $this;
-
-	}
-
-
-	public function sanitize_option( ?array $value ): array {
-
-		if ( null === $value ) {
-			return array();
-		}
-
-		return BoxHelper::prepare_save( $value );
 
 	}
 
@@ -115,26 +104,17 @@ class OptionBox extends Form {
 	public function register_setting(): void {
 
 		foreach ( $this->menu_pages as $menu_page ) {
-			$schema = apply_filters( 'themeplate_setting_' . $menu_page . '_schema', array() );
+			$option = OptionHelpers::schema_default( $menu_page );
 			$args   = array(
-				'default'      => array(),
+				'default'      => $option['default'],
 				'type'         => 'object',
 				'show_in_rest' => array(
 					'schema' => array(
 						'type'       => 'object',
-						'properties' => $schema,
+						'properties' => $option['schema'],
 					),
 				),
 			);
-
-			if ( ! empty( $schema ) ) {
-				$args['default'] = array_map(
-					function( $field ) {
-						return $field['default'];
-					},
-					$schema
-				);
-			}
 
 			register_setting( $menu_page, $menu_page, $args );
 		}

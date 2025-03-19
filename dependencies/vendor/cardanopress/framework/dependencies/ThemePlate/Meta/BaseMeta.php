@@ -130,6 +130,22 @@ abstract class BaseMeta extends Form {
 	}
 
 
+	public function build_schema( array $data ): array {
+
+		if ( null === $this->fields ) {
+			return $data;
+		}
+
+		$schema = FieldsHelper::build_schema( $this->fields, $this->config['data_prefix'] );
+
+		return array_merge(
+			$data,
+			$schema,
+		);
+
+	}
+
+
 	public function register_meta(): void {
 
 		if ( null === $this->fields ) {
@@ -137,18 +153,23 @@ abstract class BaseMeta extends Form {
 		}
 
 		$prefix = $this->config['data_prefix'];
-		$schema = FieldsHelper::build_schema( $this->fields, $prefix );
 		$types  = property_exists( $this, 'locations' ) ? $this->locations : array( '' );
 
+		add_filter( "default_{$this->config['object_type']}_metadata", array( MetaHelpers::class, 'default' ), 10, 5 );
+
 		foreach ( $this->fields->get_collection() as $field ) {
-			$args = $schema[ $field->data_key( $prefix ) ];
+			$args = FieldsHelper::get_schema( $field );
+
+			unset( $args['default'] );
+
+			$args['show_in_rest'] = array( 'schema' => $args );
 
 			$args['single'] = ! $field->get_config( 'repeatable' );
 
-			$args['show_in_rest'] = array( 'schema' => $schema[ $field->data_key( $prefix ) ] );
-
 			foreach ( $types as $type ) {
 				$args['object_subtype'] = $type;
+
+				add_filter( "themeplate_{$this->config['object_type']}_meta_{$field->data_key( $prefix )}_schema", array( $this, 'build_schema' ) );
 
 				register_meta( $this->config['object_type'], $field->data_key( $prefix ), $args );
 			}

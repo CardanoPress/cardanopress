@@ -45,7 +45,7 @@ abstract class AbstractInstaller extends SharedBase implements InstallerInterfac
         WP_Filesystem();
 
         if ($wp_filesystem) {
-            $logDir = $wp_filesystem->wp_content_dir() . $this->application::LOG_DIR;
+            $logDir = $wp_filesystem->wp_content_dir() . 'cardanopress-logs';
 
             if (! $wp_filesystem->exists($logDir)) {
                 $wp_filesystem->mkdir($logDir);

@@ -20,13 +20,7 @@ class GroupField extends Field {
 
 	protected function initialize(): void {
 
-		$clone = clone $this;
-
-		$clone->config['repeatable'] = false;
-
-		$default = FieldsHelper::get_default_value( $clone );
-
-		$this->config['default'] = $default;
+		$this->config['default'] = FieldsHelper::get_default_value( $this );
 		$this->config['fields']  = FieldsHelper::group_fields( $this->config['fields'] ?? array() );
 
 	}
