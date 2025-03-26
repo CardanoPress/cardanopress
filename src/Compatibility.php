@@ -48,10 +48,15 @@ class Compatibility
 
     protected function theme(): bool
     {
+        if (wp_is_block_theme()) {
+            return true;
+        }
+
         $url = add_query_arg(['cardanopress' => time()], home_url());
         $args = [
             'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
             'sslverify' => apply_filters('https_local_ssl_verify', false),
+            'cookies' => $_COOKIE,
         ];
 
         return ! is_wp_error(wp_remote_get($url, $args));
