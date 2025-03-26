@@ -282,6 +282,9 @@ class Installer extends AbstractInstaller
 
     public function doUpgrade(string $currentVersion, string $appVersion): void
     {
+        $this->application->userProfile()->dismissNotice('server', true);
+        $this->application->userProfile()->dismissNotice('review', true);
+
         if ('' === $currentVersion) {
             $path = plugin_dir_path($this->application->getPluginFile());
 
