@@ -265,17 +265,18 @@ class Installer extends AbstractInstaller
 
     public function doActivate(): void
     {
-        if ('after_switch_theme' === current_filter() && ! isset($_GET['activated'])) {
+        if ('after_switch_theme' === current_filter() && 'checking' === $this->compatibility->getStatus()) {
             return;
         }
 
         $this->compatibility->saveIssues(true);
-        $this->compatibility->setStatus('activated');
         $this->application->userProfile()->dismissNotice('issues', true);
 
         if ('after_switch_theme' === current_filter()) {
             $this->log('Theming ' . $this->pluginNameAndVersion);
             $this->compatibility->run();
+        } else {
+            $this->compatibility->setStatus('activated');
         }
     }
 
