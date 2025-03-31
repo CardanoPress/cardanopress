@@ -137,12 +137,36 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $this->do_actual_test('ada_handle', $value, $is_known);
     }
 
-    protected function do_actual_test(string $method, string $value, bool $is_known): void
+    public function for_data_signature(): array
+    {
+        return [
+            ['{"signature":"123","key":"456"}', true, '123|456'],
+            ['{"key":"789","signature":"456"}', true, '456|789'],
+            ['{"unknown":"value"}', false, ''],
+            ['', false, ''],
+        ];
+    }
+
+    /** @dataProvider for_data_signature */
+    public function test_data_signature(string $value, bool $is_known, string $expected): void
+    {
+        $this->do_actual_test('data_signature', $value, $is_known, $expected);
+    }
+
+    protected function do_actual_test(string $method, string $value, bool $is_known, string $expected = ''): void
     {
         $_POST[$method] = $value;
 
+        $actual = $this->sanitization->$method($value);
+
+        if ('' === $expected) {
+            $expected = $is_known ? $value : '';
+        }
+
+        $this->assertSame($expected, $actual);
+
         if ($is_known) {
-            $this->assertSame($value, $this->sanitization->sanitizePost($method));
+            $this->assertSame($expected, $this->sanitization->sanitizePost($method));
         } else {
             add_action('wp_ajax_test', function () use ($method) {
                 $this->sanitization->sanitizePost($method);
@@ -157,9 +181,6 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
 
             $this->assertSame(['success' => false, 'data' => $this->sanitization->getMessage($method)], $output);
         }
-
-        $actual = $this->sanitization->$method($value);
-        $expected = $is_known ? $value : '';
 
         $this->assertSame($expected, $actual);
     }
