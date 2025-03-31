@@ -354,6 +354,20 @@ class Admin extends AbstractAdmin
             'parent_slug' => 'cardanopress',
             'dismissable' => true,
             'is_automatic' => true,
+            'strings' => [
+                'notice_can_install_required'     => _n_noop(
+                    /* translators: 1: plugin name(s). */
+                    'CardanoPress requires the following plugin: %1$s.',
+                    'CardanoPress requires the following plugins: %1$s.',
+                    'cardanopress'
+                ),
+                'notice_can_install_recommended'  => _n_noop(
+                    /* translators: 1: plugin name(s). */
+                    'CardanoPress recommends the following plugin: %1$s.',
+                    'CardanoPress recommends the following plugins: %1$s.',
+                    'cardanopress'
+                ),
+            ]
         ];
 
         tgmpa($plugins, $config);
