@@ -237,6 +237,8 @@ class Admin extends AbstractAdmin
                     return [
                         'type' => 'page',
                         'title' => ucfirst($page),
+                        'none' => !in_array($page, ['dashboard', 'collection'], true),
+                        'required' => in_array($page, ['dashboard', 'collection'], true),
                     ];
                 }, self::PAGES),
             ),
