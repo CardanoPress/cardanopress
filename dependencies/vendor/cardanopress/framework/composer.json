@@ -17,7 +17,11 @@
     }
   ],
   "config": {
+    "platform": {
+      "php": "7.4"
+    },
     "optimize-autoloader": true,
+    "sort-packages": true,
     "allow-plugins": {
       "automattic/jetpack-autoloader": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
@@ -27,11 +31,12 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require": {
-    "php": "^7.4|^8.0",
+    "php": "^7.4|^8.2",
     "ext-json": "*"
   },
   "require-dev": {
-    "automattic/jetpack-autoloader": "^2.12",
+    "automattic/jetpack-autoloader": "^5.0",
+    "coenjacobs/mozart": "^0.7.1",
     "themeplate/tester": "^2.1"
   },
   "autoload": {
@@ -39,12 +44,12 @@
       "dependencies/compatibility.php"
     ],
     "psr-4": {
-      "CardanoPress\\Dependencies\\": "dependencies/",
-      "CardanoPress\\": "src/"
+      "CardanoPress\\Dependencies\\": "dependencies",
+      "CardanoPress\\": "src"
     }
   },
   "scripts": {
-    "index.php": "find . -type d -not \\( -path ./vendor -prune \\) -exec cp -f ./index.php {} \\;",
+    "index.php": "themeplate index.php",
     "analyse": "themeplate analyse",
     "lint": "themeplate lint",
     "fix": "themeplate fix"

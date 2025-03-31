@@ -20,7 +20,7 @@ class OptionHelpers {
 
 		if ( ! empty( $schema ) ) {
 			$default = array_map(
-				function( $field ) {
+				function ( $field ) {
 					return $field['default'];
 				},
 				$schema
@@ -43,7 +43,7 @@ class OptionHelpers {
 
 		array_walk(
 			$saved,
-			function( &$value, $key, $default ) {
+			function ( &$value, $key, $default ) {
 				if ( empty( $value ) ) {
 					$value = $default[ $key ];
 				}

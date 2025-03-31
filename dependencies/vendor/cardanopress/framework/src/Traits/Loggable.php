@@ -18,14 +18,14 @@ trait Loggable
         $this->logger = $logger;
     }
 
-    protected function getLogger(): LoggerInterface
+    protected function getLogger(): ?LoggerInterface
     {
         return $this->logger;
     }
 
     protected function log(string $message, string $level = 'info'): void
     {
-        if (null === $this->logger) {
+        if (null === $this->getLogger()) {
             error_log(strtoupper($level) . ' > ' . print_r($message, true));
             return;
         }

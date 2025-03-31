@@ -115,24 +115,25 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.10.1",
+            "version": "v2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "6cb344e4835e484fab360dff2ddad03c577120df"
+                "reference": "a3605b9f3c07df8b908f5949d976230ef3f6ea8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/6cb344e4835e484fab360dff2ddad03c577120df",
-                "reference": "6cb344e4835e484fab360dff2ddad03c577120df",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/a3605b9f3c07df8b908f5949d976230ef3f6ea8c",
+                "reference": "a3605b9f3c07df8b908f5949d976230ef3f6ea8c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.4|^8.0"
+                "php": "^7.4|^8.2"
             },
             "require-dev": {
-                "automattic/jetpack-autoloader": "^2.12",
+                "automattic/jetpack-autoloader": "^5.0",
+                "coenjacobs/mozart": "^0.7.1",
                 "themeplate/tester": "^2.1"
             },
             "type": "library",
@@ -141,8 +142,8 @@
                     "dependencies/compatibility.php"
                 ],
                 "psr-4": {
-                    "CardanoPress\\": "src/",
-                    "CardanoPress\\Dependencies\\": "dependencies/"
+                    "CardanoPress\\": "src",
+                    "CardanoPress\\Dependencies\\": "dependencies"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -166,9 +167,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.10.1"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.12.0"
             },
-            "time": "2025-03-18T03:27:48+00:00"
+            "time": "2025-03-31T08:48:34+00:00"
         },
         {
             "name": "kermage/cardanophp",
@@ -216,16 +217,16 @@
         },
         {
             "name": "themeplate/enqueue",
-            "version": "v2.7.0",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Enqueue.git",
-                "reference": "3232110de87a76ed8af64accf8661de5c162f530"
+                "reference": "257e22a52ac48a70a89e1d3f09f05b71bfbdd9fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/3232110de87a76ed8af64accf8661de5c162f530",
-                "reference": "3232110de87a76ed8af64accf8661de5c162f530",
+                "url": "https://api.github.com/repos/ThemePlate/Enqueue/zipball/257e22a52ac48a70a89e1d3f09f05b71bfbdd9fb",
+                "reference": "257e22a52ac48a70a89e1d3f09f05b71bfbdd9fb",
                 "shasum": ""
             },
             "require": {
@@ -256,22 +257,22 @@
             "description": "Helper for registered dependencies",
             "support": {
                 "issues": "https://github.com/ThemePlate/Enqueue/issues",
-                "source": "https://github.com/ThemePlate/Enqueue/tree/v2.7.0"
+                "source": "https://github.com/ThemePlate/Enqueue/tree/v2.8.0"
             },
-            "time": "2025-03-02T05:18:26+00:00"
+            "time": "2025-03-28T11:45:44+00:00"
         },
         {
             "name": "themeplate/resource",
-            "version": "v2.4.0",
+            "version": "v2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Resource.git",
-                "reference": "8830aa6c684ead8e626c33f0059d1a5b1cf49a65"
+                "reference": "4431cf751d12ff5396f3366d9575466371f6d833"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Resource/zipball/8830aa6c684ead8e626c33f0059d1a5b1cf49a65",
-                "reference": "8830aa6c684ead8e626c33f0059d1a5b1cf49a65",
+                "url": "https://api.github.com/repos/ThemePlate/Resource/zipball/4431cf751d12ff5396f3366d9575466371f6d833",
+                "reference": "4431cf751d12ff5396f3366d9575466371f6d833",
                 "shasum": ""
             },
             "require": {
@@ -302,9 +303,9 @@
             "description": "ThemePlate resource hinting",
             "support": {
                 "issues": "https://github.com/ThemePlate/Resource/issues",
-                "source": "https://github.com/ThemePlate/Resource/tree/v2.4.0"
+                "source": "https://github.com/ThemePlate/Resource/tree/v2.4.1"
             },
-            "time": "2025-03-01T05:34:09+00:00"
+            "time": "2025-03-28T12:16:58+00:00"
         },
         {
             "name": "themeplate/vite",

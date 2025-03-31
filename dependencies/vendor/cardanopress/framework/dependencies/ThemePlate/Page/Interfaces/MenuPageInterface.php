@@ -11,6 +11,6 @@ namespace CardanoPress\Dependencies\ThemePlate\Page\Interfaces;
 
 interface MenuPageInterface {
 
-	public function icon( string $icon ): self;
+	public function icon( string $url ): self;
 
 }

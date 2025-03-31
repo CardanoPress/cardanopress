@@ -31,8 +31,8 @@ class FormHelper {
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_style( 'themeplate-select2-style', AssetsHelper::get_url( 'select2.min.css' ), array(), '4.0.13' );
 		wp_enqueue_script( 'themeplate-select2-script', AssetsHelper::get_url( 'select2.full.min.js' ), array(), '4.0.13', true );
-		wp_enqueue_style( 'themeplate-datepicker-style', AssetsHelper::get_url( 'datepicker.min.css' ), array(), '1.9.0' );
-		wp_enqueue_script( 'themeplate-datepicker-script', AssetsHelper::get_url( 'datepicker.min.js' ), array(), '1.9.0', true );
+		wp_enqueue_style( 'themeplate-datepicker-style', AssetsHelper::get_url( 'datepicker.min.css' ), array(), '1.10.0' );
+		wp_enqueue_script( 'themeplate-datepicker-script', AssetsHelper::get_url( 'datepicker.min.js' ), array(), '1.10.0', true );
 		wp_add_inline_script( 'themeplate-datepicker-script', 'if ( ! jQuery.fn.bootstrapDP && jQuery.fn.datepicker && jQuery.fn.datepicker.noConflict ) jQuery.fn.bootstrapDP = jQuery.fn.datepicker.noConflict();' );
 		wp_enqueue_style( 'themeplate-style', AssetsHelper::get_url( 'themeplate.css' ), array(), $version );
 		wp_enqueue_script( 'themeplate-script', AssetsHelper::get_url( 'themeplate.js' ), array( 'wp-dom-ready' ), $version, true );

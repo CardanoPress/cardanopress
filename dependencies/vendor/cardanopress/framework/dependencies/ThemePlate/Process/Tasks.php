@@ -105,7 +105,7 @@ class Tasks {
 			$done[ $index ] = compact( 'task', 'output' );
 
 			unset( $queued['tasks'][ $index ] );
-			$index ++;
+			++$index;
 
 			if ( empty( $queued['tasks'] ) ) {
 				$this->delete( $queued['key'] );

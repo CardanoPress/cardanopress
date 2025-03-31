@@ -97,6 +97,7 @@ class Async {
 
 	public function dispatch( string $custom_url = null ): bool {
 
+		// phpcs:ignore Universal.Operators.DisallowShortTernary
 		$post_url  = $custom_url ?: admin_url( 'admin-ajax.php' );
 		$post_args = array(
 			'timeout'   => defined( 'PROCESS_ASYNC_TIMEOUT' ) ? PROCESS_ASYNC_TIMEOUT : 1,

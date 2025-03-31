@@ -26,7 +26,7 @@ class OptionHandler extends Handler {
 
 		$stored = $this->saved_values[ $field->data_key( $data_prefix ) ] ?? '';
 
-		// phpcs:ignore WordPress.PHP.DisallowShortTernary.Found
+		// phpcs:ignore Universal.Operators.DisallowShortTernary
 		$value = $stored ?: $field->get_config( 'default' );
 
 		if (

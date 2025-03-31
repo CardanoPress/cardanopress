@@ -52,7 +52,7 @@ class Handler {
 
 				$source = 'script' === $type ? Helper::get_script_src( $handle ) : Helper::get_style_src( $handle );
 
-				if ( $source ) {
+				if ( '' !== $source ) {
 					( new Item( $source, $attributes['directive'] ) )
 						->extra(
 							array_merge(

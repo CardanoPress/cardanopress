@@ -9,7 +9,6 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Core;
 
-use CardanoPress\Dependencies\ThemePlate\Core\Helper\FieldsHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\FormHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MetaHelper;
 

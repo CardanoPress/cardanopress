@@ -13,6 +13,10 @@ interface PageInterface {
 
 	public function capability( string $capability ): self;
 
+	public function title( string $title ): self;
+
+	public function slug( string $slug ): self;
+
 	public function position( int $position ): self;
 
 	public function menu(): void;
