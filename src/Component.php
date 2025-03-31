@@ -36,7 +36,7 @@ class Component
         ]);
     }
 
-    public function paymentForm(float $amount = null, string $address = null): string
+    public function paymentForm(?float $amount = null, ?string $address = null): string
     {
         $this->application->enqueue('script', 'cardanopress-payment');
 

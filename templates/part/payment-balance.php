@@ -17,4 +17,4 @@ $inAda = empty($format) || $format === 'ADA';
 
 ?>
 
-<span x-text="balanceValue('<?php echo esc_js($type); ?>', <?php echo esc_js($inAda) ? 'true' : 'false'; ?>)"></span>
+<span x-text="balanceValue('<?php echo esc_js($type); ?>', <?php echo esc_js($inAda ? 'true' : 'false'); ?>)"></span>
