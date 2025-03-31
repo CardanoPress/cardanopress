@@ -149,10 +149,8 @@ class Application extends AbstractApplication
     public function getWallets(): array
     {
         return apply_filters('cardanopress_supported_wallets', [
-            'Nami',
             'Eternl',
             'Yoroi',
-            'Flint',
             'Typhon',
             'GeroWallet',
             'NuFi',
