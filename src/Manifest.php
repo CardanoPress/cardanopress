@@ -7,20 +7,17 @@
 
 namespace PBWebDev\CardanoPress;
 
-use CardanoPress\Dependencies\ThemePlate\Enqueue\CustomData;
 use CardanoPress\Dependencies\ThemePlate\Vite;
 use CardanoPress\Foundation\AbstractManifest;
 
 class Manifest extends AbstractManifest
 {
-    private bool $legacy_loaded;
     private Vite $vite;
 
     public const HANDLE_PREFIX = 'cardanopress-';
 
     public function initialize(): void
     {
-        $this->legacy_loaded = ! (isset($this->data) && $this->data instanceof CustomData);
         $this->vite = new Vite(plugin_dir_path($this->path), plugin_dir_url($this->path));
     }
 
@@ -87,13 +84,8 @@ class Manifest extends AbstractManifest
             'https://www.google.com/recaptcha/api.js?onload=cardanoPressRecaptchaCallback'
         );
 
-        if ($this->legacy_loaded) {
-            wp_script_add_data(self::HANDLE_PREFIX . 'alpinejs', 'defer', true);
-            wp_script_add_data(self::HANDLE_PREFIX . 'recaptcha', 'defer', true);
-        } else {
-            $this->data->script(self::HANDLE_PREFIX . 'alpinejs', ['defer' => true]);
-            $this->data->script(self::HANDLE_PREFIX . 'recaptcha', ['defer' => true]);
-        }
+        $this->data->script(self::HANDLE_PREFIX . 'alpinejs', ['defer' => true]);
+        $this->data->script(self::HANDLE_PREFIX . 'recaptcha', ['defer' => true]);
 
         $data = [
             'ajaxUrl' => admin_url('admin-ajax.php'),
