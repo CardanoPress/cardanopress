@@ -41,6 +41,7 @@ class Installer extends AbstractInstaller
         add_action('admin_notices', [$this, 'noticePossibleIssues']);
         add_action('wp_ajax_cardanopress_compatibility_check', [$this, 'compatibilityCheckAction']);
         add_action('after_switch_theme', [$this, 'doActivate']);
+        add_action('init', [$this->compatibility, 'load']);
         add_action(self::DATA_PREFIX . 'activating', [$this, 'doActivate']);
         add_action(self::DATA_PREFIX . 'upgrading', [$this, 'doUpgrade'], 10, 2);
         add_filter('plugin_action_links_' . $this->pluginBaseName, [$this, 'mergeSettingsLink']);
@@ -188,11 +189,13 @@ class Installer extends AbstractInstaller
             return;
         }
 
-        if ('activated' === $this->compatibility->getStatus()) {
+        $status = $this->compatibility->getStatus();
+
+        if ('activated' === $status) {
             $this->compatibility->addIssue('missed');
         }
 
-        $issues = $this->compatibility->getIssues();
+        $issues = $this->compatibility->getIssues('checking' === $status);
 
         if (empty($issues)) {
             return;

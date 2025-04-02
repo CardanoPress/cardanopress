@@ -23,6 +23,12 @@ class Compatibility
 
     public function __construct(LoggerInterface $logger)
     {
+        $this->setLogger($logger);
+        $this->setInstance($this);
+    }
+
+    public function load(): void
+    {
         $this->issues = $this->getIssues(true);
         $this->messages = [
             'missed' => __('Unable to complete the compatibility check run.', 'cardanopress'),
@@ -31,12 +37,9 @@ class Compatibility
             'html5' => __('Activated theme does not support HTML5 markup. `script` value required.', 'cardanopress'),
             'sodium' => __('Sodium extension is not loaded. Required in datasignature verification.', 'cardanopress'),
         ];
-
-        $this->setLogger($logger);
-        $this->setInstance($this);
     }
 
-    public function getStatus()
+    public function getStatus(): string
     {
         return get_option(static::DATA_PREFIX . 'status', 'normal');
     }
@@ -81,6 +84,8 @@ class Compatibility
         }
 
         $this->issues[] = $type;
+
+        $this->log($this->message($type), 'warning');
 
         return true;
     }
@@ -129,14 +134,8 @@ class Compatibility
             return;
         }
 
-        foreach ($this->getIssues(true) as $issue) {
-            $this->addIssue($issue);
-            $this->log($this->message($issue), 'warning');
-        }
-
         if (! extension_loaded('sodium')) {
             $this->addIssue('sodium');
-            $this->log($this->message('sodium'), 'warning');
             $this->saveIssues();
         }
     }
