@@ -104,6 +104,12 @@ class WalletAction implements HookInterface
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
         $stakeAddress = $this->sanitization->sanitizePost('stake_address');
+        $dataSignature = $this->sanitization->sanitizePost('data_signature');
+
+        if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress)) {
+            wp_send_json_error(CoreAction::getAjaxMessage('incorrectSignature'));
+        }
+
         $userProfile = $this->application->userProfile();
 
         $userProfile->saveNetwork($queryNetwork);
