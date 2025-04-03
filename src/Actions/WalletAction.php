@@ -50,7 +50,7 @@ class WalletAction implements HookInterface
 
     public function initializeUserAccount(): void
     {
-        $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
+        $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
@@ -99,7 +99,7 @@ class WalletAction implements HookInterface
 
     public function connectUserWallet(): void
     {
-        $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address']);
+        $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
