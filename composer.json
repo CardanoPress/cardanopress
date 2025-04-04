@@ -18,7 +18,11 @@
     }
   ],
   "config": {
+    "platform": {
+      "php": "7.4"
+    },
     "optimize-autoloader": true,
+    "sort-packages": true,
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "phpstan/extension-installer": true
@@ -27,7 +31,7 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require": {
-    "php": "^7.4|^8.0",
+    "php": "^7.4|^8.2",
     "ext-json": "*",
     "ext-fileinfo": "*",
     "ext-ctype": "*"
@@ -38,7 +42,7 @@
   },
   "autoload": {
     "psr-4": {
-      "PBWebDev\\CardanoPress\\": "src/"
+      "PBWebDev\\CardanoPress\\": "src"
     }
   },
   "autoload-dev": {
@@ -47,11 +51,10 @@
     }
   },
   "scripts": {
+    "index.php": "themeplate index.php",
     "analyse": "themeplate analyse",
     "lint": "themeplate lint",
     "fix": "themeplate fix",
-    "test": "themeplate test",
-    "test:unit": "themeplate test --type unit",
-    "test:integration": "themeplate test --type integration"
+    "test": "themeplate test"
   }
 }

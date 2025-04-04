@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "397b4dc37e7349226efbdb1ef68ccf46",
+    "content-hash": "b92bca0e3d661f363e3aa051f98d0038",
     "packages": [],
     "packages-dev": [
         {
@@ -2810,16 +2810,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.12.0",
+            "version": "3.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "2d1b63db139c3c6ea0c927698e5160f8b3b8d630"
+                "reference": "ea16a1f3719783345febd3aab41beb55c8c84bfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/2d1b63db139c3c6ea0c927698e5160f8b3b8d630",
-                "reference": "2d1b63db139c3c6ea0c927698e5160f8b3b8d630",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/ea16a1f3719783345febd3aab41beb55c8c84bfd",
+                "reference": "ea16a1f3719783345febd3aab41beb55c8c84bfd",
                 "shasum": ""
             },
             "require": {
@@ -2890,7 +2890,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-03-18T05:04:51+00:00"
+            "time": "2025-04-04T12:57:55+00:00"
         },
         {
             "name": "symfony/console",
@@ -3890,16 +3890,16 @@
         },
         {
             "name": "themeplate/cli",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/CLI.git",
-                "reference": "9ac6c3b54f20e10f2f5e21ee0456ad1ca962dcdc"
+                "reference": "8f85e14450d027bc02ac9669911dd43d009c26a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/CLI/zipball/9ac6c3b54f20e10f2f5e21ee0456ad1ca962dcdc",
-                "reference": "9ac6c3b54f20e10f2f5e21ee0456ad1ca962dcdc",
+                "url": "https://api.github.com/repos/ThemePlate/CLI/zipball/8f85e14450d027bc02ac9669911dd43d009c26a1",
+                "reference": "8f85e14450d027bc02ac9669911dd43d009c26a1",
                 "shasum": ""
             },
             "require": {
@@ -3939,22 +3939,22 @@
             "description": "The command-line interface for ThemePlate",
             "support": {
                 "issues": "https://github.com/ThemePlate/CLI/issues",
-                "source": "https://github.com/ThemePlate/CLI/tree/v1.1.0"
+                "source": "https://github.com/ThemePlate/CLI/tree/v1.2.0"
             },
-            "time": "2025-03-28T18:30:22+00:00"
+            "time": "2025-04-02T14:47:58+00:00"
         },
         {
             "name": "themeplate/tester",
-            "version": "v2.3.0",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Tester.git",
-                "reference": "e830ddebdf708fb0fc7246bdc67212b50ec913fc"
+                "reference": "b10f245e3c67b297b41a910fcc53b5a4b5badd8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Tester/zipball/e830ddebdf708fb0fc7246bdc67212b50ec913fc",
-                "reference": "e830ddebdf708fb0fc7246bdc67212b50ec913fc",
+                "url": "https://api.github.com/repos/ThemePlate/Tester/zipball/b10f245e3c67b297b41a910fcc53b5a4b5badd8b",
+                "reference": "b10f245e3c67b297b41a910fcc53b5a4b5badd8b",
                 "shasum": ""
             },
             "require": {
@@ -3994,9 +3994,9 @@
             "description": "Common for all packages",
             "support": {
                 "issues": "https://github.com/ThemePlate/Tester/issues",
-                "source": "https://github.com/ThemePlate/Tester/tree/v2.3.0"
+                "source": "https://github.com/ThemePlate/Tester/tree/v2.5.0"
             },
-            "time": "2025-03-28T05:06:08+00:00"
+            "time": "2025-04-08T05:17:13+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -4184,11 +4184,14 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4|^8.2",
         "ext-json": "*",
         "ext-fileinfo": "*",
         "ext-ctype": "*"
     },
     "platform-dev": {},
+    "platform-overrides": {
+        "php": "7.4"
+    },
     "plugin-api-version": "2.6.0"
 }

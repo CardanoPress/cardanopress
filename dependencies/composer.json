@@ -1,6 +1,10 @@
 {
   "config": {
+    "platform": {
+      "php": "7.4"
+    },
     "optimize-autoloader": true,
+    "sort-packages": true,
     "allow-plugins": {
       "automattic/jetpack-autoloader": true
     }
@@ -8,7 +12,7 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require": {
-    "php": "^7.4|^8.0",
+    "php": "^7.4|^8.2",
     "ext-json": "*",
     "ext-fileinfo": "*",
     "ext-ctype": "*",
@@ -19,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "PBWebDev\\CardanoPress\\": "../src/",
+      "PBWebDev\\CardanoPress\\": "../src",
       "CardanoPress\\Dependencies\\": "."
     }
   },
@@ -39,9 +43,9 @@
   "scripts": {
     "action-prefix": [
       "../vendor/bin/mozart compose",
-      "rm -rf vendor/themeplate/enqueue",
+      "rm -rf vendor/bin vendor/themeplate",
       "composer dump-autoload --classmap-authoritative",
-      "find . -type d -exec cp -f ./index.php {} \\;"
+      "composer -d .. run index.php"
     ],
     "post-install-cmd": "@action-prefix",
     "post-update-cmd": "@action-prefix"
