@@ -9,4 +9,6 @@
 composer.* export-ignore
 phpcs.xml export-ignore
 phpstan.neon export-ignore
+phpunit.xml export-ignore
+Screenshot-*.png export-ignore
 update-data.json export-ignore
