@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <phpunit
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
 	cacheResultFile=".cache/.phpunit.result.cache"
 	bootstrap="tests/bootstrap.php"
 	backupGlobals="false"
@@ -10,19 +12,13 @@
 >
 	<testsuites>
 		<testsuite name="default">
-			<directory suffix="Test.php">./tests/</directory>
-		</testsuite>
-		<testsuite name="integration">
-			<directory suffix="Test.php">./tests/Integration</directory>
-		</testsuite>
-		<testsuite name="unit">
-			<directory suffix="Test.php">./tests/Unit</directory>
+			<directory suffix="Test.php">tests</directory>
 		</testsuite>
 	</testsuites>
 
 	<coverage>
 		<include>
-			<directory suffix=".php">./src/</directory>
+			<directory suffix=".php">src</directory>
 		</include>
 	</coverage>
 </phpunit>
