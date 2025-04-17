@@ -337,7 +337,7 @@ class Admin extends AbstractAdmin
         ]);
     }
 
-    public function recommendPlugins()
+    public function recommendPlugins(): void
     {
         $plugins = [
             [

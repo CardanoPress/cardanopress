@@ -14,6 +14,7 @@ use PBWebDev\CardanoPress\Blockfrost;
 use PBWebDev\CardanoPress\Collection;
 use PBWebDev\CardanoPress\Manifest;
 use PBWebDev\CardanoPress\Profile;
+use WP_User;
 
 class CoreAction implements HookInterface
 {
@@ -100,7 +101,7 @@ class CoreAction implements HookInterface
         return $messages[$type] ?? '';
     }
 
-    public function localizeMessages()
+    public function localizeMessages(): void
     {
         $messages = apply_filters('cardanopress_script_messages', $this->customizableMessages('script'));
         $messages['dataMessage'] = $this->dataMessage();
@@ -108,7 +109,7 @@ class CoreAction implements HookInterface
         wp_localize_script(Manifest::HANDLE_PREFIX . 'script', 'cardanoPressMessages', $messages);
     }
 
-    public function doWalletStatusChecks($username, $user): void
+    public function doWalletStatusChecks(string $username, WP_User $user): void
     {
         $userProfile = new Profile($user);
 
@@ -286,7 +287,7 @@ class CoreAction implements HookInterface
         }
     }
 
-    public function saveUserHandle()
+    public function saveUserHandle(): void
     {
         check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
 

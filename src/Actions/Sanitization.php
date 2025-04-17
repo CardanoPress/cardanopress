@@ -12,7 +12,7 @@ use CardanoPress\Clients\BlockfrostClient;
 // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 class Sanitization
 {
-    protected function customizableMessages()
+    protected function customizableMessages(): array
     {
         return [
             'query_network' => __('Invalid query network', 'cardanopress'),
@@ -52,7 +52,7 @@ class Sanitization
         return $value;
     }
 
-    public function query_network($value): string
+    public function query_network(string $value): string
     {
         $value = sanitize_key($value);
 
@@ -63,7 +63,7 @@ class Sanitization
         return $value;
     }
 
-    public function wallet_address($value): string
+    public function wallet_address(string $value): string
     {
         $value = sanitize_text_field($value);
 
@@ -74,7 +74,7 @@ class Sanitization
         return $value;
     }
 
-    public function stake_address($value): string
+    public function stake_address(string $value): string
     {
         $value = sanitize_text_field($value);
 
@@ -85,7 +85,7 @@ class Sanitization
         return $value;
     }
 
-    public function reward_address($value): string
+    public function reward_address(string $value): string
     {
         $value = sanitize_text_field($value);
 
@@ -96,7 +96,7 @@ class Sanitization
         return $value;
     }
 
-    public function pool_id($value): string
+    public function pool_id(string $value): string
     {
         $value = sanitize_text_field($value);
 
@@ -107,7 +107,7 @@ class Sanitization
         return $value;
     }
 
-    public function transaction_action($value): string
+    public function transaction_action(string $value): string
     {
         $value = sanitize_key($value);
 
@@ -118,7 +118,7 @@ class Sanitization
         return $value;
     }
 
-    public function transaction_hash($value): string
+    public function transaction_hash(string $value): string
     {
         $value = sanitize_key($value);
 
@@ -129,7 +129,7 @@ class Sanitization
         return $value;
     }
 
-    public function ada_handle($value): string
+    public function ada_handle(string $value): string
     {
         $value = sanitize_text_field($value);
 
@@ -140,7 +140,7 @@ class Sanitization
         return $value;
     }
 
-    public function data_signature($value): string
+    public function data_signature(string $value): string
     {
         $value = sanitize_text_field($value);
 

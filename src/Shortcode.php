@@ -98,7 +98,7 @@ class Shortcode extends AbstractShortcode
         return '<template x-if="' . esc_attr($args['condition']) . '">' . $html . '</template>';
     }
 
-    public function doComponentCardanoPress($attributes, ?string $content = null): string
+    public function doComponentCardanoPress(array $attributes, ?string $content = null): string
     {
         ob_start();
         Manifest::injectDataProvider();
@@ -114,7 +114,7 @@ class Shortcode extends AbstractShortcode
         return $html;
     }
 
-    public function doComponentPoolDelegation($attributes, ?string $content = null): string
+    public function doComponentPoolDelegation(array $attributes, ?string $content = null): string
     {
         $html = '<div ' . $this->component->poolDelegation() . '>';
         $html .= apply_filters('the_content', $content);
@@ -123,7 +123,7 @@ class Shortcode extends AbstractShortcode
         return trim($html);
     }
 
-    public function doComponentPaymentForm($attributes, ?string $content = null): string
+    public function doComponentPaymentForm(array $attributes, ?string $content = null): string
     {
         $args = shortcode_atts([
             'amount' => null,
@@ -143,7 +143,7 @@ class Shortcode extends AbstractShortcode
         return trim($html);
     }
 
-    public function doComponentSplitForm($attributes, ?string $content = null): string
+    public function doComponentSplitForm(array $attributes, ?string $content = null): string
     {
         $html = '<form ' . $this->component->splitForm() . '>';
         $html .= apply_filters('the_content', $content);

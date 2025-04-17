@@ -20,6 +20,11 @@ class AdminAction implements HookInterface
     }
 
 
+    /**
+     * @param mixed $newValue
+     * @param mixed $oldValue
+     * @return mixed
+     */
     public function savePoolDetails($newValue, $oldValue)
     {
         if (

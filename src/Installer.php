@@ -257,7 +257,7 @@ class Installer extends AbstractInstaller
         <?php
     }
 
-    public function compatibilityCheckAction()
+    public function compatibilityCheckAction(): void
     {
         check_ajax_referer('cardanopress_compatibility_check');
         $this->doActivate();
@@ -300,7 +300,7 @@ class Installer extends AbstractInstaller
         }
     }
 
-    public function updateOldPasswords()
+    public function updateOldPasswords(): void
     {
         $this->log(__('Checking for old user passwords', 'cardanopress'));
 
