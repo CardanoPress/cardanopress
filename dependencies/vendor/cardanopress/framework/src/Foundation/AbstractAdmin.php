@@ -36,6 +36,7 @@ abstract class AbstractAdmin extends SharedBase implements AdminInterface, HookI
         $this->initialize();
     }
 
+    /** @param array<string, mixed> $config */
     protected function settingsPage(string $title, array $config = []): BasePage
     {
         $parent = $config['parent'] ?? '';
@@ -46,18 +47,19 @@ abstract class AbstractAdmin extends SharedBase implements AdminInterface, HookI
         if ('' !== $parent) {
             unset($config['parent']);
 
-            $page = new SubMenuPage($title, '', $config);
+            $page = new SubMenuPage($title);
 
             $page->parent($parent);
         } else {
-            $page = new MenuPage($title, $config);
+            $page = new MenuPage($title);
         }
 
-        $page->setup();
+        $page->config($config)->setup();
 
         return $page;
     }
 
+    /** @param array<string, mixed> $config */
     protected function optionFields(string $title, array $config): OptionBox
     {
         $fields = $config['fields'] ?? null;
@@ -79,6 +81,7 @@ abstract class AbstractAdmin extends SharedBase implements AdminInterface, HookI
         return $settings;
     }
 
+    /** @return mixed */
     public function getOption(string $key)
     {
         return $this->retrieveValue($key, static::OPTION_KEY);

@@ -11,8 +11,9 @@ namespace CardanoPress\Dependencies\ThemePlate\Enqueue;
 
 class Dynamic {
 
-	private array $scripts;
-	private array $styles;
+	private array $scripts = array();
+	private array $styles  = array();
+
 	private array $data = array(
 		'scripts' => array(),
 		'styles'  => array(),
@@ -22,13 +23,11 @@ class Dynamic {
 	public function action(): void {
 
 		foreach ( array( 'scripts', 'styles' ) as $type ) {
-			if ( ! empty( $this->{$type} ) ) {
-				foreach ( $this->{$type} as $handle => $src ) {
-					$function = 'wp_enqueue_' . rtrim( $type, 's' );
+			foreach ( $this->{$type} as $handle => $src ) {
+				$function = 'wp_enqueue_' . rtrim( $type, 's' );
 
-					$function( $handle, $src );
-					$this->add( $type, $handle );
-				}
+				$function( $handle, $src );
+				$this->add( $type, $handle );
 			}
 		}
 

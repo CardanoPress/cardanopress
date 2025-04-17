@@ -13,5 +13,6 @@ interface AdminInterface
 {
     public function __construct(LoggerInterface $logger);
 
+    /** @return mixed */
     public function getOption(string $key);
 }

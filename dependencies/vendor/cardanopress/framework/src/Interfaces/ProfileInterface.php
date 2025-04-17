@@ -13,7 +13,8 @@ interface ProfileInterface
 
     public function unsetUserAuth(): void;
 
-    public function getData(string $key = null);
+    /** @return mixed */
+    public function getData(?string $key = null);
 
     public function addRole(string $role): void;
 
@@ -35,10 +36,13 @@ interface ProfileInterface
 
     public function saveStake(string $stakeAddress): bool;
 
+    /** @return mixed[] */
     public function storedAssets(): array;
 
+    /** @param mixed[] $data */
     public function saveAssets(array $data): bool;
 
+    /** @return array{network: string, action: string, hash: string}[] */
     public function allTransactions(): array;
 
     public function saveTransaction(string $network, string $action, string $hash): bool;

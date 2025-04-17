@@ -12,8 +12,11 @@ namespace CardanoPress\Dependencies\ThemePlate\Core\Field;
 use CardanoPress\Dependencies\ThemePlate\Core\Field;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\AssetsHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MainHelper;
+use WP_Post;
 use WP_Query;
+use WP_Term;
 use WP_Term_Query;
+use WP_User;
 use WP_User_Query;
 
 class TypeField extends Field {
@@ -44,16 +47,26 @@ class TypeField extends Field {
 
 	protected static function get_callback( string $type ): callable {
 
-		return array( self::class, 'get_' . self::get_correct_type( $type ) );
+		$type = self::get_correct_type( $type );
+
+		switch ( $type ) {
+			case 'users':
+				return array( self::class, 'get_users' );
+			case 'terms':
+				return array( self::class, 'get_terms' );
+			case 'posts':
+			default:
+				return array( self::class, 'get_posts' );
+		}
 
 	}
 
 
 	protected function initialize(): void {
 
-		$hook_name = 'wp_ajax_' . $this->get_action_name( $this->get_config( 'type' ) );
+		$hook_name = 'wp_ajax_' . static::get_action_name( $this->get_config( 'type' ) );
 
-		add_action( $hook_name, $this->get_callback( $this->get_config( 'type' ) ) );
+		add_action( $hook_name, static::get_callback( $this->get_config( 'type' ) ) );
 
 	}
 
@@ -76,34 +89,41 @@ class TypeField extends Field {
 		$config_options = $this->get_config( 'options' );
 
 		switch ( $this->get_config( 'type' ) ) {
-			default:
-			case 'post':
-				$defaults = array( 'post_type' => $this->get_config( 'type' ) );
-
-				if ( MainHelper::is_sequential( $config_options ) ) {
-					$config_options = array( 'post_type' => $config_options );
-				}
-
-				break;
 			case 'user':
-				$defaults = array( 'role' => '' );
+				$type_key = 'role';
+				$defaults = array( $type_key => null );
 
 				if ( MainHelper::is_sequential( $config_options ) ) {
-					$config_options = array( 'role' => $config_options );
+					$config_options = array( $type_key => $config_options );
 				}
 
 				break;
 			case 'term':
-				$defaults = array( 'taxonomy' => null );
+				$type_key = 'taxonomy';
+				$defaults = array( $type_key => null );
 
 				if ( MainHelper::is_sequential( $config_options ) ) {
-					$config_options = array( 'taxonomy' => $config_options );
+					$config_options = array( $type_key => $config_options );
+				}
+
+				break;
+			case 'post':
+			default:
+				$type_key = 'post_type';
+				$defaults = array( $type_key => array( $this->get_config( 'type' ) ) );
+
+				if ( MainHelper::is_sequential( $config_options ) ) {
+					$config_options = array( $type_key => $config_options );
 				}
 
 				break;
 		}
 
 		$args = MainHelper::fool_proof( $defaults, $config_options );
+
+		if ( empty( $args[ $type_key ] ) ) {
+			unset( $args[ $type_key ] );
+		}
 
 		echo '<select disabled><option>Loading values...</option></select>';
 		echo '<select class="themeplate-select2 select2-hidden-accessible"
@@ -116,44 +136,30 @@ class TypeField extends Field {
 
 		$value = array_filter( (array) $value );
 
-		if ( ! empty( $value ) ) {
-			foreach ( $value as $item ) {
-				echo '<option value="' . esc_attr( $item ) . '" selected="selected">' . esc_html( $item ) . '</option>';
-			}
+		foreach ( $value as $item ) {
+			echo '<option value="' . esc_attr( $item ) . '" selected="selected">' . esc_html( $item ) . '</option>';
 		}
 
 		echo '</select>';
 		echo '<div class="select2-options"
-				data-action="' . esc_attr( $this->get_action_name( $this->get_config( 'type' ) ) ) . '"
-				data-options="' . esc_attr( wp_json_encode( $args, JSON_NUMERIC_CHECK ) ) . '"
-				data-value="' . esc_attr( wp_json_encode( empty( $value ) ? '' : $value, JSON_NUMERIC_CHECK ) ) . '"
+				data-action="' . esc_attr( static::get_action_name( $this->get_config( 'type' ) ) ) . '"
+				data-options="' . esc_attr( (string) wp_json_encode( $args, JSON_NUMERIC_CHECK ) ) . '"
+				data-value="' . esc_attr( (string) wp_json_encode( array() === $value ? '' : $value, JSON_NUMERIC_CHECK ) ) . '"
 				></div>';
 
 	}
 
 
-	private static int $count      = 10;
-	private static array $prefixes = array();
+	private static int $count = 10;
 
-
-	private static function get_prefix( int $id, array $options ): string {
-
-		$prefix = '';
-
-		if ( is_array( $options['post_type'] ) && 1 < count( $options['post_type'] ) ) {
-			$type = get_post_type( $id );
-
-			if ( ! array_key_exists( $type, self::$prefixes ) ) {
-				$object                  = get_post_type_object( $type );
-				self::$prefixes[ $type ] = $object->labels->singular_name;
-			}
-
-			$prefix = self::$prefixes[ $type ] . ' | ';
-		}
-
-		return $prefix;
-
-	}
+	/**
+	 * @var array<string, array<string, string>>
+	 */
+	private static array $prefixes = array(
+		'post' => array(),
+		'user' => array(),
+		'term' => array(),
+	);
 
 
 	// phpcs:disable WordPress.Security.NonceVerification
@@ -170,12 +176,12 @@ class TypeField extends Field {
 		$defaults = array(
 			'post_status'    => 'publish',
 			's'              => $_GET['search'] ?? '',
-			'fields'         => 'ids',
 			'posts_per_page' => isset( $_GET['ids__in'] ) ? -1 : self::$count,
 			'post__in'       => $_GET['ids__in'] ?? '',
 		);
+		$is_multi = is_array( $_GET['options']['post_type'] ) && 1 < count( $_GET['options']['post_type'] );
 
-		if ( is_array( $_GET['options']['post_type'] ) && 1 < count( $_GET['options']['post_type'] ) ) {
+		if ( $is_multi ) {
 			$defaults['orderby'] = array(
 				'post_type' => 'ASC',
 			);
@@ -188,15 +194,39 @@ class TypeField extends Field {
 		}
 
 		foreach ( $query->posts as $post ) {
+			/** @var WP_Post $post */
 			$return['results'][] = array(
-				'id'   => $post,
-				'text' => self::get_prefix( $post, $_GET['options'] ) . get_the_title( $post ),
+				'id'   => $post->ID,
+				'text' => self::get_post_text( $post, $is_multi ),
 			);
 		}
 
 		echo wp_json_encode( $return );
 
 		wp_die();
+
+	}
+
+
+	private static function get_post_text( WP_Post $post, bool $is_multi ): string {
+
+		if ( ! $is_multi ) {
+			return $post->post_title;
+		}
+
+		$type = $post->post_type;
+
+		if ( ! array_key_exists( $type, self::$prefixes['post'] ) ) {
+			$object = get_post_type_object( $type );
+
+			if ( null === $object ) {
+				return $post->post_title;
+			}
+
+			self::$prefixes['post'][ $type ] = $object->labels->singular_name;
+		}
+
+		return self::$prefixes['post'][ $type ] . ' | ' . $post->post_title;
 
 	}
 
@@ -213,26 +243,56 @@ class TypeField extends Field {
 		);
 		$defaults = array(
 			'search'  => isset( $_GET['search'] ) ? '*' . $_GET['search'] . '*' : '',
-			'fields'  => array( 'ID', 'display_name' ),
 			'number'  => isset( $_GET['ids__in'] ) ? -1 : self::$count,
 			'include' => $_GET['ids__in'] ?? '',
 		);
-		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'], $_GET['_page'] ) );
+		$roles    = $_GET['options']['role'] ?? array();
+		$is_multi = empty( $roles ) ? true : is_array( $roles ) && 1 < count( $roles );
+		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'] ?? array(), $_GET['_page'] ) );
 
 		if ( $_GET['_page']['paged'] < ceil( $query->get_total() / self::$count ) ) {
 			$return['pagination']['more'] = true;
 		}
 
 		foreach ( $query->get_results() as $user ) {
+			/** @var WP_User $user */
 			$return['results'][] = array(
 				'id'   => $user->ID,
-				'text' => $user->display_name,
+				'text' => self::get_user_text( $user, $roles, $is_multi ),
 			);
 		}
 
 		echo wp_json_encode( $return );
 
 		wp_die();
+
+	}
+
+
+	/**
+	 * @param string[] $roles
+	 */
+	private static function get_user_text( WP_User $user, array $roles, bool $is_multi ): string {
+
+		if ( ! $is_multi ) {
+			return $user->display_name;
+		}
+
+		if ( empty( self::$prefixes['user'] ) ) {
+			self::$prefixes['user'] = wp_roles()->get_names();
+		}
+
+		if ( array() === $roles ) {
+			$roles = $user->roles;
+		}
+
+		foreach ( $roles as $role ) {
+			if ( array_key_exists( $role, self::$prefixes['user'] ) ) {
+				return self::$prefixes['user'][ $role ] . ' | ' . $user->display_name;
+			}
+		}
+
+		return $user->display_name;
 
 	}
 
@@ -250,28 +310,53 @@ class TypeField extends Field {
 		$offset   = ( $_GET['_page']['paged'] > 0 ) ? self::$count * ( $_GET['_page']['paged'] - 1 ) : 1;
 		$defaults = array(
 			'search'  => $_GET['search'] ?? '',
-			'fields'  => 'id=>name',
 			'number'  => isset( $_GET['ids__in'] ) ? 0 : self::$count,
 			'include' => $_GET['ids__in'] ?? '',
 			'offset'  => $offset,
 		);
-		$total    = wp_count_terms( $_GET['options']['taxonomy'] );
-		$query    = new WP_Term_Query( array_merge( $defaults, $_GET['options'] ) );
+		$total    = wp_count_terms( $_GET['options'] ?? array() );
+		$taxonomy = $_GET['options']['taxonomy'] ?? array();
+		$is_multi = empty( $taxonomy ) ? true : is_array( $taxonomy ) && 1 < count( $taxonomy );
+		$query    = new WP_Term_Query( array_merge( $defaults, $_GET['options'] ?? array() ) );
 
 		if ( ! is_wp_error( $total ) && $_GET['_page']['paged'] < ceil( (int) $total / self::$count ) ) {
 			$return['pagination']['more'] = true;
 		}
 
-		foreach ( $query->get_terms() as $id => $name ) {
+		foreach ( (array) $query->get_terms() as $term ) {
+			/** @var WP_Term $term */
 			$return['results'][] = array(
-				'id'   => $id,
-				'text' => $name,
+				'id'   => $term->term_id,
+				'text' => self::get_term_text( $term, $is_multi ),
 			);
 		}
 
 		echo wp_json_encode( $return );
 
 		wp_die();
+
+	}
+
+
+	private static function get_term_text( WP_Term $term, bool $is_multi ): string {
+
+		if ( ! $is_multi ) {
+			return $term->name;
+		}
+
+		$tax = $term->taxonomy;
+
+		if ( ! array_key_exists( $tax, self::$prefixes['term'] ) ) {
+			$object = get_taxonomy( $tax );
+
+			if ( false === $object ) {
+				return $term->name;
+			}
+
+			self::$prefixes['term'][ $tax ] = $object->labels->singular_name;
+		}
+
+		return self::$prefixes['term'][ $tax ] . ' | ' . $term->name;
 
 	}
 

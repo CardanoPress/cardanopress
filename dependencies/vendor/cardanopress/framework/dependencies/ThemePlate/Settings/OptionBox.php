@@ -10,6 +10,7 @@
 namespace CardanoPress\Dependencies\ThemePlate\Settings;
 
 use CardanoPress\Dependencies\ThemePlate\Core\Config;
+use CardanoPress\Dependencies\ThemePlate\Core\Fields;
 use CardanoPress\Dependencies\ThemePlate\Core\Form;
 use CardanoPress\Dependencies\ThemePlate\Core\Handler;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\BoxHelper;
@@ -19,7 +20,9 @@ use CardanoPress\Dependencies\ThemePlate\Core\Helper\FormHelper;
 class OptionBox extends Form {
 
 	protected string $option_name = '';
-	protected array $menu_pages   = array();
+
+	/** @var string[] */
+	protected array $menu_pages = array();
 
 
 	protected function get_handler(): Handler {
@@ -29,6 +32,12 @@ class OptionBox extends Form {
 	}
 
 
+	/**
+	 * @param array{
+	 *     context: string,
+	 *     data_prefix: string,
+	 * } $config
+	 */
 	protected function initialize( array &$config ): void {
 	}
 
@@ -78,6 +87,16 @@ class OptionBox extends Form {
 	}
 
 
+	/** @param array<string, Field|mixed> $collection */
+	public function fields( array $collection ): self {
+
+		$this->fields = new Fields( $collection );
+
+		return $this;
+
+	}
+
+
 	public function get_config(): Config {
 
 		return new Config( $this->config['data_prefix'], $this->fields );
@@ -85,9 +104,13 @@ class OptionBox extends Form {
 	}
 
 
+	/**
+	 * @param array<mixed> $data
+	 * @return array<mixed>
+	 */
 	public function build_schema( array $data ): array {
 
-		if ( null === $this->fields ) {
+		if ( ! $this->fields instanceof Fields ) {
 			return $data;
 		}
 

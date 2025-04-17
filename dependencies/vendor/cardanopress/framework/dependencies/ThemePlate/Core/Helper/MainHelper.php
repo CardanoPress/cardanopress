@@ -96,7 +96,7 @@ class MainHelper {
 
 
 	/**
-	 * @param $value array|string|null
+	 * @param array|string|null $value
 	 */
 	public static function for_repeatable( $value ): bool {
 
@@ -106,7 +106,7 @@ class MainHelper {
 
 
 	/**
-	 * @param $value array|string|null
+	 * @param array|string|null $value
 	 */
 	public static function maybe_adjust( Field $field, &$value ): void {
 

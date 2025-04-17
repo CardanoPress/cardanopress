@@ -11,7 +11,10 @@ namespace CardanoPress\Dependencies\ThemePlate\CPT;
 
 abstract class Base implements CommonInterface {
 
-	protected array $args;
+	/** @var array<string, mixed> */
+	protected array $args = array();
+
+	/** @var array<string, mixed> */
 	protected array $defaults = array(
 		'labels'       => array(),
 		'public'       => true,
@@ -22,6 +25,7 @@ abstract class Base implements CommonInterface {
 	);
 
 
+	/** @return array<string, mixed> */
 	public function defaults(): array {
 
 		return $this->defaults;
@@ -29,13 +33,45 @@ abstract class Base implements CommonInterface {
 	}
 
 
+	public function description( string $description ): self {
+
+		$this->args['description'] = $description;
+
+		return $this;
+
+	}
+
+
+	public function hierarchical( bool $hierarchical ): self {
+
+		$this->args['hierarchical'] = $hierarchical;
+
+		return $this;
+
+	}
+
+
+	public function public( bool $is_public ): self {
+
+		$this->args['public'] = $is_public;
+
+		if ( ! $is_public ) {
+			$this->args['rewrite'] = false;
+		}
+
+		return $this;
+
+	}
+
+
+	/** @param array<string, mixed> $args */
 	protected function initialize( string $type, array $args ): void {
 
 		$names = $this->parse( $type );
 
 		$this->defaults['rewrite']['slug'] = $names['slug'];
 
-		$this->args = array_replace_recursive( $this->defaults, $args );
+		$this->config( $args );
 
 		if ( isset( $args['public'] ) && ! $args['public'] ) {
 			$this->args['rewrite'] = false;
@@ -46,6 +82,21 @@ abstract class Base implements CommonInterface {
 	}
 
 
+	/** @param array<string, mixed> $config */
+	public function config( array $config ): self {
+
+		$this->args = array_replace_recursive( $this->defaults, $this->args, $config );
+
+		if ( isset( $config['public'] ) && ! $config['public'] ) {
+			$this->args['rewrite'] = false;
+		}
+
+		return $this;
+
+	}
+
+
+	/** @return array<string, string> */
 	protected function parse( string $name ): array {
 
 		$names = array();
@@ -70,8 +121,12 @@ abstract class Base implements CommonInterface {
 		);
 
 		foreach ( $map as $pattern => $replacement ) {
-			if ( preg_match( $pattern, $single ) ) {
-				return preg_replace( $pattern, $replacement, $single );
+			if ( 1 === preg_match( $pattern, $single ) ) {
+				$replaced = preg_replace( $pattern, $replacement, $single );
+
+				if ( null !== $replaced ) {
+					return $replaced;
+				}
 			}
 		}
 
@@ -87,6 +142,7 @@ abstract class Base implements CommonInterface {
 	}
 
 
+	/** @param array<string, string> $labels */
 	protected function apply( array $labels, string $plural ): void {
 
 		$this->args['labels'] = array_merge( $this->args['labels'], $labels );

@@ -16,7 +16,7 @@ class TextareaField extends Field {
 
 	public function render( $value ): void {
 
-		$defaults = array( 'rows' => 4 );
+		$defaults = array( 'rows' => '4' );
 		$attrs    = MainHelper::fool_proof( $defaults, $this->get_config( 'options' ) );
 
 		echo '<textarea

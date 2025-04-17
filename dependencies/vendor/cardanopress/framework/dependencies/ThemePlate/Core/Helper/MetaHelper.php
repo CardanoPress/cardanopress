@@ -33,7 +33,7 @@ class MetaHelper {
 		$result = (bool) ( $callback( $current_id ) );
 
 		if ( 'hide' === $type ) {
-			$result = ! $result;
+			return ! $result;
 		}
 
 		return $result;
@@ -46,7 +46,7 @@ class MetaHelper {
 		$result = in_array( $current_id, array_map( 'strval', $wanted_ids ), true );
 
 		if ( 'hide' === $type ) {
-			$result = ! $result;
+			return ! $result;
 		}
 
 		return $result;
@@ -84,6 +84,9 @@ class MetaHelper {
 				$container[ $type . '_id' ] = (array) $value[0]['value'];
 				unset( $container[ $type ] );
 			}
+		} elseif ( is_callable( $value ) ) {
+			$container[ $type . '_cb' ] = $value;
+			unset( $container[ $type ] );
 		}
 
 		return $container;
@@ -98,7 +101,7 @@ class MetaHelper {
 
 			foreach ( array( 'show', 'hide' ) as $key ) {
 				if ( ! empty( $container[ $key . '_on' ] ) ) {
-					$value = wp_json_encode( $container[ $key . '_on' ], JSON_NUMERIC_CHECK );
+					$value = (string) wp_json_encode( $container[ $key . '_on' ], JSON_NUMERIC_CHECK );
 					echo ' data-' . $key . '="' . esc_attr( $value ) . '"'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}

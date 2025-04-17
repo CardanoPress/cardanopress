@@ -91,7 +91,7 @@ abstract class AbstractInstaller extends SharedBase implements InstallerInterfac
         delete_transient(static::DATA_PREFIX . 'activating');
     }
 
-    public function maybeDoUpgrades($isActivating = false): void
+    public function maybeDoUpgrades(?bool $isActivating = false): void
     {
         $currentVersion = get_option(static::DATA_PREFIX . 'version', '');
         $appVersion = $this->application->getData('Version');

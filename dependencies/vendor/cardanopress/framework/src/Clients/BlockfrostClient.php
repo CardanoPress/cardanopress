@@ -34,7 +34,7 @@ class BlockfrostClient
     /**
      * Create a new BlockfrostClient instance
      */
-    public function __construct(string $project_id, HandlerStack $handler = null)
+    public function __construct(string $project_id, ?HandlerStack $handler = null)
     {
         $network = substr($project_id, 0, 7);
 
@@ -65,8 +65,8 @@ class BlockfrostClient
         return static function (
             $retries,
             Request $request,
-            Response $response = null,
-            RequestException $exception = null
+            ?Response $response = null,
+            ?RequestException $exception = null
         ) {
             if ($retries >= self::MAX_RETRIES) {
                 return false;
@@ -96,9 +96,13 @@ class BlockfrostClient
      * Make a GET request to the API endpoint
      *
      * @param  string  $endpoint
-     * @param  array   $query
+     * @param  mixed[] $query
      *
-     * @return array
+     * @return array{
+     *     status_code: int,
+     *     data: mixed[],
+     *     error?: string,
+     * }
      */
     public function request(string $endpoint, array $query = []): array
     {

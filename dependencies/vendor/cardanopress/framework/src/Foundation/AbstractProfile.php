@@ -38,7 +38,8 @@ abstract class AbstractProfile extends SharedBase implements ProfileInterface
         do_action('wp_logout', $this->getData('ID'));
     }
 
-    public function getData(string $key = null)
+    /** @return mixed */
+    public function getData(?string $key = null)
     {
         if (null === $key) {
             return $this->user;
@@ -62,16 +63,26 @@ abstract class AbstractProfile extends SharedBase implements ProfileInterface
         return in_array($role, $this->getData('roles'), true);
     }
 
+    /** @return mixed */
     protected function getMeta(string $key, bool $single = false)
     {
         return get_user_meta($this->getData('ID'), $key, $single);
     }
 
+    /**
+     * @param mixed $value
+     * @return int|false
+     */
     protected function addMeta(string $key, $value, bool $unique = false)
     {
         return add_user_meta($this->getData('ID'), $key, $value, $unique);
     }
 
+    /**
+     * @param mixed $value
+     * @param mixed $previous
+     * @return int|bool
+     */
     protected function updateMeta(string $key, $value, $previous = '')
     {
         return update_user_meta($this->getData('ID'), $key, $value, $previous);
@@ -136,6 +147,7 @@ abstract class AbstractProfile extends SharedBase implements ProfileInterface
         return (bool)$isUpdated;
     }
 
+    /** @return mixed[] */
     public function storedAssets(): array
     {
         $saved = $this->getMeta($this->prefix . 'stored_assets', true);
@@ -143,11 +155,13 @@ abstract class AbstractProfile extends SharedBase implements ProfileInterface
         return array_filter((array)$saved);
     }
 
+    /** @param mixed[] $data */
     public function saveAssets(array $data): bool
     {
-        return $this->updateMeta($this->prefix . 'stored_assets', $data);
+        return (bool) $this->updateMeta($this->prefix . 'stored_assets', $data);
     }
 
+    /** @return array{network: string, action: string, hash: string}[] */
     public function allTransactions(): array
     {
         $saved = $this->getMeta($this->prefix . 'transaction');
@@ -165,11 +179,11 @@ abstract class AbstractProfile extends SharedBase implements ProfileInterface
 
     public function dismissNotice(string $type, bool $reset = false): bool
     {
-        return $this->updateMeta($this->prefix . 'dismissed_' . $type, ! $reset);
+        return (bool) $this->updateMeta($this->prefix . 'dismissed_' . $type, ! $reset);
     }
 
     public function isDismissedNotice(string $type): bool
     {
-        return (bool)$this->getMeta($this->prefix . 'dismissed_' . $type, true);
+        return (bool) $this->getMeta($this->prefix . 'dismissed_' . $type, true);
     }
 }

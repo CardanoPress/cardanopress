@@ -11,6 +11,7 @@ use CardanoPress\Interfaces\ApplicationInterface;
 use CardanoPress\Interfaces\HookInterface;
 use CardanoPress\SharedBase;
 use CardanoPress\Traits\Loggable;
+use WP_Error;
 
 abstract class AbstractLicenser extends SharedBase implements HookInterface
 {
@@ -56,6 +57,14 @@ abstract class AbstractLicenser extends SharedBase implements HookInterface
         );
     }
 
+    /**
+     * @return array{
+     *     raw: mixed[]|WP_Error,
+     *     error: bool,
+     *     code: int,
+     *     body: string,
+     * }
+     */
     protected function callApi(bool $sslVerify = true, int $timeout = 15): array
     {
         $response = wp_remote_post(
@@ -75,7 +84,7 @@ abstract class AbstractLicenser extends SharedBase implements HookInterface
         return [
             'raw' => $response,
             'error' => is_wp_error($response),
-            'code' => wp_remote_retrieve_response_code($response),
+            'code' => (int) wp_remote_retrieve_response_code($response),
             'body' => wp_remote_retrieve_body($response),
         ];
     }
@@ -90,7 +99,9 @@ abstract class AbstractLicenser extends SharedBase implements HookInterface
 
         if ($data['error'] || 200 !== $data['code']) {
             if (is_wp_error($data['error'])) {
-                $message = $data['raw']->get_error_message();
+                /** @var WP_Error $error */
+                $error = $data['raw'];
+                $message = $error->get_error_message();
             } else {
                 $message = __('An error occurred, please try again.', 'cardanopress');
             }
@@ -118,6 +129,7 @@ abstract class AbstractLicenser extends SharedBase implements HookInterface
         wp_send_json_success(compact('message', 'response'));
     }
 
+    /** @param array{error: string, expires: string} $response */
     protected function getErrorMessage(array $response): string
     {
         switch ($response['error']) {
@@ -127,7 +139,7 @@ abstract class AbstractLicenser extends SharedBase implements HookInterface
                     __('Your license key expired on %s.', 'cardanopress'),
                     date_i18n(
                         get_option('date_format'),
-                        strtotime($response['expires'], current_time('timestamp'))
+                        strtotime($response['expires'], (int) current_time('timestamp'))
                     )
                 );
                 break;

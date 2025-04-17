@@ -9,12 +9,17 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\CPT;
 
-class Taxonomy extends Base {
+use CardanoPress\Dependencies\ThemePlate\CPT\Interfaces\TaxonomyInterface;
+
+class Taxonomy extends Base implements TaxonomyInterface {
 
 	protected string $taxonomy;
+
+	/** @var string[] */
 	protected array $object_type = array();
 
 
+	/** @param array<string, mixed> $args */
 	public function __construct( string $taxonomy, array $args = array() ) {
 
 		$this->taxonomy = $taxonomy;
@@ -23,6 +28,23 @@ class Taxonomy extends Base {
 		$this->defaults['show_admin_column'] = true;
 
 		$this->initialize( $taxonomy, $args );
+
+	}
+
+
+	public function hierarchical( bool $hierarchical ): self {
+
+		$this->args['hierarchical'] = $hierarchical;
+
+		return $this;
+
+	}
+
+	public function column( bool $column ): self {
+
+		$this->args['show_admin_column'] = $column;
+
+		return $this;
 
 	}
 
@@ -90,6 +112,10 @@ class Taxonomy extends Base {
 	}
 
 
+	/**
+	 * @param array<string, string[]> $messages
+	 * @return array<string, string[]>
+	 */
 	public function custom_messages( array $messages ): array {
 
 		$singular = $this->args['labels']['singular_name'];

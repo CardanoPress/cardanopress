@@ -55,11 +55,11 @@ class Tasks {
 
 	private function set_defaults(): void {
 
-		if ( ! $this->limit && $this->every ) {
+		if ( 0 === $this->limit && 0 !== $this->every ) {
 			$this->limit = 1;
 		}
 
-		if ( ! $this->every && $this->limit ) {
+		if ( 0 === $this->every && 0 !== $this->limit ) {
 			$this->every = 60;
 		}
 
@@ -77,7 +77,7 @@ class Tasks {
 		$queued = $this->get_queued();
 		$total  = count( $queued['tasks'] );
 
-		if ( ! $total ) {
+		if ( 0 === $total ) {
 			$this->delete( $queued['key'] );
 			return;
 		}
@@ -89,7 +89,7 @@ class Tasks {
 		$done  = array();
 		$index = 0;
 
-		if ( ! $this->limit || $this->limit > $total ) {
+		if ( 0 === $this->limit || $this->limit > $total ) {
 			$this->limit = $total;
 		}
 
@@ -124,16 +124,15 @@ class Tasks {
 	}
 
 
-	public function execute(): bool {
+	public function execute(): void {
 
-		if ( empty( $this->tasks ) ) {
-			return false;
+		if ( array() === $this->tasks ) {
+			return;
 		}
 
 		$this->save( $this->tasks );
 		$this->clear();
-
-		return ! $this->async->dispatch();
+		$this->async->dispatch();
 
 	}
 
@@ -214,9 +213,9 @@ class Tasks {
 	}
 
 
-	public function maybe_schedule( $schedules ) {
+	public function maybe_schedule( array $schedules ): array {
 
-		if ( $this->limit ) {
+		if ( 0 !== $this->limit ) {
 			$schedules[ $this->identifier . '_interval' ] = array(
 				'interval' => $this->every,
 				/* translators: %s: number of seconds */
@@ -231,14 +230,14 @@ class Tasks {
 
 	public function maybe_run(): void {
 
-		if ( $this->has_queued() && ! $this->next_scheduled() && ! $this->is_running() ) {
+		if ( $this->has_queued() && 0 === $this->next_scheduled() && ! $this->is_running() ) {
 			$this->runner( $this->identifier );
 		}
 
 	}
 
 
-	private function save( array $tasks, string $key = null ): void {
+	private function save( array $tasks, ?string $key = null ): void {
 
 		if ( null === $key ) {
 			$key = $this->generate_key();
@@ -267,7 +266,7 @@ class Tasks {
 
 		$this->start = time();
 
-		if ( $this->every ) {
+		if ( 0 !== $this->every ) {
 			$timeout = $this->every * 2;
 		} else {
 			$timeout = 2 * MINUTE_IN_SECONDS;
@@ -296,7 +295,7 @@ class Tasks {
 
 	private function schedule(): void {
 
-		if ( ! $this->next_scheduled() ) {
+		if ( 0 === $this->next_scheduled() ) {
 			wp_schedule_event(
 				$this->start + $this->every,
 				$this->identifier . '_interval',
@@ -312,7 +311,7 @@ class Tasks {
 
 		$timestamp = $this->next_scheduled();
 
-		if ( $timestamp ) {
+		if ( 0 !== $timestamp ) {
 			wp_unschedule_event( $timestamp, $this->identifier . '_event', array( $this->identifier ) );
 		}
 
@@ -320,10 +319,6 @@ class Tasks {
 
 
 	private function reporter( array $done ): void {
-
-		if ( empty( $this->report_callback ) ) {
-			return;
-		}
 
 		foreach ( $this->report_callback as $report_callback ) {
 			$report_callback( new Report( $done, $this->start, $this->end ) );

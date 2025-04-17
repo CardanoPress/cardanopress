@@ -16,6 +16,7 @@ use CardanoPress\SharedBase;
 abstract class AbstractApplication extends SharedBase implements ApplicationInterface, HookInterface
 {
     protected string $pluginFile;
+    /** @var array<string, string> */
     protected array $data;
     protected Logger $logger;
 

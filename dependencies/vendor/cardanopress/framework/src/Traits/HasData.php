@@ -33,6 +33,7 @@ trait HasData
         $this->getData()->store($config);
     }
 
+    /** @return mixed */
     protected function retrieveValue(string $key, string $id)
     {
         if (null === $this->getData()) {

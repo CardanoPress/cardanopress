@@ -128,11 +128,7 @@ abstract class Field {
 	}
 
 
-	public function can_have_multiple_value( array $config = null ): bool {
-
-		if ( null === $config ) {
-			$config = $this->get_config();
-		}
+	public function can_have_multiple_value( array $config ): bool {
 
 		return ( static::MULTIPLE_ABLE && (bool) $config['multiple'] ) || (bool) $config['repeatable'];
 

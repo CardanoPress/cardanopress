@@ -50,7 +50,7 @@ class SelectField extends Field {
 			$ordered = array();
 			$values  = array_keys( $config_options );
 
-			foreach ( $value as $item ) {
+			foreach ( (array) $value as $item ) {
 				$item = ( $is_sequential ? (int) $item - 1 : $item );
 
 				if ( ! in_array( (string) $item, MainHelper::values_to_string( $values ), true ) ) {

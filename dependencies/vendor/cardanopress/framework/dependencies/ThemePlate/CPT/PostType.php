@@ -9,12 +9,16 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\CPT;
 
-class PostType extends Base {
+use CardanoPress\Dependencies\ThemePlate\CPT\Interfaces\PostTypeInterface;
+
+class PostType extends Base implements PostTypeInterface {
 
 	protected string $post_type;
+
 	protected bool $classic_editor = false;
 
 
+	/** @param array<string, mixed> $args */
 	public function __construct( string $post_type, array $args = array() ) {
 
 		$this->post_type = $post_type;
@@ -29,6 +33,64 @@ class PostType extends Base {
 		}
 
 		$this->initialize( $post_type, $args );
+
+	}
+
+
+	public function icon( string $icon ): self {
+
+		$this->args['menu_icon'] = $icon;
+
+		return $this;
+
+	}
+
+
+	public function supports( string ...$supports ): self {
+
+		$this->args['supports'] = $supports;
+
+		return $this;
+
+	}
+
+
+	public function capabilities( string ...$capabilities ): self {
+
+		if ( 1 === count( $capabilities ) ) {
+			$capabilities = array( $capabilities[0], $this->pluralize( $capabilities[0] ) );
+		}
+
+		$this->args['capability_type'] = $capabilities;
+
+		return $this;
+
+	}
+
+
+	public function position( int $position ): self {
+
+		$this->args['menu_position'] = $position;
+
+		return $this;
+
+	}
+
+
+	public function archive( bool $archive ): self {
+
+		$this->args['has_archive'] = $archive;
+
+		return $this;
+
+	}
+
+
+	public function classic( bool $classic ): self {
+
+		$this->classic_editor = $classic;
+
+		return $this;
 
 	}
 
@@ -117,6 +179,10 @@ class PostType extends Base {
 	}
 
 
+	/**
+	 * @param array<string, array<int, string>> $messages
+	 * @return array<string, array<int, bool|string>>
+	 */
 	public function custom_messages( array $messages ): array {
 
 		global $post_type_object, $post;
@@ -137,11 +203,13 @@ class PostType extends Base {
 		$viewable                 = is_post_type_viewable( $post_type_object );
 
 		if ( $viewable ) {
-			$preview_post_link_html = sprintf(
-				' <a target="_blank" href="%1$s">%2$s</a>',
-				esc_url( $preview_url ),
-				'Preview ' . $singular
-			);
+			if ( null !== $preview_url ) {
+				$preview_post_link_html = sprintf(
+					' <a target="_blank" href="%1$s">%2$s</a>',
+					esc_url( $preview_url ),
+					'Preview ' . $singular
+				);
+			}
 
 			$scheduled_post_link_html = sprintf(
 				' <a target="_blank" href="%1$s">%2$s</a>',
@@ -177,6 +245,12 @@ class PostType extends Base {
 	}
 
 
+	/**
+	 * @param array<string, array<string, string>> $messages
+	 * @param array<string, int> $counts
+	 *
+	 * @return array<string, array<string, bool|string>>
+	 */
 	public function bulk_custom_messages( array $messages, array $counts ): array {
 
 		$name     = $this->post_type;

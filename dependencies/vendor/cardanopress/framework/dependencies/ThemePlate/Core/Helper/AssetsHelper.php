@@ -12,7 +12,7 @@ namespace CardanoPress\Dependencies\ThemePlate\Core\Helper;
 class AssetsHelper {
 
 	public const LOADER_ACTION  = 'themeplate_assets_loader';
-	public const LOADER_VERSION = '2.9.1';
+	public const LOADER_VERSION = '2.13.0';
 
 
 	public static function setup_loader(): void {
@@ -27,8 +27,9 @@ class AssetsHelper {
 		return add_query_arg(
 			array(
 				'action'   => self::LOADER_ACTION,
+				'version'  => self::LOADER_VERSION,
 				'filename' => $filename,
-				'_wpnonce' => wp_create_nonce( self::LOADER_ACTION ),
+				'_wpnonce' => wp_create_nonce( self::LOADER_ACTION . '@' . self::LOADER_VERSION ),
 			),
 			admin_url( 'admin-ajax.php' )
 		);
@@ -38,7 +39,9 @@ class AssetsHelper {
 
 	public static function load_asset(): void {
 
-		check_ajax_referer( self::LOADER_ACTION );
+		if ( ! check_ajax_referer( self::LOADER_ACTION . '@' . self::LOADER_VERSION, false, false ) ) {
+			return;
+		}
 
 		if ( empty( $_GET['filename'] ) ) {
 			wp_die();
@@ -58,7 +61,7 @@ class AssetsHelper {
 		ob_start();
 		include $filename;
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		wp_die( ob_get_clean() );
+		wp_die( (string) ob_get_clean() );
 
 	}
 

@@ -11,7 +11,7 @@ use CardanoPress\Dependencies\Psr\Log\LoggerInterface;
 
 interface BlockfrostInterface
 {
-    public function __construct(string $queryNetwork, LoggerInterface $logger = null);
+    public function __construct(string $queryNetwork, ?LoggerInterface $logger = null);
 
     public static function useProjectIds(string $mainnet, string $testnet): void;
 
@@ -23,7 +23,17 @@ interface BlockfrostInterface
 
     public function getClient(): BlockfrostClient;
 
+    /**
+     * @param  mixed[] $query
+     *
+     * @return array{
+     *     status_code: int,
+     *     data: mixed[],
+     *     error?: string,
+     * }
+     */
     public function request(string $endpoint, array $query = []): array;
 
-    public function getResponse(string $key = null);
+    /** @return mixed */
+    public function getResponse(?string $key = null);
 }

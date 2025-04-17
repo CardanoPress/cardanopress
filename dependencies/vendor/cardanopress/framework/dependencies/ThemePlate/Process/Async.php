@@ -95,7 +95,7 @@ class Async {
 	}
 
 
-	public function dispatch( string $custom_url = null ): bool {
+	public function dispatch( ?string $custom_url = null ): bool {
 
 		// phpcs:ignore Universal.Operators.DisallowShortTernary
 		$post_url  = $custom_url ?: admin_url( 'admin-ajax.php' );

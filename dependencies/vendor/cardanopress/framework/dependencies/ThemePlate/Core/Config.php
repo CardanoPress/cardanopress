@@ -24,7 +24,7 @@ class Config {
 
 		$collection = array();
 
-		if ( null !== $fields ) {
+		if ( $fields instanceof Fields ) {
 			foreach ( $fields->get_collection() as $field ) {
 				$collection[ $field->data_key( $this->prefix ) ] = $field->get_config();
 			}

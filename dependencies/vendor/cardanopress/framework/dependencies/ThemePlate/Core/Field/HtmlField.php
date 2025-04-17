@@ -42,7 +42,7 @@ class HtmlField extends Field {
 			return (string) $value;
 		}
 
-		return wp_json_encode( $value );
+		return (string) wp_json_encode( $value );
 
 	}
 

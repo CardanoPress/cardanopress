@@ -13,20 +13,51 @@ use CardanoPress\Dependencies\ThemePlate\Page\Interfaces\PageInterface;
 
 abstract class BasePage implements CommonInterface, PageInterface {
 
-	protected array $defaults = array(
-		'capability' => 'manage_options',
-		'menu_title' => '',
-		'menu_slug'  => '',
-		'position'   => null,
+	/**
+	 * @var array{
+	 *     capability: string,
+	 *     menu_title: string,
+	 *     menu_slug: string,
+	 *     position: int|null,
+	 *     icon_url: string,
+	 *     parent_slug: string,
+	 * }
+	 */
+	protected array $config = array(
+		'capability'  => 'manage_options',
+		'menu_title'  => '',
+		'menu_slug'   => '',
+		'position'    => null,
+		'icon_url'    => '',
+		'parent_slug' => '',
 	);
-	protected array $config;
+
 	protected string $title;
 	protected string $hookname = '';
 
 
-	protected function initialize( string $title, array $config ) {
+	/**
+	 * @param array{
+	 *     menu_title?: string,
+	 *     menu_slug?: string,
+	 * } $config
+	 */
+	protected function initialize( string $title, array $config ): void {
 
 		$this->title = $title;
+
+		$this->config( $config );
+
+	}
+
+
+	/**
+	 * @param array{
+	 *     menu_title?: string,
+	 *     menu_slug?: string,
+	 * } $config
+	 */
+	public function config( array $config ): self {
 
 		if ( empty( $config['menu_title'] ) ) {
 			$config['menu_title'] = $this->title;
@@ -36,9 +67,11 @@ abstract class BasePage implements CommonInterface, PageInterface {
 			$config['menu_slug'] = $config['menu_title'];
 		}
 
-		$config['menu_slug'] = sanitize_title( $config['menu_slug'] );
+		$this->config = array_merge( $this->config, $config );
 
-		$this->config = array_merge( $this->defaults, $config );
+		$this->slug( $config['menu_slug'] );
+
+		return $this;
 
 	}
 
@@ -54,7 +87,7 @@ abstract class BasePage implements CommonInterface, PageInterface {
 
 	public function title( string $title ): self {
 
-		$this->title = $title;
+		$this->config['menu_title'] = $title;
 
 		return $this;
 
@@ -63,7 +96,7 @@ abstract class BasePage implements CommonInterface, PageInterface {
 
 	public function slug( string $slug ): self {
 
-		$this->config['menu_slug'] = $slug;
+		$this->config['menu_slug'] = sanitize_title( $slug );
 
 		return $this;
 
@@ -92,6 +125,10 @@ abstract class BasePage implements CommonInterface, PageInterface {
 	}
 
 
+	/**
+	 * @param array<string, string|int> $options
+	 * @return array<string, string|int|array{}>
+	 */
 	public function maybe_init_option( array $options ): array {
 
 		if ( ! array_key_exists( $this->config['menu_slug'], $options ) ) {

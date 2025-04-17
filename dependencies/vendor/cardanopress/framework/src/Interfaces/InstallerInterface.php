@@ -13,5 +13,5 @@ interface InstallerInterface
 
     public function activate(): void;
 
-    public function maybeDoUpgrades($isActivating = false): void;
+    public function maybeDoUpgrades(?bool $isActivating = false): void;
 }

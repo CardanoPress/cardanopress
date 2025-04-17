@@ -75,7 +75,7 @@ class CustomData {
 			foreach ( $dependencies->registered as $dependency ) {
 				$specified = ( 'scripts' === $type ? ScriptsTag::filter_attributes( $dependency->extra ) : StylesTag::filter_attributes( $dependency->extra ) );
 
-				if ( ! empty( $specified ) ) {
+				if ( array() !== $specified ) {
 					$this->{$type}[ $dependency->handle ] = $specified;
 				}
 			}
@@ -86,13 +86,13 @@ class CustomData {
 
 	public function action(): void {
 
-		if ( ! empty( $this->scripts ) ) {
+		if ( array() !== $this->scripts ) {
 			$script_tag = new ScriptsTag( $this->scripts );
 
 			add_filter( 'script_loader_tag', array( $script_tag, 'filter' ), 10, 2 );
 		}
 
-		if ( ! empty( $this->styles ) ) {
+		if ( array() !== $this->styles ) {
 			$style_tag = new StylesTag( $this->styles );
 
 			add_filter( 'style_loader_tag', array( $style_tag, 'filter' ), 10, 2 );

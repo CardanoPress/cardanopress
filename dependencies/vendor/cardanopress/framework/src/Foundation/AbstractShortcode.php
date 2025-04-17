@@ -29,12 +29,12 @@ abstract class AbstractShortcode implements HookInterface
     }
 
     /**
-     * @param array|string $value
+     * @param mixed $value
      *
      * @return string
      */
     protected function getString($value): string
     {
-        return is_array($value) ? json_encode($value) : $value;
+        return is_array($value) ? (string) json_encode($value) : $value;
     }
 }

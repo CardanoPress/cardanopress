@@ -115,17 +115,17 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.12.0",
-            "version_normalized": "2.12.0.0",
+            "version": "v2.13.0",
+            "version_normalized": "2.13.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "a3605b9f3c07df8b908f5949d976230ef3f6ea8c"
+                "reference": "6adce49176858e00865172f28abe98db5df17560"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/a3605b9f3c07df8b908f5949d976230ef3f6ea8c",
-                "reference": "a3605b9f3c07df8b908f5949d976230ef3f6ea8c",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/6adce49176858e00865172f28abe98db5df17560",
+                "reference": "6adce49176858e00865172f28abe98db5df17560",
                 "shasum": ""
             },
             "require": {
@@ -137,7 +137,7 @@
                 "coenjacobs/mozart": "^0.7.1",
                 "themeplate/tester": "^2.1"
             },
-            "time": "2025-03-31T08:48:34+00:00",
+            "time": "2025-04-17T02:26:38+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -170,7 +170,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.12.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.13.0"
             },
             "install-path": "../cardanopress/framework"
         },
@@ -321,17 +321,17 @@
         },
         {
             "name": "themeplate/vite",
-            "version": "v1.7.0",
-            "version_normalized": "1.7.0.0",
+            "version": "v1.6.0",
+            "version_normalized": "1.6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThemePlate/Vite.git",
-                "reference": "5f4a18d5707cb91bb3846b423ae1b8a0de37202b"
+                "reference": "5b2567f2bf1c494895ecfc0ae464085a442b82be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThemePlate/Vite/zipball/5f4a18d5707cb91bb3846b423ae1b8a0de37202b",
-                "reference": "5f4a18d5707cb91bb3846b423ae1b8a0de37202b",
+                "url": "https://api.github.com/repos/ThemePlate/Vite/zipball/5b2567f2bf1c494895ecfc0ae464085a442b82be",
+                "reference": "5b2567f2bf1c494895ecfc0ae464085a442b82be",
                 "shasum": ""
             },
             "require": {
@@ -343,7 +343,7 @@
             "require-dev": {
                 "themeplate/tester": "^2.0"
             },
-            "time": "2025-03-15T05:48:03+00:00",
+            "time": "2024-05-29T10:59:13+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -364,7 +364,7 @@
             "description": "Straight-forward Vite integration for WordPress",
             "support": {
                 "issues": "https://github.com/ThemePlate/Vite/issues",
-                "source": "https://github.com/ThemePlate/Vite/tree/v1.7.0"
+                "source": "https://github.com/ThemePlate/Vite/tree/v1.6.0"
             },
             "install-path": "../themeplate/vite"
         }

@@ -13,10 +13,31 @@ use CardanoPress\Dependencies\ThemePlate\Page\Interfaces\SubMenuPageInterface;
 
 class SubMenuPage extends BasePage implements SubMenuPageInterface {
 
+	/** @param array<string, mixed>|array{} $config */
 	public function __construct( string $title, string $parent_slug = '', array $config = array() ) {
 
 		if ( '' !== $parent_slug ) {
 			_deprecated_argument( __METHOD__, '2.1.0', 'Use the new ' . esc_html( self::class . '::parent()' ) . ' instead.' );
+		}
+
+		if ( array() !== $config ) {
+			_deprecated_argument( __METHOD__, '2.5.0', 'Use the new ' . esc_html( self::class . '::config()' ) . ' instead.' );
+
+			if ( isset( $config['capability'] ) ) {
+				_deprecated_argument( __METHOD__, '2.5.0', 'Use the new ' . esc_html( self::class . '::capability()' ) . ' instead.' );
+			}
+
+			if ( isset( $config['menu_title'] ) ) {
+				_deprecated_argument( __METHOD__, '2.5.0', 'Use the new ' . esc_html( self::class . '::title()' ) . ' instead.' );
+			}
+
+			if ( isset( $config['menu_slug'] ) ) {
+				_deprecated_argument( __METHOD__, '2.5.0', 'Use the new ' . esc_html( self::class . '::slug()' ) . ' instead.' );
+			}
+
+			if ( isset( $config['position'] ) ) {
+				_deprecated_argument( __METHOD__, '2.5.0', 'Use the new ' . esc_html( self::class . '::position()' ) . ' instead.' );
+			}
 		}
 
 		$config['parent_slug'] = $parent_slug;
@@ -39,7 +60,7 @@ class SubMenuPage extends BasePage implements SubMenuPageInterface {
 
 		$config = $this->config;
 
-		$this->hookname = add_submenu_page(
+		$this->hookname = (string) add_submenu_page(
 			// Parent Slug
 			$config['parent_slug'],
 			// Page Title

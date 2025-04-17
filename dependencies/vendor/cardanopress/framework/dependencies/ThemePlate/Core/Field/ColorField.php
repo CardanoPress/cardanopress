@@ -32,7 +32,7 @@ class ColorField extends Field {
 				value="' . esc_attr( $value ) . '"
 				' . ( $default ? ' data-default-color="' . esc_attr( $default ) . '"' : '' );
 		if ( ! empty( $this->get_config( 'options' ) ) ) {
-			$values = wp_json_encode( $this->get_config( 'options' ) );
+			$values = (string) wp_json_encode( $this->get_config( 'options' ) );
 
 			echo ' data-palettes="' . esc_attr( $values ) . '"';
 		}

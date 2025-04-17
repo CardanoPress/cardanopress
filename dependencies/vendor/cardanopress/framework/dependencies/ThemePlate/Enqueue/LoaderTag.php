@@ -67,7 +67,7 @@ abstract class LoaderTag {
 
 		$custom = array_filter(
 			$data,
-			function ( $key ) {
+			function ( $key ): bool {
 				return 'data-' === substr( $key, 0, 5 );
 			},
 			ARRAY_FILTER_USE_KEY
@@ -90,7 +90,11 @@ abstract class LoaderTag {
 
 		unset( $attributes[ $property ] );
 
-		$tag = preg_replace( $pattern, $replacement, $tag );
+		$replaced = preg_replace( $pattern, $replacement, $tag );
+
+		if ( null !== $replaced ) {
+			$tag = $replaced;
+		}
 
 	}
 

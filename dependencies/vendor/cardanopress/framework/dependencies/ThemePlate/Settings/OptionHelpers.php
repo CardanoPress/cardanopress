@@ -13,25 +13,30 @@ use CardanoPress\Dependencies\ThemePlate\Core\Helper\BoxHelper;
 
 class OptionHelpers {
 
+	/** @return array{schema: array{}|array<string, string>, default: array<string, string>} */
 	public static function schema_default( string $menu_page ): array {
 
-		$default = array();
-		$schema  = apply_filters( 'themeplate_setting_' . $menu_page . '_schema', $default );
+		$schema  = (array) apply_filters( 'themeplate_setting_' . $menu_page . '_schema', array() );
+		$default = array_map(
+			static function ( $field ) {
+				if ( ! is_array( $field ) || empty( $field['default'] ) ) {
+					return '';
+				}
 
-		if ( ! empty( $schema ) ) {
-			$default = array_map(
-				function ( $field ) {
-					return $field['default'];
-				},
-				$schema
-			);
-		}
+				return $field['default'];
+			},
+			$schema
+		);
 
 		return compact( 'schema', 'default' );
 
 	}
 
 
+	/**
+	 * @param null|array<string, mixed> $value
+	 * @return array{}|array<string, mixed>
+	 */
 	public static function sanitize( ?array $value, string $menu_page ): array {
 
 		if ( null === $value ) {
@@ -43,9 +48,9 @@ class OptionHelpers {
 
 		array_walk(
 			$saved,
-			function ( &$value, $key, $default ) {
+			function ( &$value, $key, array $option_default ): void {
 				if ( empty( $value ) ) {
-					$value = $default[ $key ];
+					$value = $option_default[ $key ];
 				}
 			},
 			$option['default']

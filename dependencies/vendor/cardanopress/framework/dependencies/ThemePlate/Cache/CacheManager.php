@@ -18,7 +18,7 @@ class CacheManager {
 	private string $last_field;
 
 
-	public function __construct( Tasks $tasks = null ) {
+	public function __construct( ?Tasks $tasks = null ) {
 
 		$this->storage = new StorageManager();
 		$this->tasks   = $tasks;
@@ -33,7 +33,7 @@ class CacheManager {
 		$value   = $handler->get( $key, $data );
 
 		if ( false === $value ) {
-			$value = $handler->set( $key, $data );
+			return $handler->set( $key, $data );
 		}
 
 		return $value;
@@ -41,7 +41,7 @@ class CacheManager {
 	}
 
 
-	public function forget( string $key, $default = null ) {
+	public function forget( string $key, $default_value = null ) {
 
 		$value = ( $this->storage->get() )->get( $key );
 
@@ -52,7 +52,7 @@ class CacheManager {
 			return $value;
 		}
 
-		return $default;
+		return $default_value;
 
 	}
 

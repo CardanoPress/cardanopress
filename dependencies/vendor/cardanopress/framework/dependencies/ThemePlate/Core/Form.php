@@ -131,7 +131,7 @@ abstract class Form {
 
 		echo '<div class="fields-container ' . esc_attr( $this->config['style'] ) . '">';
 
-		if ( null !== $this->fields ) {
+		if ( $this->fields instanceof Fields ) {
 			foreach ( $this->fields->get_collection() as $field ) {
 				if ( ! MetaHelper::should_display( $field->get_config(), $current_id ) ) {
 					continue;

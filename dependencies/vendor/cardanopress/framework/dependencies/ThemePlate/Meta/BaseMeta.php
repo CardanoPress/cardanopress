@@ -10,6 +10,7 @@
 namespace CardanoPress\Dependencies\ThemePlate\Meta;
 
 use CardanoPress\Dependencies\ThemePlate\Core\Config;
+use CardanoPress\Dependencies\ThemePlate\Core\Fields;
 use CardanoPress\Dependencies\ThemePlate\Core\Form;
 use CardanoPress\Dependencies\ThemePlate\Core\Handler;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\BoxHelper;
@@ -45,6 +46,7 @@ abstract class BaseMeta extends Form {
 	}
 
 
+	/** @return array{action: string, name: string} */
 	protected function get_nonce_data( int $object_id ): array {
 
 		$form_id = $this->config['form_id'];
@@ -67,18 +69,22 @@ abstract class BaseMeta extends Form {
 
 	protected function can_save( int $object_id ): bool {
 
-		if ( null === $this->fields || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
+		if ( ! $this->fields instanceof Fields || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
 			return false;
 		}
 
 		$data = $this->get_nonce_data( $object_id );
 
-		return ! ( ! isset( $_POST[ $data['name'] ] ) || ! wp_verify_nonce( $_POST[ $data['name'] ], $data['action'] ) );
+		return isset( $_POST[ $data['name'] ] ) && wp_verify_nonce( $_POST[ $data['name'] ], $data['action'] );
 
 	}
 
 
 	protected function save( int $object_id ): void {
+
+		if ( ! $this->fields instanceof Fields ) {
+			return;
+		}
 
 		$config = $this->config;
 
@@ -108,7 +114,11 @@ abstract class BaseMeta extends Form {
 					add_metadata( $config['object_type'], $object_id, $key, $value );
 				}
 			} else {
-				if ( ( ! $stored && ! $updated ) || $stored === $updated ) {
+				if ( ! $stored && ! $updated ) {
+					continue;
+				}
+
+				if ( $stored === $updated ) {
 					continue;
 				}
 
@@ -130,9 +140,13 @@ abstract class BaseMeta extends Form {
 	}
 
 
+	/**
+	 * @param array<mixed> $data
+	 * @return array<mixed>
+	 */
 	public function build_schema( array $data ): array {
 
-		if ( null === $this->fields ) {
+		if ( ! $this->fields instanceof Fields ) {
 			return $data;
 		}
 
@@ -148,7 +162,7 @@ abstract class BaseMeta extends Form {
 
 	public function register_meta(): void {
 
-		if ( null === $this->fields ) {
+		if ( ! $this->fields instanceof Fields ) {
 			return;
 		}
 

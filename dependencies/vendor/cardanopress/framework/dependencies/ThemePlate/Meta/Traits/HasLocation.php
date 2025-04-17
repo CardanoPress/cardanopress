@@ -8,6 +8,7 @@ namespace CardanoPress\Dependencies\ThemePlate\Meta\Traits;
 
 trait HasLocation {
 
+	/** @var string[] */
 	protected array $locations = array();
 
 
