@@ -278,8 +278,8 @@ class CoreAction implements HookInterface
         global $wp;
 
         $currentLink = trailingslashit(home_url($wp->request));
-        $dashboardLink = get_permalink($dashboardPage);
-        $collectionLink = get_permalink($collectionPage);
+        $dashboardLink = (string) get_permalink($dashboardPage);
+        $collectionLink = (string) get_permalink($collectionPage);
 
         if ($currentLink === $collectionLink && $currentLink !== $dashboardLink) {
             wp_safe_redirect($dashboardLink);

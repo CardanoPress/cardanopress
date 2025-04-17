@@ -26,7 +26,7 @@ class Profile extends AbstractProfile
 
     public function saveHandles(array $data): bool
     {
-        return $this->updateMeta($this->prefix . 'stored_handles', $data);
+        return (bool)$this->updateMeta($this->prefix . 'stored_handles', $data);
     }
 
     public function getFavoriteHandle(): string
@@ -45,7 +45,7 @@ class Profile extends AbstractProfile
 
     public function saveFavoriteHandle(string $handle): bool
     {
-        return $this->updateMeta($this->prefix . 'favorite_handle', $handle);
+        return (bool)$this->updateMeta($this->prefix . 'favorite_handle', $handle);
     }
 
     public function getAccountInfo(): array
@@ -57,12 +57,12 @@ class Profile extends AbstractProfile
 
     public function saveAccountInfo(array $data): bool
     {
-        return $this->updateMeta($this->prefix . 'account_info', $data);
+        return (bool)$this->updateMeta($this->prefix . 'account_info', $data);
     }
 
     public function dismissNotice(string $type, bool $reset = false): bool
     {
-        return $this->updateMeta($this->prefix . 'dismissed_' . $type, ! $reset);
+        return (bool)$this->updateMeta($this->prefix . 'dismissed_' . $type, ! $reset);
     }
 
     public function isDismissedNotice(string $type): bool

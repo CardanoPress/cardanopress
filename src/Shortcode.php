@@ -77,7 +77,7 @@ class Shortcode extends AbstractShortcode
         $html = ob_get_clean();
 
         if (empty($args['if'])) {
-            return $html;
+            return (string) $html;
         }
 
         return '<template x-if="' . esc_attr($args['if']) . '">' . $html . '</template>';
