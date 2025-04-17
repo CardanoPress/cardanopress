@@ -6,7 +6,7 @@
  * Author:      CardanoPress
  * Author URI:  https://cardanopress.io
  * Description: Core plugin for the suite of CardanoPress plugins
- * Version:     1.27.0
+ * Version:     1.28.0
  * License:     GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *

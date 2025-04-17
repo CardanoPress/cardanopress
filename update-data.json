@@ -1,12 +1,12 @@
 {
-  "new_version": "1.27.0",
+  "new_version": "1.28.0",
   "homepage": "https://wordpress.org/plugins/cardanopress/",
   "download_link": "https://downloads.wordpress.org/plugin/cardanopress.zip",
-  "last_updated": "2025-03-31",
+  "last_updated": "2025-04-17",
   "author": "Gene Alyson Fortunado Torcende",
   "author_profile": "https://cardanopress.io",
   "requires": "5.9.0",
-  "tested": "6.7.99",
+  "tested": "6.8.99",
   "requires_php": "7.4",
   "upgrade_notice": "Please do the update now to seamlessly use the official WordPress Plugin Directory version",
   "sections": {
