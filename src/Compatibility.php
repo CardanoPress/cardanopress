@@ -21,9 +21,12 @@ class Compatibility
 
     public const DATA_PREFIX = 'cardanopress_';
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(?LoggerInterface $logger)
     {
-        $this->setLogger($logger);
+        if (null !== $logger) {
+            $this->setLogger($logger);
+        }
+
         $this->setInstance($this);
     }
 
