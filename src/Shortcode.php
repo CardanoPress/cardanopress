@@ -56,7 +56,7 @@ class Shortcode extends AbstractShortcode
     {
         $args = shortcode_atts([
             'name' => '',
-            'variables' => [],
+            'variables' => '',
             'if' => '',
         ], $attributes);
 
@@ -64,15 +64,17 @@ class Shortcode extends AbstractShortcode
             return '';
         }
 
+        $variables = [];
+
         if (isset($attributes['variables'])) {
-            parse_str(str_replace('&amp;', '&', $args['variables']), $args['variables']);
+            parse_str(str_replace('&amp;', '&', $args['variables']), $variables);
         }
 
         $name = pathinfo($args['name'], PATHINFO_DIRNAME) . '/';
         $name .= sanitize_file_name(pathinfo($args['name'], PATHINFO_BASENAME));
 
         ob_start();
-        $this->application->template(ltrim($name, './'), $args['variables']);
+        $this->application->template(ltrim($name, './'), $variables);
 
         $html = ob_get_clean();
 
