@@ -13,6 +13,7 @@ use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
 use PBWebDev\CardanoPress\Manifest;
 use PBWebDev\CardanoPress\Profile;
+use WP_Error;
 
 class WalletAction implements HookInterface
 {
@@ -66,17 +67,24 @@ class WalletAction implements HookInterface
         $shouldReload = false;
         $newAccount = false;
 
-        if (! $userId) {
+        if (false === $userId) {
             $userId = wp_create_user($username, wp_hash_password($stakeAddress));
             $newAccount = true;
 
-            if (is_wp_error($userId)) {
+            if ($userId instanceof WP_Error) {
                 $this->application->logger('actions')->error($userId->get_error_message());
                 wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
+                return;
             }
         }
 
         $user = get_user_by('id', $userId);
+
+        if (false === $user) {
+            wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
+            return;
+        }
+
         $userProfile = new Profile($user);
 
         if ($newAccount || ! $userProfile->isConnected()) {

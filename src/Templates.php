@@ -9,6 +9,8 @@ namespace PBWebDev\CardanoPress;
 
 use CardanoPress\Foundation\AbstractTemplates;
 use CardanoPress\Traits\HasPageTemplates;
+use WP_Error;
+use WP_Post;
 
 class Templates extends AbstractTemplates
 {
@@ -60,8 +62,12 @@ class Templates extends AbstractTemplates
     {
         $found = get_page_by_path(sanitize_title($title));
 
+        if (! $found instanceof WP_Post) {
+            return 0;
+        }
+
         if (
-            null !== $found && in_array(
+            in_array(
                 get_post_meta($found->ID, '_wp_page_template', true),
                 ['default', $template],
                 true
@@ -70,7 +76,7 @@ class Templates extends AbstractTemplates
             return $found->ID;
         }
 
-        return wp_insert_post([
+        $post = wp_insert_post([
             'post_status' => 'publish',
             'post_type' => 'page',
             'post_title' => $title,
@@ -78,5 +84,7 @@ class Templates extends AbstractTemplates
                 '_wp_page_template' => $template,
             ],
         ]);
+
+        return $post instanceof WP_Error ? 0 : $post;
     }
 }
