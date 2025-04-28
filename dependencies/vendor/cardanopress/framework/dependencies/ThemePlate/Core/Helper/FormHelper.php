@@ -66,6 +66,9 @@ class FormHelper {
 	}
 
 
+	/**
+	 * @return class-string<Field>
+	 */
 	public static function get_field_class( string $type ): string {
 
 		switch ( $type ) {
@@ -127,6 +130,9 @@ class FormHelper {
 	}
 
 
+	/**
+	 * @param array<string, mixed> $config
+	 */
 	public static function make_field( string $data_key, array $config ): Field {
 
 		$type = self::get_field_class( $config['type'] ?? '' );

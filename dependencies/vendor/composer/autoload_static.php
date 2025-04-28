@@ -52,6 +52,7 @@ class ComposerStaticInitdb368335731274e0956d8862c3e94f05
         'Automattic\\Jetpack\\Autoloader\\AutoloadProcessor' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/AutoloadProcessor.php',
         'Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/CustomAutoloaderPlugin.php',
         'Automattic\\Jetpack\\Autoloader\\ManifestGenerator' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/ManifestGenerator.php',
+        'CardanoPress\\Asset' => __DIR__ . '/..' . '/cardanopress/framework/src/Asset.php',
         'CardanoPress\\Clients\\BlockfrostClient' => __DIR__ . '/..' . '/cardanopress/framework/src/Clients/BlockfrostClient.php',
         'CardanoPress\\Dependencies\\CBOR\\CBOREncoder' => __DIR__ . '/../..' . '/CBOR/CBOREncoder.php',
         'CardanoPress\\Dependencies\\CBOR\\CBORIncorrectAdditionalInfoException' => __DIR__ . '/../..' . '/CBOR/CBORIncorrectAdditionalInfoException.php',

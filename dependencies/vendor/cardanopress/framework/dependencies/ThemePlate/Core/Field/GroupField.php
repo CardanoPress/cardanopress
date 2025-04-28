@@ -26,7 +26,7 @@ class GroupField extends Field {
 	}
 
 	/**
-	 * @param array $value
+	 * @param array<string, mixed> $value
 	 */
 	public function render( $value ): void {
 

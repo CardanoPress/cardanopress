@@ -51,6 +51,9 @@ class Repository {
 	protected function field( string $key ): Field {
 
 		return new class( $key ) extends Field {
+			/**
+			 * @param mixed $value
+			 */
 			public function render( $value ): void {}
 		};
 

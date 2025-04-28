@@ -11,6 +11,7 @@ return array(
     'Automattic\\Jetpack\\Autoloader\\AutoloadProcessor' => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadProcessor.php',
     'Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin' => $vendorDir . '/automattic/jetpack-autoloader/src/CustomAutoloaderPlugin.php',
     'Automattic\\Jetpack\\Autoloader\\ManifestGenerator' => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php',
+    'CardanoPress\\Asset' => $vendorDir . '/cardanopress/framework/src/Asset.php',
     'CardanoPress\\Clients\\BlockfrostClient' => $vendorDir . '/cardanopress/framework/src/Clients/BlockfrostClient.php',
     'CardanoPress\\Dependencies\\CBOR\\CBOREncoder' => $baseDir . '/CBOR/CBOREncoder.php',
     'CardanoPress\\Dependencies\\CBOR\\CBORIncorrectAdditionalInfoException' => $baseDir . '/CBOR/CBORIncorrectAdditionalInfoException.php',

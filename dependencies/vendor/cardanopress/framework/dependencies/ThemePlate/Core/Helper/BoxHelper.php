@@ -11,6 +11,10 @@ namespace CardanoPress\Dependencies\ThemePlate\Core\Helper;
 
 class BoxHelper {
 
+	/**
+	 * @param array<string, mixed> $data
+	 * @return array<string, mixed>
+	 */
 	public static function prepare_save( array $data ): array {
 
 		$filtered = array();
@@ -28,6 +32,10 @@ class BoxHelper {
 	}
 
 
+	/**
+	 * @param array<string, mixed> $data
+	 * @return array<string, mixed>
+	 */
 	private static function filter( array $data ): array {
 
 		foreach ( $data as $key => $value ) {
@@ -45,6 +53,9 @@ class BoxHelper {
 	}
 
 
+	/**
+	 * @param array<string, mixed> $config
+	 */
 	public static function get_priority( array $config ): int {
 
 		switch ( $config['priority'] ) {

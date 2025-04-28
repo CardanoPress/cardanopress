@@ -30,14 +30,20 @@ abstract class Field {
 	public const MULTIPLE_ABLE = false;
 
 
+	/**
+	 * @var array<string, mixed>
+	 */
 	protected array $config;
 	protected string $data_key;
 	/**
-	 * @var string|array
+	 * @var mixed
 	 */
 	protected $user_passed_default = '';
 
 
+	/**
+	 * @param array<string, mixed> $config
+	 */
 	public function __construct( string $data_key, array $config = array() ) {
 
 		$this->data_key = $data_key;
@@ -50,9 +56,16 @@ abstract class Field {
 	}
 
 
+	/**
+	 * @param mixed $value
+	 */
 	abstract public function render( $value ): void;
 
 
+	/**
+	 * @param array<string, mixed> $config
+	 * @return array<string, mixed>
+	 */
 	protected function check( array $config ): array {
 
 		$config = MainHelper::fool_proof(
@@ -128,6 +141,9 @@ abstract class Field {
 	}
 
 
+	/**
+	 * @param array<string, mixed> $config
+	 */
 	public function can_have_multiple_value( array $config ): bool {
 
 		return ( static::MULTIPLE_ABLE && (bool) $config['multiple'] ) || (bool) $config['repeatable'];
@@ -143,7 +159,7 @@ abstract class Field {
 
 
 	/**
-	 * @return array|mixed|null
+	 * @return mixed
 	 */
 	public function get_config( string $key = '' ) {
 
@@ -183,7 +199,7 @@ abstract class Field {
 
 
 	/**
-	 * @return string|array
+	 * @return mixed
 	 */
 	public function clone_value() {
 
@@ -206,6 +222,9 @@ abstract class Field {
 	}
 
 
+	/**
+	 * @param mixed $value
+	 */
 	public function maybe_adjust( &$value ): void {
 
 		if ( ! $this->get_config( 'repeatable' ) ) {
@@ -223,7 +242,7 @@ abstract class Field {
 		$current = count( $value );
 
 		if ( $current < $this->get_config( 'minimum' ) ) {
-			$balance = $this->get_config( 'minimum' ) - $current;
+			$balance = max( 0, (int) ( $this->get_config( 'minimum' ) - $current ) );
 			$value   = array_merge( $value, array_fill( $current, $balance, $this->clone_value() ) );
 		}
 

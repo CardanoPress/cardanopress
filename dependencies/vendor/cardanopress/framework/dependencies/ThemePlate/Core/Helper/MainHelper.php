@@ -13,6 +13,11 @@ use CardanoPress\Dependencies\ThemePlate\Core\Field;
 
 class MainHelper {
 
+	/**
+	 * @param array<string, mixed> $defaults
+	 * @param array<string, mixed> $options
+	 * @return array<string, mixed>
+	 */
 	public static function fool_proof( array $defaults, array $options ): array {
 
 		$result = array_merge( $defaults, $options );
@@ -38,8 +43,7 @@ class MainHelper {
 				if ( is_scalar( $result[ $key ] ) || null === $result[ $key ] ) {
 					$result[ $key ] = (string) $result[ $key ];
 				} else {
-					// phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode
-					$result[ $key ] = json_encode( $result[ $key ] );
+					$result[ $key ] = wp_json_encode( $result[ $key ] );
 				}
 			}
 		}
@@ -49,6 +53,9 @@ class MainHelper {
 	}
 
 
+	/**
+	 * @param array<mixed> $array_var
+	 */
 	public static function is_sequential( array $array_var ): bool {
 
 		return ( array_keys( $array_var ) === range( 0, count( $array_var ) - 1 ) );
@@ -56,6 +63,10 @@ class MainHelper {
 	}
 
 
+	/**
+	 * @param array<mixed> $config
+	 * @param array<mixed> $expected
+	 */
 	public static function is_complete( array $config, array $expected ): bool {
 
 		$result = true;
@@ -79,6 +90,10 @@ class MainHelper {
 	}
 
 
+	/**
+	 * @param array<mixed> $array_var
+	 * @return array<mixed>
+	 */
 	public static function values_to_string( array $array_var ): array {
 
 		return array_map(
@@ -96,7 +111,7 @@ class MainHelper {
 
 
 	/**
-	 * @param array|string|null $value
+	 * @param mixed $value
 	 */
 	public static function for_repeatable( $value ): bool {
 
@@ -106,7 +121,7 @@ class MainHelper {
 
 
 	/**
-	 * @param array|string|null $value
+	 * @param mixed $value
 	 */
 	public static function maybe_adjust( Field $field, &$value ): void {
 

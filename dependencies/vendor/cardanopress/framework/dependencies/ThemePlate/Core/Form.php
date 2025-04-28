@@ -28,10 +28,16 @@ abstract class Form {
 
 	protected ?Fields $fields = null;
 	protected Handler $handler;
+	/**
+	 * @var array<string, mixed>
+	 */
 	protected array $config;
 	protected string $title;
 
 
+	/**
+	 * @param array<string, mixed> $config
+	 */
 	public function __construct( string $title, array $config = array() ) {
 
 		$this->title  = $title;
@@ -45,6 +51,9 @@ abstract class Form {
 	abstract protected function get_handler(): Handler;
 
 
+	/**
+	 * @param array<string, mixed> $config
+	 */
 	abstract protected function initialize( array &$config ): void;
 
 
@@ -57,6 +66,10 @@ abstract class Form {
 	abstract public function get_config(): Config;
 
 
+	/**
+	 * @param array<string, mixed> $config
+	 * @return array<string, mixed>
+	 */
 	protected function check( array $config ): array {
 
 		$config = MainHelper::fool_proof( self::DEFAULTS, $config );
@@ -72,6 +85,9 @@ abstract class Form {
 	}
 
 
+	/**
+	 * @param array<Field|mixed> $collection
+	 */
 	public function fields( array $collection ): self {
 
 		$this->fields = new Fields( $collection );

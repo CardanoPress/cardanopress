@@ -7,8 +7,10 @@
 
 namespace CardanoPress\Foundation;
 
+use CardanoPress\Asset;
 use CardanoPress\Dependencies\ThemePlate\Enqueue\CustomData;
 use CardanoPress\Dependencies\ThemePlate\Enqueue\Dynamic;
+use CardanoPress\Dependencies\ThemePlate\Vite;
 use CardanoPress\Interfaces\HookInterface;
 use CardanoPress\Interfaces\ManifestInterface;
 use CardanoPress\SharedBase;
@@ -19,6 +21,7 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
     protected string $version;
     protected CustomData $data;
     protected Dynamic $dynamic;
+    protected ?Vite $vite = null;
 
     public const HANDLE_PREFIX = '';
 
@@ -28,6 +31,10 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
         $this->version = $version;
         $this->data = new CustomData();
         $this->dynamic = new Dynamic();
+
+        if (file_exists(plugin_dir_path($this->path) . Vite::CONFIG)) {
+            $this->vite = new Vite(plugin_dir_path($this->path), plugin_dir_url($this->path));
+        }
 
         $this->initialize();
     }
@@ -62,29 +69,74 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
 
     public function enqueueAssets(): void
     {
-        $manifest = $this->path . 'manifest.json';
-        $base = plugin_dir_url($manifest);
-
-        foreach ($this->readAssetsManifest($manifest) as $file => $asset) {
-            $parts = explode('.', $file);
-
-            if (1 === count($parts) || ! in_array($parts[1], ['js', 'css'])) {
-                continue;
-            }
-
-            $type = 'js' === $parts[1] ? 'script' : 'style';
-            $arg = 'js' === $parts[1] ? true : 'all';
-            $func = 'wp_register_' . $type;
-            $deps = [];
-
-            if ('script' === $type && 'script' !== $parts[0]) {
-                $deps[] = static::HANDLE_PREFIX . 'script';
-            }
-
-            $func(static::HANDLE_PREFIX . $parts[0], $base . $asset, $deps, $this->version, $arg);
+        if (null === $this->vite) {
+            $this->webpackAssets();
+        } else {
+            $this->viteAssets();
         }
 
         $this->dynamic->action();
+    }
+
+    protected function webpackAssets(): void
+    {
+        $manifest = $this->path . 'manifest.json';
+        $base = plugin_dir_url($manifest);
+
+        foreach ($this->readAssetsManifest($manifest) as $file => $entry) {
+            $asset = new Asset($file);
+
+            if (! $asset->isEntry()) {
+                continue;
+            }
+
+            $type = $asset->type();
+            $arg = 'script' === $type ? true : 'all';
+            /** @var non-falsy-string $func */
+            $func = 'wp_register_' . $type;
+            $deps = [];
+
+            if ('script' === $type && 'script' !== $asset->name()) {
+                $deps[] = static::HANDLE_PREFIX . 'script';
+            }
+
+            /** @var callable-string $func */
+            $func(static::HANDLE_PREFIX . $asset->name(), $base . $entry, $deps, $this->version, $arg);
+        }
+    }
+
+    protected function viteAssets(): void
+    {
+        if (null === $this->vite) {
+            return;
+        }
+
+        $manifest = plugin_dir_path($this->path) . Vite::CONFIG;
+        $manifest = $this->readAssetsManifest($manifest);
+
+        $this->vite->prefix(static::HANDLE_PREFIX);
+
+        foreach ($manifest['entryNames'] ?? [] as $entry => $file) {
+            $asset = new Asset($file);
+
+            if (! $asset->isEntry()) {
+                continue;
+            }
+
+            $type = $asset->type();
+            /** @var non-falsy-string $func */
+            $func = 'wp_dequeue_' . $type;
+            $handle = $this->vite->$type(
+                $entry,
+                ('script' === $type && 'script' !== $entry) ? [static::HANDLE_PREFIX . 'script'] : [],
+                'script' === $type ? ['in_footer' => true] : ['media' => 'all']
+            );
+
+            /** @var callable-string $func */
+            $func($handle);
+        }
+
+        $this->vite->action();
     }
 
     public function enqueueScript(string $handle): void

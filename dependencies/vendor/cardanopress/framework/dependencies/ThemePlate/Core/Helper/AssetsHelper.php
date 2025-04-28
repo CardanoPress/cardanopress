@@ -12,7 +12,7 @@ namespace CardanoPress\Dependencies\ThemePlate\Core\Helper;
 class AssetsHelper {
 
 	public const LOADER_ACTION  = 'themeplate_assets_loader';
-	public const LOADER_VERSION = '2.13.0';
+	public const LOADER_VERSION = '2.14.0';
 
 
 	public static function setup_loader(): void {

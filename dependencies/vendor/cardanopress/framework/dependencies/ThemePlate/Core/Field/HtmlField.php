@@ -28,6 +28,9 @@ class HtmlField extends Field {
 	}
 
 
+	/**
+	 * @param mixed $value
+	 */
 	private function handle( $value ): string {
 
 		if ( is_callable( $this->get_config( 'options' ) ) ) {
