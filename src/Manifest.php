@@ -12,13 +12,10 @@ use CardanoPress\Foundation\AbstractManifest;
 
 class Manifest extends AbstractManifest
 {
-    private Vite $vite;
-
     public const HANDLE_PREFIX = 'cardanopress-';
 
     public function initialize(): void
     {
-        $this->vite = new Vite(plugin_dir_path($this->path), plugin_dir_url($this->path));
     }
 
     public function setupHooks(): void
@@ -29,31 +26,8 @@ class Manifest extends AbstractManifest
         add_action('wp_footer', [$this, 'completeInjections']);
     }
 
-    public function enqueueAssets(): void
+    public function autoEnqueues(): void
     {
-        $manifest = plugin_dir_path($this->path) . Vite::CONFIG;
-        $manifest = $this->readAssetsManifest($manifest);
-
-        $this->vite->prefix(self::HANDLE_PREFIX);
-
-        foreach ($manifest['entryNames'] ?? [] as $entry => $file) {
-            $parts = explode('.', $file);
-
-            if (1 === count($parts) || ! in_array($parts[1], ['ts', 'css'])) {
-                continue;
-            }
-
-            $type = 'ts' === $parts[1] ? 'script' : 'style';
-            $func = 'wp_dequeue_' . $type;
-            $handle = $this->vite->$type(
-                $entry,
-                ('script' === $type && 'script' !== $entry) ? [static::HANDLE_PREFIX . 'script'] : [],
-                'ts' === $parts[1] ? ['in_footer' => true] : ['media' => 'all']
-            );
-
-            $func($handle);
-        }
-
         if (apply_filters('cardanopress_alpinejs_cdn', false)) {
             wp_register_script(
                 self::HANDLE_PREFIX . 'alpinejs',
@@ -72,12 +46,6 @@ class Manifest extends AbstractManifest
             );
         }
 
-        $this->dynamic->action();
-        $this->vite->action();
-    }
-
-    public function autoEnqueues(): void
-    {
         wp_enqueue_style(self::HANDLE_PREFIX . 'style');
         wp_register_script(
             self::HANDLE_PREFIX . 'recaptcha',

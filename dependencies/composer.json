@@ -18,7 +18,6 @@
     "ext-ctype": "*",
     "automattic/jetpack-autoloader": "^2.11",
     "cardanopress/framework": "^2.1",
-    "themeplate/vite": "^1.6",
     "kermage/cardanophp": "^0.3.0"
   },
   "autoload": {
@@ -43,7 +42,6 @@
   "scripts": {
     "action-prefix": [
       "../vendor/bin/mozart compose",
-      "rm -rf vendor/bin vendor/themeplate",
       "composer dump-autoload --classmap-authoritative",
       "composer -d .. run index.php"
     ],
