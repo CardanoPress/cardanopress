@@ -3,6 +3,5 @@
 /src export-ignore
 package.json export-ignore
 pnpm-lock.yaml export-ignore
-tailwind.config.js export-ignore
 tsconfig.json export-ignore
 vite.config.ts export-ignore
