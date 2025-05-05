@@ -1,5 +1,5 @@
-import { h as w, a as f, b as g, l as y, c as x, m, p as C, d as b, e as v } from "./actions-DvbpDV6r.js";
-import { a as t, c as a, r as n, E as c, s as l, g as P, b as r, d, e as h, f as p, i as u, h as W, w as E, C as A, B as S, u as T, j as M } from "./util-Dqeh-Nlc.js";
+import { h as w, a as f, b as g, l as y, c as x, m, p as C, d as b, e as v } from "./actions-B8Gt9A9j.js";
+import { a as t, c as a, r as n, E as c, s as l, g as P, b as r, d, e as h, f as p, i as u, h as W, w as E, C as A, B as S, u as T, j as M } from "./util-BdWYb80u.js";
 window.addEventListener("alpine:init", () => {
   window.Alpine.data("cardanoPress", () => ({ isAvailable: window.cardano !== void 0 && window.cardanoPress !== void 0, isConnected: false, isProcessing: false, showModal: false, openDropdown: false, connectedExtension: "", selectedHandle: "", availableWallets: [], supportedWallets: [], has(e) {
     return this.availableWallets.includes(e);
