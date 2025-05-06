@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, ada, token-gating
 Requires at least: 5.9
 Tested up to: 6.8.99
-Stable tag: 1.28.0
+Stable tag: 1.29.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -118,6 +118,12 @@ This plugin does not collect or process any personal user data unless you expres
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.29.0 =
+- Always load AlpineJS last
+- Vite builds handled in framework
+- Minor code updates; stricter and clearer
+- Update assets for extensions building transaction
 
 = 1.28.0 =
 - Directly log compatibility issues
