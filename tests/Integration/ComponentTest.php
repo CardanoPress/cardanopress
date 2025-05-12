@@ -45,7 +45,7 @@ class ComponentTest extends TestCase
         ob_start();
         $component->{$method}();
 
-        $this->assertStringContainsString('x-data="' . $method . '"', ob_get_clean());
+        $this->assertStringContainsString('x-data="' . $method . '"', (string) ob_get_clean());
     }
 
     /** @dataProvider for_instance */

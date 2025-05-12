@@ -26,7 +26,7 @@ class Component
             $handle = $this->application->userProfile()->getFavoriteHandle();
         }
 
-        $wallets = json_encode($this->application->getWallets());
+        $wallets = (string) json_encode($this->application->getWallets());
 
         return $this->attributes([
             'x-data' => 'cardanoPress',
@@ -42,11 +42,11 @@ class Component
         wp_enqueue_script('cardanopress-payment');
 
         if (null === $amount) {
-            $amount = $this->application->option('payment_amount');
+            $amount = (float) $this->application->option('payment_amount');
         }
 
         $recaptchaKeys = $this->application->option('recaptcha_key');
-        $recaptchaKey  = $recaptchaKeys['site'] ?? '';
+        $recaptchaKey  = (string) ($recaptchaKeys['site'] ?? null);
 
         if (! empty($recaptchaKey)) {
             wp_enqueue_script('cardanopress-recaptcha');
@@ -56,7 +56,7 @@ class Component
 
         return $this->attributes([
             'x-data' => 'paymentForm',
-            'data-amount' => $amount,
+            'data-amount' => (string) $amount,
             'data-address' => $address,
             'data-recaptcha' => $recaptchaKey,
         ]);

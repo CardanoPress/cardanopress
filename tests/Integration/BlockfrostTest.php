@@ -40,7 +40,7 @@ class BlockfrostTest extends TestCase
 
     protected function createResponse(int $status, array $body = []): Response
     {
-        return new Response($status, [], json_encode($body));
+        return new Response($status, [], (string) json_encode($body));
     }
 
     public function test_successful_protocol_parameters()

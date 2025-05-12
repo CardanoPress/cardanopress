@@ -121,7 +121,7 @@ class Application extends AbstractApplication
                 continue;
             }
 
-            $list[get_the_title($pageId)] = get_permalink($pageId);
+            $list[get_the_title($pageId)] = (string) get_permalink($pageId);
         }
 
         $list['Disconnect'] = wp_logout_url((string) get_permalink());
