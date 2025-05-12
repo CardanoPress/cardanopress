@@ -43,7 +43,7 @@ class BlockfrostTest extends TestCase
         return new Response($status, [], (string) json_encode($body));
     }
 
-    public function test_successful_protocol_parameters()
+    public function test_successful_protocol_parameters(): void
     {
         $expected = [
             'minFeeA' => 44,
@@ -87,7 +87,7 @@ class BlockfrostTest extends TestCase
         $this->assertSame($expected, $response);
     }
 
-    public function test_failed_protocol_parameters()
+    public function test_failed_protocol_parameters(): void
     {
         $expected = [
             'status_code' => 400,
