@@ -76,13 +76,9 @@ class Shortcode extends AbstractShortcode
         ob_start();
         $this->application->template(ltrim($name, './'), $variables);
 
-        $html = ob_get_clean();
+        $html = (string) ob_get_clean();
 
-        if (empty($args['if'])) {
-            return (string) $html;
-        }
-
-        return '<template x-if="' . esc_attr($args['if']) . '">' . $html . '</template>';
+        return $this->doTemplateIf(['condition' => $args['if']], $html);
     }
 
     public function doTemplateIf(array $attributes, ?string $content = null): string
@@ -91,7 +87,7 @@ class Shortcode extends AbstractShortcode
             'condition' => '',
         ], $attributes);
 
-        $html = apply_filters('the_content', $content);
+        $html = (string) $content;
 
         if (empty($args['condition'])) {
             return $html;
@@ -106,7 +102,7 @@ class Shortcode extends AbstractShortcode
         Manifest::injectDataProvider();
 
         $html = ob_get_clean();
-        $html .= apply_filters('the_content', $content);
+        $html .= (string) $content;
 
         ob_start();
         Manifest::closeDataProviderTag();
@@ -119,7 +115,7 @@ class Shortcode extends AbstractShortcode
     public function doComponentPoolDelegation(array $attributes, ?string $content = null): string
     {
         $html = '<div ' . $this->component->poolDelegation() . '>';
-        $html .= apply_filters('the_content', $content);
+        $html .= (string) $content;
         $html .= '</div>';
 
         return trim($html);
@@ -139,7 +135,7 @@ class Shortcode extends AbstractShortcode
         }
 
         $html = '<form ' . $this->component->paymentForm($args['amount'], $args['address']) . '>';
-        $html .= apply_filters('the_content', $content);
+        $html .= (string) $content;
         $html .= '</form>';
 
         return trim($html);
@@ -148,7 +144,7 @@ class Shortcode extends AbstractShortcode
     public function doComponentSplitForm(array $attributes, ?string $content = null): string
     {
         $html = '<form ' . $this->component->splitForm() . '>';
-        $html .= apply_filters('the_content', $content);
+        $html .= (string) $content;
         $html .= '</form>';
 
         return trim($html);

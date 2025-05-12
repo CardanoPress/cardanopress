@@ -94,11 +94,16 @@ class Component
 
         $attr = implode(' ', $attr);
 
+        return $this->printOrReturn($attr);
+    }
+
+    protected function printOrReturn(string $value): string
+    {
         if (! $this->echo) {
-            return $attr;
+            return $value;
         }
 
-        echo $attr;
+        echo $value;
 
         return '';
     }
