@@ -112,10 +112,6 @@ class Manifest extends AbstractManifest
             return;
         }
 
-        wp_enqueue_script(self::HANDLE_PREFIX . 'script');
-        wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
-        wp_enqueue_script(self::HANDLE_PREFIX . 'alpinejs');
-
         self::injectDataProvider();
 
         remove_action('wp_footer', [$this, 'completeInjections']);
@@ -124,6 +120,10 @@ class Manifest extends AbstractManifest
 
     public static function closeDataProviderTag(): void
     {
+        wp_enqueue_script(self::HANDLE_PREFIX . 'script');
+        wp_enqueue_script(self::HANDLE_PREFIX . 'notification');
+        wp_enqueue_script(self::HANDLE_PREFIX . 'alpinejs');
+
         Application::getInstance()->template('modal-connect');
         Application::getInstance()->template('notices-handler');
 

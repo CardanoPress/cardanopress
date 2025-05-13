@@ -63,6 +63,7 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
 
     public function setupHooks(): void
     {
+        add_action('wp_footer', [$this->dynamic, 'action'], -PHP_INT_MAX);
         add_action('wp_enqueue_scripts', [$this->data, 'action'], PHP_INT_MAX);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
     }
@@ -74,8 +75,6 @@ abstract class AbstractManifest extends SharedBase implements ManifestInterface,
         } else {
             $this->viteAssets();
         }
-
-        $this->dynamic->action();
     }
 
     protected function webpackAssets(): void

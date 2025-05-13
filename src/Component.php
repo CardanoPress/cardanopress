@@ -38,8 +38,7 @@ class Component
 
     public function paymentForm(?float $amount = null, ?string $address = null): string
     {
-        wp_dequeue_script('cardanopress-alpinejs');
-        wp_enqueue_script('cardanopress-payment');
+        $this->application->enqueue('script', 'cardanopress-payment');
 
         if (null === $amount) {
             $amount = $this->application->option('payment_amount');
@@ -49,10 +48,8 @@ class Component
         $recaptchaKey  = $recaptchaKeys['site'] ?? '';
 
         if (! empty($recaptchaKey)) {
-            wp_enqueue_script('cardanopress-recaptcha');
+            $this->application->enqueue('script', 'cardanopress-recaptcha');
         }
-
-        wp_enqueue_script('cardanopress-alpinejs');
 
         return $this->attributes([
             'x-data' => 'paymentForm',
@@ -64,9 +61,7 @@ class Component
 
     public function poolDelegation(): string
     {
-        wp_dequeue_script('cardanopress-alpinejs');
-        wp_enqueue_script('cardanopress-delegation');
-        wp_enqueue_script('cardanopress-alpinejs');
+        $this->application->enqueue('script', 'cardanopress-delegation');
 
         return $this->attributes([
             'x-data' => 'poolDelegation',
@@ -75,9 +70,7 @@ class Component
 
     public function splitForm(): string
     {
-        wp_dequeue_script('cardanopress-alpinejs');
-        wp_enqueue_script('cardanopress-split');
-        wp_enqueue_script('cardanopress-alpinejs');
+        $this->application->enqueue('script', 'cardanopress-split');
 
         return $this->attributes([
             'x-data' => 'splitForm',
