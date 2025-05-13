@@ -222,6 +222,11 @@ class Shortcode extends AbstractShortcode
         if (false === $value) {
             $blockfrost = new Blockfrost($queryNetwork);
             $addressDetails = $blockfrost->getAddressDetails($args['address']);
+
+            if (empty($addressDetails['amount'])) {
+                return '';
+            }
+
             $index = array_search('lovelace', array_column($addressDetails['amount'], 'unit'), true);
 
             if (false === $index) {

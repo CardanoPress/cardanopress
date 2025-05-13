@@ -189,10 +189,14 @@ class CoreAction implements HookInterface
 
                 $data = $blockfrost->specificAsset($asset['unit']);
 
+                if (empty($data)) {
+                    continue;
+                }
+
                 do_action('cardanopress_associated_asset', $stakeAddress, $data, $asset);
 
                 $collection = new Collection($data);
-                $assets[] = $collection->filteredAsset($asset['quantity']);
+                $assets[] = $collection->filteredAsset((int) $asset['quantity']);
                 $handles[] = $collection->grabHandle();
                 $index = array_search($data['policy_id'], $assetAccessPolicyIds, true);
 
@@ -239,7 +243,7 @@ class CoreAction implements HookInterface
                 $wanted = array_filter($response, function ($history) use ($poolIds, $queryNetwork) {
                     return (
                         $history['pool_id'] === $poolIds[$queryNetwork] &&
-                        NumberHelper::lovelaceToAda($history['amount']) >= $this->application->option('amount')
+                        NumberHelper::lovelaceToAda((int) $history['amount']) >= $this->application->option('amount')
                     );
                 });
             }
