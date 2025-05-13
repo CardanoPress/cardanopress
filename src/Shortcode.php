@@ -36,6 +36,7 @@ class Shortcode extends AbstractShortcode
         add_shortcode('cardanopress_component_splitform', [$this, 'doComponentSplitForm']);
     }
 
+    /** @param array<string, string> $attributes */
     public function doOption(array $attributes): string
     {
         $args = shortcode_atts([
@@ -52,6 +53,7 @@ class Shortcode extends AbstractShortcode
         return $this->printOutput($value, $args['sub']);
     }
 
+    /** @param array<string, string> $attributes */
     public function doTemplate(array $attributes): string
     {
         $args = shortcode_atts([
@@ -81,6 +83,7 @@ class Shortcode extends AbstractShortcode
         return $this->doTemplateIf(['condition' => $args['if']], $html);
     }
 
+    /** @param array<string, string> $attributes */
     public function doTemplateIf(array $attributes, ?string $content = null): string
     {
         $args = shortcode_atts([
@@ -96,6 +99,7 @@ class Shortcode extends AbstractShortcode
         return '<template x-if="' . esc_attr($args['condition']) . '">' . $html . '</template>';
     }
 
+    /** @param array<string, string> $attributes */
     public function doComponentCardanoPress(array $attributes, ?string $content = null): string
     {
         ob_start();
@@ -112,6 +116,7 @@ class Shortcode extends AbstractShortcode
         return $html;
     }
 
+    /** @param array<string, string> $attributes */
     public function doComponentPoolDelegation(array $attributes, ?string $content = null): string
     {
         $html = '<div ' . $this->component->poolDelegation() . '>';
@@ -121,6 +126,7 @@ class Shortcode extends AbstractShortcode
         return trim($html);
     }
 
+    /** @param array<string, string> $attributes */
     public function doComponentPaymentForm(array $attributes, ?string $content = null): string
     {
         $args = shortcode_atts([
@@ -141,6 +147,7 @@ class Shortcode extends AbstractShortcode
         return trim($html);
     }
 
+    /** @param array<string, string> $attributes */
     public function doComponentSplitForm(array $attributes, ?string $content = null): string
     {
         $html = '<form ' . $this->component->splitForm() . '>';
@@ -150,6 +157,7 @@ class Shortcode extends AbstractShortcode
         return trim($html);
     }
 
+    /** @param array<string, string> $attributes */
     public function doUserProfile(array $attributes): string
     {
         $args = shortcode_atts([
@@ -167,6 +175,7 @@ class Shortcode extends AbstractShortcode
         return $this->printOutput($value, $args['sub']);
     }
 
+    /** @param array<string, string> $attributes */
     public function doDelegationPool(array $attributes): string
     {
         $args = shortcode_atts([
@@ -183,6 +192,7 @@ class Shortcode extends AbstractShortcode
         return $this->printOutput($value);
     }
 
+    /** @param array<string, string> $attributes */
     public function doWalletBalance(array $attributes): string
     {
         $args = shortcode_atts([

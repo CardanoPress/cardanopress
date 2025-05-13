@@ -67,6 +67,10 @@ class AdminAction implements HookInterface
         update_option(Admin::OPTION_KEY, $optionsValue);
     }
 
+    /**
+     * @param array<string, string> $poolIds
+     * @return array<string, array<string, mixed>>
+     */
     protected function getPoolDetails(array $poolIds): array
     {
         $poolDetails = [];
@@ -87,6 +91,7 @@ class AdminAction implements HookInterface
         return $poolDetails;
     }
 
+    /** @param array<string, mixed> $data */
     protected function addPoolExtended(array &$data): void
     {
         if (empty($data)) {
@@ -100,6 +105,10 @@ class AdminAction implements HookInterface
         }
     }
 
+    /**
+     * @param array<string, mixed> $data
+     * @return array<string, mixed>
+     */
     protected function checkPoolJson(array $data, string $key): array
     {
         if (empty($data)) {

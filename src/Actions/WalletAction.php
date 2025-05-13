@@ -41,6 +41,7 @@ class WalletAction implements HookInterface
         add_action('wp_ajax_cardanopress_payment_address', [$this, 'getPaymentAddress']);
     }
 
+    /** @param string[] $data */
     private function verifyDataSignature(array $data, string $walletAddress): bool
     {
         list($signature, $key) = $data;
@@ -272,6 +273,7 @@ class WalletAction implements HookInterface
         wp_send_json_success($response);
     }
 
+    /** @param string[] $postVars */
     private function maybeInvalid(array $postVars = []): void
     {
         if (is_user_logged_in()) {

@@ -17,6 +17,7 @@ class Profile extends AbstractProfile
     {
     }
 
+    /** @return string[] */
     public function storedHandles(): array
     {
         $saved = $this->getMeta($this->prefix . 'stored_handles', true);
@@ -24,6 +25,7 @@ class Profile extends AbstractProfile
         return array_filter((array)$saved);
     }
 
+    /** @param string[] $data */
     public function saveHandles(array $data): bool
     {
         return (bool)$this->updateMeta($this->prefix . 'stored_handles', $data);
@@ -48,6 +50,7 @@ class Profile extends AbstractProfile
         return (bool)$this->updateMeta($this->prefix . 'favorite_handle', $handle);
     }
 
+    /** @return array<string, mixed> */
     public function getAccountInfo(): array
     {
         $saved = $this->getMeta($this->prefix . 'account_info', true);
@@ -55,6 +58,7 @@ class Profile extends AbstractProfile
         return (array)$saved ?: [];
     }
 
+    /** @param array<string, mixed> $data */
     public function saveAccountInfo(array $data): bool
     {
         return (bool)$this->updateMeta($this->prefix . 'account_info', $data);

@@ -71,6 +71,7 @@ class Application extends AbstractApplication
         return $user;
     }
 
+    /** @return array<string, mixed> */
     public function delegationPool(): array
     {
         static $data;
@@ -110,6 +111,7 @@ class Application extends AbstractApplication
         return $network;
     }
 
+    /** @return array<string, string> */
     public function getPages(): array
     {
         $list = [];
@@ -146,6 +148,7 @@ class Application extends AbstractApplication
         return $account['pool_id'] === $delegation['pool_id'];
     }
 
+    /** @return string[] */
     public function getWallets(): array
     {
         return apply_filters('cardanopress_supported_wallets', [

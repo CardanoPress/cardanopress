@@ -9,6 +9,7 @@ namespace PBWebDev\CardanoPress;
 
 class Collection
 {
+    /** @var array<string, mixed> */
     private array $data;
 
     public const ASSETS_URL = 'https://ipfs.blockfrost.dev/ipfs';
@@ -17,11 +18,16 @@ class Collection
         'testnet' => 'c21f8b778503fbcee295d6e633c125f70bcc16c897d8873163c6577e',
     ];
 
+    /** @param array<string, mixed> $data */
     public function __construct(array $data)
     {
         $this->data = $data;
     }
 
+    /**
+     * @param string[] $custom
+     * @return string[]
+     */
     public static function wantedPolicyIds(array $custom = []): array
     {
         $policyIds = Application::getInstance()->option('policy_ids');
@@ -33,6 +39,7 @@ class Collection
         ));
     }
 
+    /** @return array<string, mixed> */
     public function filteredAsset(int $quantity = 0): array
     {
         $data = $this->data;
@@ -73,6 +80,7 @@ class Collection
         return $data['onchain_metadata']['name'] ?? '';
     }
 
+    /** @param array<string, mixed> $data */
     private function shouldSkip(array $data): bool
     {
         if (empty($data)) {

@@ -29,6 +29,7 @@ class BlockfrostTest extends TestCase
         $this->blockfrost = new Blockfrost('testnet', new Logger('blockfrost'));
     }
 
+    /** @param array<int, Response> $responses */
     protected function mockResponses(array $responses): void
     {
         $mock = new MockHandler($responses);
@@ -38,6 +39,7 @@ class BlockfrostTest extends TestCase
         $this->blockfrost->setClient($client);
     }
 
+    /** @param array<string, mixed> $body */
     protected function createResponse(int $status, array $body = []): Response
     {
         return new Response($status, [], (string) json_encode($body));

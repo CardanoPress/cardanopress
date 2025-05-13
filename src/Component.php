@@ -77,6 +77,7 @@ class Component
         ]);
     }
 
+    /** @param array<string, string|null> $data */
     protected function attributes(array $data): string
     {
         $attr = [];

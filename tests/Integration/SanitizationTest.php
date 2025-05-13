@@ -25,6 +25,7 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $this->sanitization = new Sanitization();
     }
 
+    /** @return array<int, array{string, bool}> */
     public function for_query_network(): array
     {
         return [
@@ -40,6 +41,7 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $this->do_actual_test('query_network', $value, $is_known);
     }
 
+    /** @return array<int, array{string, bool}> */
     public function for_wallet_address(): array
     {
         // phpcs:disable Generic.Files.LineLength.TooLong
@@ -57,6 +59,7 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $this->do_actual_test('wallet_address', $value, $is_known);
     }
 
+    /** @return array<int, array{string, bool}> */
     public function for_stake_address(): array
     {
         return [
@@ -78,6 +81,7 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $this->do_actual_test('reward_address', $value, $is_known);
     }
 
+    /** @return array<int, array{string, bool}> */
     public function for_pool_id(): array
     {
         return [
@@ -92,6 +96,7 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $this->do_actual_test('pool_id', $value, $is_known);
     }
 
+    /** @return array<int, array{string, bool}> */
     public function for_transaction_action(): array
     {
         return [
@@ -107,6 +112,7 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $this->do_actual_test('transaction_action', $value, $is_known);
     }
 
+    /** @return array<int, array{string, bool}> */
     public function for_transaction_hash(): array
     {
         return [
@@ -122,6 +128,7 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $this->do_actual_test('transaction_hash', $value, $is_known);
     }
 
+    /** @return array<int, array{string, bool}> */
     public function for_ada_handle(): array
     {
         return [
@@ -137,6 +144,7 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         $this->do_actual_test('ada_handle', $value, $is_known);
     }
 
+    /** @return array<int, array{string, bool, string}> */
     public function for_data_signature(): array
     {
         return [

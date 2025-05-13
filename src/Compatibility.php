@@ -16,7 +16,9 @@ class Compatibility
     use Instantiable;
     use Loggable;
 
+    /** @var array<string, string> */
     protected array $messages = [];
+    /** @var string[] */
     protected array $issues = [];
 
     public const DATA_PREFIX = 'cardanopress_';
@@ -102,6 +104,7 @@ class Compatibility
         return in_array($type, $this->issues, true);
     }
 
+    /** @return string[] */
     public function getIssues(bool $in_cache = false): array
     {
         if ($in_cache) {

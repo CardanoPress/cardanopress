@@ -27,6 +27,7 @@ class ComponentTest extends TestCase
         new Application(CARDANOPRESS_FILE);
     }
 
+    /** @return array<int, array<int, string>> */
     public static function for_instance(): array
     {
         return array(

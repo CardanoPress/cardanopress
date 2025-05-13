@@ -41,6 +41,7 @@ class CoreAction implements HookInterface
         );
     }
 
+    /** @return array<string, string> */
     protected static function customizableMessages(string $type): array
     {
         $data = [
@@ -156,6 +157,7 @@ class CoreAction implements HookInterface
         }
     }
 
+    /** @return array<int, array<string, string>> */
     protected function getAssetAccess(): array
     {
         $assetAccess = $this->application->option('asset_access');

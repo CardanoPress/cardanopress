@@ -12,6 +12,7 @@ use CardanoPress\Clients\BlockfrostClient;
 // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 class Sanitization
 {
+    /** @return array<string, string> */
     protected function customizableMessages(): array
     {
         return [

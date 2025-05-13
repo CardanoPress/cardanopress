@@ -11,6 +11,7 @@ use CardanoPress\Foundation\AbstractAdmin;
 
 class Admin extends AbstractAdmin
 {
+    /** @var string[] */
     protected array $roles = array();
 
     public const OPTION_KEY = 'cardanopress';
@@ -107,10 +108,10 @@ class Admin extends AbstractAdmin
                             'title' => __('Secret', 'cardanopress'),
                             'type' => 'text',
                         ],
+                        ],
                     ],
                 ],
-            ],
-        ]);
+            ]);
     }
 
     private function poolDelegationFields(): void
@@ -138,10 +139,10 @@ class Admin extends AbstractAdmin
                             'description' => __('For networks preview and preprod', 'cardanopress'),
                             'type' => 'text',
                         ],
+                        ],
                     ],
                 ],
-            ],
-        ]);
+            ]);
     }
 
     private function paymentAddressFields(): void
@@ -189,9 +190,9 @@ class Admin extends AbstractAdmin
                         'min' => 0.1,
                         'step' => 0.1,
                     ],
+                    ],
                 ],
-            ],
-        ]);
+            ]);
     }
 
     private function assetsPolicyFields(): void
@@ -220,10 +221,10 @@ class Admin extends AbstractAdmin
                             'description' => __('Policy ID value.', 'cardanopress'),
                             'type' => 'text',
                         ],
+                        ],
                     ],
                 ],
-            ],
-        ]);
+            ]);
     }
 
     private function memberPagesFields(): void
@@ -278,8 +279,8 @@ class Admin extends AbstractAdmin
                     'description' => __('Role that is assigned for meeting required delegation.', 'cardanopress'),
                     'options' => $this->roles,
                 ],
-            ],
-        ]);
+                ],
+            ]);
     }
 
     private function assetAccessFields(): void
@@ -315,10 +316,10 @@ class Admin extends AbstractAdmin
                             'title' => __('Additional Role', 'cardanopress'),
                             'options' => $this->roles,
                         ],
+                        ],
                     ],
                 ],
-            ],
-        ]);
+            ]);
     }
 
     private function managedRoleFields(): void
@@ -333,8 +334,8 @@ class Admin extends AbstractAdmin
                     'options' => $this->roles,
                     'multiple' => true,
                 ],
-            ],
-        ]);
+                ],
+            ]);
     }
 
     public function recommendPlugins(): void
