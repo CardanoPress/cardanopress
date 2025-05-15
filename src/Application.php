@@ -159,6 +159,7 @@ class Application extends AbstractApplication
             'NuFi',
             'Lace',
             'Begin',
+            'VESPR',
         ]);
     }
 

@@ -1,4 +1,3 @@
-import { fromVespr } from '@pbwebdev/cardano-wallet-browser-extensions-interface'
 
 export const cardanoPress = window.cardanoPress || {
     ajaxUrl: '',
@@ -21,16 +20,7 @@ export const cardanoPressMessages = window.cardanoPressMessages || {
     dataMessage: '',
 }
 
-export const getConnectedExtension = () => {
-    const extension = localStorage.getItem('_x_connectedExtension') || ''
-
-    if ('' === extension) {
-        return ''
-    }
-
-    return `${extension}${fromVespr(extension) ? '(VESPR Compat)' : ''}`
-}
-
+export const getConnectedExtension = () => localStorage.getItem('_x_connectedExtension') || ''
 export const setConnectedExtension = (value: string) => localStorage.setItem('_x_connectedExtension', value)
 export const isNotified = () => 'true' === (localStorage.getItem('_x_isNotified') || 'false')
 export const setNotified = (value: string) => localStorage.setItem('_x_isNotified', value)
