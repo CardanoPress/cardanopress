@@ -66,7 +66,9 @@ window.addEventListener('alpine:init', () => {
                 this.refreshWallets()
             })
 
-            this.supportedWallets = supportedWallets.filter((wallet) => this.$root.dataset.wallets?.includes(wallet))
+            const wallets = JSON.parse(this.$root.dataset.wallets || '[]')
+
+            this.supportedWallets = Array.isArray(wallets) && wallets.length > 0 ? wallets.filter((wallet: string) => supportedWallets.includes(wallet)) : [...supportedWallets]
 
             if (cardanoPress.logged) {
                 this.connectedExtension = getConnectedExtension()
