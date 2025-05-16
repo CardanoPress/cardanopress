@@ -9,6 +9,11 @@ namespace CardanoPress\Dependencies\ThemePlate\Cache\Handlers;
 
 class DataHandler extends AbstractHandler {
 
+	/**
+	 * @param array<string, mixed> $data
+	 *
+	 * @return mixed
+	 */
 	public function get( string $key, array $data ) {
 
 		if ( $this->forced_refresh( $key ) ) {
@@ -30,6 +35,11 @@ class DataHandler extends AbstractHandler {
 	}
 
 
+	/**
+	 * @param array{callback: callable, expiration: int} $data
+	 *
+	 * @return mixed
+	 */
 	public function set( string $key, array $data ) {
 
 		$value = $data['callback']();

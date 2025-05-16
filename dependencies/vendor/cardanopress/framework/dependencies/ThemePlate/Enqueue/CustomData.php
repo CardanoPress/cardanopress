@@ -13,10 +13,18 @@ use WP_Dependencies;
 
 class CustomData {
 
+	/** @var array<string, array<string, mixed>> */
 	private array $scripts = array();
-	private array $styles  = array();
+
+	/** @var array<string, array<string, mixed>> */
+	private array $styles = array();
 
 
+	/**
+	 * @param array<string, mixed> $data
+	 *
+	 * @return array<string, mixed>
+	 */
 	public function filter( array $data, string $type ): array {
 
 		if ( ! in_array( $type, array( 'scripts', 'styles' ), true ) ) {
@@ -31,6 +39,7 @@ class CustomData {
 	}
 
 
+	/** @param array<string, mixed> $data */
 	public function add( string $type, string $handle, array $data ): void {
 
 		if ( ! in_array( $type, array( 'script', 'style' ), true ) ) {
@@ -45,6 +54,7 @@ class CustomData {
 	}
 
 
+	/** @param array<string, mixed> $data */
 	public function script( string $handle, array $data ): void {
 
 		$this->scripts[ $handle ] = $data;
@@ -52,6 +62,7 @@ class CustomData {
 	}
 
 
+	/** @param array<string, mixed> $data */
 	public function style( string $handle, array $data ): void {
 
 		$this->styles[ $handle ] = $data;

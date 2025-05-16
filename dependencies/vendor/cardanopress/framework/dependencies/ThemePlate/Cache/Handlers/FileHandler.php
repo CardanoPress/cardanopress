@@ -37,6 +37,7 @@ class FileHandler extends AbstractHandler {
 	}
 
 	/**
+	 * @param array{path: string, time: int} $data
 	 * @return false|string
 	 */
 	public function set( string $key, array $data ) {

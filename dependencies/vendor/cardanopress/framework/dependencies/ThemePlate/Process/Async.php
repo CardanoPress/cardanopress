@@ -13,12 +13,18 @@ use Throwable;
 
 class Async {
 
+	/**
+	 * @var array<string, int>
+	 */
 	private static array $storage = array();
 	private string $identifier;
 	/**
 	 * @var callable
 	 */
 	private $callback_func;
+	/**
+	 * @var array<int, mixed>
+	 */
 	private array $callback_args;
 	/**
 	 * @var ?callable
@@ -35,6 +41,7 @@ class Async {
 	private string $error_output = '';
 
 
+	/** @param array<int, mixed> $callback_args */
 	public function __construct( callable $callback_func, array $callback_args = array() ) {
 
 		$this->callback_func = $callback_func;

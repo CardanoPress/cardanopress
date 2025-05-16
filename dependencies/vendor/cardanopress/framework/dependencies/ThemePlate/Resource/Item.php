@@ -11,6 +11,7 @@ namespace CardanoPress\Dependencies\ThemePlate\Resource;
 
 class Item {
 
+	/** @var array<int|string, string> */
 	private array $attributes;
 
 	public const ATTRIBUTES = array(
@@ -31,6 +32,7 @@ class Item {
 	}
 
 
+	/** @param array<int|string, string> $attributes */
 	public function extra( array $attributes = array() ): self {
 
 		$this->attributes = array_merge(
@@ -52,6 +54,7 @@ class Item {
 	}
 
 
+	/** @param array<int|string, string> $attributes */
 	private function stringify( array $attributes ): string {
 
 		$string = '';

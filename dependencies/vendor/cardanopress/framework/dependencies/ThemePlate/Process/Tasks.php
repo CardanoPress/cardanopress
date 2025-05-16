@@ -11,6 +11,14 @@ namespace CardanoPress\Dependencies\ThemePlate\Process;
 
 use Throwable;
 
+/**
+ * @phpstan-type Task array{
+ *   callback_func: callable,
+ *   callback_args: array<int, mixed>
+ * }
+ *
+ * @phpstan-type Data array<int, array{task: Task, output: mixed}>
+ */
 class Tasks {
 
 	private string $identifier;
@@ -21,10 +29,12 @@ class Tasks {
 	 */
 	private array $report_callback = array();
 
-	private int $start   = 0;
-	private int $end     = 0;
-	private int $limit   = 0;
-	private int $every   = 0;
+	private int $start = 0;
+	private int $end   = 0;
+	private int $limit = 0;
+	private int $every = 0;
+
+	/** @var array<int, Task> */
 	private array $tasks = array();
 
 
@@ -137,6 +147,7 @@ class Tasks {
 	}
 
 
+	/** @param array<int, mixed> $callback_args */
 	public function add( callable $callback_func, array $callback_args = array() ): Tasks {
 
 		$this->tasks[] = compact( 'callback_func', 'callback_args' );
@@ -146,6 +157,7 @@ class Tasks {
 	}
 
 
+	/** @param array<int, mixed> $callback_args */
 	public function remove( callable $callback_func, array $callback_args = array() ): Tasks {
 
 		$index = array_search( compact( 'callback_func', 'callback_args' ), $this->tasks, true );
@@ -199,6 +211,14 @@ class Tasks {
 	}
 
 
+	/**
+	 * @return array{
+	 *   limit: int,
+	 *   every: int,
+	 *   tasks: array<int, Task>,
+	 *   report: callable[]
+	 * }
+	 */
 	public function dump(): array {
 
 		$this->set_defaults();
@@ -213,6 +233,11 @@ class Tasks {
 	}
 
 
+	/**
+	 * @param array<string, array{interval: int, display: string}> $schedules
+	 *
+	 * @return array<string, array{interval: int, display: string}>
+	 */
 	public function maybe_schedule( array $schedules ): array {
 
 		if ( 0 !== $this->limit ) {
@@ -237,6 +262,9 @@ class Tasks {
 	}
 
 
+	/**
+	 * @param array<int, Task> $tasks
+	 */
 	private function save( array $tasks, ?string $key = null ): void {
 
 		if ( null === $key ) {
@@ -255,9 +283,9 @@ class Tasks {
 	}
 
 
-	public function is_running() {
+	public function is_running(): int {
 
-		return get_transient( $this->identifier . '_lock' );
+		return (int) get_transient( $this->identifier . '_lock' );
 
 	}
 
@@ -288,7 +316,7 @@ class Tasks {
 
 	public function next_scheduled(): int {
 
-		return wp_next_scheduled( $this->identifier . '_event', array( $this->identifier ) );
+		return (int) wp_next_scheduled( $this->identifier . '_event', array( $this->identifier ) );
 
 	}
 
@@ -318,6 +346,9 @@ class Tasks {
 	}
 
 
+	/**
+	 * @param Data $done
+	 */
 	private function reporter( array $done ): void {
 
 		foreach ( $this->report_callback as $report_callback ) {
@@ -346,6 +377,9 @@ class Tasks {
 	}
 
 
+	/**
+	 * @return array{key: string, tasks: array<int, Task>}
+	 */
 	public function get_queued(): array {
 
 		global $wpdb;

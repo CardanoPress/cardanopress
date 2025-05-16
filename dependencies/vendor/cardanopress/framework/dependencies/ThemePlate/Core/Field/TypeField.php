@@ -12,6 +12,7 @@ namespace CardanoPress\Dependencies\ThemePlate\Core\Field;
 use CardanoPress\Dependencies\ThemePlate\Core\Field;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\AssetsHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MainHelper;
+use WP_Error;
 use WP_Post;
 use WP_Query;
 use WP_Term;
@@ -319,7 +320,7 @@ class TypeField extends Field {
 		$is_multi = empty( $taxonomy ) ? true : is_array( $taxonomy ) && 1 < count( $taxonomy );
 		$query    = new WP_Term_Query( array_merge( $defaults, $_GET['options'] ?? array() ) );
 
-		if ( ! is_wp_error( $total ) && $_GET['_page']['paged'] < ceil( (int) $total / self::$count ) ) {
+		if ( ! $total instanceof WP_Error && $_GET['_page']['paged'] < ceil( (int) $total / self::$count ) ) {
 			$return['pagination']['more'] = true;
 		}
 

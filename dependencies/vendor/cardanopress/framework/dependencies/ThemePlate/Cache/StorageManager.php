@@ -7,19 +7,19 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Cache;
 
+use CardanoPress\Dependencies\ThemePlate\Cache\Storages\AbstractStorage;
 use CardanoPress\Dependencies\ThemePlate\Cache\Storages\OptionsStorage;
 use CardanoPress\Dependencies\ThemePlate\Cache\Storages\PostMetaStorage;
-use CardanoPress\Dependencies\ThemePlate\Cache\Storages\StorageInterface;
 use CardanoPress\Dependencies\ThemePlate\Cache\Storages\TermMetaStorage;
 use CardanoPress\Dependencies\ThemePlate\Cache\Storages\UserMetaStorage;
 
 class StorageManager {
 
 	private string $type;
-	private StorageInterface $postmeta;
-	private StorageInterface $termmeta;
-	private StorageInterface $usermeta;
-	private StorageInterface $options;
+	private PostMetaStorage $postmeta;
+	private TermMetaStorage $termmeta;
+	private UserMetaStorage $usermeta;
+	private OptionsStorage $options;
 
 
 	public function __construct() {
@@ -39,19 +39,22 @@ class StorageManager {
 	}
 
 
-	public function get(): StorageInterface {
+	public function get(): AbstractStorage {
 
 		return $this->{$this->current()};
 
 	}
 
 
+	/**
+	 * @param int|string $field
+	 */
 	public function set( $field ): void {
 
 		$decoded    = $this->decode( $field );
 		$this->type = $decoded['type'];
 
-		/** @var StorageInterface $storage */
+		/** @var AbstractStorage $storage */
 		$storage = $this->{$decoded['type']};
 
 		$storage->point( $decoded['id'] );
@@ -59,6 +62,11 @@ class StorageManager {
 	}
 
 
+	/**
+	 * @param int|string $field
+	 *
+	 * @return array{type: string, id: int}
+	 */
 	private function decode( $field ): array {
 
 		$type = 'options';

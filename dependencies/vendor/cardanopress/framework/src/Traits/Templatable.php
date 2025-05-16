@@ -7,36 +7,29 @@
 
 namespace CardanoPress\Traits;
 
-use CardanoPress\Interfaces\TemplatesInterface;
-use CardanoPress\Helpers\ThemeHelper;
+use CardanoPress\Foundation\AbstractTemplates;
+use CardanoPress\TemplateLoader;
 
 trait Templatable
 {
-    protected TemplatesInterface $templates;
+    protected AbstractTemplates $templates;
 
-    protected function setTemplates(TemplatesInterface $templates): void
+    protected function setTemplates(AbstractTemplates $templates): void
     {
         $this->templates = $templates;
     }
 
-    protected function getTemplates(): TemplatesInterface
+    protected function getTemplates(): AbstractTemplates
     {
         return $this->templates;
     }
 
+    /** @param array<string, string> $variables */
     public function template(string $name, array $variables = []): void
     {
-        $name .= '.php';
-        $file = locate_template($this->templates->getOverridesPrefix() . $name);
+        $loader = new TemplateLoader($this->templates);
 
-        if (! $file) {
-            $file = $this->templates->getPath() . $name;
-        }
-
-        if (file_exists($file)) {
-            extract($variables, EXTR_OVERWRITE);
-            include $file;
-        }
+        $loader->load($name, $variables);
     }
 
     public function compatibleHeader(): void

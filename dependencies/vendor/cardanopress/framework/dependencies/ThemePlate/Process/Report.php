@@ -7,8 +7,12 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Process;
 
+/**
+ * @phpstan-import-type Data from Tasks
+ */
 class Report {
 
+	/** @var Data */
 	public array $data;
 	public int $start;
 	public int $end;
@@ -16,6 +20,7 @@ class Report {
 	public const DATE_FORMAT = 'Y-m-d H:i:s';
 
 
+	/** @param Data $data */
 	public function __construct( array $data, int $start, int $end ) {
 
 		$this->data  = $data;

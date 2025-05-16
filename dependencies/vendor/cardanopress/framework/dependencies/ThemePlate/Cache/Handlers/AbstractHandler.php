@@ -7,16 +7,16 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Cache\Handlers;
 
-use CardanoPress\Dependencies\ThemePlate\Cache\Storages\StorageInterface;
+use CardanoPress\Dependencies\ThemePlate\Cache\Storages\AbstractStorage;
 use CardanoPress\Dependencies\ThemePlate\Process\Tasks;
 
 abstract class AbstractHandler implements HandlerInterface {
 
-	protected StorageInterface $storage;
+	protected AbstractStorage $storage;
 	protected ?Tasks $tasks;
 
 
-	public function __construct( StorageInterface $storage, Tasks $tasks = null ) {
+	public function __construct( AbstractStorage $storage, ?Tasks $tasks = null ) {
 
 		$this->storage = $storage;
 		$this->tasks   = $tasks;
@@ -31,12 +31,12 @@ abstract class AbstractHandler implements HandlerInterface {
 		}
 
 		// phpcs:ignore WordPress.Security.NonceVerification
-		if ( empty( $_REQUEST[ StorageInterface::PREFIX . 'refresh' ] ) ) {
+		if ( empty( $_REQUEST[ $this->storage::PREFIX . 'refresh' ] ) ) {
 			return false;
 		}
 
 		// phpcs:ignore WordPress.Security.NonceVerification
-		return in_array( $key, (array) $_REQUEST[ StorageInterface::PREFIX . 'refresh' ], true );
+		return in_array( $key, (array) $_REQUEST[ $this->storage::PREFIX . 'refresh' ], true );
 
 	}
 
@@ -53,6 +53,11 @@ abstract class AbstractHandler implements HandlerInterface {
 	}
 
 
+	/**
+	 * @param array<string, mixed> $data
+	 *
+	 * @return false|mixed
+	 */
 	protected function action_update( string $key, array $data ) {
 
 		if ( ! $this->tasks instanceof Tasks ) {
@@ -73,7 +78,7 @@ abstract class AbstractHandler implements HandlerInterface {
 	public static function update( string $storage, int $pointer, string $key, array $data ) {
 
 		$handler = static::class;
-		/** @var StorageInterface $storage */
+		/** @var AbstractStorage $storage */
 		$storage = new $storage();
 
 		$storage->point( $pointer );

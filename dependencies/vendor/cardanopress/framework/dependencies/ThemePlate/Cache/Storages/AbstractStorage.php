@@ -9,6 +9,12 @@ namespace CardanoPress\Dependencies\ThemePlate\Cache\Storages;
 
 abstract class AbstractStorage implements StorageInterface {
 
+	public const PREFIX = 'tcs_';
+
+
+	/**
+	 * @var array<int|string, mixed|array<string, mixed>> $collection
+	 */
 	protected array $collection = array();
 
 

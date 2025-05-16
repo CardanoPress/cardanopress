@@ -32,19 +32,11 @@ class MainHelper {
 			}
 
 			if ( is_int( $value ) ) {
-				if ( is_scalar( $result[ $key ] ) || null === $result[ $key ] ) {
-					$result[ $key ] = (int) $result[ $key ];
-				} else {
-					$result[ $key ] = (int) ( (bool) $result[ $key ] );
-				}
+				$result[ $key ] = ( is_scalar( $result[ $key ] ) || null === $result[ $key ] ) ? (int) $result[ $key ] : (int) ( (bool) $result[ $key ] );
 			}
 
 			if ( is_string( $value ) ) {
-				if ( is_scalar( $result[ $key ] ) || null === $result[ $key ] ) {
-					$result[ $key ] = (string) $result[ $key ];
-				} else {
-					$result[ $key ] = wp_json_encode( $result[ $key ] );
-				}
+				$result[ $key ] = ( is_scalar( $result[ $key ] ) || null === $result[ $key ] ) ? (string) $result[ $key ] : wp_json_encode( $result[ $key ] );
 			}
 		}
 
@@ -129,12 +121,9 @@ class MainHelper {
 			self::for_repeatable( $value ) &&
 			(
 				! $field->get_config( 'repeatable' ) ||
-				! (
-					is_array( $field::DEFAULT_VALUE ) ||
-					(
-						$field::MULTIPLE_ABLE &&
-						(bool) $field->get_config( 'multiple' )
-					)
+				(
+					! is_array( $field::DEFAULT_VALUE ) &&
+					! ( $field::MULTIPLE_ABLE && (bool) $field->get_config( 'multiple' ) )
 				)
 			)
 		) {

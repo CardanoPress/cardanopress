@@ -7,18 +7,18 @@
 
 namespace CardanoPress\Traits;
 
-use CardanoPress\Interfaces\ManifestInterface;
+use CardanoPress\Foundation\AbstractManifest;
 
 trait Enqueueable
 {
-    protected ManifestInterface $manifest;
+    protected AbstractManifest $manifest;
 
-    protected function setManifest(ManifestInterface $manifest): void
+    protected function setManifest(AbstractManifest $manifest): void
     {
         $this->manifest = $manifest;
     }
 
-    protected function getManifest(): ManifestInterface
+    protected function getManifest(): AbstractManifest
     {
         return $this->manifest;
     }

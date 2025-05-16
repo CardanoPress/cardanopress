@@ -115,17 +115,17 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.14.0",
-            "version_normalized": "2.14.0.0",
+            "version": "v2.15.0",
+            "version_normalized": "2.15.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "9e7500ff3ab0fe90910528eca46e7a450a734932"
+                "reference": "82a39d70f45e9c6799c740689c2c0005f3accbbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/9e7500ff3ab0fe90910528eca46e7a450a734932",
-                "reference": "9e7500ff3ab0fe90910528eca46e7a450a734932",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/82a39d70f45e9c6799c740689c2c0005f3accbbd",
+                "reference": "82a39d70f45e9c6799c740689c2c0005f3accbbd",
                 "shasum": ""
             },
             "require": {
@@ -137,7 +137,7 @@
                 "coenjacobs/mozart": "^0.7.1",
                 "themeplate/tester": "^2.1"
             },
-            "time": "2025-04-24T07:29:31+00:00",
+            "time": "2025-05-16T07:52:23+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -170,7 +170,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.14.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.15.0"
             },
             "install-path": "../cardanopress/framework"
         },

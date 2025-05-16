@@ -26,6 +26,9 @@ class CacheManager {
 	}
 
 
+	/**
+	 * @return mixed
+	 */
 	public function remember( string $key, callable $callback, int $expiration = 0 ) {
 
 		$handler = new DataHandler( $this->storage->get(), $this->tasks );
@@ -41,6 +44,11 @@ class CacheManager {
 	}
 
 
+	/**
+	 * @param mixed $default_value
+	 *
+	 * @return mixed
+	 */
 	public function forget( string $key, $default_value = null ) {
 
 		$value = ( $this->storage->get() )->get( $key );
@@ -57,13 +65,16 @@ class CacheManager {
 	}
 
 
+	/**
+	 * @return false|string
+	 */
 	public function file( string $key, string $path ) {
 
 		$handler = new FileHandler( $this->storage->get(), $this->tasks );
 		$value   = $handler->get( $key, $path );
 
 		if ( false === $value ) {
-			$time  = @filemtime( $path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+			$time  = (int) @filemtime( $path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
 			$value = $handler->set( $key, compact( 'path', 'time' ) );
 		}
 
@@ -72,6 +83,9 @@ class CacheManager {
 	}
 
 
+	/**
+	 * @param int|string $field
+	 */
 	public function assign( $field ): CacheManager {
 
 		$this->save_field();
@@ -93,6 +107,9 @@ class CacheManager {
 	}
 
 
+	/**
+	 * @return array{type: string, ID: int}
+	 */
 	public function assignment(): array {
 
 		return array(

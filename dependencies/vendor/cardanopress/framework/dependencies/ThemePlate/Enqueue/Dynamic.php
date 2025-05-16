@@ -11,9 +11,13 @@ namespace CardanoPress\Dependencies\ThemePlate\Enqueue;
 
 class Dynamic {
 
+	/** @var array<string, string> */
 	private array $scripts = array();
-	private array $styles  = array();
 
+	/** @var array<string, string> */
+	private array $styles = array();
+
+	/** @var array<string, array<string, mixed>> */
 	private array $data = array(
 		'scripts' => array(),
 		'styles'  => array(),
@@ -24,8 +28,10 @@ class Dynamic {
 
 		foreach ( array( 'scripts', 'styles' ) as $type ) {
 			foreach ( $this->{$type} as $handle => $src ) {
+				/** @var non-falsy-string $function */
 				$function = 'wp_enqueue_' . rtrim( $type, 's' );
 
+				/** @var callable-string $function */
 				$function( $handle, $src );
 				$this->add( $type, $handle );
 			}
@@ -38,8 +44,10 @@ class Dynamic {
 
 		if ( ! empty( $this->data[ $type ][ $handle ] ) ) {
 			foreach ( $this->data[ $type ][ $handle ] as $attribute => $value ) {
+				/** @var non-falsy-string $function */
 				$function = 'wp_' . rtrim( $type, 's' ) . '_add_data';
 
+				/** @var callable-string $function */
 				$function( $handle, $attribute, $value );
 			}
 		}
@@ -47,6 +55,7 @@ class Dynamic {
 	}
 
 
+	/** @param array<string, mixed> $data */
 	public function script( string $handle, string $src = '', array $data = array() ): void {
 
 		$this->scripts[ $handle ] = $src;
@@ -56,6 +65,7 @@ class Dynamic {
 	}
 
 
+	/** @param array<string, mixed> $data */
 	public function style( string $handle, string $src = '', array $data = array() ): void {
 
 		$this->styles[ $handle ] = $src;

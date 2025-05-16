@@ -11,6 +11,7 @@ namespace CardanoPress\Dependencies\ThemePlate\Enqueue;
 
 abstract class LoaderTag {
 
+	/** @var array<string, mixed> */
 	protected array $dependencies;
 
 	public const MAIN_PROPERTY = '';
@@ -27,7 +28,7 @@ abstract class LoaderTag {
 	);
 
 	/**
-	 * @param array $dependencies List of dependencies to be handled with their attributes
+	 * @param array<string, mixed> $dependencies List of dependencies to be handled with their attributes
 	 */
 	public function __construct( array $dependencies ) {
 
@@ -45,7 +46,7 @@ abstract class LoaderTag {
 			if ( in_array( 'noscript', array_keys( $attributes ), true ) ) {
 				unset( $attributes['noscript'] );
 
-				$tag = '<noscript>' . $tag . '</noscript>';
+				$tag = sprintf( "<noscript>%s</noscript>\n", trim( $tag ) );
 			}
 
 			$this->clean( $tag, $attributes, $property );
@@ -60,6 +61,11 @@ abstract class LoaderTag {
 	}
 
 
+	/**
+	 * @param array<string, mixed> $data
+	 *
+	 * @return array<string, mixed>
+	 */
 	public static function filter_attributes( array $data ): array {
 
 		$attributes  = array_merge( self::ATTRIBUTES, static::ATTRIBUTES );
@@ -78,6 +84,7 @@ abstract class LoaderTag {
 	}
 
 
+	/** @param array<string, mixed> $attributes */
 	private function clean( string &$tag, array &$attributes, string $property ): void {
 
 		$pattern     = array();
@@ -99,6 +106,7 @@ abstract class LoaderTag {
 	}
 
 
+	/** @param array<string, mixed> $attributes */
 	private function stringify( array $attributes ): string {
 
 		$string = '';

@@ -7,18 +7,18 @@
 
 namespace CardanoPress\Traits;
 
-use CardanoPress\Interfaces\AdminInterface;
+use CardanoPress\Foundation\AbstractAdmin;
 
 trait Configurable
 {
-    protected AdminInterface $admin;
+    protected AbstractAdmin $admin;
 
-    protected function setAdmin(AdminInterface $admin): void
+    protected function setAdmin(AbstractAdmin $admin): void
     {
         $this->admin = $admin;
     }
 
-    protected function getAdmin(): AdminInterface
+    protected function getAdmin(): AbstractAdmin
     {
         return $this->admin;
     }

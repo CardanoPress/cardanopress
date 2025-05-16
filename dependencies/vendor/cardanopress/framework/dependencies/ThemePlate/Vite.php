@@ -26,19 +26,19 @@ class Vite {
 	public const CONFIG = 'vite.themeplate.json';
 
 	public const DEFAULTS = array(
-		'outDir'  => 'dist',
-		'isBuild' => true,
-		'urls'    => array(
+		'baseUrl'    => '/',
+		'outDir'     => 'dist',
+		'isBuild'    => true,
+		'urls'       => array(
 			'local'   => array(),
 			'network' => array(),
 		),
-		'entries' => array(),
-
+		'entries'    => array(),
 		'entryNames' => array(),
 	);
 
 
-	public function __construct( string $project_root, string $public_base ) {
+	public function __construct( string $project_root, string $public_base = '' ) {
 
 		$this->public_base = trailingslashit( $public_base );
 		$this->custom_data = new CustomData();
@@ -49,23 +49,23 @@ class Vite {
 	}
 
 
-	protected function parse( string $file, array $default = array() ): array {
+	protected function parse( string $file, array $default_value = array() ): array {
 
 		if ( ! file_exists( $file ) ) {
-			return $default;
+			return $default_value;
 		}
 
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$contents = file_get_contents( $file );
 
 		if ( false === $contents ) {
-			return $default;
+			return $default_value;
 		}
 
 		$decoded = json_decode( $contents, true );
 
 		if ( null === $decoded ) {
-			return $default;
+			return $default_value;
 		}
 
 		return $decoded;
@@ -73,13 +73,19 @@ class Vite {
 	}
 
 
-	protected function outpath( string $file ): string {
+	protected function outpath( string $file, bool $uri = false ): string {
 
-		if ( '' === $this->config['outDir'] ) {
-			return $file;
+		$path = $uri ? ltrim( $this->config['baseUrl'] ?? '', '/' ) : $this->config['outDir'];
+
+		if ( '' === $path && $uri ) {
+			$path = $this->config['outDir'];
 		}
 
-		return trailingslashit( $this->config['outDir'] ) . $file;
+		if ( '' !== $path ) {
+			$path = trailingslashit( $path );
+		}
+
+		return $path . $file;
 
 	}
 
@@ -151,6 +157,7 @@ class Vite {
 			return '';
 		}
 
+		// phpcs:ignore Universal.Operators.DisallowShortTernary.Found
 		return array_search( $entry, $this->config['entryNames'], true ) ?: '';
 
 	}
@@ -173,7 +180,7 @@ class Vite {
 			$asset = $this->asset( $name );
 
 			if ( ! empty( $asset ) ) {
-				$name = $this->outpath( $asset['file'] );
+				$name = $this->outpath( $asset['file'], $uri );
 			}
 		}
 
@@ -209,7 +216,7 @@ class Vite {
 		}
 
 		$handle = $this->handle_prefix . $handle;
-		$path = $this->path( $entry );
+		$path   = $this->path( $entry );
 
 		return array( $handle, $path, $entry );
 

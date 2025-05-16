@@ -11,10 +11,13 @@ namespace CardanoPress\Dependencies\ThemePlate\Resource;
 
 class Handler {
 
+	/** @var array<string, array{directive: string, extra: array<string, string>}> */
 	private array $scripts = array();
-	private array $styles  = array();
+	/** @var array<string, array{directive: string, extra: array<string, string>}> */
+	private array $styles = array();
 
 
+	/** @param array<string, string> $extra */
 	public function script( string $handle, string $directive, array $extra = array() ): void {
 
 		$this->scripts[ $handle ] = compact( 'directive', 'extra' );
@@ -22,6 +25,7 @@ class Handler {
 	}
 
 
+	/** @param array<string, string> $extra */
 	public function style( string $handle, string $directive, array $extra = array() ): void {
 
 		$this->styles[ $handle ] = compact( 'directive', 'extra' );

@@ -9,6 +9,9 @@ namespace CardanoPress\Dependencies\ThemePlate\Cache\Storages;
 
 class OptionsStorage extends AbstractStorage {
 
+	/**
+	 * @return mixed
+	 */
 	public function get( string $key, bool $data = false ) {
 
 		$key = $this->transform( $key, $data );
@@ -18,6 +21,9 @@ class OptionsStorage extends AbstractStorage {
 	}
 
 
+	/**
+	 * @param mixed $value
+	 */
 	public function set( string $key, $value, bool $data = false ): bool {
 
 		$key = $this->transform( $key, $data );
