@@ -7,7 +7,6 @@
 
 namespace PBWebDev\CardanoPress;
 
-use CardanoPress\Dependencies\ThemePlate\Vite;
 use CardanoPress\Foundation\AbstractManifest;
 
 class Manifest extends AbstractManifest
