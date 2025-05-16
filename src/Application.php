@@ -8,6 +8,7 @@
 namespace PBWebDev\CardanoPress;
 
 use CardanoPress\Foundation\AbstractApplication;
+use CardanoPress\Interfaces\TemplatesInterface;
 use CardanoPress\Traits\Configurable;
 use CardanoPress\Traits\Enqueueable;
 use CardanoPress\Traits\Instantiable;
@@ -58,6 +59,11 @@ class Application extends AbstractApplication
         $projectIds = array_filter((array)$projectIds);
 
         return ! empty($projectIds);
+    }
+
+    public function getTemplates(): TemplatesInterface
+    {
+        return $this->templates;
     }
 
     public function userProfile(): Profile

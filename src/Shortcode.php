@@ -10,9 +10,12 @@ namespace PBWebDev\CardanoPress;
 use CardanoPress\Foundation\AbstractShortcode;
 use CardanoPress\Helpers\NumberHelper;
 use CardanoPress\Helpers\WalletHelper;
+use CardanoPress\Traits\HasTemplateShortcodes;
 
 class Shortcode extends AbstractShortcode
 {
+    use HasTemplateShortcodes;
+
     protected Application $application;
     protected Component $component;
 
@@ -20,6 +23,8 @@ class Shortcode extends AbstractShortcode
     {
         $this->application = Application::getInstance();
         $this->component = new Component(false);
+
+        $this->setTemplates($this->application->getTemplates());
     }
 
     public function setupHooks(): void
@@ -51,52 +56,6 @@ class Shortcode extends AbstractShortcode
         $value = $this->application->option($args['key']);
 
         return $this->printOutput($value, $args['sub']);
-    }
-
-    /** @param array<string, string> $attributes */
-    public function doTemplate(array $attributes): string
-    {
-        $args = shortcode_atts([
-            'name' => '',
-            'variables' => '',
-            'if' => '',
-        ], $attributes);
-
-        if (empty($args['name'])) {
-            return '';
-        }
-
-        $variables = [];
-
-        if (isset($attributes['variables'])) {
-            parse_str(str_replace('&amp;', '&', $args['variables']), $variables);
-        }
-
-        $name = pathinfo($args['name'], PATHINFO_DIRNAME) . '/';
-        $name .= sanitize_file_name(pathinfo($args['name'], PATHINFO_BASENAME));
-
-        ob_start();
-        $this->application->template(ltrim($name, './'), $variables);
-
-        $html = (string) ob_get_clean();
-
-        return $this->doTemplateIf(['condition' => $args['if']], $html);
-    }
-
-    /** @param array<string, string> $attributes */
-    public function doTemplateIf(array $attributes, ?string $content = null): string
-    {
-        $args = shortcode_atts([
-            'condition' => '',
-        ], $attributes);
-
-        $html = (string) $content;
-
-        if (empty($args['condition'])) {
-            return $html;
-        }
-
-        return '<template x-if="' . esc_attr($args['condition']) . '">' . $html . '</template>';
     }
 
     /** @param array<string, string> $attributes */
