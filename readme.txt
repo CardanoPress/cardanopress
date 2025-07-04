@@ -14,11 +14,11 @@ Integrate the Cardano blockchain with your WordPress website. Merging Web2 and W
 
 == Description ==
 
-CardanoPress does the heavy lifting and integration to the Cardano blockchain using the Blockfrost API, allowing you to interact with the blockchain via your favourite Web3 wallet.
+CardanoPress handles the heavy lifting and integration with the Cardano blockchain using the Blockfrost API, enabling you to interact with the blockchain via your preferred Web3 wallet.
 
-We've done all the technical and hard work so you as a builder can integrate Cardano quickly and easily. Use our Bootstrap starter and child theme or use your favourite page builder such as Divi, WPBakery or Elementor with shortcodes.
+We've done all the technical and hard work, so you, as a builder, can integrate Cardano quickly and easily. Use our Bootstrap starter and child theme, or use your favourite page builder, such as Divi, WPBakery, or Elementor, with shortcodes.
 
-We are supporting various wallets including:
+We are supporting various wallets, including:
 
 * Eternl
 * Yoroi
@@ -28,17 +28,21 @@ We are supporting various wallets including:
 * Lace
 * Begin
 
-The plugin is created by the team at [PB Web Development](https://pbwebdev.com).
+The plugin is created by the team at [Mesh With Us](https://meshwithus.com.au).
 
 = Example Use Cases =
 
-There are many  use cases that we have covered for projects that may wish to use the plugin from small DApp developers, NFT projects, stake pool operators and Initial Stake Pool Offering (ISPO) projects.
+We have covered numerous use cases for projects that may wish to utilise the plugin, including small DApp developers, NFT projects, stake pool operators, and Initial Stake Pool Offering (ISPO) projects.
 
-* Members only content. Projects looking to provide access control to pay walled content based on delegation of a wallet, tokens or NFTs that are within a users wallet. E.g, if user has an NFT from a collection with policy ID x, then assign the user permissions to access private content.
-* Stake pool operators that want to build a quick and simple way to delegate to their stake pools.
-* Initial Stake Pool Offerings needing a delegation point and dashboard for rewards.
-* NFT projects looking for a spam controlled minting page.
-* Single sign on with using a wallet instead of using a username and password across WordPress websites
+* Wallet login. Sign up and log in to a website using your Cardano Wallet. Message signing authentication
+* Use an NFT or token to verify your access to the website by assigning policy IDs
+* Stake pool delegation
+* NFT Minting page for drops, not a vending machine; just the front end to handle minting with anti-bot protection.
+* Lace, Eternl, Typhon, Yoroi, GeroWallet, NuFi, Begin and Vespr are currently supported
+* Accepting payments with ADA
+* Permissions and roles based on your stake delegation, e.g access content if the user has been delegated to your pool for a month
+* Permissions and roles based on NFT in your wallet, giving the user access to paywall content for purchase and holding NFTs
+* Permissions and roles based on NFT metadata, being able to assign an access level based on rarity, rarer NFTs have higher access
 
 
 = Video: Installation and first steps =
@@ -58,14 +62,14 @@ https://youtu.be/YOm10Mu5XcM?t=1509
 
 == Follow Us ==
 
-Follow us on [Twitter](https://twitter.com/cardanopress)
-View all of our repos on [GitHub](https://github.com/CardanoPress/)
-View all of our documentation and resources on our [website](https://cardanopress.io)
+Follow us on [X](https://x.com/cardanopress)
+Please view all of our repos on [GitHub](https://github.com/CardanoPress/)
+Please view all of our documentation and resources on our [website](https://cardanopress.io)
 
 
 == Installation ==
 
-This plugin requires your own standalone WordPress installation and access to the web server to add a line of code to your htaccess file.
+This plugin has been tested to work on shared and standalone hosting environments, including WordPress.com, Pressable, SiteGround, WPEngine, AWS and many more.
 
 1. Installing the plugin
 
@@ -79,18 +83,25 @@ The plugin will create the base pages for all that you need.
 
 3. Sign up for a Blockfrost
 
-CardanoPress is dependent on the Blockfrost API to communicate to the Cardano blockchain. You can get an API key for free at [Blockfrost API](https://blockfrost.io/).
+CardanoPress is dependent on the Blockfrost API to communicate with the Cardano blockchain. You can get an API key for free at [Blockfrost API](https://blockfrost.io/).
 
-Obtain your key and paste it into the configuration screen of CardanoPress.
+Obtain your key and paste it into the CardanoPress configuration screen.
 
-Once you've done this, you will be able to connect your WordPress website to the Cardano blockchain.
+Once you've completed this step, you will be able to connect your WordPress website to the Cardano blockchain.
 
 For more detailed documentation and tutorials on how to use the plugin, please visit the [CardanoPress documentation website](https://cardanopress.io).
 
 
 == Get Support ==
 
-We have community support available on our website under the [CardanoPress forums](https://cardanopress.io/community/). We also have an online chat support via our [Discord server](https://discord.gg/CEX4aSfkXF). We encourage you to use the forums first though as it will help others that read through the forums for support.
+We offer community support on our website, accessible under the [CardanoPress forums](https://cardanopress.io/community/). We encourage you to use the forums first, though, as it will help others who read through the forums for support.
+
+You can find more documentation and support on our main website: https://cardanopress.io.
+
+Agency design, development and support via our company, https://MeshWithUs.com.au
+
+Support the development of our plugin by delegating to our Stake pool: Ticker *ADAOZ* - [https://cardanode.com.au](https://cardanode.com.au).
+
 
 
 == Frequently Asked Questions ==
@@ -112,7 +123,7 @@ We've also taking into account page builders and created short codes for all the
 
 == Privacy ==
 
-This plugin does not collect or process any personal user data unless you expressively opt-in.
+This plugin does not collect or process any personal user data.
 
 
 == Changelog ==
