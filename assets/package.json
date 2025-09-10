@@ -13,7 +13,7 @@
     "alpinejs": "^3.14.9",
     "autoprefixer": "^10.4.21",
     "tailwindcss": "^4.1.5",
-    "vite": "^6.3.4",
+    "vite": "^6.3.6",
     "vite-plugin-offload-wasm": "^0.3.1",
     "vite-plugin-themeplate": "^1.10.0",
     "vite-plugin-top-level-await": "^1.5.0",
