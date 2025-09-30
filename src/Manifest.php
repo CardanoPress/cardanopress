@@ -71,6 +71,7 @@ class Manifest extends AbstractManifest
             return;
         }
 
+        wp_deregister_script(self::HANDLE_PREFIX . 'script');
         wp_enqueue_script(self::HANDLE_PREFIX . 'compatibility');
         wp_add_inline_script(
             self::HANDLE_PREFIX . 'compatibility',
