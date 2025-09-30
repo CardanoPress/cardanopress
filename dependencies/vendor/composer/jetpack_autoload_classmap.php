@@ -38,68 +38,68 @@ return array(
 		'version' => '2.12.0',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Autoloader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Autoloader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Autoloader_Handler' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Autoloader_Handler' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader-handler.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Autoloader_Locator' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Autoloader_Locator' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader-locator.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Container' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Container' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-container.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Hook_Manager' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Hook_Manager' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-hook-manager.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Latest_Autoloader_Guard' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Latest_Autoloader_Guard' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-latest-autoloader-guard.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Manifest_Reader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Manifest_Reader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-manifest-reader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\PHP_Autoloader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\PHP_Autoloader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-php-autoloader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Path_Processor' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Path_Processor' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-path-processor.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Plugin_Locator' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Plugin_Locator' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-plugin-locator.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Plugins_Handler' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Plugins_Handler' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-plugins-handler.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Shutdown_Handler' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Shutdown_Handler' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-shutdown-handler.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Version_Loader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Version_Loader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-version-loader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpdb368335731274e0956d8862c3e94f05\\al2_12_0\\Version_Selector' => array(
+	'Automattic\\Jetpack\\Autoloader\\jp58da0ac83db11f0d32377e59cc9feb16\\al2_12_0\\Version_Selector' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-version-selector.php'
 	),
 	'CardanoPress\\Asset' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Asset.php'
 	),
 	'CardanoPress\\Clients\\BlockfrostClient' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Clients/BlockfrostClient.php'
 	),
 	'CardanoPress\\Dependencies\\CBOR\\CBOREncoder' => array(
@@ -167,1374 +167,1374 @@ return array(
 		'path'    => $baseDir . '/CardanoPHP/Verifier.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizer' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/BodySummarizer.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\BodySummarizerInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/BodySummarizerInterface.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Client' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Client.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\ClientInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/ClientInterface.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\ClientTrait' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/ClientTrait.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Cookie\\CookieJar' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Cookie/CookieJar.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Cookie\\CookieJarInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Cookie/CookieJarInterface.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Cookie\\FileCookieJar' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Cookie/FileCookieJar.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Cookie\\SessionCookieJar' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Cookie/SessionCookieJar.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Cookie\\SetCookie' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Cookie/SetCookie.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Exception\\BadResponseException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Exception/BadResponseException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Exception\\ClientException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Exception/ClientException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Exception\\ConnectException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Exception/ConnectException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Exception\\GuzzleException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Exception/GuzzleException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Exception\\InvalidArgumentException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Exception/InvalidArgumentException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Exception\\RequestException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Exception/RequestException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Exception\\ServerException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Exception/ServerException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Exception\\TooManyRedirectsException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Exception/TooManyRedirectsException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Exception\\TransferException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Exception/TransferException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\HandlerStack' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/HandlerStack.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Handler\\CurlFactory' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Handler/CurlFactory.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Handler\\CurlFactoryInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Handler/CurlFactoryInterface.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Handler\\CurlHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Handler/CurlHandler.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Handler\\CurlMultiHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Handler/CurlMultiHandler.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Handler\\EasyHandle' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Handler/EasyHandle.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Handler\\HeaderProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Handler/HeaderProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Handler\\MockHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Handler/MockHandler.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Handler\\Proxy' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Handler/Proxy.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Handler\\StreamHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Handler/StreamHandler.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\MessageFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/MessageFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\MessageFormatterInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/MessageFormatterInterface.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Middleware' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Middleware.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Pool' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Pool.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\PrepareBodyMiddleware' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/PrepareBodyMiddleware.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\AggregateException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/AggregateException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\CancellationException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/CancellationException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\Coroutine' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/Coroutine.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\Create' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/Create.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\Each' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/Each.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\EachPromise' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/EachPromise.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\FulfilledPromise' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/FulfilledPromise.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\Is' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/Is.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\Promise' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/Promise.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\PromiseInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/PromiseInterface.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\PromisorInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/PromisorInterface.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\RejectedPromise' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/RejectedPromise.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\RejectionException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/RejectionException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\TaskQueue' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/TaskQueue.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\TaskQueueInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/TaskQueueInterface.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Promise\\Utils' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Promise/Utils.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\AppendStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/AppendStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\BufferStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/BufferStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\CachingStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/CachingStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\DroppingStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/DroppingStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Exception\\MalformedUriException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Exception/MalformedUriException.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\FnStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/FnStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Header' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Header.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\HttpFactory' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/HttpFactory.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\InflateStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/InflateStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\LazyOpenStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/LazyOpenStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\LimitStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/LimitStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Message' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Message.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\MessageTrait' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/MessageTrait.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\MimeType' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/MimeType.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\MultipartStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/MultipartStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\NoSeekStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/NoSeekStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\PumpStream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/PumpStream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Query' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Query.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Request' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Request.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Response' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Response.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Rfc7230' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Rfc7230.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\ServerRequest' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/ServerRequest.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Stream' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Stream.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\StreamDecoratorTrait' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/StreamDecoratorTrait.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\StreamWrapper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/StreamWrapper.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\UploadedFile' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/UploadedFile.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Uri' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Uri.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\UriComparator' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/UriComparator.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\UriNormalizer' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/UriNormalizer.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\UriResolver' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/UriResolver.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Psr7\\Utils' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Psr7/Utils.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\RedirectMiddleware' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/RedirectMiddleware.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\RequestOptions' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/RequestOptions.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\RetryMiddleware' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/RetryMiddleware.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\TransferStats' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/TransferStats.php'
 	),
 	'CardanoPress\\Dependencies\\GuzzleHttp\\Utils' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/GuzzleHttp/Utils.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Attribute\\AsMonologProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Attribute/AsMonologProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\DateTimeImmutable' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/DateTimeImmutable.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\ErrorHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/ErrorHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\ChromePHPFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/ChromePHPFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\ElasticaFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/ElasticaFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\ElasticsearchFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/ElasticsearchFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\FlowdockFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/FlowdockFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\FluentdFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/FluentdFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\FormatterInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/FormatterInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\GelfMessageFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/GelfMessageFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\GoogleCloudLoggingFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/GoogleCloudLoggingFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\HtmlFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/HtmlFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\JsonFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/JsonFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\LineFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/LineFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\LogglyFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/LogglyFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\LogmaticFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/LogmaticFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\LogstashFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/LogstashFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\MongoDBFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/MongoDBFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\NormalizerFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/NormalizerFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\ScalarFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/ScalarFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Formatter\\WildfireFormatter' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Formatter/WildfireFormatter.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\AbstractHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/AbstractHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\AbstractProcessingHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/AbstractProcessingHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\AbstractSyslogHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/AbstractSyslogHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\AmqpHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/AmqpHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\BrowserConsoleHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/BrowserConsoleHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\BufferHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/BufferHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\ChromePHPHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/ChromePHPHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\CouchDBHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/CouchDBHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\CubeHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/CubeHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\Curl\\Util' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/Curl/Util.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\DeduplicationHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/DeduplicationHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\DoctrineCouchDBHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/DoctrineCouchDBHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\DynamoDbHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/DynamoDbHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\ElasticaHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/ElasticaHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\ElasticsearchHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/ElasticsearchHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\ErrorLogHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/ErrorLogHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FallbackGroupHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FallbackGroupHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FilterHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FilterHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FingersCrossedHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FingersCrossedHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FingersCrossed\\ActivationStrategyInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FingersCrossed/ActivationStrategyInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FingersCrossed\\ChannelLevelActivationStrategy' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FingersCrossed/ChannelLevelActivationStrategy.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FingersCrossed\\ErrorLevelActivationStrategy' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FingersCrossed/ErrorLevelActivationStrategy.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FirePHPHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FirePHPHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FleepHookHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FleepHookHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FlowdockHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FlowdockHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FormattableHandlerInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FormattableHandlerInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\FormattableHandlerTrait' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/FormattableHandlerTrait.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\GelfHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/GelfHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\GroupHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/GroupHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\Handler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/Handler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\HandlerInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/HandlerInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\HandlerWrapper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/HandlerWrapper.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\IFTTTHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/IFTTTHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\InsightOpsHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/InsightOpsHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\LogEntriesHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/LogEntriesHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\LogglyHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/LogglyHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\LogmaticHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/LogmaticHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\MailHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/MailHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\MandrillHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/MandrillHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\MissingExtensionException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/MissingExtensionException.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\MongoDBHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/MongoDBHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\NativeMailerHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/NativeMailerHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\NewRelicHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/NewRelicHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\NoopHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/NoopHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\NullHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/NullHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\OverflowHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/OverflowHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\PHPConsoleHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/PHPConsoleHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\ProcessHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/ProcessHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\ProcessableHandlerInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/ProcessableHandlerInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\ProcessableHandlerTrait' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/ProcessableHandlerTrait.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\PsrHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/PsrHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\PushoverHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/PushoverHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\RedisHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/RedisHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\RedisPubSubHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/RedisPubSubHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\RollbarHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/RollbarHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\RotatingFileHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/RotatingFileHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SamplingHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SamplingHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SendGridHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SendGridHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SlackHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SlackHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SlackWebhookHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SlackWebhookHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\Slack\\SlackRecord' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/Slack/SlackRecord.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SocketHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SocketHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SqsHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SqsHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\StreamHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/StreamHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SwiftMailerHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SwiftMailerHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SymfonyMailerHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SymfonyMailerHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SyslogHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SyslogHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SyslogUdpHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SyslogUdpHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\SyslogUdp\\UdpSocket' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/SyslogUdp/UdpSocket.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\TelegramBotHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/TelegramBotHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\TestHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/TestHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\WebRequestRecognizerTrait' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/WebRequestRecognizerTrait.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\WhatFailureGroupHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/WhatFailureGroupHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Handler\\ZendMonitorHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Handler/ZendMonitorHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\LogRecord' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/LogRecord.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Logger' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Logger.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\GitProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/GitProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\HostnameProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/HostnameProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\IntrospectionProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/IntrospectionProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\MemoryPeakUsageProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/MemoryPeakUsageProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\MemoryProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/MemoryProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\MemoryUsageProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/MemoryUsageProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\MercurialProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/MercurialProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\ProcessIdProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/ProcessIdProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\ProcessorInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/ProcessorInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\PsrLogMessageProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/PsrLogMessageProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\TagProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/TagProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\UidProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/UidProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Processor\\WebProcessor' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Processor/WebProcessor.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Registry' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Registry.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\ResettableInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/ResettableInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\SignalHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/SignalHandler.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Test\\TestCase' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Test/TestCase.php'
 	),
 	'CardanoPress\\Dependencies\\Monolog\\Utils' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Monolog/Utils.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Client\\ClientExceptionInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Client/ClientExceptionInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Client\\ClientInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Client/ClientInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Client\\NetworkExceptionInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Client/NetworkExceptionInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Client\\RequestExceptionInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Client/RequestExceptionInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\MessageInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/MessageInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\RequestFactoryInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/RequestFactoryInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\RequestInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/RequestInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\ResponseFactoryInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/ResponseFactoryInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\ResponseInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/ResponseInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\ServerRequestFactoryInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/ServerRequestFactoryInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\ServerRequestInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/ServerRequestInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\StreamFactoryInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/StreamFactoryInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\StreamInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/StreamInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\UploadedFileFactoryInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/UploadedFileFactoryInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\UploadedFileInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/UploadedFileInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\UriFactoryInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/UriFactoryInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Http\\Message\\UriInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Http/Message/UriInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\AbstractLogger' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/AbstractLogger.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\InvalidArgumentException' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/InvalidArgumentException.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\LogLevel' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/LogLevel.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\LoggerAwareInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/LoggerAwareInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\LoggerAwareTrait' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/LoggerAwareTrait.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\LoggerInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/LoggerInterface.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\LoggerTrait' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/LoggerTrait.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\NullLogger' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/NullLogger.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\Test\\DummyTest' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/Test/DummyTest.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\Test\\LoggerInterfaceTest' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/Test/LoggerInterfaceTest.php'
 	),
 	'CardanoPress\\Dependencies\\Psr\\Log\\Test\\TestLogger' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Psr/Log/Test/TestLogger.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\CPT\\Base' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/CPT/Base.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\CPT\\CommonInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/CPT/CommonInterface.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\CPT\\Interfaces\\PostTypeInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/CPT/Interfaces/PostTypeInterface.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\CPT\\Interfaces\\TaxonomyInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/CPT/Interfaces/TaxonomyInterface.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\CPT\\PostType' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/CPT/PostType.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\CPT\\Taxonomy' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/CPT/Taxonomy.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\CacheManager' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/CacheManager.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Handlers\\AbstractHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Handlers/AbstractHandler.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Handlers\\DataHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Handlers/DataHandler.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Handlers\\FileHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Handlers/FileHandler.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Handlers\\HandlerInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Handlers/HandlerInterface.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\StorageManager' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/StorageManager.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Storages\\AbstractStorage' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Storages/AbstractStorage.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Storages\\MetadataStorage' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Storages/MetadataStorage.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Storages\\OptionsStorage' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Storages/OptionsStorage.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Storages\\PostMetaStorage' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Storages/PostMetaStorage.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Storages\\StorageInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Storages/StorageInterface.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Storages\\TermMetaStorage' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Storages/TermMetaStorage.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Cache\\Storages\\UserMetaStorage' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Cache/Storages/UserMetaStorage.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Config' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Config.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\CheckboxField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/CheckboxField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\ColorField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/ColorField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\DateField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/DateField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\EditorField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/EditorField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\FileField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/FileField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\GroupField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/GroupField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\HtmlField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/HtmlField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\InputField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/InputField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\LinkField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/LinkField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\NumberField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/NumberField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\RadioField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/RadioField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\SelectField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/SelectField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\TextareaField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/TextareaField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Field\\TypeField' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Field/TypeField.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Fields' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Fields.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Form' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Form.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Handler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Handler.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Helper\\AssetsHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Helper/AssetsHelper.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Helper\\BoxHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Helper/BoxHelper.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Helper\\FieldsHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Helper/FieldsHelper.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Helper\\FormHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Helper/FormHelper.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Helper\\MainHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Helper/MainHelper.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Helper\\MetaHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Helper/MetaHelper.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Core\\Repository' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Core/Repository.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\CustomData' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/CustomData.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\Dynamic' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/Dynamic.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\LoaderTag' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/LoaderTag.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\ScriptsTag' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/ScriptsTag.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Enqueue\\StylesTag' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Enqueue/StylesTag.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Logger' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Logger.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Meta\\BaseMeta' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Meta/BaseMeta.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Meta\\MenuMeta' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Meta/MenuMeta.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Meta\\MetaHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Meta/MetaHandler.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Meta\\MetaHelpers' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Meta/MetaHelpers.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Meta\\PostMeta' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Meta/PostMeta.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Meta\\TermMeta' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Meta/TermMeta.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Meta\\Traits\\HasLocation' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Meta/Traits/HasLocation.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Meta\\UserMeta' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Meta/UserMeta.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Page\\BasePage' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Page/BasePage.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Page\\CommonInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Page/CommonInterface.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Page\\Interfaces\\MenuPageInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Page/Interfaces/MenuPageInterface.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Page\\Interfaces\\PageInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Page/Interfaces/PageInterface.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Page\\Interfaces\\SubMenuPageInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Page/Interfaces/SubMenuPageInterface.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Page\\MenuPage' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Page/MenuPage.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Page\\SubMenuPage' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Page/SubMenuPage.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Process\\Async' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Process/Async.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Process\\Report' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Process/Report.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Process\\Tasks' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Process/Tasks.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Resource\\Handler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Resource/Handler.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Resource\\Helper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Resource/Helper.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Resource\\Item' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Resource/Item.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Settings\\OptionBox' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Settings/OptionBox.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Settings\\OptionHandler' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Settings/OptionHandler.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Settings\\OptionHelpers' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Settings/OptionHelpers.php'
 	),
 	'CardanoPress\\Dependencies\\ThemePlate\\Vite' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/ThemePlate/Vite.php'
 	),
 	'CardanoPress\\Foundation\\AbstractAdmin' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractAdmin.php'
 	),
 	'CardanoPress\\Foundation\\AbstractApplication' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractApplication.php'
 	),
 	'CardanoPress\\Foundation\\AbstractBlockfrost' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractBlockfrost.php'
 	),
 	'CardanoPress\\Foundation\\AbstractComponent' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractComponent.php'
 	),
 	'CardanoPress\\Foundation\\AbstractInstaller' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractInstaller.php'
 	),
 	'CardanoPress\\Foundation\\AbstractLicenser' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractLicenser.php'
 	),
 	'CardanoPress\\Foundation\\AbstractManifest' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractManifest.php'
 	),
 	'CardanoPress\\Foundation\\AbstractProfile' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractProfile.php'
 	),
 	'CardanoPress\\Foundation\\AbstractShortcode' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractShortcode.php'
 	),
 	'CardanoPress\\Foundation\\AbstractTemplates' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Foundation/AbstractTemplates.php'
 	),
 	'CardanoPress\\Helpers\\CompatHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Helpers/CompatHelper.php'
 	),
 	'CardanoPress\\Helpers\\LicenseHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Helpers/LicenseHelper.php'
 	),
 	'CardanoPress\\Helpers\\NumberHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Helpers/NumberHelper.php'
 	),
 	'CardanoPress\\Helpers\\ThemeHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Helpers/ThemeHelper.php'
 	),
 	'CardanoPress\\Helpers\\WalletHelper' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Helpers/WalletHelper.php'
 	),
 	'CardanoPress\\Interfaces\\AdminInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Interfaces/AdminInterface.php'
 	),
 	'CardanoPress\\Interfaces\\ApplicationInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Interfaces/ApplicationInterface.php'
 	),
 	'CardanoPress\\Interfaces\\BlockfrostInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Interfaces/BlockfrostInterface.php'
 	),
 	'CardanoPress\\Interfaces\\HookInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Interfaces/HookInterface.php'
 	),
 	'CardanoPress\\Interfaces\\InstallerInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Interfaces/InstallerInterface.php'
 	),
 	'CardanoPress\\Interfaces\\ManifestInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Interfaces/ManifestInterface.php'
 	),
 	'CardanoPress\\Interfaces\\ProfileInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Interfaces/ProfileInterface.php'
 	),
 	'CardanoPress\\Interfaces\\TemplatesInterface' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Interfaces/TemplatesInterface.php'
 	),
 	'CardanoPress\\SharedBase' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/SharedBase.php'
 	),
 	'CardanoPress\\TemplateLoader' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/TemplateLoader.php'
 	),
 	'CardanoPress\\Traits\\Configurable' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/Configurable.php'
 	),
 	'CardanoPress\\Traits\\Enqueueable' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/Enqueueable.php'
 	),
 	'CardanoPress\\Traits\\HasComponent' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/HasComponent.php'
 	),
 	'CardanoPress\\Traits\\HasData' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/HasData.php'
 	),
 	'CardanoPress\\Traits\\HasLicense' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/HasLicense.php'
 	),
 	'CardanoPress\\Traits\\HasPageTemplates' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/HasPageTemplates.php'
 	),
 	'CardanoPress\\Traits\\HasSettingsLink' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/HasSettingsLink.php'
 	),
 	'CardanoPress\\Traits\\HasTemplateShortcodes' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/HasTemplateShortcodes.php'
 	),
 	'CardanoPress\\Traits\\Instantiable' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/Instantiable.php'
 	),
 	'CardanoPress\\Traits\\Loggable' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/Loggable.php'
 	),
 	'CardanoPress\\Traits\\Noticeable' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/Noticeable.php'
 	),
 	'CardanoPress\\Traits\\Templatable' => array(
-		'version' => '2.15.0.0',
+		'version' => '2.15.1.0',
 		'path'    => $vendorDir . '/cardanopress/framework/src/Traits/Templatable.php'
 	),
-	'ComposerAutoloaderInitdb368335731274e0956d8862c3e94f05' => array(
+	'ComposerAutoloaderInit58da0ac83db11f0d32377e59cc9feb16' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/autoload_real.php'
 	),
@@ -1542,7 +1542,7 @@ return array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/ClassLoader.php'
 	),
-	'Composer\\Autoload\\ComposerStaticInitdb368335731274e0956d8862c3e94f05' => array(
+	'Composer\\Autoload\\ComposerStaticInit58da0ac83db11f0d32377e59cc9feb16' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/composer/autoload_static.php'
 	),

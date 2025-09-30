@@ -115,16 +115,16 @@
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.15.0",
+            "version": "v2.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "82a39d70f45e9c6799c740689c2c0005f3accbbd"
+                "reference": "35976d76d300ac8703b9708bfa7314c991d723a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/82a39d70f45e9c6799c740689c2c0005f3accbbd",
-                "reference": "82a39d70f45e9c6799c740689c2c0005f3accbbd",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/35976d76d300ac8703b9708bfa7314c991d723a6",
+                "reference": "35976d76d300ac8703b9708bfa7314c991d723a6",
                 "shasum": ""
             },
             "require": {
@@ -167,9 +167,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.15.0"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.15.1"
             },
-            "time": "2025-05-16T07:52:23+00:00"
+            "time": "2025-09-30T05:37:03+00:00"
         },
         {
             "name": "kermage/cardanophp",
