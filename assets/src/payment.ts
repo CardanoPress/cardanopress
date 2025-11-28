@@ -132,7 +132,7 @@ window.cardanoPressRecaptchaCallback = () => {
     const sendVerified = (status: boolean) =>
         window.dispatchEvent(new CustomEvent('cardanoPress:recaptcha', { detail: status }))
 
-    window.addEventListener('alpine:init', () => {
+    const initRecaptcha = () => {
         waitElement('#cardanopress-recaptcha').then((element) => {
             grecaptcha.render(element, {
                 callback: () => {
@@ -146,5 +146,11 @@ window.cardanoPressRecaptchaCallback = () => {
                 },
             })
         })
-    })
+    }
+
+    if (window.Alpine.store('alpineInitialized')) {
+        initRecaptcha()
+    } else {
+        window.addEventListener('alpine:init', initRecaptcha)
+    }
 }

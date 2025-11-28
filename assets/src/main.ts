@@ -24,6 +24,7 @@ import * as actions from './api/actions'
 import * as util from './api/util'
 
 window.addEventListener('alpine:init', () => {
+    window.Alpine.store('alpineInitialized', Date.now())
     window.Alpine.data('cardanoPress', () => ({
         isAvailable: undefined !== window.cardano && undefined !== window.cardanoPress,
         isConnected: false,
@@ -68,7 +69,10 @@ window.addEventListener('alpine:init', () => {
 
             const wallets = JSON.parse(this.$root.dataset.wallets || '[]')
 
-            this.supportedWallets = Array.isArray(wallets) && wallets.length > 0 ? wallets.filter((wallet: string) => supportedWallets.includes(wallet)) : [...supportedWallets]
+            this.supportedWallets =
+                Array.isArray(wallets) && wallets.length > 0
+                    ? wallets.filter((wallet: string) => supportedWallets.includes(wallet))
+                    : [...supportedWallets]
 
             if (cardanoPress.logged) {
                 this.connectedExtension = getConnectedExtension()
