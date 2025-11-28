@@ -48,7 +48,7 @@ let __tla = (async () => {
   ]);
   T = "modulepreload";
   A = function(n) {
-    return "/wp-content/plugins/cardanopress/assets/dist/" + n;
+    return "/" + n;
   };
   b = {};
   S = function(e, t, s) {
@@ -90,7 +90,7 @@ let __tla = (async () => {
   w = (_a = class {
     static async load() {
       return w.Module === void 0 && (w.Module = (await S(async () => {
-        const { Buffer: e } = await import("./index-CVsC6eDr.js").then((t) => t.i);
+        const { Buffer: e } = await import("./index-j9nFomPY.js").then((t) => t.i);
         return {
           Buffer: e
         };
@@ -99,7 +99,7 @@ let __tla = (async () => {
   }, __publicField(_a, "Module"), _a);
   l = (_b = class {
     static async load() {
-      return l.Module === void 0 && (l.Module = await S(() => import("./cardano_serialization_lib-pHqu9iRB.js").then(async (m2) => {
+      return l.Module === void 0 && (l.Module = await S(() => import("./cardano_serialization_lib-ykJEShHf.js").then(async (m2) => {
         await m2.__tla;
         return m2;
       }), [])), l.Module;

@@ -78,7 +78,7 @@ function _r() {
 */
 var fr;
 function Sr() {
-  return fr || (fr = 1, function(y) {
+  return fr || (fr = 1, (function(y) {
     const c = Cr(), F = _r(), m = typeof Symbol == "function" && typeof Symbol.for == "function" ? Symbol.for("nodejs.util.inspect.custom") : null;
     y.Buffer = u, y.SlowBuffer = R, y.INSPECT_MAX_BYTES = 50;
     const a = 2147483647;
@@ -526,13 +526,13 @@ function Sr() {
     }, u.prototype.readUint32BE = u.prototype.readUInt32BE = function(r, t) {
       return r = r >>> 0, t || T(r, 4, this.length), this[r] * 16777216 + (this[r + 1] << 16 | this[r + 2] << 8 | this[r + 3]);
     }, u.prototype.readBigUInt64LE = D(function(r) {
-      r = r >>> 0, O(r, "offset");
+      r = r >>> 0, $(r, "offset");
       const t = this[r], e = this[r + 7];
       (t === void 0 || e === void 0) && q(r, this.length - 8);
       const n = t + this[++r] * 2 ** 8 + this[++r] * 2 ** 16 + this[++r] * 2 ** 24, o = this[++r] + this[++r] * 2 ** 8 + this[++r] * 2 ** 16 + e * 2 ** 24;
       return BigInt(n) + (BigInt(o) << BigInt(32));
     }), u.prototype.readBigUInt64BE = D(function(r) {
-      r = r >>> 0, O(r, "offset");
+      r = r >>> 0, $(r, "offset");
       const t = this[r], e = this[r + 7];
       (t === void 0 || e === void 0) && q(r, this.length - 8);
       const n = t * 2 ** 24 + this[++r] * 2 ** 16 + this[++r] * 2 ** 8 + this[++r], o = this[++r] * 2 ** 24 + this[++r] * 2 ** 16 + this[++r] * 2 ** 8 + e;
@@ -562,13 +562,13 @@ function Sr() {
     }, u.prototype.readInt32BE = function(r, t) {
       return r = r >>> 0, t || T(r, 4, this.length), this[r] << 24 | this[r + 1] << 16 | this[r + 2] << 8 | this[r + 3];
     }, u.prototype.readBigInt64LE = D(function(r) {
-      r = r >>> 0, O(r, "offset");
+      r = r >>> 0, $(r, "offset");
       const t = this[r], e = this[r + 7];
       (t === void 0 || e === void 0) && q(r, this.length - 8);
       const n = this[r + 4] + this[r + 5] * 2 ** 8 + this[r + 6] * 2 ** 16 + (e << 24);
       return (BigInt(n) << BigInt(32)) + BigInt(t + this[++r] * 2 ** 8 + this[++r] * 2 ** 16 + this[++r] * 2 ** 24);
     }), u.prototype.readBigInt64BE = D(function(r) {
-      r = r >>> 0, O(r, "offset");
+      r = r >>> 0, $(r, "offset");
       const t = this[r], e = this[r + 7];
       (t === void 0 || e === void 0) && q(r, this.length - 8);
       const n = (t << 24) + this[++r] * 2 ** 16 + this[++r] * 2 ** 8 + this[++r];
@@ -712,9 +712,9 @@ function Sr() {
       }
       return this;
     };
-    const $ = {};
+    const O = {};
     function W(i, r, t) {
-      $[i] = class extends t {
+      O[i] = class extends t {
         constructor() {
           super(), Object.defineProperty(this, "message", { value: r.apply(this, arguments), writable: true, configurable: true }), this.name = `${this.name} [${i}]`, this.stack, delete this.name;
         }
@@ -744,21 +744,21 @@ function Sr() {
       return `${i.slice(0, t)}${r}`;
     }
     function gr(i, r, t) {
-      O(r, "offset"), (i[r] === void 0 || i[r + t] === void 0) && q(r, i.length - (t + 1));
+      $(r, "offset"), (i[r] === void 0 || i[r + t] === void 0) && q(r, i.length - (t + 1));
     }
     function nr(i, r, t, e, n, o) {
       if (i > t || i < r) {
         const h = typeof r == "bigint" ? "n" : "";
         let s;
-        throw r === 0 || r === BigInt(0) ? s = `>= 0${h} and < 2${h} ** ${(o + 1) * 8}${h}` : s = `>= -(2${h} ** ${(o + 1) * 8 - 1}${h}) and < 2 ** ${(o + 1) * 8 - 1}${h}`, new $.ERR_OUT_OF_RANGE("value", s, i);
+        throw r === 0 || r === BigInt(0) ? s = `>= 0${h} and < 2${h} ** ${(o + 1) * 8}${h}` : s = `>= -(2${h} ** ${(o + 1) * 8 - 1}${h}) and < 2 ** ${(o + 1) * 8 - 1}${h}`, new O.ERR_OUT_OF_RANGE("value", s, i);
       }
       gr(e, n, o);
     }
-    function O(i, r) {
-      if (typeof i != "number") throw new $.ERR_INVALID_ARG_TYPE(r, "number", i);
+    function $(i, r) {
+      if (typeof i != "number") throw new O.ERR_INVALID_ARG_TYPE(r, "number", i);
     }
     function q(i, r, t) {
-      throw Math.floor(i) !== i ? (O(i, t), new $.ERR_OUT_OF_RANGE("offset", "an integer", i)) : r < 0 ? new $.ERR_BUFFER_OUT_OF_BOUNDS() : new $.ERR_OUT_OF_RANGE("offset", `>= 0 and <= ${r}`, i);
+      throw Math.floor(i) !== i ? ($(i, t), new O.ERR_OUT_OF_RANGE("offset", "an integer", i)) : r < 0 ? new O.ERR_BUFFER_OUT_OF_BOUNDS() : new O.ERR_OUT_OF_RANGE("offset", `>= 0 and <= ${r}`, i);
     }
     const mr = /[^+/0-9A-Za-z-_]/g;
     function Ir(i) {
@@ -832,21 +832,21 @@ function Sr() {
     function H(i) {
       return i !== i;
     }
-    const Ur = function() {
+    const Ur = (function() {
       const i = "0123456789abcdef", r = new Array(256);
       for (let t = 0; t < 16; ++t) {
         const e = t * 16;
         for (let n = 0; n < 16; ++n) r[e + n] = i[t] + i[n];
       }
       return r;
-    }();
+    })();
     function D(i) {
       return typeof BigInt > "u" ? Rr : i;
     }
     function Rr() {
       throw new Error("BigInt not supported");
     }
-  }(V)), V;
+  })(V)), V;
 }
 var Lr = Sr();
 const Nr = Tr({ __proto__: null }, [Lr]);
