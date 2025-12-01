@@ -16,7 +16,7 @@
     "ext-json": "*",
     "ext-fileinfo": "*",
     "ext-ctype": "*",
-    "automattic/jetpack-autoloader": "^2.11",
+    "automattic/jetpack-autoloader": "^5.0",
     "cardanopress/framework": "^2.1",
     "kermage/cardanophp": "^0.3.0"
   },

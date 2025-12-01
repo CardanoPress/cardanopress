@@ -4,43 +4,43 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit58da0ac83db11f0d32377e59cc9feb16
+class ComposerStaticInite4290ca39b6a618aad0efc7fc04443c7
 {
     public static $files = array (
         '1adb4ff695388b04d573ca23d2979f89' => __DIR__ . '/..' . '/cardanopress/framework/dependencies/compatibility.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'P' => 
+        'P' =>
         array (
             'PBWebDev\\CardanoPress\\' => 22,
         ),
-        'C' => 
+        'C' =>
         array (
             'CardanoPress\\Dependencies\\' => 26,
             'CardanoPress\\' => 13,
         ),
-        'A' => 
+        'A' =>
         array (
             'Automattic\\Jetpack\\Autoloader\\' => 30,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'PBWebDev\\CardanoPress\\' => 
+        'PBWebDev\\CardanoPress\\' =>
         array (
             0 => __DIR__ . '/../..' . '/../src',
         ),
-        'CardanoPress\\Dependencies\\' => 
+        'CardanoPress\\Dependencies\\' =>
         array (
             0 => __DIR__ . '/../..' . '/',
             1 => __DIR__ . '/..' . '/cardanopress/framework/dependencies',
         ),
-        'CardanoPress\\' => 
+        'CardanoPress\\' =>
         array (
             0 => __DIR__ . '/..' . '/cardanopress/framework/src',
         ),
-        'Automattic\\Jetpack\\Autoloader\\' => 
+        'Automattic\\Jetpack\\Autoloader\\' =>
         array (
             0 => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src',
         ),
@@ -433,9 +433,9 @@ class ComposerStaticInit58da0ac83db11f0d32377e59cc9feb16
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit58da0ac83db11f0d32377e59cc9feb16::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit58da0ac83db11f0d32377e59cc9feb16::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit58da0ac83db11f0d32377e59cc9feb16::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite4290ca39b6a618aad0efc7fc04443c7::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite4290ca39b6a618aad0efc7fc04443c7::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInite4290ca39b6a618aad0efc7fc04443c7::$classMap;
 
         }, null, ClassLoader::class);
     }

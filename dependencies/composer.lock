@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58da0ac83db11f0d32377e59cc9feb16",
+    "content-hash": "e4290ca39b6a618aad0efc7fc04443c7",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -53,24 +53,27 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "v2.12.0",
+            "version": "v5.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/jetpack-autoloader.git",
-                "reference": "632b69cfc73ed5505f2b03165e7f68d414d0da12"
+                "reference": "94888d86820a99a0f3aba3498ba10f6b6245c929"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/632b69cfc73ed5505f2b03165e7f68d414d0da12",
-                "reference": "632b69cfc73ed5505f2b03165e7f68d414d0da12",
+                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/94888d86820a99a0f3aba3498ba10f6b6245c929",
+                "reference": "94888d86820a99a0f3aba3498ba10f6b6245c929",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.1 || ^2.0"
+                "composer-plugin-api": "^2.2",
+                "php": ">=7.2"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^3.3.11",
-                "yoast/phpunit-polyfills": "1.1.0"
+                "automattic/jetpack-changelogger": "^6.0.9",
+                "automattic/phpunit-select-config": "^1.0.3",
+                "composer/composer": "^2.2",
+                "yoast/phpunit-polyfills": "^4.0.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -78,7 +81,7 @@
                 "autotagger": true,
                 "mirror-repo": "Automattic/jetpack-autoloader",
                 "branch-alias": {
-                    "dev-trunk": "2.12.x-dev"
+                    "dev-trunk": "5.0.x-dev"
                 },
                 "changelogger": {
                     "link-template": "https://github.com/Automattic/jetpack-autoloader/compare/v${old}...v${new}"
@@ -109,9 +112,9 @@
                 "wordpress"
             ],
             "support": {
-                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v2.12.0"
+                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v5.0.13"
             },
-            "time": "2023-09-28T18:33:34+00:00"
+            "time": "2025-11-12T16:41:11+00:00"
         },
         {
             "name": "cardanopress/framework",
@@ -232,5 +235,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }

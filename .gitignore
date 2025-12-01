@@ -4,3 +4,5 @@ logs/
 .cache/
 vendor/
 .DS_Store
+.aagh/**/index.php
+.github/**/index.php
