@@ -9,8 +9,6 @@
  * @since   0.1.0
  */
 
-$fixedFee = cardanoPress()->option('payment_split');
-
 cardanoPress()->compatibleHeader();
 
 ?>
@@ -20,7 +18,7 @@ cardanoPress()->compatibleHeader();
         <h1>Split Payments</h1>
         <?php the_content(); ?>
 
-        <form <?php cardanoPress()->component()->paymentForm($fixedFee); ?>>
+        <form <?php cardanoPress()->component()->paymentForm(); ?>>
             <div class="py-6">
                 <h2>Fixed Fee: <span x-text="payAmount"></span> ADA</h2>
 

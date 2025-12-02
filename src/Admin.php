@@ -92,7 +92,8 @@ class Admin extends AbstractAdmin
             'data_prefix' => 'recaptcha_',
             'description' => __('Required for NFT payment page to reveal payment address.', 'cardanopress'),
             'context' => 'side',
-            'fields' => [
+        ])->fields(
+            [
                 'key' => [
                     'type' => 'group',
                     'default' => [
@@ -108,10 +109,10 @@ class Admin extends AbstractAdmin
                             'title' => __('Secret', 'cardanopress'),
                             'type' => 'text',
                         ],
-                        ],
                     ],
                 ],
-            ]);
+            ],
+        );
     }
 
     private function poolDelegationFields(): void
@@ -119,10 +120,11 @@ class Admin extends AbstractAdmin
         $this->optionFields(__('Delegation: Pool ID', 'cardanopress'), [
             'data_prefix' => 'delegation_',
             'description' => __(
-                'Enter to Pool ID of the stake pool your delegation page will delegate to.',
+                'Bech32 ID of the stake pool your delegation page will delegate to.',
                 'cardanopress'
             ),
-            'fields' => [
+        ])->fields(
+            [
                 'pool_id' => [
                     'type' => 'group',
                     'default' => [
@@ -139,10 +141,10 @@ class Admin extends AbstractAdmin
                             'description' => __('For networks preview and preprod', 'cardanopress'),
                             'type' => 'text',
                         ],
-                        ],
                     ],
                 ],
-            ]);
+            ],
+        );
     }
 
     private function paymentAddressFields(): void
@@ -150,7 +152,8 @@ class Admin extends AbstractAdmin
         $this->optionFields(__('Payment Settings', 'cardanopress'), [
             'data_prefix' => 'payment_',
             'description' => __('Settings for the payment page.', 'cardanopress'),
-            'fields' => [
+        ])->fields(
+            [
                 'amount' => [
                     'title' => __('Amount in ADA', 'cardanopress'),
                     'description' => __('Price for one NFT or item for sale.', 'cardanopress'),
@@ -190,9 +193,9 @@ class Admin extends AbstractAdmin
                         'min' => 0.1,
                         'step' => 0.1,
                     ],
-                    ],
                 ],
-            ]);
+            ],
+        );
     }
 
     private function assetsPolicyFields(): void
@@ -200,7 +203,8 @@ class Admin extends AbstractAdmin
         $this->optionFields(__('Policy IDs', 'cardanopress'), [
             'data_prefix' => 'policy_',
             'description' => __('Used for the NFT collection builder.', 'cardanopress'),
-            'fields' => [
+        ])->fields(
+            [
                 'ids' => [
                     'type' => 'group',
                     'default' => [
@@ -221,10 +225,10 @@ class Admin extends AbstractAdmin
                             'description' => __('Policy ID value.', 'cardanopress'),
                             'type' => 'text',
                         ],
-                        ],
                     ],
                 ],
-            ]);
+            ],
+        );
     }
 
     private function memberPagesFields(): void
@@ -232,7 +236,8 @@ class Admin extends AbstractAdmin
         $this->optionFields(__('Member Pages', 'cardanopress'), [
             'data_prefix' => 'member_',
             'context' => 'side',
-            'fields' => array_combine(
+        ])->fields(
+            array_combine(
                 self::PAGES,
                 array_map(function ($page) {
                     return [
@@ -242,8 +247,8 @@ class Admin extends AbstractAdmin
                         'required' => in_array($page, ['dashboard', 'collection'], true),
                     ];
                 }, self::PAGES),
-            ),
-        ]);
+            )
+        );
     }
 
     private function userAccessFields(): void
@@ -252,7 +257,8 @@ class Admin extends AbstractAdmin
             'data_prefix' => 'ua_',
             'description' => __('Assigning a user role based on stake pool delegation settings.', 'cardanopress'),
             'context' => 'side',
-            'fields' => [
+        ])->fields(
+            [
                 'required_epoch' => [
                     'type' => 'number',
                     'title' => __('Required Epoch', 'cardanopress'),
@@ -279,8 +285,8 @@ class Admin extends AbstractAdmin
                     'description' => __('Role that is assigned for meeting required delegation.', 'cardanopress'),
                     'options' => $this->roles,
                 ],
-                ],
-            ]);
+            ]
+        );
     }
 
     private function assetAccessFields(): void
@@ -288,7 +294,8 @@ class Admin extends AbstractAdmin
         $this->optionFields(__('Asset Access', 'cardanopress'), [
             'data_prefix' => 'asset_',
             'description' => __('Assigning a user role based on NFTs in wallet.', 'cardanopress'),
-            'fields' => [
+        ])->fields(
+            [
                 'access' => [
                     'type' => 'group',
                     'default' => [
@@ -316,10 +323,10 @@ class Admin extends AbstractAdmin
                             'title' => __('Additional Role', 'cardanopress'),
                             'options' => $this->roles,
                         ],
-                        ],
                     ],
                 ],
-            ]);
+            ],
+        );
     }
 
     private function managedRoleFields(): void
@@ -328,14 +335,15 @@ class Admin extends AbstractAdmin
             'data_prefix' => 'managed_',
             'description' => __('Select roles to be removed every wallet connect.', 'cardanopress'),
             'context' => 'side',
-            'fields' => [
+        ])->fields(
+            [
                 'roles' => [
                     'type' => 'select',
                     'options' => $this->roles,
                     'multiple' => true,
                 ],
-                ],
-            ]);
+            ]
+        );
     }
 
     public function recommendPlugins(): void
