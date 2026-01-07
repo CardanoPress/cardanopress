@@ -27,13 +27,18 @@ class Manifest extends AbstractManifest
 
     public function autoEnqueues(): void
     {
+        global $wp_version;
+
+        $pre_63 = 0 > version_compare($wp_version, '6.3');
+        $args = $pre_63 ? true : ['in_footer' => true, 'strategy' => 'defer'];
+
         if (apply_filters('cardanopress_alpinejs_cdn', false)) {
             wp_register_script(
                 self::HANDLE_PREFIX . 'alpinejs',
                 'https://unpkg.com/alpinejs',
                 [self::HANDLE_PREFIX . 'script', self::HANDLE_PREFIX . 'notification'],
                 'latest',
-                true
+                $args
             );
         } else {
             wp_register_script(
@@ -41,18 +46,23 @@ class Manifest extends AbstractManifest
                 plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
                 [self::HANDLE_PREFIX . 'script', self::HANDLE_PREFIX . 'notification'],
                 '3.14.1',
-                true
+                $args
             );
         }
 
         wp_enqueue_style(self::HANDLE_PREFIX . 'style');
         wp_register_script(
             self::HANDLE_PREFIX . 'recaptcha',
-            'https://www.google.com/recaptcha/api.js?onload=cardanoPressRecaptchaCallback'
+            'https://www.google.com/recaptcha/api.js?onload=cardanoPressRecaptchaCallback',
+            [],
+            'latest',
+            $args
         );
 
-        $this->data->script(self::HANDLE_PREFIX . 'alpinejs', ['defer' => true]);
-        $this->data->script(self::HANDLE_PREFIX . 'recaptcha', ['defer' => true]);
+        if ($pre_63) {
+            $this->data->script(self::HANDLE_PREFIX . 'alpinejs', ['defer' => true]);
+            $this->data->script(self::HANDLE_PREFIX . 'recaptcha', ['defer' => true]);
+        }
 
         $data = [
             'ajaxUrl' => admin_url('admin-ajax.php'),
