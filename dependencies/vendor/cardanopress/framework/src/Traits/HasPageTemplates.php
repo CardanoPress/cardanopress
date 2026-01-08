@@ -63,6 +63,6 @@ trait HasPageTemplates
 
     protected function getLoaderFile(): string
     {
-        return get_page_template_slug();
+        return (string) get_page_template_slug();
     }
 }

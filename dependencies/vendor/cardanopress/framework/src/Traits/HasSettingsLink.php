@@ -31,6 +31,10 @@ trait HasSettingsLink
         );
     }
 
+    /**
+     * @param array<string, string> $links
+     * @return array<string, string>
+     */
     public function mergeSettingsLink(array $links): array
     {
         $settings = $this->getSettingsLink();

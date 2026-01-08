@@ -50,7 +50,7 @@ trait Noticeable
         return ! $this->userProfile->isDismissedNotice($type);
     }
 
-    public function dismissNoticeScript()
+    public function dismissNoticeScript(): void
     {
         if (wp_cache_get('cardanopress_dismiss_notice')) {
             return;
@@ -79,7 +79,7 @@ trait Noticeable
         wp_cache_set('cardanopress_dismiss_notice', true);
     }
 
-    public function dismissNoticeAction()
+    public function dismissNoticeAction(): void
     {
         check_ajax_referer('cardanopress_dismiss_notice');
 

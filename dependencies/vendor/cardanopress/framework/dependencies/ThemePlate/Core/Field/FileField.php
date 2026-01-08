@@ -35,6 +35,8 @@ class FileField extends Field {
 			echo '</div>';
 		}
 
+		global $wp_version;
+
 		foreach ( $value as $file ) {
 			$name    = basename( (string) get_attached_file( $file ) );
 			$info    = wp_check_filetype( $name );
@@ -45,7 +47,13 @@ class FileField extends Field {
 			echo '<div class="centered"><img src="' . esc_attr( $preview ) . '" alt="' . esc_attr( get_the_title( $file ) ) . '"/></div>';
 			echo '<div class="filename"><div>' . esc_html( $name ) . '</div></div>';
 			echo '</div></div>';
-			echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+
+			if ( version_compare( $wp_version, '6.9', '<' ) ) {
+				echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+			} else {
+				echo '<button type="button" class="button-link attachment-close"><span class="media-modal-icon" aria-hidden="true"></span><span class="screen-reader-text">Remove</span></button>';
+			}
+
 			echo '<input
 				type="hidden"
 				name="' . esc_attr( $this->get_config( 'name' ) ) . ( $this->get_config( 'multiple' ) ? '[]' : '' ) . '"

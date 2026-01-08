@@ -288,24 +288,55 @@ window.ThemePlate = window.ThemePlate || {};
 	};
 
 
+	function maybeAdjust( $cloneable, $container, conditions ) {
+		if ( ! $cloneable.length ) {
+			return conditions;
+		}
+
+		var index = $container.closest( '.field-input.repeatable' ).find( '.themeplate-clone' ).index( $cloneable );
+
+		return conditions.map( function( condition ) {
+			condition.key = condition.key.replace( /i-(\d|x)/, index );
+
+			return condition;
+		} );
+	}
+
+
+	function setupOptions( $this ) {
+		var $container = TP.getContainer( $this );
+		var $cloneable = $container.closest( '.themeplate-clone' );
+
+		if ( $cloneable.length && $cloneable.hasClass( 'hidden' ) ) {
+			return
+		}
+
+		var conditions;
+
+		if ( $this.data( 'show' ) ) {
+			conditions = maybeAdjust( $cloneable, $container, $this.data( 'show' ) );
+			TP.maybeShowHide( $container, 'show', conditions );
+			TP.addEventListener( $container, 'show', conditions );
+		}
+
+		if ( $this.data( 'hide' ) ) {
+			conditions = maybeAdjust( $cloneable, $container, $this.data( 'hide' ) );
+			TP.maybeShowHide( $container, 'hide', conditions );
+			TP.addEventListener( $container, 'hide', conditions );
+		}
+	}
+
+
 	wp.domReady( function() {
 		$( '.themeplate-options' ).each( function() {
-			var $this = $( this );
-			var $container = TP.getContainer( $this );
-			var conditions;
-
-			if ( $this.data( 'show' ) ) {
-				conditions = $this.data( 'show' );
-				TP.maybeShowHide( $container, 'show', conditions );
-				TP.addEventListener( $container, 'show', conditions );
-			}
-
-			if ( $this.data( 'hide' ) ) {
-				conditions = $this.data( 'hide' );
-				TP.maybeShowHide( $container, 'hide', conditions );
-				TP.addEventListener( $container, 'hide', conditions );
-			}
+			setupOptions( $( this ) );
 		});
 	});
+
+	$( document ).on( 'clone', '.themeplate-clone', function() {
+		$( this ).find( '.themeplate-options' ).each( function() {
+			setupOptions( $( this ) );
+		});
+	} )
 
 }( jQuery, window.ThemePlate ));

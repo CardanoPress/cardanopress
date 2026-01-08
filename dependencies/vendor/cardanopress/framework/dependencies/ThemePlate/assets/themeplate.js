@@ -27,7 +27,7 @@
 
 	$( document ).on( 'click', '.tpo.postbox .hndle, .tpo.postbox .handlediv', function() {
 		var $el = $( this ),
-			p = $el.parent( '.postbox' ),
+			p = $el.parents( '.postbox' ),
 			ariaExpandedValue;
 
 		p.toggleClass( 'closed' );
@@ -263,7 +263,7 @@
 						$this = $( this ).siblings( '.select2-options' );
 
 						return {
-						    _wpnonce: ThemePlate.nonce,
+							_wpnonce: ThemePlate.nonce,
 							search: params.term,
 							_page: { paged: params.page || 1 },
 							action: s2data.action,

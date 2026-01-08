@@ -24,6 +24,7 @@ trait HasTemplateShortcodes
         return $this->templates;
     }
 
+    /** @param array<string, mixed> $attributes */
     public function doTemplate(array $attributes): string
     {
         if (null === $this->getTemplates()) {
@@ -58,6 +59,7 @@ trait HasTemplateShortcodes
         return $this->doTemplateIf(['condition' => $args['if']], $html);
     }
 
+    /** @param array<string, string> $attributes */
     public function doTemplateIf(array $attributes, ?string $content = null): string
     {
         $args = shortcode_atts([

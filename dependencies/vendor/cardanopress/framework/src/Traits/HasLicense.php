@@ -11,6 +11,7 @@ use CardanoPress\Helpers\LicenseHelper;
 
 trait HasLicense
 {
+    /** @return array<string, mixed> */
     protected function licenseKeyConfig(callable $optionGetter): array
     {
         $status = $optionGetter('license_status');

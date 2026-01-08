@@ -24,7 +24,7 @@ trait Templatable
         return $this->templates;
     }
 
-    /** @param array<string, string> $variables */
+    /** @param array<string, mixed> $variables */
     public function template(string $name, array $variables = []): void
     {
         $loader = new TemplateLoader($this->templates);

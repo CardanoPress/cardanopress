@@ -18,7 +18,7 @@ class TemplateLoader
         $this->templates = $templates;
     }
 
-    /** @param array<string, string> $variables */
+    /** @param array<string, mixed> $variables */
     public function load(string $name, array $variables = []): void
     {
         $name .= '.php';

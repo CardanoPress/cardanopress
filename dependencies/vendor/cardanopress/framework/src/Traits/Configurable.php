@@ -23,6 +23,7 @@ trait Configurable
         return $this->admin;
     }
 
+    /** @return mixed */
     public function option(string $key)
     {
         return $this->admin->getOption($key);

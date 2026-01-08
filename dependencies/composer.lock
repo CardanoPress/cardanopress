@@ -53,16 +53,16 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "v5.0.13",
+            "version": "v5.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/jetpack-autoloader.git",
-                "reference": "94888d86820a99a0f3aba3498ba10f6b6245c929"
+                "reference": "d5263d6ffa91dc0d0d39b1df54de1e9bb2091364"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/94888d86820a99a0f3aba3498ba10f6b6245c929",
-                "reference": "94888d86820a99a0f3aba3498ba10f6b6245c929",
+                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/d5263d6ffa91dc0d0d39b1df54de1e9bb2091364",
+                "reference": "d5263d6ffa91dc0d0d39b1df54de1e9bb2091364",
                 "shasum": ""
             },
             "require": {
@@ -70,7 +70,7 @@
                 "php": ">=7.2"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^6.0.9",
+                "automattic/jetpack-changelogger": "^6.0.12",
                 "automattic/phpunit-select-config": "^1.0.3",
                 "composer/composer": "^2.2",
                 "yoast/phpunit-polyfills": "^4.0.0"
@@ -112,22 +112,22 @@
                 "wordpress"
             ],
             "support": {
-                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v5.0.13"
+                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v5.0.15"
             },
-            "time": "2025-11-12T16:41:11+00:00"
+            "time": "2025-12-15T11:22:11+00:00"
         },
         {
             "name": "cardanopress/framework",
-            "version": "v2.15.1",
+            "version": "v2.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CardanoPress/framework.git",
-                "reference": "35976d76d300ac8703b9708bfa7314c991d723a6"
+                "reference": "170b732382816c3b868dc923396f9de0a94865a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/35976d76d300ac8703b9708bfa7314c991d723a6",
-                "reference": "35976d76d300ac8703b9708bfa7314c991d723a6",
+                "url": "https://api.github.com/repos/CardanoPress/framework/zipball/170b732382816c3b868dc923396f9de0a94865a3",
+                "reference": "170b732382816c3b868dc923396f9de0a94865a3",
                 "shasum": ""
             },
             "require": {
@@ -170,9 +170,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CardanoPress/framework/issues",
-                "source": "https://github.com/CardanoPress/framework/tree/v2.15.1"
+                "source": "https://github.com/CardanoPress/framework/tree/v2.16.0"
             },
-            "time": "2025-09-30T05:37:03+00:00"
+            "time": "2026-01-07T06:08:59+00:00"
         },
         {
             "name": "kermage/cardanophp",

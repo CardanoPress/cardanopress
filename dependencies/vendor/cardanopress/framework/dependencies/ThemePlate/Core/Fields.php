@@ -111,7 +111,7 @@ class Fields {
 				echo ! empty( $field->get_config( 'information' ) ) ? '<p class="description">' . $field->get_config( 'information' ) . '</p>' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo '</div>';
 		echo '</div>';
-		/* phpcs:enable */
+		/* phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact */
 
 	}
 
@@ -121,10 +121,17 @@ class Fields {
 	 */
 	protected function cloner( Field $field, $value, bool $last = false ): void {
 
+		global $wp_version;
+
 		echo '<div class="themeplate-clone' . ( $last ? ' hidden' : '' ) . '">';
 			echo '<div class="themeplate-handle"></div>';
 			$field->render( $value );
+
+		if ( version_compare( $wp_version, '6.9', '<' ) ) {
 			echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+		} else {
+			echo '<button type="button" class="button-link attachment-close"><span class="media-modal-icon" aria-hidden="true"></span><span class="screen-reader-text">Remove</span></button>';
+		}
 
 		if ( 'group' === $field->get_config( 'type' ) ) {
 			echo '<fieldset class="themeplate-mover">';

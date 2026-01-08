@@ -488,7 +488,7 @@ select[disabled] {
 	line-height: 1.4;
 }
 
-.themeplate.tpo .hndle {
+.themeplate.tpo.postbox .hndle {
 	cursor: pointer;
 }
 
