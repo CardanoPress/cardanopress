@@ -54,7 +54,7 @@ let __tla = (async () => {
   S = function(e, t, s) {
     let o = Promise.resolve();
     if (t && t.length > 0) {
-      let c = function(i) {
+      let h = function(i) {
         return Promise.all(i.map((d) => Promise.resolve(d).then((f) => ({
           status: "fulfilled",
           value: f
@@ -64,14 +64,14 @@ let __tla = (async () => {
         }))));
       };
       document.getElementsByTagName("link");
-      const r = document.querySelector("meta[property=csp-nonce]"), h = (r == null ? void 0 : r.nonce) || (r == null ? void 0 : r.getAttribute("nonce"));
-      o = c(t.map((i) => {
+      const c = document.querySelector("meta[property=csp-nonce]"), r = (c == null ? void 0 : c.nonce) || (c == null ? void 0 : c.getAttribute("nonce"));
+      o = h(t.map((i) => {
         if (i = A(i), i in b) return;
         b[i] = true;
         const d = i.endsWith(".css"), f = d ? '[rel="stylesheet"]' : "";
         if (document.querySelector(`link[href="${i}"]${f}`)) return;
         const u = document.createElement("link");
-        if (u.rel = d ? "stylesheet" : T, d || (u.as = "script"), u.crossOrigin = "", u.href = i, h && u.setAttribute("nonce", h), document.head.appendChild(u), d) return new Promise((E, C) => {
+        if (u.rel = d ? "stylesheet" : T, d || (u.as = "script"), u.crossOrigin = "", u.href = i, r && u.setAttribute("nonce", r), document.head.appendChild(u), d) return new Promise((E, C) => {
           u.addEventListener("load", E), u.addEventListener("error", () => C(new Error(`Unable to preload CSS for ${i}`)));
         });
       }));
@@ -90,7 +90,7 @@ let __tla = (async () => {
   w = (_a = class {
     static async load() {
       return w.Module === void 0 && (w.Module = (await S(async () => {
-        const { Buffer: e } = await import("./index-j9nFomPY.js").then((t) => t.i);
+        const { Buffer: e } = await import("./index-MkSInhvO.js").then((t) => t.i);
         return {
           Buffer: e
         };

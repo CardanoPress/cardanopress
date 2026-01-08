@@ -50,7 +50,6 @@ function Cr() {
   return j;
 }
 var Y = {};
-/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 var hr;
 function _r() {
   return hr || (hr = 1, Y.read = function(y, c, F, m, a) {
@@ -70,16 +69,10 @@ function _r() {
     y[F + f - l] |= w * 128;
   }), Y;
 }
-/*!
-* The buffer module from node.js, for the browser.
-*
-* @author   Feross Aboukhadijeh <https://feross.org>
-* @license  MIT
-*/
 var fr;
 function Sr() {
   return fr || (fr = 1, (function(y) {
-    const c = Cr(), F = _r(), m = typeof Symbol == "function" && typeof Symbol.for == "function" ? Symbol.for("nodejs.util.inspect.custom") : null;
+    const c = Cr(), F = _r(), m = typeof Symbol == "function" && typeof Symbol.for == "function" ? /* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom") : null;
     y.Buffer = u, y.SlowBuffer = R, y.INSPECT_MAX_BYTES = 50;
     const a = 2147483647;
     y.kMaxLength = a, u.TYPED_ARRAY_SUPPORT = E(), !u.TYPED_ARRAY_SUPPORT && typeof console < "u" && typeof console.error == "function" && console.error("This browser lacks typed array (Uint8Array) support which is required by `buffer` v5.x. Use `buffer` v4.x if you require old browser support.");
