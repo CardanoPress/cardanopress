@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, ada, token-gating
 Requires at least: 5.9
 Tested up to: 6.9.99
-Stable tag: 1.32.0
+Stable tag: 1.33.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -129,6 +129,10 @@ This plugin does not collect or process any personal user data.
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.33.0 =
+- Conditional script args pre 6.3
+- Update packages and dependencies
 
 = 1.32.0 =
 - Never miss recaptcha init

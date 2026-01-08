@@ -15,3 +15,5 @@ parameters:
     - dependencies
   dynamicConstantNames:
     - CARDANOPRESS_FILE
+  ignoreErrors:
+    - '#Constant MINUTE_IN_SECONDS not found.#'
