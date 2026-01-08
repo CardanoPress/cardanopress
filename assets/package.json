@@ -7,12 +7,12 @@
     "watch": "vite"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.18",
     "@types/alpinejs": "^3.13.11",
     "@types/grecaptcha": "^3.0.9",
-    "alpinejs": "^3.15.2",
-    "autoprefixer": "^10.4.22",
-    "tailwindcss": "^4.1.17",
+    "alpinejs": "^3.15.3",
+    "autoprefixer": "^10.4.23",
+    "tailwindcss": "^4.1.18",
     "vite": "^6.4.1",
     "vite-plugin-offload-wasm": "^0.3.1",
     "vite-plugin-themeplate": "^1.11.0",
