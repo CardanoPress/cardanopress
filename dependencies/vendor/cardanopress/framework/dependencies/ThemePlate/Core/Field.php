@@ -9,6 +9,33 @@ namespace CardanoPress\Dependencies\ThemePlate\Core;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MainHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MetaHelper;
 
+/**
+ * @phpstan-type FConfig array{
+ *     type: string,
+ *     options: array<string, string>|callable,
+ *     multiple: bool,
+ *     none: bool,
+ *     style: string,
+ *     repeatable: bool,
+ *     required: bool,
+ *     minimum: int,
+ *     maximum: int,
+ *     show_on?: array<string, string>|callable,
+ *     hide_on?: array<string, string>|callable,
+ *     show_on_cb?: callable,
+ *     hide_on_cb?: callable,
+ *     show_on_id?: int[]|string[],
+ *     hide_on_id?: int[]|string[],
+ *     count: int,
+ *     default: mixed,
+ *     fields?: Fields,
+ *     id?: string,
+ *     title?: string,
+ *     name?: string,
+ *     description?: string,
+ *     information?: string,
+ * }
+ */
 abstract class Field {
 
 	public const DEFAULTS = array(
@@ -31,7 +58,7 @@ abstract class Field {
 
 
 	/**
-	 * @var array<string, mixed>
+	 * @var FConfig
 	 */
 	protected array $config;
 	protected string $data_key;
@@ -62,7 +89,7 @@ abstract class Field {
 
 	/**
 	 * @param array<string, mixed> $config
-	 * @return array<string, mixed>
+	 * @return FConfig
 	 */
 	protected function check( array $config ): array {
 
@@ -143,7 +170,7 @@ abstract class Field {
 
 
 	/**
-	 * @param array<string, mixed> $config
+	 * @param FConfig $config
 	 */
 	public function can_have_multiple_value( array $config ): bool {
 
@@ -160,7 +187,10 @@ abstract class Field {
 
 
 	/**
-	 * @return mixed
+	 * @template K of string
+	 * @param K $key
+	 * @return (K is '' ? FConfig : FConfig[K]|null)
+	 * @phpstan-return (K is '' ? FConfig : (K is key-of<FConfig> ? FConfig[K] : null))
 	 */
 	public function get_config( string $key = '' ) {
 

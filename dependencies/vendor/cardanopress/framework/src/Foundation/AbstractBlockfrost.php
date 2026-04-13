@@ -72,7 +72,15 @@ abstract class AbstractBlockfrost extends SharedBase implements BlockfrostInterf
 
     public function request(string $endpoint, array $query = []): array
     {
-        $response = $this->client->request($endpoint, $query);
+        $response = $this->client->request('GET', $endpoint, compact('query'));
+
+        if (isset($response['data']['status_code'], $response['data']['error'], $response['data']['message'])) {
+            $response['status_code'] = $response['data']['status_code'];
+
+            $response['error'] = $response['data'];
+            $response['data']  = [];
+        }
+
         $this->lastResponse = $response;
 
         if (200 !== $response['status_code'] || ! empty($response['error'])) {

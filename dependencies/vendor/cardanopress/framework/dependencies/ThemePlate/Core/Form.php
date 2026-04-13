@@ -12,8 +12,29 @@ namespace CardanoPress\Dependencies\ThemePlate\Core;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\AssetsHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MainHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MetaHelper;
+use CardanoPress\Dependencies\ThemePlate\Core\Interfaces\FieldsInterface;
+use CardanoPress\Dependencies\ThemePlate\Core\Traits\HasFields;
 
-abstract class Form {
+/**
+ * @phpstan-type FConfig array{
+ *     description: string,
+ *     data_prefix: string,
+ *     style: string,
+ *     show_on?: array<string, string>|callable,
+ *     hide_on?: array<string, string>|callable,
+ *     show_on_cb?: callable,
+ *     hide_on_cb?: callable,
+ *     show_on_id?: int[]|string[],
+ *     hide_on_id?: int[]|string[],
+ *     context: string,
+ *     priority: string,
+ *     form_id: string,
+ * }
+ */
+abstract class Form implements FieldsInterface {
+
+	use HasFields;
+
 
 	public const DEFAULTS = array(
 		'description' => '',
@@ -26,10 +47,9 @@ abstract class Form {
 	);
 
 
-	protected ?Fields $fields = null;
 	protected Handler $handler;
 	/**
-	 * @var array<string, mixed>
+	 * @var FConfig
 	 */
 	protected array $config;
 	protected string $title;
@@ -52,7 +72,7 @@ abstract class Form {
 
 
 	/**
-	 * @param array<string, mixed> $config
+	 * @param FConfig $config
 	 */
 	abstract protected function initialize( array &$config ): void;
 
@@ -68,7 +88,7 @@ abstract class Form {
 
 	/**
 	 * @param array<string, mixed> $config
-	 * @return array<string, mixed>
+	 * @return FConfig
 	 */
 	protected function check( array $config ): array {
 
@@ -81,18 +101,6 @@ abstract class Form {
 		AssetsHelper::setup_loader();
 
 		return $config;
-
-	}
-
-
-	/**
-	 * @param array<Field|mixed> $collection
-	 */
-	public function fields( array $collection ): self {
-
-		$this->fields = new Fields( $collection );
-
-		return $this;
 
 	}
 

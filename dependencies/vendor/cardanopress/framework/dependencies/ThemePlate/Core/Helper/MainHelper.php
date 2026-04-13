@@ -14,14 +14,16 @@ use CardanoPress\Dependencies\ThemePlate\Core\Field;
 class MainHelper {
 
 	/**
-	 * @param array<string, mixed> $defaults
+	 * @template T of array<string, mixed>
+	 * @param T $defaults
 	 * @param array<string, mixed> $options
-	 * @return array<string, mixed>
+	 * @return T
 	 */
 	public static function fool_proof( array $defaults, array $options ): array {
 
 		$result = array_merge( $defaults, $options );
 
+		/** @var array<string, mixed> $defaults */
 		foreach ( $defaults as $key => $value ) {
 			if ( is_array( $value ) ) {
 				$result[ $key ] = (array) $result[ $key ];
@@ -40,6 +42,7 @@ class MainHelper {
 			}
 		}
 
+		/** @var T $result */
 		return $result;
 
 	}
@@ -83,8 +86,9 @@ class MainHelper {
 
 
 	/**
-	 * @param array<mixed> $array_var
-	 * @return array<mixed>
+	 * @template T of array<mixed>
+	 * @param T $array_var
+	 * @return T|array<T>
 	 */
 	public static function values_to_string( array $array_var ): array {
 

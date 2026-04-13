@@ -13,9 +13,6 @@ use CardanoPress\Dependencies\ThemePlate\Core\Field;
 
 class InputField extends Field {
 
-	/**
-	 * @param string $value
-	 */
 	public function render( $value ): void {
 
 		echo '<input

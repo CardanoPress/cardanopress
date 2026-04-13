@@ -12,6 +12,7 @@ namespace CardanoPress\Dependencies\ThemePlate\Core\Field;
 use CardanoPress\Dependencies\ThemePlate\Core\Field;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MainHelper;
 
+/** @phpstan-type Value array{url: string, text: string, target: string} */
 class LinkField extends Field {
 
 	public const DEFAULT_VALUE = array(
@@ -32,7 +33,7 @@ class LinkField extends Field {
 
 	/**
 	 * @param array<string, string> $default_value
-	 * @return array<string, string>
+	 * @return Value
 	 */
 	private function values_structure( array $default_value ): array {
 

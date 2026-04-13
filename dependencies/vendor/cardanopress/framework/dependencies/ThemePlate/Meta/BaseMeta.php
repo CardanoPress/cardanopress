@@ -20,6 +20,8 @@ abstract class BaseMeta extends Form {
 
 	protected int $current_id = 0;
 
+	protected string $object_type = '';
+
 
 	protected function register(): void {
 
@@ -34,7 +36,7 @@ abstract class BaseMeta extends Form {
 
 	protected function get_handler(): Handler {
 
-		return new MetaHandler( $this->config['object_type'] );
+		return new MetaHandler( $this->object_type );
 
 	}
 
@@ -95,7 +97,7 @@ abstract class BaseMeta extends Form {
 				continue;
 			}
 
-			$stored  = get_metadata( $config['object_type'], $object_id, $key, ! $field->get_config( 'repeatable' ) );
+			$stored  = get_metadata( $this->object_type, $object_id, $key, ! $field->get_config( 'repeatable' ) );
 			$updated = $_POST[ $this->fields_group_key() ][ $key ]; // phpcs:ignore WordPress.Security.NonceVerification
 
 			if ( is_array( $updated ) ) {
@@ -104,14 +106,14 @@ abstract class BaseMeta extends Form {
 			}
 
 			if ( $field->get_config( 'repeatable' ) ) {
-				delete_metadata( $config['object_type'], $object_id, $key );
+				delete_metadata( $this->object_type, $object_id, $key );
 
 				foreach ( $updated as $i => $value ) {
 					if ( 'i-x' === $i ) {
 						continue;
 					}
 
-					add_metadata( $config['object_type'], $object_id, $key, $value );
+					add_metadata( $this->object_type, $object_id, $key, $value );
 				}
 			} else {
 				if ( ! $stored && ! $updated ) {
@@ -123,9 +125,9 @@ abstract class BaseMeta extends Form {
 				}
 
 				if ( $updated ) {
-					update_metadata( $config['object_type'], $object_id, $key, $updated, $stored );
+					update_metadata( $this->object_type, $object_id, $key, $updated, $stored );
 				} else {
-					delete_metadata( $config['object_type'], $object_id, $key, $stored );
+					delete_metadata( $this->object_type, $object_id, $key, $stored );
 				}
 			}
 		}
@@ -167,9 +169,9 @@ abstract class BaseMeta extends Form {
 		}
 
 		$prefix = $this->config['data_prefix'];
-		$types  = property_exists( $this, 'locations' ) ? $this->locations : array( '' );
+		$types  = $this->locations ?? array( '' );
 
-		add_filter( "default_{$this->config['object_type']}_metadata", array( MetaHelpers::class, 'default' ), 10, 5 );
+		add_filter( "default_{$this->object_type}_metadata", array( MetaHelpers::class, 'default' ), 10, 5 );
 
 		foreach ( $this->fields->get_collection() as $field ) {
 			$args = FieldsHelper::get_schema( $field );
@@ -183,9 +185,9 @@ abstract class BaseMeta extends Form {
 			foreach ( $types as $type ) {
 				$args['object_subtype'] = $type;
 
-				add_filter( "themeplate_{$this->config['object_type']}_meta_{$field->data_key( $prefix )}_schema", array( $this, 'build_schema' ) );
+				add_filter( "themeplate_{$this->object_type}_meta_{$field->data_key( $prefix )}_schema", array( $this, 'build_schema' ) );
 
-				register_meta( $this->config['object_type'], $field->data_key( $prefix ), $args );
+				register_meta( $this->object_type, $field->data_key( $prefix ), $args );
 			}
 		}
 

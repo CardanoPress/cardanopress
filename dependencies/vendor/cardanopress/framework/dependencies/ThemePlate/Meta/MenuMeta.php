@@ -9,7 +9,6 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Meta;
 
-use CardanoPress\Dependencies\ThemePlate\Core\Fields;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\BoxHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\FormHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MetaHelper;
@@ -19,11 +18,10 @@ class MenuMeta extends BaseMeta {
 	/** @var string[] */
 	protected array $locations = array();
 
+	protected string $object_type = 'post';
 
-	/** @param array{object_type: string} $config */
+
 	protected function initialize( array &$config ): void {
-
-		$config['object_type'] = 'post';
 
 		$this->locations = array( 'nav_menu_item' );
 
@@ -33,16 +31,6 @@ class MenuMeta extends BaseMeta {
 	protected function fields_group_key(): string {
 
 		return parent::fields_group_key() . '_' . $this->current_id;
-
-	}
-
-
-	/** @param array<string, Field|mixed> $collection */
-	public function fields( array $collection ): self {
-
-		$this->fields = new Fields( $collection );
-
-		return $this;
 
 	}
 

@@ -131,7 +131,7 @@ class FormHelper {
 
 
 	/**
-	 * @param array<string, mixed> $config
+	 * @param array{type?: string} $config
 	 */
 	public static function make_field( string $data_key, array $config ): Field {
 

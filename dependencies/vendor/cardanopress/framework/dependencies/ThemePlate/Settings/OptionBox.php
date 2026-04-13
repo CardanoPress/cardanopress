@@ -32,12 +32,6 @@ class OptionBox extends Form {
 	}
 
 
-	/**
-	 * @param array{
-	 *     context: string,
-	 *     data_prefix: string,
-	 * } $config
-	 */
 	protected function initialize( array &$config ): void {
 	}
 
@@ -81,16 +75,6 @@ class OptionBox extends Form {
 	public function location( string $page ): self {
 
 		$this->menu_pages[] = $page;
-
-		return $this;
-
-	}
-
-
-	/** @param array<string, Field|mixed> $collection */
-	public function fields( array $collection ): self {
-
-		$this->fields = new Fields( $collection );
 
 		return $this;
 

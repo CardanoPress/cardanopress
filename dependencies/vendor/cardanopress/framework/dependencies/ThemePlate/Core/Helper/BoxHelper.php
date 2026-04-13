@@ -54,7 +54,7 @@ class BoxHelper {
 
 
 	/**
-	 * @param array<string, mixed> $config
+	 * @param array{priority: string} $config
 	 */
 	public static function get_priority( array $config ): int {
 

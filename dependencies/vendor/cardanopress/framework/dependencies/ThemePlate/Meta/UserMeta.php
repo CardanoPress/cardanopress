@@ -9,7 +9,6 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Meta;
 
-use CardanoPress\Dependencies\ThemePlate\Core\Fields;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\BoxHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\FormHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MetaHelper;
@@ -17,21 +16,10 @@ use WP_User;
 
 class UserMeta extends BaseMeta {
 
-	/** @param array{object_type: string} $config */
+	protected string $object_type = 'user';
+
+
 	protected function initialize( array &$config ): void {
-
-		$config['object_type'] = 'user';
-
-	}
-
-
-	/** @param array<string, Field|mixed> $collection */
-	public function fields( array $collection ): self {
-
-		$this->fields = new Fields( $collection );
-
-		return $this;
-
 	}
 
 

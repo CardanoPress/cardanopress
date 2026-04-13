@@ -12,7 +12,8 @@ namespace CardanoPress\Dependencies\ThemePlate\Core\Helper;
 class MetaHelper {
 
 	/**
-	 * @param array<string, mixed> $meta_box
+	 * @template T of array<string, mixed>
+	 * @param T $meta_box
 	 */
 	public static function should_display( array $meta_box, string $current_id ): bool {
 
@@ -61,8 +62,9 @@ class MetaHelper {
 
 
 	/**
-	 * @param array<string, mixed> $container
-	 * @return array<string, mixed>
+	 * @template T of array<string, mixed>
+	 * @param T $container
+	 * @return T
 	 */
 	public static function normalize_options( array $container ): array {
 
@@ -72,14 +74,16 @@ class MetaHelper {
 			}
 		}
 
+		/** @var T $container */
 		return $container;
 
 	}
 
 
 	/**
-	 * @param array<string, mixed> $container
-	 * @return array<string, mixed>
+	 * @template T of array<string, mixed>
+	 * @param T $container
+	 * @return T
 	 */
 	private static function option_check( string $type, array $container ): array {
 
@@ -103,13 +107,15 @@ class MetaHelper {
 			unset( $container[ $type ] );
 		}
 
+		/** @var T $container */
 		return $container;
 
 	}
 
 
 	/**
-	 * @param array<string, mixed> $container
+	 * @template T of array<string, mixed>
+	 * @param T $container
 	 */
 	public static function render_options( array $container ): void {
 

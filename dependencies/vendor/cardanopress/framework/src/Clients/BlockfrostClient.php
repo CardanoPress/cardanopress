@@ -7,23 +7,12 @@
 
 namespace CardanoPress\Clients;
 
-use CardanoPress\Dependencies\GuzzleHttp\Client;
-use CardanoPress\Dependencies\GuzzleHttp\Exception\ConnectException;
-use CardanoPress\Dependencies\GuzzleHttp\Exception\GuzzleException;
-use CardanoPress\Dependencies\GuzzleHttp\Exception\RequestException;
 use CardanoPress\Dependencies\GuzzleHttp\HandlerStack;
 use CardanoPress\Dependencies\GuzzleHttp\Middleware;
-use CardanoPress\Dependencies\GuzzleHttp\Psr7\Request;
-use CardanoPress\Dependencies\GuzzleHttp\Psr7\Response;
-use Closure;
-use JsonException;
+use CardanoPress\Dependencies\Psr\Http\Message\RequestInterface;
 
-class BlockfrostClient
+class BlockfrostClient extends BaseClient
 {
-    private Client $client;
-
-    public const DELAY = 1000;
-    public const MAX_RETRIES = 5;
     public const ENDPOINT = [
         'mainnet' => 'https://cardano-mainnet.blockfrost.io/api/v0/',
         'testnet' => 'https://cardano-testnet.blockfrost.io/api/v0/',
@@ -42,108 +31,20 @@ class BlockfrostClient
             $network = 'mainnet';
         }
 
-        $Accept = 'application/json';
-        $this->client = new Client([
-            'base_uri' => self::ENDPOINT[$network],
-            'timeout' => 10,
-            'connect_timeout' => 10,
-            'handler' => null === $handler ? $this->createHandlerStack() : $handler,
-            'headers' => compact('Accept', 'project_id'),
-        ]);
-    }
-
-    private function createHandlerStack(): HandlerStack
-    {
-        $stack = HandlerStack::create();
-        $stack->push(Middleware::retry($this->retryDecider(), $this->retryDelay()));
-
-        return $stack;
-    }
-
-    private function retryDecider(): Closure
-    {
-        return static function (
-            $retries,
-            Request $request,
-            ?Response $response = null,
-            ?RequestException $exception = null
-        ) {
-            if ($retries >= self::MAX_RETRIES) {
-                return false;
+        $stacker = static function (HandlerStack $stack) use ($handler, $project_id) {
+            if (null !== $handler) {
+                // @phpstan-ignore-next-line
+                $stack->setHandler($handler);
             }
 
-            // @phpstan-ignore-next-line
-            if ($exception instanceof ConnectException) {
-                return true;
-            }
-
-            if ($response && $response->getStatusCode() >= 500) {
-                return true;
-            }
-
-            return false;
+            $stack->push(
+                Middleware::mapRequest(
+                    static fn (RequestInterface $request) => $request->withHeader('project_id', $project_id)
+                ),
+                'project_id'
+            );
         };
-    }
 
-    private function retryDelay(): Closure
-    {
-        return static function ($numberOfRetries) {
-            return self::DELAY * $numberOfRetries;
-        };
-    }
-
-    /**
-     * Make a GET request to the API endpoint
-     *
-     * @param  string  $endpoint
-     * @param  mixed[] $query
-     *
-     * @return array{
-     *     status_code: int,
-     *     data: mixed[],
-     *     error?: string,
-     * }
-     */
-    public function request(string $endpoint, array $query = []): array
-    {
-        $value = [
-            'status_code' => 500,
-            'data' => [],
-        ];
-
-        try {
-            $response = $this->client->request('GET', $endpoint, compact('query'));
-
-            $value['status_code'] = $response->getStatusCode();
-            $value['data'] = json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
-
-            if (isset($value['data']['status_code'], $value['data']['error'], $value['data']['message'])) {
-                $value['status_code'] = $value['data']['status_code'];
-
-                $value['error'] = $value['data'];
-                $value['data']  = [];
-            }
-        } catch (RequestException $error) {
-            $response = $error->getResponse();
-
-            if (null === $response) {
-                $value['error'] = $error->getMessage();
-
-                return $value;
-            }
-
-            try {
-                $value['status_code'] = $response->getStatusCode();
-                $value['error'] = json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
-            } catch (JsonException $e) {
-                $value['error'] = $e->getMessage();
-            }
-        } catch (GuzzleException $e) {
-            $value['error'] = $e->getMessage();
-        } catch (JsonException $e) {
-            $value['error'] = $e->getMessage();
-        }
-
-        return $value;
+        parent::__construct(self::ENDPOINT[$network], $stacker);
     }
 }

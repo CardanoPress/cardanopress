@@ -16,7 +16,15 @@ use CardanoPress\Dependencies\ThemePlate\Core\Fields;
 class FieldsHelper {
 
 	/**
-	 * @return array<string, mixed>
+	 * @return array<
+	 *     string,
+	 *     array{
+	 *         type: string,
+	 *         default: mixed,
+	 *         properties?: array<string, mixed>,
+	 *         items?: array<string, mixed>
+	 *     }
+	 * >
 	 */
 	public static function build_schema( Fields $fields, string $data_prefix = '' ): array {
 
@@ -42,7 +50,12 @@ class FieldsHelper {
 
 
 	/**
-	 * @return array<string, mixed>
+	 * @return array{
+	 *     type: string,
+	 *     default: mixed,
+	 *     properties?: array<string, mixed>,
+	 *     items?: array<string, mixed>
+	 * }
 	 */
 	public static function get_schema( Field $field ): array {
 

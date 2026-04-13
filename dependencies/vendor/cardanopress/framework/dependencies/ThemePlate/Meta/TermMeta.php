@@ -9,7 +9,6 @@
 
 namespace CardanoPress\Dependencies\ThemePlate\Meta;
 
-use CardanoPress\Dependencies\ThemePlate\Core\Fields;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\BoxHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\FormHelper;
 use CardanoPress\Dependencies\ThemePlate\Core\Helper\MetaHelper;
@@ -21,21 +20,10 @@ class TermMeta extends BaseMeta {
 	use HasLocation;
 
 
-	/** @param array{object_type: string} $config */
+	protected string $object_type = 'term';
+
+
 	protected function initialize( array &$config ): void {
-
-		$config['object_type'] = 'term';
-
-	}
-
-
-	/** @param array<string, Field|mixed> $collection */
-	public function fields( array $collection ): self {
-
-		$this->fields = new Fields( $collection );
-
-		return $this;
-
 	}
 
 

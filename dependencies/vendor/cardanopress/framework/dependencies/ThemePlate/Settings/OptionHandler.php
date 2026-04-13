@@ -22,7 +22,7 @@ class OptionHandler extends Handler {
 	public function get_value( Field $field, string $data_prefix, string $current_id ) {
 
 		if ( null === $this->saved_values ) {
-			$this->saved_values = get_option( $current_id, array() );
+			$this->saved_values = (array) get_option( $current_id, array() );
 		}
 
 		$stored = $this->saved_values[ $field->data_key( $data_prefix ) ] ?? '';
