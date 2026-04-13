@@ -8,6 +8,7 @@
 namespace PBWebDev\CardanoPress\Actions;
 
 use CardanoPress\Dependencies\CardanoPHP\Verifier;
+use CardanoPress\Helpers\HasPostInput;
 use CardanoPress\Interfaces\HookInterface;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
@@ -17,6 +18,8 @@ use WP_Error;
 
 class WalletAction implements HookInterface
 {
+    use HasPostInput;
+
     protected Application $application;
     protected Sanitization $sanitization;
 
@@ -24,6 +27,7 @@ class WalletAction implements HookInterface
     {
         $this->application = Application::getInstance();
         $this->sanitization = new Sanitization();
+        $this->messager = new Messager();
     }
 
     public function setupHooks(): void
@@ -42,18 +46,23 @@ class WalletAction implements HookInterface
         add_action('wp_ajax_cardanopress_save_handle', [$this, 'saveUserHandle']);
     }
 
+    public static function getNonce(): string
+    {
+        return Manifest::HANDLE_PREFIX . 'action';
+    }
+
     /** @param string[] $data */
     private function verifyDataSignature(array $data, string $walletAddress): bool
     {
         list($signature, $key) = $data;
-        $message = CoreAction::getAjaxMessage('dataMessage');
+        $message = CoreAction::dataMessage();
 
         return Verifier::verify($signature, $key, $message, $walletAddress);
     }
 
     public function initializeUserAccount(): void
     {
-        $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
+        $this->maybeInvalidPost(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
@@ -61,7 +70,7 @@ class WalletAction implements HookInterface
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
         if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress)) {
-            wp_send_json_error(CoreAction::getAjaxMessage('incorrectSignature'));
+            wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
         }
 
         $username = md5($stakeAddress);
@@ -75,7 +84,7 @@ class WalletAction implements HookInterface
 
             if ($userId instanceof WP_Error) {
                 $this->application->logger('actions')->error($userId->get_error_message());
-                wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
+                wp_send_json_error($this->messager::getAjaxMessage('somethingWrong'));
                 return;
             }
         }
@@ -83,7 +92,7 @@ class WalletAction implements HookInterface
         $user = get_user_by('id', $userId);
 
         if (false === $user) {
-            wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
+            wp_send_json_error($this->messager::getAjaxMessage('somethingWrong'));
             return;
         }
 
@@ -102,14 +111,14 @@ class WalletAction implements HookInterface
         }
 
         wp_send_json_success([
-            'message' => sprintf(CoreAction::getAjaxMessage('welcome'), $username),
+            'message' => sprintf($this->messager::getAjaxMessage('welcome'), $username),
             'reload' => $shouldReload,
         ]);
     }
 
     public function connectUserWallet(): void
     {
-        $this->maybeInvalid(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
+        $this->maybeInvalidPost(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
@@ -117,7 +126,7 @@ class WalletAction implements HookInterface
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
         if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress)) {
-            wp_send_json_error(CoreAction::getAjaxMessage('incorrectSignature'));
+            wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
         }
 
         $userProfile = $this->application->userProfile();
@@ -129,14 +138,14 @@ class WalletAction implements HookInterface
         do_action('wp_login', $userProfile->getData('user_login'), $userProfile->getData());
 
         wp_send_json_success([
-            'message' => CoreAction::getAjaxMessage('connected'),
+            'message' => $this->messager::getAjaxMessage('connected'),
             'reload' => false,
         ]);
     }
 
     public function syncUserAssets(): void
     {
-        $this->maybeInvalid();
+        $this->maybeInvalidPost();
 
         $userProfile = $this->application->userProfile();
         $stored = $userProfile->storedAssets();
@@ -144,14 +153,14 @@ class WalletAction implements HookInterface
         do_action('wp_login', $userProfile->getData('user_login'), $userProfile->getData());
 
         wp_send_json_success([
-            'message' => CoreAction::getAjaxMessage('walletSynced'),
+            'message' => $this->messager::getAjaxMessage('walletSynced'),
             'updated' => $stored !== $userProfile->storedAssets(),
         ]);
     }
 
     public function logoutCurrentUser(): void
     {
-        $this->maybeInvalid(['query_network', 'wallet_address']);
+        $this->maybeInvalidPost(['query_network', 'wallet_address']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
@@ -178,20 +187,20 @@ class WalletAction implements HookInterface
 
     public function getProtocolParameters(): void
     {
-        $this->maybeInvalid(['query_network']);
+        $this->maybeInvalidPost(['query_network']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
 
         if (! Blockfrost::isReady($queryNetwork)) {
-            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
+            wp_send_json_error(sprintf($this->messager::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
         }
 
         $blockfrost = new Blockfrost($queryNetwork);
         $response = $blockfrost->protocolParameters();
 
         if (empty($response)) {
-            $this->application->logger('actions')->error(CoreAction::getErrorMessage('blockfrost'));
-            wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
+            $this->application->logger('actions')->error($this->messager::getErrorMessage('blockfrost'));
+            wp_send_json_error($this->messager::getAjaxMessage('blockfrostError'));
         }
 
         wp_send_json_success($response);
@@ -199,21 +208,21 @@ class WalletAction implements HookInterface
 
     public function getAccountDetails(): void
     {
-        $this->maybeInvalid(['query_network', 'reward_address']);
+        $this->maybeInvalidPost(['query_network', 'reward_address']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $rewardAddress = $this->sanitization->sanitizePost('reward_address');
 
         if (! Blockfrost::isReady($queryNetwork)) {
-            wp_send_json_error(sprintf(CoreAction::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
+            wp_send_json_error(sprintf($this->messager::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
         }
 
         $blockfrost = new Blockfrost($queryNetwork);
         $response = $blockfrost->getAccountDetails($rewardAddress);
 
         if (empty($response)) {
-            $this->application->logger('actions')->error(CoreAction::getErrorMessage('blockfrost'));
-            wp_send_json_error(CoreAction::getAjaxMessage('blockfrostError'));
+            $this->application->logger('actions')->error($this->messager::getErrorMessage('blockfrost'));
+            wp_send_json_error($this->messager::getAjaxMessage('blockfrostError'));
         }
 
         wp_send_json_success($response);
@@ -221,14 +230,14 @@ class WalletAction implements HookInterface
 
     public function getDelegationData(): void
     {
-        $this->maybeInvalid();
+        $this->maybeInvalidPost();
 
         $poolData = $this->application->delegationPool();
         $response = $poolData['hex'] ?? '';
 
         if (empty($response)) {
-            $this->application->logger('actions')->error(CoreAction::getErrorMessage('delegation'));
-            wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
+            $this->application->logger('actions')->error($this->messager::getErrorMessage('delegation'));
+            wp_send_json_error($this->messager::getAjaxMessage('somethingWrong'));
         }
 
         wp_send_json_success($response);
@@ -236,7 +245,7 @@ class WalletAction implements HookInterface
 
     public function saveWalletTransaction(): void
     {
-        $this->maybeInvalid(['query_network', 'transaction_action', 'transaction_hash']);
+        $this->maybeInvalidPost(['query_network', 'transaction_action', 'transaction_hash']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $transactionAction = $this->sanitization->sanitizePost('transaction_action');
@@ -250,25 +259,25 @@ class WalletAction implements HookInterface
         );
 
         if (! $success) {
-            $this->application->logger('actions')->error(CoreAction::getErrorMessage('transaction'));
-            wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
+            $this->application->logger('actions')->error($this->messager::getErrorMessage('transaction'));
+            wp_send_json_error($this->messager::getAjaxMessage('somethingWrong'));
         }
 
         wp_send_json_success([
-            'message' => sprintf(CoreAction::getAjaxMessage('successfulTransaction'), $transactionAction),
+            'message' => sprintf($this->messager::getAjaxMessage('successfulTransaction'), $transactionAction),
             'hash' => $transactionHash,
         ]);
     }
 
     public function getPaymentAddress(): void
     {
-        $this->maybeInvalid();
+        $this->maybeInvalidPost();
 
         $response = $this->application->paymentAddress();
 
         if (empty($response)) {
-            $this->application->logger('actions')->error(CoreAction::getErrorMessage('payment'));
-            wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
+            $this->application->logger('actions')->error($this->messager::getErrorMessage('payment'));
+            wp_send_json_error($this->messager::getAjaxMessage('somethingWrong'));
         }
 
         wp_send_json_success($response);
@@ -276,34 +285,12 @@ class WalletAction implements HookInterface
 
     public function saveUserHandle(): void
     {
-        check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
+        $this->maybeInvalidPost(['ada_handle']);
 
-        $adaHandle = (new Sanitization())->sanitizePost('ada_handle');
+        $adaHandle = $this->sanitization->sanitizePost('ada_handle');
         $userProfile = $this->application->userProfile();
 
         $userProfile->saveFavoriteHandle($adaHandle);
-        wp_send_json_success(CoreAction::getAjaxMessage('handleSaved'));
-    }
-
-    /** @param string[] $postVars */
-    private function maybeInvalid(array $postVars = []): void
-    {
-        if (is_user_logged_in()) {
-            check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
-        }
-
-        if (! is_allowed_http_origin()) {
-            $message = sprintf(CoreAction::getErrorMessage('unauthorized'), get_http_origin());
-
-            $this->application->logger('actions')->error($message);
-            wp_send_json_error(CoreAction::getAjaxMessage('notPermitted'));
-        }
-
-        if (empty($postVars) || (! empty($_POST) && empty(array_diff($postVars, array_keys($_POST))))) {
-            return;
-        }
-
-        $this->application->logger('actions')->error(CoreAction::getErrorMessage('incomplete'));
-        wp_send_json_error(CoreAction::getAjaxMessage('somethingWrong'));
+        wp_send_json_success($this->messager::getAjaxMessage('handleSaved'));
     }
 }

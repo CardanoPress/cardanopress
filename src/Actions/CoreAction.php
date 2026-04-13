@@ -29,84 +29,14 @@ class CoreAction implements HookInterface
     {
         add_action('wp_login', [$this, 'doWalletStatusChecks'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
-        add_action('wp_enqueue_scripts', [$this, 'localizeMessages'], 20);
     }
 
-    protected static function dataMessage(): string
+    public static function dataMessage(): string
     {
         return apply_filters(
             'cardanopress_data_message',
             sprintf(__('Login to %s', 'cardanopress'), get_bloginfo('name'))
         );
-    }
-
-    /** @return array<string, string> */
-    protected static function customizableMessages(string $type): array
-    {
-        $data = [
-            'script' => [
-                'connected' => __('Successfully connected', 'cardanopress'),
-                'connecting' => __('Connecting...', 'cardanopress'),
-                'verifying' => __('Verifying...', 'cardanopress'),
-                'reconnected' => __('Wallet reconnected', 'cardanopress'),
-                'reconnecting' => __('Reconnecting...', 'cardanopress'),
-                'walletSyncing' => __('Syncing...', 'cardanopress'),
-                'newAssetsPulled' => __('New assets pulled', 'cardanopress'),
-                'handleSaving' => __('Saving...', 'cardanopress'),
-                'delegating' => __('Processing...', 'cardanopress'),
-                'paying' => __('Processing...', 'cardanopress'),
-                'clipboardCopy' => __('Successfully copied', 'cardanopress'),
-            ],
-            'ajax' => [
-                /* translators: %s: connected username */
-                'welcome' => __('Welcome %s', 'cardanopress'),
-                'connected' => __('Successfully connected', 'cardanopress'),
-                'walletSynced' => __('Successfully synced', 'cardanopress'),
-                'handleSaved' => __('Successfully saved', 'cardanopress'),
-                /* translators: %s: transaction action */
-                'successfulTransaction' => __('Successful %s', 'cardanopress'),
-                'somethingWrong' => __('Something is wrong. Please try again', 'cardanopress'),
-                /* translators: %s: cardano environment */
-                'unsupportedNetwork' => __('Unsupported network %s', 'cardanopress'),
-                'blockfrostError' => __('Blockfrost API Error. Please try again', 'cardanopress'),
-                'notPermitted' => __('You don\'t have permission to do this.', 'cardanopress'),
-                'incorrectSignature' => __('Provided data signature is incorrect.', 'cardanopress'),
-            ],
-            'error' => [
-                /* translators: %s: http origin */
-                'unauthorized' => __('Bad AJAX request. Unauthorized HTTP origin %s', 'cardanopress'),
-                'incomplete' => __('Bad AJAX request. Received missing required field/s data.', 'cardanopress'),
-                'delegation' => __('Incomplete delegation settings. Empty pool details.', 'cardanopress'),
-                'transaction' => __('Unable to save transaction details to user meta.', 'cardanopress'),
-                'payment' => __('Incomplete payment settings. Empty wallet address to send funds.', 'cardanopress'),
-                'blockfrost' => __('Bad blockfrost response. Actual data received in separate log.', 'cardanopress'),
-            ],
-        ];
-
-        return $data[$type];
-    }
-
-    public static function getAjaxMessage(string $type): string
-    {
-        $messages = apply_filters('cardanopress_ajax_messages', self::customizableMessages('ajax'));
-        $messages['dataMessage'] = self::dataMessage();
-
-        return $messages[$type] ?? '';
-    }
-
-    public static function getErrorMessage(string $type): string
-    {
-        $messages = apply_filters('cardanopress_error_messages', self::customizableMessages('error'));
-
-        return $messages[$type] ?? '';
-    }
-
-    public function localizeMessages(): void
-    {
-        $messages = apply_filters('cardanopress_script_messages', $this->customizableMessages('script'));
-        $messages['dataMessage'] = $this->dataMessage();
-
-        wp_localize_script(Manifest::HANDLE_PREFIX . 'script', 'cardanoPressMessages', $messages);
     }
 
     public function doWalletStatusChecks(string $username, WP_User $user): void

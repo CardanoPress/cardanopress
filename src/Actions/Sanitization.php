@@ -8,12 +8,15 @@
 namespace PBWebDev\CardanoPress\Actions;
 
 use CardanoPress\Clients\BlockfrostClient;
+use CardanoPress\Foundation\AbstractSanitizer;
 
 // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-class Sanitization
+class Sanitization extends AbstractSanitizer
 {
+    public const HOOK_PREFIX = 'cardanopress_sanitization_';
+
     /** @return array<string, string> */
-    protected function customizableMessages(): array
+    public static function customizableMessages(): array
     {
         return [
             'query_network' => __('Invalid query network', 'cardanopress'),
@@ -26,31 +29,6 @@ class Sanitization
             'ada_handle' => __('Invalid ada handle', 'cardanopress'),
             'data_signature' => __('Invalid data signature', 'cardanopress'),
         ];
-    }
-
-    public function getMessage(string $type): string
-    {
-        $messages = apply_filters('cardanopress_sanitization_messages', $this->customizableMessages());
-
-        return $messages[$type] ?? '';
-    }
-
-    /**
-     * Sends a JSON response back to an Ajax request if $_POST data fails
-     *
-     * @param string $key
-     * @return string
-     */
-    public function sanitizePost(string $key): string
-    {
-        $value = $this->$key($_POST[$key]);
-        $value = apply_filters('cardanopress_sanitization_' . $key, $value, $_POST[$key]);
-
-        if ('' === $value) {
-            wp_send_json_error($this->getMessage($key));
-        }
-
-        return $value;
     }
 
     public function query_network(string $value): string

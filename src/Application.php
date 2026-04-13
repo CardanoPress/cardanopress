@@ -15,6 +15,7 @@ use CardanoPress\Traits\Instantiable;
 use CardanoPress\Traits\Templatable;
 use PBWebDev\CardanoPress\Actions\AdminAction;
 use PBWebDev\CardanoPress\Actions\CoreAction;
+use PBWebDev\CardanoPress\Actions\Messager;
 use PBWebDev\CardanoPress\Actions\WalletAction;
 
 class Application extends AbstractApplication
@@ -47,6 +48,7 @@ class Application extends AbstractApplication
     {
         load_plugin_textdomain($this->getData('TextDomain'));
 
+        (new Messager())->setupHooks();
         (new AdminAction())->setupHooks();
         (new CoreAction())->setupHooks();
         (new WalletAction())->setupHooks();
