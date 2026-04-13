@@ -39,6 +39,7 @@ class WalletAction implements HookInterface
         add_action('wp_ajax_cardanopress_wallet_transaction', [$this, 'saveWalletTransaction']);
         add_action('wp_ajax_nopriv_cardanopress_payment_address', [$this, 'getPaymentAddress']);
         add_action('wp_ajax_cardanopress_payment_address', [$this, 'getPaymentAddress']);
+        add_action('wp_ajax_cardanopress_save_handle', [$this, 'saveUserHandle']);
     }
 
     /** @param string[] $data */
@@ -271,6 +272,17 @@ class WalletAction implements HookInterface
         }
 
         wp_send_json_success($response);
+    }
+
+    public function saveUserHandle(): void
+    {
+        check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
+
+        $adaHandle = (new Sanitization())->sanitizePost('ada_handle');
+        $userProfile = $this->application->userProfile();
+
+        $userProfile->saveFavoriteHandle($adaHandle);
+        wp_send_json_success(CoreAction::getAjaxMessage('handleSaved'));
     }
 
     /** @param string[] $postVars */

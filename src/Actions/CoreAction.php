@@ -29,7 +29,6 @@ class CoreAction implements HookInterface
     {
         add_action('wp_login', [$this, 'doWalletStatusChecks'], 10, 2);
         add_action('parse_request', [$this, 'maybeRedirect']);
-        add_action('wp_ajax_cardanopress_save_handle', [$this, 'saveUserHandle']);
         add_action('wp_enqueue_scripts', [$this, 'localizeMessages'], 20);
     }
 
@@ -291,16 +290,5 @@ class CoreAction implements HookInterface
             wp_safe_redirect($dashboardLink);
             exit;
         }
-    }
-
-    public function saveUserHandle(): void
-    {
-        check_ajax_referer(Manifest::HANDLE_PREFIX . 'actions');
-
-        $adaHandle = (new Sanitization())->sanitizePost('ada_handle');
-        $userProfile = $this->application->userProfile();
-
-        $userProfile->saveFavoriteHandle($adaHandle);
-        wp_send_json_success($this->getAjaxMessage('handleSaved'));
     }
 }
