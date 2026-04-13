@@ -7,17 +7,17 @@
     "watch": "vite"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/vite": "^4.2.2",
     "@types/alpinejs": "^3.13.11",
     "@types/grecaptcha": "^3.0.9",
-    "alpinejs": "^3.15.3",
-    "autoprefixer": "^10.4.23",
-    "tailwindcss": "^4.1.18",
-    "vite": "^7.3.1",
+    "alpinejs": "^3.15.11",
+    "autoprefixer": "^10.4.27",
+    "tailwindcss": "^4.2.2",
+    "vite": "^7.3.2",
     "vite-plugin-offload-wasm": "^0.3.1",
     "vite-plugin-themeplate": "^1.11.0",
     "vite-plugin-top-level-await": "^1.6.0",
-    "vite-plugin-wasm": "^3.5.0"
+    "vite-plugin-wasm": "^3.6.0"
   },
   "dependencies": {
     "@pbwebdev/cardano-wallet-browser-extensions-interface": "^1.9.0"
