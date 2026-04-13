@@ -64,7 +64,7 @@ let __tla = (async () => {
         }))));
       };
       document.getElementsByTagName("link");
-      const c = document.querySelector("meta[property=csp-nonce]"), r = (c == null ? void 0 : c.nonce) || (c == null ? void 0 : c.getAttribute("nonce"));
+      const c = document.querySelector("meta[property=csp-nonce]"), r = c?.nonce || c?.getAttribute("nonce");
       o = h(t.map((i) => {
         if (i = A(i), i in b) return;
         b[i] = true;
@@ -99,7 +99,7 @@ let __tla = (async () => {
   }, __publicField(_a, "Module"), _a);
   l = (_b = class {
     static async load() {
-      return l.Module === void 0 && (l.Module = await S(() => import("./cardano_serialization_lib-ykJEShHf.js").then(async (m2) => {
+      return l.Module === void 0 && (l.Module = await S(() => import("./cardano_serialization_lib-C5V6FfME.js").then(async (m2) => {
         await m2.__tla;
         return m2;
       }), [])), l.Module;
@@ -174,9 +174,8 @@ let __tla = (async () => {
         return e.map((o) => t.TransactionUnspentOutput.from_bytes(s.from(o, "hex")));
       });
       __publicField(this, "getStakeKeyHash", async () => {
-        var _a2, _b2, _c2;
         const e = await this.getRewardAddress(), t = await l.load();
-        return (_c2 = (_b2 = (_a2 = t.RewardAddress.from_address(t.Address.from_bech32(e))) == null ? void 0 : _a2.payment_cred()) == null ? void 0 : _b2.to_keyhash()) == null ? void 0 : _c2.to_bytes();
+        return t.RewardAddress.from_address(t.Address.from_bech32(e))?.payment_cred()?.to_keyhash()?.to_bytes();
       });
       __publicField(this, "signData", async (e) => {
         const t = x(e), s = this.cardano;
@@ -225,10 +224,7 @@ let __tla = (async () => {
   }
   let k;
   k = async (n) => (n === "typhon" && (n = "typhoncip30"), await window.cardano[n].enable());
-  L = (n) => {
-    var _a2, _b2;
-    return ((_b2 = (_a2 = window.cardano[n.toLowerCase()]) == null ? void 0 : _a2.experimental) == null ? void 0 : _b2.vespr_compat) || false;
-  };
+  L = (n) => window.cardano[n.toLowerCase()]?.experimental?.vespr_compat || false;
   O = (_c = class {
     static isSupported(e) {
       return g.includes(e);
@@ -237,8 +233,7 @@ let __tla = (async () => {
       return g.filter(L);
     }
     static hasWallet(e) {
-      var _a2;
-      return this.isSupported(e) ? !!((_a2 = window.cardano) == null ? void 0 : _a2[e.toLowerCase()]) : false;
+      return this.isSupported(e) ? !!window.cardano?.[e.toLowerCase()] : false;
     }
     static async isEnabled(e) {
       return this.hasWallet(e) ? window.cardano[e.toLowerCase()].isEnabled() : false;

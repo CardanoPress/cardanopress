@@ -1,9 +1,9 @@
-import { k as n } from "./util-zKEKfwQ9.js";
+import { k as n } from "./util-BWl-H7-Q.js";
 window.addEventListener("alpine:init", () => {
   window.Alpine.store("toastNotification", { list: [], visible: [], init() {
     window.addEventListener("cardanoPress:addNotice", (i) => i.detail && this.add(i.detail)), window.addEventListener("cardanoPress:removeNotice", (i) => i.detail && this.remove(i.detail));
   }, add(i) {
-    (i == null ? void 0 : i.id) || (i.id = n(), i.unique = true), (i == null ? void 0 : i.unique) || this.remove(i.id), this.list.push(i), this.visible.push(i), (i == null ? void 0 : i.unique) && setTimeout(() => {
+    i?.id || (i.id = n(), i.unique = true), i?.unique || this.remove(i.id), this.list.push(i), this.visible.push(i), i?.unique && setTimeout(() => {
       this.remove(i.id);
     }, 5e3 * this.list.length);
   }, remove(i) {
