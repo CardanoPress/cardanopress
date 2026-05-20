@@ -1,4 +1,4 @@
-import { k as n } from "./util-BWl-H7-Q.js";
+import { g as n } from "./util-D4PRAAo2.js";
 window.addEventListener("alpine:init", () => {
   window.Alpine.store("toastNotification", { list: [], visible: [], init() {
     window.addEventListener("cardanoPress:addNotice", (i) => i.detail && this.add(i.detail)), window.addEventListener("cardanoPress:removeNotice", (i) => i.detail && this.remove(i.detail));
