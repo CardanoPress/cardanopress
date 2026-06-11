@@ -50,17 +50,17 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "v5.0.16",
-            "version_normalized": "5.0.16.0",
+            "version": "v5.0.19",
+            "version_normalized": "5.0.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/jetpack-autoloader.git",
-                "reference": "d8ae822a35e7431137e860ee60eceedaa745e4d1"
+                "reference": "2b195d4ba0c6d9851aca1e5220e47b2072f6c93c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/d8ae822a35e7431137e860ee60eceedaa745e4d1",
-                "reference": "d8ae822a35e7431137e860ee60eceedaa745e4d1",
+                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/2b195d4ba0c6d9851aca1e5220e47b2072f6c93c",
+                "reference": "2b195d4ba0c6d9851aca1e5220e47b2072f6c93c",
                 "shasum": ""
             },
             "require": {
@@ -68,12 +68,11 @@
                 "php": ">=7.2"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^6.0.14",
-                "automattic/phpunit-select-config": "^1.0.3",
+                "automattic/phpunit-select-config": "^1.0.8",
                 "composer/composer": "^2.2",
                 "yoast/phpunit-polyfills": "^4.0.0"
             },
-            "time": "2026-02-16T10:33:15+00:00",
+            "time": "2026-06-08T08:27:29+00:00",
             "type": "composer-plugin",
             "extra": {
                 "class": "Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin",
@@ -112,7 +111,7 @@
                 "wordpress"
             ],
             "support": {
-                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v5.0.16"
+                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v5.0.19"
             },
             "install-path": "../automattic/jetpack-autoloader"
         },
