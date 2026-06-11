@@ -7,14 +7,14 @@
     "watch": "vite"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.2.2",
+    "@tailwindcss/vite": "^4.3.0",
     "@types/alpinejs": "^3.13.11",
     "@types/grecaptcha": "^3.0.9",
-    "alpinejs": "^3.15.11",
-    "autoprefixer": "^10.4.27",
-    "tailwindcss": "^4.2.2",
-    "vite": "^7.3.2",
-    "vite-plugin-offload-wasm": "^0.3.1",
+    "alpinejs": "^3.15.12",
+    "autoprefixer": "^10.5.0",
+    "tailwindcss": "^4.3.0",
+    "vite": "^7.3.3",
+    "vite-plugin-offload-wasm": "^0.4.0",
     "vite-plugin-themeplate": "^1.11.0",
     "vite-plugin-top-level-await": "^1.6.0",
     "vite-plugin-wasm": "^3.6.0"
