@@ -6,7 +6,7 @@
   "author": "Gene Alyson Fortunado Torcende",
   "author_profile": "https://cardanopress.io",
   "requires": "5.9.0",
-  "tested": "7.0.99",
+  "tested": "7.0",
   "requires_php": "7.4",
   "upgrade_notice": "Please do the update now to seamlessly use the official WordPress Plugin Directory version",
   "sections": {

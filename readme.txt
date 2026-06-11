@@ -1,15 +1,15 @@
 === CardanoPress - Cardano Blockchain Integration for WordPress ===
 Contributors: pbwebdev, gaft
 Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
-Tags: cardano, blockchain, web3, ada, token-gating
+Tags: cardano, blockchain, web3, nft, token gating
 Requires at least: 5.9
-Tested up to: 7.0.99
+Tested up to: 7.0
 Stable tag: 1.35.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
 
-Integrate the Cardano blockchain with your WordPress website. Merging Web2 and Web3.
+Integrate Cardano with WordPress: web3 wallet login, NFT & token gating, ADA payments, and stake pool delegation. Bridging Web2 and Web3.
 
 
 == Description ==
@@ -18,15 +18,16 @@ CardanoPress handles the heavy lifting and integration with the Cardano blockcha
 
 We've done all the technical and hard work, so you, as a builder, can integrate Cardano quickly and easily. Use our Bootstrap starter and child theme, or use your favourite page builder, such as Divi, WPBakery, or Elementor, with shortcodes.
 
-We are supporting various wallets, including:
+We support all the major CIP-30 Cardano web3 wallets, including:
 
+* Lace
 * Eternl
 * Yoroi
 * Typhon
 * GeroWallet
 * NuFi
-* Lace
 * Begin
+* VESPR
 
 The plugin is created by the team at [Mesh With Us](https://meshwithus.com.au).
 
@@ -69,27 +70,29 @@ Please view all of our documentation and resources on our [website](https://card
 
 == Installation ==
 
-This plugin has been tested to work on shared and standalone hosting environments, including WordPress.com, Pressable, SiteGround, WPEngine, AWS and many more.
+Requirements: WordPress 5.9 or higher, PHP 7.4 or higher, and a free Blockfrost API key.
 
-1. Installing the plugin
+CardanoPress has been tested on shared and standalone hosting environments, including WordPress.com, Pressable, SiteGround, WP Engine, AWS and many more.
 
-Find the plugin in the list at the backend and click to install it. Or, upload the ZIP file through the admin backend. Or, upload the unzipped tag-groups folder to the /wp-content/plugins/ directory.
+= 1. Install the plugin =
 
-2. Activate the plugin
+From your WordPress dashboard, go to **Plugins &rarr; Add New**, search for "CardanoPress", then click **Install Now**.
 
-Navigate to Plugins from the WordPress admin area and activate the CardanoPress plugin.
+Alternatively, download the ZIP from this page and upload it via **Plugins &rarr; Add New &rarr; Upload Plugin**, or extract the ZIP and copy the `cardanopress` folder into your site's `/wp-content/plugins/` directory.
 
-The plugin will create the base pages for all that you need.
+= 2. Activate the plugin =
 
-3. Sign up for a Blockfrost
+Go to **Plugins** in the WordPress admin area and click **Activate** on CardanoPress. On activation, the plugin automatically creates the base pages you need to get started.
 
-CardanoPress is dependent on the Blockfrost API to communicate with the Cardano blockchain. You can get an API key for free at [Blockfrost API](https://blockfrost.io/).
+= 3. Get a free Blockfrost API key =
 
-Obtain your key and paste it into the CardanoPress configuration screen.
+CardanoPress uses the [Blockfrost API](https://blockfrost.io/) to communicate with the Cardano blockchain. Sign up for a free account, create a project for your chosen network (Mainnet, Preprod or Preview), and copy the project's API key.
 
-Once you've completed this step, you will be able to connect your WordPress website to the Cardano blockchain.
+= 4. Configure CardanoPress =
 
-For more detailed documentation and tutorials on how to use the plugin, please visit the [CardanoPress documentation website](https://cardanopress.io).
+Open the CardanoPress settings screen, select your network, and paste in your Blockfrost API key. Once saved, your WordPress website is connected to the Cardano blockchain and ready to use wallet login, token gating, payments and delegation.
+
+For detailed documentation, tutorials and shortcode references, visit the [CardanoPress documentation website](https://cardanopress.io).
 
 
 == Get Support ==
