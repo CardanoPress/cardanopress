@@ -1,0 +1,9 @@
+# pnpm 10+ reads project settings here (the package.json "pnpm" field is ignored).
+# Force the build-only transitive uuid to a patched release (GHSA-w5hq-g745-h8pq).
+overrides:
+  uuid: ^11.1.1
+
+# Allow these well-known build tools to run their install scripts.
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
