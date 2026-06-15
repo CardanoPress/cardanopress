@@ -1,7 +1,10 @@
 # pnpm 10+ reads project settings here (the package.json "pnpm" field is ignored).
-# Force the build-only transitive uuid to a patched release (GHSA-w5hq-g745-h8pq).
+# Force build-only transitive packages to patched releases:
+#   uuid    - GHSA-w5hq-g745-h8pq
+#   esbuild - GHSA-gv7w-rqvm-qjhr (high) and GHSA-g7r4-m6w7-qqqr (low)
 overrides:
   uuid: ^11.1.1
+  esbuild: ^0.28.1
 
 # Allow these well-known build tools to run their install scripts.
 allowBuilds:
