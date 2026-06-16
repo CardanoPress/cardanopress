@@ -1,16 +1,17 @@
-import { b as s, d as i, r, h as o, a as c, w as d } from "./util-D4PRAAo2.js";
-import { g as n, c as l } from "./actions-BdrbiB5J.js";
+import { b as s, d as i, r, h as d, a as c, w as h } from "./util-D4PRAAo2.js";
+import { g as n, c as l } from "./actions-Fb_eg-U3.js";
 window.addEventListener("alpine:init", () => {
-  window.Alpine.data("paymentForm", () => ({ isVerified: false, isProcessing: false, payAmount: 1, quantity: 1, currentBalance: 0, remainingBalance: 0, transactionHash: "", showAddress: false, paymentAddress: "", recaptchaKey: "", syncedBalance: false, async init() {
+  window.Alpine.data("paymentForm", () => ({ isVerified: false, isProcessing: false, payAmount: 1, quantity: 1, currentBalance: 0, remainingBalance: 0, transactionHash: "", showAddress: false, paymentAddress: "", recaptchaKey: "", recaptchaToken: "", syncedBalance: false, async init() {
     if (this.payAmount = parseFloat(this.$root.dataset.amount || "1.0"), this.paymentAddress = this.$root.dataset.address || "", this.recaptchaKey = this.$root.dataset.recaptcha || "", this.recaptchaKey === "" && this.paymentAddress === "") {
       this.isVerified = true;
       const e = await n();
       this.paymentAddress = e.data;
     }
     window.addEventListener("cardanoPress:recaptcha", async (e) => {
-      if (e.detail && (this.isVerified = e.detail, this.isVerified && !this.paymentAddress)) {
-        const a = await n();
-        this.paymentAddress = a.data;
+      const a = e.detail || "";
+      if (a !== "" && (this.recaptchaToken = a, this.isVerified = true, !this.paymentAddress)) {
+        const t = await n(a);
+        this.paymentAddress = t.data;
       }
     }, { once: true });
   }, isReady(e = "extension") {
@@ -26,7 +27,7 @@ window.addEventListener("alpine:init", () => {
   }, async syncBalance() {
     s({ id: "balance", type: "info", text: i.walletSyncing }), this.isProcessing = true;
     try {
-      const e = await o();
+      const e = await d();
       this.currentBalance = parseInt(await e.getBalance()), this.remainingBalance = this.currentBalance - parseInt(this.lovelaceValue()), this.syncedBalance = true;
     } catch (e) {
       s({ type: "error", text: e });
@@ -34,7 +35,7 @@ window.addEventListener("alpine:init", () => {
     r("balance"), this.isProcessing = false;
   }, async handlePayment() {
     if (this.transactionHash = "", s({ id: "payment", type: "info", text: i.paying }), !this.paymentAddress) {
-      const { success: a, data: t } = await n();
+      const { success: a, data: t } = await n(this.recaptchaToken);
       a && (this.paymentAddress = t);
     }
     this.isProcessing = true;
@@ -44,13 +45,13 @@ window.addEventListener("alpine:init", () => {
 });
 window.cardanoPressRecaptchaCallback = () => {
   const e = (t) => window.dispatchEvent(new CustomEvent("cardanoPress:recaptcha", { detail: t })), a = () => {
-    d("#cardanopress-recaptcha").then((t) => {
-      grecaptcha.render(t, { callback: () => {
-        e(true);
+    h("#cardanopress-recaptcha").then((t) => {
+      grecaptcha.render(t, { callback: (o) => {
+        e(o);
       }, "expired-callback": () => {
-        e(false);
+        e("");
       }, "error-callback": () => {
-        e(false);
+        e("");
       } });
     });
   };

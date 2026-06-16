@@ -15,6 +15,7 @@ window.addEventListener('alpine:init', () => {
         showAddress: false,
         paymentAddress: '',
         recaptchaKey: '',
+        recaptchaToken: '',
         syncedBalance: false,
 
         async init() {
@@ -32,15 +33,18 @@ window.addEventListener('alpine:init', () => {
 
             window.addEventListener(
                 'cardanoPress:recaptcha',
-                async (event: CustomEventInit<boolean>) => {
-                    if (!event.detail) {
+                async (event: CustomEventInit<string>) => {
+                    const token = event.detail || ''
+
+                    if ('' === token) {
                         return
                     }
 
-                    this.isVerified = event.detail
+                    this.recaptchaToken = token
+                    this.isVerified = true
 
-                    if (this.isVerified && !this.paymentAddress) {
-                        const response = await getPaymentAddress()
+                    if (!this.paymentAddress) {
+                        const response = await getPaymentAddress(token)
 
                         this.paymentAddress = response.data
                     }
@@ -103,7 +107,7 @@ window.addEventListener('alpine:init', () => {
             })
 
             if (!this.paymentAddress) {
-                const { success, data } = await getPaymentAddress()
+                const { success, data } = await getPaymentAddress(this.recaptchaToken)
 
                 if (success) {
                     this.paymentAddress = data
@@ -129,20 +133,20 @@ window.addEventListener('alpine:init', () => {
 })
 
 window.cardanoPressRecaptchaCallback = () => {
-    const sendVerified = (status: boolean) =>
-        window.dispatchEvent(new CustomEvent('cardanoPress:recaptcha', { detail: status }))
+    const sendVerified = (token: string) =>
+        window.dispatchEvent(new CustomEvent('cardanoPress:recaptcha', { detail: token }))
 
     const initRecaptcha = () => {
         waitElement('#cardanopress-recaptcha').then((element) => {
             grecaptcha.render(element, {
-                callback: () => {
-                    sendVerified(true)
+                callback: (token: string) => {
+                    sendVerified(token)
                 },
                 'expired-callback': () => {
-                    sendVerified(false)
+                    sendVerified('')
                 },
                 'error-callback': () => {
-                    sendVerified(false)
+                    sendVerified('')
                 },
             })
         })

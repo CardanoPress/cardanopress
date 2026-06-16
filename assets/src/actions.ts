@@ -17,13 +17,20 @@ export const handleReconnect = async (
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
-    const dataSignature = await Wallet.signData(cardanoPressMessages.dataMessage)
+    const challenge = await getLoginChallenge()
+
+    if (!challenge.success) {
+        return challenge
+    }
+
+    const dataSignature = await Wallet.signData(challenge.data.message)
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
             _wpnonce: cardanoPress._nonce,
             action: 'cardanopress_reconnect_account',
             data_signature: JSON.stringify(dataSignature),
+            login_nonce: challenge.data.nonce,
             stake_address: rewardAddress,
             wallet_address: changeAddress,
             query_network: network,
@@ -35,7 +42,13 @@ export const logMeIn = async (Wallet: Extension): Promise<ServerResponse<{ messa
     const network = await Wallet.getNetwork()
     const changeAddress = await Wallet.getChangeAddress()
     const rewardAddress = await Wallet.getRewardAddress()
-    const dataSignature = await Wallet.signData(cardanoPressMessages.dataMessage)
+    const challenge = await getLoginChallenge()
+
+    if (!challenge.success) {
+        return challenge
+    }
+
+    const dataSignature = await Wallet.signData(challenge.data.message)
 
     addNotice({
         id: 'loginVerify',
@@ -49,6 +62,7 @@ export const logMeIn = async (Wallet: Extension): Promise<ServerResponse<{ messa
             _wpnonce: cardanoPress._nonce,
             action: 'cardanopress_user_account',
             data_signature: JSON.stringify(dataSignature),
+            login_nonce: challenge.data.nonce,
             stake_address: rewardAddress,
             wallet_address: changeAddress,
             query_network: network,
@@ -58,6 +72,16 @@ export const logMeIn = async (Wallet: Extension): Promise<ServerResponse<{ messa
 
         return response.json()
     })
+}
+
+export const getLoginChallenge = async (): Promise<ServerResponse<{ nonce: string; message: string }>> => {
+    return await fetch(cardanoPress.ajaxUrl, {
+        method: 'POST',
+        body: new URLSearchParams({
+            _wpnonce: cardanoPress._nonce,
+            action: 'cardanopress_login_challenge',
+        }),
+    }).then((response) => response.json())
 }
 
 export const logMeOut = async (
@@ -96,12 +120,13 @@ export const handleSave = async ($handle: string): Promise<ServerResponse<string
     }).then((response) => response.json())
 }
 
-export const getPaymentAddress = async (): Promise<ServerResponse<string>> => {
+export const getPaymentAddress = async (recaptchaToken = ''): Promise<ServerResponse<string>> => {
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
             _wpnonce: cardanoPress._nonce,
             action: 'cardanopress_payment_address',
+            recaptcha_token: recaptchaToken,
         }),
     }).then((response) => response.json())
 }

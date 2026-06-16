@@ -39,6 +39,15 @@ class CoreAction implements HookInterface
         );
     }
 
+    public static function challengeMessage(string $token): string
+    {
+        return self::dataMessage() . "\n\n" . sprintf(
+            /* translators: %s: one-time login nonce */
+            __('One-time nonce: %s', 'cardanopress'),
+            $token
+        );
+    }
+
     public function doWalletStatusChecks(string $username, WP_User $user): void
     {
         $userProfile = new Profile($user);
