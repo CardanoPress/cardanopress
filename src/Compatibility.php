@@ -56,7 +56,7 @@ class Compatibility
 
     protected function theme(): bool
     {
-        if (wp_is_block_theme()) {
+        if (apply_filters('cardanopress_is_block_theme', wp_is_block_theme())) {
             return true;
         }
 
