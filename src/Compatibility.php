@@ -40,7 +40,7 @@ class Compatibility
             'theme' => __('Incomplete template injections in front-end.', 'cardanopress'),
             'classic' => __('Activated theme does not support the `wp_body_open` hook.', 'cardanopress'),
             'html5' => __('Activated theme does not support HTML5 markup. `script` value required.', 'cardanopress'),
-            'sodium' => __('Sodium extension is not loaded. Required in datasignature verification.', 'cardanopress'),
+            'sodium' => __('Sodium functions are unavailable. Required in datasignature verification.', 'cardanopress'),
         ];
     }
 
@@ -140,7 +140,7 @@ class Compatibility
             return;
         }
 
-        if (! extension_loaded('sodium')) {
+        if (! function_exists('sodium_crypto_box')) {
             $this->addIssue('sodium');
             $this->saveIssues();
         }
