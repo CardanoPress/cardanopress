@@ -8,8 +8,8 @@
 namespace PBWebDev\CardanoPress\Actions;
 
 use CardanoPress\Dependencies\CardanoPHP\Verifier;
-use CardanoPress\Helpers\HasPostInput;
 use CardanoPress\Interfaces\HookInterface;
+use CardanoPress\Traits\HasPostInput;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
 use PBWebDev\CardanoPress\Manifest;

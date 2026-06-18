@@ -8,6 +8,7 @@
 namespace PBWebDev\CardanoPress\Actions;
 
 use CardanoPress\Interfaces\HookInterface;
+use CardanoPress\Helpers\HttpHelper;
 use PBWebDev\CardanoPress\Admin;
 use PBWebDev\CardanoPress\Blockfrost;
 
@@ -116,10 +117,7 @@ class AdminAction implements HookInterface
         }
 
         $url = $data[$key];
-        $args = [
-            'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
-            'sslverify' => apply_filters('https_local_ssl_verify', false),
-        ];
+        $args = HttpHelper::getRequestArgs($url);
 
         $response = wp_remote_retrieve_body(wp_remote_get($url, $args));
 
