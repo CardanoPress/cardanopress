@@ -4,10 +4,9 @@
  * @package ThemePlate
  */
 
-namespace CardanoPress\Helpers;
+namespace CardanoPress\Traits;
 
 use CardanoPress\Interfaces\MessagerInterface;
-use CardanoPress\Traits\Loggable;
 
 trait HasPostInput
 {

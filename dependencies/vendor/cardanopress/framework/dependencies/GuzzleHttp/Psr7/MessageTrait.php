@@ -34,6 +34,15 @@ trait MessageTrait
      */
     public function withProtocolVersion($version): MessageInterface
     {
+        if (!\is_string($version)) {
+            \trigger_deprecation(
+                'guzzlehttp/psr7',
+                '2.11',
+                'Passing %s to MessageInterface::withProtocolVersion() is deprecated; guzzlehttp/psr7 3.0 requires string.',
+                \get_debug_type($version)
+            );
+        }
+
         if ($this->protocol === $version) {
             return $this;
         }
@@ -78,6 +87,19 @@ trait MessageTrait
     public function withHeader($header, $value): MessageInterface
     {
         $this->assertHeader($header);
+        $values = \is_array($value) ? $value : [$value];
+        foreach ($values as $item) {
+            if (!\is_string($item) && (\is_scalar($item) || $item === null)) {
+                \trigger_deprecation(
+                    'guzzlehttp/psr7',
+                    '2.11',
+                    'Passing %s to MessageInterface::withHeader() is deprecated; guzzlehttp/psr7 3.0 requires string|string[].',
+                    \get_debug_type($item)
+                );
+
+                break;
+            }
+        }
         $value = $this->normalizeHeaderValue($value);
         $normalized = strtolower($header);
 
@@ -97,6 +119,19 @@ trait MessageTrait
     public function withAddedHeader($header, $value): MessageInterface
     {
         $this->assertHeader($header);
+        $values = \is_array($value) ? $value : [$value];
+        foreach ($values as $item) {
+            if (!\is_string($item) && (\is_scalar($item) || $item === null)) {
+                \trigger_deprecation(
+                    'guzzlehttp/psr7',
+                    '2.11',
+                    'Passing %s to MessageInterface::withAddedHeader() is deprecated; guzzlehttp/psr7 3.0 requires string|string[].',
+                    \get_debug_type($item)
+                );
+
+                break;
+            }
+        }
         $value = $this->normalizeHeaderValue($value);
         $normalized = strtolower($header);
 
@@ -166,6 +201,20 @@ trait MessageTrait
             $header = (string) $header;
 
             $this->assertHeader($header);
+            $values = \is_array($value) ? $value : [$value];
+            foreach ($values as $item) {
+                if (!\is_string($item) && (\is_scalar($item) || $item === null)) {
+                    \trigger_deprecation(
+                        'guzzlehttp/psr7',
+                        '2.11',
+                        'Passing %s to %s::__construct() is deprecated; guzzlehttp/psr7 3.0 requires string|string[].',
+                        \get_debug_type($item),
+                        static::class
+                    );
+
+                    break;
+                }
+            }
             $value = $this->normalizeHeaderValue($value);
             $normalized = strtolower($header);
             if (isset($this->headerNames[$normalized])) {
@@ -185,6 +234,14 @@ trait MessageTrait
      */
     private function normalizeHeaderValue($value): array
     {
+        if (is_array($value) && $value === []) {
+            \trigger_deprecation(
+                'guzzlehttp/psr7',
+                '2.11',
+                'Passing an empty array as a header value is deprecated; guzzlehttp/psr7 3.0 rejects empty header value arrays.'
+            );
+        }
+
         if (!is_array($value)) {
             return $this->trimAndValidateHeaderValues([$value]);
         }
@@ -214,6 +271,12 @@ trait MessageTrait
                     'Header value must be scalar or null but %s provided.',
                     is_object($value) ? get_class($value) : gettype($value)
                 ));
+            }
+
+            // Convert non-finite floats explicitly, as implicit coercion of
+            // NAN emits a warning on PHP 8.5.
+            if (is_float($value) && !is_finite($value)) {
+                $value = is_nan($value) ? 'NAN' : ($value > 0 ? 'INF' : '-INF');
             }
 
             $trimmed = trim((string) $value, " \t");

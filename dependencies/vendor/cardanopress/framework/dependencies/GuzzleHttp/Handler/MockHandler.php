@@ -7,7 +7,6 @@ use CardanoPress\Dependencies\GuzzleHttp\HandlerStack;
 use CardanoPress\Dependencies\GuzzleHttp\Promise as P;
 use CardanoPress\Dependencies\GuzzleHttp\Promise\PromiseInterface;
 use CardanoPress\Dependencies\GuzzleHttp\TransferStats;
-use CardanoPress\Dependencies\GuzzleHttp\Utils;
 use CardanoPress\Dependencies\Psr\Http\Message\RequestInterface;
 use CardanoPress\Dependencies\Psr\Http\Message\ResponseInterface;
 use CardanoPress\Dependencies\Psr\Http\Message\StreamInterface;
@@ -160,7 +159,7 @@ class MockHandler implements \Countable
             ) {
                 $this->queue[] = $value;
             } else {
-                throw new \TypeError('Expected a Response, Promise, Throwable or callable. Found '.Utils::describeType($value));
+                throw new \TypeError('Expected a Response, Promise, Throwable or callable. Found '.\get_debug_type($value));
             }
         }
     }
