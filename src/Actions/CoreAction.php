@@ -31,20 +31,16 @@ class CoreAction implements HookInterface
         add_action('parse_request', [$this, 'maybeRedirect']);
     }
 
-    public static function dataMessage(): string
+    public static function challengeMessage(string $token): string
     {
         return apply_filters(
             'cardanopress_data_message',
-            sprintf(__('Login to %s', 'cardanopress'), get_bloginfo('name'))
-        );
-    }
-
-    public static function challengeMessage(string $token): string
-    {
-        return self::dataMessage() . "\n\n" . sprintf(
-            /* translators: %s: one-time login nonce */
-            __('One-time nonce: %s', 'cardanopress'),
-            $token
+            sprintf(
+                /* translators: 1: plugin name, 2: login nonce */
+                __('Login to %1$s -- One-time nonce: %2$s', 'cardanopress'),
+                get_bloginfo('name'),
+                $token
+            )
         );
     }
 

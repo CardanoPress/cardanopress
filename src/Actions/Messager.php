@@ -70,8 +70,6 @@ class Messager extends AbstractMessager
 
     protected static function localizeScript(array $messages): void
     {
-        $messages['dataMessage'] = CoreAction::dataMessage();
-
         wp_localize_script(Manifest::HANDLE_PREFIX . 'script', 'cardanoPressMessages', $messages);
     }
 }

@@ -72,7 +72,7 @@ class Manifest extends AbstractManifest
         ];
 
         wp_localize_script(self::HANDLE_PREFIX . 'script', 'cardanoPress', $data);
-        wp_register_script(self::HANDLE_PREFIX . 'compatibility', '');
+        wp_register_script(self::HANDLE_PREFIX . 'compatibility', false);
 
         $compatibility = Compatibility::getInstance();
         $issues = $compatibility->getIssues();

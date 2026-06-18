@@ -17,7 +17,6 @@ export const cardanoPressMessages = window.cardanoPressMessages || {
     delegating: '',
     paying: '',
     clipboardCopy: '',
-    dataMessage: '',
 }
 
 export const getConnectedExtension = () => localStorage.getItem('_x_connectedExtension') || ''
