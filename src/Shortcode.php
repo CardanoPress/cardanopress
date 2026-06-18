@@ -66,7 +66,7 @@ class Shortcode extends AbstractShortcode
         Manifest::injectDataProvider();
 
         $html = ob_get_clean();
-        $html .= (string) $content;
+        $html .= apply_filters('the_content', (string) $content);
 
         ob_start();
         Manifest::closeDataProviderTag();
@@ -80,7 +80,7 @@ class Shortcode extends AbstractShortcode
     public function doComponentPoolDelegation(array $attributes, ?string $content = null): string
     {
         $html = '<div ' . $this->component->poolDelegation() . '>';
-        $html .= (string) $content;
+        $html .= apply_filters('the_content', (string) $content);
         $html .= '</div>';
 
         return trim($html);
@@ -101,7 +101,7 @@ class Shortcode extends AbstractShortcode
         }
 
         $html = '<form ' . $this->component->paymentForm($args['amount'], $args['address']) . '>';
-        $html .= (string) $content;
+        $html .= apply_filters('the_content', (string) $content);
         $html .= '</form>';
 
         return trim($html);
@@ -111,7 +111,7 @@ class Shortcode extends AbstractShortcode
     public function doComponentSplitForm(array $attributes, ?string $content = null): string
     {
         $html = '<form ' . $this->component->splitForm() . '>';
-        $html .= (string) $content;
+        $html .= apply_filters('the_content', (string) $content);
         $html .= '</form>';
 
         return trim($html);
