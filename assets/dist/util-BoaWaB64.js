@@ -21,8 +21,7 @@ let __tla = (async () => {
     handleSaving: "",
     delegating: "",
     paying: "",
-    clipboardCopy: "",
-    dataMessage: ""
+    clipboardCopy: ""
   };
   v = () => localStorage.getItem("_x_connectedExtension") || "";
   V = (n) => localStorage.setItem("_x_connectedExtension", n);

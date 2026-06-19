@@ -55,7 +55,8 @@ class Shortcode extends AbstractShortcode
 
         $value = $this->application->option($args['key']);
 
-        return $this->printOutput($value, $args['sub']);
+        // Option values are admin-set; allow safe HTML but strip scripts/handlers.
+        return wp_kses_post((string) $this->printOutput($value, $args['sub']));
     }
 
     /** @param array<string, string> $attributes */
@@ -65,7 +66,7 @@ class Shortcode extends AbstractShortcode
         Manifest::injectDataProvider();
 
         $html = ob_get_clean();
-        $html .= (string) $content;
+        $html .= apply_filters('the_content', (string) $content);
 
         ob_start();
         Manifest::closeDataProviderTag();
@@ -79,7 +80,7 @@ class Shortcode extends AbstractShortcode
     public function doComponentPoolDelegation(array $attributes, ?string $content = null): string
     {
         $html = '<div ' . $this->component->poolDelegation() . '>';
-        $html .= (string) $content;
+        $html .= apply_filters('the_content', (string) $content);
         $html .= '</div>';
 
         return trim($html);
@@ -100,7 +101,7 @@ class Shortcode extends AbstractShortcode
         }
 
         $html = '<form ' . $this->component->paymentForm($args['amount'], $args['address']) . '>';
-        $html .= (string) $content;
+        $html .= apply_filters('the_content', (string) $content);
         $html .= '</form>';
 
         return trim($html);
@@ -110,7 +111,7 @@ class Shortcode extends AbstractShortcode
     public function doComponentSplitForm(array $attributes, ?string $content = null): string
     {
         $html = '<form ' . $this->component->splitForm() . '>';
-        $html .= (string) $content;
+        $html .= apply_filters('the_content', (string) $content);
         $html .= '</form>';
 
         return trim($html);
@@ -129,9 +130,19 @@ class Shortcode extends AbstractShortcode
         }
 
         $method = $args['method'];
-        $value = $this->application->userProfile()->$method();
+        $userProfile = $this->application->userProfile();
 
-        return $this->printOutput($value, $args['sub']);
+        // Only allow read-only profile getters; never invoke mutating methods.
+        $isMutator = preg_match('/^(save|update|set|unset|delete|dismiss)/i', $method);
+
+        if (! is_callable([$userProfile, $method]) || $isMutator) {
+            return '';
+        }
+
+        $value = $userProfile->$method();
+
+        // Profile/blockchain data is untrusted; escape before output.
+        return esc_html((string) $this->printOutput($value, $args['sub']));
     }
 
     /** @param array<string, string> $attributes */
@@ -148,7 +159,8 @@ class Shortcode extends AbstractShortcode
         $value = $this->application->delegationPool();
         $value = $value[$args['key']] ?? '';
 
-        return $this->printOutput($value);
+        // Pool metadata is fetched from off-chain URLs; escape before output.
+        return esc_html((string) $this->printOutput($value));
     }
 
     /** @param array<string, string> $attributes */
@@ -198,9 +210,9 @@ class Shortcode extends AbstractShortcode
         }
 
         if ('ada' === $args['unit']) {
-            return strval(NumberHelper::lovelaceToAda($value));
+            return esc_html(strval(NumberHelper::lovelaceToAda($value)));
         }
 
-        return $value;
+        return esc_html((string) $value);
     }
 }

@@ -61,10 +61,11 @@ class Compatibility
         }
 
         $url = add_query_arg(['cardanopress' => time()], home_url());
+        // Loopback request to our own home URL only needs to succeed; do not
+        // replay the visitor's cookie jar (auth/session cookies) outbound.
         $args = [
             'timeout' => apply_filters('http_request_timeout', MINUTE_IN_SECONDS, $url),
             'sslverify' => apply_filters('https_local_ssl_verify', false),
-            'cookies' => $_COOKIE,
         ];
 
         return ! is_wp_error(wp_remote_get($url, $args));
