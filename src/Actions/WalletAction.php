@@ -32,6 +32,8 @@ class WalletAction implements HookInterface
 
     public function setupHooks(): void
     {
+        add_action('wp_ajax_nopriv_cardanopress_login_challenge', [$this, 'getLoginChallenge']);
+        add_action('wp_ajax_cardanopress_login_challenge', [$this, 'getLoginChallenge']);
         add_action('wp_ajax_nopriv_cardanopress_user_account', [$this, 'initializeUserAccount']);
         add_action('wp_ajax_cardanopress_user_account', [$this, 'connectUserWallet']);
         add_action('wp_ajax_cardanopress_reconnect_account', [$this, 'connectUserWallet']);
@@ -48,16 +50,68 @@ class WalletAction implements HookInterface
 
     public static function getNonce(): string
     {
-        return Manifest::HANDLE_PREFIX . 'action';
+        // Must match the nonce action localized to the front-end in Manifest.
+        return Manifest::HANDLE_PREFIX . 'actions';
     }
 
+    public const CHALLENGE_PREFIX = 'cardanopress_login_';
+    public const CHALLENGE_TTL = 600; // 10 minutes
+
     /** @param string[] $data */
-    private function verifyDataSignature(array $data, string $walletAddress): bool
+    private function verifyDataSignature(array $data, string $walletAddress, string $message): bool
     {
         list($signature, $key) = $data;
-        $message = CoreAction::dataMessage();
 
         return Verifier::verify($signature, $key, $message, $walletAddress);
+    }
+
+    /** Read a single string field from $_POST, unslashed and sanitized. */
+    private function postString(string $key): string
+    {
+        if (! isset($_POST[$key]) || ! is_string($_POST[$key])) {
+            return '';
+        }
+
+        $value = wp_unslash($_POST[$key]);
+
+        return is_string($value) ? sanitize_text_field($value) : '';
+    }
+
+    /**
+     * Issue a single-use, time-bound login challenge. The signed message is
+     * built server-side so the client signs exactly what we will validate,
+     * defeating signature replay and predictable-message phishing.
+     */
+    public function getLoginChallenge(): void
+    {
+        $this->maybeInvalidPost();
+
+        $token = bin2hex(random_bytes(16));
+
+        set_transient(self::CHALLENGE_PREFIX . $token, time(), self::CHALLENGE_TTL);
+
+        wp_send_json_success([
+            'nonce' => $token,
+            'message' => CoreAction::challengeMessage($token),
+        ]);
+    }
+
+    /**
+     * Validate and consume a login challenge token, returning the exact message
+     * that was issued for it. Sends a JSON error (and exits) when invalid.
+     */
+    private function consumeChallenge(): string
+    {
+        $token = $this->postString('login_nonce');
+
+        if ('' === $token || false === get_transient(self::CHALLENGE_PREFIX . $token)) {
+            wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
+        }
+
+        // Single use: invalidate immediately so a token can never be replayed.
+        delete_transient(self::CHALLENGE_PREFIX . $token);
+
+        return CoreAction::challengeMessage($token);
     }
 
     public function initializeUserAccount(): void
@@ -69,7 +123,9 @@ class WalletAction implements HookInterface
         $stakeAddress = $this->sanitization->sanitizePost('stake_address');
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
-        if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress)) {
+        $message = $this->consumeChallenge();
+
+        if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress, $message)) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
         }
 
@@ -125,7 +181,9 @@ class WalletAction implements HookInterface
         $stakeAddress = $this->sanitization->sanitizePost('stake_address');
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
-        if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress)) {
+        $message = $this->consumeChallenge();
+
+        if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress, $message)) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
         }
 
@@ -273,6 +331,10 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalidPost();
 
+        if (! $this->verifyRecaptcha()) {
+            wp_send_json_error($this->messager::getAjaxMessage('notPermitted'));
+        }
+
         $response = $this->application->paymentAddress();
 
         if (empty($response)) {
@@ -292,5 +354,42 @@ class WalletAction implements HookInterface
 
         $userProfile->saveFavoriteHandle($adaHandle);
         wp_send_json_success($this->messager::getAjaxMessage('handleSaved'));
+    }
+
+    /**
+     * Verify the reCAPTCHA token server-side. Returns true when reCAPTCHA is
+     * not configured (no secret), so sites without it are unaffected.
+     */
+    private function verifyRecaptcha(): bool
+    {
+        $recaptcha = (array) $this->application->option('recaptcha_key');
+        $secret = (string) ($recaptcha['secret'] ?? '');
+
+        if ('' === $secret) {
+            return true;
+        }
+
+        $token = $this->postString('recaptcha_token');
+
+        if ('' === $token) {
+            return false;
+        }
+
+        $response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+            'timeout' => apply_filters('http_request_timeout', 5, ''),
+            'body' => [
+                'secret' => $secret,
+                'response' => $token,
+                'remoteip' => sanitize_text_field((string) ($_SERVER['REMOTE_ADDR'] ?? '')),
+            ],
+        ]);
+
+        if (is_wp_error($response)) {
+            return false;
+        }
+
+        $body = json_decode((string) wp_remote_retrieve_body($response), true);
+
+        return is_array($body) && ! empty($body['success']);
     }
 }

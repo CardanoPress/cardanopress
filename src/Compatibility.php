@@ -62,8 +62,9 @@ class Compatibility
         }
 
         $url = add_query_arg(['cardanopress' => time()], home_url());
+        // Loopback request to our own home URL only needs to succeed; do not
+        // replay the visitor's cookie jar (auth/session cookies) outbound.
         $args = HttpHelper::getRequestArgs($url);
-        $args['cookies'] = $_COOKIE;
 
         return ! is_wp_error(wp_remote_get($url, $args));
     }

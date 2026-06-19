@@ -110,13 +110,22 @@ class AdminAction implements HookInterface
      * @param array<string, mixed> $data
      * @return array<string, mixed>
      */
-    protected function checkPoolJson(array $data, string $key): array
+    protected function checkPoolJson(array $data, string $key, int $depth = 0): array
     {
-        if (empty($data)) {
+        // Pool metadata URLs are attacker-influenced (on-chain). Bound the
+        // recursive `extended` follow to avoid loops/abuse.
+        if (empty($data) || $depth > 2) {
             return [];
         }
 
         $url = $data[$key];
+
+        // Guard against SSRF: reject non-string, non-http(s), and internal/
+        // loopback/link-local hosts before issuing the server-side request.
+        if (! is_string($url) || ! wp_http_validate_url($url)) {
+            return [];
+        }
+
         $args = HttpHelper::getRequestArgs($url);
 
         $response = wp_remote_retrieve_body(wp_remote_get($url, $args));
@@ -131,6 +140,10 @@ class AdminAction implements HookInterface
             return [];
         }
 
-        return isset($data['extended']) ? $this->checkPoolJson($data, 'extended') : $data;
+        if (isset($data['extended'])) {
+            return $this->checkPoolJson($data, 'extended', $depth + 1);
+        }
+
+        return $data;
     }
 }
