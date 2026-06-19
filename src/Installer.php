@@ -260,6 +260,11 @@ class Installer extends AbstractInstaller
     public function compatibilityCheckAction(): void
     {
         check_ajax_referer('cardanopress_compatibility_check');
+
+        if (! current_user_can('activate_plugins')) {
+            wp_die(-1, 403);
+        }
+
         $this->doActivate();
         $this->log('Checking ' . $this->pluginNameAndVersion);
 

@@ -14,6 +14,8 @@ use PBWebDev\CardanoPress\Blockfrost;
 
 class AdminAction implements HookInterface
 {
+    public const METADATA_RECURSION_LIMIT = 2;
+
     public function setupHooks(): void
     {
         add_filter('pre_update_option_' . Admin::OPTION_KEY, [$this, 'savePoolDetails'], 10, 2);
@@ -112,17 +114,25 @@ class AdminAction implements HookInterface
      */
     protected function checkPoolJson(array $data, string $key, int $depth = 0): array
     {
-        // Pool metadata URLs are attacker-influenced (on-chain). Bound the
-        // recursive `extended` follow to avoid loops/abuse.
-        if (empty($data) || $depth > 2) {
+        if (
+            empty($data) ||
+            ! isset($data[$key]) ||
+            ! is_string($data[$key])
+        ) {
             return [];
         }
 
-        $url = $data[$key];
+        // Pool metadata URLs are attacker-influenced (on-chain). Bound the
+        // recursive `extended` follow to avoid loops/abuse.
+        if ($depth >= self::METADATA_RECURSION_LIMIT) {
+            return $data;
+        }
+
+        $url = trim($data[$key]);
 
         // Guard against SSRF: reject non-string, non-http(s), and internal/
         // loopback/link-local hosts before issuing the server-side request.
-        if (! is_string($url) || ! wp_http_validate_url($url)) {
+        if (! $this->isMetadataUrlAllowed($url)) {
             return [];
         }
 
@@ -145,5 +155,30 @@ class AdminAction implements HookInterface
         }
 
         return $data;
+    }
+
+    protected function isMetadataUrlAllowed(string $url): bool
+    {
+        if ('' === $url || ! wp_http_validate_url($url)) {
+            return false;
+        }
+
+        $parts = wp_parse_url($url);
+
+        if (! is_array($parts)) {
+            return false;
+        }
+
+        if ('https' !== strtolower((string) ($parts['scheme'] ?? ''))) {
+            return false;
+        }
+
+        $host = $parts['host'] ?? '';
+
+        if (! is_string($host) || '' === $host) {
+            return false;
+        }
+
+        return true;
     }
 }
