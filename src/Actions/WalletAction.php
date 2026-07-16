@@ -57,8 +57,16 @@ class WalletAction implements HookInterface
     public const CHALLENGE_PREFIX = 'cardanopress_login_';
     public const CHALLENGE_TTL = 600; // 10 minutes
 
-    /** @param string[] $data */
-    private function verifyDataSignature(array $data, string $walletAddress, string $message): bool
+    /**
+     * Verify the signed challenge and return the stake address DERIVED from the
+     * signed wallet address, or null when verification fails. The account
+     * identity therefore always comes from the signed payload — never from a
+     * separately-posted stake_address, which an attacker could set to a victim's
+     * (public, on-chain) stake address to take over their account.
+     *
+     * @param string[] $data
+     */
+    private function verifyDataSignature(array $data, string $walletAddress, string $message): ?string
     {
         list($signature, $key) = $data;
 
@@ -116,16 +124,18 @@ class WalletAction implements HookInterface
 
     public function initializeUserAccount(): void
     {
-        $this->maybeInvalidPost(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
+        $this->maybeInvalidPost(['query_network', 'wallet_address', 'data_signature']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
-        $stakeAddress = $this->sanitization->sanitizePost('stake_address');
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
         $message = $this->consumeChallenge();
 
-        if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress, $message)) {
+        // Derive the stake identity from the signature; never trust a posted stake_address.
+        $stakeAddress = $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress, $message);
+
+        if (null === $stakeAddress) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
         }
 
@@ -174,16 +184,18 @@ class WalletAction implements HookInterface
 
     public function connectUserWallet(): void
     {
-        $this->maybeInvalidPost(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
+        $this->maybeInvalidPost(['query_network', 'wallet_address', 'data_signature']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
-        $stakeAddress = $this->sanitization->sanitizePost('stake_address');
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
         $message = $this->consumeChallenge();
 
-        if (! $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress, $message)) {
+        // Derive the stake identity from the signature; never trust a posted stake_address.
+        $stakeAddress = $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress, $message);
+
+        if (null === $stakeAddress) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
         }
 

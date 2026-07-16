@@ -27,20 +27,30 @@ class Verifier
         $this->key       = $key;
     }
 
-    public static function verify(string $signature, string $key, string $message, string $address): bool
+    /**
+     * Verify a wallet data-signature and, on success, return the stake (reward)
+     * address DERIVED from the signed wallet address. Callers must use this
+     * return value as the account identity: it is bound to the signed payload,
+     * unlike any stake address posted alongside the signature (which an attacker
+     * can set to a victim's public stake address to impersonate them).
+     *
+     * Returns null on any verification failure, and also for addresses that have
+     * no stake credential (enterprise addresses) — those cannot key an account.
+     */
+    public static function verify(string $signature, string $key, string $message, string $address): ?string
     {
         if ('' === $signature || '' === $key || '' === $message || '' === $address) {
-            return false;
+            return null;
         }
 
         $verifier = new self($signature, $key);
 
         if (! $verifier->isAddress($address)) {
-            return false;
+            return null;
         }
 
         if (! $verifier->hasExpected($message)) {
-            return false;
+            return null;
         }
 
         return $verifier->correctCBOR($message, $address);
@@ -78,33 +88,33 @@ class Verifier
         return true;
     }
 
-    protected function correctCBOR(string $message, string $providedAddress): bool
+    protected function correctCBOR(string $message, string $providedAddress): ?string
     {
         $cborSignature = hex2bin($this->signature);
         $signatureData = CBOREncoder::decode($cborSignature);
 
         if (! $this->isCoseSign1($signatureData)) {
-            return false;
+            return null;
         }
 
         $protectedHeader        = $signatureData[0]->get_byte_string();
         $decodedProtectedHeader = CBOREncoder::decode($protectedHeader);
 
         if (! $this->handledHeader($decodedProtectedHeader)) {
-            return false;
+            return null;
         }
 
         $payload = $signatureData[2]->get_byte_string();
 
         if ($payload !== $message) {
-            return false;
+            return null;
         }
 
         $cborKey = hex2bin($this->key);
         $keyData = CBOREncoder::decode($cborKey);
 
         if (! $this->validKeyPair($keyData)) {
-            return false;
+            return null;
         }
 
         $protectedAddress = $decodedProtectedHeader['address']->get_byte_string();
@@ -113,7 +123,7 @@ class Verifier
         $hexAddress       = bin2hex($protectedAddress);
 
         if (false === strpos($hexAddress, bin2hex($credentialHash))) {
-            return false;
+            return null;
         }
 
         $network    = false === strpos($providedAddress, 'test') ? new Mainnet() : new Testnet();
@@ -122,18 +132,26 @@ class Verifier
             substr($hexAddress, 2, 56)
         );
 
+        // The stake address is derived from the SIGNED wallet address only, so it
+        // cannot be spoofed by a separately-posted value. Stays null for
+        // enterprise addresses (no stake credential): they cannot key an account.
+        $stakeAddress   = null;
+        $decodedAddress = null;
+
         if (0 === strpos($providedAddress, 'addr')) {
             $stakeCredentialHash = substr($hexAddress, 2 + 56);
 
             if ($stakeCredentialHash) {
-                $decodedAddress = new ShelleyAddress(
+                $stakeCredential = new Credential(
+                    new Address(),
+                    $stakeCredentialHash
+                );
+                $decodedAddress  = new ShelleyAddress(
                     $network,
                     $credential,
-                    new Credential(
-                        new Address(),
-                        substr($hexAddress, 2 + 56)
-                    ),
+                    $stakeCredential
                 );
+                $stakeAddress    = (new RewardAddress($network, $stakeCredential))->getBech32();
             } else {
                 $decodedAddress = new EnterpriseAddress(
                     $network,
@@ -141,18 +159,20 @@ class Verifier
                 );
             }
         } elseif (0 === strpos($providedAddress, 'stake')) {
+            // The wallet signed with its reward address directly: it IS the stake address.
             $decodedAddress = new RewardAddress(
                 $network,
                 $credential
             );
+            $stakeAddress = $decodedAddress->getBech32();
         }
 
         if (empty($decodedAddress)) {
-            return false;
+            return null;
         }
 
         if ($decodedAddress->getBech32() !== $providedAddress) {
-            return false;
+            return null;
         }
 
         $sigStructure = array(
@@ -162,11 +182,13 @@ class Verifier
             $signatureData[2],
         );
 
-        return sodium_crypto_sign_verify_detached(
+        $verified = sodium_crypto_sign_verify_detached(
             $signatureData[3]->get_byte_string(),
             CBOREncoder::encode($sigStructure),
             $publicKey
         );
+
+        return $verified ? $stakeAddress : null;
     }
 
     protected function isCoseSign1($data): bool

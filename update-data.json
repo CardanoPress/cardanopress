@@ -1,14 +1,14 @@
 {
-  "new_version": "1.36.0",
+  "new_version": "1.36.1",
   "homepage": "https://wordpress.org/plugins/cardanopress/",
   "download_link": "https://downloads.wordpress.org/plugin/cardanopress.zip",
-  "last_updated": "2026-06-19",
+  "last_updated": "2026-07-17",
   "author": "Gene Alyson Fortunado Torcende",
   "author_profile": "https://cardanopress.io",
   "requires": "5.9.0",
   "tested": "7.0.99",
   "requires_php": "7.4",
-  "upgrade_notice": "Please do the update now to seamlessly use the official WordPress Plugin Directory version",
+  "upgrade_notice": "Security release: fixes a wallet-login account takeover. Please update immediately.",
   "sections": {
     "description": "<p>CardanoPress does the heavy lifting and integration to the Cardano blockchain using the Blockfrost API, allowing you to interact with the blockchain via your favourite Web3 wallet.</p>"
   }

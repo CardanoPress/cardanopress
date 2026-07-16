@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, nft, token gating
 Requires at least: 5.9
 Tested up to: 7.0.99
-Stable tag: 1.36.0
+Stable tag: 1.36.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -132,6 +132,11 @@ This plugin does not collect or process any personal user data.
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.36.1 =
+- Security: fix wallet login account takeover. The stake address used as the account identity is now derived from the signed wallet address instead of a separate, unsigned request parameter, so it can no longer be spoofed with a victim's public stake address
+- Reject enterprise addresses (no stake credential) at wallet login
+- Thanks to Cullah ([@CullahMusic](https://x.com/CullahMusic), [valt.digital](http://valt.digital/)) for responsibly reporting the vulnerability
 
 = 1.36.0 =
 - Security hardening: fix login replay, XSS, reCAPTCHA bypass, and SSRF
