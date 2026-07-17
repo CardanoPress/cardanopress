@@ -262,7 +262,7 @@ class Installer extends AbstractInstaller
         check_ajax_referer('cardanopress_compatibility_check');
 
         if (! current_user_can('activate_plugins')) {
-            wp_die(-1, 403);
+            wp_die('-1', '', ['response' => 403]);
         }
 
         $this->doActivate();

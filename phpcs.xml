@@ -26,6 +26,8 @@
 	<exclude-pattern>.cache</exclude-pattern>
 	<!-- Exclude the dependencies directory. -->
 	<exclude-pattern>dependencies</exclude-pattern>
+	<!-- Exclude Git metadata. -->
+	<exclude-pattern>.git</exclude-pattern>
 
 	<!-- Include PHP cross-version compatibility. -->
 	<config name="testVersion" value="7.4-" />

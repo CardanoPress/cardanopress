@@ -137,6 +137,8 @@ class WalletAction implements HookInterface
 
         if (null === $stakeAddress) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
+
+            return;
         }
 
         $username = md5($stakeAddress);
@@ -197,6 +199,8 @@ class WalletAction implements HookInterface
 
         if (null === $stakeAddress) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
+
+            return;
         }
 
         $userProfile = $this->application->userProfile();

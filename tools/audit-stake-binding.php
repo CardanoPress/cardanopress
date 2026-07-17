@@ -33,6 +33,7 @@ if (! defined('ABSPATH')) {
  * bech32 (BIP-173) decode — no length limit, as Cardano addresses exceed 90 chars.
  * ------------------------------------------------------------------------- */
 
+/** @param array<int, int> $values */
 function cp_audit_polymod(array $values): int
 {
     $gen = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
@@ -52,6 +53,7 @@ function cp_audit_polymod(array $values): int
     return $chk;
 }
 
+/** @return array<int, int> */
 function cp_audit_hrp_expand(string $hrp): array
 {
     $out = [];
@@ -70,6 +72,10 @@ function cp_audit_hrp_expand(string $hrp): array
     return $out;
 }
 
+/**
+ * @param array<int, int> $data
+ * @return array<int, int>|null
+ */
 function cp_audit_convertbits(array $data, int $from, int $to, bool $pad): ?array
 {
     $acc    = 0;
@@ -126,6 +132,11 @@ function cp_audit_bech32_to_hex(string $bech): ?array
 
     $hrp      = substr($bech, 0, $pos);
     $dataPart = substr($bech, $pos + 1);
+
+    if (false === $dataPart) {
+        return null;
+    }
+
     $alphabet = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
     $data     = [];
 
