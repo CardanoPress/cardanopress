@@ -16,6 +16,19 @@ class Shortcode extends AbstractShortcode
 {
     use HasTemplateShortcodes;
 
+    private const PROFILE_GETTERS = [
+        'storedHandles',
+        'getFavoriteHandle',
+        'getTrimmedAddress',
+        'getAccountInfo',
+        'isConnected',
+        'connectedNetwork',
+        'connectedWallet',
+        'connectedStake',
+        'storedAssets',
+        'allTransactions',
+    ];
+
     protected Application $application;
     protected Component $component;
 
@@ -130,15 +143,12 @@ class Shortcode extends AbstractShortcode
         }
 
         $method = $args['method'];
-        $userProfile = $this->application->userProfile();
 
-        // Only allow read-only profile getters; never invoke mutating methods.
-        $isMutator = preg_match('/^(save|update|set|unset|delete|dismiss)/i', $method);
-
-        if (! is_callable([$userProfile, $method]) || $isMutator) {
+        if (! in_array($method, self::PROFILE_GETTERS, true)) {
             return '';
         }
 
+        $userProfile = $this->application->userProfile();
         $value = $userProfile->$method();
 
         // Profile/blockchain data is untrusted; escape before output.
