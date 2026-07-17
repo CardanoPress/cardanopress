@@ -138,7 +138,7 @@ class AdminAction implements HookInterface
 
         $args = HttpHelper::getRequestArgs($url);
 
-        $response = wp_remote_retrieve_body(wp_remote_get($url, $args));
+        $response = wp_remote_retrieve_body(wp_safe_remote_get($url, $args));
 
         if ('' === $response) {
             return [];
