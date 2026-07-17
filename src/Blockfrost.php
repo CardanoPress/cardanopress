@@ -217,7 +217,7 @@ class Blockfrost extends AbstractBlockfrost
     /** @return EpochParameters|array{} */
     public function epochParameters(string $number): array
     {
-        $response = $this->request('epochs/' . $number . '/parameters');
+        $response = $this->request('epochs/' . rawurlencode($number) . '/parameters');
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
@@ -257,7 +257,7 @@ class Blockfrost extends AbstractBlockfrost
     /** @return AddressDetails|array{} */
     public function getAddressDetails(string $key): array
     {
-        $response = $this->request('addresses/' . $key);
+        $response = $this->request('addresses/' . rawurlencode($key));
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
@@ -265,7 +265,7 @@ class Blockfrost extends AbstractBlockfrost
     /** @return AccountDetails|array{} */
     public function getAccountDetails(string $stake): array
     {
-        $response = $this->request('accounts/' . $stake);
+        $response = $this->request('accounts/' . rawurlencode($stake));
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
@@ -273,7 +273,7 @@ class Blockfrost extends AbstractBlockfrost
     /** @return AccountHistory[]|array{} */
     public function getAccountHistory(string $address, int $page = 1, string $order = 'asc'): array
     {
-        $response = $this->request('accounts/' . $address . '/history', compact('page', 'order'));
+        $response = $this->request('accounts/' . rawurlencode($address) . '/history', compact('page', 'order'));
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
@@ -289,7 +289,7 @@ class Blockfrost extends AbstractBlockfrost
     /** @return PoolInfo|array{} */
     public function getPoolInfo(string $id): array
     {
-        $response = $this->request('pools/' . $id);
+        $response = $this->request('pools/' . rawurlencode($id));
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
@@ -297,7 +297,7 @@ class Blockfrost extends AbstractBlockfrost
     /** @return PoolDetails|array{} */
     public function getPoolDetails(string $id): array
     {
-        $response = $this->request('pools/' . $id . '/metadata');
+        $response = $this->request('pools/' . rawurlencode($id) . '/metadata');
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
@@ -305,7 +305,7 @@ class Blockfrost extends AbstractBlockfrost
     /** @return array{unit: string, quantity: string}[]|array{} */
     public function associatedAssets(string $address, int $page = 1): array
     {
-        $response = $this->request('accounts/' . $address . '/addresses/assets', compact('page'));
+        $response = $this->request('accounts/' . rawurlencode($address) . '/addresses/assets', compact('page'));
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }
@@ -313,7 +313,7 @@ class Blockfrost extends AbstractBlockfrost
     /** @return Asset|array{} */
     public function specificAsset(string $key): array
     {
-        $response = $this->request('assets/' . $key);
+        $response = $this->request('assets/' . rawurlencode($key));
 
         return 200 === $response['status_code'] ? $response['data'] : [];
     }

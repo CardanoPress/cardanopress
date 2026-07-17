@@ -9,6 +9,7 @@ namespace Tests\Integration;
 use CardanoPress\Clients\BlockfrostClient;
 use CardanoPress\Dependencies\GuzzleHttp\Handler\MockHandler;
 use CardanoPress\Dependencies\GuzzleHttp\HandlerStack;
+use CardanoPress\Dependencies\GuzzleHttp\Middleware;
 use CardanoPress\Dependencies\GuzzleHttp\Psr7\Response;
 use CardanoPress\Dependencies\Monolog\Logger;
 use Tests\LoadDependencies;
@@ -43,6 +44,61 @@ class BlockfrostTest extends TestCase
     protected function createResponse(int $status, array $body = []): Response
     {
         return new Response($status, [], (string) json_encode($body));
+    }
+
+    /** @return array<int, array<string, mixed>> */
+    protected function captureRequests(string $method, string $input): array
+    {
+        $container = [];
+        $history = Middleware::history($container);
+        $mock = new MockHandler([
+            $this->createResponse(200),
+            $this->createResponse(200),
+            $this->createResponse(200),
+            $this->createResponse(200),
+        ]);
+        $handler = HandlerStack::create($mock);
+        $handler->push($history);
+
+        $this->blockfrost->setClient(new BlockfrostClient('tester', $handler));
+        $this->blockfrost->$method($input);
+
+        return is_array($container) ? $container : [];
+    }
+
+    /** @return array<string, array{string, string, string}> */
+    public function for_path_encoding(): array
+    {
+        return [
+            'getAddressDetails' => [
+                'getAddressDetails', 'addr1test/../../secret', 'addresses/addr1test%2F..%2F..%2Fsecret',
+            ],
+            'getAccountDetails' => [
+                'getAccountDetails', 'stake1test/../../secret', 'accounts/stake1test%2F..%2F..%2Fsecret',
+            ],
+            'getPoolInfo' => ['getPoolInfo', 'pool1test?q=1', 'pools/pool1test%3Fq%3D1'],
+            'specificAsset' => ['specificAsset', 'asset#frag', 'assets/asset%23frag'],
+        ];
+    }
+
+    /** @dataProvider for_path_encoding */
+    public function test_path_encoding(string $method, string $input, string $expectedSubstring): void
+    {
+        $container = $this->captureRequests($method, $input);
+
+        $this->assertNotEmpty($container);
+        $uri = (string) $container[0]['request']->getUri();
+        $this->assertStringContainsString($expectedSubstring, $uri);
+    }
+
+    public function test_clean_bech32_not_double_encoded(): void
+    {
+        $clean = 'stake1uyehkck0lajq8gr28t9uxnuvgcqrc6070x3k9r8048z8y5gh6ffgw';
+        $container = $this->captureRequests('getAccountDetails', $clean);
+
+        $uri = (string) $container[0]['request']->getUri();
+        $this->assertStringContainsString('accounts/' . $clean, $uri);
+        $this->assertStringNotContainsString('%', $uri);
     }
 
     public function test_successful_protocol_parameters(): void
