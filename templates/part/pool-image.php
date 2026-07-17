@@ -25,7 +25,7 @@ if (isset($pool['extended']['info']['url_png_icon_64x64'])) {
     <div class="absolute inset-0">
         <?php if ($image_icon) : ?>
             <img
-                src="<?php echo esc_attr($image_icon); ?>"
+                src="<?php echo \PBWebDev\CardanoPress\Helpers\OutputHelper::escapeSrc($image_icon); ?>"
                 alt="<?php echo esc_attr($pool['name']); ?>"
                 class="w-full"
             >

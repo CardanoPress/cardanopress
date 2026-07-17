@@ -27,7 +27,7 @@ if (! $source && ! $label) {
     <div class="absolute inset-0">
         <?php if ($source) : ?>
             <img
-                src="<?php echo esc_attr($source); ?>"
+                src="<?php echo \PBWebDev\CardanoPress\Helpers\OutputHelper::escapeSrc($source); ?>"
                 alt="<?php echo esc_attr($label); ?>"
                 class="w-full"
             >
