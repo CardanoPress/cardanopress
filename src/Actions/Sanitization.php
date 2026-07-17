@@ -46,7 +46,7 @@ class Sanitization extends AbstractSanitizer
     {
         $value = sanitize_text_field($value);
 
-        if ('' === $value || (0 !== strpos($value, 'addr1') && 0 !== strpos($value, 'addr_test1'))) {
+        if (1 !== preg_match('/^(addr1|addr_test1)[02-9ac-hj-np-z]{40,120}$/', $value)) {
             return '';
         }
 
@@ -57,7 +57,7 @@ class Sanitization extends AbstractSanitizer
     {
         $value = sanitize_text_field($value);
 
-        if ('' === $value || (0 !== strpos($value, 'stake1') && 0 !== strpos($value, 'stake_test1'))) {
+        if (1 !== preg_match('/^(stake1|stake_test1)[02-9ac-hj-np-z]{40,120}$/', $value)) {
             return '';
         }
 
@@ -68,7 +68,7 @@ class Sanitization extends AbstractSanitizer
     {
         $value = sanitize_text_field($value);
 
-        if ('' === $value || (0 !== strpos($value, 'stake1') && 0 !== strpos($value, 'stake_test1'))) {
+        if (1 !== preg_match('/^(stake1|stake_test1)[02-9ac-hj-np-z]{40,120}$/', $value)) {
             return '';
         }
 
@@ -79,7 +79,7 @@ class Sanitization extends AbstractSanitizer
     {
         $value = sanitize_text_field($value);
 
-        if ('' === $value || 0 !== strpos($value, 'pool1')) {
+        if (1 !== preg_match('/^pool1[02-9ac-hj-np-z]{40,70}$/', $value)) {
             return '';
         }
 

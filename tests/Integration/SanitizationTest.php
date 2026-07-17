@@ -49,6 +49,13 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
             ['addr1qx2fxv2umyhttkxyxp8x0dlpdt3k6cwng5pxj3jhsydzer3n0d3vllmyqwsx5wktcd8cc3sq835lu7drv2xwl2wywfgse35a3x', true],
             ['addr_test1qz2fxv2umyhttkxyxp8x0dlpdt3k6cwng5pxj3jhsydzer3n0d3vllmyqwsx5wktcd8cc3sq835lu7drv2xwl2wywfgs68faae', true],
             ['invalidwallet', false],
+            ['addr1../../../../v0/blocks/latest', false],
+            ['addr1QQQUPPERCASE', false],
+            ['addr1has.dots.in.it', false],
+            ['addr1has?query=param', false],
+            ['addr1has#fragment', false],
+            ['addr1' . str_repeat('q', 19), false],
+            ['addr1' . str_repeat('q', 121), false],
         ];
         // phpcs:enable Generic.Files.LineLength.TooLong
     }
@@ -66,6 +73,11 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
             ['stake1uyehkck0lajq8gr28t9uxnuvgcqrc6070x3k9r8048z8y5gh6ffgw', true],
             ['stake_test1uqehkck0lajq8gr28t9uxnuvgcqrc6070x3k9r8048z8y5gssrtvn', true],
             ['invalidstake', false],
+            ['stake1../../../../v0/blocks/latest', false],
+            ['stake1UPPERCASE', false],
+            ['stake1has/slashes', false],
+            ['stake1' . str_repeat('q', 19), false],
+            ['stake1' . str_repeat('q', 121), false],
         ];
     }
 
@@ -87,6 +99,11 @@ class SanitizationTest extends WP_Ajax_UnitTestCase
         return [
             ['pool1vev8z03vh7jwx3mfrgzrt9fltt97nupaxv8ffj4r5r8mgwts5ze', true],
             ['invalidpool', false],
+            ['pool1../../../../v0', false],
+            ['pool1UPPER', false],
+            ['pool1has.dots', false],
+            ['pool1' . str_repeat('q', 19), false],
+            ['pool1' . str_repeat('q', 71), false],
         ];
     }
 
