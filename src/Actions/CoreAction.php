@@ -106,7 +106,6 @@ class CoreAction implements HookInterface
         $assetAccess = $this->getAssetAccess();
         $assetAccessPolicyIds = array_column($assetAccess, 'id');
         $wantedPolicyIds = Collection::wantedPolicyIds($assetAccessPolicyIds);
-        $wantedPolicyIdsRegExPattern = '/^' . implode('|', $wantedPolicyIds) . '/';
         $assets = [];
         $handles = [];
         $page = 1;
@@ -117,7 +116,17 @@ class CoreAction implements HookInterface
             do_action('cardanopress_associated_assets', $stakeAddress, $response, $page);
 
             foreach ($response as $asset) {
-                if (! preg_match($wantedPolicyIdsRegExPattern, $asset['unit'])) {
+                $matched = false;
+
+                foreach ($wantedPolicyIds as $policyId) {
+                    if (str_starts_with($asset['unit'], $policyId)) {
+                        $matched = true;
+
+                        break;
+                    }
+                }
+
+                if (! $matched) {
                     continue;
                 }
 
