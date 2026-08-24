@@ -11,36 +11,36 @@ class ComposerStaticInite4290ca39b6a618aad0efc7fc04443c7
     );
 
     public static $prefixLengthsPsr4 = array (
-        'P' =>
+        'P' => 
         array (
             'PBWebDev\\CardanoPress\\' => 22,
         ),
-        'C' =>
+        'C' => 
         array (
             'CardanoPress\\Dependencies\\' => 26,
             'CardanoPress\\' => 13,
         ),
-        'A' =>
+        'A' => 
         array (
             'Automattic\\Jetpack\\Autoloader\\' => 30,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'PBWebDev\\CardanoPress\\' =>
+        'PBWebDev\\CardanoPress\\' => 
         array (
             0 => __DIR__ . '/../..' . '/../src',
         ),
-        'CardanoPress\\Dependencies\\' =>
+        'CardanoPress\\Dependencies\\' => 
         array (
             0 => __DIR__ . '/../..' . '/',
             1 => __DIR__ . '/..' . '/cardanopress/framework/dependencies',
         ),
-        'CardanoPress\\' =>
+        'CardanoPress\\' => 
         array (
             0 => __DIR__ . '/..' . '/cardanopress/framework/src',
         ),
-        'Automattic\\Jetpack\\Autoloader\\' =>
+        'Automattic\\Jetpack\\Autoloader\\' => 
         array (
             0 => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src',
         ),
@@ -440,6 +440,7 @@ class ComposerStaticInite4290ca39b6a618aad0efc7fc04443c7
         'PBWebDev\\CardanoPress\\Collection' => __DIR__ . '/../..' . '/../src/Collection.php',
         'PBWebDev\\CardanoPress\\Compatibility' => __DIR__ . '/../..' . '/../src/Compatibility.php',
         'PBWebDev\\CardanoPress\\Component' => __DIR__ . '/../..' . '/../src/Component.php',
+        'PBWebDev\\CardanoPress\\Helpers\\OutputHelper' => __DIR__ . '/../..' . '/../src/Helpers/OutputHelper.php',
         'PBWebDev\\CardanoPress\\Installer' => __DIR__ . '/../..' . '/../src/Installer.php',
         'PBWebDev\\CardanoPress\\Manifest' => __DIR__ . '/../..' . '/../src/Manifest.php',
         'PBWebDev\\CardanoPress\\Profile' => __DIR__ . '/../..' . '/../src/Profile.php',

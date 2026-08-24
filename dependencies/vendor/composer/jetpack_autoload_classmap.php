@@ -11,90 +11,90 @@ return array(
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Symfony/Polyfill/Php80/Resources/stubs/Attribute.php'
 	),
 	'Autoloader' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader.php'
 	),
 	'Autoloader_Handler' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader-handler.php'
 	),
 	'Autoloader_Locator' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader-locator.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadFileWriter' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadFileWriter.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadGenerator' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadGenerator.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadProcessor' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadProcessor.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/CustomAutoloaderPlugin.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\ManifestGenerator' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Autoloader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Autoloader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Autoloader_Handler' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Autoloader_Handler' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader-handler.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Autoloader_Locator' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Autoloader_Locator' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-autoloader-locator.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Container' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Container' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-container.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Hook_Manager' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Hook_Manager' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-hook-manager.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Latest_Autoloader_Guard' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Latest_Autoloader_Guard' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-latest-autoloader-guard.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Manifest_Reader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Manifest_Reader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-manifest-reader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\PHP_Autoloader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\PHP_Autoloader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-php-autoloader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Path_Processor' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Path_Processor' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-path-processor.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Plugin_Locator' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Plugin_Locator' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-plugin-locator.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Plugins_Handler' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Plugins_Handler' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-plugins-handler.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Shutdown_Handler' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Shutdown_Handler' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-shutdown-handler.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Version_Loader' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Version_Loader' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-version-loader.php'
 	),
-	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_20\\Version_Selector' => array(
+	'Automattic\\Jetpack\\Autoloader\\jpe4290ca39b6a618aad0efc7fc04443c7\\al5_0_23\\Version_Selector' => array(
 		'version' => 'dev-develop',
 		'path'    => $vendorDir . '/jetpack-autoloader/class-version-selector.php'
 	),
@@ -1639,19 +1639,19 @@ return array(
 		'path'    => $vendorDir . '/composer/InstalledVersions.php'
 	),
 	'Container' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-container.php'
 	),
 	'Hook_Manager' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-hook-manager.php'
 	),
 	'Latest_Autoloader_Guard' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-latest-autoloader-guard.php'
 	),
 	'Manifest_Reader' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-manifest-reader.php'
 	),
 	'PBWebDev\\CardanoPress\\Actions\\AdminAction' => array(
@@ -1698,6 +1698,10 @@ return array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Component.php'
 	),
+	'PBWebDev\\CardanoPress\\Helpers\\OutputHelper' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/../src/Helpers/OutputHelper.php'
+	),
 	'PBWebDev\\CardanoPress\\Installer' => array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Installer.php'
@@ -1719,11 +1723,11 @@ return array(
 		'path'    => $baseDir . '/../src/Templates.php'
 	),
 	'PHP_Autoloader' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-php-autoloader.php'
 	),
 	'Path_Processor' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-path-processor.php'
 	),
 	'PhpToken' => array(
@@ -1731,15 +1735,15 @@ return array(
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Symfony/Polyfill/Php80/Resources/stubs/PhpToken.php'
 	),
 	'Plugin_Locator' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-plugin-locator.php'
 	),
 	'Plugins_Handler' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-plugins-handler.php'
 	),
 	'Shutdown_Handler' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-shutdown-handler.php'
 	),
 	'Stringable' => array(
@@ -1755,11 +1759,11 @@ return array(
 		'path'    => $vendorDir . '/cardanopress/framework/dependencies/Symfony/Polyfill/Php80/Resources/stubs/ValueError.php'
 	),
 	'Version_Loader' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-version-loader.php'
 	),
 	'Version_Selector' => array(
-		'version' => '5.0.20',
+		'version' => '5.0.23',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-version-selector.php'
 	),
 );

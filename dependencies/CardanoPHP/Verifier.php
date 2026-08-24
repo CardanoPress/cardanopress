@@ -27,17 +27,22 @@ class Verifier
         $this->key       = $key;
     }
 
+    public static function verify(string $signature, string $key, string $message, string $address): bool
+    {
+        return null !== self::authenticate($signature, $key, $message, $address);
+    }
+
     /**
-     * Verify a wallet data-signature and, on success, return the stake (reward)
-     * address DERIVED from the signed wallet address. Callers must use this
-     * return value as the account identity: it is bound to the signed payload,
-     * unlike any stake address posted alongside the signature (which an attacker
-     * can set to a victim's public stake address to impersonate them).
+     * Verify a wallet data-signature and, on success, return an address
+     * DERIVED from the signed wallet address. For base (Shelley) addresses
+     * this is the stake (reward) address; for enterprise addresses it is
+     * the enterprise address itself. Callers should use this return value
+     * as the account identity: it is bound to the signed payload, unlike
+     * any address posted alongside the signature.
      *
-     * Returns null on any verification failure, and also for addresses that have
-     * no stake credential (enterprise addresses) — those cannot key an account.
+     * @return string|null Bech32 address on success, null on failure.
      */
-    public static function verify(string $signature, string $key, string $message, string $address): ?string
+    public static function authenticate(string $signature, string $key, string $message, string $address): ?string
     {
         if ('' === $signature || '' === $key || '' === $message || '' === $address) {
             return null;
@@ -80,12 +85,7 @@ class Verifier
         }
 
         $last = substr($this->signature, $index);
-
-        if (strlen($last) !== strlen($hexMessage) + 132) {
-            return false;
-        }
-
-        return true;
+        return strlen($last) === strlen($hexMessage) + 132;
     }
 
     protected function correctCBOR(string $message, string $providedAddress): ?string
@@ -132,10 +132,7 @@ class Verifier
             substr($hexAddress, 2, 56)
         );
 
-        // The stake address is derived from the SIGNED wallet address only, so it
-        // cannot be spoofed by a separately-posted value. Stays null for
-        // enterprise addresses (no stake credential): they cannot key an account.
-        $stakeAddress   = null;
+        $derivedAddress = null;
         $decodedAddress = null;
 
         if (0 === strpos($providedAddress, 'addr')) {
@@ -151,20 +148,20 @@ class Verifier
                     $credential,
                     $stakeCredential
                 );
-                $stakeAddress    = (new RewardAddress($network, $stakeCredential))->getBech32();
+                $derivedAddress  = (new RewardAddress($network, $stakeCredential))->getBech32();
             } else {
                 $decodedAddress = new EnterpriseAddress(
                     $network,
                     $credential
                 );
+                $derivedAddress = $decodedAddress->getBech32();
             }
         } elseif (0 === strpos($providedAddress, 'stake')) {
-            // The wallet signed with its reward address directly: it IS the stake address.
             $decodedAddress = new RewardAddress(
                 $network,
                 $credential
             );
-            $stakeAddress = $decodedAddress->getBech32();
+            $derivedAddress = $decodedAddress->getBech32();
         }
 
         if (empty($decodedAddress)) {
@@ -182,15 +179,22 @@ class Verifier
             $signatureData[2],
         );
 
+        $encodedSigStructure = CBOREncoder::encode($sigStructure);
+
+        if (null === $encodedSigStructure) {
+            return null;
+        }
+
         $verified = sodium_crypto_sign_verify_detached(
             $signatureData[3]->get_byte_string(),
-            CBOREncoder::encode($sigStructure),
+            $encodedSigStructure,
             $publicKey
         );
 
-        return $verified ? $stakeAddress : null;
+        return $verified ? $derivedAddress : null;
     }
 
+    /** @param mixed $data */
     protected function isCoseSign1($data): bool
     {
         if (! is_array($data) || 4 !== count($data)) {
@@ -222,13 +226,14 @@ class Verifier
         return true;
     }
 
+    /** @param mixed $value */
     protected function handledHeader($value): bool
     {
         if (! is_array($value) || 2 > count($value)) {
             return false;
         }
 
-        if (empty($value[1] || empty($value['address']))) {
+        if (false === ($value[1] || empty($value['address']))) {
             return false;
         }
 
@@ -243,6 +248,7 @@ class Verifier
         return true;
     }
 
+    /** @param mixed $data */
     protected function validKeyPair($data): bool
     {
         if (! is_array($data) || 4 > count($data)) {

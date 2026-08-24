@@ -29,14 +29,21 @@ class Bech32
         foreach (str_split($prefix) as $char) {
             $chk = self::polymodStep($chk) ^ (ord($char) >> 5);
         }
+
         $chk = self::polymodStep($chk);
         foreach (str_split($prefix) as $char) {
             $chk = self::polymodStep($chk) ^ (ord($char) & 0x1f);
         }
+
         return $chk;
     }
 
-    public static function convert(array $data, int $inBits, int $outBits, bool $pad = true)
+    /**
+     * @param int[] $data
+     * @return int[]
+     * @throws Exception
+     */
+    public static function convert(array $data, int $inBits, int $outBits, bool $pad = true): array
     {
         $value = 0;
         $bits = 0;
@@ -61,7 +68,8 @@ class Bech32
             if ($bits >= $inBits) {
                 throw new Exception('Excess padding');
             }
-            if (($value << ($outBits - $bits)) & $maxV) {
+
+            if (0 !== (($value << ($outBits - $bits)) & $maxV)) {
                 throw new Exception('Non-zero padding');
             }
         }
@@ -69,12 +77,21 @@ class Bech32
         return $result;
     }
 
+    /**
+     * @param int[] $bytes
+     * @return int[]
+     * @throws Exception
+     */
     public static function toWords(array $bytes): array
     {
         return self::convert($bytes, 8, 5, true);
     }
 
-    public static function encode(string $prefix, array $words, int $LIMIT = 90)
+    /**
+     * @param int[] $words
+     * @throws Exception
+     */
+    public static function encode(string $prefix, array $words, int $LIMIT = 90): string
     {
         if (strlen($prefix) + 7 + count($words) > $LIMIT) {
             throw new Exception('Exceeds length limit');
@@ -89,6 +106,7 @@ class Bech32
             if ($x >> 5 !== 0) {
                 throw new Exception('Non 5-bit word');
             }
+
             $chk = self::polymodStep($chk) ^ $x;
             $result .= self::ALPHABET[$x];
         }
@@ -96,6 +114,7 @@ class Bech32
         for ($i = 0; $i < 6; ++$i) {
             $chk = self::polymodStep($chk);
         }
+
         $chk ^= 1;
 
         for ($i = 0; $i < 6; ++$i) {

@@ -18,7 +18,7 @@
     "ext-ctype": "*",
     "automattic/jetpack-autoloader": "^5.0",
     "cardanopress/framework": "^2.1",
-    "kermage/cardanophp": "^0.3.0"
+    "kermage/cardanophp": "^1.0"
   },
   "autoload": {
     "psr-4": {

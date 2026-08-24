@@ -8,6 +8,8 @@ namespace CardanoPress\Dependencies\CardanoPHP\Addresses;
 
 use CardanoPress\Dependencies\CardanoPHP\Utilities\Bech32;
 use CardanoPress\Dependencies\CardanoPHP\Utilities\Network;
+use ErrorException;
+use Exception;
 
 abstract class AbstractAddress
 {
@@ -23,24 +25,49 @@ abstract class AbstractAddress
         $this->network = $network;
     }
 
-    protected function computeBech32($addressBytes): string
+    /** @throws Exception */
+    protected function computeBech32(string $addressBytes): string
     {
         $unpack = unpack('C*', $addressBytes);
-        $words  = Bech32::toWords(array_values($unpack));
-        $data   = static::DATA . ( 0 === $this->network->id() ? '_test' : '' );
+
+        if (false === $unpack) {
+            return '';
+        }
+
+        $words = Bech32::toWords(array_values($unpack));
+        $data  = static::DATA . ( 0 === $this->network->id() ? '_test' : '' );
 
         return Bech32::encode($data, $words, 1000);
     }
 
     abstract protected function maskPayload(): int;
 
-    protected function computeHex($hash): void
+    /** @throws Exception */
+    protected function computeHex(string $hash): void
     {
         $payload = $this->maskPayload() | $this->network->id();
         $address = sprintf('%02x', $payload) . $hash;
+        $binary  = false;
+        $message = '';
+
+        set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+            throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+        }, E_WARNING);
+
+        try {
+            $binary = hex2bin($address);
+        } catch (Exception $e) {
+            $message = $e->getMessage();
+        }
+
+        restore_error_handler();
+
+        if (false === $binary) {
+            throw new Exception($message);
+        }
 
         $this->addressHex    = $address;
-        $this->addressBytes  = hex2bin($address);
+        $this->addressBytes  = $binary;
         $this->addressBech32 = $this->computeBech32($this->addressBytes);
     }
 
