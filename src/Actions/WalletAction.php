@@ -70,7 +70,7 @@ class WalletAction implements HookInterface
     {
         list($signature, $key) = $data;
 
-        return Verifier::verify($signature, $key, $message, $walletAddress);
+        return Verifier::authenticate($signature, $key, $message, $walletAddress);
     }
 
     /** Read a single string field from $_POST, unslashed and sanitized. */
