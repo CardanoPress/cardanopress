@@ -51,6 +51,7 @@ class ShortcodeTest extends WP_UnitTestCase
     public function test_user_profile_method_dispatch(string $method, bool $allowed): void
     {
         if ($allowed) {
+            $this->expectNotToPerformAssertions();
             return;
         }
 
