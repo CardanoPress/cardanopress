@@ -3,8 +3,8 @@ Contributors: pbwebdev, gaft
 Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, nft, token gating
 Requires at least: 5.9
-Tested up to: 7.0.99
-Stable tag: 1.36.1
+Tested up to: 7.1.99
+Stable tag: 1.36.2
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -132,6 +132,14 @@ This plugin does not collect or process any personal user data.
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.36.2 =
+- Security: validate bech32 charset in address sanitizers
+- Security: percent-encode Blockfrost API path segments
+- Security: block data:image/svg+xml in template src attributes
+- Security: use wp_safe_remote_get for pool metadata fetching
+- Security: replace shortcode method denylist with allowlist
+- Fix policy ID regex anchoring for multi-ID matching
 
 = 1.36.1 =
 - Security: fix wallet login account takeover. The stake address used as the account identity is now derived from the signed wallet address instead of a separate, unsigned request parameter, so it can no longer be spoofed with a victim's public stake address
