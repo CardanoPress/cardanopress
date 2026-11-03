@@ -1,14 +1,14 @@
 {
-  "new_version": "1.36.2",
+  "new_version": "1.36.3",
   "homepage": "https://wordpress.org/plugins/cardanopress/",
   "download_link": "https://downloads.wordpress.org/plugin/cardanopress.zip",
-  "last_updated": "2026-08-27",
+  "last_updated": "2026-11-03",
   "author": "Gene Alyson Fortunado Torcende",
   "author_profile": "https://cardanopress.io",
   "requires": "5.9.0",
   "tested": "7.1.99",
   "requires_php": "7.4",
-  "upgrade_notice": "Security release: fixes a wallet-login account takeover. Please update immediately.",
+  "upgrade_notice": "Security release: strengthens wallet login. Please update immediately.",
   "sections": {
     "description": "<p>CardanoPress does the heavy lifting and integration to the Cardano blockchain using the Blockfrost API, allowing you to interact with the blockchain via your favourite Web3 wallet.</p>"
   }

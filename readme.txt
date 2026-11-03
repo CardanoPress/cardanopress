@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, nft, token gating
 Requires at least: 5.9
 Tested up to: 7.1.99
-Stable tag: 1.36.2
+Stable tag: 1.36.3
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -132,6 +132,12 @@ This plugin does not collect or process any personal user data.
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.36.3 =
+- Security: strengthen wallet login verification. Please update
+- Wallet login now signs with the stake key and needs a wallet with a stake address
+- Fix wallet login failing for some mainnet addresses
+- Fix a slow request on malformed wallet signatures
 
 = 1.36.2 =
 - Security: validate bech32 charset in address sanitizers
