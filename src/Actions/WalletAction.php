@@ -7,11 +7,11 @@
 
 namespace PBWebDev\CardanoPress\Actions;
 
-use CardanoPress\Dependencies\CardanoPHP\Verifier;
 use CardanoPress\Interfaces\HookInterface;
 use CardanoPress\Traits\HasPostInput;
 use PBWebDev\CardanoPress\Application;
 use PBWebDev\CardanoPress\Blockfrost;
+use PBWebDev\CardanoPress\Helpers\StakeProof;
 use PBWebDev\CardanoPress\Manifest;
 use PBWebDev\CardanoPress\Profile;
 use WP_Error;
@@ -58,19 +58,22 @@ class WalletAction implements HookInterface
     public const CHALLENGE_TTL = 600; // 10 minutes
 
     /**
-     * Verify the signed challenge and return the stake address DERIVED from the
-     * signed wallet address, or null when verification fails. The account
-     * identity therefore always comes from the signed payload — never from a
-     * separately-posted stake_address, which an attacker could set to a victim's
-     * (public, on-chain) stake address to take over their account.
+     * Verify the challenge was signed with the stake key and return that stake
+     * address, or null when verification fails. The account identity therefore
+     * only comes from a proven stake key — a payment key signature cannot prove
+     * it, as a stake credential in an address can be copied from any public one.
      *
      * @param string[] $data
      */
-    private function verifyDataSignature(array $data, string $walletAddress, string $message): ?string
-    {
-        list($signature, $key) = $data;
+    private function verifyDataSignature(
+        array $data,
+        string $stakeAddress,
+        string $walletAddress,
+        string $message
+    ): ?string {
+        list($signature, $key) = array_pad($data, 2, '');
 
-        return Verifier::authenticate($signature, $key, $message, $walletAddress);
+        return StakeProof::verify($signature, $key, $message, $stakeAddress, $walletAddress) ? $stakeAddress : null;
     }
 
     /** Read a single string field from $_POST, unslashed and sanitized. */
@@ -124,16 +127,18 @@ class WalletAction implements HookInterface
 
     public function initializeUserAccount(): void
     {
-        $this->maybeInvalidPost(['query_network', 'wallet_address', 'data_signature']);
+        $this->maybeInvalidPost(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
+        $postedStake = $this->sanitization->sanitizePost('stake_address');
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
         $message = $this->consumeChallenge();
 
-        // Derive the stake identity from the signature; never trust a posted stake_address.
-        $stakeAddress = $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress, $message);
+        // The posted stake_address only counts once its stake key has signed the challenge.
+        $signed = explode('|', $dataSignature);
+        $stakeAddress = $this->verifyDataSignature($signed, $postedStake, $walletAddress, $message);
 
         if (null === $stakeAddress) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
@@ -186,16 +191,18 @@ class WalletAction implements HookInterface
 
     public function connectUserWallet(): void
     {
-        $this->maybeInvalidPost(['query_network', 'wallet_address', 'data_signature']);
+        $this->maybeInvalidPost(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $walletAddress = $this->sanitization->sanitizePost('wallet_address');
+        $postedStake = $this->sanitization->sanitizePost('stake_address');
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
         $message = $this->consumeChallenge();
 
-        // Derive the stake identity from the signature; never trust a posted stake_address.
-        $stakeAddress = $this->verifyDataSignature(explode('|', $dataSignature), $walletAddress, $message);
+        // The posted stake_address only counts once its stake key has signed the challenge.
+        $signed = explode('|', $dataSignature);
+        $stakeAddress = $this->verifyDataSignature($signed, $postedStake, $walletAddress, $message);
 
         if (null === $stakeAddress) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));

@@ -126,7 +126,8 @@ class Verifier
             return null;
         }
 
-        $network    = false === strpos($providedAddress, 'test') ? new Mainnet() : new Testnet();
+        // Match the prefix only: "test" can appear in the bech32 data of a mainnet address, "_" cannot.
+        $network    = false === strpos($providedAddress, '_test1') ? new Mainnet() : new Testnet();
         $credential = new Credential(
             new Address(),
             substr($hexAddress, 2, 56)

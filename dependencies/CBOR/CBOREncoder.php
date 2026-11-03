@@ -100,6 +100,11 @@ class CBOREncoder
     public static function decode(&$var){
         $out = null;
         
+        //out of input: stop here, as an unpacked empty string reads as 0 and an open ended collection never finishes
+        if ('' === (string) $var) {
+            return null;
+        }
+
         //get initial byte
         $unpacked = unpack("C*", substr($var, 0, 1));
         $header_byte = array_shift($unpacked);

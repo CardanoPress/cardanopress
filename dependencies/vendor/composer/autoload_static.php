@@ -441,6 +441,7 @@ class ComposerStaticInite4290ca39b6a618aad0efc7fc04443c7
         'PBWebDev\\CardanoPress\\Compatibility' => __DIR__ . '/../..' . '/../src/Compatibility.php',
         'PBWebDev\\CardanoPress\\Component' => __DIR__ . '/../..' . '/../src/Component.php',
         'PBWebDev\\CardanoPress\\Helpers\\OutputHelper' => __DIR__ . '/../..' . '/../src/Helpers/OutputHelper.php',
+        'PBWebDev\\CardanoPress\\Helpers\\StakeProof' => __DIR__ . '/../..' . '/../src/Helpers/StakeProof.php',
         'PBWebDev\\CardanoPress\\Installer' => __DIR__ . '/../..' . '/../src/Installer.php',
         'PBWebDev\\CardanoPress\\Manifest' => __DIR__ . '/../..' . '/../src/Manifest.php',
         'PBWebDev\\CardanoPress\\Profile' => __DIR__ . '/../..' . '/../src/Profile.php',

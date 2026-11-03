@@ -6,6 +6,14 @@ import { multisend } from './api/multisend'
 import { payment } from './api/payment'
 import { addNotice, removeNotice } from './api/util'
 
+// The server needs proof of the stake key, so this cannot use Wallet.signData() as that signs with the payment key.
+const signWithStakeKey = async (Wallet: Extension, message: string) => {
+    const [rewardAddress] = await Wallet.cardano.getRewardAddresses()
+    const payload = Array.from(new TextEncoder().encode(message), (byte) => byte.toString(16).padStart(2, '0')).join('')
+
+    return Wallet.cardano.signData(rewardAddress, payload)
+}
+
 export const handleReconnect = async (
     Wallet: Extension
 ): Promise<
@@ -23,7 +31,7 @@ export const handleReconnect = async (
         return challenge
     }
 
-    const dataSignature = await Wallet.signData(challenge.data.message)
+    const dataSignature = await signWithStakeKey(Wallet, challenge.data.message)
     return await fetch(cardanoPress.ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
@@ -48,7 +56,7 @@ export const logMeIn = async (Wallet: Extension): Promise<ServerResponse<{ messa
         return challenge
     }
 
-    const dataSignature = await Wallet.signData(challenge.data.message)
+    const dataSignature = await signWithStakeKey(Wallet, challenge.data.message)
 
     addNotice({
         id: 'loginVerify',

@@ -1702,6 +1702,10 @@ return array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Helpers/OutputHelper.php'
 	),
+	'PBWebDev\\CardanoPress\\Helpers\\StakeProof' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/../src/Helpers/StakeProof.php'
+	),
 	'PBWebDev\\CardanoPress\\Installer' => array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Installer.php'
