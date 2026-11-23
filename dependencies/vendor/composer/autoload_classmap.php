@@ -405,5 +405,6 @@ return array(
     'PBWebDev\\CardanoPress\\Manifest' => $baseDir . '/../src/Manifest.php',
     'PBWebDev\\CardanoPress\\Profile' => $baseDir . '/../src/Profile.php',
     'PBWebDev\\CardanoPress\\Shortcode' => $baseDir . '/../src/Shortcode.php',
+    'PBWebDev\\CardanoPress\\TemplateLoader' => $baseDir . '/../src/TemplateLoader.php',
     'PBWebDev\\CardanoPress\\Templates' => $baseDir . '/../src/Templates.php',
 );

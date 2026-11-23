@@ -55,6 +55,11 @@ class Messager extends AbstractMessager
                 'blockfrostError' => __('Blockfrost API Error. Please try again', 'cardanopress'),
                 'notPermitted' => __('You don\'t have permission to do this.', 'cardanopress'),
                 'incorrectSignature' => __('Provided data signature is incorrect.', 'cardanopress'),
+                'accountNotLinked' => __(
+                    'This wallet is linked to an account that wasn\'t created by wallet login.',
+                    'cardanopress'
+                ),
+                'throttled' => __('Please wait a moment before trying again.', 'cardanopress'),
             ],
             'error' => [
                 /* translators: %s: http origin */

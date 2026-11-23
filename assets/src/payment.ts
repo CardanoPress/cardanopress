@@ -28,7 +28,7 @@ window.addEventListener('alpine:init', () => {
 
                 const response = await getPaymentAddress()
 
-                this.paymentAddress = response.data
+                this.paymentAddress = response.success ? response.data : ''
             }
 
             window.addEventListener(
@@ -46,7 +46,7 @@ window.addEventListener('alpine:init', () => {
                     if (!this.paymentAddress) {
                         const response = await getPaymentAddress(token)
 
-                        this.paymentAddress = response.data
+                        this.paymentAddress = response.success ? response.data : ''
                     }
                 },
                 { once: true }

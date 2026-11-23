@@ -17,4 +17,4 @@ $inAda = empty($format) || $format === 'ADA';
 
 ?>
 
-<span x-text="balanceValue('<?php echo esc_js($type); ?>', <?php echo esc_js($inAda ? 'true' : 'false'); ?>)"></span>
+<span x-text="<?php echo esc_attr('balanceValue(' . wp_json_encode((string) $type, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) . ', ' . ($inAda ? 'true' : 'false') . ')'); ?>"></span>

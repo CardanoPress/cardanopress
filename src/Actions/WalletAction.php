@@ -15,6 +15,7 @@ use PBWebDev\CardanoPress\Helpers\StakeProof;
 use PBWebDev\CardanoPress\Manifest;
 use PBWebDev\CardanoPress\Profile;
 use WP_Error;
+use WP_User;
 
 class WalletAction implements HookInterface
 {
@@ -56,6 +57,84 @@ class WalletAction implements HookInterface
 
     public const CHALLENGE_PREFIX = 'cardanopress_login_';
     public const CHALLENGE_TTL = 600; // 10 minutes
+    public const LOGIN_MARKER = 'cardanopress_login_stake';
+    public const THROTTLE_PREFIX = 'cardanopress_throttle_';
+
+    private const TOKEN_LENGTH = 52; // 4 bytes time + 16 bytes random + 32 bytes HMAC
+
+    private static function base64UrlEncode(string $data): string
+    {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    private static function base64UrlDecode(string $data): string
+    {
+        $decoded = base64_decode(strtr($data, '-_', '+/'), true);
+
+        return false === $decoded ? '' : $decoded;
+    }
+
+    /**
+     * Stateless challenge token: base64url(time . random . HMAC(time . random)).
+     * Nothing is stored when issuing, so unauthenticated requests cost no writes.
+     */
+    public static function makeChallengeToken(?int $time = null): string
+    {
+        $payload = pack('N', $time ?? time()) . random_bytes(16);
+
+        return self::base64UrlEncode($payload . hash_hmac('sha256', $payload, wp_salt('nonce'), true));
+    }
+
+    /** Is this token genuine and still within its lifetime? */
+    public static function isFreshChallenge(string $token): bool
+    {
+        $raw = self::base64UrlDecode($token);
+
+        // Padding and +/ variants decode to the same bytes, so only the canonical text is accepted
+        if (self::TOKEN_LENGTH !== strlen($raw) || ! hash_equals(self::base64UrlEncode($raw), $token)) {
+            return false;
+        }
+
+        $payload = substr($raw, 0, 20);
+
+        if (! hash_equals(hash_hmac('sha256', $payload, wp_salt('nonce'), true), substr($raw, 20))) {
+            return false;
+        }
+
+        $issued = unpack('N', $payload);
+
+        if (false === $issued) {
+            return false;
+        }
+
+        $age = time() - (int) $issued[1];
+
+        return $age >= -60 && $age <= self::CHALLENGE_TTL;
+    }
+
+    private static function usedKey(string $token): string
+    {
+        return self::CHALLENGE_PREFIX . 'used_' . hash('sha256', $token);
+    }
+
+    private function throttled(string $action): bool
+    {
+        $seconds = (int) apply_filters('cardanopress_throttle_seconds', MINUTE_IN_SECONDS, $action);
+
+        if ($seconds <= 0) {
+            return false;
+        }
+
+        $key = self::THROTTLE_PREFIX . $action . '_' . get_current_user_id();
+
+        if (false !== get_transient($key)) {
+            return true;
+        }
+
+        set_transient($key, time(), $seconds);
+
+        return false;
+    }
 
     /**
      * Verify the challenge was signed with the stake key and return that stake
@@ -97,9 +176,7 @@ class WalletAction implements HookInterface
     {
         $this->maybeInvalidPost();
 
-        $token = bin2hex(random_bytes(16));
-
-        set_transient(self::CHALLENGE_PREFIX . $token, time(), self::CHALLENGE_TTL);
+        $token = self::makeChallengeToken();
 
         wp_send_json_success([
             'nonce' => $token,
@@ -108,21 +185,25 @@ class WalletAction implements HookInterface
     }
 
     /**
-     * Validate and consume a login challenge token, returning the exact message
-     * that was issued for it. Sends a JSON error (and exits) when invalid.
+     * Validate a login challenge token (genuine, unexpired, not yet used) and
+     * return it. Sends a JSON error (and exits) when invalid. The token is only
+     * burned by markChallengeUsed() once the signature over it has verified.
      */
     private function consumeChallenge(): string
     {
         $token = $this->postString('login_nonce');
 
-        if ('' === $token || false === get_transient(self::CHALLENGE_PREFIX . $token)) {
+        if ('' === $token || ! self::isFreshChallenge($token) || false !== get_transient(self::usedKey($token))) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
         }
 
-        // Single use: invalidate immediately so a token can never be replayed.
-        delete_transient(self::CHALLENGE_PREFIX . $token);
+        return $token;
+    }
 
-        return CoreAction::challengeMessage($token);
+    /** Single use: remember the token until it would expire anyway. */
+    private function markChallengeUsed(string $token): void
+    {
+        set_transient(self::usedKey($token), 1, self::CHALLENGE_TTL + 120);
     }
 
     public function initializeUserAccount(): void
@@ -134,17 +215,24 @@ class WalletAction implements HookInterface
         $postedStake = $this->sanitization->sanitizePost('stake_address');
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
-        $message = $this->consumeChallenge();
+        $token = $this->consumeChallenge();
 
         // The posted stake_address only counts once its stake key has signed the challenge.
         $signed = explode('|', $dataSignature);
-        $stakeAddress = $this->verifyDataSignature($signed, $postedStake, $walletAddress, $message);
+        $stakeAddress = $this->verifyDataSignature(
+            $signed,
+            $postedStake,
+            $walletAddress,
+            CoreAction::challengeMessage($token)
+        );
 
         if (null === $stakeAddress) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
 
             return;
         }
+
+        $this->markChallengeUsed($token);
 
         $username = md5($stakeAddress);
         $userId = username_exists($username);
@@ -160,6 +248,8 @@ class WalletAction implements HookInterface
                 wp_send_json_error($this->messager::getAjaxMessage('somethingWrong'));
                 return;
             }
+
+            update_user_meta($userId, self::LOGIN_MARKER, $stakeAddress);
         }
 
         $user = get_user_by('id', $userId);
@@ -170,6 +260,15 @@ class WalletAction implements HookInterface
         }
 
         $userProfile = new Profile($user);
+
+        if (! $newAccount && ! $this->ownsAccount($user, $userProfile, $stakeAddress)) {
+            $this->application->logger('actions')->error(
+                sprintf('Refused wallet login to user %d: not created by wallet login.', $user->ID)
+            );
+            wp_send_json_error($this->messager::getAjaxMessage('accountNotLinked'));
+
+            return;
+        }
 
         if ($newAccount || ! $userProfile->isConnected()) {
             $userProfile->saveNetwork($queryNetwork);
@@ -189,6 +288,28 @@ class WalletAction implements HookInterface
         ]);
     }
 
+    /**
+     * An existing account with the wallet's username is only the wallet's own when
+     * wallet login created it. Anyone could have registered that username by hand.
+     */
+    private function ownsAccount(WP_User $user, Profile $userProfile, string $stakeAddress): bool
+    {
+        $marker = (string) get_user_meta($user->ID, self::LOGIN_MARKER, true);
+
+        if ('' !== $marker && hash_equals($marker, $stakeAddress)) {
+            return true;
+        }
+
+        // Legacy accounts: connected to this stake, or made by the plugin (never had an email).
+        if (hash_equals($userProfile->connectedStake(), $stakeAddress) || '' === (string) $user->user_email) {
+            update_user_meta($user->ID, self::LOGIN_MARKER, $stakeAddress);
+
+            return true;
+        }
+
+        return false;
+    }
+
     public function connectUserWallet(): void
     {
         $this->maybeInvalidPost(['query_network', 'wallet_address', 'stake_address', 'data_signature']);
@@ -198,17 +319,24 @@ class WalletAction implements HookInterface
         $postedStake = $this->sanitization->sanitizePost('stake_address');
         $dataSignature = $this->sanitization->sanitizePost('data_signature');
 
-        $message = $this->consumeChallenge();
+        $token = $this->consumeChallenge();
 
         // The posted stake_address only counts once its stake key has signed the challenge.
         $signed = explode('|', $dataSignature);
-        $stakeAddress = $this->verifyDataSignature($signed, $postedStake, $walletAddress, $message);
+        $stakeAddress = $this->verifyDataSignature(
+            $signed,
+            $postedStake,
+            $walletAddress,
+            CoreAction::challengeMessage($token)
+        );
 
         if (null === $stakeAddress) {
             wp_send_json_error($this->messager::getAjaxMessage('incorrectSignature'));
 
             return;
         }
+
+        $this->markChallengeUsed($token);
 
         $userProfile = $this->application->userProfile();
 
@@ -227,6 +355,10 @@ class WalletAction implements HookInterface
     public function syncUserAssets(): void
     {
         $this->maybeInvalidPost();
+
+        if ($this->throttled('sync')) {
+            wp_send_json_error($this->messager::getAjaxMessage('throttled'));
+        }
 
         $userProfile = $this->application->userProfile();
         $stored = $userProfile->storedAssets();
@@ -293,9 +425,15 @@ class WalletAction implements HookInterface
 
         $queryNetwork = $this->sanitization->sanitizePost('query_network');
         $rewardAddress = $this->sanitization->sanitizePost('reward_address');
+        $connectedStake = $this->application->userProfile()->connectedStake();
 
         if (! Blockfrost::isReady($queryNetwork)) {
             wp_send_json_error(sprintf($this->messager::getAjaxMessage('unsupportedNetwork'), $queryNetwork));
+        }
+
+        // Only the logged-in user's own stake address can be queried.
+        if ('' === $connectedStake || ! hash_equals($connectedStake, $rewardAddress)) {
+            wp_send_json_error($this->messager::getAjaxMessage('notPermitted'));
         }
 
         $blockfrost = new Blockfrost($queryNetwork);
@@ -375,6 +513,10 @@ class WalletAction implements HookInterface
         $adaHandle = $this->sanitization->sanitizePost('ada_handle');
         $userProfile = $this->application->userProfile();
 
+        if ('' !== $adaHandle && ! in_array($adaHandle, $userProfile->storedHandles(), true)) {
+            wp_send_json_error($this->messager::getAjaxMessage('notPermitted'));
+        }
+
         $userProfile->saveFavoriteHandle($adaHandle);
         wp_send_json_success($this->messager::getAjaxMessage('handleSaved'));
     }
@@ -413,6 +555,13 @@ class WalletAction implements HookInterface
 
         $body = json_decode((string) wp_remote_retrieve_body($response), true);
 
-        return is_array($body) && ! empty($body['success']);
+        if (! is_array($body) || empty($body['success'])) {
+            return false;
+        }
+
+        // Google names the site the token was issued for, so a token from another site is no good here.
+        $host = (string) wp_parse_url(home_url(), PHP_URL_HOST);
+
+        return empty($body['hostname']) || 0 === strcasecmp((string) $body['hostname'], $host);
     }
 }

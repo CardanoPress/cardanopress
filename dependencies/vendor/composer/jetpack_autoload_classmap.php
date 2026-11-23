@@ -1722,6 +1722,10 @@ return array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Shortcode.php'
 	),
+	'PBWebDev\\CardanoPress\\TemplateLoader' => array(
+		'version' => 'dev-develop',
+		'path'    => $baseDir . '/../src/TemplateLoader.php'
+	),
 	'PBWebDev\\CardanoPress\\Templates' => array(
 		'version' => 'dev-develop',
 		'path'    => $baseDir . '/../src/Templates.php'

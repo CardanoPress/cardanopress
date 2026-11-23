@@ -130,8 +130,8 @@ class AdminAction implements HookInterface
 
         $url = trim($data[$key]);
 
-        // Guard against SSRF: reject non-string, non-http(s), and internal/
-        // loopback/link-local hosts before issuing the server-side request.
+        // Guard against SSRF: only https here; wp_safe_remote_get() below
+        // refuses internal, loopback and link-local hosts.
         if (! $this->isMetadataUrlAllowed($url)) {
             return [];
         }

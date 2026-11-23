@@ -35,6 +35,10 @@ abstract class AbstractSanitizer implements SanitizerInterface
             wp_send_json_error(static::getMessage($key));
         }
 
+        if (! is_string($_POST[$key])) {
+            wp_send_json_error(static::getMessage($key));
+        }
+
         $value = $_POST[$key];
 
         if (method_exists($this, $key)) {

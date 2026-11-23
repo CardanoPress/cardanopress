@@ -35,7 +35,7 @@ export default defineConfig({
         topLevelAwait(),
         offloadWasm({
             'cardano_serialization_lib_bg.wasm':
-                '//unpkg.com/@emurgo/cardano-serialization-lib-browser@14.1.1/cardano_serialization_lib_bg.wasm',
+                '//unpkg.com/@emurgo/cardano-serialization-lib-browser@14.1.2/cardano_serialization_lib_bg.wasm',
         }),
     ],
 })

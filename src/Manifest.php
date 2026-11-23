@@ -35,9 +35,9 @@ class Manifest extends AbstractManifest
         if (apply_filters('cardanopress_alpinejs_cdn', false)) {
             wp_register_script(
                 self::HANDLE_PREFIX . 'alpinejs',
-                'https://unpkg.com/alpinejs',
+                'https://unpkg.com/alpinejs@3.17.5/dist/cdn.min.js',
                 [self::HANDLE_PREFIX . 'script', self::HANDLE_PREFIX . 'notification'],
-                'latest',
+                null,
                 $args
             );
         } else {
@@ -45,7 +45,7 @@ class Manifest extends AbstractManifest
                 self::HANDLE_PREFIX . 'alpinejs',
                 plugin_dir_url($this->path) . 'vendor/alpinejs.min.js',
                 [self::HANDLE_PREFIX . 'script', self::HANDLE_PREFIX . 'notification'],
-                '3.15.3',
+                '3.17.5',
                 $args
             );
         }

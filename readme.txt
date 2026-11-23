@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=T8MR6AMVWWGK8
 Tags: cardano, blockchain, web3, nft, token gating
 Requires at least: 5.9
 Tested up to: 7.1.99
-Stable tag: 1.36.3
+Stable tag: 1.36.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/licenses.html
@@ -132,6 +132,15 @@ This plugin does not collect or process any personal user data.
 == Changelog ==
 
 You can follow our [GitHub release](https://github.com/CardanoPress/cardanopress/releases) for full details on updates to the plugins.
+
+= 1.36.4 =
+- Security: harden template, option and conditional shortcodes. Please update
+- Security: strengthen wallet login challenge and account linking
+- Gated and delegation roles are now removed when the wallet no longer qualifies, with an hourly recheck
+- Gated roles are only granted on mainnet
+- Rate limit asset sync and cache asset lookups to protect the Blockfrost quota
+- Fix the delegation minimum amount setting not being applied
+- Update dependencies
 
 = 1.36.3 =
 - Security: strengthen wallet login verification. Please update

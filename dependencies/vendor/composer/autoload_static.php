@@ -446,6 +446,7 @@ class ComposerStaticInite4290ca39b6a618aad0efc7fc04443c7
         'PBWebDev\\CardanoPress\\Manifest' => __DIR__ . '/../..' . '/../src/Manifest.php',
         'PBWebDev\\CardanoPress\\Profile' => __DIR__ . '/../..' . '/../src/Profile.php',
         'PBWebDev\\CardanoPress\\Shortcode' => __DIR__ . '/../..' . '/../src/Shortcode.php',
+        'PBWebDev\\CardanoPress\\TemplateLoader' => __DIR__ . '/../..' . '/../src/TemplateLoader.php',
         'PBWebDev\\CardanoPress\\Templates' => __DIR__ . '/../..' . '/../src/Templates.php',
     );
 

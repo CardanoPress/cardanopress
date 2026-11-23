@@ -12,7 +12,7 @@
 ?>
 
 <?php if (isset($type)) : ?>
-    <template x-data="{type:'<?php echo esc_attr($type); ?>'}" x-if="supportedWallets.includes(type)">
+    <template x-data="<?php echo esc_attr('{type:' . wp_json_encode((string) $type, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) . '}'); ?>" x-if="supportedWallets.includes(type)">
 <?php endif; ?>
 
 <button x-on:click.prevent="walletConnect(type)" x-bind:disabled="isDisabled(type)">

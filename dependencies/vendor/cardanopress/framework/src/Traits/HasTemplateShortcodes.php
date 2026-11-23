@@ -47,6 +47,10 @@ trait HasTemplateShortcodes
             parse_str(str_replace('&amp;', '&', $args['variables']), $variables);
         }
 
+        if (! TemplateLoader::isSafeName((string) $args['name'])) {
+            return '';
+        }
+
         $name = pathinfo($args['name'], PATHINFO_DIRNAME) . '/';
         $name .= sanitize_file_name(pathinfo($args['name'], PATHINFO_BASENAME));
         $loader = new TemplateLoader($this->templates);
@@ -72,6 +76,27 @@ trait HasTemplateShortcodes
             return $html;
         }
 
+        if (! $this->isAllowedCondition($args['condition'])) {
+            return '';
+        }
+
         return '<template x-if="' . esc_attr($args['condition']) . '">' . $html . '</template>';
+    }
+
+    /**
+     * Alpine evaluates x-if, so only simple identifiers are accepted, unless
+     * the author of the current post is allowed to post unfiltered HTML.
+     */
+    protected function isAllowedCondition(string $condition): bool
+    {
+        $id = '!?\s*[a-zA-Z_]\w*';
+
+        if (1 === preg_match('/^\s*' . $id . '(?:\s*(?:&&|\|\|)\s*' . $id . ')*\s*$/', $condition)) {
+            return true;
+        }
+
+        $post = get_post();
+
+        return $post && user_can((int) $post->post_author, 'unfiltered_html');
     }
 }

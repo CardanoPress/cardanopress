@@ -29,6 +29,17 @@ class Shortcode extends AbstractShortcode
         'allTransactions',
     ];
 
+    // Safe to show publicly; secrets (blockfrost_*, recaptcha_*) are excluded, and so is
+    // payment_address while reCAPTCHA is on (see publicOptions)
+    private const PUBLIC_OPTIONS = [
+        'delegation_pool_id',
+        'payment_amount',
+        'payment_split',
+        'policy_ids',
+        'ua_required_amount',
+        'ua_required_epoch',
+    ];
+
     protected Application $application;
     protected Component $component;
 
@@ -54,6 +65,103 @@ class Shortcode extends AbstractShortcode
         add_shortcode('cardanopress_component_splitform', [$this, 'doComponentSplitForm']);
     }
 
+    /** @return string[] */
+    private function publicOptions(): array
+    {
+        $defaults = self::PUBLIC_OPTIONS;
+        $recaptcha = (array) $this->application->option('recaptcha_key');
+
+        // With reCAPTCHA on, the payment address is only revealed after the check passes
+        if ('' === (string) ($recaptcha['secret'] ?? '')) {
+            $defaults[] = 'payment_address';
+        }
+
+        $keys = (array) apply_filters('cardanopress_public_options', $defaults);
+
+        return array_values(array_filter($keys, static function ($key) {
+            return is_string($key) && 1 !== preg_match('/^(blockfrost|recaptcha)_/i', $key);
+        }));
+    }
+
+    private function isPublicOption(string $key): bool
+    {
+        return in_array($key, $this->publicOptions(), true);
+    }
+
+    /** @param array<string, mixed> $attributes */
+    public function doTemplate(array $attributes): string
+    {
+        $templates = $this->getTemplates();
+
+        if (null === $templates) {
+            return '';
+        }
+
+        $args = shortcode_atts([
+            'name' => '',
+            'variables' => '',
+            'if' => '',
+        ], $attributes);
+
+        if (empty($args['name']) || ! TemplateLoader::isSafeName((string) $args['name'])) {
+            return '';
+        }
+
+        $variables = [];
+
+        if (isset($attributes['variables'])) {
+            parse_str(str_replace('&amp;', '&', (string) $args['variables']), $variables);
+        }
+
+        $name = pathinfo($args['name'], PATHINFO_DIRNAME) . '/';
+        $name .= sanitize_file_name(pathinfo($args['name'], PATHINFO_BASENAME));
+        $loader = new TemplateLoader($templates);
+
+        ob_start();
+        $loader->load(ltrim($name, './'), $variables);
+
+        $html = (string) ob_get_clean();
+
+        return $this->doTemplateIf(['condition' => $args['if']], $html);
+    }
+
+    /** @param array<string, string> $attributes */
+    public function doTemplateIf(array $attributes, ?string $content = null): string
+    {
+        $args = shortcode_atts([
+            'condition' => '',
+        ], $attributes);
+
+        $html = (string) $content;
+
+        if (empty($args['condition'])) {
+            return $html;
+        }
+
+        if (! $this->isSafeCondition((string) $args['condition'])) {
+            return '';
+        }
+
+        return '<template x-if="' . esc_attr($args['condition']) . '">' . $html . '</template>';
+    }
+
+    /**
+     * Alpine evaluates x-if, so only plain identifiers (optionally negated) joined
+     * by && or || are accepted, unless the post author may post unfiltered HTML.
+     */
+    private function isSafeCondition(string $condition): bool
+    {
+        $id = '!?\s*[a-zA-Z_]\w*';
+
+        if (1 === preg_match('/^\s*' . $id . '(?:\s*(?:&&|\|\|)\s*' . $id . ')*\s*$/', $condition)) {
+            return true;
+        }
+
+        $post = get_post();
+
+        return $post instanceof \WP_Post && user_can((int) $post->post_author, 'unfiltered_html');
+    }
+
     /** @param array<string, string> $attributes */
     public function doOption(array $attributes): string
     {
@@ -63,6 +171,10 @@ class Shortcode extends AbstractShortcode
         ], $attributes);
 
         if (empty($args['key'])) {
+            return '';
+        }
+
+        if (! $this->isPublicOption((string) $args['key'])) {
             return '';
         }
 
@@ -197,8 +309,8 @@ class Shortcode extends AbstractShortcode
             return '';
         }
 
-        $cacheKey = 'wallet_balance_' . $args['address'];
-        $value = wp_cache_get($cacheKey, Admin::OPTION_KEY);
+        $cacheKey = 'cardanopress_balance_' . md5($queryNetwork . '|' . $args['address']);
+        $value = get_transient($cacheKey);
 
         if (false === $value) {
             $blockfrost = new Blockfrost($queryNetwork);
@@ -216,7 +328,7 @@ class Shortcode extends AbstractShortcode
 
             $value = $addressDetails['amount'][$index]['quantity'];
 
-            wp_cache_set($cacheKey, $value, Admin::OPTION_KEY);
+            set_transient($cacheKey, $value, 5 * MINUTE_IN_SECONDS);
         }
 
         if ('ada' === $args['unit']) {

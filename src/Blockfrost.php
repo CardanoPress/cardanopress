@@ -206,6 +206,12 @@ class Blockfrost extends AbstractBlockfrost
         return $this->client;
     }
 
+    /** HTTP status of the last request, to tell a failed call from an empty result. */
+    public function lastStatus(): int
+    {
+        return (int) ($this->lastResponse['status_code'] ?? 0);
+    }
+
     /** @return BlocksLatest|array{} */
     public function blocksLatest(): array
     {

@@ -98,7 +98,7 @@ let __tla = (async () => {
   }, __publicField(_a, "Module"), _a);
   l = (_b = class {
     static async load() {
-      return l.Module === void 0 && (l.Module = await S(() => import("./cardano_serialization_lib-C5V6FfME.js").then(async (m2) => {
+      return l.Module === void 0 && (l.Module = await S(() => import("./cardano_serialization_lib-CBgoGANB.js").then(async (m2) => {
         await m2.__tla;
         return m2;
       }), [])), l.Module;

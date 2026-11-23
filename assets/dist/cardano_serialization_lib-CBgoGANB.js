@@ -1,6 +1,6 @@
 let $, VG, H, gr, M, yt, at, P, ar, Yr, _e, E, h, h_, vt, mt, oH, w_, l_, kt, f_, HG, MG, _H, J, WG, E_, ne, jt, GG, ot, A_, xt, Z_, br, it, m_, nH, k, z_, zt, Ft, G, Rt, TG, I_, D_, Ot, Mr, J_, Ur, O, V, c_, te, F_, e_, Er, dr, xr, Rr, pe, re, st, lr, Y_, pr, qt, r_, Z, Kr, IG, T_, dt, N_, Gr, Q, $t, Lt, Hr, fr, I, CG, Or, Ar, Ir, DG, KG, Jt, we, eH, or, ur, g_, M_, Dr, qr, Sr, C_, Yt, T, Qt, S, tH, G_, U, V_, UG, wr, P_, B_, ht, ct, $r, y_, R, EG, rH, i_, hr, Lr, W, vr, K_, B, H_, Jr, ee, Xt, yr, Zt, Ut, Et, Kt, v_, St, n_, a_, Q_, sH, o_, d_, AG, S_, X_, PG, Wt, D, Mt, Gt, Ht, lt, Y, aH, At, It, Dt, k_, iH, Tt, Nt, Ct, Vt, j_, x_, Pt, Bt, ge, _t, tt, R_, fe, ue, _r, C, be, Nr, t_, s_, X, K, L, NG, zr, A, pt, cr, wt, SG, O_, sr, u_, gt, mr, rt, Tr, ae, m, tr, et, q_, ft, ir, F, jr, __, le, $_, rr, er, BG, nr, N, ZG, Wr, oe, b_, bt, L_, ie, U_, W_, se, xi, Ni, Ki, Di, rs, Fi, os, ds, Qi, is, Gi, Hi, Ji, Xi, Vi, Si, ts, Ei, Ui, Ci, Bi, qi, Ri, Yi, ss, as, Li, Wi, ns, zi, Ti, Pi, Ii, ci, _s, Oi, Mi, cs, mi, Zi, ji, $i, Ai, es, ws, ui, ki, hi, vi, yi, ps, gG, XG, yG, mG, uG, QG, hG, vG, LG, fG, YG, qG, OG, JG, zG, FG, RG, kG, jG, xG, $G, wG, lG, bG;
 let __tla = (async () => {
-  const si = "//unpkg.com/@emurgo/cardano-serialization-lib-browser@14.1.1/cardano_serialization_lib_bg.wasm", di = async (w = {}, _) => {
+  const si = "//unpkg.com/@emurgo/cardano-serialization-lib-browser@14.1.2/cardano_serialization_lib_bg.wasm", di = async (w = {}, _) => {
     let r;
     if (_.startsWith("data:")) {
       const o = _.replace(/^data:.*?base64,/, "");

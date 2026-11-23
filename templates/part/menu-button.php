@@ -19,5 +19,5 @@ if (empty($text)) {
 ?>
 
 <button x-on:click="openDropdown = !openDropdown">
-    <span x-text="getWalletHandle('<?php echo esc_js($text); ?>')"><?php echo esc_html($text); ?></span>
+    <span x-text="<?php echo esc_attr('getWalletHandle(' . wp_json_encode((string) $text, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) . ')'); ?>"><?php echo esc_html($text); ?></span>
 </button>

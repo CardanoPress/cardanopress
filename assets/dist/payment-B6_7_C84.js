@@ -1,17 +1,17 @@
-import { b as s, d as i, r, h as d, a as c, w as h } from "./util-BoaWaB64.js";
-import { g as n, c as l } from "./actions-CVa5JGnc.js";
+import { b as s, d as i, r, h as d, a as c, w as h } from "./util-Bhdwjmsx.js";
+import { g as n, c as l } from "./actions-1q3OfuLA.js";
 window.addEventListener("alpine:init", () => {
   window.Alpine.data("paymentForm", () => ({ isVerified: false, isProcessing: false, payAmount: 1, quantity: 1, currentBalance: 0, remainingBalance: 0, transactionHash: "", showAddress: false, paymentAddress: "", recaptchaKey: "", recaptchaToken: "", syncedBalance: false, async init() {
     if (this.payAmount = parseFloat(this.$root.dataset.amount || "1.0"), this.paymentAddress = this.$root.dataset.address || "", this.recaptchaKey = this.$root.dataset.recaptcha || "", this.recaptchaKey === "" && this.paymentAddress === "") {
       this.isVerified = true;
       const e = await n();
-      this.paymentAddress = e.data;
+      this.paymentAddress = e.success ? e.data : "";
     }
     window.addEventListener("cardanoPress:recaptcha", async (e) => {
       const a = e.detail || "";
       if (a !== "" && (this.recaptchaToken = a, this.isVerified = true, !this.paymentAddress)) {
         const t = await n(a);
-        this.paymentAddress = t.data;
+        this.paymentAddress = t.success ? t.data : "";
       }
     }, { once: true });
   }, isReady(e = "extension") {
